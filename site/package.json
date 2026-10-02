@@ -15,7 +15,8 @@
     "test:e2e": "vitest run tests/e2e",
     "generate-overlays": "node --import tsx scripts/generate-overlays.mjs",
     "prebuild": "npm run generate-overlays && node --input-type=commonjs -e \"const fs=require('fs');const src='src/assets/images/home/clown-zauberer-hero.jpg';const dst='public/images/og-startseite.jpg';try{fs.unlinkSync(dst)}catch(e){}fs.copyFileSync(src,dst)\"",
-    "test:seo": "node scripts/seo-assertions.mjs"
+    "test:seo": "node scripts/seo-assertions.mjs",
+    "snapshot:content": "tsx scripts/snapshot-content.ts"
   },
   "dependencies": {
     "astro": "^7.3.5",
