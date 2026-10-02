@@ -1,55 +1,8 @@
 ---
 import { Image } from 'astro:assets';
 import logoImg from '../assets/images/general/logo-clown-nrw.png';
+import { MENU as menuItems } from '../data/site';
 
-const menuItems = [
-  {
-    label: 'Clown',
-    href: '/clown/clownshow/',
-    children: [
-      { label: 'Clownshow', href: '/clown/clownshow/' },
-      { label: 'Walk Act', href: '/clown/walk-act/' },
-      { label: 'Ballonmodellage', href: '/clown/ballonmodellage/' },
-      { label: 'Glitzer Tattoo', href: '/clown/glitzer-tattoo/' },
-    ],
-  },
-  {
-    label: 'Zauberer',
-    href: '/zauberer/',
-    children: [
-      { label: 'Bühnen Zauberer', href: '/zauberer/buehnen-zauberer/' },
-      { label: 'Tisch Zauberer', href: '/zauberer/tisch-zauberer/' },
-      { label: 'Hochzeit', href: '/zauberer/hochzeit/' },
-      { label: 'Firmenfeier', href: '/zauberer/firmenfeier/' },
-    ],
-  },
-  {
-    label: 'Kinderzauberer',
-    href: '/kinderzauberer/',
-  },
-  {
-    label: 'Kindergeburtstag',
-    href: '/kindergeburtstag/',
-  },
-  {
-    label: 'Preise',
-    href: '/preise/',
-  },
-  {
-    label: 'Zaubershow',
-    href: '/zauberer/zaubershow/',
-    children: [
-      { label: 'Kindergarten – Kita', href: '/zauberer/zaubershow/kindergarten-kita/' },
-      { label: 'Schule', href: '/zauberer/zaubershow/schule/' },
-      { label: 'Straßen – Sommer -Fest', href: '/zauberer/zaubershow/strassen-sommer-fest/' },
-      { label: 'Karneval', href: '/clown/karneval/' },
-    ],
-  },
-  { label: 'Galerie', href: '/galerie/' },
-  { label: 'Blog', href: '/blog/' },
-  { label: 'Pantomime', href: 'https://www.pantomime-la-france.eu/', external: true },
-  { label: 'Kontakt', href: '/kontakt/' },
-];
 ---
 
 <header class="w-full z-50" id="site-header">

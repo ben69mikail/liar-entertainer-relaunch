@@ -19,6 +19,13 @@ und zwar als Diff seit `ec7dcd1`: `git -C Liar-Entertainer-fresh diff ec7dcd1 or
 | `public/.htaccess`, `contact.php`, `api/reviews.php` → `ops/legacy-apache/` | Netlify hat kein Apache/PHP. Ersatz: `_redirects` (aus .htaccess), Netlify Forms, Netlify Function. |
 | `tailwind.config.mjs` nicht übernommen | Tailwind v4 nutzt ihn nicht (nirgends referenziert). |
 
+| Bewertungen auf v2-Seiten: nur die 5 echten Bewertungen aus `testimonials.json`, serverseitig, ohne Client-Austausch | Das Alt-Widget mischte per JS 5 aus 20 Bewertungen mit Umschrift ("ae/ue") und holte `/api/reviews.php` (auf Netlify nicht vorhanden). Wortlaut im HTML = Baseline. |
+| FAQ auf `/kindergeburtstag/` als `<details>` statt JS-Akkordeon | Funktioniert ohne JS; gleiche Texte. |
+| YouTube auf `/kindergeburtstag/` per Klick-Facade (youtube-nocookie) statt direktem iframe | Ladezeit + DSGVO; Video, Titel, VideoObject-Schema unverändert. |
+
+## Offene Inhaltsfragen (Nutzer entscheidet, 1:1 übernommen bis dahin)
+- `/zauberer/` Hero: „Über 400 begeisterte 5-Sterne-Bewertungen auf Google“ widerspricht „370+“ überall sonst (L3).
+
 ## Bewusst NICHT geändert
 - Kein `AggregateRating`/`Review`-Schema (Nutzerentscheidung 02.10.2026, wie live; Google-Richtlinie zu Self-Serving-Reviews).
 - Alle Titles/Metas/Canonicals/JSON-LD unverändert: Legacy-Check `npm run test:seo` 45/45.

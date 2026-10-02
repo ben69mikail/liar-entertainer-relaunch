@@ -1,0 +1,157 @@
+/*
+ * Design tokens: one set per zone, switched by <html data-zone> (lib/site-map.ts).
+ * Components only read these variables, so the same markup renders as
+ * "Zirkus-Plakat" (kids/neutral) or "Zauberei bei Nacht" (adult).
+ * Fonts are self-hosted via @fontsource (DSGVO: no Google requests).
+ */
+@import '@fontsource-variable/fredoka/wght.css';
+@import '@fontsource-variable/nunito/wght.css';
+@import '@fontsource-variable/playfair-display/wght.css';
+@import '@fontsource-variable/playfair-display/wght-italic.css';
+@import '@fontsource-variable/jost/wght.css';
+
+:root {
+  /* Brand colours from the clown logo */
+  --brand-red: #d7393e;
+  --brand-red-strong: #b8282e; /* white text 5.6:1 */
+  --brand-blue: #3b55d5;
+  --brand-yellow: #ffb546;
+
+  --space-1: 0.5rem;
+  --space-2: 1rem;
+  --space-3: 1.5rem;
+  --space-4: 2.5rem;
+  --space-5: 4rem;
+  --space-6: 6rem;
+  --measure: 68ch;
+  --container: 72rem;
+
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-spring: cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* ── KIDS: Zirkus-Plakat ─────────────────────────────── */
+[data-zone='kids'],
+[data-zone='neutral'] {
+  color-scheme: light;
+  --bg: #fff6e8;
+  --bg-alt: #ffecc8;
+  --surface: #ffffff;
+  --ink: #2b1d17;
+  --ink-soft: #5a473d; /* 8.1:1 on --bg */
+  --line: #2b1d17;
+  --accent: var(--brand-red);
+  --accent-strong: var(--brand-red-strong);
+  --accent-ink: #ffffff;
+  --accent-2: var(--brand-blue);
+  --accent-3: var(--brand-yellow);
+  --link: #b8282e;
+  --star: #e89a00;
+
+  --font-display: 'Fredoka Variable', 'Trebuchet MS', sans-serif;
+  --font-body: 'Nunito Variable', 'Segoe UI', sans-serif;
+  --display-weight: 650;
+  --display-tracking: -0.01em;
+
+  --radius: 1.25rem;
+  --radius-sm: 0.75rem;
+  --border: 2.5px solid var(--line);
+  --shadow: 5px 5px 0 var(--line); /* printed-sticker offset */
+  --shadow-hover: 8px 8px 0 var(--line);
+}
+
+/* ── ADULT: Zauberei bei Nacht (zauberer-liar.de) ────── */
+[data-zone='adult'] {
+  color-scheme: dark;
+  --bg: #0a0c14;
+  --bg-alt: #10131f;
+  --surface: #141826;
+  --ink: #f5f0e6;
+  --ink-soft: #cfcbc0; /* 11:1 on --bg */
+  --line: rgba(201, 161, 78, 0.35);
+  --accent: #c9a14e;
+  --accent-strong: #f0d79b;
+  --accent-ink: #0a0c14;
+  --accent-2: #a574d8;
+  --accent-3: #f0d79b;
+  --link: #f0d79b;
+  --star: #f0d79b;
+  --gold-deep: #9c7a32;
+
+  --font-display: 'Playfair Display Variable', Georgia, serif;
+  --font-body: 'Jost Variable', 'Segoe UI', sans-serif;
+  --display-weight: 500;
+  --display-tracking: -0.015em;
+
+  --radius: 2px;
+  --radius-sm: 2px;
+  --border: 1px solid var(--line);
+  --shadow: 0 24px 60px -20px rgba(0, 0, 0, 0.8), 0 0 0 1px var(--line);
+  --shadow-hover: 0 30px 70px -18px rgba(0, 0, 0, 0.9), 0 0 0 1px var(--accent), 0 0 40px -10px rgba(201, 161, 78, 0.45);
+}
+
+/* Base for v2 pages (legacy pages keep global.css untouched) */
+.v2 {
+  background: var(--bg);
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 1.0625rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+.v2 :where(h1, h2, h3, h4) {
+  font-family: var(--font-display);
+  font-weight: var(--display-weight);
+  letter-spacing: var(--display-tracking);
+  line-height: 1.12;
+  text-wrap: balance;
+}
+.v2 :where(p, li) { text-wrap: pretty; }
+.v2 :where(main a:not([class])) {
+  color: var(--link);
+  text-decoration: underline;
+  text-decoration-thickness: 0.08em;
+  text-underline-offset: 0.18em;
+}
+.v2 :where(a, button, summary):focus-visible {
+  outline: 3px solid var(--accent-2);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+.v2 .container {
+  width: min(100% - 2rem, var(--container));
+  margin-inline: auto;
+}
+
+/* Shared button */
+.v2 .btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  min-height: 3rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 999px;
+  font-family: var(--font-display);
+  font-weight: 650;
+  font-size: 1.05rem;
+  text-decoration: none;
+  transition: transform 0.25s var(--ease-spring), box-shadow 0.25s var(--ease-out), background-color 0.2s;
+}
+.v2 .btn--primary { background: var(--accent-strong); color: var(--accent-ink); }
+.v2 .btn--ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 2px currentColor; }
+[data-zone='kids'] .v2 .btn--primary,
+[data-zone='neutral'] .v2 .btn--primary { border: var(--border); box-shadow: 3px 3px 0 var(--line); }
+[data-zone='kids'] .v2 .btn:hover,
+[data-zone='neutral'] .v2 .btn:hover { transform: translate(-2px, -2px) rotate(-1deg); }
+[data-zone='adult'] .v2 .btn { border-radius: 2px; letter-spacing: 0.14em; text-transform: uppercase; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600; }
+[data-zone='adult'] .v2 .btn--primary { background: linear-gradient(135deg, var(--gold-deep), var(--accent) 45%, var(--accent-strong)); }
+[data-zone='adult'] .v2 .btn:hover { transform: translateY(-2px); box-shadow: 0 10px 30px -8px rgba(201, 161, 78, 0.6); }
+
+@media (prefers-reduced-motion: reduce) {
+  .v2 *, .v2 *::before, .v2 *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

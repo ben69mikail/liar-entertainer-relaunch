@@ -17,7 +17,8 @@ const ownsText = (el: AnyNode) =>
 export function contentOf(html: string): PageContent {
   const $ = cheerio.load(html);
   const main = $('main');
-  main.find('script, style, noscript, template, svg').remove();
+  // Decoration hidden from assistive tech (sparkles, blobs, icons) is not editorial content.
+  main.find('script, style, noscript, template, svg, [aria-hidden="true"]').remove();
   const headings = main
     .find('h1, h2, h3, h4, h5, h6')
     .map((_, el) => `${el.tagName} ${norm($(el).text())}`)

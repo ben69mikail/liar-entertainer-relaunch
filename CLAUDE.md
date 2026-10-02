@@ -28,3 +28,6 @@ Verbindlicher Auftrag: siehe **docs/CLAUDE-CODE-BUILD-BRIEF.md**. Vor jeder Arbe
 - Tests: zusätzlich `npm run test:seo` (45 Legacy-SEO-Assertions, muss grün bleiben) und `npm run test:e2e` (braucht `astro preview` auf :4322).
 - hreflang erst, wenn FR/EN gebaut: `PUBLISHED_LOCALES` in site-map.ts erweitern. Test `tests/dist/hreflang.test.ts` verbietet Ziele ohne Seite.
 - Bewertungen: KEIN AggregateRating/Review-Schema (Nutzerentscheidung). Formular → Netlify Forms, reviews.php → Netlify Function.
+- Design v2 (Phase 3): Seiten opt-in per `<BaseLayout design="v2">`. Tokens `site/src/styles/tokens.css` (kids/neutral = Zirkus-Plakat: Fredoka+Nunito, Creme, Logo-Farben, Sticker-Schatten; adult = Zauberei bei Nacht: Playfair+Jost, Nacht/Gold wie zauberer-liar.de). Komponenten `site/src/components/v2/`. Daten zentral `site/src/data/site.ts`.
+- Logo je Zone (Nutzerentscheidung): kids/neutral bunt `logo-clown-nrw.png`, adult Gold `brand/logo-liar-gold.webp` (von zauberer-liar.de, unverändert).
+- L1-Wächter: `tests/fixtures/content-baseline.json` (aus Alt-Build, aria-hidden ausgenommen). Abweichung erklären: `MSYS_NO_PATHCONV=1 npx tsx scripts/parity-diff.ts /pfad/`. Baseline NIE aus umgebautem Build neu ziehen — nur aus Alt-Stand (git worktree + `SNAPSHOT_DIST`).

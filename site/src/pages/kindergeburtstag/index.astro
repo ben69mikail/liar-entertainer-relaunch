@@ -4,9 +4,11 @@ import { Image } from 'astro:assets';
 import heroImg from '../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
 import kinderzaubererImg from '../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
 import karteImg from '../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
-import GoogleReviews from '../../components/GoogleReviews.astro';
-import HeroStage from '../../components/HeroStage.astro';
-import WaveDivider from '../../components/WaveDivider.astro';
+import Reviews from '../../components/v2/Reviews.astro';
+import ReviewBadge from '../../components/v2/ReviewBadge.astro';
+import Bunting from '../../components/v2/kids/Bunting.astro';
+import YouTubeFacade from '../../components/YouTubeFacade.astro';
+import { CONTACT } from '../../data/site';
 
 const seoTitle = 'Zauberer Kindergeburtstag NRW | Ab 150€ | Clown LIAR';
 const seoDescription = 'Zauberer für Kindergeburtstag in NRW buchen ✓ Clown Zauberer LIAR ✓ Zaubershow ab 150€ ✓ Ballonmodellage ✓ Glitzer-Tattoos ✓ 370+ Top-Bewertungen ✓ Jetzt buchen!';
@@ -125,378 +127,512 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   canonical="https://liar-entertainer.com/kindergeburtstag/"
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kindergeburtstag', url: '/kindergeburtstag/' }]}
+  design="v2"
 >
-
-  <!-- Hero + Intro: Pastell-Hero-Stage -->
-  <HeroStage blobOpacity={0.5}>
-  <!-- Hero Section -->
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-    <Image
-      src={heroImg}
-      alt="Kindergeburtstag mit Clown Zauberer NRW"
-      class="absolute inset-0 w-full h-full object-cover" style="object-position: 55% 26%"
-      widths={[400, 800, 1200, 1600]}
-      sizes="(max-width: 1152px) 100vw, 1120px"
-      loading="eager"
-      fetchpriority="high"
-    />
-    <div class="absolute inset-0 bg-black/45"></div>
-    <div class="relative flex items-center justify-center" style="min-height: 600px;">
-      <h1 class="text-white font-bold text-center px-6 leading-tight" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
-        Zauberer für Kindergeburtstag in NRW<br />mit Clown & Lachgarantie
-      </h1>
-    </div>
-  </div>
-    </div>
-  </section>
-
-  <!-- Intro Section -->
-  <section class="py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <!-- Left: Text -->
-        <div>
-          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Clown Zauberer für Kindergeburtstage in NRW</h2>
-          <h3 class="font-bold text-lg text-[#1f2025] mb-4">Magische Momente voller Lachen, Staunen und Freude</h3>
-          <p class="hero-subtitle text-[#374151] mb-4 leading-relaxed font-medium">
-            Ein Zauberer für den Kindergeburtstag in NRW ist ab 150&nbsp;€ buchbar: Clown Zauberer LIAR (Michaël Prescler) gestaltet eine 40-minütige interaktive Zaubershow für bis zu 12 Kinder, auf Wunsch ergänzt um Ballonmodellage und Glitzer-Tattoos. Buchbar in ganz NRW, mit 370+ Top-Bewertungen.
-          </p>
-          <p class="text-[#374151] mb-4 leading-relaxed">
-            Ein Kindergeburtstag soll unvergesslich sein – voller Lachen, Spannung und echter Magie.<br />
-            Mit meiner kindgerechten <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a> bringe ich die Augen kleiner Gäste zum Leuchten und sorge dafür, dass jedes Kind sich als Teil der Show fühlt.
-          </p>
-          <p class="text-[#374151] mb-6 leading-relaxed">
-            Ich bin <a href="/" class="text-[#d7393e] hover:underline">Clown</a> <a href="/zauberer/" class="text-[#d7393e] hover:underline">Zauberer</a> LIAR (Michaël Prescler) – professioneller <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a> mit Herz, Humor und über 15 Jahren Erfahrung auf Familienfeiern, in Kindergärten und bei Stadtfesten in ganz NRW. Alle Details zum <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Zauberer für den Kindergeburtstag</a> – Ablauf, Alter und Buchung – finden Sie auf meiner Kinderzauberer-Seite.
-          </p>
-          <p class="font-semibold text-[#1f2025] mb-3">✨ Was Sie erwartet:</p>
-          <ul class="space-y-2 text-[#374151]">
-            <li>🎪 Interaktive Zaubershow vom Kinderzauberer (40 Min.)</li>
-            <li>🎈 Ballonmodellage für jedes Kind (optional)</li>
-            <li>✨ Glitzer Tattoos (optional)</li>
-            <li>😊 Kindgerechter Humor vom erfahrenen Kinderzauberer</li>
-            <li>📍 Flexibel in ganz NRW buchbar</li>
-            <li>💰 Transparente Preise ab 150€</li>
-          </ul>
+  <!-- ── Hero: Zirkus-Plakat. No reveal here (LCP). ───────────── -->
+  <section class="kg-hero">
+    <Bunting />
+    <div class="container kg-hero__grid">
+      <div class="kg-hero__copy">
+        <ReviewBadge />
+        <h1 class="kg-hero__title">
+          Zauberer für <span class="kg-mark">Kindergeburtstag</span> in NRW<br />mit Clown & Lachgarantie
+        </h1>
+        <div class="kg-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/">Jetzt unverbindlich anfragen</a>
+          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
-        <!-- Right: Photo -->
-        <div class="flex justify-center">
-          <Image
-            src={kinderzaubererImg}
-            alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
-            class="rounded-2xl object-cover object-[20%] portrait-zoom"
-            style="width: 320px; height: 320px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
-            widths={[320, 640]}
-            sizes="320px"
-            loading="lazy"
-          />
-        </div>
+        <nav class="kg-quick" aria-label="Schnell zu den Infos">
+          <a href="#preise">Preise &amp; Pakete</a>
+          <a href="#faq">Ablauf &amp; Fragen</a>
+          <a href="#bewertungen">Bewertungen</a>
+          <a href="#einsatzgebiet">Städte</a>
+        </nav>
       </div>
+      <figure class="kg-hero__photo">
+        <Image
+          src={heroImg}
+          alt="Kindergeburtstag mit Clown Zauberer NRW"
+          widths={[400, 700, 1000, 1400]}
+          sizes="(max-width: 900px) 92vw, 560px"
+          loading="eager"
+          fetchpriority="high"
+          style="object-position: 55% 26%"
+        />
+        <a class="kg-sticker" href="#preise" aria-label="Preise ansehen: ab 150 Euro">
+          <span>ab</span><strong>150&nbsp;€</strong>
+        </a>
+      </figure>
     </div>
   </section>
-  </HeroStage>
 
-  <!-- Zaubershow Section (pastel blue) -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <p class="text-[#3b55d5] font-bold text-sm uppercase tracking-widest mb-4">VOLLTREFFER</p>
-      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-6">✨ Zaubershow für Geburtstag – mit Herz &amp; Humor</h2>
-      <p class="text-[#374151] leading-relaxed mb-4">
-        Meine <strong class="text-[#1f2025]">Zaubershow</strong> ist speziell auf Kinder abgestimmt:<br />
+  <!-- ── Intro ─────────────────────────────────────────────── -->
+  <section class="kg-intro">
+    <div class="container kg-intro__grid">
+      <div class="kg-intro__text" data-reveal>
+        <h2 class="kg-kicker">Clown Zauberer für Kindergeburtstage in NRW</h2>
+        <h3 class="kg-h3">Magische Momente voller Lachen, Staunen und Freude</h3>
+        <p class="kg-lead">
+          Ein Zauberer für den Kindergeburtstag in NRW ist ab 150&nbsp;€ buchbar: Clown Zauberer LIAR (Michaël Prescler) gestaltet eine 40-minütige interaktive Zaubershow für bis zu 12 Kinder, auf Wunsch ergänzt um Ballonmodellage und Glitzer-Tattoos. Buchbar in ganz NRW, mit 370+ Top-Bewertungen.
+        </p>
+        <p>
+          Ein Kindergeburtstag soll unvergesslich sein – voller Lachen, Spannung und echter Magie.<br />
+          Mit meiner kindgerechten <a href="/zauberer/zaubershow/">Zaubershow</a> bringe ich die Augen kleiner Gäste zum Leuchten und sorge dafür, dass jedes Kind sich als Teil der Show fühlt.
+        </p>
+        <p>
+          Ich bin <a href="/">Clown</a> <a href="/zauberer/">Zauberer</a> LIAR (Michaël Prescler) – professioneller <a href="/kinderzauberer/">Kinderzauberer</a> mit Herz, Humor und über 15 Jahren Erfahrung auf Familienfeiern, in Kindergärten und bei Stadtfesten in ganz NRW. Alle Details zum <a href="/kinderzauberer/">Zauberer für den Kindergeburtstag</a> – Ablauf, Alter und Buchung – finden Sie auf meiner Kinderzauberer-Seite.
+        </p>
+      </div>
+      <aside class="kg-expect" data-reveal data-reveal-delay="0.1">
+        <Image
+          src={kinderzaubererImg}
+          alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
+          class="kg-expect__img"
+          widths={[320, 640]}
+          sizes="320px"
+          loading="lazy"
+        />
+        <p class="kg-expect__title">✨ Was Sie erwartet:</p>
+        <ul class="kg-expect__list">
+          <li>🎪 Interaktive Zaubershow vom Kinderzauberer (40 Min.)</li>
+          <li>🎈 Ballonmodellage für jedes Kind (optional)</li>
+          <li>✨ Glitzer Tattoos (optional)</li>
+          <li>😊 Kindgerechter Humor vom erfahrenen Kinderzauberer</li>
+          <li>📍 Flexibel in ganz NRW buchbar</li>
+          <li>💰 Transparente Preise ab 150€</li>
+        </ul>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ── Zaubershow (blue band) ────────────────────────────── -->
+  <section class="kg-band kg-band--blue">
+    <div class="container kg-narrow" data-reveal>
+      <p class="kg-eyebrow">VOLLTREFFER</p>
+      <h2 class="kg-h2">✨ Zaubershow für Geburtstag – mit Herz &amp; Humor</h2>
+      <p>
+        Meine <strong>Zaubershow</strong> ist speziell auf Kinder abgestimmt:<br />
         lebendig, interaktiv und voller Überraschungen.
       </p>
-      <p class="text-[#374151] leading-relaxed mb-4">
+      <p>
         Die Kinder dürfen mitzaubern, lachen, staunen – und manchmal selbst zur kleinen Zauberin oder zum Zauberer werden.
       </p>
-      <p class="text-[#374151] leading-relaxed mb-4">
-        Dabei achte ich besonders auf <strong class="text-[#1f2025]">Respekt, Empathie und ein liebevolles Miteinander</strong>.<br />
+      <p>
+        Dabei achte ich besonders auf <strong>Respekt, Empathie und ein liebevolles Miteinander</strong>.<br />
         Kein Kind wird bloßgestellt – jedes Kind wird Teil einer positiven, fröhlichen Erfahrung.
       </p>
-      <p class="text-[#374151] leading-relaxed">
+      <p>
         Egal ob im Wohnzimmer, Garten oder im Gemeindesaal – meine Show passt sich flexibel an jede Umgebung an und sorgt garantiert für strahlende Gesichter.
       </p>
     </div>
   </section>
 
-  <!-- Die Preise -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-[#d7393e] font-bold text-3xl sm:text-4xl text-center mb-10">Was kostet ein Zauberer für den Kindergeburtstag?</h2>
+  <!-- ── Preise ────────────────────────────────────────────── -->
+  <section class="kg-prices" id="preise">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>Was kostet ein Zauberer für den Kindergeburtstag?</h2>
 
-      <!-- Paket-Tabelle (SEO-Audit 06.08.2026, Massnahme M2): LLMs uebernehmen Tabellen
-           ueberdurchschnittlich haeufig, weil sie verlustfrei extrahierbar sind. Die
-           Karten darunter bleiben als visuelle Darstellung erhalten. -->
-      <div class="max-w-3xl mx-auto mb-12 overflow-x-auto">
-        <table class="w-full text-left text-sm border-collapse bg-white rounded-xl overflow-hidden shadow-sm">
+      <div class="kg-table-wrap" data-reveal>
+        <table class="kg-table">
           <caption class="sr-only">Pakete und Preise für den Kindergeburtstag mit Clown Zauberer LIAR</caption>
-          <thead class="bg-[#f4f4f4] text-[#1f2025]">
+          <thead>
             <tr>
-              <th scope="col" class="px-4 py-3 font-bold">Paket</th>
-              <th scope="col" class="px-4 py-3 font-bold">Dauer</th>
-              <th scope="col" class="px-4 py-3 font-bold">Preis</th>
-              <th scope="col" class="px-4 py-3 font-bold">Geeignet für</th>
+              <th scope="col">Paket</th>
+              <th scope="col">Dauer</th>
+              <th scope="col">Preis</th>
+              <th scope="col">Geeignet für</th>
             </tr>
           </thead>
-          <tbody class="text-[#374151]">
-            <tr class="border-t border-gray-100">
-              <th scope="row" class="px-4 py-3 font-semibold text-left">Zaubershow</th>
-              <td class="px-4 py-3">40 Minuten</td>
-              <td class="px-4 py-3 font-bold text-[#d7393e]">150 €</td>
-              <td class="px-4 py-3">4–12 Jahre, bis ca. 12 Kinder</td>
+          <tbody>
+            <tr>
+              <th scope="row">Zaubershow</th>
+              <td>40 Minuten</td>
+              <td class="kg-price">150 €</td>
+              <td>4–12 Jahre, bis ca. 12 Kinder</td>
             </tr>
-            <tr class="border-t border-gray-100">
-              <th scope="row" class="px-4 py-3 font-semibold text-left">Zaubershow + Ballonmodellage</th>
-              <td class="px-4 py-3">ca. 55 Minuten</td>
-              <td class="px-4 py-3 font-bold text-[#d7393e]">170 €</td>
-              <td class="px-4 py-3">Jedes Kind bekommt eine Ballonfigur</td>
+            <tr>
+              <th scope="row">Zaubershow + Ballonmodellage</th>
+              <td>ca. 55 Minuten</td>
+              <td class="kg-price">170 €</td>
+              <td>Jedes Kind bekommt eine Ballonfigur</td>
             </tr>
-            <tr class="border-t border-gray-100">
-              <th scope="row" class="px-4 py-3 font-semibold text-left">Komplett-Paket inkl. Glitzer-Tattoos</th>
-              <td class="px-4 py-3">ca. 90 Minuten</td>
-              <td class="px-4 py-3 font-bold text-[#d7393e]">210 €</td>
-              <td class="px-4 py-3">Beliebteste Buchung</td>
+            <tr class="is-popular">
+              <th scope="row">Komplett-Paket inkl. Glitzer-Tattoos</th>
+              <td>ca. 90 Minuten</td>
+              <td class="kg-price">210 €</td>
+              <td>Beliebteste Buchung</td>
             </tr>
-            <tr class="border-t border-gray-100 bg-[#fafafa]">
-              <th scope="row" class="px-4 py-3 font-semibold text-left">Fahrtkosten</th>
-              <td class="px-4 py-3">–</td>
-              <td class="px-4 py-3 font-bold">0,40 €/km</td>
-              <td class="px-4 py-3">Hin- und Rückfahrt ab Gladbeck</td>
+            <tr class="is-muted">
+              <th scope="row">Fahrtkosten</th>
+              <td>–</td>
+              <td class="kg-price">0,40 €/km</td>
+              <td>Hin- und Rückfahrt ab Gladbeck</td>
             </tr>
           </tbody>
         </table>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <!-- Zaubershow -->
-        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎩 Zaubershow</h3>
-          <p class="text-[#d7393e] font-bold text-2xl mb-4">150 €</p>
-          <ul class="space-y-2 text-[#374151] text-sm mb-6">
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Minuten voller Zauber, Lachen und Staunen</li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Bis ca. 12 Kinder – Mindestalter: 4 Jahre</li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Inkl. Material</li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Das Geburtstagskind steht immer im Mittelpunkt</li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
-          </ul>
-          <p class="text-[#374151] text-sm">Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</p>
-        </div>
 
-        <!-- Ballonmodellage -->
-        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal delay-100">
-          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎈 Luftballonmodellage</h3>
-          <p class="text-[#3b55d5] font-bold text-2xl mb-4">+ 20 €</p>
-          <ul class="space-y-2 text-[#374151] text-sm mb-6">
-            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Für jedes Kind 1 Ballon</li>
-            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Ca. 15 Minuten</li>
-            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Tolle Erinnerung zum Mitnehmen</li>
-            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Große Auswahl an Figuren: Hund, Schwert, Blume u.v.m.</li>
-            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Perfekte Ergänzung zur Zaubershow</li>
+      <div class="kg-cards">
+        <article class="kg-card kg-card--red" data-reveal>
+          <h3>🎩 Zaubershow</h3>
+          <p class="kg-card__price">150 €</p>
+          <ul>
+            <li><span>✓</span> 40 Minuten voller Zauber, Lachen und Staunen</li>
+            <li><span>✓</span> Bis ca. 12 Kinder – Mindestalter: 4 Jahre</li>
+            <li><span>✓</span> Inkl. Material</li>
+            <li><span>✓</span> Das Geburtstagskind steht immer im Mittelpunkt</li>
+            <li><span>✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
           </ul>
-          <p class="text-[#374151] text-sm">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
-        </div>
+          <p class="kg-card__note">Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</p>
+        </article>
 
-        <!-- Glitzer Tattoos -->
-        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] card-hover reveal delay-200">
-          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Glitzer-Tattoos</h3>
-          <p class="text-[#d7393e] font-bold text-2xl mb-4">+ 40 €</p>
-          <ul class="space-y-2 text-[#374151] text-sm mb-6">
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Für jedes Kind 1 Tattoo</li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Ca. 30 Minuten</li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hautverträglich &amp; langanhaltend</li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Viele Motive: Einhörner, Schmetterlinge, Sterne u.v.m.</li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hält mehrere Tage auf der Haut</li>
+        <article class="kg-card kg-card--blue" data-reveal data-reveal-delay="0.1">
+          <h3>🎈 Luftballonmodellage</h3>
+          <p class="kg-card__price">+ 20 €</p>
+          <ul>
+            <li><span>✓</span> Für jedes Kind 1 Ballon</li>
+            <li><span>✓</span> Ca. 15 Minuten</li>
+            <li><span>✓</span> Tolle Erinnerung zum Mitnehmen</li>
+            <li><span>✓</span> Große Auswahl an Figuren: Hund, Schwert, Blume u.v.m.</li>
+            <li><span>✓</span> Perfekte Ergänzung zur Zaubershow</li>
           </ul>
-          <p class="text-[#374151] text-sm">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
-        </div>
+          <p class="kg-card__note">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
+        </article>
+
+        <article class="kg-card kg-card--yellow" data-reveal data-reveal-delay="0.2">
+          <h3>✨ Glitzer-Tattoos</h3>
+          <p class="kg-card__price">+ 40 €</p>
+          <ul>
+            <li><span>✓</span> Für jedes Kind 1 Tattoo</li>
+            <li><span>✓</span> Ca. 30 Minuten</li>
+            <li><span>✓</span> Hautverträglich &amp; langanhaltend</li>
+            <li><span>✓</span> Viele Motive: Einhörner, Schmetterlinge, Sterne u.v.m.</li>
+            <li><span>✓</span> Hält mehrere Tage auf der Haut</li>
+          </ul>
+          <p class="kg-card__note">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
+        </article>
       </div>
 
-      <div class="text-center mt-10">
-        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
-          Jetzt unverbindlich anfragen
-        </a>
-      </div>
+      <p class="kg-center kg-cta-row">
+        <a href="/kontakt/" class="btn btn--primary">Jetzt unverbindlich anfragen</a>
+      </p>
     </div>
   </section>
 
-  <!-- Ballonmodellage & Glitzer Tattoos -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h3 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-2">
+  <!-- ── Zusatzleistungen ──────────────────────────────────── -->
+  <section class="kg-extras">
+    <div class="container">
+      <h3 class="kg-h2 kg-center" data-reveal>
         Zusatzleistungen zur Zaubershow: Ballonmodellage &amp; Glitzer-Tattoos
       </h3>
-      <p class="text-center text-[#595959] mb-10">Das i-Tüpfelchen für den perfekten Kindergeburtstag</p>
-      <p class="text-[#374151] text-center mb-10 max-w-2xl mx-auto">
-        Optional lässt sich die Zaubershow um <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonmodellage</a> oder <a href="/clown/glitzer-tattoo/" class="text-[#d7393e] hover:underline">Glitzer-Tattoos</a> ergänzen – der Fokus bleibt die interaktive Kinderzauberer-Show. Werfen Sie auch gerne einen Blick in meine <a href="/galerie/" class="text-[#d7393e] hover:underline">Galerie</a>.
+      <p class="kg-center kg-sub">Das i-Tüpfelchen für den perfekten Kindergeburtstag</p>
+      <p class="kg-center kg-narrow">
+        Optional lässt sich die Zaubershow um <a href="/clown/ballonmodellage/">Ballonmodellage</a> oder <a href="/clown/glitzer-tattoo/">Glitzer-Tattoos</a> ergänzen – der Fokus bleibt die interaktive Kinderzauberer-Show. Werfen Sie auch gerne einen Blick in meine <a href="/galerie/">Galerie</a>.
       </p>
 
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
-        <!-- Ballonmodellage -->
-        <div class="bg-gray-50 rounded-xl p-8 card-hover reveal">
-          <h4 class="font-bold text-[#1f2025] text-xl mb-4">🎈 Ballonmodellage</h4>
-          <p class="text-[#374151] mb-4 leading-relaxed">
+      <div class="kg-extras__grid">
+        <article class="kg-extra" data-reveal>
+          <h4>🎈 Ballonmodellage</h4>
+          <p>
             Bunte Figuren, Tiere und Überraschungen – live vor den Augen der Kinder geformt. Jedes Kind bekommt sein Wunschtier mit nach Hause!
           </p>
-          <p class="text-[#374151] mb-4"><strong>Beliebte Ballonfiguren:</strong><br />
+          <p><strong>Beliebte Ballonfiguren:</strong><br />
             🐶 Hund | 🐱 Katze | 🦖 Dinosaurier | ⚔️ Schwert | 👑 Krone | 🌸 Blume | 🦋 Schmetterling
           </p>
-          <p class="text-[#374151] mb-2"><strong>Das Besondere:</strong> Jedes Kind darf sich sein Lieblingstier wünschen, und der Clown zaubert es direkt vor den Augen der Kinder. Die Ballonfiguren sind robust und halten mehrere Tage – ein Andenken, das Freude macht!</p>
-          <p class="text-[#374151] mb-2"><strong>Perfekt als:</strong> – Ergänzung zur Clown-Show – Eigenständige Attraktion auf Festen – Walk-Act auf Straßenfesten</p>
-          <p class="text-[#374151] mt-4 font-medium">
+          <p><strong>Das Besondere:</strong> Jedes Kind darf sich sein Lieblingstier wünschen, und der Clown zaubert es direkt vor den Augen der Kinder. Die Ballonfiguren sind robust und halten mehrere Tage – ein Andenken, das Freude macht!</p>
+          <p><strong>Perfekt als:</strong> – Ergänzung zur Clown-Show – Eigenständige Attraktion auf Festen – Walk-Act auf Straßenfesten</p>
+          <p class="kg-extra__dur">
             <strong>Dauer:</strong> Ca. 15 Minuten für 12 Kinder (1-2 Min. pro Figur)
           </p>
-        </div>
+        </article>
 
-        <!-- Glitzer Tattoos -->
-        <div class="bg-gray-50 rounded-xl p-8 card-hover reveal">
-          <h4 class="font-bold text-[#1f2025] text-xl mb-4">✨ Glitzer Tattoos</h4>
-          <p class="text-[#374151] mb-4 leading-relaxed">
+        <article class="kg-extra" data-reveal data-reveal-delay="0.1">
+          <h4>✨ Glitzer Tattoos</h4>
+          <p>
             Kleine Kunstwerke, die Kinder lieben – hautfreundlich, farbenfroh und mit glänzenden Augen garantiert. Die Tattoos halten 4-8 Tage und sind wasserfest!
           </p>
-          <p class="text-[#374151] mb-4"><strong>Beliebte Motive:</strong><br />
+          <p><strong>Beliebte Motive:</strong><br />
             🦄 Einhorn | 🌸 Blumen | 🦖 Dino | ✨ Sterne | 🦋 Schmetterling | 🏴‍☠️ Pirat
           </p>
-          <p class="text-[#374151] mt-4 font-medium">
+          <p class="kg-extra__dur">
             <strong>Dauer:</strong> Ca. 30 Minuten für 12 Kinder (2-3 Min. pro Tattoo)
           </p>
-        </div>
+        </article>
       </div>
 
-      <p class="text-center mt-8 text-[#374151] font-medium">
+      <p class="kg-center kg-tip">
         💡 <strong>Tipp:</strong> Kombinieren Sie alle drei Leistungen für den perfekten Rundum-Sorglos-Kindergeburtstag!
       </p>
     </div>
   </section>
 
-  <!-- Google Reviews -->
-  <GoogleReviews />
+  <Reviews />
 
-  <!-- FAQ -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Kindergeburtstag mit Kinderzauberer</h2>
-      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+  <!-- ── FAQ: native <details>, works without JS ───────────── -->
+  <section class="kg-faq" id="faq">
+    <div class="container kg-narrow">
+      <h2 class="kg-eyebrow kg-center">Häufige Fragen zum Kindergeburtstag mit Kinderzauberer</h2>
+      <h3 class="kg-h2 kg-center">
         Kindergeburtstag organisieren? Hier sind ein paar Antworten für die perfekte Feier
       </h3>
 
-      <div class="space-y-3" id="faq-list">
-        {faqItems.map((item, i) => (
-          <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
-            <button
-              class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
-              aria-expanded="false"
-            >
-              <span>{item.question}</span>
-              <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
-              {item.answer}
-            </div>
-          </div>
+      <div class="kg-faq__list">
+        {faqItems.map((item) => (
+          <details class="kg-faq__item" data-reveal>
+            <summary><span>{item.question}</span></summary>
+            <div class="kg-faq__answer">{item.answer}</div>
+          </details>
         ))}
       </div>
 
-      <div class="text-center mt-10">
-        <p class="text-[#374151] mb-2 font-semibold">Einfach Kontakt aufnehmen</p>
-        <p class="text-[#374151] mb-6 text-sm leading-relaxed max-w-xl mx-auto">
+      <div class="kg-center kg-faq__contact">
+        <p class="kg-faq__contact-title">Einfach Kontakt aufnehmen</p>
+        <p>
           Sie können mir Ihre Anfrage für einen Kindergeburtstag unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben. Ich helfe Ihnen gerne weiter.
         </p>
-        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
-          Kontaktformular
-        </a>
+        <a href="/kontakt/" class="btn btn--primary">Kontaktformular</a>
       </div>
     </div>
   </section>
 
-  <!-- Video Sektion (pastel blue) -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
-        <iframe
-          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
-          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
-          class="absolute inset-0 w-full h-full rounded-lg"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+  <!-- ── Video ─────────────────────────────────────────────── -->
+  <section class="kg-band kg-band--yellow">
+    <div class="container kg-narrow kg-center">
+      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="kg-video" data-reveal>
+        <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
-      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+      <h3 class="kg-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
-      <a
-        href="/galerie/"
-        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
-      >
-        Zur Foto- und Videogalerie
-      </a>
+      <a href="/galerie/" class="btn btn--primary">Zur Foto- und Videogalerie</a>
     </div>
   </section>
 
-  <!-- Einsatzgebiet -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-        <div>
-          <h3 class="font-bold text-[#1f2025] mb-3">Haupteinsatzgebiet Kindergeburtstag</h3>
-          <p class="text-[#374151] mb-4 leading-relaxed">
-            <a href="/kindergeburtstag/geburtstag-in-gladbeck/" class="text-[#d7393e] hover:underline">Gladbeck</a> | <a href="/kindergeburtstag/geburtstag-in-oberhausen/" class="text-[#d7393e] hover:underline">Oberhausen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/" class="text-[#d7393e] hover:underline">Gelsenkirchen</a> | <a href="/kindergeburtstag/geburtstag-in-essen/" class="text-[#d7393e] hover:underline">Essen</a> | <a href="/kindergeburtstag/geburtstag-in-duisburg/" class="text-[#d7393e] hover:underline">Duisburg</a> | <a href="/kindergeburtstag/geburtstag-in-bottrop/" class="text-[#d7393e] hover:underline">Bottrop</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/" class="text-[#d7393e] hover:underline">Bochum</a> | <a href="/kindergeburtstag/geburtstag-in-dinslaken/" class="text-[#d7393e] hover:underline">Dinslaken</a> | <a href="/kindergeburtstag/geburtstag-in-wesel/" class="text-[#d7393e] hover:underline">Wesel</a> | <a href="/kindergeburtstag/geburtstag-in-castrop-rauxel/" class="text-[#d7393e] hover:underline">Castrop-Rauxel</a> | <a href="/kindergeburtstag/geburtstag-in-dorsten/" class="text-[#d7393e] hover:underline">Dorsten</a> | <a href="/kindergeburtstag/geburtstag-in-herten/" class="text-[#d7393e] hover:underline">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-herne/" class="text-[#d7393e] hover:underline">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-marl/" class="text-[#d7393e] hover:underline">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/" class="text-[#d7393e] hover:underline">Mülheim</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/" class="text-[#d7393e] hover:underline">Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-datteln/" class="text-[#d7393e] hover:underline">Datteln</a> | <a href="/kindergeburtstag/geburtstag-in-haltern-am-see/" class="text-[#d7393e] hover:underline">Haltern am See</a> | <a href="/kindergeburtstag/geburtstag-in-moers/" class="text-[#d7393e] hover:underline">Moers</a> | <a href="/kindergeburtstag/geburtstag-in-waltrop/" class="text-[#d7393e] hover:underline">Waltrop</a> | <a href="/kindergeburtstag/geburtstag-in-xanten/" class="text-[#d7393e] hover:underline">Xanten</a>
+  <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
+  <section class="kg-area" id="einsatzgebiet">
+    <div class="container">
+      <h2 class="kg-h2 kg-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <div class="kg-area__grid">
+        <div class="kg-area__text">
+          <h3 class="kg-h3">Haupteinsatzgebiet Kindergeburtstag</h3>
+          <p class="kg-cities">
+            <a href="/kindergeburtstag/geburtstag-in-gladbeck/">Gladbeck</a> | <a href="/kindergeburtstag/geburtstag-in-oberhausen/">Oberhausen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/">Gelsenkirchen</a> | <a href="/kindergeburtstag/geburtstag-in-essen/">Essen</a> | <a href="/kindergeburtstag/geburtstag-in-duisburg/">Duisburg</a> | <a href="/kindergeburtstag/geburtstag-in-bottrop/">Bottrop</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/">Bochum</a> | <a href="/kindergeburtstag/geburtstag-in-dinslaken/">Dinslaken</a> | <a href="/kindergeburtstag/geburtstag-in-wesel/">Wesel</a> | <a href="/kindergeburtstag/geburtstag-in-castrop-rauxel/">Castrop-Rauxel</a> | <a href="/kindergeburtstag/geburtstag-in-dorsten/">Dorsten</a> | <a href="/kindergeburtstag/geburtstag-in-herten/">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-herne/">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-marl/">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/">Mülheim</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/">Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-datteln/">Datteln</a> | <a href="/kindergeburtstag/geburtstag-in-haltern-am-see/">Haltern am See</a> | <a href="/kindergeburtstag/geburtstag-in-moers/">Moers</a> | <a href="/kindergeburtstag/geburtstag-in-waltrop/">Waltrop</a> | <a href="/kindergeburtstag/geburtstag-in-xanten/">Xanten</a>
           </p>
-          <h3 class="font-bold text-[#1f2025] mb-3">Weitere NRW-Städte</h3>
-          <p class="text-[#374151] mb-4 leading-relaxed">
-            <a href="/kindergeburtstag/geburtstag-in-duesseldorf/" class="text-[#d7393e] hover:underline">Düsseldorf</a> | <a href="/kindergeburtstag/geburtstag-in-dortmund/" class="text-[#d7393e] hover:underline">Dortmund</a> | Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Moers | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn | Borken
+          <h3 class="kg-h3">Weitere NRW-Städte</h3>
+          <p class="kg-cities">
+            <a href="/kindergeburtstag/geburtstag-in-duesseldorf/">Düsseldorf</a> | <a href="/kindergeburtstag/geburtstag-in-dortmund/">Dortmund</a> | Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Moers | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn | Borken
           </p>
-          <p class="text-[#374151] leading-relaxed">
+          <p>
             Auf Anfrage bin ich auch außerhalb von NRW für Kindergeburtstage buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
           </p>
         </div>
-        <div>
+        <figure class="kg-area__map" data-reveal>
           <Image
             src={karteImg}
             alt="Karte Einsatzgebiet Kindergeburtstag: Wohnort Clown Zauberer LIAR"
-            class="rounded-lg w-full h-auto img-hover-zoom"
             widths={[400, 600, 800]}
             sizes="(max-width: 1024px) 100vw, 50vw"
             loading="lazy"
           />
-        </div>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- Contact Section -->
-  <section class="bg-white py-10 border-t border-gray-100">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
-      <p class="text-[#374151] mb-2">Anschrift : Beethovenstr. 15, 45966 Gladbeck</p>
-      <p class="text-[#374151] mb-4">
-        TEL : <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+  <!-- ── Kontakt ───────────────────────────────────────────── -->
+  <section class="kg-contact">
+    <div class="container kg-center">
+      <p class="kg-contact__name">Clown Zauberer LIAR</p>
+      <p>Anschrift : Beethovenstr. 15, 45966 Gladbeck</p>
+      <p>
+        TEL : <a href="tel:+491721517578">0172 – 1517578</a>
         {' '}// Email :
-        <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+        <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a>
       </p>
     </div>
   </section>
-
 </BaseLayout>
 
-<script>
-  document.querySelectorAll('.faq-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const answer = btn.nextElementSibling as HTMLElement;
-      const chevron = btn.querySelector('.faq-chevron');
-      const isOpen = !answer?.classList.contains('hidden');
-      if (isOpen) {
-        answer?.classList.add('hidden');
-        chevron?.classList.remove('rotate-180');
-        btn.setAttribute('aria-expanded', 'false');
-      } else {
-        answer?.classList.remove('hidden');
-        chevron?.classList.add('rotate-180');
-        btn.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-</script>
+<style>
+  /* ── shared section rhythm ── */
+  section { padding-block: var(--space-6); }
+  .kg-center { text-align: center; }
+  .kg-narrow { max-width: 46rem; margin-inline: auto; }
+  .kg-h2 { font-size: clamp(1.9rem, 4.2vw, 3rem); margin: 0 0 var(--space-3); }
+  .kg-h3 { font-size: clamp(1.25rem, 2.4vw, 1.6rem); margin: var(--space-3) 0 var(--space-2); }
+  .kg-eyebrow {
+    display: inline-block; margin: 0 0 var(--space-2); padding: 0.3rem 0.9rem;
+    font-family: var(--font-display); font-size: 0.85rem; font-weight: 700;
+    letter-spacing: 0.16em; text-transform: uppercase;
+    background: var(--ink); color: var(--bg); border-radius: 999px; rotate: -2deg;
+  }
+  .kg-kicker { font-size: 1rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent-strong); margin: 0 0 var(--space-1); font-family: var(--font-body); font-weight: 900; }
+  .kg-sub { font-family: var(--font-display); font-size: 1.25rem; color: var(--accent-2); margin-top: calc(-1 * var(--space-2)); }
+  p { margin: 0 0 var(--space-2); }
+
+  /* ── hero ── */
+  .kg-hero {
+    position: relative;
+    padding-block: 0 var(--space-5);
+    background:
+      radial-gradient(circle at 12% 30%, color-mix(in srgb, var(--brand-yellow) 35%, transparent) 0 0.35rem, transparent 0.4rem) 0 0 / 7rem 7rem,
+      radial-gradient(circle at 70% 60%, color-mix(in srgb, var(--brand-blue) 22%, transparent) 0 0.3rem, transparent 0.35rem) 0 0 / 9rem 9rem,
+      radial-gradient(circle at 40% 80%, color-mix(in srgb, var(--brand-red) 22%, transparent) 0 0.28rem, transparent 0.33rem) 0 0 / 8rem 8rem,
+      var(--bg);
+  }
+  .kg-hero__grid {
+    display: grid; gap: var(--space-4); align-items: center;
+    grid-template-columns: 1.05fr 1fr;
+    padding-top: var(--space-3);
+  }
+  .kg-hero__title {
+    font-size: clamp(2.2rem, 4.8vw, 3.8rem);
+    margin: var(--space-2) 0 var(--space-3);
+    font-weight: 700;
+  }
+  .kg-mark {
+    color: var(--accent-strong);
+    background: linear-gradient(transparent 62%, color-mix(in srgb, var(--brand-yellow) 70%, transparent) 62% 92%, transparent 92%);
+    padding-inline: 0.08em;
+  }
+  .kg-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
+  .kg-quick { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-3); }
+  .kg-quick a {
+    font-weight: 800; font-size: 0.92rem; color: var(--ink); text-decoration: none;
+    padding: 0.35rem 0.85rem; border-radius: 999px; background: var(--bg-alt); border: 2px dashed var(--line);
+    transition: background-color 0.2s, rotate 0.25s var(--ease-spring);
+  }
+  .kg-quick a:hover { background: var(--surface); rotate: -2deg; }
+  .kg-hero__photo { position: relative; margin: 0; rotate: 2deg; }
+  .kg-hero__photo img {
+    display: block; width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover;
+    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 10px 10px 0 var(--line);
+  }
+  .kg-sticker {
+    position: absolute; left: -1.6rem; bottom: -1.6rem;
+    width: 7.4rem; aspect-ratio: 1; display: grid; place-content: center; text-align: center; line-height: 1;
+    background: var(--brand-yellow); color: var(--ink); text-decoration: none;
+    clip-path: polygon(50% 0%, 61% 12%, 77% 6%, 80% 22%, 96% 26%, 89% 41%, 100% 54%, 86% 63%, 89% 80%, 72% 80%, 63% 96%, 50% 86%, 37% 96%, 28% 80%, 11% 80%, 14% 63%, 0% 54%, 11% 41%, 4% 26%, 20% 22%, 23% 6%, 39% 12%);
+    rotate: -12deg;
+    animation: wobble 4s var(--ease-out) infinite;
+  }
+  .kg-sticker span { font-weight: 800; font-size: 0.95rem; }
+  .kg-sticker strong { font-family: var(--font-display); font-size: 1.75rem; }
+  @keyframes wobble { 0%, 80%, 100% { rotate: -12deg; } 86% { rotate: -4deg; } 92% { rotate: -16deg; } }
+
+  /* ── intro ── */
+  .kg-intro { background: var(--surface); border-block: var(--border); }
+  .kg-intro__grid { display: grid; gap: var(--space-5); grid-template-columns: 1.5fr 1fr; align-items: start; }
+  .kg-lead { font-size: 1.2rem; font-weight: 600; color: var(--ink); }
+  .kg-intro__text p:not(.kg-lead) { color: var(--ink-soft); }
+  .kg-expect {
+    background: var(--bg); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+    padding: var(--space-3); rotate: -1.5deg;
+  }
+  .kg-expect__img { width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; object-position: 20%; border-radius: calc(var(--radius) - 0.4rem); border: var(--border); margin-bottom: var(--space-2); }
+  .kg-expect__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 650; margin-bottom: 0.5rem; }
+  .kg-expect__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; font-weight: 600; }
+
+  /* ── bands ── */
+  .kg-band { position: relative; text-align: center; }
+  .kg-band--blue { background: var(--brand-blue); color: #fff; }
+  .kg-band--blue .kg-eyebrow { background: var(--brand-yellow); color: var(--ink); }
+  .kg-band--blue strong { color: #fff; background: linear-gradient(transparent 70%, color-mix(in srgb, var(--brand-yellow) 85%, transparent) 70%); }
+  .kg-band--yellow { background: var(--brand-yellow); }
+  .kg-band::before, .kg-band::after {
+    content: ''; position: absolute; left: 0; right: 0; height: 1.2rem;
+    background: inherit;
+    mask: radial-gradient(circle at 0.9rem 0, transparent 0.85rem, #000 0.9rem) 0 0 / 1.8rem 100%;
+  }
+  .kg-band::before { top: -1.15rem; rotate: 180deg; }
+  .kg-band::after { bottom: -1.15rem; }
+
+  /* ── prices ── */
+  .kg-prices { padding-top: calc(var(--space-6) + 1rem); }
+  .kg-table-wrap { max-width: 52rem; margin: 0 auto var(--space-5); overflow-x: auto; border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); background: var(--surface); }
+  .kg-table { width: 100%; border-collapse: collapse; font-size: 1rem; }
+  .kg-table :is(th, td) { padding: 0.85rem 1rem; text-align: left; border-bottom: 2px dashed color-mix(in srgb, var(--line) 25%, transparent); }
+  .kg-table thead th { background: var(--ink); color: var(--bg); font-family: var(--font-display); font-weight: 600; letter-spacing: 0.02em; }
+  .kg-table tbody th { font-weight: 800; }
+  .kg-price { font-family: var(--font-display); font-size: 1.2rem; font-weight: 700; color: var(--accent-strong); white-space: nowrap; }
+  .kg-table .is-popular { background: color-mix(in srgb, var(--brand-yellow) 28%, transparent); }
+  .kg-table .is-muted { color: var(--ink-soft); }
+  .kg-table .is-muted .kg-price { color: var(--ink); font-size: 1rem; }
+  .kg-table tr:last-child :is(th, td) { border-bottom: 0; }
+
+  .kg-cards { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); }
+  .kg-card {
+    --c: var(--brand-red);
+    position: relative; padding: var(--space-4) var(--space-3) var(--space-3);
+    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+    transition: transform 0.35s var(--ease-spring), box-shadow 0.3s var(--ease-out);
+  }
+  .kg-card::before {
+    content: ''; position: absolute; inset: -2.5px -2.5px auto; height: 1.1rem;
+    background: var(--c); border: var(--border); border-radius: var(--radius) var(--radius) 0 0;
+  }
+  .kg-card--red { rotate: -1.5deg; }
+  .kg-card--blue { --c: var(--brand-blue); rotate: 1deg; }
+  .kg-card--yellow { --c: var(--brand-yellow); rotate: -0.6deg; }
+  .kg-card:hover { transform: translate(-3px, -6px) rotate(0.8deg); box-shadow: var(--shadow-hover); }
+  .kg-card h3 { font-size: 1.5rem; margin: 0 0 0.25rem; }
+  .kg-card__price { font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; color: var(--c); margin: 0 0 var(--space-2); -webkit-text-stroke: 1.5px var(--line); paint-order: stroke fill; }
+  .kg-card ul { list-style: none; margin: 0 0 var(--space-2); padding: 0; display: grid; gap: 0.45rem; font-size: 0.98rem; }
+  .kg-card li { display: flex; gap: 0.5rem; }
+  .kg-card li span { font-weight: 900; color: var(--accent-strong); }
+  .kg-card--blue li span { color: var(--brand-blue); }
+  .kg-card__note { font-style: italic; color: var(--ink-soft); margin: 0; font-size: 0.95rem; }
+  .kg-cta-row { margin-top: var(--space-4); }
+
+  /* ── extras ── */
+  .kg-extras { background: var(--bg); }
+  .kg-extras__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); margin-top: var(--space-4); }
+  .kg-extra { background: var(--surface); border: var(--border); border-radius: var(--radius); padding: var(--space-3); box-shadow: var(--shadow); }
+  .kg-extra h4 { font-size: 1.45rem; margin: 0 0 var(--space-2); }
+  .kg-extra p { color: var(--ink-soft); }
+  .kg-extra strong { color: var(--ink); }
+  .kg-extra__dur { margin: var(--space-2) 0 0; padding-top: var(--space-2); border-top: 2px dashed color-mix(in srgb, var(--line) 30%, transparent); }
+  .kg-tip { margin-top: var(--space-4); font-weight: 700; }
+
+  /* ── faq ── */
+  .kg-faq__list { display: grid; gap: 0.75rem; margin-top: var(--space-3); }
+  .kg-faq__item { background: var(--surface); border: var(--border); border-radius: var(--radius-sm); box-shadow: 3px 3px 0 var(--line); }
+  .kg-faq__item summary {
+    display: flex; justify-content: space-between; gap: 1rem; align-items: center;
+    padding: 1rem 1.25rem; cursor: pointer; font-weight: 800; list-style: none;
+  }
+  .kg-faq__item summary::-webkit-details-marker { display: none; }
+  .kg-faq__item summary::after {
+    content: '+'; flex: none; display: grid; place-items: center; width: 2rem; height: 2rem;
+    border-radius: 50%; background: var(--brand-yellow); border: 2px solid var(--line);
+    font-family: var(--font-display); font-size: 1.3rem; transition: rotate 0.3s var(--ease-spring);
+  }
+  .kg-faq__item[open] summary::after { rotate: 45deg; background: var(--accent); color: #fff; }
+  .kg-faq__answer { padding: 0 1.25rem 1.1rem; color: var(--ink-soft); }
+  .kg-faq__contact { margin-top: var(--space-4); }
+  .kg-faq__contact-title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 650; }
+  .kg-faq__contact p:not(.kg-faq__contact-title) { color: var(--ink-soft); font-size: 0.98rem; }
+
+  /* ── video ── */
+  .kg-video { margin: var(--space-3) auto; border: 5px solid var(--line); border-radius: var(--radius); overflow: hidden; box-shadow: 8px 8px 0 var(--line); rotate: -1deg; }
+
+  /* ── area ── */
+  .kg-area__grid { display: grid; gap: var(--space-4); grid-template-columns: 1.2fr 1fr; align-items: start; margin-top: var(--space-3); }
+  .kg-cities { line-height: 2; color: var(--ink-soft); }
+  .kg-area__map { margin: 0; rotate: 1.5deg; }
+  .kg-area__map img { width: 100%; height: auto; border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
+
+  /* ── contact ── */
+  .kg-contact { padding-block: var(--space-4); border-top: var(--border); background: var(--surface); }
+  .kg-contact__name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 650; }
+
+  /* ── responsive ── */
+  @media (max-width: 900px) {
+    .kg-hero__grid, .kg-intro__grid, .kg-area__grid { grid-template-columns: 1fr; }
+    .kg-hero__photo { rotate: 1deg; margin-inline: 0.5rem; }
+    .kg-sticker { left: auto; right: -0.5rem; bottom: -1.2rem; width: 6rem; }
+    .kg-sticker strong { font-size: 1.4rem; }
+    section { padding-block: var(--space-5); }
+  }
+</style>

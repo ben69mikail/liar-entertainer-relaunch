@@ -1,0 +1,78 @@
+---
+import { CONTACT, REVIEWS } from '../../data/site';
+import { colorFor, featuredReviews, initialsOf } from '../../lib/reviews';
+// Same wording as the legacy GoogleReviews block (L1), redesigned. Server-rendered only.
+---
+
+<section class="rv" id="bewertungen" aria-labelledby="rv-title">
+  <div class="container">
+    <header class="rv__head">
+      <p class="rv__eyebrow">Bewertungen</p>
+      <p class="rv__title" id="rv-title">{REVIEWS.label}</p>
+      <div class="rv__stars" aria-hidden="true"><span>★★★★★</span></div>
+      <p class="rv__count">Basierend auf <strong>{REVIEWS.count}</strong> Bewertungen</p>
+    </header>
+
+    <div class="rv__grid">
+      {featuredReviews.map((r, i) => (
+        <figure class="rv__card" data-reveal data-reveal-delay={i * 0.06}>
+          <div class="rv__who">
+            <div class="rv__avatar" style={`background:${colorFor(r.name)}`}>{initialsOf(r.name)}</div>
+            <div>
+              <p class="rv__name">{r.name}</p>
+              <p class="rv__when">{r.when}</p>
+            </div>
+          </div>
+          <div class="rv__cardstars" aria-label={`${r.rating || 5} von 5 Sternen`}>{'★'.repeat(r.rating || 5)}</div>
+          <p class="rv__text">{r.text}</p>
+        </figure>
+      ))}
+    </div>
+
+    <p class="rv__more">
+      <a class="btn btn--ghost" href={CONTACT.googleReviewHref} target="_blank" rel="noopener noreferrer">
+        ⭐ Alle Google-Bewertungen ansehen &amp; selbst bewerten
+      </a>
+    </p>
+  </div>
+</section>
+
+<style>
+  .rv { padding-block: var(--space-6); background: var(--bg-alt); border-block: var(--border); }
+  .rv__head { text-align: center; margin-bottom: var(--space-4); }
+  .rv__eyebrow { font-weight: 800; text-transform: uppercase; letter-spacing: 0.18em; font-size: 0.8rem; color: var(--accent-strong); margin: 0; }
+  .rv__title { font-family: var(--font-display); font-size: clamp(2rem, 5vw, 3.2rem); font-weight: var(--display-weight); margin: 0.2rem 0; }
+  .rv__stars { color: var(--star); font-size: 2rem; letter-spacing: 0.12em; }
+  .rv__count { color: var(--ink-soft); margin: 0.25rem 0 0; }
+  .rv__grid {
+    display: grid;
+    gap: var(--space-3);
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 12.5rem), 1fr));
+  }
+  .rv__card {
+    margin: 0;
+    padding: var(--space-3);
+    background: var(--surface);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    transition: transform 0.3s var(--ease-spring), box-shadow 0.3s var(--ease-out);
+  }
+  .rv__card:nth-child(odd) { rotate: -1deg; }
+  .rv__card:nth-child(even) { rotate: 1.2deg; }
+  .rv__card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
+  .rv__who { display: flex; align-items: center; gap: 0.75rem; }
+  .rv__avatar {
+    width: 2.6rem; height: 2.6rem; border-radius: 50%; flex: none;
+    display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 0.9rem;
+  }
+  .rv__name { font-weight: 800; margin: 0; line-height: 1.2; }
+  .rv__when { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
+  .rv__cardstars { color: var(--star); margin: 0.75rem 0 0.25rem; letter-spacing: 0.08em; }
+  .rv__text { margin: 0; font-size: 0.98rem; color: var(--ink-soft); }
+  .rv__more { text-align: center; margin: var(--space-4) 0 0; }
+
+  :global([data-zone='adult']) .rv__card { rotate: none; background: linear-gradient(180deg, #161a29, #11141f); }
+  :global([data-zone='adult']) .rv__text { font-style: italic; }
+  :global([data-zone='adult']) .rv__eyebrow { color: var(--accent); }
+</style>

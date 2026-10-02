@@ -1,0 +1,171 @@
+---
+import '../../styles/tokens.css';
+import { Image } from 'astro:assets';
+import clownLogo from '../../assets/images/general/logo-clown-nrw.png';
+import goldLogo from '../../assets/images/brand/logo-liar-gold.webp';
+import { MENU, CONTACT } from '../../data/site';
+import { zoneFor } from '../../lib/site-map';
+
+// L6: logos are fixed assets; each zone shows its own.
+const path = Astro.url.pathname;
+const logo =
+  zoneFor(path) === 'adult'
+    ? { src: goldLogo, alt: 'Zauberer LIAR – Zauberei & Comedy', width: 150 }
+    : { src: clownLogo, alt: 'LOGO Clown Zauberer LIAR', width: 104 };
+const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+---
+
+<header class="sh">
+  <div class="sh__bar container">
+    <a href="/" class="sh__logo" aria-label="Startseite Clown Zauberer LIAR">
+      <Image src={logo.src} alt={logo.alt} width={logo.width} loading="eager" />
+    </a>
+
+    <nav class="sh__nav" aria-label="Hauptnavigation">
+      <ul class="sh__menu">
+        {MENU.map((item) => (
+          <li class:list={['sh__item', { 'has-sub': item.children }]}>
+            <a
+              href={item.href}
+              aria-current={isCurrent(item.href) ? 'page' : undefined}
+              {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}
+            >
+              {item.label}
+            </a>
+            {item.children && (
+              <ul class="sh__sub">
+                {item.children.map((c) => (
+                  <li><a href={c.href}>{c.label}</a></li>
+                ))}
+              </ul>
+            )}
+          </li>
+        ))}
+      </ul>
+    </nav>
+
+    <a class="btn btn--primary sh__cta" href="/kontakt/">Anfragen</a>
+
+    <details class="sh__mobile">
+      <summary aria-label="Menü öffnen">
+        <span class="sh__burger" aria-hidden="true"></span>
+        <span>Menü</span>
+      </summary>
+      <nav aria-label="Mobile Navigation">
+        <ul>
+          {MENU.map((item) => (
+            <li>
+              <a href={item.href} {...(item.external ? { target: '_blank', rel: 'noopener' } : {})}>{item.label}</a>
+              {item.children && (
+                <ul>{item.children.map((c) => <li><a href={c.href}>{c.label}</a></li>)}</ul>
+              )}
+            </li>
+          ))}
+          <li><a href={CONTACT.phoneHref}>Anrufen: {CONTACT.phoneDisplay}</a></li>
+        </ul>
+      </nav>
+    </details>
+  </div>
+</header>
+
+<style>
+  .sh {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: var(--border);
+  }
+  .sh__bar {
+    display: flex;
+    align-items: center;
+    gap: var(--space-3);
+    min-height: 4.5rem;
+  }
+  .sh__logo { flex: none; }
+  .sh__cta { flex: none; }
+  .sh__logo img { display: block; height: 3.6rem; width: auto; }
+  :global([data-zone='adult']) .sh__logo img { height: 3.1rem; }
+  .sh__nav { margin-left: auto; }
+  .sh__menu { display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0; }
+  .sh__item { position: relative; }
+  .sh__item > a {
+    display: block;
+    padding: 0.5rem 0.55rem;
+    font-weight: 700;
+    font-size: 0.93rem;
+    white-space: nowrap;
+    color: var(--ink);
+    text-decoration: none;
+    border-radius: 999px;
+    transition: background-color 0.2s, color 0.2s;
+  }
+  .sh__item > a:hover,
+  .sh__item > a[aria-current='page'] { background: var(--bg-alt); color: var(--accent-strong); }
+  .has-sub > a::after { content: '▾'; margin-left: 0.2em; font-size: 0.7em; opacity: 0.6; }
+  .sh__sub {
+    position: absolute;
+    left: 0;
+    top: 100%;
+    min-width: 14rem;
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem;
+    background: var(--surface);
+    border: var(--border);
+    border-radius: var(--radius-sm);
+    box-shadow: var(--shadow);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(6px);
+    transition: opacity 0.18s, transform 0.18s var(--ease-out), visibility 0.18s;
+  }
+  .has-sub:hover .sh__sub,
+  .has-sub:focus-within .sh__sub { opacity: 1; visibility: visible; transform: none; }
+  .sh__sub a { display: block; padding: 0.45rem 0.75rem; color: var(--ink); text-decoration: none; border-radius: 0.5rem; font-weight: 600; }
+  .sh__sub a:hover { background: var(--bg-alt); }
+
+  .sh__mobile { display: none; margin-left: auto; }
+  .sh__mobile summary {
+    display: flex; align-items: center; gap: 0.5rem; cursor: pointer; list-style: none;
+    font-weight: 800; padding: 0.5rem 0.75rem; border: var(--border); border-radius: 999px;
+  }
+  .sh__mobile summary::-webkit-details-marker { display: none; }
+  .sh__burger, .sh__burger::before, .sh__burger::after {
+    display: block; width: 1.1rem; height: 2px; background: currentColor; position: relative; content: '';
+  }
+  .sh__burger::before { position: absolute; top: -6px; }
+  .sh__burger::after { position: absolute; top: 6px; }
+  .sh__mobile nav {
+    position: absolute; left: 0; right: 0; top: 100%;
+    max-height: calc(100dvh - 4.5rem); overflow-y: auto;
+    background: var(--bg); border-bottom: var(--border); padding: var(--space-2);
+  }
+  .sh__mobile ul { list-style: none; margin: 0; padding: 0; }
+  .sh__mobile li a { display: block; padding: 0.6rem 0.25rem; font-weight: 700; color: var(--ink); text-decoration: none; }
+  .sh__mobile li li a { padding-left: 1.25rem; font-weight: 600; color: var(--ink-soft); }
+
+  @media (max-width: 1180px) {
+    .sh__nav { display: none; }
+    .sh__mobile { display: block; }
+    .sh__cta { margin-left: auto; }
+    .sh__mobile { margin-left: 0; }
+  }
+  @media (max-width: 480px) {
+    .sh__cta { display: none; }
+    .sh__mobile { margin-left: auto; }
+  }
+
+  :global([data-zone='adult']) .sh__item > a,
+  :global([data-zone='adult']) .sh__mobile summary {
+    font-family: var(--font-body);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    font-size: 0.72rem;
+    padding-inline: 0.45rem;
+  }
+  :global([data-zone='adult']) .sh__item > a:hover,
+  :global([data-zone='adult']) .sh__item > a[aria-current='page'] { background: transparent; color: var(--accent-strong); }
+</style>

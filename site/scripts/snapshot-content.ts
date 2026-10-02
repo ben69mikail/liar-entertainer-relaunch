@@ -4,7 +4,8 @@ import { readdirSync, readFileSync, statSync, writeFileSync } from 'node:fs';
 import { join, relative, sep } from 'node:path';
 import { contentOf } from '../tests/support/content';
 
-const DIST = join(import.meta.dirname, '../dist');
+// SNAPSHOT_DIST lets us snapshot a legacy build from a separate worktree.
+const DIST = process.env.SNAPSHOT_DIST ?? join(import.meta.dirname, '../dist');
 const OUT = join(import.meta.dirname, '../tests/fixtures/content-baseline.json');
 
 function* pages(dir: string): Generator<string> {

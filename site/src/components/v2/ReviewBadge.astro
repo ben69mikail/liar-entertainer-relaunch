@@ -1,0 +1,29 @@
+---
+import { REVIEWS } from '../../data/site';
+// Trust signal above the fold (brief: Bewertungen prominent). Real values only (L3).
+---
+
+<a class="rb" href="#bewertungen">
+  <span class="rb__stars" aria-hidden="true">★★★★★</span>
+  <span class="rb__text"><strong>{REVIEWS.label}</strong> · {REVIEWS.count} Bewertungen auf {REVIEWS.source}</span>
+</a>
+
+<style>
+  .rb {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.45rem 0.9rem 0.45rem 0.7rem;
+    border-radius: 999px;
+    background: var(--surface);
+    border: var(--border);
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.95rem;
+    line-height: 1.2;
+    transition: transform 0.25s var(--ease-spring);
+  }
+  .rb:hover { transform: translateY(-2px); }
+  .rb__stars { color: var(--star); letter-spacing: 0.08em; font-size: 1.05rem; }
+  :global([data-zone='adult']) .rb { background: rgba(20, 24, 38, 0.7); border-radius: 2px; letter-spacing: 0.04em; }
+</style>

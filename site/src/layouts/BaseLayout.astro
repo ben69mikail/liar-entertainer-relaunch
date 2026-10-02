@@ -3,6 +3,9 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import CookieConsent from '../components/CookieConsent.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+import SiteHeader from '../components/v2/SiteHeader.astro';
+import SiteFooter from '../components/v2/SiteFooter.astro';
+import StickyCta from '../components/v2/StickyCta.astro';
 import '../styles/global.css';
 import '../styles/fonts.css';
 import '../styles/motion.css';
@@ -24,6 +27,8 @@ export interface Props {
   noindex?: boolean;
   breadcrumbs?: BreadcrumbItem[];
   heroPreload?: string;
+  /** 'v2' = relaunch design (zone tokens, new header/footer/sticky CTA). Pages opt in one by one. */
+  design?: 'legacy' | 'v2';
 }
 
 const {
@@ -37,7 +42,9 @@ const {
   noindex = false,
   breadcrumbs,
   heroPreload,
+  design = 'legacy',
 } = Astro.props;
+const v2 = design === 'v2';
 
 const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
   "@context": "https://schema.org",
@@ -287,13 +294,16 @@ const webPageSchema = {
         : <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
     )}
   </head>
-  <body>
-    <Header />
+  <body class:list={{ v2 }}>
+    {v2 ? <SiteHeader /> : <Header />}
     <main>
       <slot />
     </main>
-    <Footer />
+    {v2 ? <SiteFooter /> : <Footer />}
+    {v2 && <StickyCta />}
 
+    {!v2 && (
+      <Fragment>
     <!-- Mobile Sticky-CTA: Anrufen + Anfragen immer erreichbar (nur < md) -->
     <div class="mobile-cta-bar md:hidden" role="navigation" aria-label="Schnellkontakt">
       <a href="tel:+491721517578" class="mobile-cta-call">
@@ -330,12 +340,14 @@ const webPageSchema = {
         .mobile-cta-bar { display: none; }
       }
       @media (max-width: 767.98px) {
-        body { padding-bottom: calc(3.4rem + env(safe-area-inset-bottom)); }
+        body:not(.v2) { padding-bottom: calc(3.4rem + env(safe-area-inset-bottom)); }
       }
     </style>
 
     <!-- Floating WhatsApp-Button (nur Mobile, angedockt auf der Naht der CTA-Leiste) -->
     <WhatsAppButton />
+      </Fragment>
+    )}
 
     <CookieConsent />
 
