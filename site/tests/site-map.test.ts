@@ -19,11 +19,14 @@ describe('zoneFor (adult)', () => {
   it('keeps children shows under /zauberer/ in the kids zone', () => {
     expect(zoneFor('/zauberer/zaubershow/kindergarten-kita/')).toBe('kids');
     expect(zoneFor('/zauberer/zaubershow/schule/')).toBe('kids');
+    expect(zoneFor('/zauberer/zaubershow/strassen-sommer-fest/')).toBe('kids');
   });
 
   it('applies zones to translated paths', () => {
-    expect(zoneFor('/fr/zauberer/')).toBe('adult');
-    expect(zoneFor('/en/kindergeburtstag/')).toBe('kids');
+    expect(zoneFor('/fr/magicien/')).toBe('adult');
+    expect(zoneFor('/en/magician/close-up/')).toBe('adult');
+    expect(zoneFor('/fr/anniversaire-enfant/')).toBe('kids');
+    expect(zoneFor('/en/childrens-magician/')).toBe('kids');
   });
 
   it('leaves umbrella pages neutral', () => {
@@ -37,14 +40,15 @@ describe('alternatesFor (hreflang)', () => {
   it('links a core page to de, fr, en and x-default', () => {
     expect(alternatesFor('/zauberer/')).toEqual([
       { hreflang: 'de', href: 'https://liar-entertainer.com/zauberer/' },
-      { hreflang: 'fr', href: 'https://liar-entertainer.com/fr/zauberer/' },
-      { hreflang: 'en', href: 'https://liar-entertainer.com/en/zauberer/' },
+      { hreflang: 'fr', href: 'https://liar-entertainer.com/fr/magicien/' },
+      { hreflang: 'en', href: 'https://liar-entertainer.com/en/magician/' },
       { hreflang: 'x-default', href: 'https://liar-entertainer.com/zauberer/' },
     ]);
   });
 
   it('returns the same set from every language version (bidirectional)', () => {
-    expect(alternatesFor('/fr/kontakt/')).toEqual(alternatesFor('/kontakt/'));
+    expect(alternatesFor('/fr/contact/')).toEqual(alternatesFor('/kontakt/'));
+    expect(alternatesFor('/en/kids-birthday-party/')).toEqual(alternatesFor('/kindergeburtstag/'));
     expect(alternatesFor('/en/')).toEqual(alternatesFor('/'));
   });
 
@@ -52,5 +56,9 @@ describe('alternatesFor (hreflang)', () => {
     expect(alternatesFor('/kinderzauberer/kinderzauberer-in-gladbeck/')).toEqual([]);
     expect(alternatesFor('/blog/some-post/')).toEqual([]);
     expect(alternatesFor('/preise/')).toEqual([]);
+  });
+
+  it('does not invent translations by prefixing German slugs', () => {
+    expect(alternatesFor('/fr/zauberer/')).toEqual([]);
   });
 });
