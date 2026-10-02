@@ -1,0 +1,33 @@
+---
+import { SITE, zoneFor, alternatesFor } from '../lib/site-map';
+import '../styles/global.css';
+
+interface Props {
+  title: string;
+  description?: string;
+}
+
+const { title, description } = Astro.props;
+const path = Astro.url.pathname;
+const lang = Astro.currentLocale ?? 'de';
+---
+
+<!doctype html>
+<html lang={lang} data-zone={zoneFor(path)}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    {description && <meta name="description" content={description} />}
+    <link rel="canonical" href={SITE + path} />
+    {alternatesFor(path).map((a) => <link rel="alternate" hreflang={a.hreflang} href={a.href} />)}
+    <link rel="icon" href="/favicon.ico" />
+  </head>
+  <body>
+    <slot />
+    <script>
+      import { initReveals } from '../lib/motion/reveal';
+      initReveals();
+    </script>
+  </body>
+</html>

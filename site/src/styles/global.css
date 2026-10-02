@@ -1,0 +1,4 @@
+.motion-ok [data-reveal] {
+  opacity: 0;
+  transform: translateY(1rem);
+}
