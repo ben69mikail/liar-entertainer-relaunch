@@ -1,0 +1,549 @@
+# ============================================================
+# Clown Zauberer LIAR – Apache .htaccess für IONOS Hosting
+# ============================================================
+
+# ── Fehlerseiten ────────────────────────────────────────────
+ErrorDocument 404 /404.html
+
+# ── HTTPS erzwingen ─────────────────────────────────────────
+RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+
+# ── non-www erzwingen (Google indexiert non-www als kanonisch) ──
+RewriteCond %{HTTP_HOST} ^www\.(.+)$ [NC]
+RewriteRule ^ https://%1%{REQUEST_URI} [R=301,L]
+
+# ── WordPress-Legacy: index.php → Startseite ───────────────
+# MUSS vor dem Trailing-Slash-Redirect stehen (sonst /index.php → /index.php/). Autopilot 2026-06-10.
+RewriteRule ^index\.php(/.*)?$ / [R=301,L]
+
+# ── Trailing Slash (Astro output) ───────────────────────────
+# Wenn URL ohne trailing slash, auf /index.html weiterleiten
+# Asset-Dateiendungen ausgeschlossen, damit alte WP-Datei-URLs (z.B. wp-content/...jpg)
+# keinen 301-Slash-Hop vor dem 410 Gone bekommen (Autopilot 2026-06-02).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !/$
+RewriteCond %{REQUEST_URI} !\.(jpg|jpeg|png|gif|webp|avif|svg|ico|css|js|mjs|json|xml|txt|pdf|woff|woff2|ttf|eot|map|webmanifest|html|php)$ [NC]
+RewriteRule ^(.+)$ /$1/ [R=301,L]
+
+# ── WordPress → Astro Weiterleitungen ──────────────────────
+# Alle alten WP-URLs, die Google ggf. noch indexiert hat
+
+# -- WordPress Backend & System-URLs --
+RedirectMatch 301 ^/wp-admin(.*)$ /
+RedirectMatch 301 ^/wp-login\.php(.*)$ /
+RedirectMatch 301 ^/wp-signup\.php(.*)$ /
+RedirectMatch 301 ^/wp-register\.php(.*)$ /
+RedirectMatch 301 ^/wp-cron\.php(.*)$ /
+RedirectMatch 301 ^/xmlrpc\.php(.*)$ /
+RedirectMatch 301 ^/wp-json(.*)$ /
+RedirectMatch 301 ^/wp-includes(.*)$ /
+RedirectMatch 301 ^/wp-trackback\.php(.*)$ /
+RedirectMatch 301 ^/wp-comments-post\.php(.*)$ /
+
+# -- WordPress-Legacy: wp-content → 410 Gone --
+# wp-content Pfade sind seit Legacy-Cleanup 22.05.2026 nicht mehr erreichbar
+RewriteRule ^wp-content/.*$ - [R=410,L]
+
+# -- Fremde WP-Sektion /sport/ → 410 Gone (Autopilot 2026-06-10) --
+# /sport/lokalsport/... war nie Teil dieser Seite; 410 deindexiert schnell.
+RewriteRule ^sport(/.*)?$ - [R=410,L]
+
+
+# -- RSS/Atom Feeds → Blog --
+RedirectMatch 301 ^/feed/?$ /blog/
+RedirectMatch 301 ^/rss/?$ /blog/
+RedirectMatch 301 ^/atom/?$ /blog/
+RedirectMatch 301 ^/comments/feed/?$ /blog/
+RedirectMatch 301 ^/(.*)/feed/?$ /$1/
+RedirectMatch 301 ^/(.*)/comments/?$ /$1/
+
+# -- WordPress Sitemaps (alte Yoast/RankMath Sitemaps) --
+RedirectMatch 301 ^/sitemap_index\.xml$ /sitemap.xml
+RedirectMatch 301 ^/post-sitemap\.xml$ /sitemap.xml
+RedirectMatch 301 ^/page-sitemap\.xml$ /sitemap.xml
+RedirectMatch 301 ^/category-sitemap\.xml$ /sitemap.xml
+RedirectMatch 301 ^/author-sitemap\.xml$ /sitemap.xml
+
+# -- Autor-Seiten → Startseite --
+RedirectMatch 301 ^/author/(.*)$ /
+
+# -- Kategorie- und Tag-Seiten → passende Hauptseiten --
+RedirectMatch 301 ^/category/kindergeburtstag(.*)$ /kindergeburtstag/
+RedirectMatch 301 ^/category/zaubershow(.*)$ /zauberer/zaubershow/
+RedirectMatch 301 ^/category/clown(.*)$ /clown/clownshow/
+RedirectMatch 301 ^/category/(.*)$ /blog/
+RedirectMatch 301 ^/tag/(.*)$ /blog/
+RedirectMatch 301 ^/schlagwort/(.*)$ /blog/
+
+# -- WordPress-Suche → Startseite --
+RewriteCond %{QUERY_STRING} ^s=(.*)$
+RewriteRule ^$ /? [R=301,L]
+
+# -- WordPress Pagination (z.B. /blog/page/2/) → Hauptseite --
+RedirectMatch 301 ^/(.*)/page/[0-9]+/?$ /$1/
+
+# -- WordPress ?p=ID und ?page_id=ID Query-Parameter --
+RewriteCond %{QUERY_STRING} ^p=[0-9]+$
+RewriteRule ^$ /? [R=301,L]
+RewriteCond %{QUERY_STRING} ^page_id=[0-9]+$
+RewriteRule ^$ /? [R=301,L]
+
+# -- WordPress-Anhang-Seiten (attachment pages) → 410 Gone --
+# 410 (statt 301) sagt Google: kein Inhalt mehr, sofort deindexieren.
+# Gilt für /attachment/ direkt unter Root und alle Unterpfade.
+RewriteRule ^attachment/.* - [R=410,L]
+RewriteRule ^(.+)/attachment/[^/]+/?$ - [R=410,L]
+
+# -- Alte Attachment-URLs mit Bild-Slug (z.B. /kinderzauberer-bild-1/) --
+# Diese geben 410 Gone zurück, damit Google sie aus dem Index entfernt
+RewriteRule ^.*-attachment/.*$ - [G,L]
+
+# -- Karneval Doppel-URL (WP hatte beides) → neuer Pfad --
+RedirectMatch 301 ^/zauberer/zaubershow/karneval/?$ /clown/karneval/
+
+# -- Alte WP-Seiten die nicht mehr existieren → nächste passende --
+RedirectMatch 301 ^/sample-page/?$ /
+RedirectMatch 301 ^/hello-world/?$ /blog/
+
+# -- Elternseiten-Weiterleitungen (haben keine eigene index.html) --
+# /clown/ direkt → /clown/clownshow/ (1 Hop, behebt GSC Umleitungsfehler - Autopilot 2026-06-06)
+RedirectMatch 301 ^/clown/?$ /clown/clownshow/
+
+# ============================================================
+# ALTE WORDPRESS URL-STRUKTUREN → NEUE ASTRO-URLS (301)
+# Basierend auf Google Search Console 404-Analyse
+# ============================================================
+
+# --- GSC-404-Fix 18.09.2026: Legacy-Root-Slug ohne Ziel ---
+# /walk-act/ stand am 14.09. als echte 404 im GSC-Bericht, die Seite existiert
+# unter /clown/walk-act/. Additiv, aendert keine bestehende Regel.
+RewriteRule ^walk-act/?$ /clown/walk-act/ [R=301,L]
+
+# --- MUSTER 1: /content/... → Entferne /content/ Prefix ---
+RewriteRule ^content/?$ / [R=301,L]
+RewriteRule ^content/kinderzauberer/?$ /kinderzauberer/ [R=301,L]
+RewriteRule ^content/zauberer/tisch-zauberer/?$ /zauberer/tisch-zauberer/ [R=301,L]
+RewriteRule ^content/zauberer/kinderzauberer/?$ /kinderzauberer/ [R=301,L]
+RewriteRule ^content/zauberer/kinderzauberer/kinderzauberer-in-(.*)$ /kinderzauberer/kinderzauberer-in-$1 [R=301,L]
+RewriteRule ^content/clown/clown-in-(.*)$ /clown/clownshow/clown-in-$1 [R=301,L]
+RewriteRule ^content/glitzer-tattoos/?$ /clown/glitzer-tattoo/ [R=301,L]
+RewriteRule ^content/preise-fuer-clown-oder-kinderzauberer/?$ /preise/ [R=301,L]
+RewriteRule ^content/index\.php$ / [R=301,L]
+RewriteRule ^content/(.+)$ /blog/ [R=301,L]
+
+# -- Legacy 'was-kostet'-Artikel: alte Pfade direkt auf echten Blog-Artikel (Autopilot 2026-06-10) --
+RewriteRule ^clown/kindergeburtstag/was-kostet-ein-clown-fuer-ein-kindergeburtstag/?$ /blog/was-kostet-ein-clown-fuer-ein-kindergeburtstag/ [R=301,L]
+RewriteRule ^kindergeburtstag/was-kostet-ein-clown-fuer-ein-kindergeburtstag/?$ /blog/was-kostet-ein-clown-fuer-ein-kindergeburtstag/ [R=301,L]
+
+# -- GSC-404-Bereinigung 2026-09-15 (Audit 15.09.) --
+# /zauberer-nrw/ war Ziel der Zweitdomain, existiert nicht als Astro-Seite
+RewriteRule ^zauberer-nrw/?$ /zauberer/ [R=301,L]
+RewriteRule ^zauberer/zauberer-nrw/?$ /zauberer/ [R=301,L]
+# Alter Emoji-Slug (prozentkodiert) des Karneval-Artikels
+RewriteRule ^5-gruende-warum-zauberei-zum-karneval-gehoert /blog/5-gruende-warum-zauberei-zum-karneval-gehoert/ [R=301,L]
+# Abgeschnittener Fremdlink auf den Kosten-Artikel
+RewriteRule ^blog/was-kostet-ein-/?$ /blog/was-kostet-ein-clown-fuer-ein-kindergeburtstag/ [R=301,L]
+
+# --- MUSTER 2: /clown/kindergeburtstag/... → /kindergeburtstag/... ---
+RewriteRule ^clown/kindergeburtstag/?$ /kindergeburtstag/ [R=301,L]
+RewriteRule ^clown/kindergeburtstag/(.+)$ /kindergeburtstag/$1 [R=301,L]
+
+# --- MUSTER 3: /clown/geburtstag/... → /kindergeburtstag/... ---
+RewriteRule ^clown/geburtstag/?$ /kindergeburtstag/ [R=301,L]
+RewriteRule ^clown/geburtstag/(.+)$ /kindergeburtstag/$1 [R=301,L]
+
+# --- MUSTER 4: /clown/zauberer/kinderzauberer/... → /kinderzauberer/... ---
+RewriteRule ^clown/zauberer/kinderzauberer/?$ /kinderzauberer/ [R=301,L]
+RewriteRule ^clown/zauberer/kinderzauberer/kinderzauberer-in-([^/]+)/?$ /kinderzauberer/kinderzauberer-in-$1/ [R=301,L]
+RewriteRule ^clown/zauberer/kinderzauberer/kinderzauberer-in-([^/]+)/.*$ /kinderzauberer/kinderzauberer-in-$1/ [R=301,L]
+RewriteRule ^clown/zauberer/(.+)$ /zauberer/$1 [R=301,L]
+
+# --- MUSTER 5: /clown-zauberer/... ---
+RewriteRule ^clown-zauberer/clown/glitzer-tattoos/?$ /clown/glitzer-tattoo/ [R=301,L]
+RewriteRule ^clown-zauberer/clown/geburtstag/(.+)$ /kindergeburtstag/$1 [R=301,L]
+RewriteRule ^clown-zauberer/?$ /clown/clownshow/ [R=301,L]
+RewriteRule ^clown-zauberer/(.+)$ /clown/clownshow/ [R=301,L]
+
+# --- MUSTER 6: /clown-nrw/... ---
+RewriteRule ^clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-(.+)$ /clown/clownshow/clown-in-$1 [R=301,L]
+RewriteRule ^clown-nrw/clown-kinderzauberer-kindergeburtstag/?$ /kindergeburtstag/ [R=301,L]
+RewriteRule ^clown-nrw/?$ /clown/clownshow/ [R=301,L]
+RewriteRule ^clown-nrw/(.+)$ /clown/clownshow/ [R=301,L]
+
+# --- MUSTER 7: Glitzer-Tattoo Varianten ---
+RewriteRule ^clown/glitzer-tattoos/?$ /clown/glitzer-tattoo/ [R=301,L]
+RewriteRule ^clown-kindergeburtstag-extras/glitzer-tattoos/?$ /clown/glitzer-tattoo/ [R=301,L]
+RewriteRule ^glitzer-tattoos/?$ /clown/glitzer-tattoo/ [R=301,L]
+RewriteRule ^glitzer-tattoos-den-kindergeburtstag/?$ /clown/glitzer-tattoo/ [R=301,L]
+
+# --- MUSTER 8: Alte Blog-Posts auf Root-Level ---
+RewriteRule ^kindernachmittag-in-der-schnittbar-mit-liar/?$ /blog/ [R=301,L]
+RewriteRule ^ab-nach-witten/?$ /blog/ [R=301,L]
+RewriteRule ^halloween-spektakel-fur-kinder/?$ /blog/ [R=301,L]
+RewriteRule ^workshop-in-der-abenteuerkiste-in-greven/?$ /blog/ [R=301,L]
+RewriteRule ^4-harwicker-fruehjahrsfest-mit-kinderzauberer/?$ /blog/ [R=301,L]
+RewriteRule ^zauberer-liar-in-der-stadtteilbibliothek-luetgendortmund/?$ /blog/ [R=301,L]
+RewriteRule ^karnevalsaison-startet-am-sonntag/?$ /blog/ [R=301,L]
+RewriteRule ^clown-im-theater-don-kidschote/?$ /blog/ [R=301,L]
+RewriteRule ^hoffest-hof-wulhorst-mit-clown-liar/?$ /blog/ [R=301,L]
+RewriteRule ^karneval-in-gevelsberg/?$ /blog/ [R=301,L]
+RewriteRule ^sommerfest-im-gartenverein-in-dortmund-mengede/?$ /blog/ [R=301,L]
+RewriteRule ^stickerfreunde-kick-off-party-in-herdecke-mit-zauberer-liar/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-in-dortmund/?$ /blog/ [R=301,L]
+RewriteRule ^clown-zauberer-liar-beim-1-harwicker-fruhjahrsfest-auf-brinkmanns-hof-in-gescher/?$ /blog/ [R=301,L]
+RewriteRule ^toller-artikel-aus-nottuln-fuer-clown-und-zauberer/?$ /blog/ [R=301,L]
+RewriteRule ^nikolaus-markt-in-bottrop-empfaengt-clown-zauberer-liar/?$ /blog/ [R=301,L]
+RewriteRule ^bauernmarkt-in-waltrop-am-sonntag/?$ /blog/ [R=301,L]
+RewriteRule ^luis-das-bistro-zauberer-liar-bei-eroffnungsfeier-in-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^100-jahre-volksgarten-kray/?$ /blog/ [R=301,L]
+RewriteRule ^automeile-in-beckum/?$ /blog/ [R=301,L]
+RewriteRule ^weihnachtsmarkt-hagen-clown-zauberer/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-in-essen-kray/?$ /blog/ [R=301,L]
+RewriteRule ^geburtstagsangebot-clown-liar/?$ /blog/ [R=301,L]
+RewriteRule ^zufallig-gefunden-clown-auch-auch-beim-spielplatzeroffnung/?$ /blog/ [R=301,L]
+RewriteRule ^spielfest-zum-weltkindertag/?$ /blog/ [R=301,L]
+RewriteRule ^drehorgel-rolf/?$ /blog/ [R=301,L]
+RewriteRule ^nochn-clown/?$ /blog/ [R=301,L]
+RewriteRule ^kindersitzung-xanten-januar-2018/?$ /blog/ [R=301,L]
+RewriteRule ^clown-zauberer-liar-in-sauerland-am-sonntag-19-mai-2012/?$ /blog/ [R=301,L]
+RewriteRule ^sport-meets-karneval/?$ /blog/ [R=301,L]
+RewriteRule ^sommerfest-kgv-eilperfeld-in-hagen/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-im-autohaus-zumbuelt-fuer-die-automeile-2016/?$ /blog/ [R=301,L]
+RewriteRule ^tolles-plakat-fuer-bottroper-spendenlauf/?$ /blog/ [R=301,L]
+RewriteRule ^kinderzauberer-gelobt/?$ /blog/ [R=301,L]
+RewriteRule ^preise-fuer-clown-oder-kinderzauberer/?$ /preise/ [R=301,L]
+RewriteRule ^kinderzauberer-unterwegs-bei-dem-bildungswerk-essen/?$ /blog/ [R=301,L]
+RewriteRule ^rhenania-bottrops-u8-junioren-laden-ein/?$ /blog/ [R=301,L]
+RewriteRule ^5-sternen-clown-und-kinderzauberer-im-kindergarten/?$ /blog/ [R=301,L]
+RewriteRule ^bewertung-und-fotos-vom-clown/?$ /galerie/ [R=301,L]
+RewriteRule ^hotel-eroffnung-in-ennepetal-mit-clown-zauberer-liar/?$ /blog/ [R=301,L]
+RewriteRule ^neue-bewertungen-fuer-clown-liar-shows/?$ /blog/ [R=301,L]
+RewriteRule ^drk-luedenscheid-feiert-150-geburtstag/?$ /blog/ [R=301,L]
+RewriteRule ^riesenseifenblasen-macht-spass/?$ /blog/ [R=301,L]
+RewriteRule ^karneval-startet-in-oberhausen/?$ /blog/ [R=301,L]
+RewriteRule ^liar-im-regenbogenhaus-in-dortmund/?$ /blog/ [R=301,L]
+RewriteRule ^zauberworkshop-fur-kinder-in-essen-schonebeck/?$ /blog/ [R=301,L]
+RewriteRule ^oktoberfest-fur-kinder-in-der-kinderwelt-recklinghausen/?$ /blog/ [R=301,L]
+RewriteRule ^tolle-veranstaltung-in-prerow-clown/?$ /blog/ [R=301,L]
+RewriteRule ^leuchtfeder-e-v-kunst-und-kultur/?$ /blog/ [R=301,L]
+RewriteRule ^dortmunder-weihnachtsmarkt-eroeffnung-mit-clown-zauberer-liar/?$ /blog/ [R=301,L]
+RewriteRule ^haltern-bittet-zu-tisch/?$ /blog/ [R=301,L]
+RewriteRule ^fruehlingsfet-in-kray/?$ /blog/ [R=301,L]
+RewriteRule ^der-zauberer-muss-zum-arzt-nach-bottrop/?$ /blog/ [R=301,L]
+RewriteRule ^der-tennis-clown-mansour-barami/?$ /blog/ [R=301,L]
+RewriteRule ^kinderkarneval-bei-den-wittringer-ritter-in-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^zauberworkshop-in-der-kinderwelt-recklinghausen/?$ /blog/ [R=301,L]
+RewriteRule ^kinder-schmuecken-den-tannenbaum-auf-dem-robert-brauner-platz/?$ /blog/ [R=301,L]
+RewriteRule ^in-reken-fuer-karneval-fuer-die-kinder/?$ /blog/ [R=301,L]
+RewriteRule ^tanzschule-achim-juergens-in-essen/?$ /blog/ [R=301,L]
+RewriteRule ^weihnachtsmarkt-bottrop-mit-kinderzauberer-liar/?$ /blog/ [R=301,L]
+RewriteRule ^spendenlauf-in-bottrop-jeder-meter-zaehlt/?$ /blog/ [R=301,L]
+RewriteRule ^kinderschuetzenfest-in-gahlen/?$ /blog/ [R=301,L]
+RewriteRule ^100-jahriger-im-volksgarten-kray/?$ /blog/ [R=301,L]
+RewriteRule ^plan-b-feiert-auftakt-mit-clown-liar/?$ /blog/ [R=301,L]
+RewriteRule ^auch-in-geldern-fuer-karneval/?$ /blog/ [R=301,L]
+RewriteRule ^clown-zauberer-liar-auf-hochzeit-und-taufe/?$ /blog/ [R=301,L]
+RewriteRule ^dennis-treiblmair-und-michael-prescler-verzaubern-publikum/?$ /blog/ [R=301,L]
+RewriteRule ^was-kostet-einen-clown-oder-zauberer-in-nrw/?$ /blog/ [R=301,L]
+RewriteRule ^warum-einen-clown-oder-zauberer-fur-den-geburtstag-buchen/?$ /blog/ [R=301,L]
+RewriteRule ^bottroper-weihnachtsmarkt-mit-clown-liar/?$ /blog/ [R=301,L]
+RewriteRule ^adac-lenkt-autofahrer-zur-halde/?$ /blog/ [R=301,L]
+RewriteRule ^gartencenter-schellewald-in-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^karneval-in-rommreskirchen-mit-clown-liar/?$ /blog/ [R=301,L]
+RewriteRule ^ein-clown-im-seniorenzentrum-martineum-in-essen/?$ /blog/ [R=301,L]
+RewriteRule ^zauberer-in-berlin-andre-kursch/?$ /blog/ [R=301,L]
+RewriteRule ^geburtstag-40-jahre-rathaus-essen-mit-clown-zauberer-liar/?$ /blog/ [R=301,L]
+RewriteRule ^sommerfest-mit-clown-liar-in-essen/?$ /blog/ [R=301,L]
+RewriteRule ^zaubershow-auf-dem-hoffest-in-waltrop/?$ /blog/ [R=301,L]
+RewriteRule ^rewe-neueroffnung-mit-clown-liar/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-bei-marcellino-in-dormagen/?$ /blog/ [R=301,L]
+RewriteRule ^zauberer-liar-auf-dem-wetteraner-herbsfest/?$ /blog/ [R=301,L]
+RewriteRule ^24-kinderfest-im-krayer-volksgarten/?$ /blog/ [R=301,L]
+RewriteRule ^175-jaehriges-sparkasse-muelheim-nit-zauberer-liar/?$ /blog/ [R=301,L]
+RewriteRule ^benefiz-aktion-in-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^benefiz-bottrop/?$ /blog/ [R=301,L]
+RewriteRule ^zauberclown-liar-laedt-alle-kinder-in-drei-awo-kitas-ein/?$ /blog/ [R=301,L]
+RewriteRule ^topmodel-party-fur-den-geburtstag/?$ /blog/ [R=301,L]
+RewriteRule ^besuch-vom-zauberer-liar-auf-dem-weihnachtsmarkt-dortmund/?$ /blog/ [R=301,L]
+RewriteRule ^halloween-zauberhafte-momente-fur-kinder-im-kulturtempel-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^kindergeburtstag-feiern-in-duesseldorf-bei-happy-kids/?$ /blog/ [R=301,L]
+RewriteRule ^karnevalsaison-mit-clown-liar-fangt-an/?$ /blog/ [R=301,L]
+RewriteRule ^zauberhafte-party-in-eisborn/?$ /blog/ [R=301,L]
+RewriteRule ^liar-als-schwarzer-magier-fuer-halloween/?$ /blog/ [R=301,L]
+RewriteRule ^dorstener-weihnachtsmarkt-mit-clown-und-kinderzauberer/?$ /blog/ [R=301,L]
+RewriteRule ^nachwuchs-feiert-in-eisborn-karneval-mit-clown-liar/?$ /blog/ [R=301,L]
+RewriteRule ^dorsten-weihnachtsmarkt-der-mr-trucker-kinderhilfe-zieht-besucher-an/?$ /blog/ [R=301,L]
+RewriteRule ^die-kinderwelt-recklinghausen-empfangt-erneut-clown-zauberer-liar/?$ /blog/ [R=301,L]
+RewriteRule ^die-mammutspiele-in-ahlen/?$ /blog/ [R=301,L]
+RewriteRule ^kirmes-und-brunnenfest-mit-kinderzaubershow/?$ /blog/ [R=301,L]
+RewriteRule ^cafe-schlaflos-heute-in-der-buecherei-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^kinderzauberer-besucht-kita-in-gelsenkirchen/?$ /blog/ [R=301,L]
+RewriteRule ^musik-und-entertainment-mit-michael-voelkel/?$ /blog/ [R=301,L]
+RewriteRule ^clown-zauberer-liar-empfiehlt-fire-fantasies-aus-bochum/?$ /blog/ [R=301,L]
+RewriteRule ^dortmunder-weihnachtsmarkt-mit-liar/?$ /blog/ [R=301,L]
+RewriteRule ^lustiges-hochzeitsfoto-vom-zauberer/?$ /blog/ [R=301,L]
+RewriteRule ^fruehlingsfest-kray-mit-maedeltroedelmarkt/?$ /blog/ [R=301,L]
+RewriteRule ^kinderparadies-im-westfalenpark/?$ /blog/ [R=301,L]
+RewriteRule ^murray-und-der-zauberer/?$ /blog/ [R=301,L]
+RewriteRule ^kinder-helfen-helden-zu-machen/?$ /blog/ [R=301,L]
+RewriteRule ^naturheilpraxis-schreiber-in-haltern-am-see/?$ /blog/ [R=301,L]
+RewriteRule ^zirkus-aus-der-kiste-auf-dem-spielplatz-clown-zauberer-liar-in-dortmund/?$ /blog/ [R=301,L]
+RewriteRule ^bottroper-super-samstag-am-4-7/?$ /blog/ [R=301,L]
+RewriteRule ^dpvkom-fordert-ein-herz-fuer-mitarbeiter-der-deutschen-post-dhl/?$ /blog/ [R=301,L]
+RewriteRule ^zimtsternfest-mit-zauberer-liar-in-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^clown-und-kinderzauberer-in-der-kinderwelt-recklinghausen/?$ /blog/ [R=301,L]
+RewriteRule ^familienfest-in-ramsdorf-mit-clown-liar/?$ /blog/ [R=301,L]
+
+# --- MUSTER 9: Gecrawlt – nicht indexiert (GSC zusätzliche URLs) ---
+# /clown/zauberer/ Varianten → korrekte Zielseiten
+RewriteRule ^clown/zauberer/zaubershow/?$ /zauberer/zaubershow/ [R=301,L]
+RewriteRule ^clown/zauberer/?$ /zauberer/ [R=301,L]
+
+# Alte Service-Seiten mit /content/ oder Doppel-Pfaden
+RewriteRule ^content/clown/?$ /clown/clownshow/ [R=301,L]
+RewriteRule ^content/zauberer/?$ /zauberer/ [R=301,L]
+RewriteRule ^content/blog/?$ /blog/ [R=301,L]
+RewriteRule ^content/galerie/?$ /galerie/ [R=301,L]
+RewriteRule ^content/kontakt/?$ /kontakt/ [R=301,L]
+
+# Alte WordPress-Seiten mit ?replytocom= Parameter (Kommentar-Links)
+RewriteCond %{QUERY_STRING} ^replytocom= [NC]
+RewriteRule ^(.*)$ /$1? [R=301,L]
+
+# Alte WordPress-Seiten mit ?share= Parameter (Social Sharing)
+RewriteCond %{QUERY_STRING} ^share= [NC]
+RewriteRule ^(.*)$ /$1? [R=301,L]
+
+# Weitere alte Blog-Posts (Gecrawlt – nicht indexiert, Charge 2)
+RewriteRule ^kinderzauberer-clown-bei-der-awo-in-waltrop/?$ /blog/ [R=301,L]
+RewriteRule ^zauberer-in-herne-zaubershow-auf-dem-sommerfest/?$ /blog/ [R=301,L]
+RewriteRule ^zauberer-auf-dem-stadtfest-in-marl/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-auf-dem-fruehlingsfest-in-kray/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-auf-dem-roncalli-weihnachtsmarkt/?$ /blog/ [R=301,L]
+RewriteRule ^kinderzauberer-auf-der-burg-vondern-in-oberhausen/?$ /blog/ [R=301,L]
+RewriteRule ^halloween-party-fuer-kinder/?$ /blog/ [R=301,L]
+RewriteRule ^zauberer-und-clown-in-der-grundschule/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-beim-sommerfest-in-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^kinderfest-im-westfalenpark-dortmund/?$ /blog/ [R=301,L]
+RewriteRule ^kindergeburtstag-mit-zauberer-in-essen/?$ /blog/ [R=301,L]
+RewriteRule ^clown-fuer-hochzeit-in-nrw/?$ /blog/ [R=301,L]
+RewriteRule ^zauberworkshop-fuer-kinder-in-gelsenkirchen/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-beim-karnevalsumzug-in-gladbeck/?$ /blog/ [R=301,L]
+RewriteRule ^sommerfest-in-der-kita-mit-zauberer/?$ /blog/ [R=301,L]
+RewriteRule ^kinderzauberer-in-der-grundschule-in-bottrop/?$ /blog/ [R=301,L]
+RewriteRule ^zauberer-fuer-firmenevent-in-essen/?$ /blog/ [R=301,L]
+RewriteRule ^clown-liar-bei-lidl-in-gelsenkirchen/?$ /blog/ [R=301,L]
+RewriteRule ^weihnachtsfeier-mit-zauberer-in-bochum/?$ /blog/ [R=301,L]
+RewriteRule ^kindergeburtstag-in-duisburg-mit-clown/?$ /blog/ [R=301,L]
+RewriteRule ^kinderfest-auf-hof-wessels-in-haltern/?$ /blog/ [R=301,L]
+RewriteRule ^stadtfest-in-gladbeck-mit-clown-liar/?$ /blog/ [R=301,L]
+RewriteRule ^clown-zauberer-beim-fruehlingsfest/?$ /blog/ [R=301,L]
+RewriteRule ^karnevalsfeier-in-der-kita/?$ /blog/ [R=301,L]
+RewriteRule ^sommerfest-in-recklinghausen-mit-kinderzauberer/?$ /blog/ [R=301,L]
+
+# Alte /clown-zauberer/ Deep-Links
+RewriteRule ^clown-zauberer/zauberer/?$ /zauberer/ [R=301,L]
+RewriteRule ^clown-zauberer/kinderzauberer/?$ /kinderzauberer/ [R=301,L]
+RewriteRule ^clown-zauberer/kindergeburtstag/?$ /kindergeburtstag/ [R=301,L]
+RewriteRule ^clown-zauberer/preise/?$ /preise/ [R=301,L]
+RewriteRule ^clown-zauberer/galerie/?$ /galerie/ [R=301,L]
+RewriteRule ^clown-zauberer/kontakt/?$ /kontakt/ [R=301,L]
+RewriteRule ^clown-zauberer/blog/?$ /blog/ [R=301,L]
+
+# /clown/clown-zauberer/ Varianten (alt → neu)
+RewriteRule ^clown/clown-zauberer/?$ /clown/clownshow/ [R=301,L]
+RewriteRule ^clown/clown-zauberer/(.+)$ /clown/clownshow/ [R=301,L]
+
+# --- MUSTER 10: /category/ spezifische Mappings ---
+RewriteRule ^category/kinderzauberer/?$ /kinderzauberer/ [R=301,L]
+RewriteRule ^category/kinderzauberer-und-clown-aus-nrw-aktuell/?$ /blog/ [R=301,L]
+RewriteRule ^category/kinderzauberer-und-clown-aus-nrw-aktuell/(.+)$ /blog/ [R=301,L]
+RewriteRule ^category/entertainer/?$ /blog/ [R=301,L]
+RewriteRule ^category/entertainer/(.+)$ /blog/ [R=301,L]
+RewriteRule ^category/kultur-nrw/?$ /blog/ [R=301,L]
+RewriteRule ^category/kultur-nrw/(.+)$ /blog/ [R=301,L]
+RewriteRule ^category/zaubershow/?$ /zauberer/zaubershow/ [R=301,L]
+RewriteRule ^category/zaubershow/(.+)$ /zauberer/zaubershow/ [R=301,L]
+RewriteRule ^category/zauberer-2/?$ /zauberer/ [R=301,L]
+RewriteRule ^category/zauberer-2/(.+)$ /zauberer/ [R=301,L]
+RewriteRule ^category/clown-im-herzen/?$ /blog/ [R=301,L]
+RewriteRule ^category/clown-im-herzen/(.+)$ /blog/ [R=301,L]
+RewriteRule ^category/besondere-clowns/?$ /blog/ [R=301,L]
+RewriteRule ^category/nette-locations/?$ /blog/ [R=301,L]
+RewriteRule ^category/nette-locations/(.+)$ /blog/ [R=301,L]
+RewriteRule ^category/presse/?$ /blog/ [R=301,L]
+RewriteRule ^category/marketing/?$ /blog/ [R=301,L]
+RewriteRule ^category/tolle-selbstandige/?$ /blog/ [R=301,L]
+RewriteRule ^category/videos/?$ /galerie/ [R=301,L]
+RewriteRule ^category/anleitung-fur-kinderspass/?$ /blog/ [R=301,L]
+RewriteRule ^category/anleitung-fur-kinderspass/(.+)$ /blog/ [R=301,L]
+RewriteRule ^category/kinder-geburtstag-anleitung-fur-kinderspass/?$ /blog/ [R=301,L]
+RewriteRule ^category/gelsenkirchen-.*$ /blog/ [R=301,L]
+RewriteRule ^category/wetter/?$ /blog/ [R=301,L]
+
+# --- MUSTER 11: GSC 414-URLs Restmenge (Stand 10.04.2026) ---
+
+# /zauberer/kinderzauberer* → /kinderzauberer/* (3 URLs)
+RewriteRule ^zauberer/kinderzauberer/?$ /kinderzauberer/ [R=301,L]
+RewriteRule ^zauberer/kinderzauberer/kinderzauberer-in-([^/]+)/?$ /kinderzauberer/kinderzauberer-in-$1/ [R=301,L]
+RewriteRule ^zauberer/kinderzauberer/(.+)$ /kinderzauberer/ [R=301,L]
+
+# Einzelfälle — alte WP-Paths ohne Entsprechung
+RewriteRule ^kinderschminken/?$ /clown/glitzer-tattoo/ [R=301,L]
+RewriteRule ^ballonkuenstler/?$ /clown/ballonmodellage/ [R=301,L]
+RewriteRule ^index\.html/?$ / [R=301,L]
+RewriteRule ^clown-kindergeburtstag/?$ /kindergeburtstag/ [R=301,L]
+RewriteRule ^zauberer-kindergeburtstag/?$ /kindergeburtstag/ [R=301,L]
+RewriteRule ^clown/20230628_155823/?$ /galerie/ [R=301,L]
+
+# /clown/* alte Blog-Slugs (7 URLs die unter /clown/ statt root liegen)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+# -- Alte Root-/clown-Slugs auf den EXISTIERENDEN Blogartikel statt auf /blog/ (Audit 16.09.2026) --
+# Liste = alle Ordner unter dist/blog/ zum Build-Zeitpunkt; bei neuen Artikeln erweitern
+RewriteRule ^(?:clown/)?((?:10-tipps-fuer-den-perfekten-kindergeburtstag|100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie|5-gruende-warum-zauberei-zum-karneval-gehoert|adventsmarkt-in-rheinberg-mit-clown-zauberer|clown-oder-zauberer-kindergeburtstag|coesfeld-empfaengt-clown-zauberer-liar|ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck|fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events|gescher-clown-zauberer|haltern-clown-in-freiheit|ikea-duisburg-midsommar-mit-clown-zauberer|kidzival-2024|kindergeburtstag-hitze-outdoor-programm|kindergeburtstag-mai-outdoor-ruhrgebiet|kindergeburtstag-park-tipps|kinderkarneval-mit-clown-zauberer|kindersitzung-in-rheinberg|kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen|lollipop-festival-das-familienevent|luftballonmodellage-kindergeburtstag|magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie|magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt|muttertag-familiengeburtstag-kombinieren|nussknacker-weihnachtsmarkt-gladbeck|open-air-zauberei-im-freien|pantomime-auf-dem-appeltatenfest|pantomime-bei-extraschicht|sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen|sommerfest-kita-programm-clown-zauberer|tierparkfest-recklinghausen|warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist|was-ist-ein-clown|was-kostet-ein-clown-fuer-ein-kindergeburtstag|was-kostet-zauberer-kindergeburtstag|zaubershow-auf-dem-castroper-weihnachtsdorf|zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight|zaubershow-in-dortmund|zaubershow-in-duisburg-midsommarfest|zaubershow-sommer-2025))/?$ /blog/$1/ [R=301,L]
+
+RewriteRule ^clown/([a-z0-9-]{20,})/?$ /blog/ [R=301,L]
+
+# Catch-All für ~157 alte WordPress-Blog-Slugs auf Root-Ebene
+# Safe durch !-f !-d (existierende Astro-Seiten werden nicht matched)
+# und Mindestlänge 20 Zeichen (verhindert Match auf /kontakt/, /galerie/ etc.)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_URI} !^/(blog|kindergeburtstag|kinderzauberer|zauberer|clown|preise|galerie|kontakt|ueber-mich|impressum|datenschutz|agb|sitemap) [NC]
+RewriteRule ^([a-z0-9-]{20,})/?$ /blog/ [R=301,L]
+
+# ============================================================
+# CITY-SEITEN → 410 GONE (LIAR Autopilot 2026-06-02)
+# Alte WordPress-Stadt-URLs /zauberer/<stadt>/ und /clown/<stadt>/
+# (z.B. /zauberer/bochum/, /clown/essen/) existieren nicht mehr als
+# Astro-Seiten und lieferten bisher 404. 410 Gone beschleunigt die
+# Google-Deindexierung gegenüber 404.
+# Steht bewusst NACH allen MUSTER-301-Regeln: jede legitime Weiterleitung
+# (z.B. /clown/kindergeburtstag/, /clown/zauberer/...) feuert zuerst.
+# Die Whitelist listet nur ECHTE Astro-Seiten-Roots als Sicherheitsnetz,
+# damit eine reale Seite niemals fälschlich 410 wird.
+# ============================================================
+# Whitelist: echte Astro-Unterseiten unangetastet lassen (kein Statuswechsel)
+RewriteRule ^zauberer/(buehnen-zauberer|tisch-zauberer|zaubershow|kinderzauberer|hochzeit|firmenfeier)(/.*)?$ - [L]
+RewriteRule ^clown/(ballonmodellage|clownshow|glitzer-tattoo|karneval|walk-act)(/.*)?$ - [L]
+# Einsegmentige /zauberer/<stadt>/ und /clown/<stadt>/ → 410 Gone
+RewriteRule ^zauberer/[a-z][a-z0-9-]+/?$ - [R=410,L]
+RewriteRule ^clown/[a-z][a-z0-9-]+/?$ - [R=410,L]
+
+# ============================================================
+# KINDERGEBURTSTAG CITY-SEITEN — ECHTE ASTRO-SEITEN (kein 410!)
+# Die /kindergeburtstag/geburtstag-in-*/ Seiten sind LIVE existierende
+# Astro-Seiten (Top-Traffic: Dortmund, Duesseldorf, Essen ...).
+# Die fruehere 410-Regel (Autopilot 2026-06-08) war ein FEHLER und hat
+# den staerksten Seiten-Cluster deindexiert. Entfernt 2026-06-10.
+# Falls je einzelne Legacy-Geburtstags-URLs deindexiert werden sollen,
+# nur die EXAKTEN alten Slugs auflisten — niemals das ganze Muster.
+# ============================================================
+
+# ── Reviews API Cache-Schutz ──────────────────────────────
+<Files "reviews-cache.json">
+  Order Allow,Deny
+  Deny from all
+</Files>
+<Files "config.php">
+  Order Allow,Deny
+  Deny from all
+</Files>
+
+# ── MIME Types ──────────────────────────────────────────────
+AddType text/html .html
+AddType text/css .css
+AddType application/javascript .js
+AddType application/json .json
+AddType image/webp .webp
+AddType image/avif .avif
+AddType image/svg+xml .svg
+AddType font/woff2 .woff2
+
+# ── Gzip Kompression ────────────────────────────────────────
+<IfModule mod_deflate.c>
+  AddOutputFilterByType DEFLATE text/html text/plain text/xml
+  AddOutputFilterByType DEFLATE text/css application/javascript
+  AddOutputFilterByType DEFLATE application/json application/xml
+  AddOutputFilterByType DEFLATE image/svg+xml
+  AddOutputFilterByType DEFLATE font/woff font/woff2
+  AddOutputFilterByType DEFLATE application/x-font-ttf application/x-font-opentype
+</IfModule>
+
+# Vary Header für korrektes Caching bei Kompression
+<IfModule mod_headers.c>
+  <FilesMatch "\.(html|css|js|json|xml|svg)$">
+    Header append Vary Accept-Encoding
+  </FilesMatch>
+</IfModule>
+
+# ── Browser Caching ─────────────────────────────────────────
+<IfModule mod_expires.c>
+  ExpiresActive On
+
+  # HTML – kurz cachen (SEO-freundlich)
+  ExpiresByType text/html "access plus 1 hour"
+
+  # CSS & JS – lang cachen (Versionierung über Build-Hash)
+  ExpiresByType text/css "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+
+  # Bilder
+  ExpiresByType image/jpeg "access plus 1 year"
+  ExpiresByType image/png "access plus 1 year"
+  ExpiresByType image/webp "access plus 1 year"
+  ExpiresByType image/avif "access plus 1 year"
+  ExpiresByType image/gif "access plus 1 year"
+  ExpiresByType image/svg+xml "access plus 1 year"
+  ExpiresByType image/x-icon "access plus 1 year"
+
+  # Fonts
+  ExpiresByType font/woff2 "access plus 1 year"
+  ExpiresByType font/woff "access plus 1 year"
+
+  # JSON / XML
+  ExpiresByType application/json "access plus 1 hour"
+  ExpiresByType application/xml "access plus 1 hour"
+</IfModule>
+
+# ── Cache-Control Headers ───────────────────────────────────
+<IfModule mod_headers.c>
+  # Immutable für Astro-Assets (mit Hash im Dateinamen)
+  <FilesMatch "\.(css|js)$">
+    Header set Cache-Control "public, max-age=31536000, immutable"
+  </FilesMatch>
+
+  # Bilder lang cachen
+  <FilesMatch "\.(jpg|jpeg|png|gif|webp|avif|ico|svg)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+
+  # Fonts
+  <FilesMatch "\.(woff|woff2|ttf|eot)$">
+    Header set Cache-Control "public, max-age=31536000"
+  </FilesMatch>
+
+  # HTML kurz cachen
+  <FilesMatch "\.html$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+
+  # Sicherheits-Header
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=()"
+
+  # HSTS — Browser merkt sich HTTPS für 1 Jahr, spart HTTP→HTTPS-Redirect
+  Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+</IfModule>
+
+# ── ETags deaktivieren (besser Cache-Control nutzen) ───────
+<IfModule mod_headers.c>
+  Header unset ETag
+</IfModule>
+FileETag None

@@ -1,0 +1,277 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../../../assets/images/zauberer/buehnen-zauberer-hero.jpg';
+import feuerImg from '../../../assets/images/zauberer/tisch-zauberer-nrw-buehne.png';
+import standUpImg from '../../../assets/images/galerie/stand-up-zauberei.jpg';
+import buehnenZaubereiImg from '../../../assets/images/galerie/buehnen-zauberei.jpg';
+import buehnenGelsenkirchenImg from '../../../assets/images/galerie/buehnen-zauberei-gelsenkirchen.jpg';
+import buehnenEssenImg from '../../../assets/images/galerie/buehnen-zauberer-essen.jpg';
+
+const seoTitle = "Bühnenzauberer NRW buchen – Zaubershow für Bühne & Gala";
+const seoDescription = 'Bühnenzauberer NRW ✓ Professionelle Stand-up Comedy-Zauberei ✓ 20-45 Min. für 10-150 Personen ✓ 370+ TOP-Bewertungen ✓ Auch auf Französisch ✓ Jetzt buchen!';
+
+const features = [
+  { icon: '✨', title: 'Einzigartige Comedy-Zauberei', text: 'Ich zaubere nicht nur – ich unterhalte. Die Kombination aus verblüffenden Tricks und französischem Humor macht jede Show zu einem besonderen Erlebnis.' },
+  { icon: '🇫🇷', title: 'Französischer Charme', text: 'Als gebürtiger Franzose bringe ich Pariser Flair und Eleganz in meine Shows. Perfekt für internationale Events oder als besonderes Highlight.' },
+  { icon: '⭐', title: '370+ TOP-Bewertungen', text: 'Über 400 zufriedene Kunden haben mich mit 5.0 von 5 Sternen bewertet. Zuverlässigkeit und Qualität sind garantiert.' },
+  { icon: '🎭', title: 'Professionelle Ausbildung', text: 'Umfassende Ausbildung als Entertainer und Animateur mit Spezialisierung in Schauspiel, Comedy und Zauberei. Seit 2009 professionell im Entertainment-Bereich.' },
+  { icon: '💼', title: 'Erfahrung mit allen Event-Typen', text: 'Von intimen 10-Personen-Dinners bis zu 150-Personen-Galas – ich habe Erfahrung mit jedem Event-Format und passe mich perfekt an.' },
+  { icon: '🌍', title: 'Mehrsprachig', text: 'Shows auf Deutsch und Französisch möglich. Ideal für internationale Gäste oder zweisprachige Events.' },
+  { icon: '⚡', title: 'Unkompliziert & Flexibel', text: 'Minimaler technischer Aufwand, kurze Aufbauzeit, flexible Anpassung an Ihr Programm. Ich mache es Ihnen leicht.' },
+  { icon: '🎯', title: 'Individuelle Abstimmung', text: 'Jedes Event ist einzigartig. Ich stimme meine Show auf Ihre Gäste, Ihr Thema und Ihre Wünsche ab.' },
+];
+
+const faqItems = [
+  { q: 'Wie lange dauert die Bühnenzaubershow?', a: 'Die Show ist flexibel zwischen 20 und 45 Minuten buchbar. Die beliebteste Variante sind 30 Minuten – perfekt, um zu begeistern, ohne zu lang zu sein. Ich passe die Dauer gerne an Ihr Programm an.' },
+  { q: 'Für wie viele Zuschauer ist die Show geeignet?', a: 'Optimal für 10 bis 150 Personen. Bei kleineren Gruppen (unter 10) empfehle ich Close-up Zauberei, die persönlicher wirkt. Bei größeren Gruppen (über 150) können wir spezielle Setups besprechen.' },
+  { q: 'Welche technischen Anforderungen gibt es?', a: 'Minimaler Aufwand! Ich benötige: Eine Fläche von ca. 3×3 Meter, idealerweise eine kleine Bühne, Mikrofon & Soundanlage (ab 70 Zuschauer), ausreichende Beleuchtung. Das war\'s schon! Keine großen Aufbauten, keine Pyrotechnik.' },
+  { q: 'Ist die Show nur für Erwachsene?', a: 'Die Bühnenzauberei ist für gemischtes Publikum ab 12 Jahren geeignet. Der Humor ist familienfreundlich, aber anspruchsvoll genug für Erwachsene. Für jüngere Kinder (4-11 Jahre) empfehle ich meine spezielle Kinderzauberer-Show.' },
+  { q: 'Kann die Show auch auf Französisch sein?', a: 'Absolut! Als gebürtiger Franzose biete ich Shows sowohl auf Deutsch als auch auf Französisch an. Perfekt für internationale Firmenfeiern, Events mit französischen Gästen oder zweisprachige Hochzeiten.' },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.a,
+    },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Bühnenzauberer NRW – Stand-up Comedy-Zauberei",
+  "serviceType": "Bühnenzauberei / Stand-up Zauberei",
+  "description": "Professionelle Bühnenzauberei und Stand-up Comedy-Zauberei für Firmenfeiern, Galas und Events in NRW. 20–45 Minuten für 10–150 Personen, auch auf Französisch.",
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "State", "name": "Nordrhein-Westfalen" },
+  "url": "https://liar-entertainer.com/zauberer/buehnen-zauberer/"
+};
+const _pageGallery = [
+  { src: feuerImg, alt: 'Bühnenzauberer LIAR mit einem Feuer-Zaubertrick auf der Bühne' },
+  { src: standUpImg, alt: 'Stand-up Zauberei vor Publikum in NRW' },
+  { src: buehnenZaubereiImg, alt: 'Bühnenzauberer LIAR bei einer Show' },
+  { src: buehnenGelsenkirchenImg, alt: 'Bühnenshow von Zauberer LIAR in Gelsenkirchen' },
+  { src: buehnenEssenImg, alt: 'Stand-up bei einer Firmenfeier in Essen mit Assistentin aus dem Publikum' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Bühnenzauberer NRW, Stand-up Zauberer, Bühnenzauberei buchen, Gala Zauberer, Bühnenzauberer Firmenfeier"
+  canonical="https://liar-entertainer.com/zauberer/buehnen-zauberer/"
+  structuredData={[serviceSchema, faqSchema]}
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Bühnen Zauberer', url: '/zauberer/buehnen-zauberer/' }]}
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
+        <span>Bühnen Zauberer</span>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Bühnenzauberer NRW für Firmenfeiern &amp; Galas</h1>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImg}
+      alt="Bühnenzauberer NRW – Professionelle Stand-up Zauberei"
+      title="Bühnenzauberer LIAR – Stand-up Zauberei in NRW"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 47% 40%"
+      loading="eager"
+      fetchpriority="high"
+      widths={[600, 900, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 600px;">
+      <div class="text-center px-6">
+        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+          Professionelle Bühnenzauberei in NRW
+        </h2>
+        <p class="text-white/90 text-lg font-medium">Stand-up Comedy-Zauberei für Events, Galas &amp; Feiern</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <p class="text-[#374151] leading-relaxed mb-6">
+            Elegante Zauberkunst trifft auf französischen Charme – erleben Sie eine Show, die Ihre Gäste zwischen Staunen und Lachen pendeln lässt. Als professioneller Bühnenzauberer verwandle ich Ihre Veranstaltung in ein unvergessliches Erlebnis. Für kleinere Runden empfehle ich alternativ meine <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">Tischzauberei und Close-up Magie</a>.
+          </p>
+          <ul class="space-y-3">
+            {['✓ 35 Minuten Show', '✓ Für 10-150 Personen', '✓ 370+ TOP-Bewertungen ⭐⭐⭐⭐⭐', '✓ Auch auf Französisch verfügbar'].map(item => (
+              <li class="flex items-center gap-3 text-[#374151]">
+                <span class="text-[#d7393e] font-bold">{item.split(' ').slice(0,1)}</span>
+                <span>{item.split(' ').slice(1).join(' ')}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">📊 Eckdaten der Show</h3>
+          <dl class="space-y-3 text-sm">
+            {[
+              ['Dauer', '20–45 Minuten (flexibel)'],
+              ['Publikum', 'Optimal für 10–150 Personen'],
+              ['Platzbedarf', 'Ca. 3×3 Meter Fläche'],
+              ['Aufbauzeit', '15–20 Minuten'],
+              ['Sprachen', 'Deutsch, Französisch'],
+              ['Techn. Aufwand', 'Minimal'],
+            ].map(([k, v]) => (
+              <div class="flex gap-4">
+                <dt class="font-semibold text-[#1f2025] w-28 flex-shrink-0">{k}:</dt>
+                <dd class="text-[#374151]">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Weitere Anlässe (SEO-Audit 06.08.2026, Massnahme H6): /zauberer/hochzeit/ und
+       /zauberer/firmenfeier/ hatten null interne Content-Links und waren nur über die
+       Navigation erreichbar. -->
+  <section class="py-12 bg-[#f9fafb]" data-related-services>
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-6">
+        Für welche Anlässe kann man Zauberer LIAR sonst buchen?
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href="/zauberer/hochzeit/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
+          <p class="font-bold text-[#1f2025] mb-1">Zauberer für die Hochzeit</p>
+          <p class="text-sm text-[#595959]">Close-up-Zauberei am Tisch, beim Sektempfang und während der Fotosession.</p>
+        </a>
+        <a href="/zauberer/firmenfeier/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
+          <p class="font-bold text-[#1f2025] mb-1">Zauberer für die Firmenfeier</p>
+          <p class="text-sm text-[#595959]">Walk-Act zwischen den Tischen oder Bühnenshow für Betriebsfeier und Jubiläum.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <!-- Was erwartet Sie? -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">Was ist Bühnenzauberei?</h2>
+      <p class="text-center text-[#374151] mb-8">Zauberkunst für Ihr gesamtes Publikum</p>
+      <div class="max-w-3xl mx-auto">
+        <p class="text-[#374151] leading-relaxed mb-8 text-center">
+          Bei der Bühnenzauberei (auch Stand-up Zauberei genannt) präsentiere ich meine Illusionen auf einer Bühne oder im Parkett für 10 bis 150 Zuschauer gleichzeitig. Im Gegensatz zur <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">Close-up Zauberei am Tisch</a> erleben bei einer Bühnenshow alle Gäste zur gleichen Zeit die gleichen verblüffenden Momente.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {[
+          { title: 'Eleganter Stil mit Comedy-Elementen', text: 'Keine „klassische" <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a>, sondern eine raffinierte Mischung aus Illusion und Humor.' },
+          { title: 'Interaktiv & Einbindend', text: 'Ihr Publikum wird Teil der Show. Ausgewählte Gäste werden auf die Bühne geholt und erleben die Magie aus nächster Nähe.' },
+          { title: 'Flexibel & Anpassbar', text: 'Elegant für Galas, humorvoll für Betriebsfeiern, zurückhaltend für feierliche Anlässe.' },
+        ].map(item => (
+          <div class="bg-white rounded-lg p-5 shadow-sm card-hover reveal">
+            <h4 class="font-bold text-[#1f2025] mb-2">{item.title}</h4>
+            <p class="text-[#374151] text-sm" set:html={item.text} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl text-center mb-4">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <p class="text-[#374151] text-center mb-8">Weitere Fotos und Videos finden Sie in meiner <a href="/galerie/" class="text-[#d7393e] hover:underline">Foto- und Videogalerie</a>.</p>
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- Why LIAR (pastel blue) -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-2xl sm:text-3xl text-center mb-10 text-[#1f2025]">Warum Bühnenzauberer LIAR?</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        {features.map(f => (
+          <div class="bg-white rounded-xl p-5 border border-[#c5d3f7] shadow-sm card-hover reveal">
+            <p class="text-2xl mb-2">{f.icon}</p>
+            <h3 class="font-bold mb-2 text-[#1f2025]">{f.title}</h3>
+            <p class="text-[#374151] text-sm leading-relaxed">{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-4">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <h3 class="font-bold text-[#1f2025] text-xl text-center mb-8">Wo bin ich als Bühnenzauberer buchbar?</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h4 class="font-bold text-[#1f2025] mb-3">🏙️ Haupteinsatzgebiet: Nordrhein-Westfalen</h4>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">
+            Essen • Düsseldorf • Dortmund • Köln • Duisburg • Oberhausen • Gelsenkirchen • Bochum • Gladbeck • Mülheim an der Ruhr • Herne • Marl • Dorsten • Herten • Recklinghausen • Krefeld • Moers • Münster • Hagen • Lünen • Bottrop • Castrop-Rauxel • Wuppertal
+          </p>
+          <h4 class="font-bold text-[#1f2025] mb-2">🌍 Überregional & International</h4>
+          <p class="text-[#374151] text-sm">Deutschland: Gesamtes Bundesgebiet<br />International: Frankreich, Belgien, Niederlande, Österreich, Schweiz</p>
+        </div>
+        <div>
+          <h4 class="font-bold text-[#1f2025] mb-4">FAQ</h4>
+          <div class="space-y-3">
+            {faqItems.slice(0, 3).map(item => (
+              <div class="border-l-4 border-[#d7393e] pl-4">
+                <p class="font-semibold text-[#1f2025] text-sm mb-1">{item.q}</p>
+                <p class="text-[#374151] text-xs leading-relaxed">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[#1f2025] py-14 text-white text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎪 Jetzt buchen – Lassen Sie sich verzaubern!</h2>
+      <p class="text-gray-300 mb-6">Machen Sie Ihr Event zu einem unvergesslichen Erlebnis mit professioneller Bühnenzauberei. Über 400 zufriedene Kunden können nicht irren! Verschaffen Sie sich einen Eindruck in meiner <a href="/galerie/" class="text-white hover:underline font-semibold">Fotogalerie</a>.</p>
+      <div class="space-y-2 text-gray-300 mb-8">
+        <p>📞 Telefon: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172 – 1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
+        <p>📍 Standort: Gladbeck, NRW (mobil in ganz Deutschland)</p>
+      </div>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+        Jetzt unverbindlich anfragen
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

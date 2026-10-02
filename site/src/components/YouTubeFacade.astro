@@ -1,0 +1,45 @@
+---
+export interface Props {
+  id: string;
+  title: string;
+  label?: string;
+}
+const { id, title, label = 'Video abspielen' } = Astro.props;
+const embed = `https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`;
+---
+<div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom:56.25%;">
+  <button
+    type="button"
+    class="yt-facade absolute inset-0 w-full h-full rounded-lg"
+    data-embed={embed}
+    data-title={title}
+    aria-label={`${label} – dabei werden Daten an YouTube (Google) übertragen`}
+  >
+    <span class="yt-play" aria-hidden="true">▶</span>
+    <span class="yt-facade-title">{label}</span>
+    <span class="yt-facade-note">Mit Klick werden Daten an YouTube (Google) übertragen.</span>
+  </button>
+</div>
+
+<style>
+  .yt-facade{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:10px;cursor:pointer;border:0;color:#fff;text-align:center;padding:16px;background:linear-gradient(135deg,#d7393e 0%,#b62e32 55%,#3b55d5 100%);box-shadow:0 8px 24px rgba(0,0,0,.18);transition:filter .15s}
+  .yt-facade:hover{filter:brightness(1.06)}
+  .yt-play{width:74px;height:74px;border-radius:9999px;background:rgba(255,255,255,.92);color:#d7393e;font-size:30px;display:flex;align-items:center;justify-content:center;padding-left:4px;box-shadow:0 6px 18px rgba(0,0,0,.25)}
+  .yt-facade-title{font-weight:800;font-size:1.15rem}
+  .yt-facade-note{font-size:.75rem;opacity:.92;max-width:24rem}
+</style>
+
+<script>
+  document.querySelectorAll('.yt-facade').forEach(function(btn){
+    btn.addEventListener('click', function(){
+      var ifr = document.createElement('iframe');
+      ifr.src = btn.getAttribute('data-embed');
+      ifr.title = btn.getAttribute('data-title') || '';
+      ifr.className = 'absolute inset-0 w-full h-full rounded-lg';
+      ifr.setAttribute('allow','accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+      ifr.setAttribute('allowfullscreen','');
+      ifr.style.border = '0';
+      btn.replaceWith(ifr);
+    });
+  });
+</script>

@@ -1,0 +1,33 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="404 – Seite nicht gefunden | Clown Zauberer LIAR"
+  description="Diese Seite konnte nicht gefunden werden."
+  noindex={true}
+>
+  <section class="py-24 bg-white text-center">
+    <div class="max-w-[600px] mx-auto px-4">
+      <div class="text-8xl mb-6">🎪</div>
+      <h1 class="text-[#1f2025] font-extrabold text-4xl mb-4">404 – Seite nicht gefunden</h1>
+      <p class="text-[#374151] text-lg mb-8">
+        Ups! Diese Seite scheint verschwunden zu sein – aber Clown Liar findet immer eine Lösung!
+      </p>
+      <div class="flex flex-col sm:flex-row gap-3 justify-center">
+        <a
+          href="/"
+          class="inline-flex items-center justify-center bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors"
+        >
+          Zur Startseite
+        </a>
+        <a
+          href="/kontakt/"
+          class="inline-flex items-center justify-center bg-[#f4f4f4] hover:bg-gray-200 text-[#1f2025] font-bold px-8 py-3 rounded transition-colors"
+        >
+          Kontakt
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

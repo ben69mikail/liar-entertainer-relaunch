@@ -1,0 +1,1380 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import GoogleReviews from '../components/GoogleReviews.astro';
+import pagesData from '../data/pages.json';
+import postsData from '../data/posts.json';
+import scrapedData from '../data/scraped-pages.json';
+
+type WPItem = {
+  title: string; slug: string; type: string; status: string;
+  content: string; excerpt: string; date: string; link: string;
+  meta: Record<string, string | undefined>;
+  categories: { slug: string; name: string }[];
+};
+type ScrapedItem = { scrapedHtml: string; type: string; url: string; htmlLength: number; };
+
+const allItems: WPItem[] = [...(pagesData as WPItem[]), ...(postsData as WPItem[])];
+const scraped = scrapedData as Record<string, ScrapedItem>;
+
+function resolveTitle(t: string | undefined, fb: string) {
+  if (!t) return fb;
+  return t
+    .replace(/%title%/g, fb)
+    .replace(/%sitename%/g, 'Clown Zauberer LIAR')
+    .replace(/%sep%/g, '|')
+    .replace(/%page%/g, '')
+    .replace(/\s{2,}/g, ' ')
+    .trim();
+}
+
+function getFirstImg(c: string) {
+  // wp-content-URLs liefern 410 Gone (Legacy-WP abgeschaltet) → ignorieren.
+  // Nur noch erreichbare (lokale/externe Nicht-WP) Bild-URLs zurückgeben.
+  const matches = c.match(/https?:\/\/[^\s"'<>)]+\.(?:jpg|jpeg|png|webp)/gi) || [];
+  return matches.find((u) => !/wp-content/i.test(u)) ?? null;
+}
+
+// Themenpassende lokale Fallback-Bilder (public/images/fallback/, stabil deploybar).
+// BaseLayout macht relative ogImage-Pfade automatisch absolut.
+const SVC: Record<string, string> = {
+  'kindergeburtstag': '/images/fallback/kindergeburtstag.jpg',
+  'clown-zauberer': '/images/fallback/clown-zauberer.jpg',
+  'zauberer': '/images/fallback/zaubershow.jpg',
+  'zaubershow': '/images/fallback/zaubershow.jpg',
+  'clownshow': '/images/fallback/clownshow.jpg',
+  'kinderzauberer': '/images/fallback/kindergeburtstag.jpg',
+  'ballonmodellage': '/images/fallback/ballonmodellage.jpg',
+  'glitzer-tattoo': '/images/fallback/glitzer-tattoo.jpg',
+  'walk-act': '/images/fallback/walk-act.jpg',
+  'tisch-zauberer': '/images/fallback/tisch-zauberer.jpg',
+  'buehnen-zauberer': '/images/fallback/buehnen-zauberer.jpg',
+  'strassen-sommer-fest': '/images/fallback/fest.jpg',
+  'kindergarten-kita': '/images/fallback/kindergarten.jpg',
+  'karneval': '/images/fallback/karneval.jpg',
+  'schule': '/images/fallback/schule.jpg',
+};
+
+// Kategorie → Fallback-Bild für Legacy-Blog-Posts (Reihenfolge = Priorität)
+const CAT_IMG: Array<[RegExp, string]> = [
+  [/geburtstag/i, '/images/fallback/kindergeburtstag.jpg'],
+  [/karneval/i, '/images/fallback/karneval.jpg'],
+  [/zauberei/i, '/images/fallback/zaubershow.jpg'],
+  [/clown/i, '/images/fallback/clownshow.jpg'],
+  [/pantomime/i, '/images/fallback/walk-act.jpg'],
+  [/kultur|termine/i, '/images/fallback/fest.jpg'],
+];
+
+function postCategoryImg(cats: { slug: string; name: string }[] | undefined): string | null {
+  const joined = (cats || []).map((c) => c.name).join(' ');
+  for (const [re, img] of CAT_IMG) if (re.test(joined)) return img;
+  return null;
+}
+
+export function getStaticPaths() {
+  const pages2 = pagesData as WPItem[];
+  const posts2 = postsData as WPItem[];
+  const all2 = [...pages2, ...posts2];
+  const paths: { params: { slug: string }; props: { pageSlug: string } }[] = [];
+  const seen = new Set<string>();
+
+  for (const item of all2) {
+    try {
+      const url = new URL(item.link);
+      let path = url.pathname;
+      // Remove leading/trailing slashes
+      path = path.replace(/^\/|\/$/g, '');
+      if (!path) continue;
+      // Decode URL-encoded characters
+      let decoded: string;
+      try { decoded = decodeURIComponent(path); } catch { decoded = path; }
+      if (seen.has(decoded)) continue;
+      seen.add(decoded);
+      paths.push({ params: { slug: decoded }, props: { pageSlug: item.slug } });
+    } catch { /* skip */ }
+  }
+  return paths;
+}
+
+const { slug } = Astro.params as { slug: string };
+const { pageSlug } = Astro.props as { pageSlug: string };
+const page = allItems.find(p => p.slug === pageSlug);
+if (!page) return Astro.redirect('/');
+
+function fixLazyImages(html: string): string {
+  return html
+    // Replace data-src with src (WordPress lazy-load)
+    .replace(/<img([^>]*?)\ssrc="data:image\/svg\+xml[^"]*"([^>]*?)\sdata-src="([^"]+)"([^>]*?)>/gi,
+      '<img$1 src="$3"$2$4>')
+    // Also handle data-lazy-src
+    .replace(/<img([^>]*?)\sdata-lazy-src="([^"]+)"([^>]*?)>/gi,
+      '<img$1 src="$2"$3>')
+    // Remove any remaining data-src attributes to clean up
+    .replace(/\sdata-src="[^"]*"/gi, '')
+    .replace(/\sdata-lazy-src="[^"]*"/gi, '');
+}
+
+function fixVideoEmbeds(html: string): string {
+  // Remove fixed width/height from YouTube iframes and let CSS handle aspect ratio
+  return html
+    .replace(/<iframe([^>]*?)(width="[^"]*")([^>]*?)(height="[^"]*")([^>]*?)>/gi,
+      '<iframe$1$3$5>')
+    .replace(/<iframe([^>]*?)(height="[^"]*")([^>]*?)(width="[^"]*")([^>]*?)>/gi,
+      '<iframe$1$3$5>');
+}
+
+function fixBrokenLinks(html: string): string {
+  return html
+    // 1. Entferne WordPress /author/ Links — behalte nur den Ankertext
+    .replace(/<a[^>]*href="\/author\/[^"]*"[^>]*>(.*?)<\/a>/gi, '$1')
+    // 2. Entferne WordPress /category/ Links — behalte nur den Ankertext
+    .replace(/<a[^>]*href="\/category\/[^"]*"[^>]*>(.*?)<\/a>/gi, '$1')
+    // 3. Entferne WordPress /tag/ Links — behalte nur den Ankertext
+    .replace(/<a[^>]*href="\/tag\/[^"]*"[^>]*>(.*?)<\/a>/gi, '$1')
+    // 4a. Fix /clown/zauberer/kinderzauberer/kinderzauberer-in-X/ → /kinderzauberer/kinderzauberer-in-X/
+    .replace(/href="\/clown\/zauberer\/kinderzauberer\/(kinderzauberer-in-[^"]+)"/gi, 'href="/kinderzauberer/$1"')
+    // 4b. Fix /clown/zauberer/kinderzauberer/ → /kinderzauberer/
+    .replace(/href="\/clown\/zauberer\/kinderzauberer\/"/gi, 'href="/kinderzauberer/"')
+    // 5. Fix /clown/zauberer/zaubershow/ → /zauberer/zaubershow/
+    .replace(/href="\/clown\/zauberer\/zaubershow\/"/gi, 'href="/zauberer/zaubershow/"')
+    // 6. Fix /clown/zauberer/ → /zauberer/
+    .replace(/href="\/clown\/zauberer\/"/gi, 'href="/zauberer/"')
+    // 7. Fix /clown/geburtstag/geburtstag-in-X/ → /kindergeburtstag/geburtstag-in-X/
+    .replace(/href="\/clown\/geburtstag\/(geburtstag-in-[^"]+)"/gi, 'href="/kindergeburtstag/$1"')
+    // 8. Fix /clown/geburtstag/ → /kindergeburtstag/
+    .replace(/href="\/clown\/geburtstag\/"/gi, 'href="/kindergeburtstag/"')
+    // 9. Fix /clown/clown-in-X/ → /clown/clownshow/clown-in-X/
+    .replace(/href="\/clown\/(clown-in-[^"]+)"/gi, 'href="/clown/clownshow/$1"')
+    // 10. Fix /clown/kindergeburtstag/ → /kindergeburtstag/
+    .replace(/href="\/clown\/kindergeburtstag\/"/gi, 'href="/kindergeburtstag/"')
+    // 11. Fix /wp-content/uploads/.../www.DOMAIN → https://www.DOMAIN
+    .replace(/href="\/wp-content\/uploads\/[^"]*\/(www\.[a-z0-9][a-z0-9.-]+\.[a-z]{2,})([^"]*)"/gi,
+      (_, domain, rest) => `href="https://${domain}${rest}"`)
+    // 12. Entferne übrige /wp-content/ Links — behalte nur den Ankertext
+    .replace(/<a[^>]*href="\/wp-content\/[^"]*"[^>]*>(.*?)<\/a>/gi, '$1')
+    // 13. Fix /clown/ (root, existiert nicht) → /
+    .replace(/href="\/clown\/"/gi, 'href="/"')
+    // 14. Fix /clown-in-X/ (ohne /clown/ Prefix) → /clown/clownshow/clown-in-X/
+    .replace(/href="\/(clown-in-[^"]+)"/gi, 'href="/clown/clownshow/$1"')
+    // 15. Fix /clown/geburtstag-in-X/ → /kindergeburtstag/geburtstag-in-X/
+    .replace(/href="\/clown\/(geburtstag-in-[^"]+)"/gi, 'href="/kindergeburtstag/$1"')
+    // 16. Fix falsche Seiten-URLs → korrekte Ziele
+    .replace(/href="\/zauberer-kindergeburtstag\/"/gi, 'href="/kindergeburtstag/"')
+    .replace(/href="\/clown-kindergeburtstag\/"/gi, 'href="/kindergeburtstag/"')
+    .replace(/href="\/ballonkuenstler\/"/gi, 'href="/clown/ballonmodellage/"')
+    .replace(/href="\/kinderschminken\/"/gi, 'href="/clown/glitzer-tattoo/"')
+    .replace(/href="\/glitzer-tattoos-kinder\/"/gi, 'href="/clown/glitzer-tattoo/"')
+    // 17. Fix /clown/glitzer-tattoos (falsch) → /clown/glitzer-tattoo/
+    .replace(/href="\/clown\/glitzer-tattoos"/gi, 'href="/clown/glitzer-tattoo/"')
+    // 18. Fix /kontakt (ohne trailing slash) → /kontakt/
+    .replace(/href="\/kontakt"/gi, 'href="/kontakt/"')
+    // 19. Fix Grammatik: "DER französischer" → "DER französische"
+    .replace(/DER französischer/g, 'DER französische')
+    .replace(/der französischer/g, 'der französische')
+    // 20. TrustIndex Widget entfernen (ersetzt durch GoogleReviews-Komponente)
+    .replace(/<pre\s+class="ti-widget"[^>]*>[\s\S]*?<\/pre>/gi, '')
+    .replace(/<div\s+data-src="https?:\/\/cdn\.trustindex\.io\/[^"]*"[^>]*><\/div>/gi, '');
+}
+
+function stylizeCityContent(html: string): string {
+  // === A1: Preis-Karten erstellen ===
+  // Überspringe wenn schon price-grid vorhanden (z.B. Gelsenkirchen mit manueller Preis-Sektion)
+  if (html.includes('class="price-grid"')) {
+    // Price cards already exist, skip price card creation
+    // Continue with other stylizations (FAQ, emoji, etc.)
+    html = html
+      .replace(/<i\s+class="fas fa-magic"><\/i>/gi, '🪄')
+      .replace(/<i\s+class="far fa-smile"><\/i>/gi, '😊')
+      .replace(/<i\s+class="fas fa-star"><\/i>/gi, '⭐')
+      .replace(/<i\s+class="fas fa-heart"><\/i>/gi, '❤️')
+      .replace(/<i\s+class="fas fa-check"><\/i>/gi, '✅');
+    return html;
+  }
+  // Verschiedene Seiten nutzen verschiedene Überschriften und Strukturen.
+  // Step 1: Finde die Preis-Überschrift (erst H2, dann H3 als Fallback)
+  const priceKeywords = /Preis|kostet|Leistungspaket|150\s*€|150\s*Euro/i;
+  let priceHeading: { full: string; idx: number; endIdx: number } | null = null;
+  let m: RegExpExecArray | null;
+
+  // Erst H2 durchsuchen
+  const h2Regex = /<h2([^>]*)>([\s\S]*?)<\/h2>/gi;
+  while ((m = h2Regex.exec(html)) !== null) {
+    const text = m[2].replace(/<[^>]+>/g, '');
+    if (priceKeywords.test(text)) {
+      priceHeading = { full: m[0], idx: m.index, endIdx: m.index + m[0].length };
+      break;
+    }
+  }
+
+  // Fallback: H3 (z.B. Gladbeck nutzt H3 "PREISE FÜR GLADBECK")
+  if (!priceHeading) {
+    const h3Regex = /<h3([^>]*)>([\s\S]*?)<\/h3>/gi;
+    while ((m = h3Regex.exec(html)) !== null) {
+      const text = m[2].replace(/<[^>]+>/g, '');
+      if (/Preis/i.test(text)) {
+        priceHeading = { full: m[0], idx: m.index, endIdx: m.index + m[0].length };
+        break;
+      }
+    }
+  }
+
+  if (priceHeading) {
+    // Step 2: Sektion-Inhalt extrahieren (bis zum nächsten H2)
+    const after = html.substring(priceHeading.endIdx);
+    const nextH2 = after.match(/<h2[\s>]/i);
+    const sectionLen = nextH2 ? nextH2.index! : after.length;
+    const priceBlock = after.substring(0, sectionLen);
+
+    // Step 3: Preis-Items in Karten wickeln
+    // Pattern A: H3+P Gruppen (z.B. Essen, Düsseldorf, Dinslaken) — alle <p> bis zum nächsten <h3> sammeln
+    const h3Count = (priceBlock.match(/<h3[\s>]/gi) || []).length;
+    let wrapped = priceBlock;
+    if (h3Count >= 2) {
+      // Sammle H3 + ALLE nachfolgenden P-Tags bis zum nächsten H3 in eine price-card
+      wrapped = priceBlock.replace(
+        /(<h3[^>]*>[\s\S]*?<\/h3>)((?:\s*<p[^>]*>[\s\S]*?<\/p>)+)/gi,
+        '<div class="price-card">$1$2</div>'
+      );
+    }
+
+    // Pattern B: <p> mit <strong>...€/Euro...</strong> (z.B. Castrop-Rauxel, Dorsten)
+    if (!wrapped.includes('price-card')) {
+      wrapped = priceBlock.replace(
+        /(<p[^>]*>)\s*(<strong>[^<]*(?:€|Euro)[^<]*<\/strong>[\s\S]*?)(<\/p>)/gi,
+        '<div class="price-card">$1$2$3</div>'
+      );
+    }
+
+    // Pattern C: Emoji-markierte Preisblöcke (z.B. Gelsenkirchen: 🎭 FESTPREIS, 🚗 FAHRTKOSTEN)
+    // Sammle zusammengehörige <p>-Tags zu Karten
+    if (!wrapped.includes('price-card')) {
+      const paragraphs = priceBlock.match(/<p[^>]*>[\s\S]*?<\/p>/gi) || [];
+      if (paragraphs.length > 0) {
+        let cards: string[] = [];
+        let currentCard: string[] = [];
+        let currentTitle = '';
+
+        for (const p of paragraphs) {
+          const text = p.replace(/<[^>]+>/g, '').trim();
+          // Neuer Preis-Block startet mit Emoji oder "OPTIONALE" oder enthält "FESTPREIS"/"FAHRTKOSTEN"
+          const isNewBlock = /^[🎭🚗🎈✨⭐🎪]/.test(text) || /^OPTIONALE/i.test(text) ||
+            /FESTPREIS|FAHRTKOSTEN/i.test(text);
+          // Checkmark-Zeilen (✓) gehören zum aktuellen Block
+          const isCheckmark = /^✓/.test(text);
+          // "Ihr Vorteil" ist ein separater Info-Block
+          const isInfoBlock = /^Ihr Vorteil/i.test(text);
+
+          if (isNewBlock && !isCheckmark) {
+            // Vorherige Karte abschließen
+            if (currentCard.length > 0) {
+              cards.push(`<div class="price-card"><h3>${currentTitle}</h3>${currentCard.join('')}</div>`);
+            }
+            // Titel aus erstem Satz extrahieren (bis zum ersten Zeilenumbruch oder ✓)
+            const titleMatch = text.match(/^(.+?(?:€|Euro|\d+\s*€))/i);
+            currentTitle = titleMatch ? titleMatch[1].trim() : text.split(/\s{2,}|Im Preis/)[0].trim();
+            // Rest des Paragraphen als Content
+            currentCard = [p];
+          } else if (isInfoBlock) {
+            // Info-Block als eigene Karte
+            if (currentCard.length > 0) {
+              cards.push(`<div class="price-card"><h3>${currentTitle}</h3>${currentCard.join('')}</div>`);
+              currentCard = [];
+              currentTitle = '';
+            }
+            cards.push(`<div class="price-card price-card-info">${p}</div>`);
+          } else {
+            currentCard.push(p);
+          }
+        }
+        // Letzte Karte abschließen
+        if (currentCard.length > 0 && currentTitle) {
+          cards.push(`<div class="price-card"><h3>${currentTitle}</h3>${currentCard.join('')}</div>`);
+        }
+
+        if (cards.length > 0) {
+          wrapped = cards.join('\n');
+        }
+      }
+    }
+
+    // Pattern D: <li>-Elemente mit Preisen (€) als separate Karten (z.B. Recklinghausen)
+    // Wenn nur 1 Karte existiert aber <ul><li> mit Preisen vorhanden sind
+    const currentCardCount = (wrapped.match(/price-card/g) || []).length;
+    if (currentCardCount <= 1) {
+      const liMatches = priceBlock.match(/<li[^>]*>[\s\S]*?<\/li>/gi) || [];
+      const priceLis = liMatches.filter(li => /€|Euro/i.test(li));
+      if (priceLis.length > 0) {
+        const liCards = priceLis.map(li => {
+          const text = li.replace(/<[^>]+>/g, '').trim();
+          // Titel: Emoji + <strong>Name:</strong> Preis
+          const titleMatch = text.match(/^([^:]+:\s*\d+\s*€)/);
+          const title = titleMatch ? titleMatch[1].trim() : text.substring(0, 50);
+          // Rest als Beschreibung
+          const desc = titleMatch ? text.substring(titleMatch[0].length).trim() : '';
+          // Originales HTML der <li> nutzen, aber als <p> konvertieren
+          const content = li.replace(/<\/?li[^>]*>/gi, '').trim();
+          return `<div class="price-card"><h3>${title}</h3><p>${desc || content}</p></div>`;
+        });
+        // Vorhandene Karten behalten und neue anhängen
+        wrapped = wrapped + liCards.join('\n');
+        // Originale <ul> entfernen aus wrapped
+        wrapped = wrapped.replace(/<ul[^>]*>[\s\S]*?<\/ul>/gi, '');
+      }
+    }
+
+    if (wrapped.includes('price-card')) {
+      html = html.substring(0, priceHeading.endIdx)
+        + '<div class="price-grid">' + wrapped + '</div>'
+        + html.substring(priceHeading.endIdx + sectionLen);
+    }
+  }
+
+  // === A2: Font Awesome Icons → Emoji ===
+  html = html
+    .replace(/<i\s+class="fas fa-magic"><\/i>/gi, '🪄')
+    .replace(/<i\s+class="far fa-smile"><\/i>/gi, '😊')
+    .replace(/<i\s+class="fas fa-star"><\/i>/gi, '⭐')
+    .replace(/<i\s+class="fas fa-heart"><\/i>/gi, '❤️')
+    .replace(/<i\s+class="fas fa-check"><\/i>/gi, '✅');
+
+  // === A3: FAQ-Karten (Bold-Fragen in Anführungszeichen) ===
+  // Pattern 1: „Frage?" + Antwort im selben <p> (Essen-Style)
+  html = html.replace(
+    /<p([^>]*)><strong>\u201E([^<]*\?)\u201C<\/strong><br\s*\/?>\s*([\s\S]*?)<\/p>/gi,
+    '<div class="faq-card"><p$1><strong>\u201E$2\u201C</strong><br>$3</p></div>'
+  );
+  html = html.replace(
+    /<p([^>]*)><strong>„([^<]*\?)"<\/strong><br\s*\/?>\s*([\s\S]*?)<\/p>/gi,
+    '<div class="faq-card"><p$1><strong>„$2"</strong><br>$3</p></div>'
+  );
+
+  // Pattern 2: ❓ Frage? in eigenem <p> + Antwort in nächstem <p> (Gelsenkirchen-Style)
+  html = html.replace(
+    /<p([^>]*)>❓\s*([^<]*\?)<\/p>\s*<p([^>]*)>([\s\S]*?)<\/p>/gi,
+    '<div class="faq-card"><p$1><strong>„$2"</strong><br>$4</p></div>'
+  );
+
+  // === A4: KONTAKTFORMULAR-Buttons entfernen (WordPress-Überbleibsel) ===
+  html = html.replace(
+    /<div\s+class="wp-block-button[^"]*"[^>]*>\s*<a[^>]*>KONTAKTFORMULAR<\/a>\s*<\/div>/gi,
+    ''
+  );
+
+  // === A4b: "-----" Trenner entfernen (WordPress-Überbleibsel nach KONTAKTFORMULAR) ===
+  html = html.replace(/<p[^>]*>\s*_{3,}\s*<\/p>/gi, '');
+
+  // === A4c: Kaputte Kontakt-Buttons mit Anker-Links entfernen ===
+  html = html.replace(
+    /<div\s+class="wp-block-button[^"]*"[^>]*>\s*<a[^>]*href="#[^"]*"[^>]*>[^<]*(?:Kontakt|kontakt)[^<]*<\/a>\s*<\/div>/gi,
+    ''
+  );
+
+  // === A5: **bold** Markdown-Marker → HTML <strong> konvertieren ===
+  // WordPress-Seiten (Moers, Herne, Marl, Mülheim, Herten, Haltern) haben rohe **text** Marker.
+  html = html.replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+
+  // === A6: <details>/<summary> FAQ schöner stylen ===
+  // Einige Seiten (Haltern, Düsseldorf, Castrop-Rauxel, Moers) nutzen details/summary.
+  // Wir fügen CSS-Klassen hinzu für konsistentes faq-card-ähnliches Styling.
+  html = html.replace(/<details/g, '<details class="city-faq-item"');
+  html = html.replace(/<summary/g, '<summary class="city-faq-summary"');
+
+  // === A7: Inline-Styles auf Bildern entfernen (width:XXXpx constraints) ===
+  // WordPress setzt fixe Inline-Styles die zu kleinen Bildern auf Desktop führen.
+  html = html.replace(/(<img[^>]*?)style="[^"]*width:\s*\d+px[^"]*"/gi, '$1');
+  // Auch figure-Level Inline-Styles mit width
+  html = html.replace(/(<figure[^>]*?)style="[^"]*width:\s*\d+px[^"]*"/gi, '$1');
+
+  // === A8: Dunkle Sektionen abwechselnd Blau/Rot markieren ===
+  // CSS-Sibling-Selektoren funktionieren nicht, da Sektionen nicht immer Geschwister sind.
+  // Deshalb: build-time Klassen hinzufügen (dark-blue / dark-red abwechselnd).
+  let colorIdx = 0;
+  html = html.replace(/class="([^"]*\bhas-dark-bg\b[^"]*)"/gi, (match, classes) => {
+    const colorClass = colorIdx % 2 === 0 ? 'dark-blue' : 'dark-red';
+    colorIdx++;
+    return `class="${classes} ${colorClass}"`;
+  });
+
+  return html;
+}
+
+function stripInlineGradients(html: string): string {
+  // Entferne ALLE inline background-gradients aus dem gescrapten HTML.
+  // WordPress setzt bunte Gradients auf Container, Sections und Spalten,
+  // die zwischen Sektionen durchscheinen und das Design-System brechen.
+  // Der Client-JS fügt gezielt nur die gewünschten Gradients zurück.
+  return html.replace(
+    /(<(?:div|section)[^>]*?)\s*style="([^"]*)"/gi,
+    (match, tag, style) => {
+      if (!style.includes('gradient') && !style.includes('background')) return match;
+      // Entferne background gradient declarations und einfarbige backgrounds
+      const cleaned = style
+        .replace(/background(?:-image)?:\s*linear-gradient\([^)]+\)[^;]*;?/gi, '')
+        .replace(/background(?:-color)?:\s*rgb\([^)]+\)[^;]*;?/gi, '')
+        .replace(/background(?:-color)?:\s*#[0-9a-fA-F]{3,8}[^;]*;?/gi, '')
+        .trim();
+      return cleaned ? `${tag} style="${cleaned}"` : tag;
+    }
+  );
+}
+
+const rawScraped: string | null = scraped[pageSlug]?.scrapedHtml ?? null;
+let _processedScraped: string | null = rawScraped ? fixVideoEmbeds(fixBrokenLinks(fixLazyImages(rawScraped))) : null;
+// Für City-Pages: Alle inline-Gradients entfernen (Client-JS setzt eigene)
+if (_processedScraped && (pageSlug.startsWith('geburtstag-in-') || pageSlug.startsWith('kinderzauberer-in-') || pageSlug.startsWith('clown-in-'))) {
+  _processedScraped = stripInlineGradients(_processedScraped);
+}
+
+// === Gelsenkirchen-spezifisch: Zwei Bilder tauschen ===
+// Bild 1 (Intro "Von Buer bis Horst"): Geburtstag-mit-dem-Clown (Portrait) → soll Zaubershow-Bild werden
+// Bild 2 (Zaubershow-Beschreibung): Clown-Zauberer-mit-Zaubershow (Querformat) → soll Geburtstag-Bild werden
+if (_processedScraped && pageSlug === 'geburtstag-in-gelsenkirchen') {
+  const img1Src = 'https://liar-entertainer.com/wp-content/uploads/2023/08/Geburtstag-mit-dem-Clown-768x1024.jpg';
+  const img2Src = 'https://liar-entertainer.com/wp-content/uploads/2023/08/Clown-Zauberer-mit-Zaubershow.jpg';
+  // Temporärer Platzhalter für den Tausch
+  _processedScraped = _processedScraped
+    .replace(new RegExp(img1Src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), '__TEMP_IMG_SWAP__')
+    .replace(new RegExp(img2Src.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'), 'g'), img1Src)
+    .replace(/__TEMP_IMG_SWAP__/g, img2Src);
+  // Auch Optimole-URL des zweiten Bildes behandeln
+  _processedScraped = _processedScraped
+    .replace(/mlwwlszqtwuz\.i\.optimole\.com\/w:\d+\/h:\d+\/q:mauto\/f:avif\/https:\/\/liar-entertainer\.com\/wp-content\/uploads\/2023\/08\/Clown-Zauberer-mit-Zaubershow/g,
+      'liar-entertainer.com/wp-content/uploads/2023/08/Clown-Zauberer-mit-Zaubershow');
+  // Beide getauschte Bilder mit Klasse für konsistente Höhe markieren
+  _processedScraped = _processedScraped
+    .replace(/(class="wp-image-1077[^"]*")/g, '$1 data-swap="true"')
+    .replace(/(class="wp-image-304[^"]*")/g, '$1 data-swap="true"');
+  // Inline-Styles entfernen (CSS übernimmt via data-swap Attribut)
+  _processedScraped = _processedScraped
+    .replace(/style="object-fit:cover;width:352px;height:492px"/g, '')
+    .replace(/style="object-fit:cover;width:358px;height:269px"/g, '');
+
+  // === Gelsenkirchen: Preis-Sektion komplett ersetzen ===
+  // Die 2-Spalten-WordPress-Struktur macht das Regex-Matching unmöglich.
+  // Deshalb: den gesamten Block zwischen H2 "PREISE" und nächstem </section> durch
+  // handstrukturierte Preis-Karten ersetzen.
+  const priceH2Match = _processedScraped.match(/<h2[^>]*>[^<]*PREISE F(?:Ü|U)R GELSENKIRCHEN[^<]*<\/h2>/i);
+  if (priceH2Match) {
+    const priceH2Idx = priceH2Match.index!;
+    // Finde das Ende der Section (nächstes </section> nach dem H2)
+    const afterH2 = _processedScraped.substring(priceH2Idx);
+    const sectionEndMatch = afterH2.match(/<\/section>/i);
+    const sectionEndIdx = sectionEndMatch ? priceH2Idx + sectionEndMatch.index! : priceH2Idx + 5000;
+
+    const newPriceSection = `
+      <h2 class="wp-block-heading has-text-align-center" style="color:#fff">PREISE FÜR GELSENKIRCHEN</h2>
+      <div class="price-grid">
+        <div class="price-card">
+          <h3>🎭 Zaubershow: 150 €</h3>
+          <p>40 Minuten voller Zauber, Lachen und Staunen</p>
+          <p>✓ Komplette interaktive Zaubershow<br>
+          ✓ Bis zu 12 Kinder (mehr nach Absprache)<br>
+          ✓ Geburtstagskind steht im Mittelpunkt<br>
+          ✓ Gesamtes Material & Equipment<br>
+          ✓ Flexibel: drinnen oder draußen<br>
+          ✓ Festpreis – Samstag wie Mittwoch!</p>
+        </div>
+        <div class="price-card">
+          <h3>🚗 Fahrtkosten: nur 10–20 €</h3>
+          <p>Kurze Anfahrt aus dem benachbarten Gladbeck (0,40 €/km):</p>
+          <p>• Buer: ca. 10 € • Horst: ca. 10 €<br>
+          • Erle: ca. 10 € • Schalke: ca. 10 €<br>
+          • Ückendorf: ca. 12 € • Bismarck: ca. 10 €</p>
+          <p><em>Ihr Vorteil: Durch die Nähe zu Gladbeck zahlen Sie deutlich weniger als Familien in weiter entfernten Städten!</em></p>
+        </div>
+        <div class="price-card">
+          <h3>✨ Optionale Extras</h3>
+          <p>🎈 <strong>Ballonmodellage:</strong> +20 €<br>
+          ca. 15 Minuten, 1 Ballon pro Kind</p>
+          <p>💎 <strong>Glitzer-Tattoos:</strong> +40 €<br>
+          ca. 30 Minuten, 1 Tattoo pro Kind</p>
+        </div>
+      </div>`;
+
+    _processedScraped = _processedScraped.substring(0, priceH2Idx)
+      + newPriceSection
+      + _processedScraped.substring(sectionEndIdx);
+  }
+}
+
+// === Waltrop: Pre-Processing — Layout-Verbesserungen ===
+if (_processedScraped && pageSlug === 'geburtstag-in-waltrop') {
+  // W1: Intro-Paragraph aus der twoOne-Sektion extrahieren → volle Breite
+  // Der erste <p> vor der H2 "Professionelle Kinderunterhaltung" soll vor die 2-Spalten-Sektion
+  const introMatch = _processedScraped.match(/<p>(Ein <a href="\/kindergeburtstag\/">Kindergeburtstag<\/a> in Waltrop[\s\S]*?)<\/p>/i);
+  const twoOneMatch = _processedScraped.match(/<section[^>]*has-2-columns\s+has-desktop-twoOne-layout[^>]*>/i);
+  if (introMatch && twoOneMatch) {
+    // Entferne den Intro-Paragraph aus seinem aktuellen Platz
+    _processedScraped = _processedScraped.replace(introMatch[0], '');
+    // Finde die twoOne-Section erneut (Position hat sich verschoben)
+    const twoOneMatch2 = _processedScraped.match(/<section[^>]*has-2-columns\s+has-desktop-twoOne-layout[^>]*>/i);
+    if (twoOneMatch2) {
+      const insertIdx = _processedScraped.indexOf(twoOneMatch2[0]);
+      _processedScraped = _processedScraped.substring(0, insertIdx)
+        + `<div class="waltrop-intro-fullwidth"><p>${introMatch[1]}</p></div>`
+        + _processedScraped.substring(insertIdx);
+    }
+  }
+
+  // W2: Pricing bleibt in der dark-bg Section, wird aber als weiße Karte dargestellt
+  // (CSS via .waltrop-pricing-section: white background, rounded corners)
+}
+
+// === Haltern am See: Preis-Sektion + 3 Bilder komplett entfernen ===
+if (_processedScraped && pageSlug === 'geburtstag-in-haltern-am-see') {
+  // Die gesamte <section> mit "Preise für den Geburtstag in Haltern am See" entfernen.
+  // Sie ist eine .has-dark-bg Section mit H2, Preis-Karten und 3 Bildern.
+  _processedScraped = _processedScraped.replace(
+    /<section[^>]*class="[^"]*has-dark-bg[^"]*"[^>]*>[\s\S]*?Preise f(?:ü|u)r den Geburtstag in Haltern[\s\S]*?<\/section>/i,
+    ''
+  );
+}
+
+const _isCitySlug = pageSlug.startsWith('geburtstag-in-') || pageSlug.startsWith('kinderzauberer-in-') || pageSlug.startsWith('clown-in-');
+
+// === Legacy-H1 entfernen (SEO-Audit 06.08.2026, Massnahme H5) ===
+// Das importierte WordPress-Markup bringt eine eigene <h1 class="title entry-title">
+// mit. Das Template rendert den Titel bereits daruber -> zwei H1 pro Blogpost.
+// Betroffen waren 30 Seiten. Auch der Legacy-Breadcrumb daneben ist doppelt.
+// Jede <h1> aus importiertem WordPress-Markup auf <h2> herabstufen: Das Template
+// rendert die Seiten-H1 bereits selbst, jede weitere ist ein Duplikat (Massnahme H5).
+function demoteLegacyH1(html: string, templateRendersH1: boolean): string {
+  let seen = 0;
+  // Ganze h1-Elemente als Paar ersetzen - getrennte Ersetzung von oeffnendem und
+  // schliessendem Tag erzeugt sonst unbalanciertes Markup.
+  return html.replace(/<h1(\s[^>]*)?>([\s\S]*?)<\/h1>/gi, (_m, attrs, inner) => {
+    seen++;
+    // Rendert das Template selbst eine H1 (Blogpost, Stadtseite), ist JEDE
+    // Legacy-H1 ein Duplikat. Sonst bleibt die erste als Seiten-H1 bestehen.
+    const keepAsH1 = !templateRendersH1 && seen === 1;
+    const tag = keepAsH1 ? 'h1' : 'h2';
+    return `<${tag}${attrs || ''}>${inner}</${tag}>`;
+  });
+}
+
+// Textkorrekturen im importierten Legacy-Markup (SEO-Audit 06.08.2026).
+// Bewusst hier statt in src/data/*.json: die beiden Datendateien sind zusammen
+// ~9,5 MB reiner WordPress-Export und bleiben unveraendert; alle Transformationen
+// leben an einer Stelle in der Render-Pipeline.
+function fixLegacyCopy(html: string): string {
+  return html
+    // H7: Grammatikfehler, erscheint im FAQ-Schema und damit potenziell im SERP
+    .replace(/Was kostet einen Auftritt/g, 'Was kostet ein Auftritt')
+    // K2: verbindliche Bewertungszahl ist 370+ (Vorgabe Michael 06.08.2026)
+    .replace(/400\+\s*(Top-)?Bewertungen/g, (_m, top) => `370+ ${top || ''}Bewertungen`)
+    .replace(/über 400\s*(Google-)?(Top-)?Bewertungen/g, (_m, g, top) => `370+ ${g || ''}${top || ''}Bewertungen`)
+    // M3: nichtssagende Ueberschrift durch eine Frage ersetzen
+    .replace(/Schnelle Eindrücke/gi, 'Wie sieht eine Show von Clown Zauberer LIAR aus?');
+}
+
+function stripLegacyPostHeader(html: string): string {
+  return html
+    .replace(/<small[^>]*class="[^"]*breadcrumbs?[^"]*"[^>]*>[\s\S]*?<\/small>/gi, '')
+    .replace(/<h1[^>]*class="[^"]*entry-title[^"]*"[^>]*>[\s\S]*?<\/h1>/gi, '');
+}
+
+// === Legacy-Blog-Posts: kaputte wp-content-Bilder komplett entfernen ===
+// Die wp-content/uploads-URLs liefern 410 Gone (.htaccess) → Bilder samt
+// <figure>-Wrapper/Captions und Bild-Links aus dem HTML strippen.
+function stripWpImages(html: string): string {
+  let out = html
+    // 1. Bild-Links auf wp-content (Lightbox o.ä.): <a href="...wp-content..."><img ...></a>
+    .replace(/<a[^>]*href="[^"]*wp-content\/uploads[^"]*"[^>]*>\s*(?:<img[^>]*>\s*)+<\/a>/gi, '')
+    // 2. Alle <img>-Tags, die wp-content/uploads referenzieren (src/srcset/data-*, auch Optimole-CDN)
+    .replace(/<img[^>]*wp-content\/uploads[^>]*>/gi, '')
+    // 2b. K1 (11.08.2026): auch wp-content/plugins - die WPForms-Lade-Spinner
+    //     (submit-spin.svg) blieben sonst als tote Requests auf zwei Seiten stehen.
+    .replace(/<img[^>]*wp-content\/plugins[^>]*>/gi, '')
+    // 3. Übrig gebliebene leere Links
+    .replace(/<a[^>]*>(?:\s|&nbsp;)*<\/a>/gi, '');
+  // 4. <figure> ohne verbliebenes Medium (kein img/iframe/video mehr) → samt <figcaption>
+  //    entfernen. Loop für verschachtelte Galerie-Figures.
+  const emptyFigure = /<figure[^>]*>(?:(?!<img|<iframe|<video|<\/figure>)[\s\S])*<\/figure>/gi;
+  let prev: string;
+  do {
+    prev = out;
+    out = out.replace(emptyFigure, '');
+  } while (out !== prev);
+  // 4b. Verwaiste </figure>-Schließtags (äußere Galerie-Figure), wenn keine <figure> mehr offen ist
+  if (!/<figure[\s>]/i.test(out)) out = out.replace(/<\/figure>/gi, '');
+  return out
+    // 5. Leere wp-block-image-Container
+    .replace(/<div[^>]*class="[^"]*wp-block-image[^"]*"[^>]*>(?:\s|&nbsp;)*<\/div>/gi, '')
+    // 6. Leere Absätze, die durch das Strippen entstanden sind
+    .replace(/<p[^>]*>(?:\s|&nbsp;|<br\s*\/?>)*<\/p>/gi, '');
+}
+
+let scrapedContent: string | null = _processedScraped && _isCitySlug
+  ? stylizeCityContent(_processedScraped)
+  : _processedScraped;
+
+// SEO-Audit 11.08.2026, Massnahme K1: stripWpImages lief bisher nur fuer
+// page.type === 'post'. /clown/clown-zauberer/ und /zauberer/zaubershow/karneval/
+// sind aber type 'page' und lieferten dadurch 16 wp-content-Bilder aus, die per
+// .htaccess bewusst 410 Gone zurueckgeben - also 16 kaputte Bilder auf zwei Seiten.
+// stripLegacyPostHeader bleibt bewusst auf 'post' beschraenkt (Blog-spezifisch).
+if (scrapedContent) {
+  scrapedContent = stripWpImages(scrapedContent);
+  if (page.type === 'post') {
+    scrapedContent = stripLegacyPostHeader(scrapedContent);
+  }
+}
+if (scrapedContent) {
+  scrapedContent = fixLegacyCopy(scrapedContent);
+  // isBlogPost/isCityPage sind hier noch nicht initialisiert (Temporal Dead Zone) -
+  // deshalb die bereits verfuegbaren Aequivalente verwenden.
+  scrapedContent = demoteLegacyH1(scrapedContent, page.type === 'post' || _isCitySlug);
+}
+
+// === Post-stylize: Doppelte Preissektionen entfernen ===
+// Wenn price-grid existiert UND es noch einen ungestylten "Die Preise"/"ZAUBERSHOW"/"40 Minuten" Block gibt,
+// entferne die gesamte Section die den ungestylten Block enthält
+if (scrapedContent && scrapedContent.includes('price-grid') && scrapedContent.includes('price-card')) {
+  // Pattern: Section mit "Die Preise" + "ZAUBERSHOW" + "40 Minuten" als Text (NICHT in price-card)
+  // Entferne die section, die "Die Preise" als Überschrift enthält und KEINE price-card hat
+  // Typisch: <section ...has-1-columns...>...<strong>Was kostet ein Zauberer für den Kindergeburtstag?</strong>...<h3>ZAUBERSHOW</h3>...40 Minuten...</section>
+  scrapedContent = scrapedContent.replace(
+    /<section[^>]*class="[^"]*has-1-columns[^"]*"[^>]*>(?:(?!<\/section>)[\s\S])*?(?:Die Preise|ZAUBERSHOW)(?:(?!<\/section>)[\s\S])*?(?:40 Minuten|Festpreis)(?:(?!<\/section>)[\s\S])*?<\/section>/gi,
+    (match) => {
+      // Nur entfernen wenn KEIN price-card drin ist
+      if (match.includes('price-card')) return match;
+      return '';
+    }
+  );
+  // Pattern B: wp-block-group mit "Die Preise" + "ZAUBERSHOW" (einige Seiten nutzen div statt section)
+  scrapedContent = scrapedContent.replace(
+    /<div[^>]*class="[^"]*wp-block-group[^"]*"[^>]*>(?:(?!<\/section>|<section)[\s\S])*?(?:Die Preise|ZAUBERSHOW)(?:(?!<\/section>|<section)[\s\S])*?(?:40 Minuten|Festpreis)[\s\S]*?(?:<\/div>\s*){2,5}/gi,
+    (match) => {
+      if (match.includes('price-card')) return match;
+      // Nur kurze Matches (< 3000 chars) entfernen um nicht zu viel Content zu löschen
+      if (match.length > 3000) return match;
+      return '';
+    }
+  );
+  // Pattern C: Für Seiten wie Wesel/Xanten mit "Im Festpreis enthalten/inbegriffen" als zweite Preis-H2
+  scrapedContent = scrapedContent.replace(
+    /<section[^>]*class="[^"]*has-1-columns[^"]*"[^>]*>(?:(?!<\/section>)[\s\S])*?Im Festpreis (?:enthalten|inbegriffen)(?:(?!<\/section>)[\s\S])*?<\/section>/gi,
+    (match) => {
+      if (match.includes('price-card')) return match;
+      return '';
+    }
+  );
+}
+
+// === Post-stylize: Einheitliche 3-Spalten Preiskarten auf ALLEN Seiten ===
+// Ersetze den Inhalt jedes price-grid durch die 3 Standard-Karten (Zaubershow, Ballonmodellage, Glitzer-Tattoos)
+if (scrapedContent && scrapedContent.includes('price-grid') && pageSlug.startsWith('geburtstag-in-')) {
+  const standardPriceCards = `
+    <div class="price-card"><h3>🎩 Zaubershow</h3>
+      <p class="price-amount">150 €</p>
+      <p>✓ 40 Minuten voller Zauber, Lachen und Staunen</p>
+      <p>✓ Bis ca. 12 Kinder – Mindestalter: 4 Jahre</p>
+      <p>✓ Inkl. Material</p>
+      <p>✓ Das Geburtstagskind steht immer im Mittelpunkt</p>
+      <p>✓ zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</p>
+      <p><em>Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</em></p>
+    </div>
+    <div class="price-card"><h3>🎈 Luftballonmodellage</h3>
+      <p class="price-amount">+ 20 €</p>
+      <p>✓ Für jedes Kind 1 Ballon</p>
+      <p>✓ Ca. 15 Minuten</p>
+      <p>✓ Tolle Erinnerung zum Mitnehmen</p>
+      <p>✓ Große Auswahl an Figuren: Hund, Schwert, Blume u.v.m.</p>
+      <p>✓ Perfekte Ergänzung zur Zaubershow</p>
+      <p><em>Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</em></p>
+    </div>
+    <div class="price-card"><h3>✨ Glitzer-Tattoos</h3>
+      <p class="price-amount">+ 40 €</p>
+      <p>✓ Für jedes Kind 1 Tattoo</p>
+      <p>✓ Ca. 30 Minuten</p>
+      <p>✓ Hautverträglich & langanhaltend</p>
+      <p>✓ Viele Motive: Einhörner, Schmetterlinge, Sterne u.v.m.</p>
+      <p>✓ Hält mehrere Tage auf der Haut</p>
+      <p><em>Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</em></p>
+    </div>`;
+
+  // Ersetze den gesamten price-grid Block durch die Standard-Karten
+  // Finde den price-grid Div und sein korrektes schließendes </div> (mit div-Tiefe)
+  const pgIdx = scrapedContent.indexOf('class="price-grid');
+  if (pgIdx >= 0) {
+    // Finde den Anfang des <div
+    const divStart = scrapedContent.lastIndexOf('<div', pgIdx);
+    // Finde das korrekte schließende </div> mit Tiefenzählung
+    let depth = 0;
+    let i = divStart;
+    let found = false;
+    while (i < scrapedContent.length) {
+      const nextOpen = scrapedContent.indexOf('<div', i + 1);
+      const nextClose = scrapedContent.indexOf('</div>', i + 1);
+      if (nextClose < 0) break;
+      if (i === divStart) { depth = 1; i = divStart + 4; continue; }
+      if (nextOpen >= 0 && nextOpen < nextClose) {
+        depth++;
+        i = nextOpen + 4;
+      } else {
+        depth--;
+        if (depth === 0) {
+          const endIdx = nextClose + 6; // '</div>'.length
+          // Ersetze den gesamten price-grid Block
+          const openTag = '<div class="price-grid">';
+          scrapedContent = scrapedContent.substring(0, divStart)
+            + openTag + standardPriceCards + '</div>'
+            + scrapedContent.substring(endIdx);
+          found = true;
+          break;
+        }
+        i = nextClose + 6;
+      }
+    }
+  }
+}
+
+// === Post-stylize: 2-Spalten Layout-Fixes ===
+// CSS-basierter Ansatz: Bild-Spalte sticky machen, damit der Weißraum minimiert wird
+
+// === Post-stylize: Bochum – erste Einsatzgebiet-Sektion entfernen ===
+if (scrapedContent && pageSlug === 'geburtstag-in-bochum') {
+  // Entferne die ERSTE Einsatzgebiet-Sektion (es gibt zwei, die zweite am Ende bleibt)
+  const einsatzMatch = scrapedContent.match(/<section[^>]*>[\s\S]*?Einsatzgebiet[\s\S]*?<\/section>/i);
+  if (einsatzMatch) {
+    scrapedContent = scrapedContent.replace(einsatzMatch[0], '');
+  }
+}
+
+// === Post-stylize: Bottrop – Einsatzgebiet-Sektion + Stats-Banner entfernen ===
+if (scrapedContent && pageSlug === 'geburtstag-in-bottrop') {
+  // Entferne die fehlerhaft dargestellte Einsatzgebiet-Sektion
+  scrapedContent = scrapedContent.replace(
+    /<section[^>]*>[\s\S]*?Einsatzgebiet[\s\S]*?<\/section>/i,
+    ''
+  );
+  // Entferne den originalen Stats-Banner (dark-red has-3-columns) aus dem HTML
+  // Er wird per Client-JS als neuer, sauberer Banner wieder eingefügt
+  scrapedContent = scrapedContent.replace(
+    /<div[^>]*class="[^"]*dark-red[^"]*"[^>]*>[\s\S]*?<\/div>(?=\s*<section|\s*<h[23]|\s*<div[^>]*class="[^"]*alignfull)/i,
+    ''
+  );
+}
+
+// === Post-stylize: Datteln – Einsatzgebiet-Sektion entfernen ===
+if (scrapedContent && pageSlug === 'geburtstag-in-datteln') {
+  // Entferne die fehlerhafte Einsatzgebiet-Sektion vor "Ausgezeichnet"
+  scrapedContent = scrapedContent.replace(
+    /<section[^>]*>[\s\S]*?Einsatzgebiet[\s\S]*?<\/section>/i,
+    ''
+  );
+}
+
+// === Post-stylize: Bottrop-spezifische Anpassungen ===
+// Bottrop wird komplett per Client-JS gefixt (siehe Script-Block unten)
+
+// === Post-stylize: Castrop-Rauxel-spezifische Anpassungen ===
+if (scrapedContent && pageSlug === 'geburtstag-in-castrop-rauxel') {
+  // CR2: Abstände nach "Sie sind gestresst" reduzieren
+  scrapedContent = scrapedContent.replace(
+    /(<\/p>\s*)((?:<br\s*\/?>|\s|&nbsp;)*?)(\s*<figure)/gi,
+    '$1$3'
+  );
+}
+
+// === Post-stylize: Oberhausen-spezifische Anpassungen ===
+if (scrapedContent && pageSlug === 'geburtstag-in-oberhausen') {
+  // O2: Preis-Grid auf 2 Spalten (statt 4)
+  scrapedContent = scrapedContent.replace(
+    /class="price-grid"/g,
+    'class="price-grid price-grid-2col"'
+  );
+
+  // O3: "Perfekt zugeschnitten" blaue Sektion: aus dem price-grid herausnehmen
+  // und als eigenständige volle-Breite-Sektion mit 2 Feature-Karten nebeneinander darstellen.
+  // Die Section steckt im WordPress-Content verschachtelt und wird per Client-JS repositioniert.
+  // Hier markieren wir sie nur mit einer speziellen Klasse.
+  scrapedContent = scrapedContent.replace(
+    /(<section[^>]*class="[^"]*)(alignfull[^"]*has-1-columns[^"]*"[^>]*>[\s\S]*?Perfekt zugeschnitten)/i,
+    '$1perfekt-section $2'
+  );
+}
+
+// === Post-stylize: Castrop-Rauxel-spezifische Anpassungen ===
+if (scrapedContent && pageSlug === 'geburtstag-in-castrop-rauxel') {
+  // CR1: "So läuft meine Show" zentrieren (egal ob h2, h3, strong)
+  scrapedContent = scrapedContent.replace(
+    /(<(?:h2|h3|strong)[^>]*>)([\s\S]*?So läuft meine Show[\s\S]*?)(<\/(?:h2|h3|strong)>)/i,
+    (match, open, content, close) => {
+      if (!open.includes('text-align')) {
+        return open.replace('>', ' style="text-align:center;display:block;">') + content + close;
+      }
+      return match;
+    }
+  );
+
+  // CR2: Abstände zwischen Text und Bildern reduzieren (leere Absätze und <br> entfernen)
+  scrapedContent = scrapedContent.replace(/<p>\s*(&nbsp;|\s)*<\/p>/gi, '');
+  scrapedContent = scrapedContent.replace(/(<\/p>)\s*(<br\s*\/?>)+\s*(<figure|<div class="wp-block-image)/gi, '$1$3');
+}
+
+// === Post-stylize: Waltrop-spezifische Anpassungen ===
+if (scrapedContent && pageSlug === 'geburtstag-in-waltrop') {
+  // W5: "Im Festpreis enthalten" Inhalt in die erste Preis-Karte integrieren
+  const festpreisMatch = scrapedContent.match(/<div class="price-card">\s*<h3>[^<]*Im Festpreis enthalten[^<]*<\/h3>([\s\S]*?)<\/div>/i);
+  if (festpreisMatch) {
+    const festpreisContent = festpreisMatch[1];
+    scrapedContent = scrapedContent.replace(festpreisMatch[0], '');
+    const firstCardEnd = scrapedContent.match(/<div class="price-card">[\s\S]*?<\/div>/i);
+    if (firstCardEnd) {
+      const insertIdx = scrapedContent.indexOf(firstCardEnd[0]) + firstCardEnd[0].length - 6;
+      scrapedContent = scrapedContent.substring(0, insertIdx)
+        + `<hr style="border:none;border-top:1px solid #eee;margin:0.75rem 0"><p style="font-weight:600;color:#3b55d5;margin-bottom:0.25rem">Im Festpreis enthalten:</p>${festpreisContent}`
+        + scrapedContent.substring(insertIdx);
+    }
+  }
+
+  // W6: Pricing-Bereich visuell aufwerten (jetzt auf hellem Hintergrund)
+  // Finde den exakten H2 der "Ehrliche Preise" enthält (indexOf statt [\s\S]*? Regex)
+  const ehrlicheIdx = scrapedContent.indexOf('Ehrliche Preise');
+  if (ehrlicheIdx > -1) {
+    const h2Start = scrapedContent.lastIndexOf('<h2', ehrlicheIdx);
+    const h2End = scrapedContent.indexOf('</h2>', ehrlicheIdx);
+    if (h2Start > -1 && h2End > -1) {
+      const preisH2 = scrapedContent.substring(h2Start, h2End + 5);
+      const preisIdx = h2Start;
+      const afterPreisH2 = scrapedContent.substring(preisIdx);
+      const priceGridPos = afterPreisH2.indexOf('class="price-grid"');
+      if (priceGridPos > -1) {
+        // Finde das schließende </div> des price-grid (zähle open/close div Tags)
+        const gridDivStart = afterPreisH2.lastIndexOf('<div', priceGridPos);
+        let depth = 0;
+        let gridEndIdx = -1;
+        const searchStr = afterPreisH2.substring(gridDivStart);
+        const divRegex = /<\/?div[^>]*>/gi;
+        let dm;
+        while ((dm = divRegex.exec(searchStr)) !== null) {
+          if (dm[0].startsWith('</')) depth--;
+          else depth++;
+          if (depth === 0) {
+            gridEndIdx = gridDivStart + dm.index + dm[0].length;
+            break;
+          }
+        }
+        if (gridEndIdx > -1) {
+          const pricingBlock = afterPreisH2.substring(0, gridEndIdx);
+          scrapedContent = scrapedContent.substring(0, preisIdx)
+            + `<div class="waltrop-pricing-section">${pricingBlock}</div>`
+            + scrapedContent.substring(preisIdx + gridEndIdx);
+        }
+      }
+    }
+  }
+
+  // W7: CTA-Bereich "unvergesslich machen" — H3 → H2 Upgrade
+  scrapedContent = scrapedContent.replace(
+    /<h3([^>]*)>([\s\S]*?Kindergeburtstag in Waltrop unvergesslich[\s\S]*?)<\/h3>/i,
+    '<h2$1>$2</h2>'
+  );
+}
+
+// === HTML-Tag-Balancierung: Offene <div>-Tags schließen ===
+// Gescraptes WP-HTML hat oft ungeschlossene <div>-Tags, die dazu führen,
+// dass nachfolgende Astro-Sektionen (GoogleReviews, CTA, Kontakt-Footer)
+// vom Browser als Kinder des nicht geschlossenen Divs interpretiert werden.
+if (scrapedContent) {
+  const openDivs = (scrapedContent.match(/<div[\s>]/gi) || []).length;
+  const closeDivs = (scrapedContent.match(/<\/div>/gi) || []).length;
+  const unclosed = openDivs - closeDivs;
+  if (unclosed > 0) {
+    scrapedContent += '</div>'.repeat(unclosed);
+  }
+}
+
+const _fixedRaw: string | null = page.content ? fixVideoEmbeds(fixBrokenLinks(page.content)) : null;
+const fixedPageContent: string | null =
+  // K1 (11.08.2026): gilt fuer 'post' UND 'page' - siehe Kommentar oben.
+  _fixedRaw ? stripWpImages(_fixedRaw) : _fixedRaw;
+
+// === Title-Normalisierung (SEO-Audit 06.08.2026, Massnahme M6) ===
+// Legacy-Titles aus WordPress: Emojis (werden von Google aus dem SERP entfernt und
+// kosten nur Zeichen), zu lange Titles (>62 Zeichen werden abgeschnitten) und zu
+// kurze Titles (verschenkte Keyword-Flaeche).
+const TITLE_OVERRIDES: Record<string, string> = {
+  'clown-zauberer': 'Clown Zauberer NRW – Zaubershow mit Lachgarantie',
+  'karneval': 'Karneval Zauberer NRW – jecke Zaubershow für die Session',
+  'fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events': 'Sommerfest im Kindergarten: Ideen für tolle Feste',
+  'warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist': 'Clown Zauberer für die Karnevalfeier – warum er passt',
+  'tierparkfest-recklinghausen': 'Tierparkfest Recklinghausen: Zaubershow & Familienfest',
+  'magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie': 'Zaubershow in Prerow – Familienfest an der Ostsee',
+  '100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie': '100 Jahre Reitverein Gelsenkirchen – Fest mit Clown',
+  'warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist': 'Clown Zauberer für die Karnevalfeier – warum er passt',
+  'kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen': 'Kinderfest Resse-Markt: Clown-Zaubershow Gelsenkirchen',
+  'magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt': 'Weihnachtsmarkt Hagen: Clown Zauberer LIAR live',
+  'ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck': 'Kinderkarneval Gladbeck: Wittringer Ritter & Zauberer',
+  'fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events': 'Sommerfest im Kindergarten: Ideen für tolle Feste',
+  'zaubershow-in-duisburg-midsommarfest': 'Zaubershow Duisburg: IKEA Midsommar mit Clown LIAR',
+  'ikea-duisburg-midsommar-mit-clown-zauberer': 'IKEA Duisburg Midsommar: Zaubershow mit Lachgarantie',
+  'was-ist-ein-clown': 'Was ist ein Clown? Geschichte, Typen & Bedeutung',
+  'kidzival-2024': 'KIDZIVAL 2024 – Clown Zauberer LIAR beim Kinderfest',
+  'zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight': 'Zaubershow im Kindergarten: so wird sie zum Highlight',
+  '10-tipps-fuer-den-perfekten-kindergeburtstag': '10 Tipps für den perfekten Kindergeburtstag',
+  '5-gruende-warum-zauberei-zum-karneval-gehoert': '5 Gründe, warum Zauberei zum Karneval gehört',
+  'impressum': 'Impressum – Clown Zauberer LIAR aus Gladbeck',
+  'agbs': 'AGB – Clown Zauberer LIAR | Buchungsbedingungen',
+  'datenschutzerklaerung-2': 'Datenschutzerklärung – Clown Zauberer LIAR',
+};
+const EMOJI_RE = /[\u{1F300}-\u{1FAFF}\u{2600}-\u{27BF}\u{FE0F}\u{2B00}-\u{2BFF}]/gu;
+function normalizeTitle(slug: string, title: string): string {
+  // Legacy-Slugs aus WordPress enthalten teils prozent-kodierte Emojis
+  // (z.B. "%f0%9f%8c%b8-fruehlings-und-..."). Fuer den Abgleich normalisieren.
+  const cleanSlug = slug.replace(/%[0-9a-f]{2}/gi, '').replace(/-{2,}/g, '-').replace(/^-|-$/g, '');
+  const override = TITLE_OVERRIDES[slug] ?? TITLE_OVERRIDES[cleanSlug];
+  if (override) return override;
+  return title.replace(EMOJI_RE, '').replace(/\s{2,}/g, ' ').replace(/\s+([?!:.])/g, '$1').trim();
+}
+
+const seoTitle = normalizeTitle(pageSlug, fixLegacyCopy(resolveTitle(page.meta.rank_math_title, page.title)));
+const rawDesc = (
+  (page.meta?.rank_math_description || '').trim() ||
+  ((page.excerpt || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()) ||
+  ((page.content || '').replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim())
+).substring(0, 160)
+  .replace(/DER französischer/g, 'DER französische')
+  .replace(/der französischer/g, 'der französische')
+  .replace(/der niveauvoller/g, 'der niveauvolle');
+const heroImg =
+  SVC[pageSlug] ??
+  getFirstImg(page.content) ??
+  (page.type === 'post' ? postCategoryImg(page.categories) : null) ??
+  '/images/fallback/clown-zauberer.jpg';
+// === Canonical-Overrides (SEO-Audit 11.08.2026, Massnahme M4) ===
+// /zauberer/zaubershow/karneval/ (Legacy-WP) und /clown/karneval/ behandeln dasselbe
+// Thema mit derselben Suchintention: gleiche H1 "Karneval", gleicher Einstieg
+// ("Karneval Zauberer in NRW – Jecke Zaubershow fuer die fuenfte Jahreszeit"),
+// 17 von 42 langen Saetzen wortgleich. Statt die schwaechere Dublette intern zu
+// verlinken und damit zu staerken, zeigt sie per Canonical auf die gepflegte
+// Seite /clown/karneval/ (eigene .astro, Answer-Absatz, im Assertion-Set H6).
+const CANONICAL_OVERRIDES: Record<string, string> = {
+  'zauberer/zaubershow/karneval': 'https://liar-entertainer.com/clown/karneval/',
+};
+const canonicalUrl = CANONICAL_OVERRIDES[slug.replace(/^\/|\/$/g, '')]
+  ?? `https://liar-entertainer.com/${slug}/`;
+
+const isCityPage = pageSlug.startsWith('kinderzauberer-in-') || pageSlug.startsWith('geburtstag-in-') || pageSlug.startsWith('clown-in-');
+const cityName = isCityPage ? pageSlug.replace(/^(kinderzauberer-in-|geburtstag-in-|clown-in-)/, '').split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join(' ') : null;
+const isBlogPost = page.type === 'post';
+const isGeburtstagsSeite = pageSlug.startsWith('geburtstag-in-');
+
+// --- Keywords generieren ---
+const focusKeyword = page.meta?.rank_math_focus_keyword || '';
+// Umlaut-Mapping für Stadtnamen aus Slugs
+const umlautMap: Record<string, string> = {
+  'Duesseldorf': 'Düsseldorf', 'Muelheim': 'Mülheim',
+  'Haltern Am See': 'Haltern am See', 'Castrop Rauxel': 'Castrop-Rauxel',
+};
+const displayCity = cityName ? (umlautMap[cityName] || cityName) : null;
+
+// --- Hero-Inhalte pro Kategorie ---
+// Original-H1-Titel von der Live-Seite liar-entertainer.com
+const originalH1: Record<string, string> = {
+  // Kindergeburtstag
+  'geburtstag-in-essen': 'Geburtstag in Essen: Echter Pott-Zauber für Ihre Feier',
+  'geburtstag-in-dortmund': 'Geburtstag in Dortmund: Der Guide für Eltern in der Großstadt',
+  'geburtstag-in-oberhausen': 'Geburtstag in Oberhausen feiern – Clown Zauberer LIAR macht\'s unvergesslich!',
+  'geburtstag-in-bottrop': 'Geburtstag in Bottrop feiern – Clown Zauberer für magische Momente',
+  'geburtstag-in-gelsenkirchen': 'Geburtstag in Gelsenkirchen',
+  'geburtstag-in-duisburg': 'Geburtstag in Duisburg',
+  'geburtstag-in-bochum': 'Geburtstag in Bochum – Clown & Zauberer für unvergessliche Momente',
+  'geburtstag-in-castrop-rauxel': 'Kindergeburtstag in Castrop-Rauxel – Witzig & Magisch!',
+  'geburtstag-in-moers': 'Geburtstag in Moers',
+  'geburtstag-in-wesel': 'Geburtstag in Wesel',
+  'geburtstag-in-xanten': 'Geburtstag in Xanten',
+  'geburtstag-in-waltrop': 'Geburtstag in Waltrop',
+  'geburtstag-in-datteln': 'Geburtstag in Datteln',
+  'geburtstag-in-haltern-am-see': 'Geburtstag in Haltern am See',
+  'geburtstag-in-herne': 'Geburtstag in Herne',
+  'geburtstag-in-herten': 'Geburtstag in Herten',
+  'geburtstag-in-marl': 'Geburtstag in Marl',
+  'geburtstag-in-gladbeck': 'Geburtstag in Gladbeck',
+  'geburtstag-in-duesseldorf': 'Geburtstag in Düsseldorf',
+  'geburtstag-in-recklinghausen': 'Geburtstag in Recklinghausen',
+  'geburtstag-in-dinslaken': 'Geburtstag in Dinslaken',
+  'geburtstag-in-dorsten': 'Geburtstag in Dorsten',
+  'geburtstag-in-muelheim': 'Geburtstag in Mülheim',
+  // Kinderzauberer
+  'kinderzauberer-in-essen': 'Kinderzauberer in Essen buchen 🎩 – Fantastische Momente für Ihre Kleinen',
+  'kinderzauberer-in-dortmund': 'Kinderzauberer in Dortmund – Magische Shows für Ihr Event',
+  'kinderzauberer-in-duisburg': 'Kinderzauberer in Duisburg buchen – Die lustigste Show in NRW',
+  'kinderzauberer-in-gelsenkirchen': 'Kinderzauberer in Gelsenkirchen buchen | Beste Bewertungen',
+  'kinderzauberer-in-bochum': 'Kinderzauberer in Bochum – Zaubershow für Kindergeburtstag & Events',
+  'kinderzauberer-in-oberhausen': 'Kinderzauberer in Oberhausen',
+  'kinderzauberer-in-bottrop': 'Kinderzauberer in Bottrop buchen – Zaubershow für Kindergeburtstag & Events',
+  'kinderzauberer-in-herne': 'Kinderzauberer in Herne buchen – Unvergessliche Zaubershow für Ihr Event',
+  'kinderzauberer-in-haltern': 'Buchen Sie DEN Kinderzauberer in Haltern am See',
+  'kinderzauberer-in-marl': 'Kinderzauberer in Marl – TOP Zaubershow',
+  'kinderzauberer-in-recklinghausen': 'Kinderzauberer in Recklinghausen',
+  'kinderzauberer-in-moers': 'Kinderzauberer in Moers',
+  'kinderzauberer-in-duesseldorf': 'TOP Show mit Kinderzauberer in Düsseldorf buchen',
+  'kinderzauberer-in-dinslaken': 'Kinderzauberer in Dinslaken gesucht? TOP Zaubershow',
+  'kinderzauberer-in-dorsten': 'Kinderzauberer in Dorsten buchen – Zaubershow, Ballonmodellage & mehr',
+  'kinderzauberer-in-muelheim': 'Kinderzauberer in Mülheim mit TOP Bewertungen',
+  'kinderzauberer-in-herten': 'Kinderzauberer in Herten buchen | Erlebnis-Show für Kinder',
+  'kinderzauberer-in-datteln': 'Kinderzauberer in Datteln buchen | Zaubershow für Ihr Event',
+  // Clown
+  'clown-in-essen': 'Clown in Essen ⭐ | Shows & Events | Magie pur',
+  'clown-in-dortmund': 'Clown in Dortmund – LIAR | Kindergeburtstag & Events',
+  'clown-in-duisburg': 'Clown in Duisburg',
+  'clown-in-gelsenkirchen': 'TOP Clown in Gelsenkirchen – LIAR | Shows & Zauberkunst',
+  'clown-in-bochum': 'Clown in Bochum',
+  'clown-in-oberhausen': 'Clown in Oberhausen',
+  'clown-in-bottrop': 'Clown in Bottrop',
+  'clown-in-gladbeck': 'Clown in Gladbeck buchen – Unvergessliche Kinderunterhaltung',
+  'clown-in-haltern': 'Clown in Haltern am See buchen – Kinderunterhaltung',
+  'clown-in-herne': 'Clown in Herne mit TOP Bewertungen',
+  'clown-in-marl': 'Clown in Marl | Zaubershow & Walk Act',
+  'clown-in-recklinghausen': 'Clown Recklinghausen – Ruhrfestspiele & Kultur | TOP',
+  'clown-in-duesseldorf': 'Clown Düsseldorf – LIAR | Profi-Shows & Magie',
+  'clown-in-dinslaken': 'Clown in Dinslaken – LIAR buchen | Zaubershow & Clownerie',
+  'clown-in-dorsten': 'Clown Dorsten – LIAR | Show, Magie & Clownerie',
+  'clown-in-muelheim': 'Clown in Mülheim – Kindershow TOP',
+  'clown-in-herten': 'Clown in Herten',
+  'clown-in-datteln': 'Clown in Datteln – Zauberspaß & gute Laune für Dein Event',
+};
+
+let heroTitle = '';
+let heroSubtitle = '';
+let heroBreadcrumbParent = { label: '', href: '' };
+
+// Verwende Original-H1-Titel wenn vorhanden, sonst generischen Fallback
+const originalTitle = originalH1[pageSlug];
+
+if (isGeburtstagsSeite && displayCity) {
+  heroTitle = originalTitle || `Geburtstag in ${displayCity}`;
+  heroSubtitle = 'Unvergessliche Kindergeburtstage mit Clown Zauberer LIAR – Lachen, Staunen und pure Magie!';
+  heroBreadcrumbParent = { label: 'Kindergeburtstag', href: '/kindergeburtstag/' };
+} else if (pageSlug.startsWith('kinderzauberer-in-') && displayCity) {
+  heroTitle = originalTitle || `Kinderzauberer in ${displayCity}`;
+  heroSubtitle = `Magische Zaubershow für Kinder in ${displayCity} – Staunen, Lachen und unvergessliche Momente!`;
+  heroBreadcrumbParent = { label: 'Kinderzauberer', href: '/kinderzauberer/' };
+} else if (pageSlug.startsWith('clown-in-') && displayCity) {
+  heroTitle = originalTitle || `Clown in ${displayCity}`;
+  heroSubtitle = `Clownshow und Unterhaltung in ${displayCity} – Spaß, Lachen und gute Laune für Groß und Klein!`;
+  heroBreadcrumbParent = { label: 'Clownshow', href: '/clown/clownshow/' };
+}
+
+function buildKeywords(): string {
+  const c = displayCity;
+  if (isCityPage && c) {
+    if (pageSlug.startsWith('kinderzauberer-in-')) {
+      return `Kinderzauberer ${c}, Kinderzauberer in ${c}, Zauberer ${c}, Kindergeburtstag ${c}, Zaubershow ${c}, Clown ${c}, Kinderunterhaltung ${c}, NRW, Ruhrgebiet`;
+    } else if (pageSlug.startsWith('geburtstag-in-')) {
+      return `Kindergeburtstag ${c}, Geburtstag ${c}, Clown Kindergeburtstag ${c}, Zauberer Geburtstag ${c}, Kinderparty ${c}, Kindergeburtstag feiern ${c}, NRW, Ruhrgebiet`;
+    } else if (pageSlug.startsWith('clown-in-')) {
+      return `Clown ${c}, Clown in ${c}, Clownshow ${c}, Clown buchen ${c}, Zauberer ${c}, Kindergeburtstag ${c}, NRW, Ruhrgebiet`;
+    }
+  }
+  if (isBlogPost) {
+    // Blog-Posts: Focus-Keyword + Kategorien
+    const cats = (page.categories || []).map((cat: {slug: string; name: string}) => cat.name);
+    const parts = [focusKeyword, ...cats, 'Clown Zauberer Blog', 'NRW'].filter(Boolean);
+    return [...new Set(parts)].join(', ');
+  }
+  // Sonstige Seiten: Focus-Keyword + allgemeine Keywords
+  if (focusKeyword) {
+    return `${focusKeyword}, Clown Zauberer NRW, ${focusKeyword} NRW`;
+  }
+  return '';
+}
+const pageKeywords = buildKeywords();
+
+const schemas = [
+  isCityPage && cityName ? { '@context': 'https://schema.org', '@type': 'Service', name: `Clown Zauberer in ${cityName}`, serviceType: 'Kinderunterhaltung', areaServed: { '@type': 'City', name: cityName }, provider: { "@id": "https://liar-entertainer.com/#business" } } : null,
+  isBlogPost ? { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: seoTitle, description: rawDesc, image: heroImg.startsWith('http') ? heroImg : `https://liar-entertainer.com${heroImg}`, author: { '@type': 'Person', '@id': 'https://liar-entertainer.com/#person', name: 'Michaël Prescler', url: 'https://liar-entertainer.com/ueber-mich/' }, publisher: { '@id': 'https://liar-entertainer.com/#business' }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl }, datePublished: page.date, dateModified: page.date } : null,
+].filter(Boolean);
+---
+
+<BaseLayout title={seoTitle || page.title} description={rawDesc} keywords={pageKeywords || undefined} canonical={canonicalUrl} ogImage={heroImg} heroPreload={heroImg} structuredData={schemas.length > 0 ? schemas : undefined}>
+
+{scrapedContent ? (
+  <>
+    {isBlogPost && (
+      <section class="bg-white pt-8 pb-2">
+        <div class="max-w-[750px] mx-auto px-4">
+          <nav class="text-sm text-[#595959] mb-4">
+            <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+            <span class="mx-1">»</span>
+            <a href="/blog/" class="text-[#d7393e] hover:underline">Blog</a>
+            <span class="mx-1">»</span>
+            <span>{page.title}</span>
+          </nav>
+          <h1 class="text-[#1f2025] font-extrabold text-3xl sm:text-4xl leading-tight mb-3">{page.title}</h1>
+          <div class="flex flex-wrap items-center gap-3 text-sm text-[#595959] mb-6 pb-4 border-b border-gray-100">
+            <time>{new Date(page.date).toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' })}</time>
+            {page.categories && page.categories.length > 0 && (
+              <span class="flex flex-wrap gap-1">
+                {page.categories.map((c: {slug: string; name: string}) => (
+                  <span class="bg-[#f4f4f4] text-[#555] px-2 py-0.5 rounded text-xs">{c.name}</span>
+                ))}
+              </span>
+            )}
+          </div>
+        </div>
+      </section>
+    )}
+
+    {isCityPage && displayCity && heroTitle && (
+      <>
+        {/* Hero-Sektion */}
+        <section class="relative py-36 overflow-hidden">
+          <div class="absolute inset-0 bg-cover" style={`background-image: url('${heroImg}'); background-position: center 20%;`} />
+          <div class="absolute inset-0 bg-black/50" />
+          <div class="relative max-w-[750px] mx-auto px-4 text-center">
+            <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+              <span>📍</span> {displayCity}
+            </div>
+            <h1 class="text-white font-extrabold text-3xl sm:text-4xl leading-tight mb-3">{heroTitle}</h1>
+            <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">{heroSubtitle}</p>
+          </div>
+        </section>
+        {/* Breadcrumb */}
+        <section class="bg-white pt-4 pb-0">
+          <div class="max-w-6xl mx-auto px-4">
+            <nav class="text-sm text-[#595959]">
+              <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+              <span class="mx-1">»</span>
+              <a href={heroBreadcrumbParent.href} class="text-[#d7393e] hover:underline">{heroBreadcrumbParent.label}</a>
+              <span class="mx-1">»</span>
+              <span>{heroTitle}</span>
+            </nav>
+          </div>
+        </section>
+      </>
+    )}
+
+    <div class={`wp-scraped${isCityPage ? ' city-page' : ''}`}>
+      <Fragment set:html={scrapedContent} />
+    </div>
+
+    {/* Removed: legacy "City-Page Design-System Enforcement" inline script (~56 KB). It had a syntax error and never ran on the live site (verified 2026-10-02), so dropping it keeps rendered output identical. See docs/migration-notes.md. */}
+
+    {/* NEUES Design-System Script — überschreibt alle vorherigen Fixes */}
+    <script is:inline>
+        (function() {
+        if (!document.querySelector('.city-page')) return;
+
+        window.addEventListener('load', () => {
+          const cp = document.querySelector('.city-page');
+          if (!cp) return;
+
+          // === 1. WordPress-Waves verstecken ===
+          cp.querySelectorAll('.top, .bottom, .rotate').forEach(el => {
+            el.style.display = 'none';
+          });
+
+          // === 2. Leere Sektionen entfernen ===
+          cp.querySelectorAll('section, .alignfull, .wp-block-themeisle-blocks-advanced-columns, .wp-block-columns').forEach(s => {
+            if (s.closest('.price-grid') || s.closest('[class*="stats-banner"]')) return;
+            const text = s.textContent.trim();
+            const hasImg = s.querySelector('img');
+            const hasVid = s.querySelector('iframe');
+            const hasPG = s.querySelector('.price-grid');
+            if (text.length < 15 && !hasImg && !hasVid && !hasPG && s.offsetHeight > 30) {
+              s.style.display = 'none';
+            }
+          });
+
+          // === 3. Max 2 farbige Sektionen — Rest wird weiß ===
+          const coloredSections = [];
+          cp.querySelectorAll('section, .alignfull, div').forEach(s => {
+            if (s.closest('[class*="stats-banner"]')) return;
+            if (s.offsetHeight < 50 || s.offsetWidth < 200) return;
+            // Skip wrapper sections that contain child sections (they wrap entire page content)
+            // Also strip their gradients so they don't bleed through
+            const childSections = s.querySelectorAll('section, .alignfull');
+            if (childSections.length > 1) {
+              const bg = getComputedStyle(s).backgroundImage || '';
+              if (bg.includes('gradient')) {
+                s.style.setProperty('background-image', 'none', 'important');
+                s.style.setProperty('background-color', 'transparent', 'important');
+              }
+              return;
+            }
+            const bg = getComputedStyle(s).backgroundImage || '';
+            const bgC = getComputedStyle(s).backgroundColor || '';
+            const isColored = bg.includes('gradient') ||
+              (bgC !== 'rgba(0, 0, 0, 0)' && bgC !== 'rgb(255, 255, 255)' && bgC !== 'rgb(249, 250, 251)');
+            if (isColored && s.textContent.trim().length > 20) {
+              // Prüfe: ist es ein erlaubter farbiger Bereich?
+              const isRed = bg.includes('215, 57') || bg.includes('d7393e');
+              const isBlue = bg.includes('59, 85') || bg.includes('3b55d5');
+              const isDark = bg.includes('31, 32') || bg.includes('1f2025');
+              if (isRed || isBlue || isDark) {
+                // Skip if already inside a found colored section
+                const isNested = coloredSections.some(cs => cs.el.contains(s) && cs.el !== s);
+                if (!isNested) {
+                  coloredSections.push({ el: s, color: isRed ? 'red' : isBlue ? 'blue' : 'dark' });
+                }
+              } else {
+                // Unerlaubte Farbe → weiß machen
+                s.style.setProperty('background', '#fff', 'important');
+                s.querySelectorAll('h2, h3, h4, p, span, strong, li').forEach(t => {
+                  if (getComputedStyle(t).color === 'rgb(255, 255, 255)') {
+                    t.style.setProperty('color', '#1f2025', 'important');
+                  }
+                });
+                s.querySelectorAll('a').forEach(a => a.style.setProperty('color', '#d7393e', 'important'));
+              }
+            }
+          });
+
+          // Wenn mehr als 2 farbige Sektionen: überschüssige weiß machen
+          if (coloredSections.length > 2) {
+            // Behalte die ersten 2, mache den Rest weiß
+            coloredSections.slice(2).forEach(({ el }) => {
+              el.style.setProperty('background', '#fff', 'important');
+              el.querySelectorAll('h2, h3, h4, p, span, strong, li').forEach(t => {
+                if (getComputedStyle(t).color === 'rgb(255, 255, 255)') {
+                  t.style.setProperty('color', '#1f2025', 'important');
+                }
+              });
+              el.querySelectorAll('a').forEach(a => a.style.setProperty('color', '#d7393e', 'important'));
+            });
+          }
+
+          // === 4. Verbleibende farbige Sektionen → Pastell (keine Waves mehr) ===
+          const pastelBg = { red: '#fdf2f2', blue: '#eff4ff', dark: '#eff4ff' };
+          const pastelBorder = { red: '#f0c4c4', blue: '#c5d3f7', dark: '#c5d3f7' };
+          coloredSections.forEach(({ el, color }) => {
+            if (el.closest('[class*="stats-banner"]')) return;
+            // Entferne existierende Waves (WordPress-Klassen UND dynamisch erstellte)
+            el.querySelectorAll('.top, .bottom').forEach(w => w.remove());
+            for (const child of [...el.children]) {
+              if (child.querySelector && child.querySelector('svg[viewBox*="1440"]') && child.children.length === 1) {
+                child.remove();
+              }
+            }
+            // Pastell-Hintergrund + dunkle Texte (Kontrast ≥ 9:1)
+            el.style.setProperty('background', pastelBg[color] || '#eff4ff', 'important');
+            el.style.setProperty('border-top', '1px solid ' + (pastelBorder[color] || '#c5d3f7'), 'important');
+            el.style.setProperty('border-bottom', '1px solid ' + (pastelBorder[color] || '#c5d3f7'), 'important');
+            el.querySelectorAll('h2, h3, h4, p, span, strong, li, div').forEach(t => {
+              const c = getComputedStyle(t).color;
+              if (c === 'rgb(255, 255, 255)' || c === 'rgb(219, 234, 254)' || c === 'rgb(254, 226, 226)') {
+                t.style.setProperty('color', '#1f2025', 'important');
+              }
+            });
+            el.querySelectorAll('a').forEach(a => {
+              const bg = getComputedStyle(a).backgroundColor;
+              const isButton = bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
+              if (!isButton) a.style.setProperty('color', '#d7393e', 'important');
+            });
+          });
+
+          // === 5. Preis-Karten: Immer 3 Spalten ===
+          cp.querySelectorAll('.price-grid').forEach(pg => {
+            pg.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1000px;margin:1rem auto 1.5rem;';
+            // Entferne Extra-Cards über 3
+            const cards = pg.querySelectorAll('.price-card');
+            if (cards.length > 3) {
+              for (let i = 3; i < cards.length; i++) cards[i].remove();
+            }
+          });
+
+          // === 6. Overlay-Divs minimieren ===
+          cp.querySelectorAll('.wp-block-themeisle-blocks-advanced-columns-overlay').forEach(o => {
+            o.style.cssText = 'max-height:0;overflow:hidden;padding:0;';
+          });
+        });
+        })();
+      </script>
+
+    {/* Service-Links für Blog-Posts */}
+    {isBlogPost && (
+      <section class="py-10 bg-[#eff4ff] border-y border-[#c5d3f7]">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+          <p class="text-[#3b55d5] font-bold text-sm uppercase tracking-widest mb-4">Unsere Leistungen</p>
+          <div class="flex flex-wrap justify-center gap-3">
+            <a href="/clown/clownshow/" class="bg-white px-5 py-3 rounded-lg border border-[#f0c4c4] text-[#d7393e] hover:underline font-medium text-sm">🤡 Clownshow</a>
+            <a href="/zauberer/" class="bg-white px-5 py-3 rounded-lg border border-[#c5d3f7] text-[#3b55d5] hover:underline font-medium text-sm">🎩 Zauberer</a>
+            <a href="/kinderzauberer/" class="bg-white px-5 py-3 rounded-lg border border-[#f0c4c4] text-[#d7393e] hover:underline font-medium text-sm">✨ Kinderzauberer</a>
+            <a href="/kindergeburtstag/" class="bg-white px-5 py-3 rounded-lg border border-[#c5d3f7] text-[#3b55d5] hover:underline font-medium text-sm">🎂 Zauberer für Kindergeburtstag</a>
+            <a href="/zauberer/zaubershow/" class="bg-white px-5 py-3 rounded-lg border border-[#f0c4c4] text-[#d7393e] hover:underline font-medium text-sm">🪄 Zaubershow</a>
+            <a href="/galerie/" class="bg-white px-5 py-3 rounded-lg border border-[#c5d3f7] text-[#3b55d5] hover:underline font-medium text-sm">📸 Galerie</a>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {/* Google Reviews – nach dem Content wie in der Referenz */}
+    <GoogleReviews />
+
+    {/* CTA-Sektion im Referenz-Stil */}
+    {isCityPage ? (
+      <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-14">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+          <p class="font-bold text-[#d7393e] text-sm uppercase tracking-widest mb-2">EINFACH KONTAKT AUFNEHMEN</p>
+          <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl mb-6">{cityName ? `Clown Zauberer buchen in ${displayCity}` : 'Jetzt buchen'}</h2>
+          <p class="text-[#374151] mb-6 text-sm leading-relaxed max-w-xl mx-auto">
+            Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben.
+          </p>
+          <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+            Kontaktformular
+          </a>
+        </div>
+      </section>
+    ) : (
+      <section class="pb-12 bg-white">
+        <div class="max-w-[750px] mx-auto px-4">
+          <div class="mt-10 bg-[#fdf2f2] border border-[#f0c4c4] rounded-2xl p-8 text-center">
+            <h2 class="text-[#1f2025] font-bold text-xl mb-3">Jetzt buchen</h2>
+            <p class="text-[#595959] mb-5">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
+            <div class="flex flex-col sm:flex-row gap-3 justify-center">
+              <a href="/kontakt/" class="inline-flex items-center justify-center gap-2 bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">Kontakt aufnehmen</a>
+              <a href="tel:+491721517578" class="inline-flex items-center justify-center bg-white border border-gray-200 text-[#1f2025] font-bold px-8 py-3 rounded hover:bg-gray-50 transition-colors">+49 172 1517578</a>
+            </div>
+          </div>
+        </div>
+      </section>
+    )}
+
+    {/* Kontakt-Info-Zeile */}
+    {isCityPage && (
+      <section class="bg-white py-10 border-t border-[#f0c4c4]">
+        <div class="max-w-3xl mx-auto px-4 text-center">
+          <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+          <p class="text-[#374151] mb-2">Anschrift : Beethovenstr. 15, 45966 Gladbeck</p>
+          <p class="text-[#374151] mb-4">
+            TEL : <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+            {' '}// Email :
+            <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+          </p>
+        </div>
+      </section>
+    )}
+  </>
+) : (
+  <>
+    <section class="relative py-36 overflow-hidden">
+      <div class="absolute inset-0 bg-cover" style={`background-image: url('${heroImg}'); background-position: center 20%;`} />
+      <div class="absolute inset-0 bg-black/50" />
+      <div class="relative max-w-[750px] mx-auto px-4 text-center">
+        {isCityPage && cityName && <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4">📍 {cityName}</div>}
+        <h1 class="text-white font-bold text-3xl sm:text-4xl leading-tight mb-3">{seoTitle || page.title}</h1>
+        {rawDesc && <p class="text-gray-200 text-base leading-relaxed">{rawDesc}</p>}
+      </div>
+    </section>
+    <section class="pt-4 pb-12 bg-white">
+      <div class="max-w-[750px] mx-auto px-4">
+        {fixedPageContent && <div class="wp-content"><Fragment set:html={fixedPageContent} /></div>}
+      </div>
+    </section>
+    <GoogleReviews />
+    <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-10">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h2 class="text-[#1f2025] font-bold text-xl mb-3">{isCityPage && cityName ? `Clown Zauberer buchen in ${cityName}` : 'Jetzt buchen'}</h2>
+        <p class="text-[#595959] mb-5">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
+        <div class="flex flex-col sm:flex-row gap-3 justify-center">
+          <a href="/kontakt/" class="inline-flex items-center justify-center gap-2 bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">Kontakt aufnehmen</a>
+          <a href="tel:+491721517578" class="inline-flex items-center justify-center bg-white border border-gray-200 text-[#1f2025] font-bold px-8 py-3 rounded hover:bg-gray-50 transition-colors">+49 172 1517578</a>
+        </div>
+      </div>
+    </section>
+  </>
+)}
+
+</BaseLayout>

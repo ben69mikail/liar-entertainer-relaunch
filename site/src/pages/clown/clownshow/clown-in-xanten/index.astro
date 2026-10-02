@@ -1,0 +1,389 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../../components/HeroSlider.astro';
+import HeroStage from '../../../../components/HeroStage.astro';
+import CountUp from '../../../../components/CountUp.astro';
+import karteImg from '../../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../../assets/images/home/clown-zauberer-hero.jpg';
+import _clownIntroAsset from '../../../../assets/images/clown/clown-zauberer-gladbeck.jpg';
+import _gal1Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-1.jpg';
+import _gal2Asset from '../../../../assets/images/galerie/buehnen-zauberei.jpg';
+import _gal3Asset from '../../../../assets/images/clown/glitzer-tattoos.jpg';
+import _gal4Asset from '../../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import _gal5Asset from '../../../../assets/images/clown/kosten-preis-clown-nrw.jpg';
+import _gal6Asset from '../../../../assets/images/zauberer/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
+import _gal7Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-16.jpg';
+import _gal8Asset from '../../../../assets/images/zauberer/zaubershow-staunende-kinder.jpg';
+import _gal9Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-2.jpg';
+import _clownShowAsset from '../../../../assets/images/clown/clown-bei-clownshow.jpg';
+import GoogleReviews from '../../../../components/GoogleReviews.astro';
+
+const seoTitle = "Clown Xanten | TOP Bewertungen | Jetzt buchen";
+const seoDescription = "Clown in Xanten buchen ✓ Clownshow für Kindergeburtstag & Feste am Niederrhein ✓ 370+ Top-Bewertungen ✓ Auch in Wesel & Moers ✓ Jetzt anfragen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Clown in Xanten",
+  "description": "Clown LIAR für Kindergeburtstag und Kinderfest in Xanten am Niederrhein, NRW",
+  "url": "https://liar-entertainer.com/clown/clownshow/clown-in-xanten/",
+  "serviceType": ["Clownshow", "Kinderunterhaltung"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "City", "name": "Xanten" }
+};
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kommt der Clown auch in die Xantener Ortschaften? 📍",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja, gerne! Ob Altstadt am Dom, Birten, Lüttingen, Wardt oder Marienbaum – ich komme in jede Xantener Ortschaft. Auch Feiern am Freizeitzentrum an der Xantener Nord- und Südsee oder in den Nachbargemeinden Sonsbeck, Alpen und Kalkar sind kein Problem."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wieviel Platz braucht man für die Clownshow in Xanten? 📏",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ganz wenig! Mit einer Fläche von nur 2×2 Metern führe ich bereits eine vollwertige Show vor – im Wohnzimmer in Lüttingen, im Garten in Wardt, im Pfarrheim in Marienbaum oder im Ferienhaus am See. Ohne lange Vorbereitungszeit, drinnen wie draußen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kommt der Clown zuverlässig bis nach Xanten? 🚗",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Selbstverständlich! Xanten gehört fest zu meinem Einsatzgebiet am Niederrhein. Die Anfahrt über die A57 beziehungsweise B57 plane ich großzügig ein und stimme die Ankunftszeit vorab mit Ihnen ab – bei über 400 Shows im Jahr ist Pünktlichkeit Routine."
+      }
+    }
+  ]
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+const _pageGallery = [
+  { src: _gal2Asset, alt: 'Zaubershow auf einer Bühne für den Clown' },
+  { src: _gal3Asset, alt: 'So sehen Glitzer Tattoos aus beim Zauberer LIAR in Xanten' },
+  { src: _gal4Asset, alt: 'Xanten – Eindruck 3 mit Clown Zauberer LIAR' },
+  { src: _gal5Asset, alt: 'Xanten – Eindruck 4 mit Clown Zauberer LIAR' },
+  { src: _gal6Asset, alt: 'Xanten – Eindruck 5 mit Clown Zauberer LIAR' },
+  { src: _gal7Asset, alt: 'Staunende Kinder bei dem Auftritt von Clown in Xanten' },
+  { src: _gal8Asset, alt: 'Xanten – Eindruck 7 mit Clown Zauberer LIAR' },
+  { src: _gal9Asset, alt: 'Xanten – Eindruck 8 mit Clown Zauberer LIAR' },
+  { src: _clownShowAsset, alt: 'Clown in Xanten bei Clownshow' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Clown Xanten, Clown in Xanten, Clownshow Xanten, Clown buchen Xanten, Zauberer Xanten, Niederrhein, NRW"
+  canonical="https://liar-entertainer.com/clown/clownshow/clown-in-xanten/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Clownshow', url: '/clown/clownshow/' },
+    { name: 'Clown in Xanten', url: '/clown/clownshow/clown-in-xanten/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Xanten
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Clown in Xanten
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Clownshow und Unterhaltung in Xanten – Spaß, Lachen und gute Laune für Groß und Klein!
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">Clownshow</a>
+        <span class="mx-1">»</span>
+        <span>Clown in Xanten</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Buchen Sie den Clown in Xanten! 🤡</h2>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Sie suchen einen Clown in Xanten? Clown Zauberer LIAR bringt seine lustige Clownshow mit Comedy und Zauberei in die Römerstadt – nach Birten, Lüttingen, Wardt und Marienbaum genauso wie in die Altstadt am Dom. Für Kinder ab 4 Jahren, auf nur 2×2 Metern Platz und mit 370+ Google-Bewertungen im Rücken.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Mit meiner Clownshow sorge ich für ein Erlebnis, das bei Kindern und Erwachsenen noch sehr lange in Erinnerung bleiben wird. Ob als unterhaltsamer WALK-ACT durch Ihre Veranstaltung oder in Kombination mit faszinierender BALLONMODELLAGE und verblüffender ZAUBEREI – Ihre Feier in Xanten wird garantiert zum unvergesslichen Highlight! 🎉</p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="text-center">
+            <Image src={_gal1Asset} alt="Clownshow in Xanten" class="rounded-full object-cover object-[20%] portrait-zoom" style="width: 320px; height: 320px;" width={736} height={552} loading="lazy" />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Clownshow für Kinder in Xanten</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <section class="bg-[#eff4ff] py-14 text-center border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4">XANTEN</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-6">✨ Clownshow in Xanten – mit Herz &amp; Humor</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">
+        Schon die Römer wussten in Xanten gute Unterhaltung zu schätzen – heute bringe ich als Clown das Lachen zu Ihrer Familienfeier.
+      </p>
+      <p class="text-[#1f2025] leading-relaxed">
+        Meine Show ist speziell auf Kinder abgestimmt: lebendig, interaktiv und voller Überraschungen. Die Kinder dürfen mitzaubern, lachen, staunen – und manchmal selbst zur kleinen Zauberin oder zum Zauberer werden. Dabei achte ich besonders auf Respekt, Empathie und ein liebevolles Miteinander.
+      </p>
+    </div>
+  </section>
+
+  <!-- Witzig und Magisch! ✨ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Witzig und Magisch! ✨</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">Was meine Clownshow in Xanten ausmacht, ist die Mischung: mal leise und poetisch mit Mimenspiel und Pantomime, mal laut und wild mit Slapstick – aber immer nah an den Kindern und mit viel Raum für spontane, echte Momente. Kein Programm von der Stange, sondern auf die jeweilige Gruppe und den Anlass abgestimmt.</p>
+      <p class="text-[#374151] mb-4 leading-relaxed">Als professioneller Clown und Entertainer bin ich seit über 15 Jahren in NRW aktiv. Bis heute trat ich über 6.000 Mal erfolgreich auf: bei Privatpartys, Firmenveranstaltungen, Vereinsfeiern, in Kindergärten und Grundschulen – am Niederrhein genauso wie im Ruhrgebiet. Diese Erfahrung spürt man in jeder Show! 🎭</p>
+    </div>
+  </section>
+
+  <!-- ZAUBERSHOW -->
+  <section class="bg-white py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">ZAUBERSHOW</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">Der Clown findet den besten Draht zu den Kindern und der Zauberer überrascht sie mit verblüffenden Tricks! Mädchen und Jungs in Xanten erleben eine erstklassige und witzige Mischung aus Clownerie und Zauberei, bei der ich die Zuschauer zu aktiven Mitwirkenden mache und direkt einbeziehe.</p>
+      <p class="text-[#374151] mb-4 leading-relaxed">Die Kinder stehen dabei im absoluten Mittelpunkt – nicht die Zaubertricks! Durch die Interaktion entstehen unvergessliche Momente: Kinder kommen auf die Bühne, helfen bei den Tricks mit und werden selbst zu kleinen Zauberern. Das Pendeln zwischen Staunen und herzhaftem Lachen macht diese Show zu einem besonderen Erlebnis für die ganze Familie! ✨</p>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Bildergalerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Clown-Auftritt in Xanten</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Kommt der Clown auch in die Xantener Ortschaften? 📍</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Ja, gerne! Ob Altstadt am Dom, Birten, Lüttingen, Wardt oder Marienbaum – ich komme in jede Xantener Ortschaft. Auch Feiern am Freizeitzentrum an der Xantener Nord- und Südsee oder in den Nachbargemeinden Sonsbeck, Alpen und Kalkar sind kein Problem.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wieviel Platz braucht man für die Clownshow in Xanten? 📏</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Ganz wenig! Mit einer Fläche von nur 2×2 Metern führe ich bereits eine vollwertige Show vor – im Wohnzimmer in Lüttingen, im Garten in Wardt, im Pfarrheim in Marienbaum oder im Ferienhaus am See. Ohne lange Vorbereitungszeit, drinnen wie draußen.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Kommt der Clown zuverlässig bis nach Xanten? 🚗</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Selbstverständlich! Xanten gehört fest zu meinem Einsatzgebiet am Niederrhein. Die Anfahrt über die A57 beziehungsweise B57 plane ich großzügig ein und stimme die Ankunftszeit vorab mit Ihnen ab – bei über 400 Shows im Jahr ist Pünktlichkeit Routine.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Nicht nur in Xanten unterwegs</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">Besonders häufig trete ich in folgenden Städten auf:</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Niederrhein</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Wesel |
+            Moers |
+            <a href="/clown/clownshow/clown-in-dinslaken/" class="text-[#d7393e] hover:underline">Clown für Kindergeburtstag in Dinslaken</a> |
+            Rheinberg | Alpen | Sonsbeck | Kalkar | Kevelaer
+          </p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Ruhrgebiet</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Duisburg |
+            <a href="/clown/clownshow/clown-in-oberhausen/" class="text-[#d7393e] hover:underline">Clownshow in Oberhausen erleben</a> |
+            <a href="/clown/clownshow/clown-in-dorsten/" class="text-[#d7393e] hover:underline">Clown für Kinderfeste in Dorsten</a> |
+            <a href="/clown/clownshow/clown-in-gladbeck/" class="text-[#d7393e] hover:underline">Clown in Gladbeck buchen</a> |
+            <a href="/clown/clownshow/clown-in-essen/" class="text-[#d7393e] hover:underline">Clownshow für Essen</a>
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-far-cities>Auch außerhalb dieses Umkreises bin ich unterwegs: Termine in weiter entfernten Städten wie Wesel, Moers und Duisburg lassen sich einrichten – die Anfahrt plane ich dabei einfach mit ein.</p>
+          <p class="text-[#374151] leading-relaxed">
+            Selbstverständlich kann man mich auch überregional und international buchen – ich war bereits in Frankreich, Belgien, den Niederlanden, Österreich und der Schweiz im Einsatz!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Clownshow Xanten"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Xanten -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Xanten buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kindergeburtstag/geburtstag-in-xanten/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#d7393e] hover:underline font-medium text-sm card-hover reveal">🎂 Kindergeburtstag in Xanten</a>
+      <a href="/kinderzauberer/kinderzauberer-in-xanten/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#3b55d5] hover:underline font-medium text-sm card-hover reveal">🎩 Kinderzauberer in Xanten</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

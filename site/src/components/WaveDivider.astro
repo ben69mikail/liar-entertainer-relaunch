@@ -1,0 +1,15 @@
+---
+// Sanft driftende SVG-Wellen-Trennung zwischen Sektionen. Rein CSS-animiert
+// (transform), reduced-motion-safe. color = Farbe der unteren Sektion.
+interface Props {
+  color?: string;
+  flip?: boolean;
+  class?: string;
+}
+const { color = '#ffffff', flip = false, class: cls = '' } = Astro.props;
+---
+<div class:list={["wave-divider", { "wave-flip": flip }, cls]} aria-hidden="true">
+  <svg viewBox="0 0 1200 60" preserveAspectRatio="none">
+    <path d="M0,30 C200,58 400,4 600,30 C800,56 1000,2 1200,30 L1200,60 L0,60 Z" fill={color}></path>
+  </svg>
+</div>

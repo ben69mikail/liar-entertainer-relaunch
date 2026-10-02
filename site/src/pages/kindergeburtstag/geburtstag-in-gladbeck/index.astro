@@ -1,0 +1,580 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import karteImg from '../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
+import _introImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import _showImgAsset from '../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import _gal5Asset from '../../../assets/images/clown/kosten-preis-clown-nrw.jpg';
+import _gal6Asset from '../../../assets/images/zauberer/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
+import _gal8Asset from '../../../assets/images/zauberer/zaubershow-staunende-kinder.jpg';
+import _gal9Asset from '../../../assets/images/galerie/fotogalerie-clown-zauberer-2.jpg';
+import _clownerieAsset from '../../../assets/images/home/clownerie-und-zauberei.jpg';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import WaveDivider from '../../../components/WaveDivider.astro';
+
+const seoTitle = "Kindergeburtstag Gladbeck | Zaubershow ab 150€";
+const seoDescription = "Kindergeburtstag in Gladbeck — Heimatstadt von Clown LIAR! ✓ Zaubershow ab 150€ ✓ Keine Fahrtkosten ✓ 370+ Bewertungen ✓ Ballonmodellage ✓ Jetzt buchen!";
+const heroImg = _heroImgAsset.src;
+const citySlides = [
+  { src: _heroImgAsset, alt: 'Kindergeburtstag mit Clown Zauberer LIAR in Gladbeck' },
+  { src: _introImgAsset, alt: 'Kinderzauberer beim Geburtstag in Gladbeck' },
+  { src: _showImgAsset, alt: 'Zaubershow mit Clown Zauberer in Gladbeck' },
+  { src: _gal6Asset, alt: 'Zaubervorführung von LIAR' },
+  { src: _gal8Asset, alt: 'Staunende Kinder bei der Zaubershow in Gladbeck' },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Kindergeburtstag mit Clown Zauberer in Gladbeck',
+  description: seoDescription,
+  provider: { "@id": "https://liar-entertainer.com/#business" },
+  areaServed: { '@type': 'City', name: 'Gladbeck' },
+  offers: { '@type': 'Offer', price: '150', priceCurrency: 'EUR', description: '40 Minuten Zaubershow' },
+};
+
+const faqItems = [
+  {
+    question: 'Was braucht Clown LIAR für einen Auftritt?',
+    answer: 'Ohne Vorbereitungszeit und mit einer Fläche von 2x2 Meter kann ich eine Show vorführen: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Gartenanlage, große und kleine Bühne, Kindergarten, Turnhalle... Ob drinnen oder draußen, das Programm lässt sich spontan und flexibel ausführen!',
+  },
+  {
+    question: 'Wieviel Platz braucht man für das Programm?',
+    answer: 'LIAR ist ziemlich pflegeleicht: für die Show ist es wichtig, dass die Kinder gemütlich und ungestört sitzen können!!! Bei der Ballonmodellage ist nichts weiteres nötig. Bei GLITZER TATTOOS wären schon 2 Stühle und einen Tisch wichtig!',
+  },
+  {
+    question: 'Wie viele Kinder sollten überhaupt eingeladen werden?',
+    answer: 'Natürlich soll das Kind seine Freunde einladen. Allerdings sollte man eine feste Zahl als Limit vorgeben. Pädagogen empfehlen, maximal genauso viele Gäste einzuladen, wie das Kind alt wird. Wer kommen darf, soll das Kind selbst bestimmen. Natürlich sind auch dabei die Aufsichtspersonen (mindestens 2) nicht zu vergessen.',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+
+const structuredData = [serviceSchema, faqSchema];
+const _pageGallery = [
+  { src: _showImgAsset, alt: 'Auftritt Zaubershow mit Clown Zauberer Herten' },
+  { src: _gal5Asset, alt: 'Geburtstag in Gladbeck - Clown Zauberer LIAR im Einsatz in NRW' },
+  { src: _gal6Asset, alt: 'Zaubervorführung auf dem Weihnachtsmarkt' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kindergeburtstag Gladbeck, Geburtstag Gladbeck, Clown Kindergeburtstag Gladbeck, Zauberer Geburtstag Gladbeck, Kinderparty Gladbeck, NRW"
+  canonical="https://liar-entertainer.com/kindergeburtstag/geburtstag-in-gladbeck/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kindergeburtstag', url: '/kindergeburtstag/' },
+    { name: 'Geburtstag in Gladbeck', url: '/kindergeburtstag/geburtstag-in-gladbeck/' }
+  ]}
+>
+
+  <!-- Hero + Breadcrumb + Intro: Pastell-Hero-Stage -->
+  <HeroStage blobOpacity={0.45}>
+  <!-- Hero Section -->
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Gladbeck
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Kindergeburtstag in Gladbeck: Mitmach-Zaubershow ab 150 €
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Unvergessliche Kindergeburtstage mit Clown Zauberer LIAR – Lachen, Staunen und pure Magie!
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a>
+        <span class="mx-1">»</span>
+        <span>Geburtstag in Gladbeck</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Kindergeburtstag in Gladbeck – Clown &amp; Zauberer aus Ihrer Stadt!</h2>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Kindergeburtstag in Gladbeck mit Clown Zauberer LIAR direkt aus Ihrer Stadt: 40-minütige Mitmach-Zaubershow ab 150 € Festpreis – ganz ohne Fahrtkosten, für bis ca. 12 Kinder ab 4 Jahren, optional Ballonfiguren und Glitzer-Tattoos. Nur 2×2 m Platz nötig, ob in Gladbeck-Mitte, Zweckel oder Brauck. 370+ Google-Bewertungen.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Sie suchen Entertainment für einen Geburtstag in Gladbeck? Perfekt – ich bin direkt bei Ihnen um die Ecke! Seit über 15 Jahren lebe und arbeite ich in der Beethovenstraße 15 in Gladbeck-Mitte und bringe als <a href="/" class="text-[#d7393e] hover:underline">Clown</a> &amp; <a href="/zauberer/" class="text-[#d7393e] hover:underline">Zauberer</a> Kinderaugen zum Leuchten – in ganz Gladbeck und darüber hinaus.</p>
+          <p class="text-[#374151] font-bold mb-2">Ihr Gladbecker Vorteil:</p>
+          <ul class="space-y-2 text-[#374151] mb-4">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> 0 € Fahrtkosten – ich bin bereits vor Ort!</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Maximale Flexibilität – auch kurzfristige Termine möglich</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Ich kenne Gladbeck wie meine Westentasche</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Nachbarschaftlicher Service mit persönlicher Note</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Schnelle Erreichbarkeit bei Fragen oder Änderungen</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Unterstützung lokaler Dienstleister statt große Agenturen</li>
+          </ul>
+          <p class="text-[#374151] leading-relaxed">Als echter Gladbecker weiß ich, was Familien hier schätzen: Bodenständiges Entertainment ohne Schnickschnack, verlässliche Absprachen und ein faires Preis-Leistungs-Verhältnis. Genau das bekommen Sie bei mir!</p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="m-0">
+            <Image
+              src={_introImgAsset}
+              alt="Geburtstag in Gladbeck mit dem Clown aus Ihrer Stadt"
+              class="rounded-full object-cover object-[20%] portrait-zoom"
+              style="width: 320px; height: 320px;"
+              loading="lazy"
+              width={640}
+              height={853}
+            />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Clown Zauberer LIAR beim Kindergeburtstag in Gladbeck</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+  </HeroStage>
+
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <!-- ZAUBERSHOW FÜR GLADBECK -->
+  <section class="bg-white py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">ZAUBERSHOW FÜR GLADBECK</h2>
+      <p class="text-[#374151] leading-relaxed mb-4">Als Gladbecker Clown Zauberer bringe ich nicht nur eine Show mit – ich bringe ein Stück Heimat mit! Meine Zaubershow ist auf Gladbecker Kinder abgestimmt:</p>
+      <ul class="space-y-2 text-[#374151] mb-6">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Bodenständiger Humor – kein aufgesetztes Gehabe</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Direkte Ansprache – auf Augenhöhe mit den Kindern</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Interaktiv und mitreißend – alle dürfen mitmachen</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Lokale Anspielungen – Gladbecker verstehen Gladbecker!</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Das Geburtstagskind steht im Mittelpunkt</li>
+      </ul>
+
+      <h3 class="font-bold text-[#1f2025] text-lg mb-3">Was passiert in der 40-minütigen Zaubershow?</h3>
+      <ul class="space-y-3 text-[#374151] mb-6">
+        <li class="flex items-start gap-2"><span class="text-xl">🎭</span> <span><strong>Begrüßung &amp; Kennenlernen:</strong> Ich stelle mich vor, lerne das Geburtstagskind kennen und sorge dafür, dass alle Kinder sich wohlfühlen.</span></li>
+        <li class="flex items-start gap-2"><span class="text-xl">✨</span> <span><strong>Interaktive Zaubertricks:</strong> Die Kinder werden selbst zu Zauberern! Sie helfen bei den Tricks, erleben Magie hautnah und staunen über unglaubliche Verwandlungen. Dabei wechseln sich Lachen und Staunen perfekt ab.</span></li>
+        <li class="flex items-start gap-2"><span class="text-xl">🎊</span> <span><strong>Großes Finale:</strong> Ein spektakulärer Abschlusszauber, bei dem das Geburtstagskind die Hauptrolle spielt – ein Moment, den niemand vergisst!</span></li>
+      </ul>
+
+      <h3 class="font-bold text-[#1f2025] text-lg mb-3">Besonderheiten meiner Gladbecker Show:</h3>
+      <ul class="space-y-2 text-[#374151] mb-6">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">•</span> Kein Kind wird bloßgestellt – alle dürfen, niemand muss</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">•</span> Angepasst an die Altersgruppe (ideal ab 4 Jahren)</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">•</span> Auch für schüchterne Kinder geeignet</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">•</span> Funktioniert drinnen wie draußen</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">•</span> Wetter- und ortsunabhängig</li>
+      </ul>
+      <p class="text-[#374151] leading-relaxed">Die Zaubershow funktioniert in jedem Gladbecker Wohnzimmer, Garten oder Partyraum. Mehr als 2x2 Meter Platz brauche ich nicht!</p>
+    </div>
+  </section>
+
+
+  <!-- PREISE FÜR GLADBECK -->
+  <section class="bg-[#fdf2f2] py-14 border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-4">PREISE FÜR GLADBECK</h2>
+      <p class="text-gray-300 text-center leading-relaxed mb-8 max-w-3xl mx-auto">Preise für Kindergeburtstag in Gladbeck – Ihr Heimvorteil! Als Gladbecker haben Sie einen unschlagbaren Vorteil: Sie zahlen KEINE Fahrtkosten! Was Familien in anderen Städten extra kostet, sparen Sie komplett.</p>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+        <!-- Zaubershow -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎭 Zaubershow</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-1">150 €</p>
+          <p class="text-[#374151] text-xs mb-4">Festpreis</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-4">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Minuten voller Zauber, Lachen und Staunen</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Komplette interaktive Zaubershow</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Bis zu 12 Kinder (mehr nach Absprache)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Geburtstagskind steht im Mittelpunkt</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Gesamtes Material &amp; Equipment inklusive</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Flexibel einsetzbar: drinnen oder draußen</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Buchbar an jedem Wochentag zum gleichen Preis</li>
+          </ul>
+          <p class="text-[#3b55d5] font-bold text-sm">🚗 Fahrtkosten für Gladbeck: 0 €</p>
+        </div>
+        <!-- Ballonmodellage -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal delay-100">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎈 Ballonmodellage</h3>
+          <p class="text-[#3b55d5] font-bold text-2xl mb-1">+ 20 €</p>
+          <p class="text-[#374151] text-xs mb-4">Ca. 15 Min., 1 Ballon pro Kind</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-4">
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Für jedes Kind 1 Ballon</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Ca. 15 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Tolle Erinnerung zum Mitnehmen</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Große Auswahl an Figuren</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ballonfiguren sind auf jedem Gladbecker Kindergeburtstag der Hit! Jedes Kind bekommt sein individuelles Wunschtier – geformt in wenigen Minuten direkt vor seinen Augen.</p>
+        </div>
+        <!-- Glitzer Tattoos -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] card-hover reveal delay-200">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Glitzer-Tattoos</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-1">+ 40 €</p>
+          <p class="text-[#374151] text-xs mb-4">Ca. 30 Min., 1 Tattoo pro Kind</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-4">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Für jedes Kind 1 Tattoo</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Ca. 30 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hautverträglich &amp; langanhaltend</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Viele Motive zur Auswahl</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Glitzer-Tattoos sind der absolute Renner bei Gladbecker Kindergeburtstagen! Viele verschiedene Motive sorgen dafür, dass jedes Kind sein Lieblingsdesign findet.</p>
+        </div>
+      </div>
+      <div class="text-center">
+        <a href="/kontakt/" class="inline-block bg-[#3b55d5] hover:bg-[#2a3fa8] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- WARUM LOKALEN ENTERTAINER WÄHLEN -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-4">WARUM LOKALEN ENTERTAINER WÄHLEN?</h2>
+      <p class="text-[#374151] text-center leading-relaxed mb-4 max-w-3xl mx-auto">Warum einen lokalen Entertainer wählen für den Kindergeburtstag in Gladbeck? Sie könnten auch eine große Agentur beauftragen oder einen Entertainer aus Essen, Bochum oder Düsseldorf buchen. Aber warum in die Ferne schweifen, wenn das Gute liegt so nah?</p>
+      <p class="text-[#374151] text-center font-bold mb-8">💪 Die Vorteile eines Gladbecker Entertainers:</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-8">
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="text-[#d7393e] font-bold text-lg mb-2">1️⃣ KOSTENVORTEIL</p>
+          <p class="text-[#374151] text-sm leading-relaxed">Keine Fahrtkosten = mehr Budget für Extras oder andere Geburtstagswünsche!</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="text-[#d7393e] font-bold text-lg mb-2">2️⃣ FLEXIBILITÄT</p>
+          <p class="text-[#374151] text-sm leading-relaxed">Kurzfristige Änderungen? Kein Problem! Als Nachbar bin ich in 10 Minuten da.</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="text-[#d7393e] font-bold text-lg mb-2">3️⃣ PERSÖNLICHER KONTAKT</p>
+          <p class="text-[#374151] text-sm leading-relaxed">Wir können uns vorher persönlich treffen (z.B. in der Stadt), wenn Sie möchten.</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="text-[#d7393e] font-bold text-lg mb-2">4️⃣ LOKALE VERBUNDENHEIT</p>
+          <p class="text-[#374151] text-sm leading-relaxed">Ich lebe von meinem guten Ruf in Gladbeck – Qualität ist meine beste Werbung!</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="text-[#d7393e] font-bold text-lg mb-2">5️⃣ EMPFEHLUNGEN</p>
+          <p class="text-[#374151] text-sm leading-relaxed">Viele Gladbecker Familien empfehlen mich weiter – das spricht für sich!</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="text-[#d7393e] font-bold text-lg mb-2">6️⃣ LOKALE WIRTSCHAFT</p>
+          <p class="text-[#374151] text-sm leading-relaxed">Mit Ihrer Buchung unterstützen Sie einen Gladbecker Selbstständigen!</p>
+        </div>
+      </div>
+      <div class="bg-[#f9fafb] rounded-xl p-6 max-w-md mx-auto text-center mb-6">
+        <p class="text-[#d7393e] font-bold text-lg mb-2">7️⃣ VERLÄSSLICHKEIT</p>
+        <p class="text-[#374151] text-sm leading-relaxed">Kein Stau, kein Verspätungsrisiko – ich bin bereits vor Ort!</p>
+      </div>
+      <div class="bg-[#f9fafb] rounded-xl p-6 max-w-2xl mx-auto text-center">
+        <p class="text-[#374151] italic leading-relaxed">&bdquo;Warum einen Entertainer aus einer anderen Stadt holen, wenn man den besten direkt hier in Gladbeck hat? LIAR ist authentisch, zuverlässig und die Kinder lieben ihn!&ldquo; – Familie W., Gladbeck-Mitte</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <p class="text-[#1f2025] leading-relaxed mb-6 text-sm">Fotos und Videos haben die Kraft, Emotionen in uns hervorzurufen und erzeugen eine emotionale Verbindung. Viel Spaß beim Stöbern!</p>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+  <!-- Bildergalerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl text-center mb-8">Mehr Fotos und Videos vom Clown Zauberer in der Galerie</h2>
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- WARUM ZÖGERN? -->
+  <section class="bg-[#f9fafb] py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl text-center mb-10">WARUM ZÖGERN?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="text-center">
+          <div class="mx-auto mb-4">
+            <figure class="m-0">
+              <Image src={_gal9Asset} alt="Clown Kinderzauberer im Garten für einen Kindergeburtstag in Gladbeck" class="rounded-full w-40 h-40 object-cover object-[20%] mx-auto shadow-sm" loading="lazy" width={320} height={240} />
+              <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Zaubershow im Garten – Kindergeburtstag in Gladbeck</figcaption>
+            </figure>
+          </div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Große und kleine Bühne</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Ob Schulfeier, Weihnachtsfeier, Hochzeit, Fest, oder Kommunion sowie Kindergärten oder Schulen sorge ich für staunende und lachende Gesichter. Auch im Wohnzimmer für den Kindergeburtstag!</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4">
+            <figure class="m-0">
+              <Image src={_clownerieAsset} alt="Aufnahme Clownerie und Zauberei bei einem Geburtstag in Gladbeck" class="rounded-full w-40 h-40 object-cover object-[20%] mx-auto shadow-sm" loading="lazy" width={160} height={160} />
+              <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Clownerie und Zauberei bei einer Feier in Gladbeck</figcaption>
+            </figure>
+          </div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Einfach und unkompliziert</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Mit wenig Aufwand und fast ohne Vorbereitungszeit komme ich vorbei...und lege mit meinem Programm los: lachende Kinder, ausgelassene Stimmung und entspannte Eltern!</p>
+        </div>
+        <div class="text-center">
+          <div class="mx-auto mb-4">
+            <figure class="m-0">
+              <Image src={_gal8Asset} alt="TOP Zaubervorführung in Gladbeck" class="rounded-full w-40 h-40 object-cover object-[20%] mx-auto shadow-sm" loading="lazy" width={320} height={213} />
+              <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Staunende Kinder bei der Zaubervorführung in Gladbeck</figcaption>
+            </figure>
+          </div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Sehen und mit fiebern</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Die Kinder werden immer wieder mit eingebunden und pendeln die ganze Zeit zwischen Lachen und Staunen...und mein bester Trick funktioniert immer: den Kindern ein Lächeln ins Gesicht zu zaubern.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="w-full bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">400</div>
+        <div class="text-[#1f2025] text-sm mt-1">Shows im Jahr</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse">
+        <div class="text-3xl mb-2">😊</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">110.000</div>
+        <div class="text-[#1f2025] text-sm mt-1">Lachende Kinder</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">15</div>
+        <div class="text-[#1f2025] text-sm mt-1">Jahre Erfahrung</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Einsatzgebiet</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">In welchen Städten ist Clown Zauberer LIAR buchbar?</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Obwohl ich in Gladbeck zu Hause bin, besuche ich auch gerne Kindergeburtstage in den Nachbarstädten:
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/kindergeburtstag/geburtstag-in-dorsten/" class="text-[#3b55d5] hover:underline">Kindergeburtstag Dorsten feiern</a> | <a href="/kindergeburtstag/geburtstag-in-dinslaken/" class="text-[#3b55d5] hover:underline">Kindergeburtstag Dinslaken buchen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/" class="text-[#3b55d5] hover:underline">Kindergeburtstag in Gelsenkirchen</a> | <a href="/kindergeburtstag/geburtstag-in-marl/" class="text-[#3b55d5] hover:underline">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-oberhausen/" class="text-[#3b55d5] hover:underline">Oberhausen</a> | <a href="/kindergeburtstag/geburtstag-in-essen/" class="text-[#3b55d5] hover:underline">Essen</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-herten/" class="text-[#3b55d5] hover:underline">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-bottrop/" class="text-[#3b55d5] hover:underline">Bottrop</a> | <a href="/kindergeburtstag/geburtstag-in-herne/" class="text-[#3b55d5] hover:underline">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/" class="text-[#3b55d5] hover:underline">Bochum</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/" class="text-[#3b55d5] hover:underline">Mülheim</a>
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-fernstaedte>
+            Überregional – mit etwas längerer Anfahrt – bin ich außerdem in Haltern, Xanten, Moers, Waltrop, Datteln, Dortmund, Wesel, Düsseldorf und Duisburg buchbar.
+          </p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Überregional &amp; International</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            🌍 Auf Anfrage auch buchbar in ganz Deutschland sowie Belgien, Frankreich, Österreich und Schweiz!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Kindergeburtstag Gladbeck"
+            class="rounded-xl w-full h-auto shadow-sm img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-[#f9fafb] py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zur Kindergeburtstagsfeier in Gladbeck</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Was braucht Clown LIAR für einen Auftritt?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Ohne Vorbereitungszeit und mit einer Fläche von 2x2 Meter kann ich eine Show vorführen: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Gartenanlage, große und kleine Bühne, Kindergarten, Turnhalle... Ob drinnen oder draußen, das Programm lässt sich spontan und flexibel ausführen!
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wieviel Platz braucht man für das Programm?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            LIAR ist ziemlich pflegeleicht: für die Show ist es wichtig, dass die Kinder gemütlich und ungestört sitzen können!!! Bei der Ballonmodellage ist nichts weiteres nötig. Bei GLITZER TATTOOS wären schon 2 Stühle und einen Tisch wichtig!
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie viele Kinder sollten überhaupt eingeladen werden?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Natürlich soll das Kind seine Freunde einladen. Allerdings sollte man eine feste Zahl als Limit vorgeben. Pädagogen empfehlen, maximal genauso viele Gäste einzuladen, wie das Kind alt wird. Wer kommen darf, soll das Kind selbst bestimmen. Natürlich sind auch dabei die Aufsichtspersonen (mindestens 2) nicht zu vergessen.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EINFACH KONTAKT AUFNEHMEN -->
+  <section class="bg-white py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-4">EINFACH KONTAKT AUFNEHMEN</h2>
+      <p class="text-[#374151] text-center leading-relaxed mb-2">Kindergeburtstag in Gladbeck buchen – Ihr Nachbar ist nur einen Anruf entfernt!</p>
+      <p class="text-[#374151] text-center leading-relaxed mb-8">Sie möchten einen unvergesslichen Kindergeburtstag in Gladbeck feiern? Kontaktieren Sie mich völlig unverbindlich – als Ihr Gladbecker Nachbar bin ich persönlich für Sie da!</p>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="font-bold text-[#1f2025] mb-2">📱 SCHNELLSTE VARIANTE: WhatsApp</p>
+          <p class="text-[#374151] text-sm leading-relaxed"><a href="tel:+491721517578" class="text-[#d7393e] font-bold hover:underline">0172-1517578</a></p>
+          <p class="text-[#374151] text-sm leading-relaxed">Kurz schreiben: &bdquo;Geburtstag in Gladbeck, [Datum], [Stadtteil], ca. [X] Kinder&ldquo; &rarr; Ich melde mich innerhalb von 2 Stunden zurück!</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="font-bold text-[#1f2025] mb-2">☎️ TELEFONISCH (am liebsten!)</p>
+          <p class="text-[#374151] text-sm leading-relaxed"><a href="tel:+491721517578" class="text-[#d7393e] font-bold hover:underline">0172-1517578</a> (täglich 9-20 Uhr)</p>
+          <p class="text-[#374151] text-sm leading-relaxed">Gladbecker lieben's unkompliziert – einfach anrufen und wir besprechen alles direkt!</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="font-bold text-[#1f2025] mb-2">✉️ PER E-MAIL</p>
+          <p class="text-[#374151] text-sm leading-relaxed"><a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] font-bold hover:underline">info@liar-entertainer.com</a></p>
+          <p class="text-[#374151] text-sm leading-relaxed">Schreiben Sie mir Ihre Anfrage – Antwort innerhalb von 24 Stunden garantiert.</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6">
+          <p class="font-bold text-[#1f2025] mb-2">🏠 PERSÖNLICHES TREFFEN</p>
+          <p class="text-[#374151] text-sm leading-relaxed">Auf Wunsch können wir uns auch persönlich in Gladbeck treffen – zum Beispiel bei einem Kaffee in der Stadt. So lernen Sie mich vorab kennen!</p>
+        </div>
+      </div>
+
+      <div class="bg-[#f9fafb] rounded-xl p-6 mb-8">
+        <p class="font-bold text-[#1f2025] mb-3">📝 DIESE INFOS HELFEN MIR BEI DER PLANUNG:</p>
+        <ul class="space-y-2 text-[#374151] text-sm">
+          <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Gewünschtes Datum &amp; Uhrzeit</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Stadtteil in Gladbeck (Brauck, Butendorf, Rentfort, Mitte...)</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Anzahl der Kinder</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Alter des Geburtstagskindes</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Drinnen oder draußen?</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Extras gewünscht? (Ballons/Tattoos)</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Besondere Wünsche oder Motto?</li>
+        </ul>
+      </div>
+
+      <p class="text-[#374151] text-center leading-relaxed mb-6">Ich freue mich darauf, den Kindergeburtstag Ihres Kindes hier in Gladbeck zu einem magischen Erlebnis zu machen!</p>
+
+      <div class="text-center">
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Kontaktformular
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Footer -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Gladbeck -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Gladbeck buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/clown/clownshow/clown-in-gladbeck/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#d7393e] hover:underline font-medium text-sm card-hover">🤡 Clown in Gladbeck</a>
+      <a href="/kinderzauberer/kinderzauberer-in-gladbeck/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#3b55d5] hover:underline font-medium text-sm card-hover">🎩 Kinderzauberer in Gladbeck</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

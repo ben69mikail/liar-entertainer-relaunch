@@ -5,6 +5,13 @@ export const LOCALES = ['de', 'fr', 'en'] as const;
 export type Locale = (typeof LOCALES)[number];
 
 /**
+ * Locales whose pages are actually built. hreflang is only emitted between
+ * published locales, so we never point Google at pages that do not exist yet.
+ * Add 'fr' / 'en' here once their core pages ship.
+ */
+export const PUBLISHED_LOCALES: readonly Locale[] = ['de'];
+
+/**
  * Pages translated to fr/en (brief E2), with their translated paths.
  * Everything else is DE-only. Single source of truth for routing + hreflang.
  */
@@ -46,11 +53,14 @@ export function zoneFor(path: string): Zone {
   return ZONE_RULES.find(([prefix]) => base.startsWith(prefix))?.[1] ?? 'neutral';
 }
 
-export function alternatesFor(path: string): Array<{ hreflang: string; href: string }> {
+export function alternatesFor(
+  path: string,
+  locales: readonly Locale[] = PUBLISHED_LOCALES,
+): Array<{ hreflang: string; href: string }> {
   const entry = coreEntry(path);
-  if (!entry) return [];
+  if (!entry || locales.length < 2) return [];
   return [
-    ...LOCALES.map((l) => ({ hreflang: l, href: SITE + entry[l] })),
+    ...locales.map((l) => ({ hreflang: l, href: SITE + entry[l] })),
     { hreflang: 'x-default', href: SITE + entry.de },
   ];
 }

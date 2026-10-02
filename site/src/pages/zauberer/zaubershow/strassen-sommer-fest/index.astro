@@ -1,0 +1,326 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../../components/HeroSlider.astro';
+import HeroStage from '../../../../components/HeroStage.astro';
+import CountUp from '../../../../components/CountUp.astro';
+import GoogleReviews from '../../../../components/GoogleReviews.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../../../../assets/images/zauberer/strassenfest-essen-hero.jpg';
+import festBottropImg from '../../../../assets/images/zauberer/fest-bottrop.jpg';
+import ballonmodellageEssenImg from '../../../../assets/images/zauberer/ballonmodellage-essen.jpg';
+import kostenPreisImg from '../../../../assets/images/zauberer/kosten-preis-clown-nrw.jpg';
+import weihnachtsmarktDortmundImg from '../../../../assets/images/zauberer/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
+
+const seoTitle = "Zauberer fürs Sommerfest in NRW – Walk-Act & Bühnenshow";
+const seoDescription = 'Clown Zauberer LIAR für Ihr Straßenfest & Sommerfest ✓ Walk Act, Zaubershow & Ballonmodellage ✓ In ganz NRW ✓ 370+ Top-Bewertungen ✓ Jetzt unverbindlich anfragen!';
+
+const formate = [
+  {
+    icon: '🚶‍♂️',
+    title: 'Walk-Act – Zauberkunst mobil und hautnah',
+    dauer: 'Dauer: 2–4 Stunden (flexibel, mit Pausen)',
+    publikum: 'Publikum: Individuelle Begegnungen mit kleinen Gruppen',
+    location: 'Location: Überall auf dem Festgelände',
+    perfektFuer: ['Große Feste mit viel Laufpublikum', 'Feste ohne feste Bühne', 'Als Ergänzung zur Bühnenshow', 'Belebung ruhiger Ecken des Festgeländes', 'Wartezeitüberbrückung (z. B. vor Essensständen)'],
+    highlights: ['Zauberei direkt vor den Augen der Gäste', 'Kartentricks, Münzmagie, Objektzauber', 'Spontane Begegnungen ohne festes Programm', 'Keine Bühne oder Technik nötig'],
+  },
+  {
+    icon: '🎭',
+    title: 'Bühnenzaubershow – Das Highlight für Ihr Fest',
+    dauer: 'Showdauer: 40 Minuten (flexibel anpassbar)',
+    publikum: 'Publikum: 50–500+ Personen',
+    location: 'Location: Bühne, Festplatz, überdachter Bereich',
+    perfektFuer: ['Eröffnung des Festes als Auftakt', 'Hauptprogramm am Nachmittag', 'Abschluss-Highlight am Abend', 'Festes Zeitfenster im Programmablauf'],
+    highlights: ['Verblüffende Zaubertricks mit Zuschauerbeteiligung', 'Lustige Clown-Momente für Lacher', 'Kinder und Erwachsene auf die Bühne geholt', 'Gemeinsames Staunen und Lachen'],
+  },
+  {
+    icon: '🎈',
+    title: 'Ballonmodellage – Bunte Kunstwerke für Kinder',
+    dauer: 'Dauer: 1–4 Stunden (Dauerprogramm)',
+    publikum: 'Publikum: Kinder aller Altersgruppen',
+    location: 'Location: Überall auf dem Festgelände',
+    perfektFuer: ['Kinderbereiche auf Festen', 'Als Dauerprogramm über mehrere Stunden', 'Erinnerung zum Mitnehmen', 'Belebung des Festgeländes'],
+    highlights: ['Schnelle Anfertigung (2 Min. pro Figur)', 'Hunde, Katzen, Schwerter, Kronen, Blumen & mehr', 'Kann mit Walk-Act kombiniert werden', 'Wetterunabhängig (indoor/outdoor)'],
+  },
+];
+
+const festarten = [
+  { icon: '🏘️', title: 'Straßenfest & Stadtteilfest', groesse: '500–5.000 Besucher', formate: 'Walk-Act, Ballonmodellage, optional Bühnenshow' },
+  { icon: '🎡', title: 'Sommerfest (Vereine, Firmen, Gemeinden)', groesse: '200–2.000 Besucher', formate: 'Bühnenshow + Ballonmodellage oder Walk-Act' },
+  { icon: '🏰', title: 'Stadtfest & Altstadtfest', groesse: '5.000–50.000 Besucher', formate: 'Bühnenshow oder ganztägiger Walk-Act' },
+  { icon: '🍂', title: 'Schützenfest & Volksfest', groesse: '500–10.000 Besucher', formate: 'Bühnenshow im Festzelt oder Kinderbereich' },
+  { icon: '🏢', title: 'Dorffest & Gemeindefest', groesse: '100–1.000 Besucher', formate: 'Bühnenshow + Ballonmodellage' },
+  { icon: '🎄', title: 'Weihnachtsmarkt & Adventsmarkt', groesse: '500–20.000 Besucher', formate: 'Walk-Act (winterfest!)' },
+  { icon: '🏢', title: 'Firmenevent & Betriebsfest (Outdoor)', groesse: '50–2.000 Personen', formate: 'Bühnenshow, Walk-Act, Close-Up beim Empfang' },
+  { icon: '☀️', title: 'Store-Opening & Eröffnungsfeier', groesse: '100–1.000 Besucher', formate: 'Walk-Act, Ballonmodellage (Kundenbindung!)' },
+];
+const _pageGallery = [
+  { src: festBottropImg, alt: 'Walk Act auf einem Straßenfest in Bottrop' },
+  { src: ballonmodellageEssenImg, alt: 'Ballonmodellage beim Walk-Act auf einem Straßenfest' },
+  { src: kostenPreisImg, alt: 'Kosten Preis Clown NRW' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Straßenfest Zauberer, Sommerfest Entertainer NRW, Stadtfest Clown, Walk Act Straßenfest, Sommerfest Programm"
+  canonical="https://liar-entertainer.com/zauberer/zaubershow/strassen-sommer-fest/"
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
+        <a href="/zauberer/zaubershow/" class="hover:text-[#d7393e]">Zaubershow</a> »
+        <span>Strassen – Sommer -Fest</span>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Straßen- &amp; Sommerfest</h1>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImg}
+      alt="Straßenfest Zauberer NRW – Clown LIAR auf Stadtfesten und Sommerfesten"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 58% 47%"
+      loading="eager"
+      fetchpriority="high"
+      widths={[600, 900, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 600px;">
+      <div class="text-center px-6">
+        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+          🎉 Straßen- und Sommerfest Zauberer –<br />Ihr Highlight für Stadtfeste in NRW
+        </h2>
+        <p class="text-white/90 text-lg font-medium">Der Zauberer für Ihr erfolgreiches Straßen- und Sommerfest</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <h2 class="font-bold text-[#1f2025] text-2xl mb-4">Wenn Ihr Fest zum magischen Event wird</h2>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Sie planen ein Fest, Straßenfest, Sommerfest, Stadtteilfest oder Vereinsfest in Nordrhein-Westfalen? Als professioneller Pantomime, Zauberer, Clown und Allround-Entertainer bringe ich seit über 30 Jahren Magie, Spaß und Begeisterung auf Feste aller Art!
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Das Besondere: Ich bin nicht auf eine feste Bühne angewiesen! Ob auf großen Stadtfesten mit tausenden Besuchern, gemütlichen Straßenfesten im Wohnviertel oder Vereinssommerfesten – ich passe mich flexibel an und sorge überall für strahlende Gesichter bei Groß und Klein.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Für Veranstalter bedeutet das: Professionelles, vielseitiges Entertainment aus einer Hand, das sich nahtlos in Ihr Festprogramm einfügt. Ich mache Ihr Fest zum Erlebnis! Informieren Sie sich auch über meine Angebote für <a href="/zauberer/zaubershow/kindergarten-kita/" class="text-[#d7393e] hover:underline">Kita- und Kindergartenfeste</a> oder <a href="/zauberer/zaubershow/schule/" class="text-[#d7393e] hover:underline">Schulveranstaltungen</a>.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">✨ Entertainment-Formate für Ihr Fest</h3>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🚶‍♂️</span> <span class="text-[#374151]"><strong>Walk-Act:</strong> Zauberkunst mobil & hautnah – direkt zu den Besuchern</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🎭</span> <span class="text-[#374151]"><strong>Bühnenzaubershow:</strong> Das Highlight für 50–500+ Zuschauer</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🎈</span> <span class="text-[#374151]"><strong>Ballonmodellage:</strong> Bunte Kunstwerke für Kinder als Dauerprogramm</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🔀</span> <span class="text-[#374151]"><strong>Kombiniert buchbar:</strong> Alle Formate lassen sich individuell kombinieren</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">⚡</span> <span class="text-[#374151]"><strong>Unkompliziert:</strong> Minimaler Technikaufwand, ich bringe alles mit</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">📅</span> <span class="text-[#374151]"><strong>30 Jahre Erfahrung:</strong> Auf Festen aller Größen von 100 bis 50.000 Besucher</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <GoogleReviews />
+
+  <!-- Entertainment Formate -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-4">✨ Entertainment-Formate für Ihr Fest</h2>
+      <p class="text-center text-[#374151] mb-10">Vielseitiges Entertainment aus einer Hand – einzeln oder kombiniert buchbar</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {formate.map((f, i) => (
+          <div class={`bg-white rounded-xl p-6 shadow-sm border-t-4 ${['border-[#d7393e]','border-[#3b55d5]','border-[#ffb546]'][i % 3]} card-hover`}>
+            <p class="text-3xl mb-3">{f.icon}</p>
+            <h3 class="font-bold text-[#1f2025] mb-3">{f.title}</h3>
+            <p class="text-[#374151] text-xs mb-1">{f.dauer}</p>
+            <p class="text-[#374151] text-xs mb-1">{f.publikum}</p>
+            <p class="text-[#374151] text-xs mb-4">{f.location}</p>
+            <p class="font-semibold text-[#1f2025] text-sm mb-2">Perfekt für:</p>
+            <ul class="space-y-1 mb-4">
+              {f.perfektFuer.map(p => (
+                <li class="text-[#374151] text-xs flex items-start gap-1"><span class="text-green-500">✓</span> {p}</li>
+              ))}
+            </ul>
+            <p class="font-semibold text-[#1f2025] text-sm mb-2">Was Besucher erleben:</p>
+            <ul class="space-y-1">
+              {f.highlights.map(h => (
+                <li class="text-[#374151] text-xs flex items-start gap-1"><span class="text-[#d7393e]">→</span> {h}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- Stats Section (pastel redesign) -->
+  <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-10 text-center">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Arten von Festen -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-4">🎊 Für welche Feste bin ich buchbar?</h2>
+      <p class="text-center text-[#374151] mb-10">Von A wie Altstadtfest bis Z wie Zeltfest</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        {festarten.map(f => (
+          <div class="bg-gray-50 rounded-xl p-5 card-hover reveal">
+            <p class="text-2xl mb-2">{f.icon}</p>
+            <h3 class="font-bold text-[#1f2025] text-sm mb-2">{f.title}</h3>
+            <p class="text-[#374151] text-xs mb-1">👥 {f.groesse}</p>
+            <p class="text-[#374151] text-xs">🎭 {f.formate}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion (pastel redesign) -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+  <!-- Atmosphäre Beschreibung -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6">🌈 So entsteht die perfekte Fest-Atmosphäre</h2>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Stellen Sie sich vor: Ihr Straßenfest ist in vollem Gange. An der Hauptbühne versammeln sich Familien – Kinder sitzen vorne, Eltern stehen entspannt dahinter mit einem Getränk in der Hand. Dann beginnt meine Show!
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Ein Kind wird auf die Bühne gerufen. Unter den staunenden Blicken von hundert Zuschauern verschwindet ein Ring – und taucht in der Tasche des Kindes wieder auf! Gelächter und Applaus. Ein Seil wird durchgeschnitten, heilt sich magisch wieder. 🎩
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Zwischen den Show-Zeiten schlendere ich als Walk Act durch die Festmeile. An einem Essensstand lasse ich eine Münze verschwinden. Am Ballon-Stand bildet sich eine Schlange – jedes Kind will eine Wunschfigur! Das Ergebnis: Zufriedene Besucher, die länger bleiben.
+          </p>
+        </div>
+        <div>
+          <Image
+            src={weihnachtsmarktDortmundImg}
+            alt="Zaubervorführung auf dem Weihnachtsmarkt Dortmund"
+            class="w-full rounded-xl shadow-sm img-hover-zoom"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-8">📍 Wo bin ich als Fest-Zauberer buchbar?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-3">🏙️ Haupteinsatzgebiet: Nordrhein-Westfalen</h3>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">
+            Essen • Düsseldorf • Dortmund • Köln • Duisburg • Oberhausen • Gelsenkirchen • Bochum • Gladbeck • Mülheim an der Ruhr • Herne • Marl • Dorsten • Herten • Recklinghausen • Krefeld • Moers • Münster • Hagen • Lünen • Bottrop • Castrop-Rauxel • Wuppertal • Ahaus • Reken
+          </p>
+          <h3 class="font-bold text-[#1f2025] mb-2">🌍 Überregional & International</h3>
+          <p class="text-[#374151] text-sm mb-6">Deutschland: Gesamtes Bundesgebiet<br />International: Frankreich, Belgien, Niederlande, Österreich, Schweiz</p>
+          <p class="text-[#374151] text-sm italic">💡 <strong>Tipp für Veranstalter:</strong> Beliebte Fest-Termine (Mai bis September, Wochenenden) sind oft Monate im Voraus ausgebucht. Für etablierte Stadtfeste empfehle ich eine Buchung mindestens 3–6 Monate im Voraus!</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">📞 Direkt anfragen</h3>
+          <div class="space-y-3 text-[#374151]">
+            <p>📱 Telefon & WhatsApp: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
+            <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+            <p>📍 Standort: Beethovenstr. 15, 45966 Gladbeck</p>
+            <p>⚡ Reaktionszeit: Meist innerhalb 24 Stunden</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[#1f2025] py-14 text-white text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎉 Jetzt für Ihr Straßen- oder Sommerfest buchen!</h2>
+      <p class="text-gray-300 mb-6">Ob Straßenfest, Stadtfest, Vereinssommerfest oder Firmenevent – lassen Sie uns gemeinsam Ihr Fest zum magischen Erlebnis machen! Informieren Sie sich auch über meine Shows speziell für <a href="/zauberer/zaubershow/kindergarten-kita/" class="text-white hover:underline font-semibold">Kindergärten und Kitas</a> und <a href="/zauberer/zaubershow/schule/" class="text-white hover:underline font-semibold">Schulen</a>.</p>
+      <div class="space-y-2 text-gray-300 mb-8">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
+        <p>⚡ Schnelle Antwort: Meist innerhalb 24 Stunden</p>
+      </div>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+        Jetzt unverbindlich anfragen
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

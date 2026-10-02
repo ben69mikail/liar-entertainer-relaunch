@@ -1,0 +1,80 @@
+/* ============================================
+   DESIGN TOKENS – Clown Zauberer LIAR
+   Extrahiert aus den 10 Menü-Seiten (Source of Truth)
+   Letzte Aktualisierung: 2026-03-26
+   ============================================ */
+
+:root {
+  /* ── Farben (Brand) ──────────────── */
+  --color-red: #d7393e;
+  --color-red-dark: #b62e32;
+  --color-blue: #3b55d5;
+  --color-blue-dark: #2a3fa8;
+  --color-dark: #1f2025;
+  --color-gold: #ffb546;
+  --color-gold-dark: #e69420;
+
+  /* ── Farben (Text) ──────────────── */
+  --color-text-primary: #1f2025;
+  --color-text-body: #374151;
+  --color-text-light: #7c7c7c;
+  --color-text-white: #ffffff;
+  --color-text-on-blue: #dbeafe; /* text-blue-100 */
+  --color-text-on-red: #fee2e2;  /* text-red-100 */
+
+  /* ── Farben (Hintergrund) ───────── */
+  --color-bg-white: #ffffff;
+  --color-bg-gray: #f9fafb;       /* bg-gray-50 */
+  --color-bg-gray-dark: #f4f4f4;
+
+  /* ── Farben (Border) ────────────── */
+  --color-border-light: #e5e7eb;   /* gray-200 */
+  --color-border-medium: #d1d5db;  /* gray-300 */
+
+  /* ── Typografie ──────────────────── */
+  --font-family: Poppins, Arial, Helvetica, sans-serif;
+  --font-size-body: 17px;
+  --font-size-sm: 0.875rem;   /* 14px */
+  --font-size-base: 1rem;     /* 16px */
+  --font-size-lg: 1.125rem;   /* 18px */
+  --font-size-xl: 1.25rem;    /* 20px */
+  --font-size-2xl: 1.5rem;    /* 24px */
+  --font-size-3xl: 1.875rem;  /* 30px */
+
+  /* ── Section Padding ────────────── */
+  --section-py: 3.5rem;        /* py-14 = Standard */
+  --section-py-sm: 2.5rem;     /* py-10 */
+  --section-py-md: 3rem;       /* py-12 */
+  --section-px: 1rem;          /* px-4 */
+
+  /* ── Container-Breiten ──────────── */
+  --container-narrow: 48rem;    /* max-w-3xl = 768px */
+  --container-medium: 56rem;    /* max-w-4xl = 896px */
+  --container-wide: 64rem;      /* max-w-5xl = 1024px */
+  --container-full: 72rem;      /* max-w-6xl = 1152px */
+
+  /* ── Wave SVG ───────────────────── */
+  --wave-height: 60px;
+  --wave-path: "M0,0 Q720,60 1440,0 L1440,60 L0,60 Z";
+  --wave-viewbox: "0 0 1440 60";
+
+  /* ── Bilder ─────────────────────── */
+  --img-radius: 0.75rem;       /* rounded-xl */
+  --img-radius-sm: 0.5rem;     /* rounded-lg */
+  --img-circular: 9999px;       /* rounded-full */
+  --img-portrait-size: 320px;   /* Standard Portrait-Durchmesser */
+
+  /* ── Schatten ───────────────────── */
+  --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+  --shadow-md: 0 4px 6px rgba(0,0,0,0.07);
+  --shadow-lg: 0 10px 15px rgba(0,0,0,0.1);
+
+  /* ── Karten ─────────────────────── */
+  --card-radius: 0.75rem;       /* rounded-xl */
+  --card-padding: 2rem;         /* p-8 */
+  --card-shadow: 0 1px 2px rgba(0,0,0,0.05); /* shadow-sm */
+  --card-border-width: 4px;     /* border-t-4 */
+
+  /* ── CONSTRAINTS ────────────────── */
+  --max-colored-sections: 2;    /* Max 2 farbige Sektionen pro Seite */
+}

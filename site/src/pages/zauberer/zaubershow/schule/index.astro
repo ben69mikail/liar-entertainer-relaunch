@@ -1,0 +1,408 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroStage from '../../../../components/HeroStage.astro';
+import CountUp from '../../../../components/CountUp.astro';
+import GoogleReviews from '../../../../components/GoogleReviews.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../../../../assets/images/zauberer/schule-hero.jpg';
+import galerieImg12 from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-12.jpg';
+import schuleDortmundImg from '../../../../assets/images/zauberer/zaubershow-schule-dortmund.jpg';
+import karteImg from '../../../../assets/images/kinderzauberer/clown-zauberer-gladbeck.jpg';
+
+const seoTitle = 'Zaubershow für Schule NRW | LIAR';
+const seoDescription = 'Zaubershow für Ihre Schule in NRW ✓ Clown Zauberer LIAR bringt Kinder zum Lachen & Staunen ✓ 370+ Top-Bewertungen ✓ Für Schulfest & Projekttage ✓ Jetzt anfragen!';
+
+const faqItems = [
+  { q: 'Für welche Klassenstufen ist die Zaubershow geeignet?', a: 'Die Show ist auf Grundschulkinder der Klassen 1 bis 4 abgestimmt und wird altersgerecht angepasst – von der Einschulungsfeier bis zur Karnevalsfeier für die älteren Schüler.' },
+  { q: 'Wie viel Platz wird für die Zaubershow in der Schule benötigt?', a: 'Es genügt eine Fläche von etwa 2×2 Metern; für größere Veranstaltungen sind 4×4 Meter ideal. Die Show funktioniert im Klassenraum, in der Aula oder in der Turnhalle – bei Regen problemlos drinnen.' },
+  { q: 'Wie lange dauert eine Zaubershow für die Schule?', a: 'Die Hauptshow dauert in der Regel rund 40 Minuten. Für Einschulungsfeiern ist auch eine kürzere Variante von etwa 35 Minuten möglich.' },
+  { q: 'Für welche Schul-Anlässe eignet sich die Zaubershow?', a: 'Als zentrales Bühnenprogramm für Schulfeste, Sommerfeste, Einschulungen, Projekttage und Karnevalsfeiern – jeweils passend für die Klassen 1 bis 4.' },
+  { q: 'Seit wann tritt Clown Zauberer LIAR an Schulen auf?', a: 'LIAR steht seit 2009 als professioneller Clown Zauberer auf der Bühne und bringt seither Magie und Staunen in Grundschulen im Ruhrgebiet und in ganz NRW.' },
+];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })),
+};
+
+const anlaesse = [
+  {
+    icon: '🎪',
+    title: 'Schulfest & Sommerfest',
+    text: 'DER Klassiker! Die Zaubershow ist das Highlight des Schulfestes und begeistert Schüler, Eltern, Geschwister und Lehrer gleichermaßen. Perfekt als zentrales Bühnenprogramm.',
+    checks: ['Begeistert alle Altersgruppen (Klasse 1–4)', 'Eltern erleben ihre Kinder in Aktion', 'Wetterfest (bei Regen einfach in der Turnhalle)', 'Keine aufwendige Technik nötig', 'Schafft gemeinsame Erinnerungen'],
+    dauer: 'Optimal: 40 Minuten Hauptshow',
+  },
+  {
+    icon: '🎓',
+    title: 'Einschulung & Einschulungsfeier',
+    text: 'Ein magischer Start ins Schulleben! Die Einschulungsfeier wird mit einer Zaubershow zu einem unvergesslichen ersten Schultag. Die frischgebackenen Erstklässler erleben: „Schule ist toll!\"',
+    checks: ['Speziell auf ABC-Schützen abgestimmt', 'Etwas einfacher als für ältere Kinder', 'Eltern, Großeltern und Verwandte sind dabei', 'Feierlicher Rahmen mit viel Humor'],
+    dauer: 'Dauer: 35 Minuten (nicht zu lang für die Aufregung)',
+  },
+  {
+    icon: '🎭',
+    title: 'Karneval',
+    text: 'Eine würdevolle und zugleich fröhliche Feier! Die Schüler bekommen eine besondere Zaubershow für eine besondere Feierlichkeit: KARNEVAL. Diese Show ist etwas anspruchsvoller und würdigt auch die „Großen\".',
+    checks: ['Komplexere Tricks für die älteren Schüler', 'Mehr Humor und Wortspiele', 'Emotionale Feier mit schöner Erinnerung'],
+    dauer: 'Dauer: 40 Minuten',
+  },
+];
+
+const praktisch = [
+  {
+    icon: '📐',
+    title: 'Platzbedarf & Räume',
+    content: [
+      { label: 'Minimaler Platzbedarf', value: '2×2 Meter' },
+      { label: 'Ideal für große Veranstaltungen', value: '4×4 Meter' },
+    ],
+    raeume: ['Turnhalle / Sporthalle (optimal für große Gruppen!)', 'Aula (falls vorhanden)', 'Mehrzweckraum', 'Musikraum (bei kleineren Gruppen)', 'Großes Klassenzimmer (bei einzelnen Klassen)', 'Außenbereich (überdacht, bei gutem Wetter)'],
+  },
+  {
+    icon: '👥',
+    title: 'Gruppengrößen',
+    gruppen: [
+      { label: 'Einzelne Klasse: 20–30 Schüler', desc: 'Sehr intime Show, Dauer: 30–40 Min.' },
+      { label: 'Zwei Klassen: 40–60 Schüler', desc: 'Noch viel Interaktion möglich, Dauer: 40 Min.' },
+      { label: 'Halbe Schule / Stufe: 60–100 Schüler', desc: 'Ideal für Klasse 1–3 und 2–4 getrennt, Dauer: 40–45 Min.' },
+      { label: 'Ganze Schule: 100–200+ Schüler', desc: 'Bei Schulfesten oft alle zusammen, Dauer: 45 Min.' },
+    ],
+  },
+  {
+    icon: '⏱️',
+    title: 'Showdauer',
+    zeiten: [
+      { label: 'Standard-Show: ca. 40 Min.', desc: 'Ideal für gemischte Klassen und Stufen – von Erstklässlern bis Viertklässlern' },
+    ],
+    note: 'Die Dauer wird individuell mit Ihnen abgestimmt!',
+  },
+];
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  structuredData={[faqSchema]}
+  keywords="Zaubershow Schule, Zauberer Grundschule, Schulshow NRW, Zaubershow Schulfest, Zauberer Einschulung"
+  canonical="https://liar-entertainer.com/zauberer/zaubershow/schule/"
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
+        <a href="/zauberer/zaubershow/" class="hover:text-[#d7393e]">Zaubershow</a> »
+        <span>Schule</span>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Schule</h1>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImg}
+      alt="Zaubershow für Schulen in NRW"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 46% 66%"
+      loading="eager"
+      fetchpriority="high"
+      widths={[600, 900, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 600px;">
+      <div class="text-center px-6">
+        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+          🎪 Die magische Zaubershow<br />für Ihre Schulveranstaltung
+        </h2>
+        <p class="text-white/90 text-lg font-medium">Magie &amp; Lernspaß für Schulkinder der Klassen 1–4</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Als erfahrener und professioneller Clown Zauberer für Schulen bringe ich seit 2009 Magie, Staunen und Begeisterung in Grundschulen im Ruhrgebiet. Meine Zaubershow ist speziell auf Schulkinder der Klassen 1 bis 4 abgestimmt – altersgerecht, interaktiv und mit pädagogischem Mehrwert. ✨
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Ob für Ihr Schulfest, die Einschulungsfeier, Projekttage, Abschlussfeiern der Viertklässler oder als besonderes Highlight im Schuljahr: Meine Zaubershow verwandelt jeden Schultag in ein unvergessliches Erlebnis. Die Schüler werden aktiv eingebunden, erleben Magie hautnah und sind die Stars der Show – nicht die Zaubertricks!
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Das Besondere? Meine Show fördert Konzentration, logisches Denken, Selbstvertrauen und soziales Lernen. Für Lehrkräfte und Schulleitung: Minimaler organisatorischer Aufwand bei maximalem pädagogischem und Unterhaltungswert. Für jüngere Kinder empfehle ich mein spezielles Programm für <a href="/zauberer/zaubershow/kindergarten-kita/" class="text-[#d7393e] hover:underline">Kindergärten und Kitas</a>. Ich trete auch regelmäßig auf <a href="/zauberer/zaubershow/strassen-sommer-fest/" class="text-[#d7393e] hover:underline">Straßen- und Sommerfesten</a> auf.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">⭐ Was meine Show für Schulen so besonders macht:</h3>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🎯</span> <span class="text-[#374151]"><strong>Altersgerecht für Klassen 1–4:</strong> Einfache Tricks, kurze Geschichten, viel Bewegung</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">👥</span> <span class="text-[#374151]"><strong>Große Gruppen kein Problem:</strong> Erfahrung mit 20 bis 200+ Schülern</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">📚</span> <span class="text-[#374151]"><strong>Pädagogischer Mehrwert:</strong> Fördert Konzentration, logisches Denken & Selbstbewusstsein</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🤝</span> <span class="text-[#374151]"><strong>Inklusion:</strong> Alle Schüler werden eingebunden – schüchterne wie wilde</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">⚡</span> <span class="text-[#374151]"><strong>Unkompliziert:</strong> Nur 2×2 Meter Platz, kein Strom nötig, ich bringe alles mit</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🔄</span> <span class="text-[#374151]"><strong>Mehrere Shows möglich:</strong> 2–3 Shows hintereinander an einem Vormittag buchbar</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <GoogleReviews />
+
+  <!-- Altersgruppen -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-4">🌟 Für jede Altersgruppe die richtige Zauberkunst</h2>
+      <p class="text-center text-[#374151] mb-10">Von der Grundschule bis zur weiterführenden Schule</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-4">🎨 Grundschüler</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Für jüngere Schüler arbeite ich mit bunten, visuellen Tricks und viel Bewegung: Ringe verschwinden spurlos, Seile zerschneiden sich von selbst wieder zusammen, und plötzlich erscheinen Süßigkeiten aus dem Nichts! Die Show ist lebhaft, interaktiv und perfekt auf die kurze Aufmerksamkeitsspanne abgestimmt.
+          </p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-4">🧠 Ältere Schüler</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Bei älteren Schülern setze ich auf verblüffende Mentalmagie, Kartentricks und interaktive Illusionen, die auch kritische junge Köpfe ins Grübeln bringen. Der Clown schafft dabei die lockere Atmosphäre, während der <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a> mit seinen Tricks für Gänsehaut-Momente sorgt.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Akzentbild 1 -->
+  <div class="bg-white pt-10 pb-2">
+    <div class="flex justify-center px-4">
+      <Image
+        src={galerieImg12}
+        alt="Zaubershow in einer Schule mit Clown Zauberer LIAR"
+        class="rounded-xl shadow-sm img-hover-zoom"
+        style="max-width: 220px; width: 100%;"
+        loading="lazy"
+        widths={[220, 440]}
+        sizes="220px"
+      />
+    </div>
+  </div>
+
+  <!-- Anlässe -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">🎓 Perfekt für jeden Anlass an Ihrer Schule</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {anlaesse.map(a => (
+          <div class="bg-gray-50 rounded-xl p-6 shadow-sm card-hover reveal">
+            <p class="text-3xl mb-3">{a.icon}</p>
+            <h3 class="font-bold text-[#1f2025] mb-2">{a.title}</h3>
+            <p class="text-[#374151] text-sm leading-relaxed mb-4">{a.text}</p>
+            <ul class="space-y-1 mb-4">
+              {a.checks.map(c => (
+                <li class="text-[#374151] text-xs flex items-start gap-1"><span class="text-green-500">✓</span> {c}</li>
+              ))}
+            </ul>
+            <p class="text-[#d7393e] text-xs font-semibold">{a.dauer}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section (pastel redesign) -->
+  <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-10 text-center">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Akzentbild 2 -->
+  <div class="bg-white pt-10 pb-2">
+    <div class="flex justify-center px-4">
+      <Image
+        src={schuleDortmundImg}
+        alt="Zaubershow Schule Dortmund"
+        class="rounded-xl shadow-sm img-hover-zoom"
+        style="max-width: 220px; width: 100%;"
+        loading="lazy"
+        widths={[220, 440]}
+        sizes="220px"
+      />
+    </div>
+  </div>
+
+  <!-- Praktische Details -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">📋 Praktische Details für Schulen</h2>
+      <p class="text-center text-[#374151] mb-10">Organisatorisches für Ihre Schule – Alles auf einen Blick</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Platzbedarf -->
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">📐 Platzbedarf & Räume</h3>
+          <p class="text-[#374151] text-sm mb-1">Minimaler Platzbedarf: <strong>2×2 Meter</strong></p>
+          <p class="text-[#374151] text-sm mb-3">Ideal für große Veranstaltungen: <strong>4×4 Meter</strong></p>
+          <p class="font-semibold text-[#1f2025] text-sm mb-2">Geeignete Räume:</p>
+          <ul class="text-[#374151] text-sm space-y-1">
+            <li>✓ Turnhalle / Sporthalle (optimal!)</li>
+            <li>✓ Aula (falls vorhanden)</li>
+            <li>✓ Mehrzweckraum</li>
+            <li>✓ Musikraum (kleinere Gruppen)</li>
+            <li>✓ Großes Klassenzimmer</li>
+            <li>✓ Außenbereich (überdacht)</li>
+          </ul>
+        </div>
+        <!-- Gruppengrößen -->
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">👥 Gruppengrößen</h3>
+          <ul class="text-[#374151] text-sm space-y-3">
+            <li><strong>Einzelne Klasse: 20–30 Schüler</strong><br />Sehr intime Show, Dauer: 30–40 Min.</li>
+            <li><strong>Zwei Klassen: 40–60 Schüler</strong><br />Noch viel Interaktion möglich, Dauer: 40 Min.</li>
+            <li><strong>Halbe Schule: 60–100 Schüler</strong><br />Ideal für Klasse 1–3 und 2–4 getrennt, Dauer: 40–45 Min.</li>
+            <li><strong>Ganze Schule: 100–200+ Schüler</strong><br />Dauer: 45 Min. – Mikrofon empfehlenswert</li>
+          </ul>
+          <p class="text-[#374151] text-xs mt-3 italic">💡 Mehrere Shows hintereinander möglich – z. B. erst Klasse 1–3, dann Klasse 2–4</p>
+        </div>
+        <!-- Showdauer -->
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">⏱️ Showdauer & Technik</h3>
+          <p class="text-[#374151] text-sm mb-2"><strong>Standard-Show: ca. 40 Minuten</strong></p>
+          <p class="text-[#374151] text-sm leading-relaxed mb-3">
+            Ideal für gemischte Klassen und Stufen – von Erstklässlern bis zu Viertklässlern. Die perfekte Länge, um alle Kinder zu begeistern, ohne die Aufmerksamkeitsspanne zu überschreiten.
+          </p>
+          <p class="font-semibold text-[#1f2025] text-sm mb-2">Technik – Minimal!</p>
+          <ul class="text-[#374151] text-sm space-y-1">
+            <li>✓ Kein Strom nötig</li>
+            <li>✓ Kein Mikrofon (bis ~80 Schüler)</li>
+            <li>✓ Keine Bühne, keine Musikanlage</li>
+            <li>✓ Ich bringe alles mit!</li>
+          </ul>
+          <p class="text-[#374151] text-xs mt-3 italic">💡 Optional für 100+ Schüler: Ein Mikrofon ist hilfreich – falls vorhanden, nutze ich es gerne.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion (pastel redesign) -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-8">📍 Zaubershow für Schulen in ganz NRW</h2>
+      <p class="text-[#374151] text-center mb-8">Regional verwurzelt, überregional buchbar – als erfahrener Schulzauberer bin ich für Ihre Schule da.</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-3">Ruhrgebiet</h3>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">Oberhausen, Essen, Duisburg, Mülheim, Gelsenkirchen, Bochum, Dortmund, Bottrop, Gladbeck, Herten, Herne, Marl, Recklinghausen, Dinslaken</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Rheinland</h3>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">Düsseldorf, Krefeld, Moers, Neuss, Köln, Leverkusen, Mönchengladbach</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Münsterland</h3>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">Münster, Dorsten, Reken, Ahaus, Coesfeld, Haltern am See</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Weitere Städte</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Dortmund, Lünen, Hagen, Bochum, Witten und viele mehr</p>
+          <p class="text-[#374151] text-sm mt-2">🌍 Auf Anfrage auch deutschlandweit sowie in Belgien, Niederlande, Frankreich, Österreich und der Schweiz buchbar!</p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Wohnort Clown Zauberer LIAR"
+            class="rounded-xl shadow-sm w-full max-w-md img-hover-zoom"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[#1f2025] py-14 text-white text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎪 Jetzt Zaubershow für Ihre Schule buchen!</h2>
+      <p class="text-gray-300 mb-6">Ob Schulfest, Einschulung oder Karneval – lassen Sie uns gemeinsam ein unvergessliches Erlebnis für Ihre Schülerinnen und Schüler schaffen! Entdecken Sie auch mein Programm für <a href="/zauberer/zaubershow/kindergarten-kita/" class="text-white hover:underline font-semibold">Kindergärten und Kitas</a> oder bei <a href="/zauberer/zaubershow/strassen-sommer-fest/" class="text-white hover:underline font-semibold">Straßen- und Sommerfesten</a>.</p>
+      <div class="space-y-2 text-gray-300 mb-8">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
+        <p>⚡ Schnelle Antwort: Meist innerhalb 24 Stunden</p>
+        <p class="text-yellow-300">💡 Tipp: Beliebte Termine vor den Sommerferien oder zur Weihnachtszeit sind schnell vergeben – frühzeitig anfragen lohnt sich!</p>
+      </div>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+        Jetzt unverbindlich anfragen
+      </a>
+    </div>
+  </section>
+
+
+  <!-- FAQ (sichtbar + FAQPage-Schema) -->
+  <section class="py-14 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center text-2xl font-extrabold text-[#1f2025] mb-8">Häufig gestellte Fragen</h2>
+      <div class="space-y-4">
+        {faqItems.map((i) => (
+          <details class="bg-[#f9fafb] rounded-xl p-5 group">
+            <summary class="font-bold cursor-pointer text-[#1f2025] flex justify-between items-center gap-4">
+              <span>{i.q}</span>
+              <span class="text-[#d7393e] transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+            </summary>
+            <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">{i.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,55 @@
+---
+// Zahl, die beim Scroll-in hochzählt. Rendert nur die Zahl (Styling bleibt bei der Seite).
+// reduced-motion -> sofort Endwert. Tausenderpunkte (de-DE).
+interface Props {
+  value: number;
+  suffix?: string;
+  duration?: number;
+  class?: string;
+}
+const { value, suffix = '', duration = 1600, class: cls = '' } = Astro.props;
+const formatted = value.toLocaleString('de-DE');
+---
+<span class:list={["countup-num", cls]} data-countup={value} data-suffix={suffix} data-duration={duration}>{formatted}{suffix}</span>
+
+<script>
+  function animate(el: HTMLElement) {
+    const target = parseFloat(el.dataset.countup || '0');
+    const suffix = el.dataset.suffix || '';
+    const dur = parseInt(el.dataset.duration || '1600', 10);
+    const fmt = (n: number) => Math.floor(n).toLocaleString('de-DE') + suffix;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      el.textContent = fmt(target);
+      return;
+    }
+    let start: number | null = null;
+    function step(ts: number) {
+      if (start === null) start = ts;
+      const p = Math.min((ts - start) / dur, 1);
+      el.textContent = fmt(p * target);
+      if (p < 1) requestAnimationFrame(step);
+      else el.textContent = fmt(target);
+    }
+    requestAnimationFrame(step);
+  }
+  function initCountUps() {
+    const els = document.querySelectorAll<HTMLElement>('[data-countup]:not([data-cu-init])');
+    if (!('IntersectionObserver' in window)) {
+      els.forEach((el) => { el.dataset.cuInit = '1'; animate(el); });
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting) {
+          const el = e.target as HTMLElement;
+          el.dataset.cuInit = '1';
+          animate(el);
+          io.unobserve(el);
+        }
+      });
+    }, { threshold: 0.4 });
+    els.forEach((el) => io.observe(el));
+  }
+  initCountUps();
+  document.addEventListener('astro:after-swap', initCountUps);
+</script>

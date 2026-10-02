@@ -1,0 +1,408 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import CountUp from '../../../components/CountUp.astro';
+import aktionImg from '../../../assets/images/kinderzauberer/clown-zauberer-gladbeck.jpg';
+import { Image } from 'astro:assets';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import _heroImgAsset from '../../../assets/images/kinderzauberer/kinderzauberer-hero.jpg';
+import _roundImgAsset from '../../../assets/images/kinderzauberer/zaubershow-mit-clown-zauberer-liar.jpg';
+import _showImgAsset from '../../../assets/images/clown/clown-bei-clownshow.jpg';
+import _kgImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import _galleryImgAsset from '../../../assets/images/clown/kinderzauberer-kindergarten-essen.jpg';
+
+const seoTitle = "Zauberer Kindergeburtstag Wesel | Kinderzauberer LIAR";
+const seoDescription = "Kinderzauberer in Wesel buchen ✓ Zaubershow für Kindergeburtstag & Events am Niederrhein ✓ 370+ Bewertungen ✓ Auch in Dinslaken & Xanten ✓ Jetzt anfragen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Kinderzauberer in Wesel",
+  "description": "Kinderzauberer LIAR für Kindergeburtstag und Kinderevents in Wesel am Niederrhein, NRW",
+  "url": "https://liar-entertainer.com/kinderzauberer/kinderzauberer-in-wesel/",
+  "serviceType": ["Kinderzauberer", "Zaubershow für Kinder"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "City", "name": "Wesel" }
+};
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Kommt der Kinderzauberer auch in die Weseler Ortsteile?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ja! Ob Obrighoven, Büderich, Flüren, Feldmark, Fusternberg oder Blumenkamp – ich trete in ganz Wesel und den umliegenden Gemeinden am Niederrhein auf. Über die A3 und B58 bin ich gut zu erreichen, auch rechts und links des Rheins."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie viel Platz braucht die Zaubershow in Wesel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nur 2×2 Meter! Ob Wohnzimmer in der Feldmark, Partyraum in Obrighoven, Gartenfest in Flüren oder Gemeindesaal in Büderich: Die Show funktioniert ohne lange Vorbereitungszeit in praktisch jeder Räumlichkeit – und bei gutem Wetter natürlich auch draußen."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Lohnt sich die Anfahrt des Zauberers nach Wesel?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Absolut – Wesel gehört fest zu meinem Einsatzgebiet am Niederrhein. Von Gladbeck aus bin ich über die A31 und A3 zügig bei Ihnen. Die Anfahrt stimme ich vorab mit Ihnen ab, damit die Show pünktlich zum geplanten Programmpunkt Ihrer Feier beginnt."
+      }
+    }
+  ]
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kinderzauberer Wesel, Kinderzauberer in Wesel, Zauberer Wesel, Kindergeburtstag Wesel, Zaubershow Wesel, Niederrhein, NRW"
+  canonical="https://liar-entertainer.com/kinderzauberer/kinderzauberer-in-wesel/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kinderzauberer', url: '/kinderzauberer/' },
+    { name: 'Kinderzauberer in Wesel', url: '/kinderzauberer/kinderzauberer-in-wesel/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 60%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Wesel
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Zauberer für den Kindergeburtstag in Wesel
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Kinderzauberer LIAR aus Gladbeck – 40 Minuten Zaubershow für Kinder von 4 bis 12 Jahren in Wesel.
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a>
+        <span class="mx-1">»</span>
+        <span>Kinderzauberer in Wesel – Zaubershow für Kindergeburtstag & Events</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Text + Image -->
+  <section class="py-14">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Ein Zauberer für Kinder muss in Wesel vor allem eines können: die Kleinen 40 Minuten lang fesseln. Kinderzauberer LIAR bringt seine interaktive Mitmach-Zaubershow für Kinder ab 4 Jahren an den Niederrhein nach Wesel – nach Obrighoven, Büderich oder Flüren genauso wie in die Innenstadt. Rund 40 Minuten Staunen und Lachen, für die schon 2×2 Meter Platz im Wohnzimmer genügen. 370+ Google-Bewertungen sprechen für sich.</p>
+      </div>
+      <div class="flex justify-center">
+        <Image
+          src={_roundImgAsset}
+          alt="Kinderzauberer in Wesel"
+          class="rounded-full object-cover object-[20%] portrait-zoom"
+          style="width: 320px; height: 320px;"
+          loading="lazy" width={600} height={450} />
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <section class="bg-[#eff4ff] py-14 border-y border-[#c5d3f7]">
+    <div class="max-w-5xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4 text-center">WESEL</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-10 text-center">Warum LIAR als Kinderzauberer in Wesel buchen? ⭐</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">Die Hansestadt am Rhein hat für Familien viel zu bieten – vom Auesee bis zur Zitadelle. Und wenn zu Hause gefeiert wird, sorge ich für das Programm: Meine interaktive Zaubershow begeistert Kinder von 4 bis 12 Jahren, ob beim Kindergeburtstag in der Feldmark, beim Kita-Fest in Büderich oder beim Vereinsfest in Flüren.</p>
+      <p class="text-[#1f2025] leading-relaxed mb-4">Als erfahrener Zauberer für Kinder erlebe ich täglich glänzende Kinderaugen und staunende Gesichter. In zauberhaften Geschichten verwandle ich Alltagsgegenstände in magische Requisiten – die Kinder wirken aktiv mit, werden selbst zu kleinen Zauberern und sorgen für ausgelassene Stimmung bei Klein und Groß!</p>
+      <div class="text-center mt-8">
+        <a href="#zaubershow" class="inline-block bg-[#3b55d5] text-white font-bold px-8 py-3 rounded transition-colors hover:bg-[#2a3fa8]">
+          Über die Zaubershow
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zaubershow in Wesel -->
+  <section id="zaubershow" class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl mb-6">Zaubershow in Wesel: Interaktiv, lustig und unvergesslich 🎭</h2>
+        <p class="text-[#374151] mb-4 leading-relaxed">Meine Zaubershow in Wesel ist eine unterhaltsame Mischung aus Zauberei und Clownerie, bei der die Kinder (nicht die Zaubertricks!) im Mittelpunkt stehen. Die jungen Zuschauer werden aktiv eingebunden und pendeln zwischen Lachen und Staunen – vom ersten bis zum letzten Trick.</p>
+        <p class="text-[#374151] mb-4 leading-relaxed">Diese bunte und zauberhafte Show ist optimal auf die jeweilige Altersklasse abgestimmt. Die Kinder wirken aktiv mit, werden selbst zum Zauberer und erleben erstaunliche Momente, die unglaublich wirken. Für Familien am Niederrhein wird diese Clown- und Zaubershow zu einem unvergesslichen Erlebnis. Die nachfolgenden Videos vermitteln Ihnen einen authentischen Eindruck von meiner Arbeit mit Kindern.</p>
+      </div>
+      <div>
+        <Image src={_showImgAsset} alt="Zaubershow in Wesel" class="rounded-xl w-full object-cover object-top shadow-sm" loading="lazy" width={506} height={640} />
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Kindergeburtstag in Wesel mit Kinderzauberer feiern -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl mb-6">Kindergeburtstag in Wesel mit Kinderzauberer feiern</h2>
+        <p class="text-[#374151] mb-4 leading-relaxed">Einen Kinderzauberer für den Kindergeburtstag in Wesel zu buchen ist einfacher als gedacht! Ich komme zu Ihnen nach Hause, in den Partykeller oder in die angemietete Location – ob mitten in der Innenstadt, in Obrighoven oder auf der anderen Rheinseite in Büderich.</p>
+        <p class="text-[#374151] mb-4 leading-relaxed">Das Geburtstagskind steht dabei immer im Mittelpunkt meiner Show und spielt bei den Zaubertricks die Hauptrolle. Die Kinder werden zum Lachen und Staunen gebracht. Das Ergebnis: lachende Kinder, ausgelassene Stimmung und entspannte Eltern!</p>
+        <a href="/kindergeburtstag/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors mt-4">
+          Kindergeburtstag – Preise
+        </a>
+      </div>
+      <div>
+        <Image src={_kgImgAsset} alt="Kindergeburtstag mit Kinderzauberer in Wesel" class="rounded-xl w-full object-cover object-top shadow-sm" loading="lazy" width={800} height={1067} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Anlässe für den Kinderzauberer in Wesel -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-10">Anlässe für den Kinderzauberer in Wesel 👧👦</h2>
+      <p class="text-[#374151] text-center mb-8 leading-relaxed">Meine Zaubershow ist perfekt für verschiedene Veranstaltungen in Wesel und Umgebung:</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <div class="text-2xl mb-3">🎂</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Kindergeburtstag</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Unvergessliche Feier zu Hause oder in gemieteten Locations</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <div class="text-2xl mb-3">🏫</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Schulfeste & Kita-Events</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Sommerfest, Abschlussfeier oder Weihnachtsfeier im Kindergarten</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <div class="text-2xl mb-3">🏢</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Firmenfeiern & Betriebsfeste</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Unterhaltung für die kleinen Gäste bei Firmenevents</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <div class="text-2xl mb-3">💒</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Hochzeiten & Familienfeiern</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Kinderbetreuung mit Zaubershow auf Hochzeiten und Festen</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <div class="text-2xl mb-3">🎪</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Stadt- & Straßenfeste</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Walk Act und Bühnenshow für öffentliche Veranstaltungen</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <div class="text-2xl mb-3">⛪</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Kommunion & Konfirmation</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Magische Unterhaltung für die Feier nach dem Gottesdienst</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildergalerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4 flex justify-center">
+      <Image src={_galleryImgAsset} alt="Veranstaltung mit Zaubershow: Kinderzauberer in Wesel" class="rounded-xl w-full max-w-md object-cover object-top shadow-sm" style="max-height:400px;max-width:28rem" loading="lazy" width={320} height={480} />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Kinderzauberer in Wesel</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Kommt der Kinderzauberer auch in die Weseler Ortsteile?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Ja! Ob Obrighoven, Büderich, Flüren, Feldmark, Fusternberg oder Blumenkamp – ich trete in ganz Wesel und den umliegenden Gemeinden am Niederrhein auf. Über die A3 und B58 bin ich gut zu erreichen, auch rechts und links des Rheins.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie viel Platz braucht die Zaubershow in Wesel?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Nur 2×2 Meter! Ob Wohnzimmer in der Feldmark, Partyraum in Obrighoven, Gartenfest in Flüren oder Gemeindesaal in Büderich: Die Show funktioniert ohne lange Vorbereitungszeit in praktisch jeder Räumlichkeit – und bei gutem Wetter natürlich auch draußen.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Lohnt sich die Anfahrt des Zauberers nach Wesel?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Absolut – Wesel gehört fest zu meinem Einsatzgebiet am Niederrhein. Von Gladbeck aus bin ich über die A31 und A3 zügig bei Ihnen. Die Anfahrt stimme ich vorab mit Ihnen ab, damit die Show pünktlich zum geplanten Programmpunkt Ihrer Feier beginnt.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Einsatzgebiete: Kinderzauberer in Wesel und am Niederrhein</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Als Kinderzauberer bin ich in Wesel und am gesamten Niederrhein buchbar, darunter: <a href="/kinderzauberer/kinderzauberer-in-dinslaken/" class="text-[#3b55d5] hover:underline">Dinslaken</a>, Xanten, Moers, Hamminkeln, Voerde, Schermbeck und Rees. Auch das Ruhrgebiet – etwa Duisburg und <a href="/kinderzauberer/kinderzauberer-in-dorsten/" class="text-[#3b55d5] hover:underline">Dorsten</a> – gehört zu meinem Kerngebiet; ansässig bin ich als <a href="/kinderzauberer/kinderzauberer-in-gladbeck/" class="text-[#3b55d5] hover:underline">Kinderzauberer für Gladbeck</a>.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Auf Anfrage bin ich auch außerhalb von NRW buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={aktionImg}
+            alt="Karte Einsatzgebiet Kinderzauberer Wesel"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Wesel -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Wesel buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kindergeburtstag/geburtstag-in-wesel/" class="bg-[#d7393e] hover:bg-[#b62e32] text-white rounded-lg px-5 py-3 font-bold text-sm transition-colors">🎂 Kindergeburtstag in Wesel</a>
+      <a href="/clown/clownshow/clown-in-wesel/" class="bg-[#d7393e] hover:bg-[#b62e32] text-white rounded-lg px-5 py-3 font-bold text-sm transition-colors">🤡 Clown in Wesel</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

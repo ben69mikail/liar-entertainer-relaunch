@@ -1,0 +1,134 @@
+---
+/**
+ * Floating WhatsApp-Button — nur Mobile (< 768px).
+ *
+ * Sitzt mittig ueber der bestehenden Mobile-CTA-Leiste aus BaseLayout
+ * (Anrufen / Jetzt anfragen). Reiner wa.me-Link: kein Drittanbieter-Widget,
+ * kein Script von Meta, damit kein Consent noetig und keine Ladekosten.
+ *
+ * Farbe: #1aa34a statt des hellen #25d366. Weisses Glyph auf #25d366 erreicht
+ * nur 1,98:1 und reisst damit die 3:1-Grenze fuer grafische Elemente (WCAG
+ * 1.4.11). #1aa34a liegt in derselben Gruenfamilie und erreicht 3,29:1 —
+ * gegen weisse Seitenflaeche ebenfalls 3,29:1.
+ */
+const phone = '491721517578';
+const href = `https://wa.me/${phone}`;
+---
+
+<a
+  class="wa-fab md:hidden"
+  href={href}
+  target="_blank"
+  rel="noopener noreferrer"
+  aria-label="Per WhatsApp schreiben - oeffnet WhatsApp in einem neuen Tab"
+>
+  <svg viewBox="0 0 24 24" width="30" height="30" fill="currentColor" aria-hidden="true" focusable="false">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413Z" />
+  </svg>
+</a>
+
+<style>
+  .wa-fab {
+    /* Angedockt: die Leiste ist 3,4rem hoch, der Button 3,5rem. Er sitzt zur
+       Haelfte (1,75rem) in der Leiste — und zwar exakt auf deren Naht, weil
+       das Grid 1fr/1fr teilt und der Button bei 50% zentriert ist. Die beiden
+       Beschriftungen sind je in ihrer Haelfte zentriert (25% / 75%), die Mitte
+       bleibt frei. So verdeckt der Button weder Leistentext noch Fliesstext. */
+    position: fixed;
+    bottom: calc(1.65rem + env(safe-area-inset-bottom));
+    left: 50%;
+    /* z-index-Stufen im Projekt: CTA-Leiste 60, Cookie-Banner 9999.
+       Der FAB liegt ueber der Leiste, aber nie ueber dem Consent-Dialog. */
+    z-index: 61;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 3.5rem;
+    height: 3.5rem;
+    border-radius: 9999px;
+
+    background: #1aa34a;
+    color: #ffffff;
+    /* Weisser Ring trennt den Button vom pastellblauen Footer (#c8d0e7)
+       und von Fotos, ueber denen er stehen kann. */
+    box-shadow:
+      0 0 0 3px #ffffff,
+      0 6px 18px rgba(31, 32, 37, 0.28);
+
+    /* translateX haelt die Zentrierung; scale ist der Interaktions-Kanal. */
+    transform: translateX(-50%) scale(1);
+    transform-origin: center;
+    animation: wa-fab-in 420ms cubic-bezier(0.165, 0.84, 0.44, 1) 500ms backwards;
+    transition:
+      transform 160ms cubic-bezier(0.165, 0.84, 0.44, 1),
+      opacity 220ms cubic-bezier(0.165, 0.84, 0.44, 1),
+      background-color 160ms ease-out;
+  }
+
+  /* Eintritt verstaerkt einen bereits sichtbaren Default: faellt die
+     Animation aus, steht der Button trotzdem im Endzustand. */
+  @keyframes wa-fab-in {
+    from {
+      opacity: 0;
+      transform: translateX(-50%) scale(0.72);
+    }
+    to {
+      opacity: 1;
+      transform: translateX(-50%) scale(1);
+    }
+  }
+
+  .wa-fab:active {
+    transform: translateX(-50%) scale(0.93);
+    background: #178c3f;
+  }
+
+  .wa-fab:focus-visible {
+    outline: 3px solid #1f2025;
+    outline-offset: 4px;
+  }
+
+  /* Im Footer stehen Telefonnummer und E-Mail bereits ausgeschrieben —
+     dort weicht der Button zurueck, statt die Rechtstexte zu verdecken. */
+  .wa-fab.is-parked {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateX(-50%) scale(0.86);
+  }
+
+  @media (min-width: 768px) {
+    .wa-fab {
+      display: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .wa-fab {
+      animation: none;
+      transition: opacity 120ms linear;
+    }
+    .wa-fab:active,
+    .wa-fab.is-parked {
+      transform: translateX(-50%) scale(1);
+    }
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    var fab = document.querySelector('.wa-fab');
+    var footer = document.querySelector('footer');
+    if (!fab || !footer || !('IntersectionObserver' in window)) return;
+
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          fab.classList.toggle('is-parked', entry.isIntersecting);
+        });
+      },
+      { rootMargin: '0px 0px -25% 0px' }
+    );
+    io.observe(footer);
+  })();
+</script>

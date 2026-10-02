@@ -1,0 +1,515 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import karteImg from '../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
+import _introImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import _showImgAsset from '../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+
+const seoTitle = "Kindergeburtstag Gelsenkirchen | Zaubershow ab 150€";
+const seoDescription = "Kindergeburtstag in Gelsenkirchen mit Clown LIAR ✓ Zaubershow ab 150€ ✓ 370+ Top-Bewertungen ✓ Auch in Gladbeck & Herten ✓ Jetzt unverbindlich buchen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Kindergeburtstag mit Clown Zauberer in Gelsenkirchen',
+  description: seoDescription,
+  provider: { "@id": "https://liar-entertainer.com/#business" },
+  areaServed: { '@type': 'City', name: 'Gelsenkirchen' },
+  offers: { '@type': 'Offer', price: '150', priceCurrency: 'EUR', description: '40 Minuten Zaubershow' },
+};
+
+const faqItems = [
+  {
+    question: 'Kommen Sie wirklich in alle Stadtteile von Gelsenkirchen?',
+    answer: 'Ja, definitiv! Ich fahre in alle Stadtteile: Buer, Erle, Horst, Hassel, Beckhausen, Bismarck, Neustadt, \u00DCckendorf, Schalke, Feldmark, He\u00DFler \u2013 \u00FCberall in Gelsenkirchen bin ich f\u00FCr Sie da!',
+  },
+  {
+    question: 'Brauchen wir einen gro\u00DFen Raum f\u00FCr die Show?',
+    answer: 'Nein! 2\u00D72 Meter reichen v\u00F6llig aus. Viele Gelsenkirchener Wohnungen haben nicht riesig viel Platz \u2013 das ist \u00FCberhaupt kein Problem. Die Show funktioniert im Wohnzimmer, Kinderzimmer, Keller oder im Garten. Hauptsache, die Kinder k\u00F6nnen gem\u00FCtlich sitzen.',
+  },
+  {
+    question: 'Was ist, wenn es regnet bei einer Gartenparty?',
+    answer: 'Kein Problem! Ich bringe alle Materialien mit, die auch drinnen funktionieren. Ein schneller Ortswechsel nach drinnen ist jederzeit m\u00F6glich. Die Show ist flexibel und wetterunabh\u00E4ngig.',
+  },
+  {
+    question: 'Wie viele Kinder k\u00F6nnen maximal dabei sein?',
+    answer: 'Optimal sind 10-12 Kinder. Bei mehr Kindern funktioniert die Show aber auch \u2013 sprechen Sie mich einfach an! Wichtig ist nur, dass alle Kinder gut sehen und h\u00F6ren k\u00F6nnen.',
+  },
+  {
+    question: 'K\u00F6nnen Sie auch kurzfristig kommen?',
+    answer: 'Wenn ich noch einen freien Termin habe \u2013 gerne! Durch die kurze Anfahrt aus Gladbeck bin ich in Gelsenkirchen sehr flexibel. Am besten einfach anrufen oder per WhatsApp anfragen.',
+  },
+  {
+    question: 'Was brauchen Sie von uns f\u00FCr den Auftritt?',
+    answer: 'Sehr wenig! F\u00FCr die Zaubershow brauche ich nur Platz zum Stehen und die Kinder sollten sitzen k\u00F6nnen (auf St\u00FChlen, B\u00E4nken oder Kissen \u2013 egal!). Bei Glitzer-Tattoos w\u00E4ren 2 St\u00FChle und ein Tisch ideal, aber nicht zwingend notwendig.',
+  },
+  {
+    question: 'K\u00F6nnen Sie auch w\u00E4hrend eines Schalke-Spiels kommen?',
+    answer: 'Nat\u00FCrlich! Obwohl\u2026 w\u00E4ren die V\u00E4ter dann dabei? Spa\u00DF beiseite: Ja, ich bin zu jeder Zeit buchbar \u2013 auch an Spieltagen!',
+  },
+  {
+    question: 'Ist die Show auch f\u00FCr j\u00FCngere Kinder geeignet?',
+    answer: 'Die Show ist ideal f\u00FCr Kinder ab 4 Jahren. Bei j\u00FCngeren Kindern (3 Jahre) kommt es auf die Gruppe an \u2013 manche sind schon sehr aufmerksam, andere noch nicht. Im Zweifel einfach kurz telefonisch besprechen!',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kindergeburtstag Gelsenkirchen, Geburtstag Gelsenkirchen, Clown Kindergeburtstag Gelsenkirchen, Zauberer Geburtstag Gelsenkirchen, Kinderparty Gelsenkirchen, NRW"
+  canonical="https://liar-entertainer.com/kindergeburtstag/geburtstag-in-gelsenkirchen/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kindergeburtstag', url: '/kindergeburtstag/' },
+    { name: 'Geburtstag in Gelsenkirchen', url: '/kindergeburtstag/geburtstag-in-gelsenkirchen/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Gelsenkirchen
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Kindergeburtstag in Gelsenkirchen feiern – Zaubershow ab 150 €
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Kindergeburtstag in Gelsenkirchen feiern – Clown Zauberer mit Lokalkenntnis
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">&raquo;</span>
+        <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a>
+        <span class="mx-1">&raquo;</span>
+        <span>Geburtstag in Gelsenkirchen</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Kindergeburtstag in Gelsenkirchen – Von Buer bis Horst ein Highlight!</h2>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">
+            Kindergeburtstag in Gelsenkirchen mit Clown Zauberer LIAR aus dem direkt benachbarten Gladbeck: 40-minütige Mitmach-Zaubershow ab 150 € Festpreis für bis ca. 12 Kinder ab 4 Jahren – optional Ballonfiguren und Glitzer-Tattoos. Nur 2×2 m Platz nötig, ob in Buer, Horst oder Schalke. 370+ Google-Bewertungen.
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Sie planen einen Kindergeburtstag in Gelsenkirchen? Ob in Buer, Erle, Horst, Schalke oder Ückendorf – ich bringe die Party zu Ihnen nach Hause! Als Clown Zauberer aus dem benachbarten Gladbeck kenne ich Gelsenkirchen wie meine Westentasche und bin in 10-15 Minuten bei Ihnen vor Ort.
+          </p>
+          <h3 class="font-bold text-lg text-[#1f2025] mb-4">Perfekt für Familien in Gelsenkirchen:</h3>
+          <ul class="space-y-3 text-[#374151]">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Kurze Anfahrtswege aus Gladbeck (Nachbarstadt) – nur 10-20 € Fahrtkosten</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Flexible Terminplanung – auch kurzfristig möglich</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Bodenständiges Entertainment ohne Schnickschnack</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Ideal für Geburtstage zu Hause, im Garten oder in Gemeindehäusern</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Über 15 Jahre Erfahrung mit hunderten Feiern im Ruhrgebiet</li>
+          </ul>
+          <p class="text-[#374151] mt-4 leading-relaxed">
+            Meine Show funktioniert überall: Ob in der gemütlichen Wohnung in Neustadt, im Reihenhaus in Buer oder beim Gartenfest in Erle – ich brauche nur 2×2 Meter Platz und schon kann die Party losgehen!
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="m-0">
+            <Image
+              src={_introImgAsset}
+              alt="Kindergeburtstag in Gelsenkirchen mit Clown Zauberer"
+              class="rounded-full object-cover object-[20%] portrait-zoom"
+              style="width: 320px; height: 320px;"
+              loading="lazy"
+              width={640}
+              height={853}
+            />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Staunende Kindergesichter bei einer Zaubershow in Gelsenkirchen</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+
+  <!-- Stats Banner -->
+  <section class="w-full bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">400</div>
+        <div class="text-[#1f2025] text-sm mt-1">Shows im Jahr</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">😊</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">110.000</div>
+        <div class="text-[#1f2025] text-sm mt-1">Lachende Kinder</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">15</div>
+        <div class="text-[#1f2025] text-sm mt-1">Jahre Erfahrung</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Warum Familien in Gelsenkirchen meine Shows lieben -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Warum Familien in Gelsenkirchen meine Shows lieben</h2>
+      <p class="text-[#374151] mb-6 leading-relaxed">
+        In Gelsenkirchen schätzen Eltern das Unkomplizierte: Keine aufgeblasene Show, sondern echtes Entertainment mit Herz. Meine Shows kommen bei Gelsenkirchener Kindern besonders gut an, weil:
+      </p>
+      <ul class="space-y-3 text-[#374151] mb-8">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Ich spreche die Sprache der Kinder – mit Ruhrpott-Charme, aber authentisch</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Die Show funktioniert überall: vom Einfamilienhaus in Buer bis zur Wohnung in Bismarck</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Ich brauche nur 2×2 Meter Platz – perfekt für jede Wohnsituation</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Schalke oder BVB? Ich bleibe neutral</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Kurze Anfahrt = günstige Fahrtkosten = mehr Budget für Extras!</li>
+      </ul>
+
+      <h3 class="font-bold text-lg text-[#1f2025] mb-4">Beliebte Geburtstagslocations in Gelsenkirchen</h3>
+      <p class="text-[#374151] mb-4 leading-relaxed">Die meisten Familien feiern zu Hause, aber ich war auch schon oft zu Gast in:</p>
+      <ul class="space-y-2 text-[#374151] mb-4">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">–</span> Gemeindehäusern in Buer und Horst</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">–</span> Gartenfesten in Erle und Hassel</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">–</span> Vereinsheimen lokaler Sportvereine</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">–</span> ZOOM Erlebniswelt (privat gemietete Räume für Geburtstage)</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">–</span> Schloss Berge (Außenbereich bei gutem Wetter)</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">–</span> Bürgerhäusern und Gemeindesälen in allen Stadtteilen</li>
+      </ul>
+      <p class="text-[#374151] leading-relaxed text-sm">
+        <strong>Wichtig:</strong> Für öffentliche Locations bitte vorher abklären, ob externe Entertainer erlaubt sind! Zu Hause sind Sie völlig flexibel.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- Blue Section: Zaubershow Beschreibung -->
+  <section class="bg-[#eff4ff] py-14 border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4 text-center">GELSENKIRCHEN</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-4 text-center">Zaubershow für Kindergeburtstag in Gelsenkirchen</h2>
+      <p class="text-[#1f2025] text-center mb-8">Magie mit Ruhrpott-Herz</p>
+
+      <p class="text-[#1f2025] leading-relaxed mb-6">
+        Die Kinder aus Gelsenkirchen lieben es direkt und authentisch. Deshalb verzichte ich auf übertriebenes Gehabe und künstliche Hochsprache. Stattdessen gibt's:
+      </p>
+
+      <ul class="space-y-3 mb-8">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span class="text-[#1f2025]">Humor auf Augenhöhe – wie unter Nachbarn</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span class="text-[#1f2025]">Verblüffende Tricks, die auch kritische Kids begeistern</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span class="text-[#1f2025]">Interaktion, bei der JEDES Kind mitmachen darf</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span class="text-[#1f2025]">Echte Begeisterung statt aufgesetzte Show</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span class="text-[#1f2025]">Das Geburtstagskind steht im Mittelpunkt</span></li>
+      </ul>
+
+      <p class="text-[#1f2025] leading-relaxed mb-6">
+        Die Show dauert 40 Minuten – optimal für die Aufmerksamkeitsspanne von Kindern ab 4 Jahren. Die kleinen Gäste werden selbst zu Zauberern und erleben hautnah, wie Magie entsteht. Dabei achte ich besonders darauf, dass kein Kind bloßgestellt wird – jeder darf mitmachen, niemand muss.
+      </p>
+
+      <h3 class="text-[#1f2025] font-bold text-lg mb-4">Was in der Zaubershow passiert:</h3>
+      <ul class="space-y-3">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">•</span> <span class="text-[#1f2025]">Verblüffende Kartentricks, bei denen die Kinder die Zauberer sind</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">•</span> <span class="text-[#1f2025]">Lustige Missgeschicke, die für herzhaftes Lachen sorgen</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">•</span> <span class="text-[#1f2025]">Überraschende Verwandlungen und Erscheinungen</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">•</span> <span class="text-[#1f2025]">Gemeinsames Zaubern mit allen Kindern</span></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">•</span> <span class="text-[#1f2025]">Ein spektakuläres Finale, das niemand vergisst</span></li>
+      </ul>
+
+      <p class="text-[#1f2025] leading-relaxed mt-6">
+        Alle Tricks sind kindgerecht, interaktiv und sorgen für eine perfekte Mischung aus Staunen, Lachen und Mitmachen!
+      </p>
+    </div>
+  </section>
+
+
+  <!-- Preise für Gelsenkirchen -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-3xl sm:text-4xl text-center mb-4">Preise für Kindergeburtstag in Gelsenkirchen</h2>
+      <p class="text-[#374151] text-center mb-10">Transparent &amp; fair</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Zaubershow -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎭 Zaubershow</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-1">150 €</p>
+          <p class="text-[#374151] text-xs mb-4">Festpreis</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Minuten voller Zauber, Lachen und Staunen</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Komplette interaktive Zaubershow</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Bis zu 12 Kinder (mehr nach Absprache möglich)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Geburtstagskind steht im Mittelpunkt</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Gesamtes Material &amp; Equipment</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Flexibel einsetzbar: drinnen oder draußen</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Die Zaubershow ist zum Festpreis buchbar – unabhängig vom Wochentag. Samstag kostet genauso viel wie Mittwoch!</p>
+        </div>
+        <!-- Fahrtkosten + Ballonmodellage -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🚗 Fahrtkosten Gelsenkirchen</h3>
+          <p class="text-[#3b55d5] font-bold text-2xl mb-1">Nur 10-20 €</p>
+          <p class="text-[#374151] text-xs mb-4">0,40 €/km ab Gladbeck</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> GE-Buer: ca. 10 €</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> GE-Horst: ca. 10 €</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> GE-Erle: ca. 10 €</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> GE-Schalke: ca. 10 €</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> GE-Ückendorf: ca. 12 €</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> GE-Bismarck: ca. 10 €</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ihr Vorteil in Gelsenkirchen: Durch die Nähe zu Gladbeck zahlen Sie deutlich weniger Fahrtkosten als Familien in weiter entfernten Städten!</p>
+        </div>
+        <!-- Extras -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Optionale Extras</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">ab + 20 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> <strong>Ballonmodellage:</strong> + 20 €</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Ca. 15 Minuten, 1 Ballon pro Kind</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> <strong>Glitzer-Tattoos:</strong> + 40 €</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Ca. 30 Minuten, 1 Tattoo pro Kind</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hautverträglich &amp; langanhaltend</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Viele Motive zur Auswahl</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zur Kindergeburtstagsfeier in Gelsenkirchen</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Häufige Fragen von Gelsenkirchener Eltern
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        {faqItems.map((item) => (
+          <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+              aria-expanded="false"
+            >
+              <span>{item.question}</span>
+              <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+              {item.answer}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <p class="text-[#374151] mb-6 text-sm leading-relaxed max-w-xl mx-auto">
+          Wichtig: Je früher Sie buchen, desto höher die Chance auf Ihren Wunschtermin. Beliebte Samstage sind schnell weg!
+        </p>
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+          Kontaktformular
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kontakt & Buchung -->
+  <section class="bg-white py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Kindergeburtstag in Gelsenkirchen buchen – so einfach geht's</h2>
+      <p class="text-[#374151] text-center mb-8 leading-relaxed">
+        Sie möchten einen unvergesslichen Kindergeburtstag in Gelsenkirchen feiern? Perfekt! Kontaktieren Sie mich völlig unverbindlich:
+      </p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-10">
+        <div class="bg-gray-50 rounded-xl p-6 text-center card-hover reveal">
+          <div class="text-2xl mb-2">📱</div>
+          <h3 class="font-bold text-[#1f2025] mb-2">WhatsApp</h3>
+          <p class="text-[#374151] text-sm mb-2">Schnellste Variante</p>
+          <a href="https://wa.me/491721517578" class="text-[#d7393e] font-bold hover:underline">0172-1517578</a>
+          <p class="text-[#374151] text-xs mt-2">Kurz schreiben: „Geburtstag in Gelsenkirchen, [Datum], [Stadtteil], ca. [X] Kinder"</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 text-center card-hover reveal">
+          <div class="text-2xl mb-2">☎️</div>
+          <h3 class="font-bold text-[#1f2025] mb-2">Telefonisch</h3>
+          <p class="text-[#374151] text-sm mb-2">Täglich 9-20 Uhr</p>
+          <a href="tel:+491721517578" class="text-[#d7393e] font-bold hover:underline">0172-1517578</a>
+          <p class="text-[#374151] text-xs mt-2">Einfach anrufen und wir besprechen alles direkt am Telefon!</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 text-center card-hover reveal">
+          <div class="text-2xl mb-2">✉️</div>
+          <h3 class="font-bold text-[#1f2025] mb-2">Per E-Mail</h3>
+          <p class="text-[#374151] text-sm mb-2">Antwort in 24 Std.</p>
+          <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] font-bold hover:underline text-sm">info@liar-entertainer.com</a>
+        </div>
+      </div>
+
+      <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+        <h3 class="font-bold text-[#1f2025] mb-4">📝 Diese Infos helfen mir bei der Planung:</h3>
+        <ul class="space-y-2 text-[#374151] text-sm">
+          <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Gewünschtes Datum &amp; Uhrzeit</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Stadtteil in Gelsenkirchen (z.B. Buer, Horst, Erle…)</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Anzahl der Kinder</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Alter des Geburtstagskindes</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Drinnen oder draußen?</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Extras gewünscht? (Ballons/Tattoos)</li>
+          <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Besondere Wünsche? (z.B. Fußball-Motto, Lieblingsfarben…)</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Weitere Städte rund um Gelsenkirchen</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-3">Haupteinsatzgebiet</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Ich bin nicht nur in Gelsenkirchen unterwegs! Als Clown Zauberer aus <a href="/kindergeburtstag/geburtstag-in-gladbeck/" class="text-[#3b55d5] hover:underline">Gladbeck</a> besuche ich regelmäßig Kindergeburtstage im gesamten Ruhrgebiet und darüber hinaus:
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/kindergeburtstag/geburtstag-in-dinslaken/" class="text-[#3b55d5] hover:underline">Kindergeburtstag in Dinslaken</a> | <a href="/kindergeburtstag/geburtstag-in-oberhausen/" class="text-[#3b55d5] hover:underline">Zauberer für den Kindergeburtstag in Oberhausen</a> | <a href="/kindergeburtstag/geburtstag-in-essen/" class="text-[#3b55d5] hover:underline">Zaubershow zum Kindergeburtstag in Essen</a> | <a href="/kindergeburtstag/geburtstag-in-herten/" class="text-[#3b55d5] hover:underline">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-herne/" class="text-[#3b55d5] hover:underline">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-marl/" class="text-[#3b55d5] hover:underline">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/" class="text-[#3b55d5] hover:underline">Mülheim</a> | <a href="/kindergeburtstag/geburtstag-in-dorsten/" class="text-[#3b55d5] hover:underline">Dorsten</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/" class="text-[#3b55d5] hover:underline">Bochum</a>
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-fernstaedte>
+            Überregional – mit etwas längerer Anfahrt – bin ich außerdem in Castrop-Rauxel, Haltern, Xanten, Duisburg, Moers, Waltrop, Datteln, Wesel, Dortmund und Düsseldorf buchbar.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Auch überregional und international buchbar (Deutschland, Belgien, Frankreich, Österreich, Schweiz)!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Kindergeburtstag Gelsenkirchen"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck (Nähe Gelsenkirchen)</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Gelsenkirchen -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Gelsenkirchen buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#3b55d5] hover:underline font-medium text-sm card-hover reveal">🎩 Kinderzauberer in Gelsenkirchen</a>
+      <a href="/clown/clownshow/clown-in-gelsenkirchen/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#d7393e] hover:underline font-medium text-sm card-hover reveal">🤡 Clown in Gelsenkirchen</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

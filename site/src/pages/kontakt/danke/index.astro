@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+---
+
+<BaseLayout
+  title="Vielen Dank für Ihre Anfrage – Clown Zauberer LIAR"
+  description="Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns innerhalb von 24 Stunden bei Ihnen!"
+  noindex={true}
+>
+  <section class="py-20 bg-white">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <!-- Erfolgs-Icon -->
+      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
+        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+        </svg>
+      </div>
+
+      <h1 class="text-[#1f2025] font-extrabold text-3xl sm:text-4xl mb-4">Vielen Dank für Ihre Anfrage!</h1>
+      <p class="text-[#374151] text-lg mb-8 max-w-xl mx-auto">
+        Ihre Nachricht wurde erfolgreich gesendet. Ich melde mich innerhalb von <strong>24 Stunden</strong> bei Ihnen zurück.
+      </p>
+
+      <!-- Was passiert als nächstes -->
+      <div class="bg-[#f9fafb] rounded-xl p-8 mb-10 text-left max-w-lg mx-auto">
+        <h2 class="font-bold text-[#1f2025] text-lg mb-4">Was passiert jetzt?</h2>
+        <ul class="space-y-3 text-[#374151] text-sm">
+          <li class="flex items-start gap-3">
+            <span class="text-[#d7393e] font-bold text-lg leading-none mt-0.5">1.</span>
+            <span>Ich prüfe Ihre Anfrage persönlich</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#d7393e] font-bold text-lg leading-none mt-0.5">2.</span>
+            <span>Sie erhalten innerhalb von 24h eine Antwort per E-Mail</span>
+          </li>
+          <li class="flex items-start gap-3">
+            <span class="text-[#d7393e] font-bold text-lg leading-none mt-0.5">3.</span>
+            <span>Bei dringenden Fragen erreichen Sie mich unter <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">+49 172 1517578</a></span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Zurück-Links -->
+      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+        <a href="/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+          Zur Startseite
+        </a>
+        <a href="/kindergeburtstag/" class="inline-block bg-white border-2 border-[#d7393e] text-[#d7393e] hover:bg-[#d7393e] hover:text-white font-bold px-8 py-3 rounded transition-colors">
+          Kindergeburtstag ansehen
+        </a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

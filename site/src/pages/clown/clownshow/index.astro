@@ -1,0 +1,506 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import CountUp from '../../../components/CountUp.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../../../assets/images/home/clown-zauberer-hero.jpg';
+import clownBeiClownshowImg from '../../../assets/images/clown/clown-bei-clownshow.jpg';
+import zaubershowImg from '../../../assets/images/shows/zaubershow.jpg';
+import kinderzaubererKindergartenImg from '../../../assets/images/clown/kinderzauberer-kindergarten-essen.jpg';
+import clownZaubererGladbeckImg from '../../../assets/images/clown/clown-zauberer-gladbeck.jpg';
+import fotogalerieClownZauberer3Img from '../../../assets/images/galerie/fotogalerie-clown-zauberer-3.jpg';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+
+const seoTitle = 'Clown für Kindergeburtstag NRW buchen | Clown LIAR';
+const seoDescription = 'Clown für den Kindergeburtstag mieten: lustige Clownshow mit Comedy & Zauberei, Ballonfiguren für jedes Kind ✓ 370+ Top-Bewertungen im Ruhrgebiet & NRW!';
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Clownshow in NRW",
+  "description": "Professionelle Clownshow mit Comedy, Gags und Zauberei für Kindergeburtstag und Kinderfest in NRW",
+  "url": "https://liar-entertainer.com/clown/clownshow/",
+  "serviceType": ["Clownshow", "Kinderunterhaltung"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "State", "name": "Nordrhein-Westfalen" }
+};
+
+const faqItems = [
+  {
+    question: 'Was kostet eine Clownshow bei LIAR?',
+    answer: 'Unterschiedlich! Die Gage ist immer abhängig von Art und Umfang der Veranstaltung, der Zuschauerzahl, der Anfahrt und auch eventuell der Jahreszeit. Bei KINDERGEBURTSTAGE gibt es feste Preise! Fragen Sie einfach nach!',
+  },
+  {
+    question: 'Wieviel Platz braucht man für die Show?',
+    answer: 'Ohne Vorbereitungszeit und mit einer Fläche von 2×2 Meter kann ich eine Show vorführen: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Gartenanlage, große und kleine Bühne, Bücherei, Kindergarten, Turnhalle…',
+  },
+  {
+    question: 'Wie lange dauert eine Vorführung mit dem Clown?',
+    answer: 'Die Clownshow ist ab 25/30 Minuten zu buchen. Das Besondere?!? Sie lässt sich flexibel in jeder Veranstaltung einbauen: Kindergeburtstag, Karnevalfeier, Kinderfest, Sommerfest im Kindergarten oder Schule, Schützenfest, Straßenfest, Betriebsfeier…',
+  },
+  {
+    question: 'Was ist der Unterschied zwischen Clownshow und Zaubershow?',
+    answer: 'Die Clownshow setzt stärker auf Comedy, Slapstick und Lachen – perfekt für jüngere Kinder (4-7 Jahre). Die Zaubershow betont Staunen und Magie – ideal für ältere Kinder (7-12 Jahre). Beide Shows enthalten Elemente der jeweils anderen!',
+  },
+  {
+    question: 'Können auch sehr schüchterne Kinder mitmachen?',
+    answer: 'Unbedingt! Schüchterne Kinder werden behutsam einbezogen, ohne sie zu drängen. Durch die pädagogische Ausbildung von Clown LIAR wird jedes Kind in seinem eigenen Tempo zum Strahlen gebracht.',
+  },
+  {
+    question: 'Tritt Clown LIAR auch im Kindergarten oder in der Schule auf?',
+    answer: 'Ja! Es gibt spezielle Programme für Kita-Feste (20-100 Kinder), Schulfeste (30-150 Schüler) und Abschlussfeiern. Die Show wird an die Gruppengröße und das Alter angepasst.',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer,
+    },
+  })),
+};
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!",
+  "description": "Clown Zauberer LIAR zeigt seine Zaubershow und Clownshow für Kinder in NRW. Kindergeburtstag – professionell, lustig und unvergesslich.",
+  "thumbnailUrl": "https://img.youtube.com/vi/Cop0SqRIX4Y/maxresdefault.jpg",
+  "uploadDate": "2018-02-04",
+  "duration": "PT2M30S",
+  "contentUrl": "https://www.youtube.com/watch?v=Cop0SqRIX4Y",
+  "embedUrl": "https://www.youtube.com/embed/Cop0SqRIX4Y",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Clown Zauberer LIAR",
+    "url": "https://liar-entertainer.com"
+  }
+};
+
+const structuredData = [serviceSchema, faqSchema, videoSchema];
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Clownshow NRW, Clown buchen Kindergeburtstag, Clown für Kinder, Clownshow Kindergeburtstag, Clown NRW"
+  canonical="https://liar-entertainer.com/clown/clownshow/"
+  structuredData={structuredData}
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/clown/clownshow/' }, { name: 'Clownshow', url: '/clown/clownshow/' }]}
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/" class="hover:text-[#d7393e]">Clownshow</a>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-2xl sm:text-4xl lg:text-5xl mb-6">Clownshow in NRW – Clown für Kindergeburtstag buchen</h1>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 570px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImg}
+      alt="Clown Zauberer LIAR – Clownshow NRW mit Top-Bewertungen"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 51% 70%"
+      loading="eager"
+      fetchpriority="high"
+      widths={[600, 900, 1400]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-[#1f2025]/45"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 570px;">
+      <h2 class="text-white font-bold text-center px-6 leading-tight" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Clownshow in NRW – Lachen,<br />Spaß und lustige Unterhaltung für Kinder
+      </h2>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="hero-subtitle text-[#374151] leading-relaxed mb-4">
+        Clown LIAR (Michaël Prescler) ist ein professioneller Kinderclown aus Gladbeck und tritt in ganz NRW auf. Buchbar für Kindergeburtstage, Kita- und Schulfeste sowie Familienfeiern – eine lustige Clownshow mit Comedy, Gags und Zauberei für Kinder von 4 bis 12 Jahren, ab ca. 25–30 Minuten und für Kindergeburtstage zu transparenten Festpreisen.
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        Als professioneller Kinderclown und <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a> bringe ich seit über 15 Jahren Lachen, Spaß und gute Laune zu Kindergeburtstagen, Kinderfesten und Familienveranstaltungen in ganz Nordrhein-Westfalen. Meine Clownshow ist eine bunte Mischung aus Comedy, Clown-Gags und <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a> – perfekt auf Kinder zwischen 4 und 12 Jahren abgestimmt!
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        <strong>Das Besondere an meiner Clownshow:</strong> Der Clown findet den besten Draht zu den Kindern! Mit lustigen Missgeschicken, witzigen Gags und viel Interaktion sorge ich dafür, dass die Kinder ständig lachen, mitmachen und Teil der Show werden. Und wenn zwischendurch auch noch gezaubert wird, ist das Staunen groß!
+      </p>
+      <p class="text-[#374151] leading-relaxed">
+        Ob für Ihren <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a> zu Hause, Kinderfest im Kindergarten, Schulfest oder Familienfeiern – ich komme zu Ihnen und verwandle jeden Anlass in ein fröhliches Spektakel. Mit minimalem Aufwand für Sie: Ich bringe alles mit, benötige nur 2×2 Meter Platz und keine technische Vorbereitung! Sie wünschen mehr Magie als Comedy? Dann ist der <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Zauberer für den Kindergeburtstag</a> die richtige Wahl.
+      </p>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <!-- Weitere Anlässe (SEO-Audit 06.08.2026, Massnahme H6): /clown/karneval/ und
+       /clown/walk-act/ hatten 0 bzw. 3 interne Content-Links. -->
+  <section class="py-12 bg-[#f9fafb]" data-related-services>
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-6">
+        Für welche Anlässe kann man Clown LIAR sonst buchen?
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href="/clown/karneval/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
+          <p class="font-bold text-[#1f2025] mb-1">Clown für Karneval &amp; Kindersitzung</p>
+          <p class="text-sm text-[#595959]">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
+        </a>
+        <a href="/clown/walk-act/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
+          <p class="font-bold text-[#1f2025] mb-1">Walk-Act für Straßen- und Stadtfest</p>
+          <p class="text-sm text-[#595959]">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <!-- Was ist eine Clownshow? -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-black text-[#1f2025] text-2xl sm:text-3xl mb-10 uppercase text-center">Was ist eine Clownshow?</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div class="flex justify-center">
+          <Image
+            src={clownBeiClownshowImg}
+            alt="Clown LIAR unterhält Kinder bei einer Clownshow in NRW"
+            class="rounded-2xl object-cover shadow-lg portrait-zoom"
+            style="width: 350px; height: 350px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[350, 700]}
+            sizes="350px"
+          />
+        </div>
+        <div>
+          <hr class="border-[#1f2025] border-2 mb-6 w-full" />
+          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Clownshow – Mehr als nur Witze und rote Nasen</h3>
+          <p class="text-[#374151] leading-relaxed mb-6">
+            Eine Clownshow ist pure Comedy für Kinder! Anders als bei einer reinen Zaubershow steht hier das Lachen im Vordergrund. Mit clownesken Gags, lustigen Missgeschicken (die natürlich geplant sind!), Slapstick und viel Bewegung bringe ich die Kinder zum Lachen und Mitmachen.
+          </p>
+          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Was macht eine gute Clownshow aus?</h3>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            <strong>Comedy &amp; Humor :</strong> für Kinder Keine Erwachsenen-Witze, sondern kindgerechter Humor: Dinge fallen runter, der Clown stolpert, Tricks gehen „schief" (und dann doch wieder gut) – all das lieben Kinder!
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            <strong>Interaktion &amp; Mitmachen :</strong> Die Kinder sind nicht nur Zuschauer, sondern aktive Teilnehmer! Sie kommen nach vorne, helfen dem Clown, machen Geräusche mit und sind mittendrin statt nur dabei.
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            <strong>Slapstick &amp; Action :</strong> Viel Bewegung, lustige Körperkomik und actionreiche Momente halten die Aufmerksamkeit der Kinder durchgehend hoch.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            <strong>Clownerie trifft Zaubershow :</strong> Das Beste aus beiden Welten: Der Clown zaubert auch – aber auf clowneske, witzige Art. Als Kinderzauberer überrasche ich die Kinder mit echten magischen Momenten, bei denen Tricks auch mal „schiefgehen" und dann doch wieder klappen!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-10 bg-[#fdf2f2] border-y border-[#f0c4c4] text-center">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clownshow Programme -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-center font-black text-[#1f2025] text-2xl sm:text-3xl mb-12 uppercase">Clownshow-Programme</h2>
+
+      <!-- Programm 1: Kindergeburtstag (Bild rechts) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12">
+        <div>
+          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Clownshow für Kindergeburtstag</h3>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Der absolute Klassiker! Der Clown kommt zu Ihnen nach Hause und sorgt für ausgelassene Stimmung bei der Geburtstagsfeier. Die Kinder erleben Comedy, Zauberei und bekommen am Ende Ballontiere – ein unvergesslicher Geburtstag!
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Showdauer: 40 Minuten (optimal für Kindergeburtstage) Altersgruppe: 4-12 Jahre Location: Wohnzimmer, Kinderzimmer, Garten, Partykeller
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Was die Kinder erleben: ✓ Lustige Clown-Gags und Missgeschicke ✓ Interaktive Spiele und Mitmach-Momente ✓ Verblüffende Zaubertricks ✓ Ballontiere für jedes Kind (optional) ✓ Das Geburtstagskind steht im Mittelpunkt!
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Perfekt für: Kindergeburtstage zu Hause, auch bei begrenztem Platz
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <Image
+            src={zaubershowImg}
+            alt="Clown verzaubert Kinder bei einer Clownshow auf dem Kindergeburtstag"
+            class="rounded-2xl object-cover shadow-lg portrait-zoom"
+            style="width: 320px; height: 320px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[320, 640]}
+            sizes="320px"
+          />
+        </div>
+      </div>
+
+      <hr class="border-gray-200 mb-12" />
+
+      <!-- Programm 2: Kindergarten & Kita (Bild links) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12">
+        <div class="order-2 lg:order-1 flex justify-center">
+          <Image
+            src={kinderzaubererKindergartenImg}
+            alt="Clown LIAR begeistert Kinder bei Clownshow im Kindergarten"
+            class="rounded-2xl object-cover shadow-lg portrait-zoom"
+            style="width: 320px; height: 320px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[320, 640]}
+            sizes="320px"
+          />
+        </div>
+        <div class="order-1 lg:order-2">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Clownshow für Kindergarten &amp; Kita</h3>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Für Sommerfeste, Abschiedsfeiern der Vorschulkinder, Karneval oder einfach als Überraschung – die Clownshow begeistert ganze Kindergartengruppen!
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Showdauer: 30-40 Minuten Altersgruppe: 3-6 Jahre Gruppengröße: 20-100 Kinder
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Besonderheiten: ✓ Altersgerecht für Kindergartenkinder ✓ Viel Bewegung und Action ✓ Alle Kinder werden eingebunden ✓ Auch für große Gruppen geeignet
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Perfekt für: Kita-Feste, Sommerfeste, Abschiedsfeiern, Karnevalsfeiern
+          </p>
+        </div>
+      </div>
+
+      <hr class="border-gray-200 mb-12" />
+
+      <!-- Programm 3: Schule & Schulfeste (Bild rechts) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Clownshow für Schule &amp; Schulfeste</h3>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Auch für Grundschulkinder ist die Clownshow ein Hit! Bei Schulfesten, Einschulungen oder Projekttagen sorgt der Clown für Lacher bei Groß und Klein.
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Showdauer: 35-45 Minuten Altersgruppe: 6-10 Jahre (Klasse 1-4) Gruppengröße: 30-150 Schüler
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Besonderheiten: ✓ Humor für Schulkinder (etwas anspruchsvoller) ✓ Auch für Erwachsene (Eltern) unterhaltsam ✓ Funktioniert in Turnhallen und auf Bühnen
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Perfekt für: Schulfeste, Einschulungsfeiern, Projekttage, Abschlussfeiern
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <Image
+            src={fotogalerieClownZauberer3Img}
+            alt="Clown Zauberer LIAR bringt Schulkinder zum Lachen bei Clownshow"
+            class="rounded-2xl object-cover shadow-lg portrait-zoom"
+            style="width: 320px; height: 320px; object-position: 75% 30%; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[320, 640]}
+            sizes="320px"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7] text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6">Die WITZIGSTE Clownshow NRW mit TOP BEWERTUNGEN!</h2>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        <strong>Diese farbenfrohe, humorvolle und magische Show ist liebevoll auf das Alter der Kinder abgestimmt.</strong>
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        Die kleinen Zuschauer dürfen mitmachen, selbst zaubern und erleben hautnah, wie plötzlich unglaubliche Dinge geschehen.
+      </p>
+      <p class="text-[#374151] leading-relaxed">
+        Für jedes Kind wird diese Clown- und Zaubershow zu einem intensiven, fröhlichen – und vor allem unvergesslichen Erlebnis.
+      </p>
+    </div>
+  </section>
+
+  <!-- Clown oder Zauberer? -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-center font-black text-[#1f2025] text-2xl sm:text-3xl mb-10 uppercase">Clown oder Zauberer?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="text-center">
+          <hr class="border-gray-300 mb-6" />
+          <h3 class="font-bold text-[#1f2025] text-lg mb-4">Buchen Sie die Clownshow, wenn…</h3>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            ✓ Die Kinder eher jünger sind (4-7 Jahre) ✓ Sie viel Lachen und Comedy wünschen ✓ Die Kinder Slapstick und lustige Gags lieben ✓ Sie Ballontiere als Erinnerung möchten ✓ Die Stimmung ausgelassen und fröhlich sein soll
+          </p>
+          <p class="text-[#374151] text-sm">
+            Perfekt für: Kindergeburtstage mit jüngeren Kindern, Kita-Feste, Familienfeiern mit Kleinkindern
+          </p>
+        </div>
+        <div class="text-center">
+          <hr class="border-gray-300 mb-6" />
+          <h3 class="font-bold text-[#1f2025] text-lg mb-4">Buchen Sie die Zaubershow, wenn…</h3>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            ✓ Die Kinder eher älter sind (7-12 Jahre) ✓ Sie mehr Staunen und Magie wünschen ✓ Die Kinder komplexere Tricks sehen wollen ✓ Eine etwas „coolere", weniger clowneske Show gewünscht ist ✓ Auch Erwachsene begeistert werden sollen
+          </p>
+          <p class="text-[#374151] text-sm">
+            Perfekt für: Kindergeburtstage mit älteren Kindern, Schulfeste, gemischte Veranstaltungen
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-center text-sm font-bold text-[#d7393e] uppercase tracking-widest mb-2">Häufige Fragen zur Clownshow</p>
+      <h2 class="text-center font-black text-[#1f2025] text-2xl sm:text-3xl mb-10 uppercase">Hier sind ein paar Antworten</h2>
+      <div class="space-y-3" id="faq-list">
+        {faqItems.map((item) => (
+          <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+              aria-expanded="false"
+            >
+              <span>{item.question}</span>
+              <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+              {item.answer}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-black text-[#1f2025] text-2xl sm:text-3xl mb-2 uppercase">Einsatzgebiete NRW</h2>
+      <h3 class="font-bold text-[#1f2025] text-xl mb-6">Clownshow in ganz NRW – Ihre Regionen</h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] leading-relaxed mb-4">Als Kinderclown bin ich in ganz Nordrhein-Westfalen unterwegs. Ergänzend zur Clownshow biete ich auch <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonmodellage</a>, <a href="/clown/glitzer-tattoo/" class="text-[#d7393e] hover:underline">Glitzer Tattoos</a> und <a href="/clown/walk-act/" class="text-[#d7393e] hover:underline">Walk-Act</a> an. Überzeugen Sie sich in meiner <a href="/galerie/" class="text-[#d7393e] hover:underline">Galerie</a>!</p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            <strong>Ruhrgebiet:</strong> <a href="/clown/clownshow/clown-in-essen/" class="text-[#d7393e] hover:underline">Essen</a>, <a href="/clown/clownshow/clown-in-duisburg/" class="text-[#d7393e] hover:underline">Duisburg</a>, <a href="/clown/clownshow/clown-in-oberhausen/" class="text-[#d7393e] hover:underline">Oberhausen</a>, <a href="/clown/clownshow/clown-in-gelsenkirchen/" class="text-[#d7393e] hover:underline">Gelsenkirchen</a>, <a href="/clown/clownshow/clown-in-bochum/" class="text-[#d7393e] hover:underline">Bochum</a>, <a href="/clown/clownshow/clown-in-dortmund/" class="text-[#d7393e] hover:underline">Dortmund</a>, <a href="/clown/clownshow/clown-in-bottrop/" class="text-[#d7393e] hover:underline">Bottrop</a>, <a href="/clown/clownshow/clown-in-muelheim/" class="text-[#d7393e] hover:underline">Mülheim</a>, <a href="/clown/clownshow/clown-in-herne/" class="text-[#d7393e] hover:underline">Herne</a>, <a href="/clown/clownshow/clown-in-herten/" class="text-[#d7393e] hover:underline">Herten</a>, <a href="/clown/clownshow/clown-in-gladbeck/" class="text-[#d7393e] hover:underline">Gladbeck</a>, <a href="/clown/clownshow/clown-in-marl/" class="text-[#d7393e] hover:underline">Marl</a>, <a href="/clown/clownshow/clown-in-dorsten/" class="text-[#d7393e] hover:underline">Dorsten</a>, <a href="/clown/clownshow/clown-in-recklinghausen/" class="text-[#d7393e] hover:underline">Recklinghausen</a>, <a href="/clown/clownshow/clown-in-castrop-rauxel/" class="text-[#d7393e] hover:underline">Castrop-Rauxel</a>, <a href="/clown/clownshow/clown-in-waltrop/" class="text-[#d7393e] hover:underline">Waltrop</a>, <a href="/clown/clownshow/clown-in-datteln/" class="text-[#d7393e] hover:underline">Datteln</a>, <a href="/clown/clownshow/clown-in-haltern/" class="text-[#d7393e] hover:underline">Haltern</a>, <a href="/clown/clownshow/clown-in-dinslaken/" class="text-[#d7393e] hover:underline">Dinslaken</a>
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            <strong>Rheinland:</strong> <a href="/clown/clownshow/clown-in-duesseldorf/" class="text-[#d7393e] hover:underline">Düsseldorf</a>, <a href="/clown/clownshow/clown-in-moers/" class="text-[#d7393e] hover:underline">Moers</a>, <a href="/clown/clownshow/clown-in-wesel/" class="text-[#d7393e] hover:underline">Wesel</a>, <a href="/clown/clownshow/clown-in-xanten/" class="text-[#d7393e] hover:underline">Xanten</a>, Köln, Krefeld, Mönchengladbach, Neuss, Leverkusen, Bonn
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            <strong>Münsterland &amp; Westfalen:</strong> Münster, Coesfeld, Borken, Ahaus, Reken, Lünen, Hamm
+          </p>
+          <p class="text-[#374151] font-medium">Auch überregional buchbar für besondere Anlässe!</p>
+        </div>
+        <div>
+          <Image
+            src={clownZaubererGladbeckImg}
+            alt="Einsatzgebiet Clown Zauberer LIAR – Karte NRW"
+            class="w-full rounded-xl shadow-sm img-hover-zoom"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA: Einfach Kontakt aufnehmen -->
+  <section class="bg-white py-14 text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-black text-[#1f2025] text-2xl sm:text-3xl mb-2 uppercase">Einfach Kontakt aufnehmen</h2>
+      <p class="font-bold text-[#1f2025] text-xl mb-6">Jetzt Clownshow buchen – Lachen garantiert!</p>
+      <p class="text-[#374151] leading-relaxed mb-6">
+        Machen Sie Ihren Kindergeburtstag, Ihr Kita-Fest oder Ihre Familienfeier zu einem fröhlichen Erlebnis! Mit meiner Clownshow sorge ich für Lachen, Spaß und strahlende Kinderaugen!
+      </p>
+      <p class="text-[#374151] mb-2">Jetzt unverbindlich anfragen:</p>
+      <div class="space-y-1 text-[#374151] mb-6">
+        <p>Telefon: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
+        <p>WhatsApp: <a href="https://wa.me/491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
+        <p>E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+      </div>
+      <p class="text-[#374151] font-bold mb-8">Bitte beachten Sie, dass ich auf Ihre Anfrage nur mit einer korrekten eMail-Adresse reagieren kann.</p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+        Jetzt unverbindlich anfragen
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

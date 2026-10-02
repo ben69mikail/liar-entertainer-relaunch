@@ -1,0 +1,418 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../../components/HeroSlider.astro';
+import HeroStage from '../../../../components/HeroStage.astro';
+import CountUp from '../../../../components/CountUp.astro';
+import karteImg from '../../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../../assets/images/home/clown-zauberer-hero.jpg';
+import _clownIntroAsset from '../../../../assets/images/clown/clown-zauberer-gladbeck.jpg';
+import _gal1Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-1.jpg';
+import _gal2Asset from '../../../../assets/images/galerie/buehnen-zauberei.jpg';
+import _gal3Asset from '../../../../assets/images/clown/glitzer-tattoos.jpg';
+import _gal4Asset from '../../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import _gal5Asset from '../../../../assets/images/clown/kosten-preis-clown-nrw.jpg';
+import _gal6Asset from '../../../../assets/images/zauberer/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
+import _gal7Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-16.jpg';
+import _gal8Asset from '../../../../assets/images/zauberer/zaubershow-staunende-kinder.jpg';
+import _gal9Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-2.jpg';
+import _clownShowAsset from '../../../../assets/images/clown/clown-bei-clownshow.jpg';
+import GoogleReviews from '../../../../components/GoogleReviews.astro';
+
+const seoTitle = "Clown Datteln | TOP Bewertungen | Jetzt buchen";
+const seoDescription = "Clown in Datteln buchen ✓ Französischer Clown LIAR ✓ 370+ Bewertungen ✓ Für Kindergeburtstag & Events ✓ Auch in Waltrop & Recklinghausen ✓ Anfragen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Clown in Datteln",
+  "description": "Clown LIAR für Kindergeburtstag und Kinderfest in Datteln, NRW",
+  "url": "https://liar-entertainer.com/clown/clownshow/clown-in-datteln/",
+  "serviceType": ["Clownshow", "Kinderunterhaltung"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "City", "name": "Datteln" }
+};
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet ein Auftritt von Clown LIAR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Unterschiedlich! Die Gage ist immer abhängig von Art und Umfang der Veranstaltung, der Zuschauerzahl, der Anfahrt und auch eventuell der Jahreszeit. Bei KINDERGEBURTSTAGE gibt es feste Preise! Fragen Sie einfach nach!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wieviel Platz braucht man für die Clownshow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ohne Vorbereitungszeit und mit einer Fläche von 2×2 Meter kann ich eine Show vorführen: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Gartenanlage, große und kleine Bühne, Bücherei, Kindergarten, Turnhalle…"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert eine eine Vorführung mit dem Clown?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Show ist ab 25/30 Minuten zu buchen. Das Besondere?!? Sie lässt sich flexibel in jeder Veranstaltung einbauen: Kindergeburtstag, Karnevalfeier, Kinderfest, Sommerfest im Kindergarten oder Schule, Schützenfest, Straßenfest, Betriebsfeier…"
+      }
+    }
+  ]
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+const _pageGallery = [
+  { src: _gal2Asset, alt: 'Zaubershow auf einer Bühne in Datteln' },
+  { src: _gal3Asset, alt: 'Glitzer Tattoos in Datteln sind auch buchbar' },
+  { src: _gal4Asset, alt: 'Datteln – Eindruck 3 mit Clown Zauberer LIAR' },
+  { src: _gal5Asset, alt: 'Datteln – Eindruck 4 mit Clown Zauberer LIAR' },
+  { src: _gal6Asset, alt: 'Datteln – Eindruck 5 mit Clown Zauberer LIAR' },
+  { src: _gal7Asset, alt: 'Show mit Kinder bei dem Clown in Datteln' },
+  { src: _gal8Asset, alt: 'Datteln – Eindruck 7 mit Clown Zauberer LIAR' },
+  { src: _gal9Asset, alt: 'Datteln – Eindruck 8 mit Clown Zauberer LIAR' },
+  { src: _clownShowAsset, alt: 'Clown bei Clownshow' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Clown Datteln, Clown in Datteln, Clownshow Datteln, Clown buchen Datteln, Zauberer Datteln, NRW"
+  canonical="https://liar-entertainer.com/clown/clownshow/clown-in-datteln/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Clownshow', url: '/clown/clownshow/' },
+    { name: 'Clown in Datteln', url: '/clown/clownshow/clown-in-datteln/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Datteln
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Clown in Datteln – Zauberspaß & gute Laune für Dein Event
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Clownshow und Unterhaltung in Datteln – Spaß, Lachen und gute Laune für Groß und Klein!
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">Clownshow</a>
+        <span class="mx-1">»</span>
+        <span>Clown in Datteln – Zauberspaß & gute Laune für Dein Event</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Warum gerade in Datteln?</h2>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Clown Zauberer LIAR aus Gladbeck kommt mit seiner lustigen Clownshow – Comedy plus Zauberei – nach Datteln: perfekt für Kindergeburtstag, Kita-Fest und Vereinsfeier, für Kinder ab 4 Jahren und schon auf 2×2 m Platz spielbar. Auch in Waltrop und Recklinghausen unterwegs – mit 370+ Google-Bewertungen.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Datteln ist nicht nur für die Schleusenanlage und den Kanal bekannt – hier gibt es zahlreiche charmante Orte für Festivitäten: vom gemütlichen Garten bis zur Aula im Kinderhaus. Meine Shows in Datteln profitieren vom kurzen Anfahrtsweg – somit bleibt der Preis fair, und ich kann flexibel auftreten. 💡Ob im Stadtteil Ö – Osten oder rund um den Kanal-Park: Deine Location wird zur Bühne für Spaß & Magie.</p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="text-center">
+            <Image src={_gal1Asset} alt="Clownshow in Datteln" class="rounded-full object-cover object-[20%] portrait-zoom" style="width: 320px; height: 320px;" width={736} height={552} loading="lazy" />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Interaktive Clownshow vor Kindern in Datteln</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <section class="bg-[#eff4ff] py-14 text-center border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4">DATTELN</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-6">✨ Clownshow in Datteln – mit Herz &amp; Humor</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">
+        Meine Show ist speziell auf Kinder abgestimmt: lebendig, interaktiv und voller Überraschungen.
+      </p>
+      <p class="text-[#1f2025] leading-relaxed">
+        Die Kinder dürfen mitzaubern, lachen, staunen – und manchmal selbst zur kleinen Zauberin oder zum Zauberer werden.
+        Dabei achte ich besonders auf Respekt, Empathie und ein liebevolles Miteinander.
+      </p>
+    </div>
+  </section>
+
+  <!-- " Diese SHOW mit dem Clown in Datteln ist DAS Highlight " -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-10">" Diese SHOW mit dem Clown in Datteln ist DAS Highlight "</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">✨ Zusatzleistung: Glitzer-Tattoos</h3>
+          <p class="text-[#374151] leading-relaxed">Für den besonderen Glanz: Hautverträglich und mit Wow-Effekt – meine Glitzer-Tattoos begeistern Groß und Klein und bleiben gerne noch einige Tage sichtbar.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">🎭 Showmix: Clown trifft Zauberer</h3>
+          <p class="text-[#374151] leading-relaxed">In meiner Show erleben Kinder und Erwachsene nicht nur reine Animation, sondern werden aktiv eingebunden: Ich zaubere und dabei werden alle zu kleinen Mitwirkenden.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">🎈 Zusatzleistung: Ballonmodellage</h3>
+          <p class="text-[#374151] leading-relaxed">Ob Ritterhelm oder Marienkäfer: Ich forme individuelle Ballonfiguren live vor Ort – jedes Kind geht mit seinem Wunsch­tier nach Hause. Ideal als Ergänzung zur Show oder als eigenständiger Programmpunkt.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Witzig und Magisch! -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-10">Witzig und Magisch!</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Der witzigste Clown in Datteln mit TOP BEWERTUNGEN!</h3>
+          <p class="text-[#374151] leading-relaxed">Die jungen Gäste erleben eine fröhliche und erstklassige Unterhaltung, bei der ich die kleinen Zuschauer in das Geschehen einbeziehe und zu aktiven Teilnehmern der Show mache. Dadurch werden die Kinder auf spielerische Weise in die Vorstellung integriert und ich sorge damit für eine unvergessliche Zeit.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Was ist ein Clown?</h3>
+          <p class="text-[#374151] leading-relaxed">Eine Person, die im Zirkus mit allerlei lustigen Vorführungen zum Lachen reizt ist ein Clown. Gemeint war ursprünglich ein Tölpel, ein dummer Bauer, ein ungeschickter Mensch. Im 16. Jahrhundert gab es in englischen Theatern schon Clowns: Sie traten in den Pausen auf und unterhielten die Zuschauer. Später gab es im Theater und im Zirkus viele unterschiedliche Arten: die einen sind eher lustig, die anderen ernsthafter. Sie bringen die Menschen mal zum Lachen, mal zum Weinen.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Clown in Datteln? NICHT NUR!</h3>
+          <p class="text-[#374151] leading-relaxed">Moderne Clowns sind häufig im Rahmen eines freien Berufes als Künstler selbstständig tätig. Unter anderem gibt es die Klinikclowns, die sich auf das spezielle Arbeitsgebiet im Krankenhaus oder in der Pflege vorbereiten. Bis heute trat ich über 6000mal bei Privatpartys, Firmenveranstaltungen, Vereinsfeiern, Messen, in Theatern, Kindergärten und Grundschulen auf. Nicht nur in Datteln.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildergalerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Clown-Auftritt in Datteln</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Was kostet ein Auftritt von Clown LIAR?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Unterschiedlich! Die Gage ist immer abhängig von Art und Umfang der Veranstaltung, der Zuschauerzahl, der Anfahrt und auch eventuell der Jahreszeit. Bei KINDERGEBURTSTAGE gibt es feste Preise! Fragen Sie einfach nach!
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wieviel Platz braucht man für die Clownshow?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Ohne Vorbereitungszeit und mit einer Fläche von 2×2 Meter kann ich eine Show vorführen: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Gartenanlage, große und kleine Bühne, Bücherei, Kindergarten, Turnhalle…
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie lange dauert eine eine Vorführung mit dem Clown?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Die Show ist ab 25/30 Minuten zu buchen. Das Besondere?!? Sie lässt sich flexibel in jeder Veranstaltung einbauen: Kindergeburtstag, Karnevalfeier, Kinderfest, Sommerfest im Kindergarten oder Schule, Schützenfest, Straßenfest, Betriebsfeier…
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Nicht nur in Datteln</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/clown/clownshow/clown-in-oberhausen/" class="text-[#d7393e] hover:underline">Clown Oberhausen buchen</a> |
+            <a href="/clown/clownshow/clown-in-gelsenkirchen/" class="text-[#d7393e] hover:underline">Clownshow in Gelsenkirchen erleben</a> |
+            <a href="/clown/clownshow/clown-in-essen/" class="text-[#d7393e] hover:underline">Clown für Kinderfeste in Essen</a> |
+            Duisburg |
+            <a href="/clown/clownshow/clown-in-dorsten/" class="text-[#d7393e] hover:underline">Clown in Dorsten buchen</a> |
+            <a href="/clown/clownshow/clown-in-herten/" class="text-[#d7393e] hover:underline">Clownshow für Herten</a> |
+            <a href="/clown/clownshow/clown-in-herne/" class="text-[#d7393e] hover:underline">Clown für Kindergeburtstag in Herne</a> |
+            <a href="/clown/clownshow/clown-in-marl/" class="text-[#d7393e] hover:underline">Clown Marl buchen</a> |
+            <a href="/clown/clownshow/clown-in-datteln/" class="text-[#d7393e] hover:underline">Datteln</a> |
+            <a href="/clown/clownshow/clown-in-muelheim/" class="text-[#d7393e] hover:underline">Clownshow in Mülheim erleben</a> |
+            Düsseldorf |
+            Dortmund |
+            Lünen |
+            Haltern am See |
+            Moers | Krefeld | Reken |
+            <a href="/clown/clownshow/clown-in-gladbeck/" class="text-[#d7393e] hover:underline">Clown für Kinderfeste in Gladbeck</a> |
+            Münster |
+            <a href="/clown/clownshow/clown-in-bochum/" class="text-[#d7393e] hover:underline">Clown in Bochum buchen</a>
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-far-cities>Auch außerhalb dieses Umkreises bin ich unterwegs: Termine in weiter entfernten Städten wie Duisburg, Düsseldorf und Dortmund lassen sich einrichten – die Anfahrt plane ich dabei einfach mit ein.</p>
+          <p class="text-[#374151] leading-relaxed">
+            Jedoch kann man mich auch überregional und international (Frankreich, Belgien, Österreich, Schweiz) buchen!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Clownshow Datteln"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Datteln -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Datteln buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kindergeburtstag/geburtstag-in-datteln/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#d7393e] hover:underline font-medium text-sm card-hover reveal">🎂 Kindergeburtstag in Datteln</a>
+      <a href="/kinderzauberer/kinderzauberer-in-datteln/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#3b55d5] hover:underline font-medium text-sm card-hover reveal">🎩 Kinderzauberer in Datteln</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

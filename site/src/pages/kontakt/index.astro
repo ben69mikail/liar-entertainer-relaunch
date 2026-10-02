@@ -1,0 +1,323 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroStage from '../../components/HeroStage.astro';
+import GoogleReviews from '../../components/GoogleReviews.astro';
+import heroImage from '../../assets/images/general/clown-zauberer-liar-kontaktformular.jpg';
+---
+
+<BaseLayout
+  title="Kontakt | Clown Zauberer LIAR | Jetzt anfragen"
+  description="Kontaktieren Sie Clown Zauberer LIAR ✓ Unverbindliche Anfrage ✓ Antwort in 24h ✓ Tel: 0172 1517578 ✓ Aus Gladbeck für ganz NRW ✓ Jetzt anfragen!"
+  keywords="Clown Zauberer buchen, Kontakt Zauberer NRW, Anfrage Clown, Zauberer NRW Kontakt"
+  canonical="https://liar-entertainer.com/kontakt/"
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kontakt', url: '/kontakt/' }]}
+>
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 540px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImage}
+      alt="Kontakt Clown Zauberer LIAR"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 50% top"
+      loading="eager"
+      fetchpriority="high"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative flex items-end justify-center pb-12 pt-28" style="min-height: 540px;">
+      <div class="max-w-[750px] mx-auto px-4 text-center">
+        <h1 class="text-white font-extrabold text-3xl sm:text-4xl mb-3 drop-shadow-lg">Einfach und unverbindlich kontaktieren</h1>
+        <p class="text-gray-100 text-base drop-shadow">Stellen Sie Ihre Anfrage – wir melden uns innerhalb von 24 Stunden!</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Content -->
+  <section class="py-14 bg-white">
+    <div class="max-w-[960px] mx-auto px-4">
+      <div class="max-w-[760px] mb-10 text-[#374151] leading-relaxed">
+        <p class="mb-3">
+          Sie suchen einen <strong>Kinderzauberer für den Kindergeburtstag</strong> in Gladbeck oder in der
+          Umgebung? Schreiben Sie mir einfach kurz, worum es geht – meistens antworte ich noch am selben Tag,
+          spätestens innerhalb von 24 Stunden.
+        </p>
+        <p>
+          Nach Gladbeck komme ich ohne Anfahrtskosten. Im Umkreis von rund 20 Kilometern bin ich ohnehin
+          regelmäßig unterwegs – unter anderem in
+          <a href="/kinderzauberer/kinderzauberer-in-bottrop/" class="text-[#d7393e] hover:underline">Bottrop</a>,
+          <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/" class="text-[#d7393e] hover:underline">Gelsenkirchen</a>,
+          <a href="/kinderzauberer/kinderzauberer-in-essen/" class="text-[#d7393e] hover:underline">Essen</a> und
+          <a href="/kinderzauberer/kinderzauberer-in-oberhausen/" class="text-[#d7393e] hover:underline">Oberhausen</a>.
+          Für andere Anlässe – Kita-Fest, Firmenfeier oder Stadtfest – nutzen Sie gern dasselbe Formular.
+        </p>
+      </div>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+
+        <!-- Contact Form (Static HTML form → Netlify/Formspree-compatible) -->
+        <div>
+          <h2 class="text-[#1f2025] font-bold text-2xl mb-6">Anfrage senden</h2>
+          <!-- Fehlermeldungen -->
+          <div id="form-error" class="hidden bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 mb-4 text-sm">
+            <span id="error-text"></span>
+          </div>
+          <script>
+            (function() {
+              const params = new URLSearchParams(window.location.search);
+              const fehler = params.get('fehler');
+              if (fehler) {
+                const errorEl = document.getElementById('form-error');
+                const textEl = document.getElementById('error-text');
+                if (errorEl && textEl) {
+                  errorEl.classList.remove('hidden');
+                  const messages = {
+                    '1': 'Bitte füllen Sie alle Pflichtfelder korrekt aus.',
+                    '2': 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.',
+                    'captcha': 'Die Antwort auf die Mathe-Frage war leider falsch. Bitte versuchen Sie es erneut.',
+                    'timeout': 'Das Formular war zu lange offen. Bitte laden Sie die Seite neu und versuchen Sie es erneut.'
+                  };
+                  textEl.textContent = messages[fehler] || 'Ein unbekannter Fehler ist aufgetreten.';
+                }
+              }
+            })();
+          </script>
+          <form
+            method="POST"
+            action="/contact.php"
+            class="space-y-4"
+          >
+            <!-- Honeypot-Feld gegen Spam (versteckt) -->
+            <div style="display:none" aria-hidden="true">
+              <label for="website">Website leer lassen</label>
+              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+            </div>
+            <div>
+              <label for="name" class="block text-sm font-medium text-[#1f2025] mb-1">Ihr Name *</label>
+              <input
+                type="text"
+                id="name"
+                name="name"
+                required
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] focus:ring-1 focus:ring-[#d7393e]"
+                placeholder="Max Mustermann"
+              />
+            </div>
+            <div>
+              <label for="email" class="block text-sm font-medium text-[#1f2025] mb-1">E-Mail *</label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                required
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e]"
+                placeholder="max@example.de"
+              />
+            </div>
+            <div>
+              <label for="phone" class="block text-sm font-medium text-[#1f2025] mb-1">Telefon</label>
+              <input
+                type="tel"
+                id="phone"
+                name="phone"
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e]"
+                placeholder="+49 ..."
+              />
+            </div>
+            <div>
+              <label for="event-date" class="block text-sm font-medium text-[#1f2025] mb-1">Veranstaltungsdatum</label>
+              <input
+                type="date"
+                id="event-date"
+                name="event-date"
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e]"
+              />
+            </div>
+            <div>
+              <label for="event-time" class="block text-sm font-medium text-[#1f2025] mb-1">Gewünschte Uhrzeit</label>
+              <input
+                type="time"
+                id="event-time"
+                name="event-time"
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e]"
+              />
+            </div>
+            <div>
+              <label for="event-city" class="block text-sm font-medium text-[#1f2025] mb-1">Ort / Stadt *</label>
+              <input
+                type="text"
+                id="event-city"
+                name="event-city"
+                required
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] focus:ring-1 focus:ring-[#d7393e]"
+                placeholder="z.B. Essen, Dortmund, Bochum..."
+              />
+            </div>
+            <div>
+              <label for="event-type" class="block text-sm font-medium text-[#1f2025] mb-1">Art der Veranstaltung</label>
+              <select
+                id="event-type"
+                name="event-type"
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] bg-white"
+              >
+                <option value="">Bitte wählen...</option>
+                <option>Kindergeburtstag</option>
+                <option>Firmenfeier</option>
+                <option>Stadtfest / Open Air</option>
+                <option>Kindergarten / Kita</option>
+                <option>Schule</option>
+                <option>Karneval</option>
+                <option>Sonstiges</option>
+              </select>
+            </div>
+            <div>
+              <label for="message" class="block text-sm font-medium text-[#1f2025] mb-1">Ihre Nachricht</label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] resize-y"
+                placeholder="Erzählen Sie mir von Ihrem Event..."
+              ></textarea>
+            </div>
+            <!-- CAPTCHA: Mathe-Frage (DSGVO-konform, keine Drittanbieter) -->
+            <div>
+              <label for="captcha" class="block text-sm font-medium text-[#1f2025] mb-1">
+                Spam-Schutz: <span id="captcha-question" class="font-bold text-[#d7393e]"></span> *
+              </label>
+              <input
+                type="number"
+                id="captcha"
+                name="captcha"
+                required
+                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] focus:ring-1 focus:ring-[#d7393e]"
+                placeholder="Ihre Antwort"
+                autocomplete="off"
+              />
+              <input type="hidden" id="captcha-hash" name="captcha_hash" />
+              <input type="hidden" id="form-token" name="form_token" />
+            </div>
+            <button
+              type="submit"
+              class="w-full bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold py-3 px-6 rounded transition-colors"
+            >
+              Anfrage absenden →
+            </button>
+          </form>
+        </div>
+
+        <!-- Contact Info -->
+        <div>
+          <h2 class="text-[#1f2025] font-bold text-2xl mb-6">Direkt Kontakt</h2>
+          <div class="space-y-6">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-[#d7393e] rounded-full flex items-center justify-center text-white flex-shrink-0">📞</div>
+              <div>
+                <div class="font-bold text-[#1f2025] mb-0.5">Telefon</div>
+                <a href="tel:+491721517578" class="text-[#d7393e] hover:underline text-lg font-semibold">
+                  +49 172 1517578
+                </a>
+                <p class="text-[#595959] text-sm mt-0.5">Mo–Sa 8:00 – 20:00 Uhr</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-[#d7393e] rounded-full flex items-center justify-center text-white flex-shrink-0">✉</div>
+              <div>
+                <div class="font-bold text-[#1f2025] mb-0.5">E-Mail</div>
+                <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">
+                  info@liar-entertainer.com
+                </a>
+                <p class="text-[#595959] text-sm mt-0.5">Antwort innerhalb 24 Stunden</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-[#d7393e] rounded-full flex items-center justify-center text-white flex-shrink-0">📍</div>
+              <div>
+                <div class="font-bold text-[#1f2025] mb-0.5">Adresse</div>
+                <address class="not-italic text-[#374151] text-sm">
+                  Beethovenstr. 15<br />
+                  45966 Gladbeck<br />
+                  Nordrhein-Westfalen
+                </address>
+              </div>
+            </div>
+          </div>
+
+          <!-- Trust signals -->
+          <div class="mt-8 bg-[#fdf2f2] border border-[#f0c4c4] rounded-lg p-6 card-hover reveal">
+            <h3 class="font-bold text-[#1f2025] mb-3">Warum Clown Zauberer LIAR?</h3>
+            <ul class="space-y-2 text-sm text-[#374151]">
+              {['⭐ 370+ Bewertungen – durchschnittlich 5/5 Sterne',
+                '✅ 15+ Jahre Erfahrung als Profi-Entertainer',
+                '🎉 Über 400 Shows jährlich in NRW',
+                '🔒 Versichert & mit polizeilichem Führungszeugnis',
+                '📞 Persönliche Beratung und schnelle Antwort'].map(t => (
+                <li>{t}</li>
+              ))}
+            </ul>
+          </div>
+
+          <!-- Service-Links -->
+          <div class="mt-6">
+            <h3 class="font-bold text-[#1f2025] mb-3">Unsere Leistungen</h3>
+            <div class="grid grid-cols-2 gap-2 text-sm">
+              <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">🎂 Zauberer für Kindergeburtstag</a>
+              <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">🎩 Zaubershow</a>
+              <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">🤡 Clownshow</a>
+              <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">🎈 Ballonmodellage</a>
+              <a href="/clown/glitzer-tattoo/" class="text-[#d7393e] hover:underline">✨ Glitzer Tattoos</a>
+              <a href="/clown/walk-act/" class="text-[#d7393e] hover:underline">🚶 Walk-Act</a>
+              <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">🃏 Tischzauberer</a>
+              <a href="/galerie/" class="text-[#d7393e] hover:underline">📸 Galerie</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <GoogleReviews />
+
+  <!-- CAPTCHA Script (DSGVO-konform: kein externer Service, keine Cookies) -->
+  <script>
+    (function() {
+      const KEY = 'L1aR-c4ptch4-2024';
+      const a = Math.floor(Math.random() * 10) + 1;
+      const b = Math.floor(Math.random() * 10) + 1;
+      const ops = [
+        { symbol: '+', result: a + b },
+        { symbol: '-', result: Math.max(a, b) - Math.min(a, b) },
+      ];
+      const op = ops[Math.floor(Math.random() * ops.length)];
+      const num1 = op.symbol === '-' ? Math.max(a, b) : a;
+      const num2 = op.symbol === '-' ? Math.min(a, b) : b;
+      const answer = op.result;
+
+      // Question anzeigen
+      const qEl = document.getElementById('captcha-question');
+      if (qEl) qEl.textContent = 'Was ist ' + num1 + ' ' + op.symbol + ' ' + num2 + '?';
+
+      // Hash generieren (einfache Verschleierung, kein Krypto nötig)
+      const ts = Date.now();
+      const raw = answer + ':' + ts + ':' + KEY;
+      let hash = 0;
+      for (let i = 0; i < raw.length; i++) {
+        const c = raw.charCodeAt(i);
+        hash = ((hash << 5) - hash) + c;
+        hash |= 0;
+      }
+
+      const hashEl = document.getElementById('captcha-hash');
+      if (hashEl) hashEl.value = answer + ':' + ts + ':' + Math.abs(hash);
+
+      const tokenEl = document.getElementById('form-token');
+      if (tokenEl) tokenEl.value = ts.toString();
+    })();
+  </script>
+</BaseLayout>

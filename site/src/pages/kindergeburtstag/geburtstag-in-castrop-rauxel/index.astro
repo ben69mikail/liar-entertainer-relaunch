@@ -1,0 +1,414 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import karteImg from '../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
+import _introImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import _showImgAsset from '../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+
+const seoTitle = "Kindergeburtstag Castrop-Rauxel | Zaubershow ab 150€";
+const seoDescription = "Kindergeburtstag in Castrop-Rauxel mit Clown LIAR ✓ Zaubershow ab 150€ ✓ Ballonmodellage ✓ 370+ Bewertungen ✓ Auch in Recklinghausen & Dortmund!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Kindergeburtstag mit Clown Zauberer in Castrop-Rauxel',
+  description: seoDescription,
+  provider: { "@id": "https://liar-entertainer.com/#business" },
+  areaServed: { '@type': 'City', name: 'Castrop-Rauxel' },
+  offers: { '@type': 'Offer', price: '150', priceCurrency: 'EUR', description: '40 Minuten Zaubershow' },
+};
+
+const faqItems = [
+  {
+    question: 'Wie weit im Voraus muss ich buchen?',
+    answer: 'Ideal sind 3-4 Wochen. An beliebten Samstagen kann es auch mal schneller ausgebucht sein. Aber: Fragen kostet nichts! Manchmal habe ich auch kurzfristig Lücken.',
+  },
+  {
+    question: 'Was ist mit sehr jungen oder älteren Kindern?',
+    answer: 'Ab 4 Jahre optimal. Aber auch mit 3-Jährigen oder 11-Jährigen funktioniert es – ich passe mein Programm einfach an. Sprechen Sie mich darauf an!',
+  },
+  {
+    question: 'Brauchen Sie Strom, Musik, Mikrofon?',
+    answer: 'Nein, nein und nein! Meine Show ist „unplugged". Kein technischer Schnickschnack nötig. Das macht mich flexibel und unabhängig.',
+  },
+  {
+    question: 'Können Eltern zuschauen?',
+    answer: 'Klar! Die meisten Eltern bleiben im Hintergrund und freuen sich über die Reaktionen ihrer Kinder. Manche machen Fotos – absolut erwünscht!',
+  },
+  {
+    question: 'Was kostet ein Clown Zauberer für einen Kindergeburtstag?',
+    answer: 'Die Preise für Kindergeburtstage starten ab 150 Euro. Die genaue Gage ist abhängig von Art und Umfang der Veranstaltung, Zuschauerzahl, Anfahrtsweg und Jahreszeit. Für ein individuelles, unverbindliches Angebot kontaktieren Sie mich unter 0172-1517578 oder info@liar-entertainer.com.',
+  },
+  {
+    question: 'Wie lange dauert eine Clown & Zaubershow für Kinder?',
+    answer: 'Die Show dauert 40 Minuten, je nach Alter der Kinder und Ihren Wünschen. Die Dauer wird individuell an Ihre Veranstaltung angepasst. Zusätzlich kann Ballonmodellage oder Glitzer-Tattoos dazugebucht werden.',
+  },
+  {
+    question: 'Wie viel Platz braucht man für die Clown- und Zaubershow?',
+    answer: 'Minimal nur 2x2 Meter Fläche. Die Show funktioniert überall: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Garten, Turnhalle, Kindergarten, Schule oder Bücherei. Keine Aufbauzeit und es wird fast keine Vorbereitung benötigt.',
+  },
+  {
+    question: 'Welche Leistungen sind im Kindergeburtstag-Paket enthalten?',
+    answer: 'Im Basis-Paket ist eine 40 minütige Clown & Zaubershow enthalten, bei der Kinder aktiv mitmachen. Optional zubuchbar: Ballonmodellage (jedes Kind bekommt eine Wunschfigur zum Mitnehmen) und Glitzer-Tattoos (hautverträglich, hält 5-7 Tage, über 50 Motive). Alles wird von LIAR mitgebracht - Sie stellen nur den Platz!',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kindergeburtstag Castrop-Rauxel, Geburtstag Castrop-Rauxel, Clown Kindergeburtstag Castrop-Rauxel, Zauberer Geburtstag Castrop-Rauxel, Kinderparty Castrop-Rauxel, NRW"
+  canonical="https://liar-entertainer.com/kindergeburtstag/geburtstag-in-castrop-rauxel/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kindergeburtstag', url: '/kindergeburtstag/' },
+    { name: 'Geburtstag in Castrop-Rauxel', url: '/kindergeburtstag/geburtstag-in-castrop-rauxel/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Castrop-Rauxel
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Zauberer für den Kindergeburtstag in Castrop-Rauxel – ab 150 €
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Zauberhafte Feiern für kleine und große Partygäste
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">&raquo;</span>
+        <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a>
+        <span class="mx-1">&raquo;</span>
+        <span>Geburtstag in Castrop-Rauxel</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Geburtstag in Castrop-Rauxel: Zauberhafte Feiern für kleine und große Partygäste</h2>
+          <h3 class="font-bold text-lg text-[#1f2025] mb-4">Ihr Zauberkünstler für unvergessliche Kindergeburtstage in Castrop-Rauxel</h3>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">
+            Kindergeburtstag in Castrop-Rauxel mit Clown Zauberer LIAR aus Gladbeck: 40 Minuten Mitmach-Zaubershow ab 150 € Festpreis, für bis ca. 12 Kinder ab 4 Jahren – auf Wunsch mit Ballonfiguren und Glitzer-Tattoos. Nur 2×2 m Platz nötig, ob in Ickern, Rauxel oder Habinghorst. 370+ Google-Bewertungen.
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Als professioneller Kinderzauberer und Entertainer habe ich in den letzten 15 Jahren eine Mission: <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstage</a> in Castrop-Rauxel zu echten Highlights machen. Von Ickern über Rauxel bis Habinghorst – ich verwandle jedes Wohnzimmer in eine Showbühne!
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="m-0">
+            <Image
+              src={_introImgAsset}
+              alt="Kindergeburtstag in Castrop-Rauxel mit Clown Zauberer"
+              class="rounded-full object-cover object-[20%] portrait-zoom"
+              style="width: 320px; height: 320px;"
+              loading="lazy"
+              width={640}
+              height={853}
+            />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Das Geburtstagskind im Mittelpunkt der Show in Castrop-Rauxel</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <!-- Warum eine Zaubershow den Unterschied macht -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Warum eine Zaubershow den Unterschied macht</h2>
+      <p class="text-[#374151] mb-6 leading-relaxed">
+        Klar könnten Sie selbst Spiele organisieren. Topfschlagen, Stopptanz, Schokokuss-Wettessen – kennen wir alle. Aber seien wir ehrlich: Nach 20 Minuten wird es chaotisch. Die Hälfte der Kinder verliert das Interesse. Die andere Hälfte wird überdreht. Und Sie? Sie sind gestresst.
+      </p>
+      <h3 class="font-bold text-lg text-[#1f2025] mb-4">Eine professionelle Zaubershow löst dieses Problem elegant:</h3>
+      <ul class="space-y-3 text-[#374151]">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <strong>Fokussierte Aufmerksamkeit</strong> – 40 Minuten lang sind ALLE Kinder bei der Sache. Keine Langeweile, kein Chaos, keine gelangweilten Gesichter.</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <strong>Echtes Staunen</strong> – Kinder erleben Dinge, die ihre Vorstellungskraft herausfordern. Wie ist das möglich? Das ist echte Magie! Diese Momente bleiben im Gedächtnis.</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <strong>Aktive Teilnahme</strong> – Keine passive Berieselung. Die Kinder sind Mitwirkende, werden selbst zu Zauberern und fühlen sich wie Stars.</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <strong>Ihre Entspannung</strong> – Während die Show läuft, können Sie sich um andere Dinge kümmern oder einfach die strahlenden Gesichter genießen.</li>
+      </ul>
+    </div>
+  </section>
+
+
+  <!-- Blue Section: So läuft meine Show ab -->
+  <section class="bg-[#eff4ff] py-14 border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4 text-center">CASTROP-RAUXEL</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-8 text-center">So läuft meine Show in Castrop-Rauxel ab</h2>
+
+      <div class="space-y-6">
+        <div>
+          <h3 class="text-[#1f2025] font-bold text-lg mb-2">🎭 Der Einstieg</h3>
+          <p class="text-[#1f2025] leading-relaxed">Ich erscheine (natürlich nicht durch Zauberhand, sondern ganz normal durch Ihre Tür), baue blitzschnell auf und starte mit einem Knalleffekt. Sofort haben alle Augen nur ein Ziel: mich und meine Requisiten. Die Neugier ist geweckt!</p>
+        </div>
+        <div>
+          <h3 class="text-[#1f2025] font-bold text-lg mb-2">✨ Die erste Welle</h3>
+          <p class="text-[#1f2025] leading-relaxed">Jetzt beginnt die eigentliche Magie. Ich führe verblüffende Tricks vor – aber nicht alleine. Die Kinder werden einbezogen, dürfen helfen, assistieren. Plötzlich verschwinden Dinge, tauchen woanders wieder auf, verändern ihre Farbe. Die Kinder: völlig gebannt!</p>
+        </div>
+        <div>
+          <h3 class="text-[#1f2025] font-bold text-lg mb-2">🌟 Das Geburtstagskind im Mittelpunkt</h3>
+          <p class="text-[#1f2025] leading-relaxed">Jetzt kommt der emotionale Höhepunkt. Ihr Kind wird zum Hauptzauberer! Es darf den spektakulärsten Trick ausführen – unter meiner Anleitung natürlich. Die anderen Kinder jubeln, die Eltern applaudieren. Dieser Moment ist Gold wert!</p>
+        </div>
+        <div>
+          <h3 class="text-[#1f2025] font-bold text-lg mb-2">🎉 Das große Finale</h3>
+          <p class="text-[#1f2025] leading-relaxed">Zum Abschluss noch ein paar besonders beeindruckende Illusionen. Alle Kinder dürfen nochmal mitmachen. Der Applaus ist riesig. Die Show endet auf dem absoluten Höhepunkt – und die Kinder reden noch Stunden darüber.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Die Preise -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-3xl sm:text-4xl text-center mb-4">Preise, die Sinn machen</h2>
+      <p class="text-[#374151] text-center mb-10">Ich weiß, dass Kindergeburtstage ins Geld gehen können. Deshalb halte ich meine Preise fair und transparent:</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎩 Basis-Show</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">150 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Minuten Zaubershow + Clownerie</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Für bis zu 12 Kinder ab 4 Jahren</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Alle Materialien inklusive</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Festpreis ohne Wochentags-Aufschlag</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Bei der kurzen Strecke nach Castrop-Rauxel bleiben die Fahrtkosten überschaubar!</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎈 Ballonmodellage</h3>
+          <p class="text-[#3b55d5] font-bold text-2xl mb-4">+ 20 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> 15 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Jedes Kind bekommt sein Wunsch-Ballontier</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Hund, Schwert, Blume, Katze und mehr</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Tolle Erinnerung zum Mitnehmen</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Perfekte Ergänzung zur Zaubershow</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Glitzer-Tattoos</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">+ 40 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 30 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Professionelle, hautfreundliche Tattoos</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Haltbarkeit: 5-7 Tage</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Der Hit auf jeder Party!</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Viele Motive zur Auswahl</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Banner -->
+  <section class="w-full bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">400</div>
+        <div class="text-[#1f2025] text-sm mt-1">Shows im Jahr</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">😊</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">110.000</div>
+        <div class="text-[#1f2025] text-sm mt-1">Lachende Kinder</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">15</div>
+        <div class="text-[#1f2025] text-sm mt-1">Jahre Erfahrung</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zur Kindergeburtstagsfeier in Castrop-Rauxel</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Typische Fragen von Eltern aus Castrop-Rauxel
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        {faqItems.map((item) => (
+          <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+              aria-expanded="false"
+            >
+              <span>{item.question}</span>
+              <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+              {item.answer}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <p class="text-[#374151] mb-6 text-sm leading-relaxed max-w-xl mx-auto">
+          Wichtig: Je früher Sie buchen, desto höher die Chance auf Ihren Wunschtermin. Beliebte Samstage sind schnell weg!
+        </p>
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+          Kontaktformular
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Nicht nur Castrop-Rauxel: Mein Einzugsgebiet</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-3">Haupteinsatzgebiet</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/kindergeburtstag/geburtstag-in-gladbeck/" class="text-[#3b55d5] hover:underline">Zauberer für den Kindergeburtstag in Gladbeck</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Zaubershow zum Kindergeburtstag in Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-herne/" class="text-[#3b55d5] hover:underline">Kindergeburtstag Herne feiern</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/" class="text-[#3b55d5] hover:underline">Bochum</a> | Oer-Erkenschwick | Lünen | <a href="/kindergeburtstag/geburtstag-in-essen/" class="text-[#3b55d5] hover:underline">Essen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/" class="text-[#3b55d5] hover:underline">Gelsenkirchen</a> | <a href="/kindergeburtstag/geburtstag-in-bottrop/" class="text-[#3b55d5] hover:underline">Bottrop</a>
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-fernstaedte>
+            Überregional – mit etwas längerer Anfahrt – bin ich außerdem in Dortmund, Waltrop und Datteln buchbar.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Fragen Sie nach Ihrer Stadt! Auf Anfrage bin ich auch außerhalb von NRW buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Kindergeburtstag Castrop-Rauxel"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck (Nähe Castrop-Rauxel)</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

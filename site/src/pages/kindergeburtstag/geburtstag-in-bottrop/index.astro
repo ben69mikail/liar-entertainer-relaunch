@@ -1,0 +1,501 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import karteImg from '../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
+import _introImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import _showImgAsset from '../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+
+const seoTitle = "Kindergeburtstag Bottrop | Zaubershow ab 150€";
+const seoDescription = "Kindergeburtstag in Bottrop feiern! Clown Zauberer LIAR ✓ Zaubershow ab 150€ ✓ Glitzer-Tattoos ✓ 370+ Bewertungen ✓ Auch in Gladbeck & Essen ✓ Buchen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Kindergeburtstag mit Clown Zauberer in Bottrop',
+  description: seoDescription,
+  provider: { "@id": "https://liar-entertainer.com/#business" },
+  areaServed: { '@type': 'City', name: 'Bottrop' },
+  offers: { '@type': 'Offer', price: '150', priceCurrency: 'EUR', description: '40 Minuten Zaubershow' },
+};
+
+const faqItems = [
+  {
+    question: 'Was kostet ein Clown Zauberer für einen Kindergeburtstag?',
+    answer: 'Die Preise für Kindergeburtstage starten ab 150 Euro. Die genaue Gage ist abhängig von Art und Umfang der Veranstaltung, Zuschauerzahl, Anfahrtsweg und Jahreszeit. Für ein individuelles, unverbindliches Angebot kontaktieren Sie mich unter 0172-1517578 oder info@liar-entertainer.com.',
+  },
+  {
+    question: 'Wie lange dauert eine Clown & Zaubershow für Kinder?',
+    answer: 'Die Show dauert 40 Minuten, je nach Alter der Kinder und Ihren Wünschen. Die Dauer wird individuell an Ihre Veranstaltung angepasst. Zusätzlich kann Ballonmodellage oder Glitzer-Tattoos dazugebucht werden.',
+  },
+  {
+    question: 'Wie viel Platz braucht man für die Clown- und Zaubershow?',
+    answer: 'Minimal nur 2x2 Meter Fläche. Die Show funktioniert überall: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Garten, Turnhalle, Kindergarten, Schule oder Bücherei. Keine Aufbauzeit und es wird fast keine Vorbereitung benötigt.',
+  },
+  {
+    question: 'Für welches Alter ist Clown Zauberer LIAR geeignet?',
+    answer: 'Die Show ist für Kinder von 4 bis 12 Jahren konzipiert, aber auch für gemischtes Publikum bis 99 Jahre geeignet. Die Show wird immer auf die Altersklasse abgestimmt. Besonders beliebt bei Kindergeburtstagen (4-10 Jahre), aber auch Schulkinder und sogar \'Pubertiere\' machen begeistert mit.',
+  },
+  {
+    question: 'Wo ist Clown Zauberer LIAR im Einsatz?',
+    answer: 'Hauptsächlich in ganz Nordrhein-Westfalen (NRW). Regelmäßig buchbar in: Essen, Oberhausen, Gelsenkirchen, Duisburg, Düsseldorf, Dortmund, Köln, Gladbeck, Mülheim, Herne, Marl, Dorsten, Herten, Münster, Krefeld, Moers und vielen weiteren NRW-Städten. Auch überregional und international buchbar in Deutschland, Frankreich, Belgien, Österreich und der Schweiz.',
+  },
+  {
+    question: 'Was macht die Show von Clown Zauberer LIAR besonders?',
+    answer: 'Die einzigartige Kombination aus französischem Charme und professioneller Ausbildung. Der Clown findet den besten Draht zu den Kindern und der Zauberer überrascht sie! Die Kinder werden aktiv eingebunden und stehen im Mittelpunkt. Sie erleben eine Mischung aus Clownerie und Zauberei, bei der sie zwischen Lachen und Staunen pendeln. Mit 370+ TOP-Bewertungen (5 Sterne) auf Google ist LIAR der bestbewertete Clown Zauberer in NRW.',
+  },
+  {
+    question: 'Welche Leistungen sind im Kindergeburtstag-Paket enthalten?',
+    answer: 'Im Basis-Paket ist eine 40 minütige Clown & Zaubershow enthalten, bei der Kinder aktiv mitmachen. Optional zubuchbar: Ballonmodellage (jedes Kind bekommt eine Wunschfigur zum Mitnehmen) und Glitzer-Tattoos (hautverträglich, hält 5-7 Tage, über 50 Motive). Alles wird von LIAR mitgebracht - Sie stellen nur den Platz!',
+  },
+  {
+    question: 'Wie läuft die Buchung ab?',
+    answer: '1. Kontaktaufnahme per Telefon (0172-1517578), E-Mail oder WhatsApp. 2. Sie erhalten ein individuelles, unverbindliches Angebot. 3. Nach Buchungsbestätigung kommt LIAR pünktlich zu Ihrer Veranstaltung. Die Kommunikation ist unkompliziert und professionell - oft Rückmeldung am gleichen Tag!',
+  },
+  {
+    question: 'Spricht Clown Zauberer LIAR auch Französisch?',
+    answer: 'Ja! Als französischer Entertainer bietet LIAR Shows sowohl auf Deutsch als auch auf Französisch an. Perfekt für internationale Events, französische Gäste oder zweisprachige Familien. Der französische Charme macht die Show besonders charmant und einzigartig.',
+  },
+  {
+    question: 'Braucht der Clown Zauberer technische Ausrüstung von uns?',
+    answer: 'Nein! LIAR bringt alles selbst mit: Alle Requisiten, Ballons, Glitzer-Tattoo-Material. Sie müssen nur den Platz (mindestens 2x2 Meter) bereitstellen und darauf achten, dass die Kinder gemütlich und ungestört sitzen können. LIAR ist sehr pflegeleicht und unkompliziert! Ab 60/70 Zuschauer sollte jedoch eine Sprechanlage vorhanden sein.',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kindergeburtstag Bottrop, Geburtstag Bottrop, Clown Kindergeburtstag Bottrop, Zauberer Geburtstag Bottrop, Kinderparty Bottrop, NRW"
+  canonical="https://liar-entertainer.com/kindergeburtstag/geburtstag-in-bottrop/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kindergeburtstag', url: '/kindergeburtstag/' },
+    { name: 'Geburtstag in Bottrop', url: '/kindergeburtstag/geburtstag-in-bottrop/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Bottrop
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Kindergeburtstag in Bottrop: Mitmach-Zaubershow ab 150 €
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Clown Zauberer für magische Momente
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">&raquo;</span>
+        <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a>
+        <span class="mx-1">&raquo;</span>
+        <span>Geburtstag in Bottrop</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section: Text + Bild -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Geburtstag in Bottrop feiern – Clown Zauberer für magische Momente</h2>
+          <h3 class="font-bold text-lg text-[#1f2025] mb-4">Ihr Geburtstag in Bottrop mit professionellem Clown-Zauberer</h3>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">
+            Kindergeburtstag in Bottrop mit Clown Zauberer LIAR aus dem direkt benachbarten Gladbeck: 40 Minuten Mitmach-Zaubershow zum Festpreis ab 150 € für bis ca. 12 Kinder ab 4 Jahren – optional Ballonfiguren und Glitzer-Tattoos. Nur 2×2 m Platz nötig, ob in Kirchhellen, Feldhausen oder Boy. 370+ Google-Bewertungen.
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Sie planen einen <strong>Geburtstag in Bottrop</strong> und suchen nach dem perfekten Entertainment? Als erfahrener Clown-Zauberer mit über 15 Jahren Bühnenerfahrung sorge ich für unvergessliche Kindergeburtstage in Bottrop, Kirchhellen, Feldhausen, Boy und allen anderen Stadtteilen.
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="m-0">
+            <Image
+              src={_introImgAsset}
+              alt="Lachende Kinder auf einem Geburtstag in Bottrop mit dem Clown"
+              class="rounded-full object-cover object-[20%] portrait-zoom"
+              style="width: 320px; height: 320px;"
+              loading="lazy"
+              width={640}
+              height={853}
+            />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Mitmach-Zauberei beim Kindergeburtstag in Bottrop</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <!-- Warum einen Clown-Zauberer? -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#1f2025] font-bold text-2xl mb-4">Warum einen Clown-Zauberer für den Kindergeburtstag in Bottrop buchen?</h2>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Die Organisation eines Kindergeburtstags kann stressig sein – besonders wenn Sie sich fragen, wie Sie alle kleinen Gäste gleichzeitig unterhalten und begeistern können. Die Lösung: Ein professioneller Kinderzauberer mit Clownerie kommt direkt zu Ihnen nach Hause in Bottrop!
+          </p>
+          <p class="font-semibold text-[#1f2025] mb-3">Ihre Vorteile auf einen Blick:</p>
+          <ul class="space-y-2 text-[#374151]">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Keine aufwendige Partyplanung nötig</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Professionelle Unterhaltung für 40 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Altersgerechtes Programm für Kinder ab 4 Jahren</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Das Geburtstagskind ist der Star der Show</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> TOP Bewertungen von Familien aus Bottrop und Umgebung</li>
+          </ul>
+          <p class="text-[#374151] mt-4 leading-relaxed">
+            Viele Eltern in Bottrop wissen gar nicht, dass man einen Clown Zauberer einfach und unkompliziert für den Kindergeburtstag nach Hause einladen kann. Dabei ist dies die ideale Lösung für entspannte Eltern und glückliche Kinder!
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="m-0">
+            <Image
+              src={_introImgAsset}
+              alt="Kindergeburtstag mit Clown Zauberer in Bottrop"
+              class="rounded-xl w-full max-w-md shadow-sm img-hover-zoom"
+              loading="lazy"
+              width={896}
+              height={1195}
+            />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Zaubershow im Wohnzimmer – Kindergeburtstag in Bottrop</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Blue Section: Die interaktive Zaubershow -->
+  <section class="bg-[#eff4ff] py-14 border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4">BOTTROP</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-6">Die interaktive Zaubershow: Magie zum Mitmachen für Ihren Geburtstag in Bottrop</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">
+        Meine Zaubershow für Kindergeburtstage ist weit mehr als passive Unterhaltung. Die Kinder werden aktiv eingebunden und erleben sich selbst als kleine Zauberer! Diese einzigartige Mischung aus Zauberei und Clownerie sorgt für:
+      </p>
+      <ul class="text-[#1f2025] space-y-2 text-left max-w-lg mx-auto mb-4">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> <strong class="text-[#1f2025]">Verblüffende Zaubertricks</strong>, bei denen die Kinder die Hauptrolle spielen</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> <strong class="text-[#1f2025]">Kindgerechten Humor</strong>, der alle zum Lachen bringt ohne zu übertreiben</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> <strong class="text-[#1f2025]">Spannung und Staunen</strong> durch erstaunliche Illusionen</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> <strong class="text-[#1f2025]">Unvergessliche Momente</strong> – jedes Kind wird wertgeschätzt und einbezogen</li>
+      </ul>
+      <p class="text-[#1f2025] leading-relaxed">
+        Das Besondere an meiner Show: Sie findet bei Ihnen zu Hause statt! Egal ob in Ihrer Wohnung, im Partyraum oder im Garten – ich bringe alle Requisiten mit und verwandle jeden Ort in Bottrop in eine magische Bühne.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- Die Preise -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-3xl sm:text-4xl text-center mb-10">Preise für Ihren Kindergeburtstag in Bottrop</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Zaubershow -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎩 Zaubershow</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">150 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Minuten professionelle Show mit Zauberkunst und Clownerie</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Alle Materialien und Requisiten inklusive</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Für bis zu 12 Kinder (Mindestalter 4 Jahre)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Das Geburtstagskind als Star der Show</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</p>
+        </div>
+        <!-- Ballonmodellage -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎈 Ballonmodellage</h3>
+          <p class="text-[#3b55d5] font-bold text-2xl mb-4">+ 20 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Für jedes Kind 1 Ballon</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Ca. 15 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Tolle Erinnerung zum Mitnehmen</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Große Auswahl an Figuren: Hund, Schwert, Blume u.v.m.</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Perfekte Ergänzung zur Zaubershow</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
+        </div>
+        <!-- Glitzer Tattoos -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Glitzer-Tattoos</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">+ 40 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Für jedes Kind 1 Tattoo</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Ca. 30 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hautverträglich &amp; langanhaltend</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Viele Motive: Einhörner, Schmetterlinge, Sterne u.v.m.</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hält mehrere Tage auf der Haut</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Kindergeburtstag Bottrop: Flexibel in allen Stadtteilen buchbar -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Kindergeburtstag Bottrop: Flexibel in allen Stadtteilen buchbar</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">Ich bin als Clown-Zauberer in ganz Bottrop für Kindergeburtstage verfügbar:</p>
+      <ul class="space-y-2 text-[#374151] mb-6">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <strong>Bottrop-Mitte</strong> und Stadtmitte</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <strong>Bottrop-Kirchhellen</strong></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <strong>Boy, Eigen, Batenbrock</strong></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <strong>Fuhlenbrock, Feldhausen, Vonderort</strong></li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Sowie alle weiteren Stadtteile</li>
+      </ul>
+      <p class="text-[#374151] leading-relaxed">Die Anfahrt von meinem Standort in Gladbeck nach Bottrop ist kurz und unkompliziert – Sie zahlen lediglich 0,40 € pro Kilometer Fahrtkosten. Bottrop liegt quasi direkt vor meiner Haustür!</p>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="w-full bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">400</div>
+        <div class="text-[#1f2025] text-sm mt-1">Shows im Jahr</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">😊</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">110.000</div>
+        <div class="text-[#1f2025] text-sm mt-1">Lachende Kinder</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">15</div>
+        <div class="text-[#1f2025] text-sm mt-1">Jahre Erfahrung</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Warum Eltern in Bottrop meine Shows schätzen -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-8">Warum Eltern in Bottrop meine Shows schätzen</h2>
+      <p class="text-[#374151] mb-6 leading-relaxed text-center max-w-3xl mx-auto">Nach über 15 Jahren Erfahrung mit Hunderten von Kindergeburtstagen in Bottrop und dem gesamten Ruhrgebiet weiß ich genau, was funktioniert:</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 rounded-xl p-6">
+          <h3 class="font-bold text-[#1f2025] mb-2">Minimaler Aufwand für Sie</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Keine Vorbereitung nötig – ich bringe alles mit und kümmere mich um die Unterhaltung. Sie können sich zurücklehnen und die strahlenden Kinderaugen genießen.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6">
+          <h3 class="font-bold text-[#1f2025] mb-2">Flexible Durchführung</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Die Show passt sich perfekt an Ihre räumlichen Gegebenheiten in Bottrop an – vom kleinen Wohnzimmer bis zum großen Partykeller.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6">
+          <h3 class="font-bold text-[#1f2025] mb-2">Altersgerechte Unterhaltung</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Das Programm wird speziell auf die Altersgruppe Ihrer Gäste abgestimmt. Ob 4-jährige Kindergartenkinder oder 10-jährige Grundschüler – alle haben Spaß!</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6">
+          <h3 class="font-bold text-[#1f2025] mb-2">Entspannte Eltern, glückliche Kinder</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Während der Show haben Sie Zeit für letzte Partyvorbereitungen oder genießen einfach die ausgelassene Stimmung.</p>
+        </div>
+      </div>
+      <div class="bg-gray-50 rounded-xl p-6 mt-6 max-w-md mx-auto">
+        <h3 class="font-bold text-[#1f2025] mb-2">Bewährte Qualität</h3>
+        <p class="text-[#374151] text-sm leading-relaxed">Zahlreiche positive Rückmeldungen von Familien aus Bottrop bestätigen: Diese Zaubershow macht Kindergeburtstage zu etwas Besonderem!</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zur Kindergeburtstagsfeier in Bottrop</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Häufig gestellte Fragen zum Geburtstag in Bottrop
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        {faqItems.map((item) => (
+          <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+              aria-expanded="false"
+            >
+              <span>{item.question}</span>
+              <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+              {item.answer}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <p class="text-[#374151] mb-2 font-semibold">Einfach Kontakt aufnehmen</p>
+        <p class="text-[#374151] mb-6 text-sm leading-relaxed max-w-xl mx-auto">
+          Sie können mir Ihre Anfrage für einen Kindergeburtstag in Bottrop unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben.
+        </p>
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+          Kontaktformular
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Kindergeburtstag in Bottrop und ganz NRW</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-3">Haupteinsatzgebiet Kindergeburtstag</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/kindergeburtstag/geburtstag-in-gladbeck/" class="text-[#3b55d5] hover:underline">Kindergeburtstag Gladbeck feiern</a> | <a href="/kindergeburtstag/geburtstag-in-oberhausen/" class="text-[#3b55d5] hover:underline">Kindergeburtstag Oberhausen buchen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/" class="text-[#3b55d5] hover:underline">Kindergeburtstag in Gelsenkirchen</a> | <a href="/kindergeburtstag/geburtstag-in-essen/" class="text-[#3b55d5] hover:underline">Essen</a> | Bottrop | <a href="/kindergeburtstag/geburtstag-in-bochum/" class="text-[#3b55d5] hover:underline">Bochum</a> | <a href="/kindergeburtstag/geburtstag-in-dinslaken/" class="text-[#3b55d5] hover:underline">Dinslaken</a> | <a href="/kindergeburtstag/geburtstag-in-dorsten/" class="text-[#3b55d5] hover:underline">Dorsten</a> | <a href="/kindergeburtstag/geburtstag-in-herten/" class="text-[#3b55d5] hover:underline">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-herne/" class="text-[#3b55d5] hover:underline">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-marl/" class="text-[#3b55d5] hover:underline">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/" class="text-[#3b55d5] hover:underline">Mülheim</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Recklinghausen</a>
+          </p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Weitere NRW-Städte</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn | Borken
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-fernstaedte>
+            Überregional – mit etwas längerer Anfahrt – bin ich außerdem in Duisburg, Wesel, Castrop-Rauxel, Düsseldorf, Dortmund und Moers buchbar.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Auf Anfrage bin ich auch überregional und international (Belgien, Niederlande, Österreich, Schweiz) verfügbar.
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Kindergeburtstag Bottrop"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Bottrop -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Bottrop buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kinderzauberer/kinderzauberer-in-bottrop/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#3b55d5] hover:underline font-medium text-sm card-hover reveal">🎩 Kinderzauberer in Bottrop</a>
+      <a href="/clown/clownshow/clown-in-bottrop/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#d7393e] hover:underline font-medium text-sm card-hover reveal">🤡 Clown in Bottrop</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

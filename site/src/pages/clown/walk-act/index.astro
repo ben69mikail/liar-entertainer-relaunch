@@ -1,0 +1,402 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import { Image } from 'astro:assets';
+import walkActHeroImg from '../../../assets/images/clown/walk-act-hero.jpg';
+import walkActFestEssenImg from '../../../assets/images/clown/walk-act-fest-essen.jpg';
+import ballonmodellage2Img from '../../../assets/images/clown/ballonmodellage-2.jpg';
+import walkActStadtfestImg from '../../../assets/images/clown/walk-act-stadtfest.jpg';
+
+const seoTitle = 'Walk Act NRW – Clown | Zauberer | Pantomime | LIAR';
+const seoDescription = 'Walk Act NRW ✓ Clown Zauberer LIAR – mobile Unterhaltung für Stadtfeste, Messen & Firmenfeiern ✓ Interaktiv, charmant & unvergesslich ✓ Jetzt anfragen!';
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Walk Act in NRW – Clown Zauberer LIAR",
+  "description": "Mobiler, interaktiver Walk Act mit Clown Zauberer LIAR in NRW – Close-Up-Zauberei, Pantomime und Comedy für Messen, Stadt- und Straßenfeste, Firmenevents und Empfänge, ganz ohne Bühne.",
+  "url": "https://liar-entertainer.com/clown/walk-act/",
+  "serviceType": ["Walk Act", "Mobile Unterhaltung", "Close-Up-Zauberei"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "State", "name": "Nordrhein-Westfalen" }
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Was ist ein Walk Act?', acceptedAnswer: { '@type': 'Answer', text: 'Ein Walk Act ist eine mobile, interaktive Showform: Clown Zauberer LIAR mischt sich frei unter die Gäste und zaubert direkt vor ihren Augen – ohne Bühne, ohne Technik. Ideal für Messen, Stadt- und Straßenfeste, Firmenevents und Empfänge.' } },
+    { '@type': 'Question', name: 'Wie lange dauert ein Walk Act?', acceptedAnswer: { '@type': 'Answer', text: 'Die Dauer wird flexibel an den Anlass angepasst – von rund 30 Minuten bis zu mehreren Stunden, auch in mehreren Sets über den Tag verteilt.' } },
+    { '@type': 'Question', name: 'Braucht der Walk Act eine Bühne oder Technik?', acceptedAnswer: { '@type': 'Answer', text: 'Nein. Der Walk Act benötigt weder Bühne noch Technik. Die Unterhaltung findet mobil mitten im Publikum statt und ist indoor wie outdoor einsetzbar.' } },
+    { '@type': 'Question', name: 'In welchen Städten ist der Walk Act buchbar?', acceptedAnswer: { '@type': 'Answer', text: 'Der Walk Act ist in ganz NRW buchbar, unter anderem in Köln, Düsseldorf, Essen und Dortmund. Auf Anfrage auch überregional.' } },
+  ],
+};
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!",
+  "description": "Clown Zauberer LIAR als Walk Act und Bühnenkünstler in NRW – mobil, interaktiv und unvergesslich.",
+  "thumbnailUrl": "https://img.youtube.com/vi/Cop0SqRIX4Y/maxresdefault.jpg",
+  "uploadDate": "2018-02-04",
+  "duration": "PT2M30S",
+  "contentUrl": "https://www.youtube.com/watch?v=Cop0SqRIX4Y",
+  "embedUrl": "https://www.youtube.com/embed/Cop0SqRIX4Y",
+  "publisher": { "@type": "Organization", "name": "Clown Zauberer LIAR", "url": "https://liar-entertainer.com" }
+};
+
+const structuredData = [serviceSchema, faqSchema, videoSchema];
+
+const highlights = [
+  {
+    icon: '🎩',
+    title: 'Close-Up-Zauberei',
+    text: 'Magie hautnah, direkt in den Händen Ihrer Gäste.',
+  },
+  {
+    icon: '🎭',
+    title: 'Clowneske Interaktion',
+    text: 'Spontane Comedy-Momente mit viel Herz und Charme.',
+  },
+  {
+    icon: '✨',
+    title: 'Pantomime & Improvisation',
+    text: 'Nonverbale Unterhaltung – perfekt für internationales Publikum.',
+  },
+];
+
+const idealFuer = [
+  { bold: 'Messen & Promotions', rest: ' – für mehr Aufmerksamkeit an Ihrem Stand' },
+  { bold: 'Straßenfeste & Stadt-Events', rest: ' – als mobiler Publikumsmagnet' },
+  { bold: 'Firmenevents & Jubiläen', rest: ' – charmante Unterhaltung während des Empfangs' },
+  { bold: 'Private Feiern & Eröffnungen', rest: ' – als lockerer Eisbrecher mit Humor und Herz' },
+];
+
+const vorteile = [
+  'Keine Bühne oder Technik erforderlich',
+  'Direkte Interaktion mit Gästen oder Kunden',
+  'Flexibel einsetzbar, indoor & outdoor',
+  'In ganz NRW buchbar (z. B. Köln, Düsseldorf, Essen, Dortmund)',
+  'Professioneller Auftritt mit künstlerischer Qualität',
+];
+
+const ablauf = [
+  { title: 'Ankommen & Einstimmung', text: 'Ich mische mich unter Ihre Gäste, baue Sympathie auf und sorge für erste Lacher.' },
+  { title: 'Interaktive Zaubermomente', text: 'Kleine magische Szenen entstehen spontan zwischen den Menschen.' },
+  { title: 'Begeisterung & Aufmerksamkeit', text: 'Der Walk-Act zieht das Publikum an, sorgt für Stimmung und Gesprächsstoff.' },
+  { title: 'Abschluss & Erinnerung', text: 'Oft bleiben die Gäste für Fotos oder eine letzte kleine Überraschung.' },
+];
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Walk Act NRW, Walk Act buchen, Clown Walk Act, Zauberer Walk Act, Walk Act Straßenfest, Walk Act Firmenevent"
+  canonical="https://liar-entertainer.com/clown/walk-act/"
+  structuredData={structuredData}
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/' }, { name: 'Walk Act', url: '/clown/walk-act/' }]}
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/" class="hover:text-[#d7393e]">Clown Zauberer LIAR</a> »
+        <span>Walk Act</span>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Walk Act</h1>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={walkActHeroImg}
+      alt="Walk Act NRW – Clown Zauberer LIAR – Pantomime"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 55% 24%"
+      loading="eager"
+      fetchpriority="high"
+      widths={[600, 900, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 600px;">
+      <div class="text-center px-6">
+        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.8rem, 4.5vw, 3.2rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+          Walk Act in NRW –<br />Clown Zauberer LIAR – Pantomime
+        </h2>
+        <p class="text-white/90 text-lg font-medium">Mobil. Interaktiv. Unvergesslich.</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6">Walk Act Zauberer in NRW – Clown Zauberer LIAR</h2>
+      <p class="hero-subtitle text-[#374151] leading-relaxed mb-4">
+        Ein Walk Act mit Clown Zauberer LIAR (Michaël Prescler) ist mobile, interaktive Walking-Unterhaltung, die sich frei unter die Gäste mischt – buchbar in ganz <strong>NRW</strong> (u. a. Köln, Düsseldorf, Essen, Dortmund) für Messen, Stadt- und Straßenfeste, Firmenevents und Empfänge. Ohne Bühne und Technik, je nach Anlass flexibel von rund 30 Minuten bis zu mehreren Stunden.
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        Als <a href="/" class="text-[#d7393e] hover:underline font-medium">Clown</a> <a href="/zauberer/" class="text-[#d7393e] hover:underline font-medium">Zauberer</a> <strong>LIAR</strong> bringe ich Magie, Humor und charmante Unterhaltung direkt zu Ihren Gästen – mitten im Publikum, auf Messen, Stadtfesten oder Firmenfeiern in NRW.
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        Ich kombiniere <strong>Zauberkunst, Pantomime und spontane Comedy</strong>, um Menschen auf natürliche Weise zu begeistern, zu vernetzen und bleibende Eindrücke zu schaffen.
+      </p>
+      <p class="text-[#374151] leading-relaxed">
+        Kein Bühnenaufbau, kein Aufwand – nur pure, mobile Unterhaltung mit Herz.
+      </p>
+    </div>
+  </section>
+
+  </HeroStage>
+  <GoogleReviews />
+
+  <!-- Was ist ein Walk-Act? -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="flex justify-center">
+          <Image
+            src={walkActFestEssenImg}
+            alt="Fest Essen Walk Act"
+            class="rounded-2xl object-cover shadow-lg portrait-zoom"
+            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="340px"
+          />
+        </div>
+        <div>
+          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-2">Was ist ein Walk-Act?</h2>
+          <hr class="border-[#1f2025] border-t-2 mb-6 w-64" />
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Ein Walk-Act ist eine <strong>bewegliche, interaktive Showform</strong>, bei der ich mich frei unter Ihre Gäste mische.
+            Ob auf einer Messe, einem Straßenfest oder einer privaten Feier – ich zaubere direkt vor den Augen der Besucher, wechsle von Gruppe zu Gruppe und erschaffe dabei magische Begegnungen voller Lachen und Staunen.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Diese Art der Animation ist ideal, wenn Sie Ihrem Event <strong>eine besondere Atmosphäre</strong> verleihen möchten – lebendig, sympathisch und unvergesslich.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- WALK ACT Highlights -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-2">WALK ACT Highlights</h2>
+          <hr class="border-[#1f2025] border-t-2 mb-2 w-64" />
+          <p class="text-[#374151] mb-6">Meine Walk-Act Highlights</p>
+          <div class="space-y-4 mb-8">
+            {highlights.map((h) => (
+              <div>
+                <p class="font-bold text-[#1f2025]">
+                  <span class="mr-2">{h.icon}</span>{h.title}:
+                </p>
+                <p class="text-[#374151] text-sm ml-7">{h.text}</p>
+              </div>
+            ))}
+          </div>
+          <a
+            href="/kontakt/"
+            class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded uppercase tracking-wide transition-colors"
+          >
+            Kontaktformular
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <Image
+            src={ballonmodellage2Img}
+            alt="Herzballon bei Ballonmodellage"
+            class="rounded-2xl object-cover shadow-lg portrait-zoom"
+            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="340px"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Reviews -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="text-center mb-8">
+        <p class="text-2xl font-bold text-[#1f2025]">⭐⭐⭐⭐⭐ Google Bewertungen</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:#e91e63;">SJ</div>
+            <div>
+              <p class="font-semibold text-[#1f2025] text-sm">Smilson Johnson</p>
+              <p class="text-xs text-[#595959]">vor 2 Monaten</p>
+            </div>
+          </div>
+          <div class="text-yellow-400 text-sm mb-2">★★★★★</div>
+          <p class="text-[#374151] text-sm">In jeder Hinsicht wirklich empfehlenswert!</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:#009688;">TA</div>
+            <div>
+              <p class="font-semibold text-[#1f2025] text-sm">Thorsten Andres</p>
+              <p class="text-xs text-[#595959]">vor 2 Monaten</p>
+            </div>
+          </div>
+          <div class="text-yellow-400 text-sm mb-2">★★★★★</div>
+          <p class="text-[#374151] text-sm">Was ein geiler Typ! Witz, Charme und Humor im Herzen ❤️</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <div class="flex items-center gap-3 mb-3">
+            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:#3b55d5;">NK</div>
+            <div>
+              <p class="font-semibold text-[#1f2025] text-sm">Nina Keller</p>
+              <p class="text-xs text-[#595959]">vor 2 Monaten</p>
+            </div>
+          </div>
+          <div class="text-yellow-400 text-sm mb-2">★★★★★</div>
+          <p class="text-[#374151] text-sm">Mit unglaublich viel Charme und Humor begeistert Michaël die kleinen UND die großen Zuschauer. Ganz große Klasse 🐻</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- STRASSENFEST, STADTFEST, KINDERFEST -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div class="flex justify-center">
+          <Image
+            src={walkActStadtfestImg}
+            alt="Walk Act Stadtfest"
+            class="rounded-2xl object-cover shadow-lg portrait-zoom"
+            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="340px"
+          />
+        </div>
+        <div>
+          <h2 class="font-black text-[#1f2025] text-3xl sm:text-4xl mb-2 uppercase leading-tight">
+            Straßenfest,<br />Stadtfest,<br />Kinderfest
+          </h2>
+          <hr class="border-[#1f2025] border-t-2 mb-6 w-48" />
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Clown Zauberer LIAR unterhält und verblüfft die Zuschauer mit seinem Zauberprogramm. Das Publikum kann die Zauberei und Magie hautnah miterleben – denn die Zaubershow findet mitten unter den Zuschauern statt. Es ist somit die wohl faszinierendste Form der Zauberei bei Straßenfesten, <a href="/zauberer/zaubershow/strassen-sommer-fest/" class="text-[#d7393e] hover:underline">Stadtfesten</a> und Kinderfesten.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Da es sich um kein „festes" Programm handelt, werden die Inhalte und die Zaubertricks immer wieder auf das vorhandene Publikum angepasst. Die Straßen-Zauberei kann sehr gut mit der <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonmodellage</a> kombiniert werden.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- IDEAL FÜR + VORTEILE (pastel bg) -->
+  <section class="bg-[#eff4ff] border-y border-[#c5d3f7] py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+        <div>
+          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6 uppercase tracking-wider">Ideal für</h2>
+          <ul class="space-y-3">
+            {idealFuer.map((item) => (
+              <li class="flex items-start gap-3">
+                <span class="text-[#d7393e] mt-1 flex-shrink-0">●</span>
+                <p class="text-[#374151]"><strong class="text-[#1f2025]">{item.bold}</strong>{item.rest}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div>
+          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6 uppercase tracking-wider">Ihre Vorteile</h2>
+          <ol class="space-y-3">
+            {['Keine Bühne oder Technik erforderlich ✅', 'Direkte Interaktion mit Gästen oder Kunden ✅', 'Flexibel einsetzbar, indoor & outdoor ✅', 'In ganz NRW buchbar (z. B. Köln, Düsseldorf, Essen, Dortmund) ✅', 'Professioneller Auftritt mit künstlerischer Qualität ✅'].map((v, i) => (
+              <li class="flex items-start gap-3">
+                <span class="text-[#d7393e] font-bold flex-shrink-0">{i + 1}.</span>
+                <p class="text-[#374151]">{v}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABLAUF -->
+  <section class="bg-white py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center uppercase tracking-wider mb-10">Ablauf eines Walk Acts</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+        {ablauf.map((step, i) => (
+          <div class="bg-gray-50 rounded-xl p-6 flex gap-4 items-start card-hover reveal">
+            <div class="w-10 h-10 rounded-full bg-[#d7393e] text-white font-bold flex items-center justify-center flex-shrink-0">
+              {i + 1}
+            </div>
+            <div>
+              <p class="font-bold text-[#1f2025] mb-1">{step.title}</p>
+              <p class="text-[#374151] text-sm leading-relaxed">{step.text}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion (pastel bg) -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA Booking -->
+  <section class="bg-white py-12 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="font-bold text-[#1f2025] text-xl mb-4">Einfach Kontakt aufnehmen</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">
+        Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten.
+      </p>
+      <div class="space-y-2 text-[#374151] mb-6">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+        <p>📍 Standort: Beethovenstr. 15, 45966 Gladbeck</p>
+      </div>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Jetzt unverbindlich anfragen
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,408 @@
+﻿---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import CountUp from '../../../components/CountUp.astro';
+import aktionImg from '../../../assets/images/kinderzauberer/clown-zauberer-gladbeck.jpg';
+import { Image } from 'astro:assets';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import _heroImgAsset from '../../../assets/images/kinderzauberer/kinderzauberer-hero.jpg';
+import _roundImgAsset from '../../../assets/images/kinderzauberer/zaubershow-mit-clown-zauberer-liar.jpg';
+import _showImgAsset from '../../../assets/images/clown/clown-bei-clownshow.jpg';
+import _kgImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import _galleryImgAsset from '../../../assets/images/clown/kinderzauberer-kindergarten-essen.jpg';
+
+const seoTitle = "Zauberer Kindergeburtstag Bochum | Kinderzauberer LIAR";
+const seoDescription = "Kinderzauberer in Bochum buchen ✓ Zaubershow für Kindergeburtstag & Events ✓ 370+ Bewertungen ✓ Auch in Herne & Dortmund ✓ Jetzt anfragen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Kinderzauberer in Bochum",
+  "description": "Kinderzauberer LIAR für Kindergeburtstag und Kinderevents in Bochum, NRW",
+  "url": "https://liar-entertainer.com/kinderzauberer/kinderzauberer-in-bochum/",
+  "serviceType": ["Kinderzauberer", "Zaubershow für Kinder"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "City", "name": "Bochum" }
+};
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet ein Kinderzauberer in Bochum?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Kosten für einen Kinderzauberer in Bochum variieren je nach Art der Veranstaltung, Dauer der Show, Zuschauerzahl und Anfahrt. Für Kindergeburtstage biete ich Festpreise an. Kontaktieren Sie mich unverbindlich für ein individuelles Angebot – ich berate Sie gerne!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie viel Platz braucht die Zaubershow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Für meine Zaubershow in Bochum benötige ich lediglich eine Fläche von 2×2 Metern – ohne lange Vorbereitungszeit! Ob Wohnzimmer, Partykeller, Garten, Kindergarten, Schule oder Eventlocation: Ich passe mich flexibel an Ihre Räumlichkeiten an."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert die Zaubershow in Bochum?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meine Zaubershow in Bochum dauert ab 30 Minuten und lässt sich flexibel an Ihre Veranstaltung anpassen. Perfekt für: Kindergeburtstag, Kita-Fest, Schulfest, Sommerfest, Firmenevent, Hochzeit, Kommunion oder Straßenfest. Die Show-Dauer stimme ich individuell auf Ihr Event ab."
+      }
+    }
+  ]
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kinderzauberer Bochum, Kinderzauberer in Bochum, Zauberer Bochum, Kindergeburtstag Bochum, Zaubershow Bochum, NRW"
+  canonical="https://liar-entertainer.com/kinderzauberer/kinderzauberer-in-bochum/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kinderzauberer', url: '/kinderzauberer/' },
+    { name: 'Kinderzauberer in Bochum', url: '/kinderzauberer/kinderzauberer-in-bochum/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 60%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Bochum
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Zauberer für den Kindergeburtstag in Bochum
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Kinderzauberer LIAR aus Gladbeck – 40 Minuten Zaubershow für Kinder von 4 bis 12 Jahren in Bochum.
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a>
+        <span class="mx-1">»</span>
+        <span>Kinderzauberer in Bochum – Zaubershow für Kindergeburtstag & Events</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Text + Image -->
+  <section class="py-14">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Sie suchen einen Zauberer für Kinder in Bochum? Kinderzauberer LIAR aus Gladbeck bringt seine interaktive Mitmach-Zaubershow für Kinder ab 4 Jahren direkt zu Ihnen nach Bochum – ebenso nach Herne oder Witten. Rund 40 Minuten Staunen und Lachen, dafür genügen 2×2 Meter Platz im Wohnzimmer oder Partyraum. 370+ Google-Bewertungen sprechen für sich.</p>
+      </div>
+      <div class="flex justify-center">
+        <Image
+          src={_roundImgAsset}
+          alt="Kinderzauberer in Bochum"
+          class="rounded-full object-cover object-[20%] portrait-zoom"
+          style="width: 320px; height: 320px;"
+          loading="lazy" width={600} height={450} />
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <section class="bg-[#eff4ff] py-14 border-y border-[#c5d3f7]">
+    <div class="max-w-5xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4 text-center">BOCHUM</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-10 text-center">Warum LIAR als Kinderzauberer in Bochum buchen? ⭐</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">Mit LIAR, Ihrem professionellen Kinderzauberer in Bochum, wird Ihre Veranstaltung zu einem unvergesslichen Erlebnis. Ob Kindergeburtstag, Schulfest oder Firmenevent – meine interaktive Zaubershow begeistert Kinder von 4 bis 12 Jahren und bleibt lange in Erinnerung. Sie suchen einen Kinderzauberer in Bochum?</p>
+      <p class="text-[#1f2025] leading-relaxed mb-4">Als erfahrener Zauberer für Kinder erlebe ich täglich glänzende Kinderaugen und staunende Gesichter – und genau das macht meine Arbeit so besonders. In zauberhaften Geschichten verwandle ich Alltagsgegenstände in magische Requisiten. Das verblüfft, begeistert und sorgt für ausgelassene Stimmung bei Klein und Groß!</p>
+      <div class="text-center mt-8">
+        <a href="#zaubershow" class="inline-block bg-[#3b55d5] text-white font-bold px-8 py-3 rounded transition-colors hover:bg-[#2a3fa8]">
+          Über die Zaubershow
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Zaubershow in Bochum: Interaktiv, lustig und unvergesslich 🎭 -->
+  <section id="zaubershow" class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl mb-6">Zaubershow in Bochum: Interaktiv, lustig und unvergesslich 🎭</h2>
+        <p class="text-[#374151] mb-4 leading-relaxed">Meine Zaubershow in Bochum ist eine unterhaltsame Mischung aus Zauberei und Clownerie, bei der die Kinder (nicht die Zaubertricks!) im Mittelpunkt stehen. Die jungen Zuschauer werden aktiv eingebunden und pendeln zwischen Lachen und Staunen. Diese interaktive Show ist altersgerecht abgestimmt und macht jede Veranstaltung in Bochum zum Highlight.</p>
+        <p class="text-[#374151] mb-4 leading-relaxed">Diese bunte und zauberhafte Show ist optimal auf die jeweilige Altersklasse abgestimmt. Die Kinder wirken aktiv mit, werden selbst zum Zauberer und erleben erstaunliche Momente, die unglaublich wirken. Für die kleinen Zuschauer wird diese Clown- und Zaubershow zu einem unvergesslichen Erlebnis. Die nachfolgenden Videos vermitteln Ihnen einen authentischen Eindruck von meiner Arbeit mit Kindern und zeigen, wie meine Zaubershow in Bochum wirkt.</p>
+      </div>
+      <div>
+        <Image src={_showImgAsset} alt="Zaubershow in Bochum" class="rounded-xl w-full object-cover object-top shadow-sm" loading="lazy" width={506} height={640} />
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Kindergeburtstag in Bochum mit Kinderzauberer feiern -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4 grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+      <div>
+        <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl mb-6">Kindergeburtstag in Bochum mit Kinderzauberer feiern</h2>
+        <p class="text-[#374151] mb-4 leading-relaxed">Einen Kinderzauberer für den Kindergeburtstag in Bochum zu buchen ist einfacher als gedacht! Ich komme zu Ihnen nach Hause, in den Partykeller oder in die angemietete Location. Mit minimalem Aufwand und ohne lange Vorbereitungszeit sorge ich für strahlende Kinderaugen und entspannte Eltern.</p>
+        <p class="text-[#374151] mb-4 leading-relaxed">Das Geburtstagskind steht dabei immer im Mittelpunkt meiner Show. Die Kinder werden zum Lachen und Staunen gebracht. Der Spaß mit den Kindern steht für mich im Vordergrund, wobei das Geburtstagskind immer die Hauptrolle spielt. Das Ergebnis: lachende Kinder, ausgelassene Stimmung und entspannte Eltern!</p>
+        <a href="/kindergeburtstag/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors mt-4">
+          Kindergeburtstag – Preise
+        </a>
+      </div>
+      <div>
+        <Image src={_kgImgAsset} alt="Kindergeburtstag mit Kinderzauberer in Bochum" class="rounded-xl w-full object-cover object-top shadow-sm" loading="lazy" width={800} height={1067} />
+      </div>
+    </div>
+  </section>
+
+  <!-- Anlässe für den Kinderzauberer in Bochum -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-10">Anlässe für den Kinderzauberer in Bochum 👧👦</h2>
+      <p class="text-[#374151] text-center mb-8 leading-relaxed">Meine Zaubershow ist perfekt für verschiedene Veranstaltungen in Bochum und Umgebung:</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <div class="text-2xl mb-3">🎂</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Kindergeburtstag</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Unvergessliche Feier zu Hause oder in gemieteten Locations</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <div class="text-2xl mb-3">🏫</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Schulfeste & Kita-Events</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Sommerfest, Abschlussfeier oder Weihnachtsfeier im Kindergarten</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <div class="text-2xl mb-3">🏢</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Firmenfeiern & Betriebsfeste</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Unterhaltung für die kleinen Gäste bei Firmenevents</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <div class="text-2xl mb-3">💒</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Hochzeiten & Familienfeiern</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Kinderbetreuung mit Zaubershow auf Hochzeiten und Festen</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <div class="text-2xl mb-3">🎪</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Stadt- & Straßenfeste</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Walk Act und Bühnenshow für öffentliche Veranstaltungen</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <div class="text-2xl mb-3">⛪</div>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-2">Kommunion & Konfirmation</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Magische Unterhaltung für die Feier nach dem Gottesdienst</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bildergalerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4 flex justify-center">
+      <Image src={_galleryImgAsset} alt="Veranstaltung mit Zaubershow: Kinderzauberer in Bochum" class="rounded-xl w-full max-w-md object-cover object-top shadow-sm" style="max-height:400px;max-width:28rem" loading="lazy" width={320} height={480} />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Kinderzauberer in Bochum</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Was kostet ein Kinderzauberer in Bochum?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Die Kosten für einen Kinderzauberer in Bochum variieren je nach Art der Veranstaltung, Dauer der Show, Zuschauerzahl und Anfahrt. Für Kindergeburtstage biete ich Festpreise an. Kontaktieren Sie mich unverbindlich für ein individuelles Angebot – ich berate Sie gerne!
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie viel Platz braucht die Zaubershow?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Für meine Zaubershow in Bochum benötige ich lediglich eine Fläche von 2×2 Metern – ohne lange Vorbereitungszeit! Ob Wohnzimmer, Partykeller, Garten, Kindergarten, Schule oder Eventlocation: Ich passe mich flexibel an Ihre Räumlichkeiten an.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie lange dauert die Zaubershow in Bochum?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Meine Zaubershow in Bochum dauert ab 30 Minuten und lässt sich flexibel an Ihre Veranstaltung anpassen. Perfekt für: Kindergeburtstag, Kita-Fest, Schulfest, Sommerfest, Firmenevent, Hochzeit, Kommunion oder Straßenfest. Die Show-Dauer stimme ich individuell auf Ihr Event ab.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Einsatzgebiete: Kinderzauberer in Bochum und ganz NRW</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Als Kinderzauberer bin ich in Bochum und im gesamten Ruhrgebiet buchbar, darunter: <a href="/kinderzauberer/kinderzauberer-in-essen/" class="text-[#3b55d5] hover:underline">Essen</a>, <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/" class="text-[#3b55d5] hover:underline">Gelsenkirchen</a>, <a href="/kinderzauberer/kinderzauberer-in-herne/" class="text-[#3b55d5] hover:underline">Herne</a>, Witten, <a href="/kinderzauberer/kinderzauberer-in-dinslaken/" class="text-[#3b55d5] hover:underline">Dinslaken</a>, Castrop-Rauxel, Wattenscheid sowie <a href="/kinderzauberer/kinderzauberer-in-oberhausen/" class="text-[#3b55d5] hover:underline">Oberhausen</a>, <a href="/kinderzauberer/kinderzauberer-in-muelheim/" class="text-[#3b55d5] hover:underline">Mülheim</a>, <a href="/kinderzauberer/kinderzauberer-in-bottrop/" class="text-[#3b55d5] hover:underline">Bottrop</a>, <a href="/kinderzauberer/kinderzauberer-in-dorsten/" class="text-[#3b55d5] hover:underline">Dorsten</a>, <a href="/kinderzauberer/kinderzauberer-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Recklinghausen</a> und viele weitere Städte in NRW. Mit etwas längerer Anfahrt bin ich außerdem in Dortmund und Duisburg unterwegs. Mein Standort ist Gladbeck: Als <a href="/kinderzauberer/kinderzauberer-in-gladbeck/" class="text-[#3b55d5] hover:underline">Kinderzauberer in Gladbeck</a> bin ich von dort über die A42 schnell in Bochum. Auch überregionale und internationale Buchungen (Niederlande, Belgien, Österreich, Schweiz) sind möglich!
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Auf Anfrage bin ich auch außerhalb von NRW buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={aktionImg}
+            alt="Karte Einsatzgebiet Kinderzauberer Bochum"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Bochum -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Bochum buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kindergeburtstag/geburtstag-in-bochum/" class="bg-[#d7393e] hover:bg-[#b62e32] text-white rounded-lg px-5 py-3 font-bold text-sm transition-colors">🎂 Kindergeburtstag in Bochum</a>
+      <a href="/clown/clownshow/clown-in-bochum/" class="bg-[#d7393e] hover:bg-[#b62e32] text-white rounded-lg px-5 py-3 font-bold text-sm transition-colors">🤡 Clown in Bochum</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,124 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getAllBlogPosts, getAllCategories, catToSlug } from '../../../utils/allPosts';
+
+export async function getStaticPaths() {
+  const cats = await getAllCategories();
+  const allPosts = await getAllBlogPosts();
+  return cats.map((c) => ({
+    params: { category: c.slug },
+    props: {
+      categoryName: c.name,
+      posts: allPosts.filter((p) =>
+        p.categories.some((pc) => catToSlug(pc) === c.slug),
+      ),
+    },
+  }));
+}
+
+interface PostSummary {
+  slug: string;
+  href: string;
+  title: string;
+  date: Date;
+  excerpt: string;
+  image: string;
+  categories: string[];
+}
+
+const { categoryName, posts } = Astro.props as {
+  categoryName: string;
+  posts: PostSummary[];
+};
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+const canonicalSlug = catToSlug(categoryName);
+
+// Dünne Kategorien (<5 Artikel) nicht indexieren — Thin-Content-Schutz.
+// Schwelle 06.08.2026 von 2 auf 5 angehoben: im Build gemessen erreicht eine
+// Kategorie erst ab ca. 5 Beiträgen über 300 Wörter. Darunter: 40–220 Wörter,
+// 0–1 interne Links — genau der Index-Bloat aus dem GSC-Bericht.
+// TODO (redaktionell): kindergeburtstag, geburtstag, ratgeber und karneval mit
+// einem eigenen Einleitungstext ausbauen und danach wieder auf index setzen.
+// Werthaltige Kategorien stehen in der Sitemap (sitemap.xml.ts, gleiche Schwelle).
+const isThin = posts.length < 5;
+
+// Redaktionelle Einleitungen (SEO-Audit 11.08.2026, Massnahme M3): Kategorien mit
+// genug Beitraegen fuer den Index, aber ohne eigenen Text, waren reine Teaser-Listen
+// (~205 Woerter). Die Einleitung verankert das Thema im Kindergeburtstags- bzw.
+// Kinderzauberer-Kontext und gibt der Archivseite eigenen redaktionellen Wert.
+const CATEGORY_INTROS: Record<string, string> = {
+  feste:
+    'Ob Sommerfest in der Kita, Straßenfest oder Familienfeier: Hier sammle ich Berichte und Planungstipps rund um Feste in NRW. Vieles davon lässt sich direkt auf den <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a> übertragen – vom Zeitplan über die Sitzordnung bis zu der Frage, wann ein Programmpunkt wie eine Zaubershow wirklich trägt. Wer gerade ein Fest plant, findet hier Erfahrungswerte aus über 15 Jahren Bühnenpraxis statt Checklisten von der Stange.',
+  geburtstag:
+    'Alles rund um den Kindergeburtstag: Programmideen, Ablaufpläne, Altersempfehlungen und ehrliche Antworten auf die Fragen, die Eltern mir am Telefon stellen. Die Beiträge zeigen, wie eine Feier für 4- bis 12-Jährige entspannt bleibt – mit oder ohne <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a>. Wer stattdessen die konkreten Leistungen und Pakete sucht, wird auf der Seite <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a> schneller fündig.',
+  saisonal:
+    'Jede Jahreszeit stellt eigene Anforderungen an eine Kinderfeier: Hitze im Juli, Dauerregen im Mai, Karneval im Februar. In dieser Kategorie sammle ich saisonale Tipps für <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstage</a> und Feste in NRW – inklusive Plan B fürs Wetter. So lässt sich früh entscheiden, ob die Show drinnen oder draußen stattfindet und welche Programmpunkte im jeweiligen Monat überhaupt funktionieren.',
+  'pantomime-nrw':
+    'Als Pantomime und Walk-Act bin ich in NRW auf Stadtfesten, Weihnachtsmärkten und Vereinsfeiern unterwegs – leise, ohne Worte, mitten im Publikum. Die Beiträge hier zeigen diese Auftritte im Alltag und machen deutlich, worin sich ein <a href="/clown/walk-act/" class="text-[#d7393e] hover:underline">Walk-Act</a> von einer klassischen Bühnenshow unterscheidet. Für die Feier zu Hause ist dagegen die interaktive Show des <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberers</a> das passendere Format – mehr dazu auf der Seite <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a>.',
+};
+const intro = CATEGORY_INTROS[canonicalSlug] ?? null;
+---
+
+<BaseLayout
+  title={`${categoryName} | Blog | Clown Zauberer LIAR`}
+  description={`Alle Blog-Artikel zur Kategorie ${categoryName} vom Clown Zauberer LIAR. Berichte, Tipps und Neuigkeiten rund um Kindergeburtstag, Zauberei und Events in NRW.`}
+  canonical={`https://liar-entertainer.com/blog/kategorie/${canonicalSlug}/`}
+  noindex={isThin}
+>
+  <section class="py-12 bg-[#f4f4f4]">
+    <div class="max-w-[960px] mx-auto px-4">
+      <nav class="text-sm text-[#595959] mb-4">
+        <a href="/blog/" class="text-[#d7393e] hover:underline">← Blog</a>
+        <span class="mx-2">/</span>
+        <span>{categoryName}</span>
+      </nav>
+
+      <h1 class="text-[#1f2025] font-extrabold text-3xl text-center mb-2">{categoryName}</h1>
+      <p class="text-[#595959] text-center text-sm mb-6">
+        {posts.length} {posts.length === 1 ? 'Artikel' : 'Artikel'} in dieser Kategorie
+      </p>
+
+      {intro && (
+        <p
+          class="max-w-2xl mx-auto text-center text-[#374151] leading-relaxed mb-10"
+          set:html={intro}
+        />
+      )}
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        {posts.map((post, i) => (
+          <article class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+            <a href={post.href}>
+              <img
+                src={post.image}
+                alt={post.title}
+                class="w-full object-cover object-top"
+                loading={i < 3 ? 'eager' : 'lazy'}
+                decoding="async"
+                width="400"
+                height="240"
+                style="aspect-ratio: 5/3"
+              />
+            </a>
+            <div class="p-5">
+              <time class="text-[#595959] text-xs">{formatDate(post.date)}</time>
+              <h2 class="font-bold text-[#1f2025] text-base mt-1 mb-2 leading-snug">
+                <a href={post.href} class="hover:text-[#d7393e] transition-colors">
+                  {post.title}
+                </a>
+              </h2>
+              <p class="text-[#374151] text-sm leading-relaxed mb-3">{post.excerpt}</p>
+              <a href={post.href} class="text-[#d7393e] text-sm font-semibold hover:underline">
+                Weiterlesen →
+              </a>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

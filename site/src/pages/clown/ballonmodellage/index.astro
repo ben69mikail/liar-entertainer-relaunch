@@ -1,0 +1,411 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import { Image } from 'astro:assets';
+import ballonmodellage1Img from '../../../assets/images/clown/ballonmodellage-1.jpg';
+import ballonmodellage2Img from '../../../assets/images/clown/ballonmodellage-2.jpg';
+import zaubershowMitClownImg from '../../../assets/images/clown/zaubershow-mit-clown-zauberer.jpg';
+import zaubervorfuehrungWeihnachtsmarktImg from '../../../assets/images/clown/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
+import kostenPreisClownImg from '../../../assets/images/clown/kosten-preis-clown-nrw.jpg';
+import clownZaubererGladbeckImg from '../../../assets/images/clown/clown-zauberer-gladbeck.jpg';
+
+const seoTitle = "Ballonkünstler NRW buchen – Ballonmodellage für Kinder";
+const seoDescription = 'Ballonmodellage NRW ✓ Ballonkünstler LIAR – bunte Ballonfiguren für Kindergeburtstage, Stadtfeste & Events ✓ Individuelle Wunschfiguren ✓ Jetzt anfragen!';
+
+const anlaesse = [
+  'Kindergeburtstage (absolute Bestseller!)',
+  'Straßenfeste & Sommerfeste',
+  'Firmenfeiern mit Kinderbereich',
+  'Kita- & Schulfeste',
+  'Weihnachtsmärkte',
+  'Store-Openings & Eröffnungen',
+  'Hochzeiten mit Kindern',
+  'Kommunion & Konfirmation',
+  'Vereinsfeste',
+  'Jedes Event mit Kindern!',
+];
+
+const figuren = [
+  {
+    title: '🐾 Klassische Ballontiere',
+    items: ['🐕 Hunde – Der absolute Klassiker!', '🐈 Katzen – Mit Schwanz und Ohren', '🐰 Hasen – Besonders beliebt zu Ostern', '🦒 Giraffen – Mit langem Hals', '🐘 Elefanten – Mit Rüssel', '🐞 Marienkäfer – Mein persönlicher Favorit!'],
+  },
+  {
+    title: '⚔️ Für Jungs beliebt',
+    items: ['⚔️ Schwerter – Zum Fechten und Spielen', '🗡️ Säbel – Für kleine Piraten', '👑 Wikinger Helm – Für Starke!', '🏹 Springende Maus – Für Bogenschützen'],
+  },
+  {
+    title: '🌸 Für Mädchen beliebt',
+    items: ['🌸 Blumen – In verschiedenen Farben', '💕 Herzen – Süß und romantisch', '👑 Kronen – Für kleine Prinzessinnen', '🦋 Schmetterlinge – Farbenfroh und elegant'],
+  },
+  {
+    title: '🎩 Komplexe Figuren',
+    items: ['🎩 Hüte – Tragbare Ballonhüte', '✈️ Flugzeuge – Für kleine Piloten', '🐉 Fantasy-Figuren – Drachen, Dinosaurier'],
+  },
+];
+
+const einsatzgebiet = [
+  { region: 'Ruhrgebiet', cities: 'Essen, Duisburg, Oberhausen, Gelsenkirchen, Bochum, Dortmund, Bottrop, Mülheim, Herne, Herten, Gladbeck, Marl, Dorsten, Recklinghausen, Castrop-Rauxel' },
+  { region: 'Rheinland', cities: 'Düsseldorf, Köln, Krefeld, Mönchengladbach, Neuss, Leverkusen, Bonn, Bergisch Gladbach' },
+  { region: 'Münsterland & Westfalen', cities: 'Münster, Coesfeld, Borken, Ahaus, Reken, Lünen, Hamm, Unna' },
+];
+const _pageGallery = [
+  { src: zaubershowMitClownImg, alt: 'Auftritt Zaubershow mit Clown Zauberer' },
+  { src: zaubervorfuehrungWeihnachtsmarktImg, alt: 'Zaubervorführung auf dem Weihnachtsmarkt' },
+  { src: kostenPreisClownImg, alt: 'Kosten Preis Clown NRW' },
+];
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Ballonmodellage in NRW – Ballonkünstler Clown Zauberer LIAR",
+  "description": "Ballonmodellage mit Ballonkünstler LIAR in NRW – individuelle Ballonfiguren (Ballontiere, Schwerter, Blumen, Kronen) für Kindergeburtstage, Kita- und Schulfeste, Straßenfeste und Firmenfeiern mit Kindern. Jede Wunschfigur in 2 bis 5 Minuten geformt.",
+  "url": "https://liar-entertainer.com/clown/ballonmodellage/",
+  "serviceType": ["Ballonmodellage", "Ballonkünstler", "Ballonfiguren Kindergeburtstag"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "State", "name": "Nordrhein-Westfalen" }
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Was ist Ballonmodellage?', acceptedAnswer: { '@type': 'Answer', text: 'Ballonmodellage (auch Ballonkunst oder Balloon Twisting) ist die Kunst, aus langen Modellierballons in 2 bis 5 Minuten fantasievolle Figuren zu formen. Ballonkünstler LIAR gestaltet vor den Augen der Kinder Ballontiere, Schwerter, Blumen und mehr – jede Figur hält mehrere Tage.' } },
+    { '@type': 'Question', name: 'Welche Ballonfiguren sind möglich?', acceptedAnswer: { '@type': 'Answer', text: 'Möglich sind klassische Ballontiere (Hund, Katze, Hase, Giraffe, Elefant, Marienkäfer), Schwerter und Säbel, Blumen, Herzen und Kronen sowie komplexe Fantasie-Figuren wie Drachen oder Flugzeuge. Jedes Kind bekommt seine individuelle Wunschfigur.' } },
+    { '@type': 'Question', name: 'Für welche Anlässe eignet sich Ballonmodellage?', acceptedAnswer: { '@type': 'Answer', text: 'Ballonmodellage passt zu Kindergeburtstagen, Kita- und Schulfesten, Straßen- und Sommerfesten, Firmenfeiern mit Kinderbereich, Weihnachtsmärkten und jedem Event mit Kindern – als eigenständiges Angebot oder in Kombination mit Clownshow und Glitzer-Tattoos.' } },
+    { '@type': 'Question', name: 'In welchen Städten ist der Ballonkünstler buchbar?', acceptedAnswer: { '@type': 'Answer', text: 'Ballonkünstler LIAR ist in ganz NRW unterwegs – im Ruhrgebiet (u. a. Essen, Duisburg, Gelsenkirchen, Bochum, Dortmund, Gladbeck), im Rheinland (Düsseldorf, Köln, Krefeld) sowie im Münsterland. Für besondere Events auch überregional buchbar.' } },
+  ],
+};
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!",
+  "description": "Clown Zauberer LIAR mit Ballonmodellage, Zaubershow und Comedy in NRW – bunte Ballonfiguren für Kindergeburtstage und Events.",
+  "thumbnailUrl": "https://img.youtube.com/vi/Cop0SqRIX4Y/maxresdefault.jpg",
+  "uploadDate": "2018-02-04",
+  "duration": "PT2M30S",
+  "contentUrl": "https://www.youtube.com/watch?v=Cop0SqRIX4Y",
+  "embedUrl": "https://www.youtube.com/embed/Cop0SqRIX4Y",
+  "publisher": { "@type": "Organization", "name": "Clown Zauberer LIAR", "url": "https://liar-entertainer.com" }
+};
+
+const structuredData = [serviceSchema, faqSchema, videoSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Ballonmodellage NRW, Ballonkünstler buchen, Ballontiere Kindergeburtstag, Ballonfiguren Event, Ballonmodellage Ruhrgebiet"
+  canonical="https://liar-entertainer.com/clown/ballonmodellage/"
+  structuredData={structuredData}
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/clown/clownshow/' }, { name: 'Ballonmodellage', url: '/clown/ballonmodellage/' }]}
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/" class="hover:text-[#d7393e]">Clown Zauberer LIAR</a> »
+        <span>Ballonmodellage</span>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Ballonmodellage in NRW – Ballonkünstler für Kinder</h1>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={ballonmodellage1Img}
+      alt="Ballonmodellage NRW – Bunte Ballonfiguren für Kinder"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 48% 51%"
+      loading="eager"
+      fetchpriority="high"
+      widths={[600, 900, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-black/45"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 600px;">
+      <div class="text-center px-6">
+        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+          🎈 Bunte Ballonfiguren,<br />die Kinderaugen zum Leuchten bringen
+        </h2>
+        <p class="text-white/90 text-lg font-medium">Individuelle Wunschfiguren für jedes Kind!</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        <div>
+          <p class="hero-subtitle text-[#374151] leading-relaxed mb-4">
+            Ballonmodellage bei Clown LIAR (Michaël Prescler) bedeutet: Aus langen Modellierballons entstehen in 2–5 Minuten individuelle Wunschfiguren – Hunde, Schwerter, Blumen, Kronen und mehr. Buchbar in ganz NRW für Kindergeburtstage, Kita- und Schulfeste, Straßenfeste und Firmenfeiern mit Kindern. Jedes Kind bekommt seine eigene Figur, die mehrere Tage hält.
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Als Ballonkünstler forme ich seit über 15 Jahren fantasievolle Ballonfiguren für Kindergeburtstage, Kinderfeste, Straßenfeste und Events in ganz Nordrhein-Westfalen. Ob Ballontiere, Schwerter, Blumen oder komplexe Kreationen – vor den Augen der Kinder entstehen in wenigen Minuten bunte Kunstwerke aus Luftballons!
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Das Besondere: Jedes Kind bekommt seine individuelle Wunschfigur! Ob der Junge ein Schwert zum Fechten möchte, das Mädchen eine Blume für Mama oder beide einen Hund, eine Giraffe oder einen Marienkäfer – ich erfülle Ballonwünsche und sorge für strahlende Gesichter.
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-6">
+            Ballonmodellage ist perfekt für Kindergeburtstage, Straßenfeste, Firmenfeiern mit Kindern, Kita-Feste, Schulveranstaltungen und alle Events, bei denen Kinder dabei sind. Kombinieren Sie die Ballonkunst mit meiner <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">Clownshow</a> oder ergänzen Sie das Programm um <a href="/clown/glitzer-tattoo/" class="text-[#d7393e] hover:underline">Glitzer Tattoos</a> für ein rundum gelungenes Kinderfest!
+          </p>
+          <a href="/kindergeburtstag/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+            🎂 Kindergeburtstag – Preise
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <Image
+            src={ballonmodellage2Img}
+            alt="Herzballon für ein Kind bei Ballonmodellage"
+            class="rounded-2xl object-cover shadow-lg portrait-zoom"
+            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="340px"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Weitere Anlässe (SEO-Audit 06.08.2026, Massnahme H6): /clown/karneval/ und
+       /clown/walk-act/ hatten 0 bzw. 3 interne Content-Links. -->
+  <section class="py-12 bg-[#f9fafb]" data-related-services>
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-6">
+        Für welche Anlässe kann man Clown LIAR sonst buchen?
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href="/clown/karneval/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
+          <p class="font-bold text-[#1f2025] mb-1">Clown für Karneval &amp; Kindersitzung</p>
+          <p class="text-sm text-[#595959]">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
+        </a>
+        <a href="/clown/walk-act/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
+          <p class="font-bold text-[#1f2025] mb-1">Walk-Act für Straßen- und Stadtfest</p>
+          <p class="text-sm text-[#595959]">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <!-- Was ist Ballonmodellage? -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-2 text-center">🎈 Was ist Ballonmodellage?</h2>
+      <p class="text-center text-[#374151] mb-8">Ballonmodellage – Die Kunst der Ballonfiguren</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e]">
+          <h3 class="font-bold text-[#1f2025] mb-3">Wie funktioniert es?</h3>
+          <p class="text-[#374151] text-sm leading-relaxed mb-3">
+            Ballonmodellage (auch Ballonkunst oder Balloon Twisting genannt) ist die Kunst, aus langen Modellierballons fantasievolle Figuren zu formen. Mit gezielten Drehungen, Knicken und Kombinationen entstehen innerhalb von 2–5 Minuten beeindruckende Kreationen.
+          </p>
+          <p class="text-[#374151] text-sm">Ich verwende spezielle Modellierballons, die sich perfekt formen lassen.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5]">
+          <h3 class="font-bold text-[#1f2025] mb-3">Die Technik erfordert:</h3>
+          <ul class="space-y-2 text-[#374151] text-sm">
+            <li class="flex items-center gap-2"><span class="text-[#d7393e]">✓</span> Geschick und Übung</li>
+            <li class="flex items-center gap-2"><span class="text-[#d7393e]">✓</span> Schnelligkeit (damit Kinder nicht warten)</li>
+            <li class="flex items-center gap-2"><span class="text-[#d7393e]">✓</span> Kreativität für individuelle Wünsche</li>
+            <li class="flex items-center gap-2"><span class="text-[#d7393e]">✓</span> Geduld mit den kleinen Künstlern</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546]">
+          <h3 class="font-bold text-[#1f2025] mb-3">Was macht gute Ballonmodellage aus?</h3>
+          <ul class="space-y-2 text-[#374151] text-sm">
+            <li><strong>Schnelligkeit</strong> – Pro Figur nur 1–2 Min.</li>
+            <li><strong>Vielfalt</strong> – Von Tieren bis Fantasiekreationen</li>
+            <li><strong>Individualität</strong> – Jedes Kind bekommt seine Wunschfigur</li>
+            <li><strong>Haltbarkeit</strong> – Die Figuren halten mehrere Tage!</li>
+          </ul>
+        </div>
+      </div>
+
+      <!-- Für welche Anlässe? -->
+      <div class="mt-10">
+        <h3 class="font-bold text-[#1f2025] text-xl mb-4 text-center">Für welche Anlässe eignet sich Ballonmodellage?</h3>
+        <div class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-3">
+          {anlaesse.map((a) => (
+            <div class="bg-white rounded-lg p-3 flex items-center gap-2 shadow-sm card-hover reveal">
+              <span class="text-[#d7393e] flex-shrink-0">✓</span>
+              <span class="text-[#374151] text-sm">{a}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Beliebte Ballonfiguren -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">🐾 Beliebte Ballonfiguren</h2>
+      <p class="text-center text-[#374151] mb-8">Das Ballonrepertoire – Von Hund bis Marienkäfer</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        {figuren.map((cat) => (
+          <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+            <h3 class="font-bold text-[#1f2025] mb-4">{cat.title}</h3>
+            <ul class="space-y-2">
+              {cat.items.map((item) => (
+                <li class="text-[#374151] text-sm">{item}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Kombinationsmöglichkeiten (pastel) -->
+  <section class="bg-[#eff4ff] border-y border-[#c5d3f7] py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-8">🎪 Kombinationsmöglichkeiten</h2>
+      <p class="text-[#374151] text-center mb-10">Ballonmodellage perfekt kombinieren</p>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div class="bg-white rounded-xl p-8 border border-[#c5d3f7] shadow-sm">
+          <h3 class="text-[#1f2025] font-bold text-xl mb-4">🎩 Ballonmodellage + Show</h3>
+          <p class="text-[#374151] mb-1">Die perfekte Kombi für Kindergeburtstage!</p>
+          <ul class="space-y-2 text-[#374151] text-sm mt-4">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Min. Clown-<a href="/zauberer/zaubershow/" class="text-[#374151] hover:underline">Zaubershow</a></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Anschließend Ballonmodellage</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Komplettes Programm, Kinder durchgehend beschäftigt</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Tolle Erinnerung zum Mitnehmen</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl p-8 border border-[#c5d3f7] shadow-sm">
+          <h3 class="text-[#1f2025] font-bold text-xl mb-4">🚶 Ballonmodellage + Walk-Act</h3>
+          <p class="text-[#374151] mb-1">Für große Feste ideal!</p>
+          <ul class="space-y-2 text-[#374151] text-sm mt-4">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Ich bewege mich als Clown über das Fest</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Spontane Gags und Zaubertricks</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Forme zwischendurch Ballonfiguren</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Sehr flexibel, belebt das gesamte Fest</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="bg-white py-10">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="grid grid-cols-3 gap-6 text-center">
+        <div>
+          <p class="text-4xl font-black text-[#d7393e]">400</p>
+          <p class="text-[#374151] text-sm font-medium mt-1">Shows im Jahr</p>
+        </div>
+        <div>
+          <p class="text-4xl font-black text-[#d7393e]">110.000</p>
+          <p class="text-[#374151] text-sm font-medium mt-1">Lachende Kinder</p>
+        </div>
+        <div>
+          <p class="text-4xl font-black text-[#d7393e]">15</p>
+          <p class="text-[#374151] text-sm font-medium mt-1">Jahre Erfahrung</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Photo Gallery -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl text-center mb-8">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <p class="text-[#374151] text-center leading-relaxed mb-8">
+        Foto- und Videogalerie sind eine bereichernde und erfüllende Erfahrung: wir öffnen uns eine Welt der Emotionen! Sie regen uns an, unser Verständnis für die Welt und die Menschen um uns herum zu vertiefen. Fotos und Videos haben die Kraft, Emotionen in uns hervorzurufen und erzeugen eine emotionale Verbindung. Eine Galerie kann uns dazu bringen, uns mit den dargestellten Momenten und Geschichten zu verbinden…oder einfach spontane Eindrücke festzuhalten! Viel Spaß bei Stöbern!
+      </p>
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-4">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <h3 class="font-bold text-[#1f2025] text-xl text-center mb-8">Einsatzgebiet Ballonmodellage</h3>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+        <div>
+          <p class="text-[#374151] mb-6">Als Ballonkünstler bin ich in ganz Nordrhein-Westfalen unterwegs:</p>
+          <div class="space-y-4">
+            {einsatzgebiet.map((e) => (
+              <div>
+                <p class="font-bold text-[#1f2025] mb-1">{e.region}</p>
+                <p class="text-[#374151] text-sm leading-relaxed">{e.cities}</p>
+              </div>
+            ))}
+            <p class="text-[#374151] text-sm">🌍 Weitere Regionen: Auf Anfrage auch in ganz NRW und überregional!</p>
+          </div>
+        </div>
+        <div>
+          <Image
+            src={clownZaubererGladbeckImg}
+            alt="Ballonmodellage mit Clown LIAR – Einsatzgebiet"
+            class="w-full rounded-xl shadow-sm img-hover-zoom"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="(min-width: 768px) 50vw, 100vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion (pastel) -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-white py-12 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="font-bold text-[#1f2025] text-xl mb-4">Jetzt Ballonmodellage buchen!</h2>
+      <p class="text-[#374151] mb-6 leading-relaxed">
+        Machen Sie Ihr Event bunter! Mit professioneller Ballonmodellage sorge ich für strahlende Kinderaugen und fantasievolle Ballonfiguren, die noch tagelang Freude bereiten! Perfekt in Kombination mit meiner <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline font-semibold">Clownshow</a> oder ergänzt durch <a href="/clown/glitzer-tattoo/" class="text-[#d7393e] hover:underline font-semibold">Glitzer Tattoos</a>.
+      </p>
+      <div class="space-y-2 text-[#374151] mb-6">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+      </div>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Jetzt unverbindlich anfragen
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

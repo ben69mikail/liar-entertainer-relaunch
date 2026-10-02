@@ -1,0 +1,72 @@
+---
+// DSGVO-konformer Consent-Banner (Opt-in).
+// Google Consent Mode v2 default = denied wird in BaseLayout gesetzt.
+// GA4 (gtag.js) laedt erst nach aktiver Zustimmung. "Ablehnen" ist gleichwertig zu "Akzeptieren".
+const GA_ID = 'G-MWNLWCWDXS';
+const DATENSCHUTZ_URL = '/datenschutzerklaerung-2/';
+---
+
+<div id="cookie-consent" class="cc-banner" role="dialog" aria-modal="false" aria-label="Cookie-Einwilligung" hidden>
+  <div class="cc-inner">
+    <div class="cc-text">
+      <p class="cc-title">🍪 Cookies &amp; Statistik</p>
+      <p class="cc-desc">
+        Diese Seite nutzt statistische Cookies (Google Analytics), um Besuche anonymisiert auszuwerten.
+        Sie werden nur mit deiner Einwilligung geladen &ndash; technisch notwendige Inhalte funktionieren immer.
+        Mehr in der <a href={DATENSCHUTZ_URL}>Datenschutzerkl&auml;rung</a>.
+      </p>
+    </div>
+    <div class="cc-actions">
+      <button type="button" id="cc-decline" class="cc-btn cc-btn-decline">Ablehnen</button>
+      <button type="button" id="cc-accept" class="cc-btn cc-btn-accept">Akzeptieren</button>
+    </div>
+  </div>
+</div>
+
+<style>
+  .cc-banner{position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:16px;display:flex;justify-content:center;pointer-events:none}
+  .cc-inner{pointer-events:auto;max-width:960px;width:100%;background:#fff;border:1px solid #f0c4c4;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.18);padding:20px 22px;display:flex;flex-direction:column;gap:14px}
+  @media(min-width:768px){.cc-inner{flex-direction:row;align-items:center;gap:24px}}
+  .cc-title{margin:0 0 4px;font-weight:800;color:#1f2025;font-size:1rem}
+  .cc-desc{margin:0;color:#374151;font-size:.9rem;line-height:1.5}
+  .cc-desc a{color:#d7393e;text-decoration:underline}
+  .cc-actions{display:flex;gap:10px;flex-shrink:0}
+  @media(max-width:480px){.cc-actions{width:100%}.cc-actions .cc-btn{flex:1}}
+  .cc-btn{font-weight:700;font-size:.9rem;padding:11px 22px;border-radius:9999px;cursor:pointer;border:2px solid transparent;transition:background .15s,border-color .15s;white-space:nowrap}
+  .cc-btn-accept{background:#d7393e;color:#fff}
+  .cc-btn-accept:hover{background:#b62e32}
+  .cc-btn-decline{background:#f3f4f6;color:#1f2025;border-color:#d1d5db}
+  .cc-btn-decline:hover{background:#e5e7eb}
+</style>
+
+<script define:vars={{ GA_ID }}>
+  (function(){
+    var KEY='liar-consent-v1';
+    var banner=document.getElementById('cookie-consent');
+    var gaLoaded=false;
+    function loadGA(){
+      if(gaLoaded)return;gaLoaded=true;
+      var s=document.createElement('script');
+      s.async=true;s.src='https://www.googletagmanager.com/gtag/js?id='+GA_ID;
+      document.head.appendChild(s);
+      (window.gtag||function(){})('js',new Date());
+      (window.gtag||function(){})('config',GA_ID);
+    }
+    function grant(){
+      if(window.gtag){window.gtag('consent','update',{analytics_storage:'granted'});}
+      loadGA();
+    }
+    function hide(){if(banner)banner.hidden=true;}
+    function show(){if(banner)banner.hidden=false;}
+    function save(v){try{localStorage.setItem(KEY,v);}catch(e){}}
+    var choice=null;try{choice=localStorage.getItem(KEY);}catch(e){}
+    if(choice==='granted'){grant();}
+    else if(choice==='denied'){/* nichts laden */}
+    else{show();}
+    var a=document.getElementById('cc-accept');
+    var d=document.getElementById('cc-decline');
+    if(a)a.addEventListener('click',function(){save('granted');grant();hide();});
+    if(d)d.addEventListener('click',function(){save('denied');hide();});
+    window.liarOpenConsent=function(){show();};
+  })();
+</script>

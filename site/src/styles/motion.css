@@ -1,0 +1,4 @@
+.motion-ok :is([data-reveal], .reveal) {
+  opacity: 0;
+  transform: translateY(1rem);
+}

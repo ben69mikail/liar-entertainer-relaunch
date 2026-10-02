@@ -12,9 +12,11 @@ afterAll(() => browser?.close());
 
 async function revealState(reducedMotion: 'reduce' | 'no-preference') {
   const page = await browser.newPage({ reducedMotion });
-  await page.goto(BASE + '/');
+  await page.goto(BASE + '/kindergeburtstag/');
+  const card = page.locator('[data-reveal], .reveal').last();
+  await card.scrollIntoViewIfNeeded();
   await page.waitForTimeout(1200);
-  return page.$eval('[data-reveal]', (el) => ({
+  return card.evaluate((el) => ({
     motionOk: document.documentElement.classList.contains('motion-ok'),
     opacity: getComputedStyle(el).opacity,
     transform: getComputedStyle(el).transform,

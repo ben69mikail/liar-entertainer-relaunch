@@ -1,0 +1,408 @@
+﻿---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import CountUp from '../../../components/CountUp.astro';
+import aktionImg from '../../../assets/images/kinderzauberer/clown-zauberer-gladbeck.jpg';
+import { Image } from 'astro:assets';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import _heroImgAsset from '../../../assets/images/kinderzauberer/kinderzauberer-hero.jpg';
+import _roundImgAsset from '../../../assets/images/kinderzauberer/zaubershow-mit-clown-zauberer-liar.jpg';
+import _showImgAsset from '../../../assets/images/clown/clown-bei-clownshow.jpg';
+import _ballonImgAsset from '../../../assets/images/clown/glitzer-tattoos.jpg';
+import _clownKgImgAsset from '../../../assets/images/galerie/fotogalerie-clown-zauberer-2.jpg';
+import _zauberNrwImgAsset from '../../../assets/images/zauberer/zaubershow-staunende-kinder.jpg';
+
+const seoTitle = "Zauberer Kindergeburtstag Marl | Kinderzauberer LIAR";
+const seoDescription = "Kinderzauberer in Marl für Ihren Kindergeburtstag ✓ Clown LIAR ✓ 370+ Bewertungen ✓ Auch in Dorsten & Recklinghausen ✓ Jetzt buchen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Kinderzauberer in Marl",
+  "description": "Kinderzauberer LIAR für Kindergeburtstag und Kinderevents in Marl, NRW",
+  "url": "https://liar-entertainer.com/kinderzauberer/kinderzauberer-in-marl/",
+  "serviceType": ["Kinderzauberer", "Zaubershow für Kinder"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "City", "name": "Marl" }
+};
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet ein Kinderzauberer für einen Kindergeburtstag in Marl?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Kosten für einen Auftritt als Kinderzauberer in Marl variieren je nach mehreren Faktoren: Art und Dauer der Veranstaltung, Anzahl der Kinder, Entfernung innerhalb Marls und Jahreszeit. Für Kindergeburtstage biete ich Festpreise an, die transparent und fair kalkuliert sind. Kontaktieren Sie mich einfach für ein unverbindliches Angebot – ich berate Sie gerne persönlich zu den Möglichkeiten für Ihre Feier in Marl."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie viel Platz wird für die Zaubershow in Marl benötigt?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die gute Nachricht: Meine Show ist extrem flexibel! Ich benötige lediglich eine Fläche von etwa 2×2 Metern und komme fast ohne Vorbereitungszeit aus. Ob in Ihrem Wohnzimmer in Sinsen, im Partykeller in Alt-Marl, auf der Terrasse in Brassert oder im Gemeindehaus – ich passe mich den örtlichen Gegebenheiten an. Auch für größere Events in Turnhallen, Bürgerzentren oder auf der Bühne beim Stadtfest bin ich bestens gerüstet."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert eine Zaubervorführung mit dem Kinderzauberer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meine Zaubershow können Sie flexibel ab 30 Minuten buchen. Die Standard-Variante dauert etwa 45 Minuten – ideal für die Aufmerksamkeitsspanne der Kinder und perfekt als Highlight während eines Kindergeburtstags. Für größere Veranstaltungen oder Stadtfeste in Marl biete ich auch längere Programme oder mehrere kürzere Durchgänge an. Die Show lässt sich problemlos in jeden Ablaufplan integrieren."
+      }
+    }
+  ]
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+const _pageGallery = [
+  { src: _ballonImgAsset, alt: 'Ballonmodellage beim Kinderzauberer in Marl' },
+  { src: _clownKgImgAsset, alt: 'Witziger Kinderzauberer mit Clownerie' },
+  { src: _zauberNrwImgAsset, alt: 'Entspannter Kindergeburtstag mit professionellem Kinderzauberer' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kinderzauberer Marl, Kinderzauberer in Marl, Zauberer Marl, Kindergeburtstag Marl, Zaubershow Marl, NRW"
+  canonical="https://liar-entertainer.com/kinderzauberer/kinderzauberer-in-marl/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kinderzauberer', url: '/kinderzauberer/' },
+    { name: 'Kinderzauberer in Marl', url: '/kinderzauberer/kinderzauberer-in-marl/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 60%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Marl
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Zauberer für den Kindergeburtstag in Marl
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Kinderzauberer LIAR aus Gladbeck – 40 Minuten Zaubershow für Kinder von 4 bis 12 Jahren in Marl.
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a>
+        <span class="mx-1">»</span>
+        <span>Kinderzauberer in Marl – TOP Zaubershow</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Warum Familien in Marl LIAR als Kinderzauberer wählen?</h2>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Ein Zauberer für Kinder muss in Marl vor allem eines können: die Kleinen 40 Minuten lang fesseln. Kinderzauberer LIAR aus Gladbeck begeistert in Marl – von Hüls bis Brassert – sowie in Recklinghausen und Dorsten. Die interaktive Mitmach-Zaubershow für Kinder ab 4 Jahren dauert rund 40 Minuten und benötigt nur 2×2 Meter Platz. 370+ Google-Bewertungen sprechen für sich.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Als professioneller Kinderzauberer in Marl weiß ich genau, was Kinder zum Staunen und Lachen bringt. Bei meinen Shows in Marler Wohnzimmern, Gemeindezentren oder im Freien – etwa im Volkspark oder am Silbersee – erleben die kleinen Gäste pure Magie. Meine Zaubershow ist speziell auf die Bedürfnisse von Kindern zugeschnitten und macht jeden Kindergeburtstag in Marl zu einem besonderen Ereignis.</p>
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Das macht meine Zaubershow in Marl besonders:</h3>
+          <ul class="space-y-2 text-[#374151] text-sm mb-4">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span><strong>Interaktive Zauberei:</strong> Die Kinder sind nicht nur Zuschauer – sie werden zu aktiven Teilnehmern und Zauberlehrlingen</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span><strong>Altersgerechte Unterhaltung:</strong> Ob Kindergartenkinder oder Grundschüler – jede Show wird perfekt auf die Altersgruppe abgestimmt</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span><strong>Lokale Erfahrung:</strong> Als etablierter Kinderzauberer kenne ich Marl und die besten Locations für Kindergeburtstage</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span><strong>Persönlicher Fokus:</strong> Das Geburtstagskind steht im Mittelpunkt und bekommt eine besondere Rolle in der Show</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> <span><strong>Lach-Garantie:</strong> Meine Clown-Elemente sorgen für durchgehende Heiterkeit und entspannte Atmosphäre</span></li>
+          </ul>
+        </div>
+        <div class="flex flex-col items-center gap-4">
+          <Image
+            src={_roundImgAsset}
+            alt="Kinderzauberer in Marl"
+            class="rounded-full object-cover object-[20%] portrait-zoom"
+            style="width: 320px; height: 320px;"
+          loading="lazy" width={600} height={450} />
+          <a href="/zauberer/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+            Über die Zaubershow
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <section class="bg-[#eff4ff] py-14 text-center border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4">MARL</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-6">✨ Kinderzauberer in Marl – mit Herz &amp; Humor</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">
+        Meine Show ist speziell auf Kinder abgestimmt: lebendig, interaktiv und voller Überraschungen.
+      </p>
+      <p class="text-[#1f2025] leading-relaxed">
+        Die Kinder dürfen mitzaubern, lachen, staunen – und manchmal selbst zur kleinen Zauberin oder zum Zauberer werden.
+        Dabei achte ich besonders auf Respekt, Empathie und ein liebevolles Miteinander.
+      </p>
+    </div>
+  </section>
+
+  <!-- Anlässe für den Kinderzauberer in Marl -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h3 class="text-[#1f2025] font-bold text-xl text-center mb-8">Anlässe für den Kinderzauberer in Marl 👧👦</h3>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal"><h4 class="font-bold text-[#1f2025] mb-2">🎂 Kindergeburtstag</h4><p class="text-[#374151] text-sm leading-relaxed">Unvergessliche Feier zu Hause oder in gemieteten Locations</p></div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal"><h4 class="font-bold text-[#1f2025] mb-2">🏫 Schulfeste &amp; Kita-Events</h4><p class="text-[#374151] text-sm leading-relaxed">Begeisterung für große Kindergruppen</p></div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal"><h4 class="font-bold text-[#1f2025] mb-2">🏢 Firmenfeiern &amp; Betriebsfeste</h4><p class="text-[#374151] text-sm leading-relaxed">Kinderbetreuung mit Entertainment-Faktor</p></div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal"><h4 class="font-bold text-[#1f2025] mb-2">💒 Hochzeiten &amp; Familienfeiern</h4><p class="text-[#374151] text-sm leading-relaxed">Kinderprogramm für entspannte Eltern</p></div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal"><h4 class="font-bold text-[#1f2025] mb-2">🎪 Stadt- &amp; Straßenfeste</h4><p class="text-[#374151] text-sm leading-relaxed">Publikumsmagnet für Open-Air-Events</p></div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal"><h4 class="font-bold text-[#1f2025] mb-2">⛪ Kommunion &amp; Konfirmation</h4><p class="text-[#374151] text-sm leading-relaxed">Festliche Unterhaltung für junge Gäste</p></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Die perfekte Mischung: Zauberei trifft Clownerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Die perfekte Mischung: Zauberei trifft Clownerie</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <Image
+            src={_showImgAsset}
+            alt="Kinderzauberer in Marl bei einem Auftritt"
+            class="rounded-xl w-full object-cover object-top shadow-sm"
+          loading="lazy" width={506} height={640} />
+        </div>
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">Was unterscheidet meine Shows von anderen Kinderzauberern in Marl? Es ist die einzigartige Kombination aus professionellen Zaubertricks und herzlicher Clown-Unterhaltung. Während viele Zauberer sich ausschließlich auf Tricks konzentrieren, lege ich besonderen Wert darauf, dass die Kinder im Mittelpunkt stehen – nicht die Technik.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Meine Zaubergeschichten entführen die Kinder in fantasievolle Welten. Ein gewöhnlicher Löffel wird zum magischen Zauberstab, ein buntes Tuch zum fliegenden Teppich. Die Kinder pendeln während der gesamten Show zwischen ehrfürchtigem Staunen und herzhaftem Lachen – und genau diese emotionale Achterbahnfahrt macht meine Auftritte so besonders.</p>
+          <a href="/kindergeburtstag/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+            Kindergeburtstag – Preise
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Kindergeburtstag in Marl feiern – Entspannt für Eltern, unvergesslich für Kinder -->
+  <section class="bg-white py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Kindergeburtstag in Marl feiern – Entspannt für Eltern, unvergesslich für Kinder</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">Viele Eltern in Marl entdecken erst spät die Möglichkeit, einen professionellen Kinderzauberer für den Kindergeburtstag zu buchen. Dabei ist es so einfach! Statt sich mit der Organisation von Spielen und Unterhaltung zu stressen, können Sie sich zurücklehnen, während ich für strahlende Kinderaugen sorge.</p>
+      <p class="text-[#374151] mb-4 leading-relaxed">1. Unkomplizierte Vorbereitung: Sie brauchen lediglich eine Fläche von 2×2 Metern – ob im Wohnzimmer in Drewer, im Garten in Hüls oder im Partyraum in der Innenstadt von Marl. Ich bringe alles mit und benötige keine lange Aufbauzeit.</p>
+      <p class="text-[#374151] mb-4 leading-relaxed">2. Magische Show-Zeit: Meine Auftritte dauern zwischen 30 und 60 Minuten (je nach Buchung). In dieser Zeit verwandle ich Alltagsgegenstände in Zauberwerkzeuge, lasse Dinge verschwinden und wieder auftauchen – immer mit den Kindern als Assistenten!</p>
+      <p class="text-[#374151] mb-4 leading-relaxed">3. Nachhaltige Erinnerungen: Die Kinder sprechen oft noch Wochen später über die Zaubershow. Das Geburtstagskind fühlt sich wie ein echter Star – und die Eltern können die Feier entspannt genießen.</p>
+    </div>
+  </section>
+
+  <!-- Bildergalerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Kinderzauberer in Marl</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Was kostet ein Kinderzauberer für einen Kindergeburtstag in Marl?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Die Kosten für einen Auftritt als Kinderzauberer in Marl variieren je nach mehreren Faktoren: Art und Dauer der Veranstaltung, Anzahl der Kinder, Entfernung innerhalb Marls und Jahreszeit. Für Kindergeburtstage biete ich Festpreise an, die transparent und fair kalkuliert sind. Kontaktieren Sie mich einfach für ein unverbindliches Angebot – ich berate Sie gerne persönlich zu den Möglichkeiten für Ihre Feier in Marl.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie viel Platz wird für die Zaubershow in Marl benötigt?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Die gute Nachricht: Meine Show ist extrem flexibel! Ich benötige lediglich eine Fläche von etwa 2×2 Metern und komme fast ohne Vorbereitungszeit aus. Ob in Ihrem Wohnzimmer in Sinsen, im Partykeller in Alt-Marl, auf der Terrasse in Brassert oder im Gemeindehaus – ich passe mich den örtlichen Gegebenheiten an. Auch für größere Events in Turnhallen, Bürgerzentren oder auf der Bühne beim Stadtfest bin ich bestens gerüstet.
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie lange dauert eine Zaubervorführung mit dem Kinderzauberer?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Meine Zaubershow können Sie flexibel ab 30 Minuten buchen. Die Standard-Variante dauert etwa 45 Minuten – ideal für die Aufmerksamkeitsspanne der Kinder und perfekt als Highlight während eines Kindergeburtstags. Für größere Veranstaltungen oder Stadtfeste in Marl biete ich auch längere Programme oder mehrere kürzere Durchgänge an. Die Show lässt sich problemlos in jeden Ablaufplan integrieren.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Einsatzgebiet: Kinderzauberer in Marl und Umgebung</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Als Kinderzauberer bin ich in allen Marler Stadtteilen unterwegs: Hüls, Drewer, Sinsen, Polsum, Brassert, Marl-Mitte, Alt-Marl, Hamm sowie im gesamten Kreis <a href="/kinderzauberer/kinderzauberer-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Recklinghausen</a> und darüber hinaus. Regelmäßig trete ich auf in <a href="/kinderzauberer/kinderzauberer-in-essen/" class="text-[#3b55d5] hover:underline">Essen</a>, <a href="/kinderzauberer/kinderzauberer-in-oberhausen/" class="text-[#3b55d5] hover:underline">Oberhausen</a>, <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/" class="text-[#3b55d5] hover:underline">Gelsenkirchen</a>, Köln, <a href="/kinderzauberer/kinderzauberer-in-muelheim/" class="text-[#3b55d5] hover:underline">Mülheim</a>, <a href="/kinderzauberer/kinderzauberer-in-herne/" class="text-[#3b55d5] hover:underline">Herne</a>, Marl, <a href="/kinderzauberer/kinderzauberer-in-dorsten/" class="text-[#3b55d5] hover:underline">Dorsten</a>, <a href="/kinderzauberer/kinderzauberer-in-herten/" class="text-[#3b55d5] hover:underline">Herten</a>, Münster, Krefeld und vielen weiteren NRW-Städten. Überregional bin ich zudem in Dortmund, Duisburg, Düsseldorf und Moers buchbar. Meine Heimatstadt ist Gladbeck: Als <a href="/kinderzauberer/kinderzauberer-in-gladbeck/" class="text-[#3b55d5] hover:underline">Kinderzauberer in Gladbeck</a> zaubere ich dort so regelmäßig wie in Marl.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Auf Anfrage bin ich auch überregional und international buchbar – in ganz Deutschland, Frankreich, Belgien, Österreich und der Schweiz!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={aktionImg}
+            alt="Karte Einsatzgebiet Kinderzauberer Marl"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Marl -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Marl buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kindergeburtstag/geburtstag-in-marl/" class="bg-[#d7393e] hover:bg-[#b62e32] text-white rounded-lg px-5 py-3 font-bold text-sm transition-colors">🎂 Kindergeburtstag in Marl</a>
+      <a href="/clown/clownshow/clown-in-marl/" class="bg-[#d7393e] hover:bg-[#b62e32] text-white rounded-lg px-5 py-3 font-bold text-sm transition-colors">🤡 Clown in Marl</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

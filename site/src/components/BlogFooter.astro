@@ -1,0 +1,161 @@
+---
+/**
+ * Blog-Article-Footer:
+ *  - 3 Verwandte Artikel (per Kategorie-Match, dann neueste anderen)
+ *  - 3 Testimonials aus testimonials.json (zufaellig 3 von 6 ausgewaehlt)
+ *  - 3 CTA-Buttons (Termin, Preise, Leistungen)
+ *
+ * Wird am Ende jedes Blog-Artikels gerendert. Nutzt allPosts.ts Helper, sodass
+ * die "Verwandte Artikel" Section immer die aktuelle Liste reflektiert
+ * (sowohl Legacy-Posts als auch n8n-Workflow-Posts).
+ */
+import { getRelatedPosts } from '../utils/allPosts';
+import testimonialsData from '../data/testimonials.json';
+
+interface Props {
+  currentSlug: string;
+  categories?: string[];
+}
+
+const { currentSlug, categories = [] } = Astro.props;
+
+const related = await getRelatedPosts(currentSlug, categories, 3);
+
+interface Testimonial {
+  name: string;
+  rating: number;
+  text: string;
+  when: string;
+}
+const allTestimonials = testimonialsData as Testimonial[];
+
+// 3 zufaellige Testimonials (deterministisch per Slug — gleicher Artikel zeigt immer gleiche)
+function pick3DeterministicallyForSlug(items: Testimonial[], slug: string): Testimonial[] {
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) hash = ((hash << 5) - hash + slug.charCodeAt(i)) | 0;
+  const sorted = [...items].sort((a, b) => {
+    const ah = (a.name + slug).split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, hash);
+    const bh = (b.name + slug).split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, hash);
+    return ah - bh;
+  });
+  return sorted.slice(0, 3);
+}
+const testimonials = pick3DeterministicallyForSlug(allTestimonials, currentSlug);
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+
+const AVATAR_COLORS = [
+  '#c2185b', '#7b1fa2', '#1565c0', '#bf360c', '#2e7d32',
+  '#006064', '#c62828', '#3f51b5', '#00695c', '#4e342e',
+];
+function avatarColor(name: string) {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
+}
+function initials(name: string) {
+  const parts = name.trim().split(/\s+/);
+  if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+  return name.substring(0, 2).toUpperCase();
+}
+---
+
+<section class="bg-[#f4f4f4] py-12">
+  <div class="max-w-6xl mx-auto px-4">
+
+    {/* === Verwandte Artikel === */}
+    {related.length > 0 && (
+      <div class="mb-12">
+        <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-2">Weiterlesen</h2>
+        <p class="text-[#595959] text-center text-sm mb-6">Diese Artikel könnten dich auch interessieren</p>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
+          {related.map((post) => (
+            <article class="bg-white rounded-lg overflow-hidden shadow-sm hover:shadow-md transition-shadow">
+              <a href={post.href}>
+                <img
+                  src={post.image}
+                  alt={post.title}
+                  class="w-full object-cover"
+                  loading="lazy"
+                  decoding="async"
+                  width="400"
+                  height="240"
+                  style="aspect-ratio: 5/3"
+                />
+              </a>
+              <div class="p-4">
+                <time class="text-[#595959] text-xs">{formatDate(post.date)}</time>
+                <h3 class="font-bold text-[#1f2025] text-sm mt-1 mb-2 leading-snug line-clamp-2">
+                  <a href={post.href} class="hover:text-[#d7393e] transition-colors">
+                    {post.title}
+                  </a>
+                </h3>
+                <p class="text-[#374151] text-xs leading-relaxed mb-3 line-clamp-3">{post.excerpt}</p>
+                <a href={post.href} class="text-[#d7393e] text-xs font-semibold hover:underline">
+                  Mehr lesen →
+                </a>
+              </div>
+            </article>
+          ))}
+        </div>
+      </div>
+    )}
+
+    {/* === Bewertungen === */}
+    <div class="mb-12">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-2">Was Eltern sagen</h2>
+      <div class="flex items-center justify-center gap-1 text-2xl text-[#fbbc04] mb-6">★★★★★</div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+        {testimonials.map((t) => (
+          <div class="bg-white rounded-xl p-5 shadow-sm border border-gray-100">
+            <div class="flex items-center gap-3 mb-3">
+              <div
+                class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+                style={`background:${avatarColor(t.name)}`}
+              >
+                {initials(t.name)}
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="font-semibold text-sm text-[#1f2025] truncate">{t.name}</p>
+                <p class="text-xs text-gray-500">{t.when}</p>
+              </div>
+            </div>
+            <div class="text-[#fbbc04] text-sm mb-2">{'★'.repeat(t.rating)}</div>
+            <p class="text-sm text-gray-600 leading-relaxed">"{t.text}"</p>
+          </div>
+        ))}
+      </div>
+    </div>
+
+    {/* === CTA-Buttons === */}
+    <div>
+      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-2">Jetzt LIAR buchen</h2>
+      <p class="text-[#595959] text-center text-sm mb-6">Termin sichern oder mehr erfahren</p>
+      <div class="flex flex-wrap justify-center gap-3">
+        <a
+          href="/kontakt/"
+          class="bg-[#d7393e] hover:bg-[#b82e33] text-white font-semibold px-6 py-3 rounded-lg shadow-sm transition-colors"
+        >
+          📞 Termin anfragen
+        </a>
+        <a
+          href="/preise/"
+          class="bg-white hover:bg-gray-50 text-[#d7393e] font-semibold px-6 py-3 rounded-lg shadow-sm border-2 border-[#d7393e] transition-colors"
+        >
+          💰 Preise ansehen
+        </a>
+        <a
+          href="/kinderzauberer/"
+          class="bg-white hover:bg-gray-50 text-[#3b55d5] font-semibold px-6 py-3 rounded-lg shadow-sm border-2 border-[#3b55d5] transition-colors"
+        >
+          🎩 Alle Leistungen
+        </a>
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,436 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../../components/HeroSlider.astro';
+import HeroStage from '../../../../components/HeroStage.astro';
+import CountUp from '../../../../components/CountUp.astro';
+import karteImg from '../../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../../assets/images/home/clown-zauberer-hero.jpg';
+import _clownIntroAsset from '../../../../assets/images/clown/clown-zauberer-gladbeck.jpg';
+import _gal1Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-1.jpg';
+import _gal2Asset from '../../../../assets/images/galerie/buehnen-zauberei.jpg';
+import _gal3Asset from '../../../../assets/images/clown/glitzer-tattoos.jpg';
+import _gal4Asset from '../../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import _gal5Asset from '../../../../assets/images/clown/kosten-preis-clown-nrw.jpg';
+import _gal6Asset from '../../../../assets/images/zauberer/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
+import _gal7Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-16.jpg';
+import _gal8Asset from '../../../../assets/images/zauberer/zaubershow-staunende-kinder.jpg';
+import _gal9Asset from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-2.jpg';
+import _clownShowAsset from '../../../../assets/images/clown/clown-bei-clownshow.jpg';
+import GoogleReviews from '../../../../components/GoogleReviews.astro';
+
+const seoTitle = "Clown Bottrop | TOP Bewertungen | Jetzt buchen";
+const seoDescription = "Clown in Bottrop für Kindergeburtstag & Feste ✓ Clown Zauberer LIAR ✓ 370+ Bewertungen ✓ Lustig & magisch ✓ Auch in Gladbeck & Oberhausen ✓ Buchen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Clown in Bottrop",
+  "description": "Clown LIAR für Kindergeburtstag und Kinderfest in Bottrop, NRW",
+  "url": "https://liar-entertainer.com/clown/clownshow/clown-in-bottrop/",
+  "serviceType": ["Clownshow", "Kinderunterhaltung"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "City", "name": "Bottrop" }
+};
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet ein Auftritt von Clown LIAR in Bottrop? 💶",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Kosten variieren individuell! Die Gage richtet sich immer nach verschiedenen wichtigen Faktoren:📌 Art und Umfang der Veranstaltung (privater Kindergeburtstag, großes Firmenevent, Stadtfest)📌 Zuschauerzahl (kleine Gruppe oder mehrere hundert Gäste)📌 Anfahrtsweg nach Bottrop oder in die Region📌 Zeitpunkt (Wochentag/Wochenende, Vor-/Nachmittag)📌 Jahreszeit (Hochsaison im Frühling/Sommer oder Nebensaison)📌 Gewünschte Programme (nur Clownshow oder Kombination mit Zauberei, Ballonmodellage, Walk Act)Bei KINDERGEBURTSTAGEN gibt es transparente Festpreise, die ich Ihnen gerne mitteile! Für größere Veranstaltungen, Firmenevents oder Feste erstelle ich Ihnen ein individuelles, faires Angebot. Fragen Sie einfach unverbindlich nach – ich berate Sie ehrlich und kompetent! 📞😊"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wieviel Platz braucht man für die Clownshow? 📏",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Erstaunlich wenig! Ganz ohne lange Vorbereitungszeit und mit einer kompakten Fläche von lediglich 2×2 Meter kann ich bereits eine vollwertige, professionelle Show vorführen. Das bedeutet maximale Flexibilität für Sie:✅ Wohnzimmer & Kinderzimmer – Ideal für Kindergeburtstage zu Hause✅ Partykeller & Hobbyraum – Gemütliche Atmosphäre✅ Terrasse & Gartenanlage – Perfekt für Outdoor-Feiern✅ Große und kleine Bühnen – Für Stadtfeste und Vereinsveranstaltungen✅ Bücherei & Gemeindezentrum – Kulturelle Events✅ Kindergarten, Kita & Schule – Pädagogisch wertvolle Unterhaltung✅ Turnhalle & Mehrzweckraum – Auch für größere Gruppen✅ Restaurant & Festsaal – Bei Hochzeiten und FamilienfeiernSie benötigen keine große Location oder aufwendige Vorbereitung – die Show funktioniert praktisch überall! Das macht die Planung für Sie unkompliziert und stressfrei. 🎪👍"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert eine Vorführung mit dem Clown? ⏰",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Standard-Show ist ab 30 Minuten zu buchen – perfekt als kompaktes Highlight für kürzere Events oder als Teil eines größeren Veranstaltungsprogramms. Auf Ihren Wunsch hin kann die Show auch problemlos auf bis zu 45 Minuten oder sogar länger ausgedehnt werden, ganz nach Ihren spezifischen Bedürfnissen und Ihrem Zeitplan.Das wirklich Besondere?!? Die Show lässt sich super flexibel in jeder Art von Veranstaltung perfekt einbauen:🎈 Kindergeburtstag & Familienfeier zu Hause🎭 Karnevalfeier & Faschingsparty🎪 Kinderfest & Straßenfest in Bottrop☀️ Sommerfest im Kindergarten oder in der Schule🎯 Schützenfest & Vereinsjubiläum🏢 Betriebsfeier mit Kinderprogramm💒 Hochzeit (unterhaltsame Kinderbetreuung während der Feier)🎄 Weihnachtsfeier & FirmeneventIch passe mich zeitlich flexibel Ihrem individuellen Programmablauf an – absolut unkompliziert und immer professionell! Sie sagen mir, wann es losgehen soll, und ich liefere pünktlich ab! ⏱️✅"
+      }
+    }
+  ]
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+const _pageGallery = [
+  { src: _gal1Asset, alt: 'Clown in Bottrop' },
+  { src: _gal2Asset, alt: 'Zaubershow auf einer Bühne' },
+  { src: _gal3Asset, alt: 'Wie sehen Glitzer Tattoos aus?' },
+  { src: _gal4Asset, alt: 'Bottrop – Eindruck 4 mit Clown Zauberer LIAR' },
+  { src: _gal5Asset, alt: 'Bottrop – Eindruck 5 mit Clown Zauberer LIAR' },
+  { src: _gal6Asset, alt: 'Bottrop – Eindruck 6 mit Clown Zauberer LIAR' },
+  { src: _gal8Asset, alt: 'Bottrop – Eindruck 7 mit Clown Zauberer LIAR' },
+  { src: _gal9Asset, alt: 'Bottrop – Eindruck 8 mit Clown Zauberer LIAR' },
+  { src: _clownShowAsset, alt: 'Lustige Clownshow in Bottrop begeistert Publikum' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Clown Bottrop, Clown in Bottrop, Clownshow Bottrop, Clown buchen Bottrop, Zauberer Bottrop, NRW"
+  canonical="https://liar-entertainer.com/clown/clownshow/clown-in-bottrop/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Clownshow', url: '/clown/clownshow/' },
+    { name: 'Clown in Bottrop', url: '/clown/clownshow/clown-in-bottrop/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Bottrop
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Clown in Bottrop
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Clownshow und Unterhaltung in Bottrop – Spaß, Lachen und gute Laune für Groß und Klein!
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">Clownshow</a>
+        <span class="mx-1">»</span>
+        <span>Clown in Bottrop</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Witzig und Magisch! ✨</h2>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Clown Zauberer LIAR aus dem Nachbarort Gladbeck begeistert Bottrop mit einer lustigen Clownshow aus Comedy und Zauberei – ideal für Kindergeburtstag, Kita und Sommerfest, für Kinder ab 4 Jahren und auf nur 2×2 m Platz. Schnell vor Ort in ganz Bottrop sowie in Gladbeck und Oberhausen – mit 370+ Google-Bewertungen.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Mit über 6.000 erfolgreichen Auftritten verfüge ich über einen riesigen Erfahrungsschatz: Privatpartys (Geburtstag, Hochzeit, Taufe), Firmenveranstaltungen und Betriebsfeste, Vereinsfeiern und Jubiläen, Messen und Promotions, Auftritte in Theatern, sowie regelmäßig in Kindergärten, Kitas und Grundschulen.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Diese langjährige Bühnenerfahrung garantiert Ihnen professionelles Entertainment, das ankommt – bei Kindern genauso wie bei Erwachsenen! 🎭</p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="text-center">
+            <Image src={_gal7Asset} alt="Clownshow in Bottrop" class="rounded-full object-cover object-[20%] portrait-zoom" style="width: 320px; height: 320px;" width={800} height={533} loading="lazy" />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Clownshow für Kinder in Bottrop</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <section class="bg-[#eff4ff] py-14 text-center border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4">BOTTROP</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-6">✨ Clownshow in Bottrop – mit Herz &amp; Humor</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">
+        Meine Show ist speziell auf Kinder abgestimmt: lebendig, interaktiv und voller Überraschungen.
+      </p>
+      <p class="text-[#1f2025] leading-relaxed">
+        Die Kinder dürfen mitzaubern, lachen, staunen – und manchmal selbst zur kleinen Zauberin oder zum Zauberer werden.
+        Dabei achte ich besonders auf Respekt, Empathie und ein liebevolles Miteinander.
+      </p>
+    </div>
+  </section>
+
+  <!-- " Seine SHOW ist DAS Highlight für Ihr Event " -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-10">" Seine SHOW ist DAS Highlight für Ihr Event "</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Zusatzleistung: Ballonmodellage</h3>
+          <p class="text-[#374151] leading-relaxed">Egal ob auf dem Kindergeburtstag, beim Straßenfest, im Kindergarten oder in der Schule – bunte Ballonfiguren sind garantiert immer ein absolutes Highlight und sorgen für leuchtende Kinderaugen voller Freude! 😊</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Zusatzleistung: Glitzer-Tattoos</h3>
+          <p class="text-[#374151] leading-relaxed">Jedes Kind kann sich seine ganz persönliche Wunschfigur aussuchen und stolz mit nach Hause nehmen: Ob klassischer Ballonhund, farbenfrohes Schwert für kleine Ritter, zauberhafte Blumen für Prinzessinnen oder ausgefallene Kreaturen wie Giraffen, Schmetterlinge und Kaktus-Figuren – der Fantasie sind kaum Grenzen gesetzt!</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">ZAUBERSHOW</h3>
+          <p class="text-[#374151] leading-relaxed">Die selbst ausgesuchten Ballontiere halten mehrere Tage und werden zu wunderbaren, greifbaren Erinnerungen an den besonderen Tag. Schnell und mit jahrelanger Routine geformt, begeistern meine Ballonkreationen nicht nur Kinder, sondern faszinieren auch die Erwachsenen – denn echte Ballonkunst ist ein Handwerk, das man sehen muss! 🎨</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Was ist ein Clown? 🎪 -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-10">Was ist ein Clown? 🎪</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Clowns in der heutigen Zeit:</h3>
+          <p class="text-[#374151] leading-relaxed">Eine Person, die im Zirkus, auf Veranstaltungen oder auf der Bühne mit allerlei lustigen Vorführungen die Menschen zum Lachen bringt, ist ein Clown. Das Wort stammt aus dem Englischen und meinte ursprünglich einen Tölpel, einen einfältigen Bauern oder einen ungeschickten Menschen – also Figuren, über die man schmunzeln musste.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">HIER SIND EIN PAAR ANTWORTEN AUF NICHT GESTELTE FRAGEN</h3>
+          <p class="text-[#374151] leading-relaxed">Bereits im 16. Jahrhundert (um das Jahr 1500) gab es in englischen Theatern schon Clowns: Sie traten besonders in den Pausen auf und unterhielten die wartenden Zuschauer mit komischen Einlagen, akrobatischen Kunststücken und witzigen Wortspielen.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">EINFACH KONTAKT AUFNEHMEN 📞✉️</h3>
+          <p class="text-[#374151] leading-relaxed">Im Laufe der Jahrhunderte entwickelten sich im Theater und vor allem im Zirkus viele unterschiedliche Clown-Arten und -Typen: Die einen arbeiten eher lustig und slapstick-orientiert, die anderen sind poetischer und ernsthafter in ihrer Darstellung. Manche bringen die Menschen zum herzlichen Lachen, andere berühren auch emotional und können sogar Tränen der Rührung hervorrufen. Diese emotionale Bandbreite macht die Clownerie zu einer vielseitigen und anspruchsvollen Kunstform! 🎭</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Clown in Bottrop ? NICHT NUR!</h3>
+          <p class="text-[#374151] leading-relaxed">Moderne Clowns sind häufig im Rahmen eines freien Berufes als selbstständige Künstler tätig. Für diese künstlerische Tätigkeit ist keine gesetzlich vorgeschriebene Ausbildung erforderlich – jedoch gibt es zahlreiche professionelle Clownschulen, Theater-Workshops und Fortbildungen, in denen man das Handwerk fundiert erlernen und verfeinern kann.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Bildergalerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Clown-Auftritt in Bottrop</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Was kostet ein Auftritt von Clown LIAR in Bottrop? 💶</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Die Kosten variieren individuell! Die Gage richtet sich immer nach verschiedenen wichtigen Faktoren:📌 Art und Umfang der Veranstaltung (privater Kindergeburtstag, großes Firmenevent, Stadtfest)📌 Zuschauerzahl (kleine Gruppe oder mehrere hundert Gäste)📌 Anfahrtsweg nach Bottrop oder in die Region📌 Zeitpunkt (Wochentag/Wochenende, Vor-/Nachmittag)📌 Jahreszeit (Hochsaison im Frühling/Sommer oder Nebensaison)📌 Gewünschte Programme (nur Clownshow oder Kombination mit Zauberei, Ballonmodellage, Walk Act)Bei KINDERGEBURTSTAGEN gibt es transparente Festpreise, die ich Ihnen gerne mitteile! Für größere Veranstaltungen, Firmenevents oder Feste erstelle ich Ihnen ein individuelles, faires Angebot. Fragen Sie einfach unverbindlich nach – ich berate Sie ehrlich und kompetent! 📞😊
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wieviel Platz braucht man für die Clownshow? 📏</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Erstaunlich wenig! Ganz ohne lange Vorbereitungszeit und mit einer kompakten Fläche von lediglich 2×2 Meter kann ich bereits eine vollwertige, professionelle Show vorführen. Das bedeutet maximale Flexibilität für Sie:✅ Wohnzimmer & Kinderzimmer – Ideal für Kindergeburtstage zu Hause✅ Partykeller & Hobbyraum – Gemütliche Atmosphäre✅ Terrasse & Gartenanlage – Perfekt für Outdoor-Feiern✅ Große und kleine Bühnen – Für Stadtfeste und Vereinsveranstaltungen✅ Bücherei & Gemeindezentrum – Kulturelle Events✅ Kindergarten, Kita & Schule – Pädagogisch wertvolle Unterhaltung✅ Turnhalle & Mehrzweckraum – Auch für größere Gruppen✅ Restaurant & Festsaal – Bei Hochzeiten und FamilienfeiernSie benötigen keine große Location oder aufwendige Vorbereitung – die Show funktioniert praktisch überall! Das macht die Planung für Sie unkompliziert und stressfrei. 🎪👍
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie lange dauert eine Vorführung mit dem Clown? ⏰</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Die Standard-Show ist ab 30 Minuten zu buchen – perfekt als kompaktes Highlight für kürzere Events oder als Teil eines größeren Veranstaltungsprogramms. Auf Ihren Wunsch hin kann die Show auch problemlos auf bis zu 45 Minuten oder sogar länger ausgedehnt werden, ganz nach Ihren spezifischen Bedürfnissen und Ihrem Zeitplan.Das wirklich Besondere?!? Die Show lässt sich super flexibel in jeder Art von Veranstaltung perfekt einbauen:🎈 Kindergeburtstag & Familienfeier zu Hause🎭 Karnevalfeier & Faschingsparty🎪 Kinderfest & Straßenfest in Bottrop☀️ Sommerfest im Kindergarten oder in der Schule🎯 Schützenfest & Vereinsjubiläum🏢 Betriebsfeier mit Kinderprogramm💒 Hochzeit (unterhaltsame Kinderbetreuung während der Feier)🎄 Weihnachtsfeier & FirmeneventIch passe mich zeitlich flexibel Ihrem individuellen Programmablauf an – absolut unkompliziert und immer professionell! Sie sagen mir, wann es losgehen soll, und ich liefere pünktlich ab! ⏱️✅
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Nicht nur in Bottrop unterwegs</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">Besonders häufig trete ich in folgenden Städten und Regionen auf:</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Ruhrgebiet</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/clown/clownshow/clown-in-bottrop/" class="text-[#d7393e] hover:underline">Bottrop</a> |
+            <a href="/clown/clownshow/clown-in-oberhausen/" class="text-[#d7393e] hover:underline">Clownshow für Oberhausen</a> |
+            <a href="/clown/clownshow/clown-in-gelsenkirchen/" class="text-[#d7393e] hover:underline">Clown für Kindergeburtstag in Gelsenkirchen</a> |
+            <a href="/clown/clownshow/clown-in-essen/" class="text-[#d7393e] hover:underline">Clown Essen buchen</a> |
+            <a href="/clown/clownshow/clown-in-dorsten/" class="text-[#d7393e] hover:underline">Clownshow in Dorsten erleben</a> |
+            <a href="/clown/clownshow/clown-in-herten/" class="text-[#d7393e] hover:underline">Clown für Kinderfeste in Herten</a> |
+            <a href="/clown/clownshow/clown-in-dinslaken/" class="text-[#d7393e] hover:underline">Clown in Dinslaken buchen</a> |
+            <a href="/clown/clownshow/clown-in-marl/" class="text-[#d7393e] hover:underline">Clownshow für Marl</a> |
+            <a href="/clown/clownshow/clown-in-herne/" class="text-[#d7393e] hover:underline">Clown für Kindergeburtstag in Herne</a> |
+            <a href="/clown/clownshow/clown-in-muelheim/" class="text-[#d7393e] hover:underline">Clown Mülheim buchen</a> |
+            <a href="/clown/clownshow/clown-in-bochum/" class="text-[#d7393e] hover:underline">Clownshow in Bochum erleben</a> |
+            Dortmund |
+            Lünen | Castrop-Rauxel |
+            <a href="/clown/clownshow/clown-in-recklinghausen/" class="text-[#d7393e] hover:underline">Clown für Kinderfeste in Recklinghausen</a>
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-far-cities>Auch außerhalb dieses Umkreises bin ich unterwegs: Termine in weiter entfernten Städten wie Dortmund, Haltern am See und Duisburg lassen sich einrichten – die Anfahrt plane ich dabei einfach mit ein.</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Niederrhein &amp; Umgebung</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Moers | Krefeld | Wesel |
+            Haltern am See |
+            Duisburg
+          </p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Münsterland</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Reken | Münster | Coesfeld
+          </p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Weitere Städte</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Düsseldorf |
+            Köln | Neuss
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Selbstverständlich kann man mich auch überregional in ganz Deutschland sowie international buchen – ich war bereits erfolgreich in Frankreich, Belgien, den Niederlanden, Österreich und der Schweiz im Einsatz! Von meinem Wohnort <a href="/clown/clownshow/clown-in-gladbeck/" class="text-[#3b55d5] hover:underline">Gladbeck</a> aus starte ich zu allen Veranstaltungen – Bottrop erreiche ich in wenigen Minuten!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Clownshow Bottrop"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Bottrop -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Bottrop buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kindergeburtstag/geburtstag-in-bottrop/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#d7393e] hover:underline font-medium text-sm card-hover reveal">🎂 Kindergeburtstag in Bottrop</a>
+      <a href="/kinderzauberer/kinderzauberer-in-bottrop/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#3b55d5] hover:underline font-medium text-sm card-hover reveal">🎩 Kinderzauberer in Bottrop</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

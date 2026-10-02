@@ -1,0 +1,413 @@
+﻿---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import CountUp from '../../../components/CountUp.astro';
+import aktionImg from '../../../assets/images/kinderzauberer/clown-zauberer-gladbeck.jpg';
+import { Image } from 'astro:assets';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import _heroImgAsset from '../../../assets/images/kinderzauberer/kinderzauberer-hero.jpg';
+import _roundImgAsset from '../../../assets/images/kinderzauberer/zaubershow-mit-clown-zauberer-liar.jpg';
+import _showImgAsset from '../../../assets/images/clown/clown-bei-clownshow.jpg';
+import _zauberImgAsset from '../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import _kostenImgAsset from '../../../assets/images/clown/kosten-preis-clown-nrw.jpg';
+import _weihnachtImgAsset from '../../../assets/images/zauberer/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
+import _ballonImgAsset from '../../../assets/images/clown/glitzer-tattoos.jpg';
+import _galleryImgAsset from '../../../assets/images/clown/kinderzauberer-kindergarten-essen.jpg';
+
+const seoTitle = "Zauberer Kindergeburtstag Herten | Kinderzauberer LIAR";
+const seoDescription = "Kinderzauberer in Herten buchen ✓ Lustige Zaubershow für Kinder ✓ 370+ Bewertungen ✓ Auch in Recklinghausen & Marl ✓ Jetzt anfragen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Kinderzauberer in Herten",
+  "description": "Kinderzauberer LIAR für Kindergeburtstag und Kinderevents in Herten, NRW",
+  "url": "https://liar-entertainer.com/kinderzauberer/kinderzauberer-in-herten/",
+  "serviceType": ["Kinderzauberer", "Zaubershow für Kinder"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "City", "name": "Herten" }
+};
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was investiere ich für einen Kinderzauberer in Herten? 💰",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meine Honorare richten sich nach dem Rahmen: Welche Art Event? Wie lange soll ich unterhalten? Wie viele Kinder? Welche Anfahrt? Für private Kindergeburtstage habe ich klare Paketpreise – damit Sie wissen, woran Sie sind! Lassen Sie uns sprechen – ich erstelle Ihnen gerne ein passendes Angebot! 📞"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Welche räumlichen Voraussetzungen brauche ich? 📏",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meine Show ist extrem flexibel! Eine Grundfläche von 2×2 Metern genügt – mehr nicht. Kein spezielles Licht, keine Bühne erforderlich. Ob Wohnzimmer, Garten 🌳, Keller, Kita-Raum oder große Halle: Ich mache das Beste aus jeder Location!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lang sollte die Show sein? ⏰",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ab 30 Minuten ist buchbar – und nach oben gibt's kaum Grenzen. Je nach Event empfehle ich unterschiedliche Längen: Für Kindergeburtstage 🎉 oft 40-60 Minuten, für Kita-Gruppen manchmal kürzer, für Großveranstaltungen auch länger. Wir finden gemeinsam die ideale Dauer!"
+      }
+    }
+  ]
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+const _pageGallery = [
+  { src: _zauberImgAsset, alt: 'Auftritt Zaubershow mit Clown und Kinderzauberer in Herten' },
+  { src: _kostenImgAsset, alt: 'Clown Zauberer LIAR im Einsatz in NRW' },
+  { src: _weihnachtImgAsset, alt: 'Zaubervorführung von Kinderzauberer in Herten auf dem Weihnachtsmarkt' },
+  { src: _ballonImgAsset, alt: 'Ballonmodellage beim Kinderzauberer in Herten' },
+  { src: _galleryImgAsset, alt: 'Pantomime und Clown-Kunst in Herten' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kinderzauberer Herten, Kinderzauberer in Herten, Zauberer Herten, Kindergeburtstag Herten, Zaubershow Herten, NRW"
+  canonical="https://liar-entertainer.com/kinderzauberer/kinderzauberer-in-herten/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kinderzauberer', url: '/kinderzauberer/' },
+    { name: 'Kinderzauberer in Herten', url: '/kinderzauberer/kinderzauberer-in-herten/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 60%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Herten
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Zauberer für den Kindergeburtstag in Herten
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Kinderzauberer LIAR aus Gladbeck – 40 Minuten Zaubershow für Kinder von 4 bis 12 Jahren in Herten.
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a>
+        <span class="mx-1">»</span>
+        <span>Kinderzauberer in Herten buchen | Erlebnis-Show für Kinder</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">TOP Kinderzauberer in Herten für Ihr Event! ⭐</h2>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Als Zauberer für Kinder bin ich in Herten regelmäßig unterwegs. Kinderzauberer LIAR aus Gladbeck ist in Herten, Recklinghausen und Marl regelmäßig gebucht. Kinder ab 4 Jahren erleben rund 40 Minuten interaktive Mitmach-Zauberei, für die schon 2×2 Meter Platz genügen – drinnen wie draußen. Mehr als 400 Google-Bewertungen belegen die Qualität der Show.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Erleben Sie LIAR, den Kinderzauberer in Herten, der jedes Event in ein magisches Abenteuer verwandelt! 🎪 Meine Erlebnis-Show schafft bleibende Eindrücke, die Kinder begeistern und Eltern entspannen lassen. Seit Jahren verzaubere ich kleine und große Gäste in Herten und Umgebung – mit einer Show, die Herzen berührt und Gesichter zum Leuchten bringt! ✨</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Auf der Suche nach einem Kinderzauberer in Herten? Als professioneller Kinderentertainer (besonders beliebt für Kindergeburtstage) schaffe ich täglich Momente purer Freude 👀 – wenn Kinder vor Begeisterung quietschen, ihre Augen leuchten und sie voller Stolz von „ihren" Zaubertricks erzählen. Durch spannende Erzählungen werden simple Dinge zu magischen Instrumenten. Das sorgt für Gänsehaut, Begeisterungsstürme und eine Atmosphäre, die man spüren kann – das ist die Kunst eines wahren Kinderzauberers! 🪄</p>
+        </div>
+        <div class="flex flex-col items-center gap-4">
+          <Image
+            src={_roundImgAsset}
+            alt="Kinderzauberer in Herten"
+            class="rounded-full object-cover object-[20%] portrait-zoom"
+            style="width: 320px; height: 320px;"
+          loading="lazy" width={600} height={450} />
+          <a href="/zauberer/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+            Über die Zaubershow
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <section class="bg-[#eff4ff] py-14 text-center border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4">HERTEN</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-6">✨ Kinderzauberer in Herten – mit Herz &amp; Humor</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">
+        Meine Show ist speziell auf Kinder abgestimmt: lebendig, interaktiv und voller Überraschungen.
+      </p>
+      <p class="text-[#1f2025] leading-relaxed">
+        Die Kinder dürfen mitzaubern, lachen, staunen – und manchmal selbst zur kleinen Zauberin oder zum Zauberer werden.
+        Dabei achte ich besonders auf Respekt, Empathie und ein liebevolles Miteinander.
+      </p>
+    </div>
+  </section>
+
+  <!-- Erlebnis-Show in Herten – Mehr als nur Tricks! 🌟 -->
+  <section class="bg-white py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Erlebnis-Show in Herten – Mehr als nur Tricks! 🌟</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">Meine Show in Herten kombiniert kunstvolle Illusionen mit lebendiger Comedy – doch das Besondere: Die Kinder sind nicht Zuschauer, sondern Mitgestalter! Sie bestimmen den Verlauf, werden zu Zauber-Assistenten und erleben hautnah, wie Magie entsteht. Das Publikum wechselt permanent zwischen ausgelassenem Jubel 😄 und sprachlosem Staunen. Das ist Entertainment, das bewegt!</p>
+      <p class="text-[#374151] mb-4 leading-relaxed">Jede Show passt sich organisch an die Gruppe an: Ob 5-Jährige oder 12-Jährige, ob 8 oder 80 Kinder – die Performance entfaltet sich individuell. Es entstehen magische Augenblicke, die durch die Energie der Kinder erst richtig zum Leben erwachen. Diese Shows bleiben als positive Erinnerungen haften und werden zum Gesprächsthema auf dem Schulhof! Die Videos weiter unten zeigen authentische Reaktionen und beweisen: In Herten wird Zauberkunst zum Gemeinschaftserlebnis. 🎥</p>
+    </div>
+  </section>
+
+  <!-- Die Show in Herten -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-8">Die Show in Herten – Was Sie erwartet! 🎭</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Lustige Zaubershow mit interaktivem Charakter 🪄</h3>
+          <p class="text-[#374151] leading-relaxed">Die Performance vereint meisterhafte Illusionen mit herzlicher Comedy – und der Clou: Die Kinder agieren nicht nur mit, sie gestalten aktiv mit! Sie entscheiden, wohin die Reise geht, werden zu Zauber-Partnern und erschaffen gemeinsam magische Momente. Jeder wird gesehen, jeder darf glänzen!</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Spontan &amp; flexibel 👍</h3>
+          <p class="text-[#374151] leading-relaxed">Ohne langes Setup oder komplizierte Technik komme ich und lege direkt los. Egal ob drinnen 🏠 oder draußen 🌳, ob 10 oder 100 Kinder – die Show passt sich an. Das Motto: maximale Freude bei minimalem Stress für Sie!</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Emotionale Achterbahn garantiert 🎢</h3>
+          <p class="text-[#374151] leading-relaxed">Die Kinder durchleben ein Wechselbad der Gefühle: Sie kichern, staunen, jubeln, raten mit… und mein bestes Kunststück? Jedem Kind ein echtes Lächeln zu entlocken, das von innen kommt! 😊</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Emotionen in Bildern und Bewegtbild 📸🎬 -->
+  <section class="bg-white py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Emotionen in Bildern und Bewegtbild 📸🎬</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">Foto- und Videogalerien erschließen uns eine bereichernde Welt voller Emotionen! Sie inspirieren uns, unser Verständnis für kostbare Momente und die Menschen um uns herum zu erweitern. Bilder und Videos besitzen die Kraft, Gefühle in uns zu wecken und schaffen emotionale Brücken. Eine Galerie erlaubt es uns, dargestellte Augenblicke nachzuempfinden… oder einfach spontane Eindrücke festzuhalten! Viel Vergnügen beim Entdecken! 🎥</p>
+    </div>
+  </section>
+
+  <!-- Bildergalerie -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Kindergeburtstag in Herten -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Kindergeburtstag in Herten – Stressfrei für Sie, unvergesslich für die Kids! 🎂🎈</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">Wussten Sie schon? Professionelles Kinderentertainment kommt auch nach Hause! Viele Familien in Herten entdecken gerade diese praktische Möglichkeit: Sie buchen mich als Kinderzauberer – und ich bringe die komplette Show zu Ihnen. Ob in Ihrer Wohnung 🏠, im Garten, im Gemeindesaal oder in gemieteten Partyräumen: Ich benötige nur wenige Minuten Setup und schon startet das Programm!</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Die jungen Gäste tauchen ein in eine Welt aus Lachen und Zauber. Für mich steht eines im Fokus: authentische Freude schenken. Das Geburtstagskind wird zum strahlenden Star des Tages, während alle anderen begeistert mitmachen und mitfeiern. Das Resultat? Fröhliche Kids 😊, ausgelassene Stimmung und Sie können den Nachmittag genießen, statt zu organisieren!</p>
+          <a href="/kindergeburtstag/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+            Kindergeburtstag – Preise
+          </a>
+        </div>
+        <div>
+          <Image
+            src={_showImgAsset}
+            alt="Kindergeburtstag mit Kinderzauberer in Herten"
+            class="rounded-xl w-full object-cover object-top shadow-sm"
+          loading="lazy" width={506} height={640} />
+        </div>
+      </div>
+    </div>
+  </section>
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Kinderzauberer in Herten</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Was investiere ich für einen Kinderzauberer in Herten? 💰</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Meine Honorare richten sich nach dem Rahmen: Welche Art Event? Wie lange soll ich unterhalten? Wie viele Kinder? Welche Anfahrt? Für private Kindergeburtstage habe ich klare Paketpreise – damit Sie wissen, woran Sie sind! Lassen Sie uns sprechen – ich erstelle Ihnen gerne ein passendes Angebot! 📞
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Welche räumlichen Voraussetzungen brauche ich? 📏</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Meine Show ist extrem flexibel! Eine Grundfläche von 2×2 Metern genügt – mehr nicht. Kein spezielles Licht, keine Bühne erforderlich. Ob Wohnzimmer, Garten 🌳, Keller, Kita-Raum oder große Halle: Ich mache das Beste aus jeder Location!
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie lang sollte die Show sein? ⏰</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Ab 30 Minuten ist buchbar – und nach oben gibt’s kaum Grenzen. Je nach Event empfehle ich unterschiedliche Längen: Für Kindergeburtstage 🎉 oft 40-60 Minuten, für Kita-Gruppen manchmal kürzer, für Großveranstaltungen auch länger. Wir finden gemeinsam die ideale Dauer!
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Unterwegs in Herten und der Region</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Als Kinderzauberer bin ich in allen Stadtteilen von Herten aktiv: Herten-Mitte, Westerholt, Bertlich, Disteln, Scherlebeck sowie in der direkten Umgebung: <a href="/kinderzauberer/kinderzauberer-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Recklinghausen</a>, <a href="/kinderzauberer/kinderzauberer-in-marl/" class="text-[#3b55d5] hover:underline">Marl</a>, Gelsenkirchen-Buer, <a href="/kinderzauberer/kinderzauberer-in-herne/" class="text-[#3b55d5] hover:underline">Herne</a>, Waltrop und weiter in Richtung <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/" class="text-[#3b55d5] hover:underline">Gelsenkirchen</a>, <a href="/kinderzauberer/kinderzauberer-in-bottrop/" class="text-[#3b55d5] hover:underline">Bottrop</a>, <a href="/kinderzauberer/kinderzauberer-in-essen/" class="text-[#3b55d5] hover:underline">Essen</a>, <a href="/kinderzauberer/kinderzauberer-in-bochum/" class="text-[#3b55d5] hover:underline">Bochum</a>, <a href="/kinderzauberer/kinderzauberer-in-oberhausen/" class="text-[#3b55d5] hover:underline">Oberhausen</a> und viele weitere Orte in NRW. Etwas weiter von meinem Standort Gladbeck entfernt liegen Dortmund, Haltern am See und Datteln – auch dorthin komme ich gerne. Von meinem Wohnort aus bin ich als <a href="/kinderzauberer/kinderzauberer-in-gladbeck/" class="text-[#3b55d5] hover:underline">Kinderzauberer in Gladbeck</a> ebenso unterwegs wie in Herten. Internationale Buchungen sind ebenfalls möglich!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={aktionImg}
+            alt="Karte Einsatzgebiet Kinderzauberer Herten"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Herten -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Herten buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kindergeburtstag/geburtstag-in-herten/" class="bg-[#d7393e] hover:bg-[#b62e32] text-white rounded-lg px-5 py-3 font-bold text-sm transition-colors">🎂 Kindergeburtstag in Herten</a>
+      <a href="/clown/clownshow/clown-in-herten/" class="bg-[#d7393e] hover:bg-[#b62e32] text-white rounded-lg px-5 py-3 font-bold text-sm transition-colors">🤡 Clown in Herten</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

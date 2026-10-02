@@ -1,0 +1,474 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import karteImg from '../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
+import _introImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import _showImgAsset from '../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+
+const seoTitle = "Kindergeburtstag Duisburg | Zaubershow ab 150€";
+const seoDescription = "Kindergeburtstag in Duisburg unvergesslich machen! Clown LIAR ✓ Zaubershow ab 150€ ✓ 370+ Bewertungen ✓ Auch in Oberhausen & Dinslaken ✓ Anfragen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Kindergeburtstag mit Clown Zauberer in Duisburg',
+  description: seoDescription,
+  provider: { "@id": "https://liar-entertainer.com/#business" },
+  areaServed: { '@type': 'City', name: 'Duisburg' },
+  offers: { '@type': 'Offer', price: '150', priceCurrency: 'EUR', description: '40 Minuten Zaubershow' },
+};
+
+const faqItems = [
+  {
+    question: '1. „Lohnt sich ein Clown-Zauberer wirklich?"',
+    answer: 'Kurze Antwort: Ja, wenn Sie Wert auf professionelle Unterhaltung legen. Lange Antwort: Schauen Sie, ich bin nicht billig. 150 € für 40 Minuten ist eine Investition. Aber: Sie bekommen dafür garantierte Unterhaltung. Keine Diskussionen, keine gelangweilten Kinder, kein Chaos. Die Kinder sind fokussiert, Sie können durchatmen, und am Ende sind alle glücklich. Vergleichen Sie das mit selbstorganisierten Spielen (stressig) oder einem Ausflug (teuer + logistisch aufwendig). Dann sieht mein Angebot plötzlich sehr fair aus.',
+  },
+  {
+    question: '2. „Funktioniert das auch bei uns zu Hause?"',
+    answer: 'Ja! Ich war schon überall in Duisburg: In 50m²-Wohnungen in Marxloh – In Reihenhäusern in Homberg – In Altbauwohnungen in Neudorf – In modernen Neubauten in Mündelheim. Solange die Kinder Platz zum Sitzen haben (Stühle, Boden, Kissen – egal), funktioniert die Show. Ich passe mich an. Das ist meine Spezialität.',
+  },
+  {
+    question: '3. „Mein Kind ist 4 Jahre alt – ist das nicht zu jung?"',
+    answer: '4 Jahre ist das perfekte Einstiegsalter! Die Show für den Geburtstag in Duisburg ist genau auf diese Altersgruppe abgestimmt. Die Tricks sind verständlich, der Humor ist kindgerecht, die Aufmerksamkeitsspanne passt. Mit 3 Jahren wird es manchmal schwierig (zu kurze Konzentration). Ab 4 läuft es super. Bis etwa 12 Jahre haben Kinder Spaß – ich passe das Programm einfach ans Alter an.',
+  },
+  {
+    question: '4. „Was passiert, wenn ein Kind nicht mitmachen will?"',
+    answer: 'Null Problem! Ich zwinge niemanden. Manche Kinder sind am Anfang schüchtern. Die dürfen erstmal zuschauen. Oft tauen sie nach 10 Minuten auf und kommen von selbst. Wenn nicht, ist das auch okay. Die Show funktioniert mit 5 Kindern genauso wie mit 12. Jedes Kind darf teilnehmen – muss aber nicht.',
+  },
+  {
+    question: '5. „Wie läuft das mit der Buchung?"',
+    answer: 'Super einfach: Sie rufen an (0172-1517578) oder schreiben (WhatsApp/E-Mail). Wir klären Datum, Uhrzeit, Ort in Duisburg, Kinderanzahl. Ich schicke Ihnen eine Bestätigung. Fertig – Termin ist reserviert! Keine komplizierten Verträge. Kein Kleingedrucktes. Einfach und unkompliziert.',
+  },
+  {
+    question: '6. „Was kostet mich das wirklich?"',
+    answer: 'Ehrliche Rechnung: Basis-Show: 150 €, ca. 40 Minuten – Fahrtkosten: Gladbeck nach Duisburg = ca. 25-30 km = 20-25 € (bei 0,40 €/gefahrener km) – Optional Ballonmodellage: + 20 € – Optional Glitzer-Tattoos: + 40 € – Keine versteckten Kosten. Keine Überraschungen.',
+  },
+  {
+    question: '7. „Kann man auch draußen feiern?"',
+    answer: 'Bei gutem Wetter: gerne! Garten, Terrasse, Hof – alles möglich. Duisburg im Sommer kann wunderschön sein (wenn es nicht gerade regnet…). Mein Tipp: Haben Sie immer Plan B (drinnen). Das Wetter am Niederrhein ist unberechenbar. Aber die Show funktioniert drinnen genauso gut.',
+  },
+  {
+    question: '8. „Wie weit im Voraus muss ich buchen?"',
+    answer: 'Ideal: 3-4 Wochen. Gerade Samstage sind schnell weg. Aber ich hatte auch schon Buchungen 3 Tage vorher – kommt drauf an, ob ich frei bin. Meine Empfehlung für Duisburg: Je früher, desto sicherer. Großstadt = viele Anfragen = voller Kalender.',
+  },
+  {
+    question: '9. „Was bei gemischten Altersgruppen?"',
+    answer: 'Überhaupt kein Problem! Bei Geschwisterkindern oder Cousins/Cousinen gibt es oft 4-Jährige bis 10-Jährige. Ich passe die Show dynamisch an: Einfachere Tricks für die Kleinen – Raffiniertere Illusionen für die Größeren – Alle sind eingebunden. Das funktioniert erstaunlich gut.',
+  },
+  {
+    question: '10. „Warum sollte ich ausgerechnet Sie buchen?"',
+    answer: '15 Jahre Erfahrung – Ich habe wirklich schon alles erlebt. Scheue Kinder, wilde Gruppen, enge Räume. Ich improvisiere und bleibe flexibel. Authentisch – Keine aufgesetzte Maske, kein überdrehtes Getue. Ich bin echt. Das merken Kinder sofort. Zuverlässig – Wenn ich zusage, komme ich. Auch bei Stau auf der A3. Auch bei Regen. Immer.',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kindergeburtstag Duisburg, Geburtstag Duisburg, Clown Kindergeburtstag Duisburg, Zauberer Geburtstag Duisburg, Kinderparty Duisburg, NRW"
+  canonical="https://liar-entertainer.com/kindergeburtstag/geburtstag-in-duisburg/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kindergeburtstag', url: '/kindergeburtstag/' },
+    { name: 'Geburtstag in Duisburg', url: '/kindergeburtstag/geburtstag-in-duisburg/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Duisburg
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Kindergeburtstag in Duisburg feiern – Clown & Zauberer ab 150 €
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Antworten auf Ihre wichtigsten Fragen
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">&raquo;</span>
+        <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a>
+        <span class="mx-1">&raquo;</span>
+        <span>Geburtstag in Duisburg</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Geburtstag in Duisburg: Antworten auf Ihre wichtigsten Fragen</h2>
+          <h3 class="font-bold text-lg text-[#1f2025] mb-4">Der Clown-Zauberer für Ihre Familienfeier in Duisburg</h3>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">
+            Kindergeburtstag in Duisburg mit Clown Zauberer LIAR aus Gladbeck: 40-minütige Mitmach-Zaubershow zum Festpreis ab 150 €, für bis ca. 12 Kinder ab 4 Jahren – optional mit Ballonfiguren und Glitzer-Tattoos. Nur 2×2 m Platz nötig, ob in Rheinhausen, Walsum oder Homberg. 370+ Google-Bewertungen.
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Sie planen einen Geburtstag in Duisburg und haben tausend Fragen im Kopf? Das kenne ich! Nach 15 Jahren als Clown-Zauberer und hunderten Kindergeburtstagen in Duisburg – von Rheinhausen über Walsum bis Homberg – habe ich diese Fragen schon oft beantwortet.
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Lassen Sie mich Ihnen die wichtigsten direkt beantworten. Ehrlich, praktisch, ohne Marketing-Geschwätz.
+          </p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="m-0">
+            <Image
+              src={_introImgAsset}
+              alt="Kindergeburtstag in Duisburg mit Clown Zauberer"
+              class="rounded-full object-cover object-[20%] portrait-zoom"
+              style="width: 320px; height: 320px;"
+              loading="lazy"
+              width={640}
+              height={853}
+            />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Mitmach-Zauberei beim Kindergeburtstag in Duisburg</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <!-- So läuft die Show praktisch ab -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-8">So läuft die Show praktisch ab</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">🎭 Vor der Show</h3>
+          <p class="text-[#374151] leading-relaxed">Ich komme, parke, trage meine Sachen rein. Die Kinder werden neugierig und bevor die Show anfängt passieren erstaunliche Dinge. Die Spannung steigt!</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">✨ Die Show</h3>
+          <p class="text-[#374151] leading-relaxed">Volle Action. Ich habe die Aufmerksamkeit aller Kinder. Sie können zuschauen, Fotos machen oder in der Küche letzte Handgriffe erledigen.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">🎉 Nach der Show</h3>
+          <p class="text-[#374151] leading-relaxed">Ich packe zusammen, verabschiede mich. Die Kinder sind zufrieden, aber nicht überdreht. Perfekter Zeitpunkt für Kuchen!</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Blue Section: Die 10 häufigsten Fragen -->
+  <section class="bg-[#eff4ff] py-14 border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4 text-center">DUISBURG</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-4 text-center">Die 10 häufigsten Fragen von Eltern für einen Kindergeburtstag in Duisburg</h2>
+      <p class="text-[#1f2025] text-center mb-8">Ehrliche Antworten auf die Fragen, die mir am häufigsten gestellt werden.</p>
+    </div>
+  </section>
+
+
+  <!-- Q&A Section: Die 10 häufigsten Fragen als Accordion -->
+  <section class="bg-white py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <div class="space-y-3" id="faq-list">
+        {faqItems.map((item) => (
+          <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+              aria-expanded="false"
+            >
+              <span>{item.question}</span>
+              <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+              {item.answer}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Was Sie über meine Show wissen sollten -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-8">Was Sie über meine Show wissen sollten</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">🎩 Das Konzept</h3>
+          <p class="text-[#374151] leading-relaxed">40 Minuten interaktive Zaubershow. Die Kinder sind keine Zuschauer – sie sind Akteure. Sie lernen Tricks, führen sie vor, ernten Applaus. Ihr Kind ist der Hauptstar. Alle anderen sind wichtige Nebenrollen.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">✨ Die Atmosphäre</h3>
+          <p class="text-[#374151] leading-relaxed">Keine laute Disco-Musik. Keine Hektik. Keine Überforderung. Sondern: Fokussierte Aufmerksamkeit, echtes Staunen, herzliches Lachen. Kinder und Eltern genießen gemeinsam.</p>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">🌟 Das Ergebnis</h3>
+          <p class="text-[#374151] leading-relaxed">Nach der Show: Zufriedene Kinder, die noch stundenlang über die Tricks reden. Entspannte Eltern, die den Tag tatsächlich genossen haben. Und Ihr Kind fühlt sich wie ein Star.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="w-full bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-4xl mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">400</div>
+        <div class="text-[#1f2025] text-sm mt-1">Shows im Jahr</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">😊</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">110.000</div>
+        <div class="text-[#1f2025] text-sm mt-1">Lachende Kinder</div>
+      </div>
+      <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+        <div class="text-3xl mb-2">🪄</div>
+        <div class="text-4xl font-extrabold text-[#1f2025]">15</div>
+        <div class="text-[#1f2025] text-sm mt-1">Jahre Erfahrung</div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Preise für Duisburg -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-3xl sm:text-4xl text-center mb-4">Preise für Duisburg – transparent und fair</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+        <!-- Standard-Paket -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎩 Standard-Paket</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">150 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Komplette 40-Minuten-Show</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Zauberei + Clownerie</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Alle Materialien</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Bis zu 12 Kinder (ab 4 Jahren)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Festpreis – kein Wochenend-Zuschlag</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Enthalten: Komplette Show mit allen Materialien. Sie stellen nur den Platz!</p>
+        </div>
+        <!-- Extra-Ballons -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎈 Extra-Ballons</h3>
+          <p class="text-[#3b55d5] font-bold text-2xl mb-4">+ 20 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> 15 Minuten Ballonkunst</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Jedes Kind wählt sein Wunschtier</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Schwert, Hund, Blume, Giraffe – alles möglich</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Die Kinder nehmen sie mit nach Hause</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Spielen tagelang damit</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Die Kinder nehmen sie mit nach Hause und spielen tagelang damit.</p>
+        </div>
+        <!-- Extra-Tattoos -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Extra-Tattoos</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">+ 40 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 30 Minuten Glitzer-Station</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Große Motivauswahl</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Professionell, hautverträglich</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hält 5-7 Tage</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Auch Jungs lieben es (Superhelden-Symbole!)</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Praktische Tipps -->
+  <section class="bg-white py-14">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-8">Praktische Tipps für Ihren Geburtstag in Duisburg</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div class="bg-gray-50 rounded-xl p-6">
+          <h3 class="font-bold text-[#1f2025] mb-2">🕐 Timing</h3>
+          <p class="text-[#374151] leading-relaxed">Nachmittags zwischen 14-16 Uhr ist ideal. Kinder sind wach, aber nicht übermüdet.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6">
+          <h3 class="font-bold text-[#1f2025] mb-2">🎂 Verpflegung</h3>
+          <p class="text-[#374151] leading-relaxed">Kuchen NACH der Show. Vorher sind die Kinder zu aufgeregt. Nachher genießen sie es mehr.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6">
+          <h3 class="font-bold text-[#1f2025] mb-2">👧👦 Geschwister</h3>
+          <p class="text-[#374151] leading-relaxed">Dürfen zuschauen! Auch jüngere oder ältere Geschwister sind willkommen. Je mehr Publikum, desto besser die Stimmung.</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6">
+          <h3 class="font-bold text-[#1f2025] mb-2">📸 Fotos/Videos</h3>
+          <p class="text-[#374151] leading-relaxed">Unbedingt machen! Die Erinnerungen sind unbezahlbar. Ich habe nichts gegen Kameras – im Gegenteil!</p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 md:col-span-2">
+          <h3 class="font-bold text-[#1f2025] mb-2">🎁 Geschenke</h3>
+          <p class="text-[#374151] leading-relaxed">Auspacken NACH der Show. Sonst ist die Aufmerksamkeit weg. Zuerst Entertainment, dann Geschenke, dann Kuchen – das ist die ideale Reihenfolge.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+  <!-- Einsatzgebiet: Duisburg von Rheinhausen bis Walsum -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Duisburg von Rheinhausen bis Walsum</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-3">Ich komme in alle Stadtteile Duisburgs</h3>
+          <ul class="space-y-2 text-[#374151] mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Rheinhausen (Süden)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Homberg (Westen)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Walsum (Norden)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Hamborn (Nordwesten)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Meiderich (Mitte-Nord)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Neudorf (Süd-Zentrum)</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Mündelheim, Buchholz, Marxloh</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">✓</span> Alle weiteren Stadtteile!</li>
+          </ul>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Auch Umland: <a href="/kindergeburtstag/geburtstag-in-oberhausen/" class="text-[#d7393e] hover:underline">Oberhausen</a>, <a href="/kindergeburtstag/geburtstag-in-dinslaken/" class="text-[#3b55d5] hover:underline">Dinslaken</a>, <a href="/kindergeburtstag/geburtstag-in-muelheim/" class="text-[#3b55d5] hover:underline">Mülheim</a> – kein Problem!
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-fernstaedte>
+            Überregional – mit etwas längerer Anfahrt – bin ich außerdem in Moers buchbar.
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Jedoch kann man mich auch überregional und international (Frankreich, Belgien, Österreich, Schweiz) buchen!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Kindergeburtstag Duisburg"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact / CTA Section -->
+  <section class="bg-white py-14 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-2xl font-extrabold text-[#1f2025] mb-4">Jetzt buchen für Duisburg</h2>
+      <p class="text-[#374151] mb-2 leading-relaxed">
+        Sie haben noch Fragen? Perfekt! Genau dafür bin ich da. Rufen Sie mich an oder schreiben Sie mir. Ich berate Sie gerne – unverbindlich und ehrlich für den Geburtstag in Duisburg.
+      </p>
+      <p class="text-[#374151] mb-2">📞 Telefon/WhatsApp: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors font-bold">0172-1517578</a></p>
+      <p class="text-[#374151] mb-2">✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a></p>
+      <p class="text-[#374151] mb-4">📍 Standort: Beethovenstr. 15, 45966 Gladbeck (ca. 25 km nach Duisburg)</p>
+      <p class="text-[#374151] mb-2 text-sm leading-relaxed">
+        Für beste Beratung: Erzählen Sie mir von Ihrer Situation! Stadtteil in Duisburg, Kinderanzahl, Alter, Ihre Erwartungen – je mehr ich weiß, desto besser kann ich Sie beraten.
+      </p>
+      <p class="text-[#374151] mb-6 text-sm leading-relaxed">
+        Verfügbarkeit checken: Nennen Sie mir einfach Ihr Wunschdatum. Ich schaue sofort, ob ich frei bin. Keine Sorge: Ihre Daten bleiben bei mir. Keine Weitergabe, kein Spam. Versprochen.
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Duisburg -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Duisburg buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kinderzauberer/kinderzauberer-in-duisburg/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#3b55d5] hover:underline font-medium text-sm card-hover reveal">🎩 Kinderzauberer in Duisburg</a>
+      <a href="/clown/clownshow/clown-in-duisburg/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#d7393e] hover:underline font-medium text-sm card-hover reveal">🤡 Clown in Duisburg</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

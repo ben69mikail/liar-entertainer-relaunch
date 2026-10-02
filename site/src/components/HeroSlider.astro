@@ -1,0 +1,74 @@
+---
+import { Image } from 'astro:assets';
+// Wiederverwendbarer Bilder-Slider mit sanftem Crossfade, Dots, Autoplay
+// (pausiert bei Hover/Fokus). Mehrere Instanzen pro Seite möglich.
+// Alle Slides eager (kleine WebP) -> kein Lazy-Blank beim Autoplay-Wechsel.
+interface Slide {
+  src: ImageMetadata;
+  alt: string;
+}
+interface Props {
+  slides: Slide[];
+  class?: string;
+  interval?: number;
+  ratio?: string;
+}
+const { slides, class: cls = '', interval = 4000, ratio = '16 / 10' } = Astro.props;
+---
+<div
+  class:list={["hero-slider", cls]}
+  data-interval={interval}
+  style={`aspect-ratio:${ratio}`}
+  role="region"
+  aria-roledescription="Bildergalerie"
+  aria-label="Eindrücke von LIARs Shows"
+>
+  {slides.map((slide, i) => (
+    <Image
+      src={slide.src}
+      alt={slide.alt}
+      class:list={["hero-slide", { "is-active": i === 0 }]}
+      loading="eager"
+      fetchpriority={i === 0 ? "high" : "auto"}
+      widths={[600, 900, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+      quality={70}
+    />
+  ))}
+  <div class="hero-dots">
+    {slides.map((_, i) => (
+      <button type="button" class:list={["hero-dot", { "is-active": i === 0 }]} data-i={i} aria-label={`Bild ${i + 1} anzeigen`}></button>
+    ))}
+  </div>
+</div>
+
+<script>
+  function initSlider(root: HTMLElement) {
+    if (root.dataset.init) return;
+    root.dataset.init = '1';
+    const slides = root.querySelectorAll<HTMLElement>('.hero-slide');
+    const dots = root.querySelectorAll<HTMLElement>('.hero-dot');
+    if (slides.length < 2) return;
+    let i = 0;
+    let timer: ReturnType<typeof setInterval> | null = null;
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const interval = parseInt(root.dataset.interval || '4000', 10);
+    function show(n: number) {
+      i = (n + slides.length) % slides.length;
+      slides.forEach((s, k) => s.classList.toggle('is-active', k === i));
+      dots.forEach((d, k) => d.classList.toggle('is-active', k === i));
+    }
+    function stop() { if (timer) { clearInterval(timer); timer = null; } }
+    function start() { if (reduce) return; stop(); timer = setInterval(() => show(i + 1), interval); }
+    dots.forEach((d) => d.addEventListener('click', () => { show(parseInt(d.dataset.i || '0', 10)); start(); }));
+    root.addEventListener('mouseenter', stop);
+    root.addEventListener('mouseleave', start);
+    root.addEventListener('focusin', stop);
+    root.addEventListener('focusout', start);
+    document.addEventListener('visibilitychange', () => { document.hidden ? stop() : start(); });
+    start();
+  }
+  function initAll() { document.querySelectorAll<HTMLElement>('.hero-slider').forEach(initSlider); }
+  initAll();
+  document.addEventListener('astro:after-swap', initAll);
+</script>

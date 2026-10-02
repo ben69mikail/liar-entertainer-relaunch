@@ -1,0 +1,312 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import CountUp from '../../../components/CountUp.astro';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import { Image } from 'astro:assets';
+import karnevalHero from '../../../assets/images/clown/karneval-hero-original.jpg';
+import zaubershowKarnevalBuehne from '../../../assets/images/clown/zaubershow-karneval-buehne.jpg';
+import clownZaubererGladbeck from '../../../assets/images/clown/clown-zauberer-gladbeck.jpg';
+
+const seoTitle = 'Kinderkarneval NRW | Clown & Zauberer | Jecke Show';
+const seoDescription = 'Kinderkarneval in NRW mit Clown Zauberer LIAR ✓ Jecke Zaubershow für Karnevalssitzung & Kinderkarneval ✓ 15 Jahre Erfahrung ✓ In Ihrer Nähe ✓ Jetzt buchen!';
+
+const anlaesse = [
+  {
+    icon: '🎨',
+    title: 'Kinderkarneval in Kita & Schule',
+    desc: 'Der absolute Renner bei Karnevalsfeiern in Kindergärten und Grundschulen! Meine Kinderkarneval-Zaubershow ist bunt, lustig und voller Mitmach-Momente. Verkleidete Prinzessinnen, Piraten und Superhelden werden zu kleinen Zauberern und erleben Magie hautnah.',
+    details: [
+      'Showdauer: 35–40 Minuten (flexibel anpassbar)',
+      'Altersgruppe: 4–12 Jahre',
+      'Gruppengröße: 20–150 Kinder',
+    ],
+    perfektFuer: ['Karneval im Kindergarten', 'Karnevalsfeier in Grundschulen', 'Kinderkarneval im Vereinsheim', 'Kostümfeste & Faschingsfeiern', 'Karnevalssitzungen'],
+  },
+  {
+    icon: '🎭',
+    title: 'Karnevalssitzungen & Vereinsfeiern',
+    desc: 'Für die klassische Karnevalssitzung biete ich eine 20–45-minütige Zaubershow, die sich perfekt ins Programm einfügt. Mit einer Mischung aus Bühnenmagie, Comedy und karnevalistischem Humor begeistere ich Jecken jeden Alters.',
+    details: [
+      'Showdauer: 20–45 Minuten',
+      'Format: Bühnenprogramm',
+      'Publikum: Gemischtes Publikum (Familien & Erwachsene)',
+    ],
+    perfektFuer: ['Programmpunkt bei Kindersitzungen', 'Einlage bei Karnevalsveranstaltungen', 'Höhepunkt bei Vereinskarneval', 'Entertainment auf Karnevalsgalas', 'Pausenunterhaltung zwischen Auftritten'],
+  },
+];
+
+const besonderheiten = [
+  { icon: '🎭', title: 'Karnevalsgerecht & authentisch', text: 'Ich komme nicht in Alltagskleidung – sondern im echten Karnevalskostüm! Als Clown Zauberer vereint verkörpere ich perfekt den Geist des Karnevals, mit Referenzen zu Karnevalstraditionen und lokalem Brauchtum.' },
+  { icon: '🎉', title: 'Interaktiv & ausgelassen', text: 'Karneval bedeutet Mitmachen – und das gilt auch für meine Show! Ob Kinder auf der Bühne, Erwachsene als Assistenten oder spontane Gags mit dem Publikum: Jeder wird Teil des närrischen Treibens!' },
+  { icon: '⚡', title: 'Flexibel & unkompliziert', text: 'Karnevalsveranstaltungen haben oft enge Zeitpläne. Meine Show fügt sich flexibel ein: Ob 20 Minuten kurz und knackig oder 45 Minuten als Hauptprogramm – ich brauche nur 2×2 Meter Platz und keine aufwendige Technik!' },
+];
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Karneval Zauberer in NRW – Clown Zauberer LIAR",
+  "description": "Jecke Karnevals-Zaubershow mit Clown Zauberer LIAR in NRW – Bühnen- und Mitmachprogramm für Kinderkarneval, Karnevalssitzungen und Vereinsfeiern, im echten Karnevalskostüm, 20 bis 45 Minuten.",
+  "url": "https://liar-entertainer.com/clown/karneval/",
+  "serviceType": ["Karneval Zaubershow", "Kinderkarneval", "Karnevalssitzung Unterhaltung"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "State", "name": "Nordrhein-Westfalen" }
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'Für welche Karnevalsveranstaltungen ist die Zaubershow geeignet?', acceptedAnswer: { '@type': 'Answer', text: 'Die Karnevals-Zaubershow von Clown Zauberer LIAR passt zu Kinderkarneval in Kita und Schule, Karnevalssitzungen, Vereinsfeiern, Kostümfesten und Karnevalsgalas in NRW – als Bühnen- und Mitmachprogramm für Kinder wie für gemischtes Publikum.' } },
+    { '@type': 'Question', name: 'Wie lange dauert die Karnevals-Zaubershow?', acceptedAnswer: { '@type': 'Answer', text: 'Die Show dauert flexibel zwischen 20 und 45 Minuten und fügt sich passgenau in enge Karnevals-Zeitpläne ein – ob als kurzer Programmpunkt bei einer Karnevalssitzung oder als Hauptprogramm beim Kinderkarneval.' } },
+    { '@type': 'Question', name: 'Ab welchem Alter ist die Kinderkarneval-Show geeignet?', acceptedAnswer: { '@type': 'Answer', text: 'Die Kinderkarneval-Zaubershow ist für Kinder ab 4 Jahren geeignet und begeistert Gruppen von rund 20 bis 150 Kindern. Bei Karnevalssitzungen unterhält sie auch gemischtes Publikum aus Familien und Erwachsenen.' } },
+    { '@type': 'Question', name: 'In welchen Städten ist der Karneval-Zauberer buchbar?', acceptedAnswer: { '@type': 'Answer', text: 'Clown Zauberer LIAR ist zu Karneval in ganz NRW unterwegs, u. a. in Köln, Düsseldorf, Essen, Dortmund, Oberhausen, Gelsenkirchen und Gladbeck. Für besondere Karnevalsveranstaltungen auch bundesweit und international buchbar.' } },
+  ],
+};
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!",
+  "description": "Clown Zauberer LIAR mit jecker Karnevals-Zaubershow und Comedy in NRW – für Kinderkarneval, Karnevalssitzungen und Vereinsfeiern.",
+  "thumbnailUrl": "https://img.youtube.com/vi/Cop0SqRIX4Y/maxresdefault.jpg",
+  "uploadDate": "2018-02-04",
+  "duration": "PT2M30S",
+  "contentUrl": "https://www.youtube.com/watch?v=Cop0SqRIX4Y",
+  "embedUrl": "https://www.youtube.com/embed/Cop0SqRIX4Y",
+  "publisher": { "@type": "Organization", "name": "Clown Zauberer LIAR", "url": "https://liar-entertainer.com" }
+};
+
+const structuredData = [serviceSchema, faqSchema, videoSchema];
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Karneval Zauberer NRW, Karnevalshow buchen, Kinderkarneval Entertainer, Karnevalssitzung Zauberer, Karneval Clown"
+  canonical="https://liar-entertainer.com/clown/karneval/"
+  structuredData={structuredData}
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/clown/clownshow/' }, { name: 'Karneval', url: '/clown/karneval/' }]}
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown Zauberer LIAR</a> »
+        <a href="/clown/clownshow/" class="hover:text-[#d7393e]">Clown</a> »
+        <span>Karneval</span>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Karneval</h1>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={karnevalHero}
+      alt="Karneval Zauberer NRW – Jecke Zaubershow für die fünfte Jahreszeit"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 51% 39%"
+      widths={[400, 800, 1200, 1600]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 600px;">
+      <div class="text-center px-6">
+        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+          🎊 Karneval Zauberer in NRW –<br />Jecke Zaubershow für die fünfte Jahreszeit!
+        </h2>
+        <p class="text-white/90 text-lg font-medium">Alaaf &amp; Helau! Magie trifft Karnevalsfreude</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <p class="hero-subtitle text-[#374151] leading-relaxed mb-4">
+            Eine Karnevals-Zaubershow mit Clown Zauberer LIAR ist ein jeckes Bühnen- und Mitmachprogramm für Kinderkarneval, Karnevalssitzungen und Vereinsfeiern in NRW – im echten Karnevalskostüm, 20 bis 45 Minuten lang, für Kinder ab 4 Jahren und gemischtes Publikum, buchbar im ganzen Rheinland und Ruhrgebiet. Seit 15 Jahren bringe ich Magie und Comedy in die fünfte Jahreszeit.
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Meine Karnevals-Zaubershow kombiniert verblüffende Illusionen mit jeckem Humor und Clownerie – perfekt auf die närrische Zeit abgestimmt. Alle Details zu meiner regulären <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a> finden Sie auf der entsprechenden Seite. Ob für Kinderkarnevalsfeiern in Kitas und Schulen, Vereinssitzungen oder Straßenkarneval: Ich sorge für staunende Gesichter und ausgelassene Stimmung!
+          </p>
+          <div class="bg-yellow-50 border-l-4 border-yellow-400 rounded-r-xl p-4">
+            <p class="text-[#374151] font-semibold">⚠️ TIPP: Buchen Sie früh!</p>
+            <p class="text-[#374151] text-sm mt-1">Die Karnevalszeit (vor allem die „heißen Tage" von Weiberfastnacht bis Rosenmontag) ist sehr gefragt. Sichern Sie sich Ihren Wunschtermin idealerweise schon im Herbst!</p>
+          </div>
+        </div>
+        <div>
+          <Image
+            src={zaubershowKarnevalBuehne}
+            alt="Zaubershow auf einer Bühne für Karneval in Gladbeck"
+            class="w-full rounded-xl shadow-sm img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+            loading="eager"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <GoogleReviews />
+
+  <!-- Warum Zauberei & Karneval -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">🎪 Warum eine Zaubershow perfekt zu Karneval passt</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        {besonderheiten.map((b, i) => (
+          <div class={`bg-white rounded-xl p-6 shadow-sm text-center border-t-4 card-hover ${['border-[#d7393e]','border-[#3b55d5]','border-[#ffb546]'][i % 3]}`}>
+            <p class="text-3xl mb-3">{b.icon}</p>
+            <h3 class="font-bold text-[#1f2025] mb-3">{b.title}</h3>
+            <p class="text-[#374151] text-sm leading-relaxed">{b.text}</p>
+          </div>
+        ))}
+      </div>
+      <div class="mt-8 bg-white rounded-xl p-6 shadow-sm text-center border-t-4 border-[#d7393e]">
+        <p class="text-[#374151] leading-relaxed max-w-3xl mx-auto">
+          Karneval ist die Zeit der Verwandlung, des Staunens und der ausgelassenen Freude – und genau das ist auch Zauberkunst! Meine Karnevals-<a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a> bringt diese beiden Welten zusammen. Mit karnevalsgerechtem Kostüm, jeckem Humor und Tricks, die die närrische Stimmung aufgreifen, wird jede Karnevalsveranstaltung zum Highlight.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Anlässe -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">🎭 Karnevals-Zaubershow für jeden Anlass</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        {anlaesse.map(a => (
+          <div class="bg-gray-50 rounded-xl p-8 shadow-sm card-hover reveal">
+            <p class="text-3xl mb-3">{a.icon}</p>
+            <h3 class="font-bold text-[#1f2025] text-xl mb-3">{a.title}</h3>
+            <p class="text-[#374151] text-sm leading-relaxed mb-4">{a.desc}</p>
+            <div class="space-y-1 mb-4">
+              {a.details.map(d => (
+                <p class="text-[#374151] text-xs bg-white rounded px-3 py-1 inline-block mr-1 mb-1">{d}</p>
+              ))}
+            </div>
+            <p class="font-semibold text-[#1f2025] text-sm mb-2">Ideal als:</p>
+            <ul class="space-y-1">
+              {a.perfektFuer.map(p => (
+                <li class="text-[#374151] text-xs flex items-start gap-1"><span class="text-[#d7393e]">✓</span> {p}</li>
+              ))}
+            </ul>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-2xl mb-6">📍 Einsatzgebiet Karneval</h2>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">
+            Für Karneval bin ich in folgenden Städten NRWs unterwegs:
+          </p>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">
+            Oberhausen • Gelsenkirchen • Essen • Duisburg • Dorsten • Herten • Herne • Marl • Gladbeck • Mülheim • Düsseldorf • Dortmund • Lünen • Hagen • Moers • Krefeld • Reken • Ahaus • Münster • Köln
+          </p>
+          <p class="text-[#374151] text-sm mb-6">
+            🌍 Für besondere Karnevalsveranstaltungen bin ich auch außerhalb NRWs buchbar – in ganz Deutschland und sogar international für Karnevalsfeiern!
+          </p>
+          <div class="space-y-2 text-[#374151] text-sm">
+            <p>📱 Telefon & WhatsApp: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
+            <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+            <p>📍 Standort: Beethovenstr. 15, 45966 Gladbeck</p>
+          </div>
+        </div>
+        <div>
+          <Image
+            src={clownZaubererGladbeck}
+            alt="Wohnort Clown Zauberer für Karneval"
+            class="w-full rounded-xl shadow-sm img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(min-width: 768px) 50vw, 100vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-white py-12 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="font-bold text-[#1f2025] text-xl mb-4">Jetzt Karneval-Zauberer buchen!</h2>
+      <p class="text-[#374151] mb-4">Ob Kinderkarneval, Vereinssitzung oder Karnevalsfeier – machen Sie Ihre Veranstaltung mit einer jecken Zaubershow unvergesslich!</p>
+      <p class="text-[#374151] mb-6 text-sm leading-relaxed max-w-xl mx-auto">
+        Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben. Ich helfe Ihnen gerne weiter.
+      </p>
+      <p class="text-[#d7393e] font-semibold text-sm mb-6">Karnevalstermine sind schnell ausgebucht – idealerweise schon im Herbst anfragen!</p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

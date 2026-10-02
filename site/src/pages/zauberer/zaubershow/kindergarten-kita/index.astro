@@ -1,0 +1,331 @@
+---
+import BaseLayout from '../../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../../components/HeroSlider.astro';
+import HeroStage from '../../../../components/HeroStage.astro';
+import CountUp from '../../../../components/CountUp.astro';
+import GoogleReviews from '../../../../components/GoogleReviews.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-3.jpg';
+import kitaEssenImg from '../../../../assets/images/clown/kinderzauberer-kindergarten-essen.jpg';
+import geburtstagKitaImg from '../../../../assets/images/zauberer/geburtstag-kita.jpg';
+import galerieImg2 from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-2.jpg';
+import kindergartenGelsenkirchenImg from '../../../../assets/images/zauberer/kindergarten-gelsenkirchen.jpg';
+import karteImg from '../../../../assets/images/kinderzauberer/clown-zauberer-gladbeck.jpg';
+
+const seoTitle = 'Zaubershow Kindergarten & Kita NRW | LIAR';
+const seoDescription = 'Zaubershow für Kindergarten & Kita in NRW ✓ Kinderzauberer LIAR ✓ 370+ Top-Bewertungen ✓ Pädagogisch wertvoll ✓ Jetzt buchen!';
+
+const faqItems = [
+  { q: 'Ab welchem Alter ist die Zaubershow für Kita-Kinder geeignet?', a: 'Die Kita-Zaubershow ist speziell auf Kindergartenkinder ab etwa 3 bis 4 Jahren abgestimmt: kurze, klare Zaubereffekte, viel Interaktion und liebevoller Humor ohne Erschrecken.' },
+  { q: 'Wie lange dauert die Zaubershow im Kindergarten?', a: 'Für Kita-Kinder ist eine Showdauer von etwa 30 bis 40 Minuten ideal, damit die Aufmerksamkeitsspanne der Kleinen nicht überfordert wird.' },
+  { q: 'Wie viel Platz braucht LIAR in der Kita?', a: 'Es reicht ein freier Bereich von etwa 2×2 Metern, zum Beispiel im Gruppenraum, Bewegungsraum oder Turnraum. Aufwendige Technik ist nicht nötig.' },
+  { q: 'Ist die Zaubershow pädagogisch wertvoll?', a: 'Ja. Die Show fördert Staunen, Konzentration und gemeinsames Erleben, bezieht die Kinder aktiv ein und stärkt spielerisch das Miteinander in der Gruppe.' },
+  { q: 'Für welche Anlässe in der Kita eignet sich die Zaubershow?', a: 'Für Sommerfest, Abschlussfeier der Vorschulkinder, Laternenfest, Weihnachtsfeier oder einfach als besondere Überraschung im Kita-Alltag.' },
+];
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map((i) => ({ '@type': 'Question', name: i.q, acceptedAnswer: { '@type': 'Answer', text: i.a } })),
+};
+
+const anlaesse = [
+  { icon: '☀️', title: 'Sommerfeste', text: 'Der Klassiker! Beim Sommerfest ist die Zaubershow oft DAS Highlight. Ob auf der Bühne oder als Walk-Act – ich sorge für strahlende Kinderaugen und zufriedene Eltern.' },
+  { icon: '🎓', title: 'Abschiedsfeiern für Vorschulkinder', text: 'Die Vorschulkinder verlassen den Kindergarten – ein emotionaler Moment! Meine Show macht diesen Übergang zu einem fröhlichen, unvergesslichen Erlebnis.' },
+  { icon: '🎭', title: 'Projektwochen', text: 'Projektwochen zu Themen wie „Zirkus\", „Magie\", „Fantasie\" oder „Berufe\"? Meine Show passt perfekt!' },
+  { icon: '🎄', title: 'Weihnachtsfeiern & Winterfeste', text: 'Auch in der kalten Jahreszeit sorge ich für warme Kinderherzen. Die Show lässt sich wunderbar in Weihnachtsfeiern integrieren.' },
+  { icon: '🎈', title: 'Faschings-/Karnevalsfeiern', text: 'Wenn es bunt und lustig wird, bin ich in meinem Element! Die Clown-Elemente meiner Show passen perfekt zur Karnevalszeit.' },
+  { icon: '🎊', title: 'Jubiläen & besondere Anlässe', text: '10 Jahre Kindergarten? Neues Gebäude? Tag der offenen Tür? Für besondere Anlässe biete ich besondere Shows!' },
+];
+
+const paedagogisch = [
+  { icon: '✨', title: 'Fantasie & Kreativität', text: 'Zaubergeschichten regen die Vorstellungskraft an' },
+  { icon: '💪', title: 'Selbstbewusstsein', text: 'Als Zauberassistent auf der „Bühne\" zu stehen stärkt das Selbstwertgefühl' },
+  { icon: '👂', title: 'Konzentration', text: '30–45 Min. aufmerksam dabei bleiben – eine beachtliche Leistung für Kindergartenkinder!' },
+  { icon: '🗣️', title: 'Sprachförderung', text: 'Zaubersprüche sprechen, Dinge benennen, Fragen beantworten' },
+  { icon: '🤝', title: 'Soziale Kompetenz', text: 'Zusammen helfen, abwechseln, gemeinsam Erfolge feiern' },
+  { icon: '🎭', title: 'Emotionale Entwicklung', text: 'Freude, Überraschung, Staunen – ein emotionales Feuerwerk!' },
+];
+const _pageGallery = [
+  { src: kitaEssenImg, alt: 'Lachende Kinder bei Kinderzauberer Kindergarten Essen' },
+  { src: geburtstagKitaImg, alt: 'Kinder lachen im Kindergarten bei LIARs Zaubershow' },
+  { src: galerieImg2, alt: 'Zaubershow für Kindergarten' },
+  { src: kindergartenGelsenkirchenImg, alt: 'Kinderzauberer Kindergarten Gelsenkirchen' },
+];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  structuredData={[faqSchema]}
+  keywords="Zaubershow Kindergarten, Zauberer Kita, Zaubershow Kita NRW, Kindergarten Programm, Sommerfest Kindergarten"
+  canonical="https://liar-entertainer.com/zauberer/zaubershow/kindergarten-kita/"
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
+        <a href="/zauberer/zaubershow/" class="hover:text-[#d7393e]">Zaubershow</a> »
+        <span>Kindergarten – Kita</span>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Zaubershow für Kindergarten &amp; Kita in NRW</h1>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImg}
+      alt="Zaubershow für Kindergarten & Kita NRW"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 50% 30%"
+      loading="eager"
+      fetchpriority="high"
+      widths={[600, 900, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 600px;">
+      <div class="text-center px-6">
+        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+          🎪 Wo Lernen auf Magie trifft –<br />zauberhafte Momente für Ihre Kita!
+        </h2>
+        <p class="text-white/90 text-lg font-medium">Pädagogisch wertvoll. Altersgerecht. Unvergesslich.</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Sie planen ein Sommerfest, eine Abschiedsfeier für die Vorschulkinder oder suchen ein besonderes Highlight für Ihre Kita? Als erfahrener Kinderzauberer bringe ich seit über 15 Jahren Magie in Kindergärten und Kitas in ganz NRW. Meine Shows sind nicht nur unterhaltsam – sie sind pädagogisch wertvoll, altersgerecht und perfekt auf die Bedürfnisse von Bildungseinrichtungen abgestimmt! ✨
+          </p>
+          <p class="text-[#374151] leading-relaxed mb-4">
+            Das Beste? Für Sie als Erzieher bedeutet es minimalen Aufwand bei maximalem Erfolg. Ich bringe alles mit, benötige keine Vorbereitung und nur 2×2 Meter Platz. Ich biete auch spezielle Shows für <a href="/zauberer/zaubershow/schule/" class="text-[#d7393e] hover:underline">Grundschulen</a> sowie auf <a href="/zauberer/zaubershow/strassen-sommer-fest/" class="text-[#d7393e] hover:underline">Straßen- und Sommerfesten</a> an.
+          </p>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">⭐ Das macht meine Show kindergartengerecht:</h3>
+          <ul class="space-y-3 text-sm">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🎯</span> <span class="text-[#374151]"><strong>Altersgerecht für 3–6 Jahre:</strong> Einfache Tricks, kurze Geschichten, viel Bewegung</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">👥</span> <span class="text-[#374151]"><strong>Große Gruppen kein Problem:</strong> Erfahrung mit 20–100 Kindern</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">📚</span> <span class="text-[#374151]"><strong>Pädagogischer Mehrwert:</strong> Fördert Fantasie, Kreativität und Selbstbewusstsein</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🤝</span> <span class="text-[#374151]"><strong>Inklusion:</strong> Alle Kinder werden eingebunden – schüchterne wie wilde</span></li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">⚡</span> <span class="text-[#374151]"><strong>Unkompliziert:</strong> Minimaler Vorbereitungsaufwand, nur 2×2 Meter Platz</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <GoogleReviews />
+
+  <!-- Anlässe -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">🎉 Perfekt für diese Anlässe in Kindergarten & Kita</h2>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {anlaesse.map((a, i) => (
+          <div class={`bg-white rounded-xl p-6 shadow-sm border-t-4 card-hover ${['border-[#d7393e]','border-[#3b55d5]','border-[#ffb546]'][i % 3]}`}>
+            <p class="text-3xl mb-3">{a.icon}</p>
+            <h3 class="font-bold text-[#1f2025] mb-2">{a.title}</h3>
+            <p class="text-[#374151] text-sm leading-relaxed">{a.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Section (pastel redesign) -->
+  <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-10 text-center">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pädagogischer Mehrwert -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">🎯 Pädagogischer Mehrwert</h2>
+      <p class="text-center text-[#374151] mb-10">Was Kinder bei der Zaubershow lernen:</p>
+      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+        {paedagogisch.map(p => (
+          <div class="bg-gray-50 rounded-xl p-5 text-center">
+            <p class="text-3xl mb-2">{p.icon}</p>
+            <p class="font-bold text-[#1f2025] text-sm mb-1">{p.title}</p>
+            <p class="text-[#374151] text-xs">{p.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery: Eindrücke -->
+  <section class="bg-white py-12">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl text-center mb-8">📸 Eindrücke</h2>
+      <HeroSlider slides={_pageGallery} class="reveal" />
+    </div>
+  </section>
+
+  <!-- Praktische Details -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">📋 Praktische Details für Kitas</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">📐 Platzbedarf & Räume</h3>
+          <p class="text-[#374151] text-sm mb-3">Minimaler Platzbedarf: <strong>2×2 Meter</strong> (ideal 3×3 Meter)</p>
+          <p class="font-semibold text-[#1f2025] text-sm mb-2">Geeignete Räume:</p>
+          <ul class="text-[#374151] text-sm space-y-1">
+            <li>✓ Turnraum / Bewegungsraum (optimal!)</li>
+            <li>✓ Mehrzweckraum</li>
+            <li>✓ Großer Gruppenraum</li>
+            <li>✓ Außenbereich (überdacht)</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">👶 Gruppengrößen</h3>
+          <ul class="text-[#374151] text-sm space-y-2">
+            <li><strong>Ideal: 20–60 Kinder</strong><br />Perfekte Größe für intensive Interaktion</li>
+            <li><strong>Möglich: 60–100 Kinder</strong><br />Show bleibt effektiv</li>
+            <li><strong>Auch möglich: 100+ Kinder</strong><br />Bitte anfragen</li>
+            <li><strong>Kleine Gruppen: 10–20 Kinder</strong><br />Auch buchbar!</li>
+          </ul>
+        </div>
+        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">⏱️ Showdauer</h3>
+          <ul class="text-[#374151] text-sm space-y-2">
+            <li><strong>Kurze Show: 25–30 Min.</strong><br />Für jüngere Kinder (3–4 Jahre)</li>
+            <li><strong>Standard-Show: 35–40 Min.</strong><br />Ideal für gemischte Altersgruppen</li>
+            <li><strong>Lange Show: 45 Min.</strong><br />Für ältere Kinder oder besondere Anlässe</li>
+          </ul>
+          <p class="text-[#374151] text-xs mt-3 italic">Technik: Fast keine! Kein Strom, kein Mikrofon (normal), keine Bühne nötig.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion (pastel redesign) -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-8">Zaubershow für Kindergärten in ganz NRW</h2>
+      <p class="text-[#374151] text-center mb-8">Als erfahrener Kinderzauberer bin ich in ganz Nordrhein-Westfalen für Kindergärten und Kitas buchbar.</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-3">Ruhrgebiet</h3>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">Oberhausen, Essen, Duisburg, Mülheim, Gelsenkirchen, Bochum, Dortmund, Bottrop, Gladbeck, Herten, Herne, Marl, Recklinghausen, Castrop-Rauxel, Waltrop</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Rheinland</h3>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">Düsseldorf, Krefeld, Moers, Neuss, Köln, Leverkusen, Mönchengladbach</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Münsterland</h3>
+          <p class="text-[#374151] text-sm leading-relaxed mb-4">Münster, Haltern am See, Dorsten, Coesfeld, Dülmen</p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Weitere Städte</h3>
+          <p class="text-[#374151] text-sm leading-relaxed">Ahaus, Reken, Lünen, Hagen, Witten und viele mehr</p>
+          <p class="text-[#374151] text-sm mt-2">🌍 Auf Anfrage auch deutschlandweit sowie in Belgien, Niederlande, Frankreich, Österreich und der Schweiz buchbar!</p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Wohnort Clown Zauberer LIAR"
+            class="rounded-xl shadow-sm w-full max-w-md img-hover-zoom"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[#1f2025] py-14 text-white text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎪 Jetzt anfragen für Ihren Kindergarten!</h2>
+      <p class="text-gray-300 mb-6">Ob Sommerfest, Abschiedsfeier oder Projektwoche – lassen Sie uns gemeinsam ein unvergessliches Erlebnis für Ihre Kinder schaffen! Ich trete auch bei <a href="/zauberer/zaubershow/schule/" class="text-white hover:underline font-semibold">Schulveranstaltungen</a> und <a href="/zauberer/zaubershow/strassen-sommer-fest/" class="text-white hover:underline font-semibold">Straßen- und Sommerfesten</a> auf.</p>
+      <div class="space-y-2 text-gray-300 mb-8">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
+        <p>⚡ Schnelle Antwort: Meist innerhalb 24 Stunden</p>
+        <p class="text-yellow-300">💡 Tipp: Sommerfest-Termine sind schnell ausgebucht – frühzeitig anfragen lohnt sich!</p>
+      </div>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+        Jetzt unverbindlich anfragen
+      </a>
+    </div>
+  </section>
+
+
+  <!-- FAQ (sichtbar + FAQPage-Schema) -->
+  <section class="py-14 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center text-2xl font-extrabold text-[#1f2025] mb-8">Häufig gestellte Fragen</h2>
+      <div class="space-y-4">
+        {faqItems.map((i) => (
+          <details class="bg-[#f9fafb] rounded-xl p-5 group">
+            <summary class="font-bold cursor-pointer text-[#1f2025] flex justify-between items-center gap-4">
+              <span>{i.q}</span>
+              <span class="text-[#d7393e] transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+            </summary>
+            <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">{i.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

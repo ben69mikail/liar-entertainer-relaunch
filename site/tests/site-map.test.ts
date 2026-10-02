@@ -1,5 +1,8 @@
 import { describe, it, expect } from 'vitest';
-import { zoneFor, alternatesFor } from '../src/lib/site-map';
+import { zoneFor, alternatesFor as alternatesForLocales, LOCALES } from '../src/lib/site-map';
+
+// Table logic is tested with all locales; publishing is guarded by tests/dist/hreflang.test.ts.
+const alternatesFor = (path: string) => alternatesForLocales(path, LOCALES);
 
 describe('zoneFor', () => {
   it('puts children pages in the kids zone', () => {
@@ -56,6 +59,10 @@ describe('alternatesFor (hreflang)', () => {
     expect(alternatesFor('/kinderzauberer/kinderzauberer-in-gladbeck/')).toEqual([]);
     expect(alternatesFor('/blog/some-post/')).toEqual([]);
     expect(alternatesFor('/preise/')).toEqual([]);
+  });
+
+  it('emits nothing while only German is published', () => {
+    expect(alternatesForLocales('/zauberer/', ['de'])).toEqual([]);
   });
 
   it('does not invent translations by prefixing German slugs', () => {

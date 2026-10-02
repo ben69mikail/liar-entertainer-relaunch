@@ -1,0 +1,405 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroSlider from '../../../components/HeroSlider.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import CountUp from '../../../components/CountUp.astro';
+import karteImg from '../../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import { Image } from 'astro:assets';
+import _heroImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
+import _introImgAsset from '../../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import _showImgAsset from '../../../assets/images/zauberer/zaubershow-mit-clown-zauberer.jpg';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+
+const seoTitle = "Kindergeburtstag Oberhausen | Zaubershow ab 150€";
+const seoDescription = "Kindergeburtstag in Oberhausen mit Clown LIAR ✓ Zaubershow ab 150€ ✓ Ballonmodellage ✓ 370+ Top-Bewertungen ✓ Auch in Gladbeck & Bottrop ✓ Buchen!";
+const heroImg = _heroImgAsset.src;
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Kindergeburtstag mit Clown Zauberer in Oberhausen',
+  description: seoDescription,
+  provider: { "@id": "https://liar-entertainer.com/#business" },
+  areaServed: { '@type': 'City', name: 'Oberhausen' },
+  offers: { '@type': 'Offer', price: '150', priceCurrency: 'EUR', description: '40 Minuten Zaubershow' },
+};
+
+const faqItems = [
+  {
+    question: 'Was braucht Clown LIAR für einen Auftritt?',
+    answer: 'Ohne Vorbereitungszeit und mit einer Fläche von 2\u00d72 Meter kann ich eine Show vorführen: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Gartenanlage, große und kleine Bühne, Kindergarten, Turnhalle\u2026 Ob drinnen oder draußen, das Programm lässt sich spontan und flexibel ausführen!',
+  },
+  {
+    question: 'Wieviel Platz braucht man für das Programm?',
+    answer: 'LIAR ist ziemlich pflegeleicht: für die Show ist es wichtig, dass die Kinder gemütlich und ungestört sitzen können!!! Bei der Ballonmodellage ist nichts weiteres nötig. Bei GLITZER TATTOOS wären schon 2 Stühle und einen Tisch wichtig!',
+  },
+  {
+    question: 'Wie viele Kinder sollten überhaupt eingeladen werden?',
+    answer: 'Natürlich soll das Kind seine Freunde einladen. Allerdings sollte man eine feste Zahl als Limit vorgeben. Pädagogen empfehlen, maximal genauso viele Gäste einzuladen, wie das Kind alt wird. Wer kommen darf, soll das Kind selbst bestimmen. Natürlich sind auch dabei die Aufsichtspersonen (mindestens 2) nicht zu vergessen.',
+  },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.question,
+    "acceptedAnswer": {
+      "@type": "Answer",
+      "text": item.answer
+    }
+  }))
+};
+
+const structuredData = [serviceSchema, faqSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kindergeburtstag Oberhausen, Geburtstag Oberhausen, Clown Kindergeburtstag Oberhausen, Zauberer Geburtstag Oberhausen, Kinderparty Oberhausen, NRW"
+  canonical="https://liar-entertainer.com/kindergeburtstag/geburtstag-in-oberhausen/"
+  ogImage={heroImg}
+  structuredData={structuredData}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Kindergeburtstag', url: '/kindergeburtstag/' },
+    { name: 'Geburtstag in Oberhausen', url: '/kindergeburtstag/geburtstag-in-oberhausen/' }
+  ]}
+>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <div class="absolute inset-0 bg-cover bg-center" style={`background-image: url('${heroImg}'); background-position: center 20%;`}></div>
+    <div class="absolute inset-0 bg-black/50"></div>
+    <div class="relative flex flex-col items-center justify-center text-center px-6" style="min-height: 600px;">
+      <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
+        <span>📍</span> Oberhausen
+      </div>
+      <h1 class="text-white font-extrabold text-center leading-tight mb-3" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Kindergeburtstag in Oberhausen feiern – Clown Zauberer LIAR macht's unvergesslich!
+      </h1>
+      <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">
+        Unvergessliche Kindergeburtstage mit Clown Zauberer LIAR – Lachen, Staunen und pure Magie!
+      </p>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Breadcrumb -->
+  <section class="pt-4 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <nav class="text-sm text-[#595959]">
+        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
+        <span class="mx-1">»</span>
+        <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a>
+        <span class="mx-1">»</span>
+        <span>Geburtstag in Oberhausen feiern – Clown Zauberer LIAR macht's unvergesslich!</span>
+      </nav>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Warum einen Clown Zauberer für den Geburtstag in Oberhausen buchen?</h2>
+          <p class="hero-subtitle text-[#374151] text-[17px] leading-relaxed mb-4">Kindergeburtstag in Oberhausen mit Clown Zauberer LIAR aus dem nahen Gladbeck: 40 Minuten Mitmach-Zaubershow ab 150 € Festpreis für bis ca. 12 Kinder ab 4 Jahren – optional mit Ballonfiguren und Glitzer-Tattoos. Nur 2×2 m Platz nötig, ob in Sterkrade, Osterfeld oder der Neuen Mitte. 370+ Google-Bewertungen.</p>
+          <p class="text-[#374151] mb-4 leading-relaxed">Besonders in Oberhausen und Umgebung – ob in Sterkrade, Osterfeld oder der Neuen Mitte – bin ich regelmäßig unterwegs und kenne die örtlichen Gegebenheiten bestens. Viele Familien aus Oberhausen haben bereits die Erfahrung gemacht: Mit einem professionellen Entertainer wird der Kindergeburtstag zum Kinderspiel – für Sie als Eltern entspannt, für die Kinder unvergesslich!</p>
+        </div>
+        <div class="flex justify-center">
+          <figure class="m-0">
+            <Image
+              src={_introImgAsset}
+              alt="Kindergeburtstag in Oberhausen"
+              class="rounded-full object-cover object-[20%] portrait-zoom"
+              style="width: 320px; height: 320px;"
+              loading="lazy"
+              width={640}
+              height={853}
+            />
+            <figcaption class="px-3 py-1.5 text-sm text-[#374151] bg-white border-t border-gray-100">Clown Zauberer LIAR beim Kindergeburtstag in Oberhausen</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <section class="bg-[#eff4ff] py-14 border-y border-[#c5d3f7]">
+    <div class="max-w-5xl mx-auto px-4">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-4 text-center">OBERHAUSEN</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-10 text-center">Warum einen Clown Zauberer für den Geburtstag in Oberhausen buchen?</h2>
+      <p class="text-[#1f2025] leading-relaxed mb-4">Die Organisation eines Kindergeburtstags kann herausfordernd sein: Was sollen die Kinder spielen? Wie hält man eine ganze Gruppe bei Laune? Wie sorgt man dafür, dass sich jedes Kind einbezogen fühlt? Genau hier komme ich ins Spiel! Als professioneller Clown Zauberer nehme ich Ihnen den Stress ab und sorge dafür, dass die kleinen Gäste durchgehend beschäftigt, begeistert und glücklich sind.</p>
+      <p class="text-[#1f2025] leading-relaxed mb-4">Besonders in Oberhausen und Umgebung – ob in Sterkrade, Osterfeld oder der Neuen Mitte – bin ich regelmäßig unterwegs und kenne die örtlichen Gegebenheiten bestens. Viele Familien aus Oberhausen haben bereits die Erfahrung gemacht: Mit einem professionellen Entertainer wird der Kindergeburtstag zum Kinderspiel – für Sie als Eltern entspannt, für die Kinder unvergesslich!</p>
+    </div>
+  </section>
+
+  <!-- Die Preise -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-3xl sm:text-4xl text-center mb-10">Was kostet ein Zauberer für den Kindergeburtstag?</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎩 Zaubershow</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">150 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Minuten voller Zauber, Lachen und Staunen</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Bis ca. 12 Kinder – Mindestalter: 4 Jahre</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Inkl. Material</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Das Geburtstagskind steht immer im Mittelpunkt</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎈 Luftballonmodellage</h3>
+          <p class="text-[#3b55d5] font-bold text-2xl mb-4">+ 20 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Für jedes Kind 1 Ballon</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Ca. 15 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Tolle Erinnerung zum Mitnehmen</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Große Auswahl an Figuren: Hund, Schwert, Blume u.v.m.</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Perfekte Ergänzung zur Zaubershow</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
+        </div>
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Glitzer-Tattoos</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">+ 40 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Für jedes Kind 1 Tattoo</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Ca. 30 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hautverträglich &amp; langanhaltend</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Viele Motive: Einhörner, Schmetterlinge, Sterne u.v.m.</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hält mehrere Tage auf der Haut</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Begeisterte Familien aus Oberhausen und dem gesamten Ruhrgebiet -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Begeisterte Familien aus Oberhausen und dem gesamten Ruhrgebiet</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">Zahlreiche Familien aus Oberhausen und Umgebung haben bereits die Erfahrung gemacht, wie eine professionelle Unterhaltung den Kindergeburtstag auf ein völlig neues Level hebt. Eltern berichten von strahlenden Kinderaugen, entspannten Stunden und Geburtstagsfeiern, die noch Wochen später Gesprächsthema sind. Die Kinder erzählen in Kindergarten und Schule begeistert von ihrem magischen Erlebnis!Als französischer Clown Zauberer mit langjähriger Erfahrung im Ruhrgebiet bringe ich nicht nur Entertainment, sondern auch eine besondere internationale Note mit. Meine Show ist lebhaft, warmherzig und immer kindgerecht – perfekt für unvergessliche Kindergeburtstage in Oberhausen!</p>
+    </div>
+  </section>
+
+
+  <!-- Stats Banner -->
+  <section class="bg-[#fdf2f2] py-10 text-center border-y border-[#f0c4c4]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white border border-[#f0c4c4] shadow-sm rounded-xl p-6 stat-card-pulse reveal">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Was macht meine Show in Oberhausen so besonders? -->
+  <section class="bg-white py-14">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-6">Was macht meine Show in Oberhausen so besonders?</h2>
+      <p class="text-[#374151] mb-4 leading-relaxed">Meine Kindergeburtstags-Show ist keine gewöhnliche Vorstellung, bei der Kinder nur passiv zuschauen. Nein! Bei mir werden die kleinen Gäste selbst zu Akteuren: Sie dürfen mitzaubern, mitlachen und aktiv Teil der magischen Vorstellung werden. Schon an der Haustür beginnt das Abenteuer – mit witzigen Gags, überraschenden Momenten und einer Energie, die sofort alle mitreißt.</p>
+      <p class="text-[#374151] mb-4 leading-relaxed">Der Clown in mir findet blitzschnell den richtigen Draht zu den Kindern, während der Zauberer sie mit verblüffenden Tricks zum Staunen bringt. Diese perfekte Balance zwischen Humor und Magie sorgt dafür, dass die Kinder permanent zwischen herzhaftem Lachen und offenem Mund hin und her pendeln. Genau diese Mischung macht meine Show so einzigartig und beliebt bei Familien im gesamten Ruhrgebiet.</p>
+    </div>
+  </section>
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zur Kindergeburtstagsfeier in Oberhausen</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Hier sind ein paar Antworten
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Was braucht Clown LIAR für einen Auftritt?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Ohne Vorbereitungszeit und mit einer Fläche von 2×2 Meter kann ich eine Show vorführen: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Gartenanlage, große und kleine Bühne, Kindergarten, Turnhalle… Ob drinnen oder draußen, das Programm lässt sich spontan und flexibel ausführen!
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wieviel Platz braucht man für das Programm?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            LIAR ist ziemlich pflegeleicht: für die Show ist es wichtig, dass die Kinder gemütlich und ungestört sitzen können!!! Bei der Ballonmodellage ist nichts weiteres nötig. Bei GLITZER TATTOOS wären schon 2 Stühle und einen Tisch wichtig!
+          </div>
+        </div>
+        <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+          <button
+            class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+            aria-expanded="false"
+          >
+            <span>Wie viele Kinder sollten überhaupt eingeladen werden?</span>
+            <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+            </svg>
+          </button>
+          <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+            Natürlich soll das Kind seine Freunde einladen. Allerdings sollte man eine feste Zahl als Limit vorgeben. Pädagogen empfehlen, maximal genauso viele Gäste einzuladen, wie das Kind alt wird. Wer kommen darf, soll das Kind selbst bestimmen. Natürlich sind auch dabei die Aufsichtspersonen (mindestens 2) nicht zu vergessen.
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Video Sektion -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">Einsatzgebiet</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Als Clown bin auch in folgenden Städten NRWs unterwegs und buchbar:
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/kindergeburtstag/geburtstag-in-dinslaken/" class="text-[#3b55d5] hover:underline">Kindergeburtstag Dinslaken buchen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/" class="text-[#3b55d5] hover:underline">Kindergeburtstag in Gelsenkirchen</a> | Oberhausen | <a href="/kindergeburtstag/geburtstag-in-essen/" class="text-[#3b55d5] hover:underline">Zauberer für den Kindergeburtstag in Essen</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-dorsten/" class="text-[#3b55d5] hover:underline">Dorsten</a> | <a href="/kindergeburtstag/geburtstag-in-herten/" class="text-[#3b55d5] hover:underline">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-bottrop/" class="text-[#3b55d5] hover:underline">Bottrop</a> | <a href="/kindergeburtstag/geburtstag-in-herne/" class="text-[#3b55d5] hover:underline">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-marl/" class="text-[#3b55d5] hover:underline">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-gladbeck/" class="text-[#3b55d5] hover:underline">Gladbeck</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/" class="text-[#3b55d5] hover:underline">Mülheim</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/" class="text-[#3b55d5] hover:underline">Bochum</a>
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed" data-fernstaedte>
+            Überregional – mit etwas längerer Anfahrt – bin ich außerdem in Castrop-Rauxel, Haltern, Xanten, Duisburg, Moers, Waltrop, Datteln, Wesel, Dortmund und Düsseldorf buchbar.
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Jedoch kann man mich auch überregional und international (Frankreich, Belgien, Österreich, Schweiz) buchen!
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Da Oberhausen und <a href="/kindergeburtstag/geburtstag-in-gladbeck/" class="text-[#3b55d5] hover:underline">Gladbeck</a> direkt benachbart sind, fallen besonders geringe Fahrtkosten an.
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Kindergeburtstag Oberhausen"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL: <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        &nbsp;|&nbsp;
+        Email: <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+<!-- Cross-Linking: Weitere Services in Oberhausen -->
+<section class="py-10 bg-[#f9fafb]">
+  <div class="max-w-3xl mx-auto px-4 text-center">
+    <h2 class="text-[#1f2025] font-bold text-xl mb-4">LIAR in Oberhausen buchen</h2>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="/kinderzauberer/kinderzauberer-in-oberhausen/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#3b55d5] hover:underline font-medium text-sm card-hover reveal">🎩 Kinderzauberer in Oberhausen</a>
+      <a href="/clown/clownshow/clown-in-oberhausen/" class="bg-white rounded-lg px-5 py-3 shadow-sm text-[#d7393e] hover:underline font-medium text-sm card-hover reveal">🤡 Clown in Oberhausen</a>
+    </div>
+  </div>
+</section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

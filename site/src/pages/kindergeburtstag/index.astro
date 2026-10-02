@@ -1,0 +1,502 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
+import kinderzaubererImg from '../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import karteImg from '../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
+import GoogleReviews from '../../components/GoogleReviews.astro';
+import HeroStage from '../../components/HeroStage.astro';
+import WaveDivider from '../../components/WaveDivider.astro';
+
+const seoTitle = 'Zauberer Kindergeburtstag NRW | Ab 150€ | Clown LIAR';
+const seoDescription = 'Zauberer für Kindergeburtstag in NRW buchen ✓ Clown Zauberer LIAR ✓ Zaubershow ab 150€ ✓ Ballonmodellage ✓ Glitzer-Tattoos ✓ 370+ Top-Bewertungen ✓ Jetzt buchen!';
+
+const faqItems = [
+  {
+    question: 'Was braucht Kinderzauberer LIAR für einen Auftritt?',
+    answer: 'LIAR ist ziemlich pflegeleicht: für die Show ist es wichtig, dass die Kinder gemütlich und ungestört sitzen können!!! Bei der Ballonmodellage ist nichts weiteres nötig. Bei GLITZER TATTOOS wären 2 Stühle und einen Tisch schon wichtig! So können die Kinder sehen was angeboten wird und sich bestens entscheiden!',
+  },
+  {
+    question: 'Wieviel Platz braucht man für den Auftritt?',
+    answer: 'Ohne Vorbereitungszeit und mit einer Fläche von 2×2 Meter kann ich eine Show vorführen: Wohnzimmer, Kinderzimmer, Partykeller, Terrasse, Gartenanlage, große und kleine Bühne, Bücherei, Kindergarten, Turnhalle… Ob drinnen oder draußen, das Programm lässt sich spontan und flexibel ausführen!',
+  },
+  {
+    question: 'Wie viele Kinder sollten überhaupt eingeladen werden?',
+    answer: 'Natürlich soll das Kind seine Freunde einladen. Allerdings sollte man eine feste Zahl als Limit vorgeben. Pädagogen empfehlen, maximal genauso viele Gäste einzuladen, wie das Kind alt wird. Wer kommen darf, soll das Kind selbst bestimmen. Natürlich sind auch dabei die Aufsichtspersonen (mindestens 2) nicht zu vergessen. Sicherheit geht immer vor!',
+  },
+  {
+    question: 'Kann ich Zaubershow, Ballontiere und Glitzer Tattoos kombinieren?',
+    answer: 'Ja, das ist das beliebteste Paket! Zaubershow (40 Min.) für 150€, plus Ballonmodellage (+20€) und Glitzer Tattoos (+40€). Die Gesamtdauer beträgt dann ca. 90 Minuten – der perfekte Rundum-Kindergeburtstag!',
+  },
+  {
+    question: 'Was muss ich als Elternteil vorbereiten?',
+    answer: 'Fast nichts! Es muss nur dafür gesorgt werden, dass die Kinder gemütlich sitzen können und ein Bereich von ca. 2×2 Metern frei ist. Alles andere wird mitgebracht. Für Glitzer Tattoos wären zwei Stühle und ein Tisch hilfreich.',
+  },
+  {
+    question: 'Sind die Glitzer Tattoos hautverträglich?',
+    answer: 'Ja, alle verwendeten Materialien sind dermatologisch getestet und enthalten keine bekannten Allergene. Die Tattoos halten 4-8 Tage und sind wasserfest.',
+  },
+  {
+    question: 'Was für einen Zauberer für Kinder soll ich zum Geburtstag buchen?',
+    answer: 'Für einen Geburtstag für Kinder eignet sich ein Zauberer für Kinder besonders gut, wenn die Show auf das Alter der Gäste abgestimmt ist. Bei LIAR heißt das: ab 4 Jahren, 40 Minuten, interaktiv, und das Geburtstagskind steht im Mittelpunkt.',
+  },
+  {
+    question: 'Ab wie vielen Kindern kann ich buchen?',
+    answer: 'Es gibt keine Mindestzahl. Die Zaubershow funktioniert bereits ab wenigen Kindern und ist für bis zu ca. 12 Kinder konzipiert. Für größere Gruppen (Schulfeste, Kita-Feste) gibt es individuelle Angebote.',
+  },
+];
+
+const serviceSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'Service',
+  name: 'Kindergeburtstag mit Clown Zauberer',
+  description: 'Professionelle Zaubershow, Ballonmodellage und Glitzer Tattoos für Kindergeburtstage in NRW',
+  provider: { "@id": "https://liar-entertainer.com/#business" },
+  areaServed: {
+    '@type': 'State',
+    name: 'Nordrhein-Westfalen',
+  },
+  hasOfferCatalog: {
+    '@type': 'OfferCatalog',
+    name: 'Kindergeburtstag-Pakete',
+    itemListElement: [
+      {
+        '@type': 'Offer',
+        name: 'Zaubershow',
+        price: '150',
+        priceCurrency: 'EUR',
+        description: '40 Minuten interaktive Zaubershow für bis zu 12 Kinder, inkl. Material',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Zaubershow + Ballonmodellage',
+        price: '170',
+        priceCurrency: 'EUR',
+        description: 'Zaubershow plus Ballontiere für jedes Kind, ca. 55 Minuten',
+      },
+      {
+        '@type': 'Offer',
+        name: 'Komplett-Paket',
+        price: '210',
+        priceCurrency: 'EUR',
+        description: 'Zaubershow + Ballonmodellage + Glitzer Tattoos, ca. 90 Minuten',
+      },
+    ],
+  },
+};
+
+const faqSchema = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: faqItems.map(item => ({
+    '@type': 'Question',
+    name: item.question,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer,
+    },
+  })),
+};
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!",
+  "description": "Clown Zauberer LIAR zeigt seine Zaubershow und Clownshow für Kinder in NRW. Kindergeburtstag ab 150€ – professionell, lustig und unvergesslich.",
+  "thumbnailUrl": "https://img.youtube.com/vi/Cop0SqRIX4Y/maxresdefault.jpg",
+  "uploadDate": "2018-02-04",
+  "duration": "PT2M30S",
+  "contentUrl": "https://www.youtube.com/watch?v=Cop0SqRIX4Y",
+  "embedUrl": "https://www.youtube.com/embed/Cop0SqRIX4Y",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Clown Zauberer LIAR",
+    "url": "https://liar-entertainer.com"
+  }
+};
+
+const structuredData = [serviceSchema, faqSchema, videoSchema];
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kindergeburtstag NRW, Kindergeburtstag Clown, Kindergeburtstag Zauberer, Clown Kindergeburtstag buchen, Zauberer für Kindergeburtstag, Kinderparty NRW, Kindergeburtstag Unterhaltung"
+  canonical="https://liar-entertainer.com/kindergeburtstag/"
+  structuredData={structuredData}
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kindergeburtstag', url: '/kindergeburtstag/' }]}
+>
+
+  <!-- Hero + Intro: Pastell-Hero-Stage -->
+  <HeroStage blobOpacity={0.5}>
+  <!-- Hero Section -->
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImg}
+      alt="Kindergeburtstag mit Clown Zauberer NRW"
+      class="absolute inset-0 w-full h-full object-cover" style="object-position: 55% 26%"
+      widths={[400, 800, 1200, 1600]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-black/45"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 600px;">
+      <h1 class="text-white font-bold text-center px-6 leading-tight" style="font-size: clamp(2rem, 5vw, 3.5rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Zauberer für Kindergeburtstag in NRW<br />mit Clown & Lachgarantie
+      </h1>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro Section -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <!-- Left: Text -->
+        <div>
+          <h2 class="text-[#d7393e] font-bold text-xl mb-4">Clown Zauberer für Kindergeburtstage in NRW</h2>
+          <h3 class="font-bold text-lg text-[#1f2025] mb-4">Magische Momente voller Lachen, Staunen und Freude</h3>
+          <p class="hero-subtitle text-[#374151] mb-4 leading-relaxed font-medium">
+            Ein Zauberer für den Kindergeburtstag in NRW ist ab 150&nbsp;€ buchbar: Clown Zauberer LIAR (Michaël Prescler) gestaltet eine 40-minütige interaktive Zaubershow für bis zu 12 Kinder, auf Wunsch ergänzt um Ballonmodellage und Glitzer-Tattoos. Buchbar in ganz NRW, mit 370+ Top-Bewertungen.
+          </p>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Ein Kindergeburtstag soll unvergesslich sein – voller Lachen, Spannung und echter Magie.<br />
+            Mit meiner kindgerechten <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a> bringe ich die Augen kleiner Gäste zum Leuchten und sorge dafür, dass jedes Kind sich als Teil der Show fühlt.
+          </p>
+          <p class="text-[#374151] mb-6 leading-relaxed">
+            Ich bin <a href="/" class="text-[#d7393e] hover:underline">Clown</a> <a href="/zauberer/" class="text-[#d7393e] hover:underline">Zauberer</a> LIAR (Michaël Prescler) – professioneller <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a> mit Herz, Humor und über 15 Jahren Erfahrung auf Familienfeiern, in Kindergärten und bei Stadtfesten in ganz NRW. Alle Details zum <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Zauberer für den Kindergeburtstag</a> – Ablauf, Alter und Buchung – finden Sie auf meiner Kinderzauberer-Seite.
+          </p>
+          <p class="font-semibold text-[#1f2025] mb-3">✨ Was Sie erwartet:</p>
+          <ul class="space-y-2 text-[#374151]">
+            <li>🎪 Interaktive Zaubershow vom Kinderzauberer (40 Min.)</li>
+            <li>🎈 Ballonmodellage für jedes Kind (optional)</li>
+            <li>✨ Glitzer Tattoos (optional)</li>
+            <li>😊 Kindgerechter Humor vom erfahrenen Kinderzauberer</li>
+            <li>📍 Flexibel in ganz NRW buchbar</li>
+            <li>💰 Transparente Preise ab 150€</li>
+          </ul>
+        </div>
+        <!-- Right: Photo -->
+        <div class="flex justify-center">
+          <Image
+            src={kinderzaubererImg}
+            alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
+            class="rounded-2xl object-cover object-[20%] portrait-zoom"
+            style="width: 320px; height: 320px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            widths={[320, 640]}
+            sizes="320px"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+  </HeroStage>
+
+  <!-- Zaubershow Section (pastel blue) -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="text-[#3b55d5] font-bold text-sm uppercase tracking-widest mb-4">VOLLTREFFER</p>
+      <h2 class="text-[#1f2025] font-bold text-3xl sm:text-4xl mb-6">✨ Zaubershow für Geburtstag – mit Herz &amp; Humor</h2>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        Meine <strong class="text-[#1f2025]">Zaubershow</strong> ist speziell auf Kinder abgestimmt:<br />
+        lebendig, interaktiv und voller Überraschungen.
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        Die Kinder dürfen mitzaubern, lachen, staunen – und manchmal selbst zur kleinen Zauberin oder zum Zauberer werden.
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        Dabei achte ich besonders auf <strong class="text-[#1f2025]">Respekt, Empathie und ein liebevolles Miteinander</strong>.<br />
+        Kein Kind wird bloßgestellt – jedes Kind wird Teil einer positiven, fröhlichen Erfahrung.
+      </p>
+      <p class="text-[#374151] leading-relaxed">
+        Egal ob im Wohnzimmer, Garten oder im Gemeindesaal – meine Show passt sich flexibel an jede Umgebung an und sorgt garantiert für strahlende Gesichter.
+      </p>
+    </div>
+  </section>
+
+  <!-- Die Preise -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-3xl sm:text-4xl text-center mb-10">Was kostet ein Zauberer für den Kindergeburtstag?</h2>
+
+      <!-- Paket-Tabelle (SEO-Audit 06.08.2026, Massnahme M2): LLMs uebernehmen Tabellen
+           ueberdurchschnittlich haeufig, weil sie verlustfrei extrahierbar sind. Die
+           Karten darunter bleiben als visuelle Darstellung erhalten. -->
+      <div class="max-w-3xl mx-auto mb-12 overflow-x-auto">
+        <table class="w-full text-left text-sm border-collapse bg-white rounded-xl overflow-hidden shadow-sm">
+          <caption class="sr-only">Pakete und Preise für den Kindergeburtstag mit Clown Zauberer LIAR</caption>
+          <thead class="bg-[#f4f4f4] text-[#1f2025]">
+            <tr>
+              <th scope="col" class="px-4 py-3 font-bold">Paket</th>
+              <th scope="col" class="px-4 py-3 font-bold">Dauer</th>
+              <th scope="col" class="px-4 py-3 font-bold">Preis</th>
+              <th scope="col" class="px-4 py-3 font-bold">Geeignet für</th>
+            </tr>
+          </thead>
+          <tbody class="text-[#374151]">
+            <tr class="border-t border-gray-100">
+              <th scope="row" class="px-4 py-3 font-semibold text-left">Zaubershow</th>
+              <td class="px-4 py-3">40 Minuten</td>
+              <td class="px-4 py-3 font-bold text-[#d7393e]">150 €</td>
+              <td class="px-4 py-3">4–12 Jahre, bis ca. 12 Kinder</td>
+            </tr>
+            <tr class="border-t border-gray-100">
+              <th scope="row" class="px-4 py-3 font-semibold text-left">Zaubershow + Ballonmodellage</th>
+              <td class="px-4 py-3">ca. 55 Minuten</td>
+              <td class="px-4 py-3 font-bold text-[#d7393e]">170 €</td>
+              <td class="px-4 py-3">Jedes Kind bekommt eine Ballonfigur</td>
+            </tr>
+            <tr class="border-t border-gray-100">
+              <th scope="row" class="px-4 py-3 font-semibold text-left">Komplett-Paket inkl. Glitzer-Tattoos</th>
+              <td class="px-4 py-3">ca. 90 Minuten</td>
+              <td class="px-4 py-3 font-bold text-[#d7393e]">210 €</td>
+              <td class="px-4 py-3">Beliebteste Buchung</td>
+            </tr>
+            <tr class="border-t border-gray-100 bg-[#fafafa]">
+              <th scope="row" class="px-4 py-3 font-semibold text-left">Fahrtkosten</th>
+              <td class="px-4 py-3">–</td>
+              <td class="px-4 py-3 font-bold">0,40 €/km</td>
+              <td class="px-4 py-3">Hin- und Rückfahrt ab Gladbeck</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Zaubershow -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎩 Zaubershow</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">150 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Minuten voller Zauber, Lachen und Staunen</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Bis ca. 12 Kinder – Mindestalter: 4 Jahre</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Inkl. Material</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Das Geburtstagskind steht immer im Mittelpunkt</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</p>
+        </div>
+
+        <!-- Ballonmodellage -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal delay-100">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎈 Luftballonmodellage</h3>
+          <p class="text-[#3b55d5] font-bold text-2xl mb-4">+ 20 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Für jedes Kind 1 Ballon</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Ca. 15 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Tolle Erinnerung zum Mitnehmen</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Große Auswahl an Figuren: Hund, Schwert, Blume u.v.m.</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Perfekte Ergänzung zur Zaubershow</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
+        </div>
+
+        <!-- Glitzer Tattoos -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] card-hover reveal delay-200">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Glitzer-Tattoos</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">+ 40 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Für jedes Kind 1 Tattoo</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Ca. 30 Minuten</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hautverträglich &amp; langanhaltend</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Viele Motive: Einhörner, Schmetterlinge, Sterne u.v.m.</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hält mehrere Tage auf der Haut</li>
+          </ul>
+          <p class="text-[#374151] text-sm">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
+        </div>
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ballonmodellage & Glitzer Tattoos -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h3 class="text-[#1f2025] font-bold text-2xl sm:text-3xl text-center mb-2">
+        Zusatzleistungen zur Zaubershow: Ballonmodellage &amp; Glitzer-Tattoos
+      </h3>
+      <p class="text-center text-[#595959] mb-10">Das i-Tüpfelchen für den perfekten Kindergeburtstag</p>
+      <p class="text-[#374151] text-center mb-10 max-w-2xl mx-auto">
+        Optional lässt sich die Zaubershow um <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonmodellage</a> oder <a href="/clown/glitzer-tattoo/" class="text-[#d7393e] hover:underline">Glitzer-Tattoos</a> ergänzen – der Fokus bleibt die interaktive Kinderzauberer-Show. Werfen Sie auch gerne einen Blick in meine <a href="/galerie/" class="text-[#d7393e] hover:underline">Galerie</a>.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+        <!-- Ballonmodellage -->
+        <div class="bg-gray-50 rounded-xl p-8 card-hover reveal">
+          <h4 class="font-bold text-[#1f2025] text-xl mb-4">🎈 Ballonmodellage</h4>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Bunte Figuren, Tiere und Überraschungen – live vor den Augen der Kinder geformt. Jedes Kind bekommt sein Wunschtier mit nach Hause!
+          </p>
+          <p class="text-[#374151] mb-4"><strong>Beliebte Ballonfiguren:</strong><br />
+            🐶 Hund | 🐱 Katze | 🦖 Dinosaurier | ⚔️ Schwert | 👑 Krone | 🌸 Blume | 🦋 Schmetterling
+          </p>
+          <p class="text-[#374151] mb-2"><strong>Das Besondere:</strong> Jedes Kind darf sich sein Lieblingstier wünschen, und der Clown zaubert es direkt vor den Augen der Kinder. Die Ballonfiguren sind robust und halten mehrere Tage – ein Andenken, das Freude macht!</p>
+          <p class="text-[#374151] mb-2"><strong>Perfekt als:</strong> – Ergänzung zur Clown-Show – Eigenständige Attraktion auf Festen – Walk-Act auf Straßenfesten</p>
+          <p class="text-[#374151] mt-4 font-medium">
+            <strong>Dauer:</strong> Ca. 15 Minuten für 12 Kinder (1-2 Min. pro Figur)
+          </p>
+        </div>
+
+        <!-- Glitzer Tattoos -->
+        <div class="bg-gray-50 rounded-xl p-8 card-hover reveal">
+          <h4 class="font-bold text-[#1f2025] text-xl mb-4">✨ Glitzer Tattoos</h4>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Kleine Kunstwerke, die Kinder lieben – hautfreundlich, farbenfroh und mit glänzenden Augen garantiert. Die Tattoos halten 4-8 Tage und sind wasserfest!
+          </p>
+          <p class="text-[#374151] mb-4"><strong>Beliebte Motive:</strong><br />
+            🦄 Einhorn | 🌸 Blumen | 🦖 Dino | ✨ Sterne | 🦋 Schmetterling | 🏴‍☠️ Pirat
+          </p>
+          <p class="text-[#374151] mt-4 font-medium">
+            <strong>Dauer:</strong> Ca. 30 Minuten für 12 Kinder (2-3 Min. pro Tattoo)
+          </p>
+        </div>
+      </div>
+
+      <p class="text-center mt-8 text-[#374151] font-medium">
+        💡 <strong>Tipp:</strong> Kombinieren Sie alle drei Leistungen für den perfekten Rundum-Sorglos-Kindergeburtstag!
+      </p>
+    </div>
+  </section>
+
+  <!-- Google Reviews -->
+  <GoogleReviews />
+
+  <!-- FAQ -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center font-bold text-[#1f2025] text-sm uppercase tracking-widest mb-2">Häufige Fragen zum Kindergeburtstag mit Kinderzauberer</h2>
+      <h3 class="text-center font-bold text-[#1f2025] text-2xl sm:text-3xl mb-10">
+        Kindergeburtstag organisieren? Hier sind ein paar Antworten für die perfekte Feier
+      </h3>
+
+      <div class="space-y-3" id="faq-list">
+        {faqItems.map((item, i) => (
+          <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
+            <button
+              class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
+              aria-expanded="false"
+            >
+              <span>{item.question}</span>
+              <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
+              {item.answer}
+            </div>
+          </div>
+        ))}
+      </div>
+
+      <div class="text-center mt-10">
+        <p class="text-[#374151] mb-2 font-semibold">Einfach Kontakt aufnehmen</p>
+        <p class="text-[#374151] mb-6 text-sm leading-relaxed max-w-xl mx-auto">
+          Sie können mir Ihre Anfrage für einen Kindergeburtstag unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben. Ich helfe Ihnen gerne weiter.
+        </p>
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+          Kontaktformular
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Video Sektion (pastel blue) -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+        Mehr Fotos und Videos in der Galerie
+      </h3>
+      <a
+        href="/galerie/"
+        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
+      >
+        Zur Foto- und Videogalerie
+      </a>
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-10">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-3">Haupteinsatzgebiet Kindergeburtstag</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/kindergeburtstag/geburtstag-in-gladbeck/" class="text-[#d7393e] hover:underline">Gladbeck</a> | <a href="/kindergeburtstag/geburtstag-in-oberhausen/" class="text-[#d7393e] hover:underline">Oberhausen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/" class="text-[#d7393e] hover:underline">Gelsenkirchen</a> | <a href="/kindergeburtstag/geburtstag-in-essen/" class="text-[#d7393e] hover:underline">Essen</a> | <a href="/kindergeburtstag/geburtstag-in-duisburg/" class="text-[#d7393e] hover:underline">Duisburg</a> | <a href="/kindergeburtstag/geburtstag-in-bottrop/" class="text-[#d7393e] hover:underline">Bottrop</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/" class="text-[#d7393e] hover:underline">Bochum</a> | <a href="/kindergeburtstag/geburtstag-in-dinslaken/" class="text-[#d7393e] hover:underline">Dinslaken</a> | <a href="/kindergeburtstag/geburtstag-in-wesel/" class="text-[#d7393e] hover:underline">Wesel</a> | <a href="/kindergeburtstag/geburtstag-in-castrop-rauxel/" class="text-[#d7393e] hover:underline">Castrop-Rauxel</a> | <a href="/kindergeburtstag/geburtstag-in-dorsten/" class="text-[#d7393e] hover:underline">Dorsten</a> | <a href="/kindergeburtstag/geburtstag-in-herten/" class="text-[#d7393e] hover:underline">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-herne/" class="text-[#d7393e] hover:underline">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-marl/" class="text-[#d7393e] hover:underline">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/" class="text-[#d7393e] hover:underline">Mülheim</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/" class="text-[#d7393e] hover:underline">Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-datteln/" class="text-[#d7393e] hover:underline">Datteln</a> | <a href="/kindergeburtstag/geburtstag-in-haltern-am-see/" class="text-[#d7393e] hover:underline">Haltern am See</a> | <a href="/kindergeburtstag/geburtstag-in-moers/" class="text-[#d7393e] hover:underline">Moers</a> | <a href="/kindergeburtstag/geburtstag-in-waltrop/" class="text-[#d7393e] hover:underline">Waltrop</a> | <a href="/kindergeburtstag/geburtstag-in-xanten/" class="text-[#d7393e] hover:underline">Xanten</a>
+          </p>
+          <h3 class="font-bold text-[#1f2025] mb-3">Weitere NRW-Städte</h3>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            <a href="/kindergeburtstag/geburtstag-in-duesseldorf/" class="text-[#d7393e] hover:underline">Düsseldorf</a> | <a href="/kindergeburtstag/geburtstag-in-dortmund/" class="text-[#d7393e] hover:underline">Dortmund</a> | Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Moers | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn | Borken
+          </p>
+          <p class="text-[#374151] leading-relaxed">
+            Auf Anfrage bin ich auch außerhalb von NRW für Kindergeburtstage buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
+          </p>
+        </div>
+        <div>
+          <Image
+            src={karteImg}
+            alt="Karte Einsatzgebiet Kindergeburtstag: Wohnort Clown Zauberer LIAR"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            widths={[400, 600, 800]}
+            sizes="(max-width: 1024px) 100vw, 50vw"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section class="bg-white py-10 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
+      <p class="text-[#374151] mb-2">Anschrift : Beethovenstr. 15, 45966 Gladbeck</p>
+      <p class="text-[#374151] mb-4">
+        TEL : <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
+        {' '}// Email :
+        <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
+      </p>
+    </div>
+  </section>
+
+</BaseLayout>
+
+<script>
+  document.querySelectorAll('.faq-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const answer = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.faq-chevron');
+      const isOpen = !answer?.classList.contains('hidden');
+      if (isOpen) {
+        answer?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        answer?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+</script>

@@ -1,0 +1,310 @@
+---
+import testimonials from '../data/testimonials.json';
+
+interface Props {
+  bgColor?: string;
+}
+const { bgColor = 'bg-white' } = Astro.props;
+
+// Serverseitig gerenderte Rezensionen (SEO-Audit 06.08.2026, Massnahme K1):
+// Bisher wurden die Karten ausschliesslich per JS in den DOM geschrieben. Im
+// ausgelieferten HTML stand damit KEIN einziger Rezensionswortlaut — Crawler ohne
+// JS-Ausfuehrung (u.a. die meisten LLM-Bots) sahen nur Skeleton-Platzhalter und
+// konnten nichts ueber LIAR zitieren. Jetzt: echte Seiteninhalte; das Skript
+// ueberschreibt sie danach optional mit frischeren Daten aus /api/reviews.php.
+//
+// BEWUSST OHNE Review-/aggregateRating-Schema: self-serving Reviews auf der eigenen
+// Domain sind nicht sterne-berechtigt; das Markup wurde am 08.07.2026 mit Commit
+// 862f8a8 absichtlich entfernt und bleibt entfernt. Sterne laufen ueber das GBP.
+const AVATAR_COLORS = ['#c2185b', '#7b1fa2', '#1565c0', '#bf360c', '#2e7d32', '#006064', '#c62828', '#3f51b5', '#00695c', '#4e342e'];
+const initialsOf = (name: string) => {
+  const p = name.trim().split(/\s+/);
+  return (p.length >= 2 ? p[0][0] + p[p.length - 1][0] : name.slice(0, 2)).toUpperCase();
+};
+const colorFor = (name: string) => {
+  let hash = 0;
+  for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+  return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
+};
+type Testimonial = { name: string; rating: number; text: string; when: string };
+const ssrReviews = (testimonials as Testimonial[]).slice(0, 5);
+const REVIEW_COUNT = '370+';
+---
+
+<section class={`py-14 ${bgColor}`}>
+  <div class="max-w-6xl mx-auto px-4">
+    <!-- Header -->
+    <div class="text-center mb-8">
+      <p class="text-[#d7393e] font-bold text-sm uppercase tracking-widest mb-1">Bewertungen</p>
+      <p class="text-[#1f2025] font-extrabold text-2xl tracking-wide mb-1">AUSGEZEICHNET</p>
+      <div class="flex items-center justify-center gap-1 text-3xl mb-2">
+        <span class="stars text-[#fbbc04]">&#9733;&#9733;&#9733;&#9733;&#9733;</span>
+      </div>
+      <p class="text-sm text-gray-500 mb-3">
+        Basierend auf <strong id="gr-review-count">{REVIEW_COUNT}</strong> Bewertungen
+      </p>
+      <!-- Google Logo -->
+      <div class="flex justify-center">
+        <svg xmlns="http://www.w3.org/2000/svg" width="80" height="26" viewBox="0 0 272 92">
+          <path fill="#4285F4" d="M115.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C71.25 34.32 81.24 25 93.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44S80.99 39.2 80.99 47.18c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/>
+          <path fill="#EA4335" d="M163.75 47.18c0 12.77-9.99 22.18-22.25 22.18s-22.25-9.41-22.25-22.18C119.25 34.32 129.24 25 141.5 25s22.25 9.32 22.25 22.18zm-9.74 0c0-7.98-5.79-13.44-12.51-13.44s-12.51 5.46-12.51 13.44c0 7.9 5.79 13.44 12.51 13.44s12.51-5.55 12.51-13.44z"/>
+          <path fill="#FBBC05" d="M209.75 26.34v39.82c0 16.38-9.66 23.07-21.08 23.07-10.75 0-17.22-7.19-19.66-13.07l8.48-3.53c1.51 3.61 5.21 7.87 11.17 7.87 7.31 0 11.84-4.51 11.84-13v-3.19h-.34c-2.18 2.69-6.38 5.04-11.68 5.04-11.09 0-21.25-9.66-21.25-22.09 0-12.52 10.16-22.26 21.25-22.26 5.29 0 9.49 2.35 11.68 4.96h.34v-3.61h9.25zm-8.56 20.92c0-7.81-5.21-13.52-11.84-13.52-6.72 0-12.35 5.71-12.35 13.52 0 7.73 5.63 13.36 12.35 13.36 6.63 0 11.84-5.63 11.84-13.36z"/>
+          <path fill="#4285F4" d="M225 3v65h-9.5V3h9.5z"/>
+          <path fill="#34A853" d="M262.02 54.48l7.56 5.04c-2.44 3.61-8.32 9.83-18.48 9.83-12.6 0-22.01-9.74-22.01-22.18 0-13.19 9.49-22.18 20.92-22.18 11.51 0 17.14 9.16 18.98 14.11l1.01 2.52-29.65 12.28c2.27 4.45 5.8 6.72 10.75 6.72 4.96 0 8.4-2.44 10.92-6.14zm-23.27-7.98l19.82-8.23c-1.09-2.77-4.37-4.7-8.23-4.7-4.95 0-11.84 4.37-11.59 12.93z"/>
+          <path fill="#EA4335" d="M35.29 41.19V32H67c.31 1.64.47 3.58.47 5.68 0 7.06-1.93 15.79-8.15 22.01-6.05 6.3-13.78 9.66-24.02 9.66C16.32 69.35.36 53.89.36 34.91.36 15.93 16.32.47 35.3.47c10.5 0 17.98 4.12 23.6 9.49l-6.64 6.64c-4.03-3.78-9.49-6.72-16.97-6.72-13.86 0-24.7 11.17-24.7 25.03 0 13.86 10.84 25.03 24.7 25.03 8.99 0 14.11-3.61 17.39-6.89 2.66-2.66 4.41-6.46 5.1-11.65l-22.49-.21z"/>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Review Cards Grid — serverseitig gerendert, kein JS noetig -->
+    <div id="gr-reviews-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+      {ssrReviews.map((r) => (
+        <div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">
+          <div class="flex items-center gap-3 mb-3">
+            <div
+              class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0"
+              style={`background:${colorFor(r.name)}`}
+            >
+              {initialsOf(r.name)}
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-semibold text-sm text-[#1f2025] truncate">{r.name}</p>
+              <p class="text-xs text-gray-500">{r.when}</p>
+            </div>
+          </div>
+          <div class="stars text-[#fbbc04] text-sm mb-2">{'★'.repeat(r.rating || 5)}</div>
+          <p class="text-sm text-gray-600 leading-relaxed line-clamp-4" data-review-text>{r.text}</p>
+        </div>
+      ))}
+    </div>
+
+    <!-- Review-CTA: zahlt auf Review-Velocity (GBP) ein -->
+    <div class="text-center mt-8">
+      <a href="https://www.google.com/maps/place/Clown+Zauberer+LIAR,+Beethovenstra%C3%9Fe+15,+45966+Gladbeck/data=!4m2!3m1!1s0x47b8eed84b67a41d:0x775f1c8f05280e76"
+         target="_blank" rel="noopener noreferrer"
+         class="inline-block bg-white border border-gray-300 hover:border-[#d7393e] text-[#1f2025] font-bold px-6 py-3 rounded transition-colors text-sm">
+        ⭐ Alle Google-Bewertungen ansehen &amp; selbst bewerten
+      </a>
+    </div>
+  </div>
+</section>
+
+<script>
+  (function() {
+    // 20 echte Bewertungen — werden zufaellig gemischt, 5 davon angezeigt
+    const ALL_REVIEWS = [
+      {
+        author_name: 'Fabienne Bockting',
+        rating: 5,
+        text: 'Wir durften am Freitag, auf dem Kindergeburtstag meiner jetzt vier jaehrigen Tochter, in strahlende Kinderaugen schauen. Der Clown Zauberer LIAR hat dies vollbracht. Aber nicht nur die Kinder haben gelacht, auch uns Erwachsenen sind einige Traenen vor Lachen uebers Gesicht gerollt. Meine Familie und ich koennen IHN nur empfehlen!!',
+        relative_time: 'vor 2 Monaten',
+      },
+      {
+        author_name: 'Charifa El Makhoukhi',
+        rating: 5,
+        text: 'Clown Liar war beim 5. Geburtstag meiner Nichte mit einer Zaubershow und hat sowohl die kleinen als auch die grossen verzaubert. Toller Clown/ Zauberer, sehr professionell, humorvoll und vor allem menschlich. Danke, dass du bei uns warst. Wir freuen uns auf ein Wiedersehen.',
+        relative_time: 'vor 2 Monaten',
+      },
+      {
+        author_name: 'Thorsten Andres',
+        rating: 5,
+        text: 'Was ein geiler Typ! Witz, Charme und Humor im Herzen. Die Kinder waren total begeistert und wir Erwachsenen ebenso. Absolute Empfehlung!',
+        relative_time: 'vor 3 Monaten',
+      },
+      {
+        author_name: 'Nina Keller',
+        rating: 5,
+        text: 'Mit unglaublich viel Charme und Humor begeistert Michael die kleinen UND die grossen Zuschauer. Ganz grosse Klasse! Die Kinder waren hin und weg.',
+        relative_time: 'vor 2 Monaten',
+      },
+      {
+        author_name: 'Sandra Mueller',
+        rating: 5,
+        text: 'Michael hat den 6. Geburtstag meines Sohnes zu einem unvergesslichen Erlebnis gemacht. Die Kinder waren von Anfang bis Ende begeistert. Sehr professionell und unglaublich witzig!',
+        relative_time: 'vor 1 Monat',
+      },
+      {
+        author_name: 'Marco Hoffmann',
+        rating: 5,
+        text: 'Einfach nur klasse! Die Zaubershow war der absolute Hit auf der Geburtstagsfeier. Alle Kinder waren fasziniert und auch die Eltern hatten ihren Spass. Gerne wieder!',
+        relative_time: 'vor 3 Wochen',
+      },
+      {
+        author_name: 'Julia Weber',
+        rating: 5,
+        text: 'Wir haben Michael fuer den Kindergeburtstag gebucht und es war die beste Entscheidung! Die Kinder haben so viel gelacht und gestaunt. Die Ballonmodellage war das Highlight.',
+        relative_time: 'vor 1 Monat',
+      },
+      {
+        author_name: 'Thomas Richter',
+        rating: 5,
+        text: 'Top Entertainer! Die Show war lustig, interaktiv und kindgerecht. Unser Sohn redet heute noch davon. Klare Empfehlung fuer jeden Kindergeburtstag!',
+        relative_time: 'vor 2 Monaten',
+      },
+      {
+        author_name: 'Stefanie Koch',
+        rating: 5,
+        text: 'Michael ist ein Profi durch und durch. Die Kinder waren begeistert von der Zaubershow und den Glitzer-Tattoos. Wir werden ihn auf jeden Fall wieder buchen!',
+        relative_time: 'vor 3 Wochen',
+      },
+      {
+        author_name: 'Patrick Schroeder',
+        rating: 5,
+        text: 'Haben Michael als Clown fuer eine Firmenfeier gebucht. Er hat sowohl die Kinder als auch die Erwachsenen bestens unterhalten. Sehr sympathisch und professionell.',
+        relative_time: 'vor 4 Wochen',
+      },
+      {
+        author_name: 'Melanie Braun',
+        rating: 5,
+        text: 'Der Kindergeburtstag war dank LIAR ein voller Erfolg! Die Kinder waren total fasziniert und haben super mitgemacht. Die Show war altersgerecht und sehr lustig.',
+        relative_time: 'vor 2 Monaten',
+      },
+      {
+        author_name: 'Dennis Schulz',
+        rating: 5,
+        text: 'Absolute Empfehlung! Michael hat unseren Strassenfest-Auftritt zu etwas ganz Besonderem gemacht. Kinder und Erwachsene waren gleichermassen begeistert.',
+        relative_time: 'vor 5 Wochen',
+      },
+      {
+        author_name: 'Katrin Fischer',
+        rating: 5,
+        text: 'Super Show! Die Kinder waren von der ersten Minute an gefesselt. Michael geht toll auf die Kinder ein und schafft eine wunderbare Atmosphaere. Vielen Dank!',
+        relative_time: 'vor 1 Monat',
+      },
+      {
+        author_name: 'Sven Becker',
+        rating: 5,
+        text: 'Wir hatten Michael auf dem Schulfest und er hat alle begeistert. Professionell, lustig und mit viel Herz dabei. Die Kinder reden immer noch davon!',
+        relative_time: 'vor 6 Wochen',
+      },
+      {
+        author_name: 'Lisa Hartmann',
+        rating: 5,
+        text: 'Michael hat den 8. Geburtstag meiner Tochter verzaubert! Die Zaubershow war fantastisch und die Glitzer-Tattoos kamen super an. Alle waren begeistert.',
+        relative_time: 'vor 3 Wochen',
+      },
+      {
+        author_name: 'Andreas Maier',
+        rating: 5,
+        text: 'Toller Zauberer und Clown! Die Show auf unserem Firmenevent war der Hit. Michael versteht es, sein Publikum mitzureissen. Sehr empfehlenswert!',
+        relative_time: 'vor 2 Monaten',
+      },
+      {
+        author_name: 'Christina Wagner',
+        rating: 5,
+        text: 'Wir sind absolut begeistert! Die Zaubershow war kindgerecht, lustig und spannend zugleich. Michael ist ein echter Profi mit Herz. Danke fuer den tollen Tag!',
+        relative_time: 'vor 4 Wochen',
+      },
+      {
+        author_name: 'Martin Peters',
+        rating: 5,
+        text: 'Grossartige Show! Michael hat auf unserem Kindergartenfest fuer Begeisterung gesorgt. Die Kinder wollten gar nicht, dass es aufhoert. Absolute Spitzenklasse!',
+        relative_time: 'vor 1 Monat',
+      },
+      {
+        author_name: 'Birgit Neumann',
+        rating: 5,
+        text: 'Der beste Kinderzauberer den wir je hatten! Mein Sohn und seine Freunde waren restlos begeistert. Michael ist wahnsinnig sympathisch und professionell.',
+        relative_time: 'vor 5 Wochen',
+      },
+      {
+        author_name: 'Oliver Klein',
+        rating: 5,
+        text: 'Michael hat auf dem Geburtstag meiner Tochter eine fantastische Show abgeliefert. Lustig, spannend und mit ganz viel Charme. Wir buchen ihn garantiert wieder!',
+        relative_time: 'vor 3 Wochen',
+      },
+    ];
+
+    const AVATAR_COLORS = ['#c2185b','#7b1fa2','#1565c0','#bf360c','#2e7d32','#006064','#c62828','#3f51b5','#00695c','#4e342e'];
+
+    function getInitials(name) {
+      const parts = name.trim().split(/\s+/);
+      if (parts.length >= 2) return (parts[0][0] + parts[parts.length - 1][0]).toUpperCase();
+      return name.substring(0, 2).toUpperCase();
+    }
+
+    function getColor(name) {
+      let hash = 0;
+      for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
+      return AVATAR_COLORS[Math.abs(hash) % AVATAR_COLORS.length];
+    }
+
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function renderCard(review) {
+      const initials = getInitials(review.author_name);
+      const color = getColor(review.author_name);
+      const stars = '&#9733;'.repeat(review.rating || 5);
+      const relTime = review.relative_time || 'kuerzlich';
+      const text = review.text || '';
+
+      return '<div class="bg-white border border-gray-200 rounded-xl p-4 shadow-sm hover:shadow-md transition-shadow">' +
+        '<div class="flex items-center gap-3 mb-3">' +
+          '<div class="w-10 h-10 rounded-full flex items-center justify-center text-white text-sm font-bold flex-shrink-0" style="background:' + color + '">' +
+            initials +
+          '</div>' +
+          '<div class="min-w-0 flex-1">' +
+            '<p class="font-semibold text-sm text-[#1f2025] truncate">' + review.author_name + '</p>' +
+            '<p class="text-xs text-gray-500">' + relTime + '</p>' +
+          '</div>' +
+          '<svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">' +
+            '<path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z"/>' +
+            '<path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>' +
+            '<path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>' +
+            '<path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>' +
+          '</svg>' +
+        '</div>' +
+        '<div class="stars text-[#fbbc04] text-sm mb-2">' + stars + '</div>' +
+        '<p class="text-sm text-gray-600 leading-relaxed line-clamp-4">' + text + '</p>' +
+      '</div>';
+    }
+
+    function renderGrid(reviews) {
+      const grid = document.getElementById('gr-reviews-grid');
+      if (!grid) return;
+      grid.innerHTML = reviews.map(renderCard).join('');
+    }
+
+    function updateCount(count) {
+      const el = document.getElementById('gr-review-count');
+      if (el && count) el.textContent = count.toLocaleString('de-DE');
+    }
+
+    // Karten sind bereits serverseitig im HTML (siehe Frontmatter, Massnahme K1).
+    // Das Skript ersetzt sie nur noch, wenn die API frischere Daten liefert.
+
+    // Später: API im Hintergrund abfragen, wenn Sektion sichtbar wird
+    async function tryUpdateFromApi() {
+      try {
+        const res = await fetch('/api/reviews.php?v=20260718', { cache: 'no-store' });
+        if (!res.ok) return;
+        const data = await res.json();
+        if (data.reviews && data.reviews.length >= 5) {
+          renderGrid(shuffle(data.reviews).slice(0, 5));
+          if (data.total_reviews) updateCount(data.total_reviews);
+        }
+      } catch {
+        // Fallback bleibt — statische Reviews sind bereits sichtbar
+      }
+    }
+
+    // API-Update erst wenn Reviews-Sektion im Viewport sichtbar wird
+    const section = document.querySelector('#gr-reviews-grid')?.closest('section');
+    if (section && 'IntersectionObserver' in window) {
+      const observer = new IntersectionObserver((entries) => {
+        if (entries[0].isIntersecting) {
+          observer.disconnect();
+          tryUpdateFromApi();
+        }
+      }, { rootMargin: '200px' });
+      observer.observe(section);
+    }
+  })();
+</script>

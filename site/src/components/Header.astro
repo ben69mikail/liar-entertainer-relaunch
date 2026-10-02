@@ -1,0 +1,269 @@
+---
+import { Image } from 'astro:assets';
+import logoImg from '../assets/images/general/logo-clown-nrw.png';
+
+const menuItems = [
+  {
+    label: 'Clown',
+    href: '/clown/clownshow/',
+    children: [
+      { label: 'Clownshow', href: '/clown/clownshow/' },
+      { label: 'Walk Act', href: '/clown/walk-act/' },
+      { label: 'Ballonmodellage', href: '/clown/ballonmodellage/' },
+      { label: 'Glitzer Tattoo', href: '/clown/glitzer-tattoo/' },
+    ],
+  },
+  {
+    label: 'Zauberer',
+    href: '/zauberer/',
+    children: [
+      { label: 'Bühnen Zauberer', href: '/zauberer/buehnen-zauberer/' },
+      { label: 'Tisch Zauberer', href: '/zauberer/tisch-zauberer/' },
+      { label: 'Hochzeit', href: '/zauberer/hochzeit/' },
+      { label: 'Firmenfeier', href: '/zauberer/firmenfeier/' },
+    ],
+  },
+  {
+    label: 'Kinderzauberer',
+    href: '/kinderzauberer/',
+  },
+  {
+    label: 'Kindergeburtstag',
+    href: '/kindergeburtstag/',
+  },
+  {
+    label: 'Preise',
+    href: '/preise/',
+  },
+  {
+    label: 'Zaubershow',
+    href: '/zauberer/zaubershow/',
+    children: [
+      { label: 'Kindergarten – Kita', href: '/zauberer/zaubershow/kindergarten-kita/' },
+      { label: 'Schule', href: '/zauberer/zaubershow/schule/' },
+      { label: 'Straßen – Sommer -Fest', href: '/zauberer/zaubershow/strassen-sommer-fest/' },
+      { label: 'Karneval', href: '/clown/karneval/' },
+    ],
+  },
+  { label: 'Galerie', href: '/galerie/' },
+  { label: 'Blog', href: '/blog/' },
+  { label: 'Pantomime', href: 'https://www.pantomime-la-france.eu/', external: true },
+  { label: 'Kontakt', href: '/kontakt/' },
+];
+---
+
+<header class="w-full z-50" id="site-header">
+  <!-- Row 1: Logo + Site Title + Tagline (identisch mit WordPress) -->
+  <div class="bg-white pt-3 pb-1">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col items-center text-center">
+      <a href="/" aria-label="Startseite Clown Zauberer LIAR" class="logo-magic relative inline-block">
+        <Image
+          src={logoImg}
+          alt="LOGO Clown Zauberer LIAR"
+          width={180}
+          height={125}
+          class="w-[120px] h-auto"
+          loading="eager"
+          fetchpriority="high"
+        />
+        <span class="lspark s1" aria-hidden="true">✦</span>
+        <span class="lspark s2" aria-hidden="true">✧</span>
+        <span class="lspark s3" aria-hidden="true">✦</span>
+      </a>
+      <p class="text-[#1f2025] font-bold text-[20px] mt-1 leading-tight">Clown Zauberer in NRW – Lachen garantiert!</p>
+      <p class="text-[#595959] text-[13px] mt-0.5">Professioneller Clown mit Zaubershow | ⭐ Events &amp; Kindergeburtstage</p>
+    </div>
+  </div>
+
+  <!-- Row 2: Navigation -->
+  <nav id="main-nav" class="bg-white border-t border-b border-gray-200 transition-shadow duration-300">
+    <div class="max-w-6xl mx-auto px-4">
+
+      <!-- Desktop Navigation (ab 900px, kompakt bis xl) -->
+      <div id="nav-desktop-row" class="hidden min-[900px]:flex items-center justify-center gap-0 h-14">
+        {menuItems.map((item) => (
+          item.children ? (
+            <div class="relative h-full flex items-center nav-dropdown-wrap">
+              <a
+                href={item.href}
+                class="nav-link-wp flex items-center gap-1 px-2 xl:px-4 h-full text-[#1f2025] hover:text-[#ffb546] text-[14px] xl:text-[15px] font-medium"
+              >
+                {item.label}
+                <svg class="w-3 h-3 transition-transform dropdown-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </a>
+              <div class="dropdown-menu absolute top-full left-0 w-56 bg-white shadow-lg border border-gray-100 py-1 z-50 hidden">
+                {item.children.map((child) => (
+                  <a
+                    href={child.href}
+                    class="block px-5 py-2.5 text-[#1f2025] hover:bg-gray-50 hover:text-[#ffb546] transition-colors text-sm font-medium"
+                  >
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : item.external ? (
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener"
+              class="nav-link-wp flex items-center px-2 xl:px-4 h-14 text-[#1f2025] hover:text-[#ffb546] text-[14px] xl:text-[15px] font-medium"
+            >
+              {item.label}
+            </a>
+          ) : (
+            <a
+              href={item.href}
+              class="nav-link-wp flex items-center px-2 xl:px-4 h-14 text-[#1f2025] hover:text-[#ffb546] text-[14px] xl:text-[15px] font-medium"
+            >
+              {item.label}
+            </a>
+          )
+        ))}
+      </div>
+
+      <!-- Mobile: Hamburger Button (nur unter 900px) -->
+      <div id="nav-burger-row" class="min-[900px]:hidden flex items-center justify-end h-12">
+        <button
+          id="mobile-menu-btn"
+          class="text-[#1f2025] p-2"
+          aria-label="Navigationsmenü öffnen"
+          aria-expanded="false"
+          aria-controls="mobile-menu"
+        >
+          <svg id="hamburger-icon" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+          </svg>
+          <svg id="close-icon" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Menu -->
+      <div id="mobile-menu" class="hidden min-[900px]:hidden border-t border-gray-200 py-2 max-h-[70vh] overflow-y-auto bg-white">
+        {menuItems.map((item) => (
+          item.children ? (
+            <div class="mobile-accordion">
+              <button
+                class="mobile-accordion-btn flex items-center justify-between w-full text-[#1f2025] hover:text-[#ffb546] px-4 py-3 text-base font-medium"
+                aria-expanded="false"
+              >
+                {item.label}
+                <svg class="w-4 h-4 transition-transform accordion-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              <div class="mobile-accordion-content hidden bg-gray-50">
+                <a href={item.href} class="block text-gray-600 hover:text-[#ffb546] px-8 py-2 text-sm">
+                  {item.label}
+                </a>
+                {item.children.map((child) => (
+                  <a href={child.href} class="block text-gray-600 hover:text-[#ffb546] px-8 py-2 text-sm">
+                    {child.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+          ) : item.external ? (
+            <a
+              href={item.href}
+              target="_blank"
+              rel="noopener"
+              class="block text-[#1f2025] hover:text-[#ffb546] px-4 py-3 text-base font-medium"
+            >
+              {item.label}
+            </a>
+          ) : (
+            <a href={item.href} class="block text-[#1f2025] hover:text-[#ffb546] px-4 py-3 text-base font-medium">
+              {item.label}
+            </a>
+          )
+        ))}
+      </div>
+    </div>
+  </nav>
+
+</header>
+
+<!-- Sticky nav spacer (injected by JS when nav becomes sticky) -->
+<div id="nav-spacer" class="hidden" style="height: 56px;"></div>
+
+<script>
+  // Desktop dropdowns
+  document.querySelectorAll('.nav-dropdown-wrap').forEach((wrap) => {
+    const menu = wrap.querySelector('.dropdown-menu') as HTMLElement;
+    const chevron = wrap.querySelector('.dropdown-chevron') as SVGElement;
+    if (!menu) return;
+    wrap.addEventListener('mouseenter', () => {
+      menu.classList.remove('hidden');
+      chevron?.classList.add('rotate-180');
+    });
+    wrap.addEventListener('mouseleave', () => {
+      menu.classList.add('hidden');
+      chevron?.classList.remove('rotate-180');
+    });
+  });
+
+  // Mobile hamburger
+  const mobileBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const hamburgerIcon = document.getElementById('hamburger-icon');
+  const closeIcon = document.getElementById('close-icon');
+
+  mobileBtn?.addEventListener('click', () => {
+    const isOpen = !mobileMenu?.classList.contains('hidden');
+    if (isOpen) {
+      mobileMenu?.classList.add('hidden');
+      hamburgerIcon?.classList.remove('hidden');
+      closeIcon?.classList.add('hidden');
+      mobileBtn.setAttribute('aria-expanded', 'false');
+    } else {
+      mobileMenu?.classList.remove('hidden');
+      hamburgerIcon?.classList.add('hidden');
+      closeIcon?.classList.remove('hidden');
+      mobileBtn.setAttribute('aria-expanded', 'true');
+    }
+  });
+
+  // Mobile accordion
+  document.querySelectorAll('.mobile-accordion-btn').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const content = btn.nextElementSibling as HTMLElement;
+      const chevron = btn.querySelector('.accordion-chevron');
+      const isOpen = !content?.classList.contains('hidden');
+      if (isOpen) {
+        content?.classList.add('hidden');
+        chevron?.classList.remove('rotate-180');
+        btn.setAttribute('aria-expanded', 'false');
+      } else {
+        content?.classList.remove('hidden');
+        chevron?.classList.add('rotate-180');
+        btn.setAttribute('aria-expanded', 'true');
+      }
+    });
+  });
+
+  // Sticky nav
+  const nav = document.getElementById('main-nav');
+  const spacer = document.getElementById('nav-spacer');
+  let isSticky = false;
+
+  function checkSticky() {
+    const header = document.getElementById('site-header');
+    const headerHeight = header?.offsetHeight || 200;
+    if (window.scrollY > headerHeight - 56 && !isSticky) {
+      isSticky = true;
+      nav?.classList.add('fixed', 'top-0', 'left-0', 'right-0', 'shadow-md', 'z-50');
+      spacer?.classList.remove('hidden');
+    } else if (window.scrollY <= headerHeight - 56 && isSticky) {
+      isSticky = false;
+      nav?.classList.remove('fixed', 'top-0', 'left-0', 'right-0', 'shadow-md', 'z-50');
+      spacer?.classList.add('hidden');
+    }
+  }
+
+  window.addEventListener('scroll', checkSticky, { passive: true });
+</script>

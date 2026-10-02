@@ -1,0 +1,478 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroStage from '../../components/HeroStage.astro';
+import CountUp from '../../components/CountUp.astro';
+import { Image } from 'astro:assets';
+
+import heroImg from '../../assets/images/kinderzauberer/kinderzauberer-hero.jpg';
+import kindergeburtstagMitKinderzauberer from '../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import clownerieUndZauberei from '../../assets/images/home/clownerie-und-zauberei.jpg';
+import fotogalerieClownZauberer16 from '../../assets/images/galerie/fotogalerie-clown-zauberer-16.jpg';
+import zaubershowMitClownZaubererLiar from '../../assets/images/kinderzauberer/zaubershow-mit-clown-zauberer-liar.jpg';
+import clownZaubererGladbeck from '../../assets/images/kinderzauberer/clown-zauberer-gladbeck.jpg';
+import GoogleReviews from '../../components/GoogleReviews.astro';
+
+const seoTitle = 'Kinderzauberer NRW | Kinderzaubershow buchen | LIAR';
+const seoDescription = 'Kinderzauberer LIAR in NRW ✓ Lustige Kinderzaubershow für Kindergeburtstag, Kita & Schule ✓ 370+ Bewertungen ✓ Jetzt anfragen!';
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Kinderzauberer in NRW",
+  "description": "Professioneller Kinderzauberer LIAR – Zaubershow für Kindergeburtstag, Schulfeste und Familienfeiern in NRW",
+  "url": "https://liar-entertainer.com/kinderzauberer/",
+  "serviceType": ["Kinderzauberer", "Zaubershow für Kinder"],
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "State", "name": "Nordrhein-Westfalen" }
+};
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet ein Auftritt von Kinderzauberer LIAR?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Gage richtet sich nach Art und Umfang der Veranstaltung, Zuschauerzahl, Anfahrtsweg und Jahreszeit. Für Kindergeburtstage biete ich transparente Festpreise an. Kontaktieren Sie mich für ein unverbindliches Angebot – ich berate Sie gerne persönlich!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Was kostet eine Kinderzaubershow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ich arbeite mit transparenten Festpreisen ohne versteckte Kosten. Die Gage hängt von Anlass, Dauer und Anfahrt ab – über die Kontaktseite erstelle ich Ihnen gerne ein individuelles Angebot für Ihre Kinderzaubershow."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wieviel Platz braucht man für die Zaubershow?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Ich benötige lediglich eine Fläche von etwa 2×2 Metern. Das bedeutet: Die Show ist möglich im Wohnzimmer, Kinderzimmer, Partykeller, auf der Terrasse, im Garten, in Turnhallen, Kindergärten, auf kleinen und großen Bühnen – praktisch überall!"
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie lange dauert eine Vorführung mit dem Kinderzauberer?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Show ist ab 25-30 Minuten buchbar und lässt sich flexibel gestalten. Für größere Veranstaltungen oder wenn mehr Zeit zur Verfügung steht, biete ich auch Programme von 45-60 Minuten an. Die Dauer stimme ich individuell mit Ihnen ab."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Für welches Alter ist die Zaubershow geeignet?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Meine Kinderzaubershow ist für Kinder von 4 bis 12 Jahren konzipiert. Ich passe das Programm altersgerecht an: Für Kindergartenkinder gestalte ich die Show etwas einfacher und kürzer, für Grundschulkinder darf es komplexer und länger sein."
+      }
+    }
+  ]
+};
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!",
+  "description": "Clown Zauberer LIAR zeigt seine Zaubershow und Clownshow für Kinder in NRW. Kindergeburtstag – professionell, lustig und unvergesslich.",
+  "thumbnailUrl": "https://img.youtube.com/vi/Cop0SqRIX4Y/maxresdefault.jpg",
+  "uploadDate": "2018-02-04",
+  "duration": "PT2M30S",
+  "contentUrl": "https://www.youtube.com/watch?v=Cop0SqRIX4Y",
+  "embedUrl": "https://www.youtube.com/embed/Cop0SqRIX4Y",
+  "publisher": {
+    "@type": "Organization",
+    "name": "Clown Zauberer LIAR",
+    "url": "https://liar-entertainer.com"
+  }
+};
+const structuredData = [serviceSchema, faqSchema, videoSchema];
+
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Kinderzauberer NRW, Kinderzauberer buchen, Zauberer für Kinder, Zaubershow Kindergeburtstag, Kinderzauberer Ruhrgebiet"
+  canonical="https://liar-entertainer.com/kinderzauberer/"
+  structuredData={structuredData}
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kinderzauberer', url: '/kinderzauberer/' }]}
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/" class="hover:text-[#d7393e]">Clown Zauberer LIAR</a> »
+      </p>
+      <h1 class="font-black text-[#1f2025] text-2xl sm:text-4xl lg:text-5xl mb-6">Kinderzauberer in NRW – Ihre Kinderzaubershow zum Staunen</h1>
+    </div>
+  </section>
+
+  <!-- Hero Section -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 576px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImg}
+      alt="Kinderzauberer NRW – Zaubershow für Kinder"
+      class="absolute inset-0 w-full h-full object-cover object-top"
+      style="object-position: 46% 70%"
+      widths={[480, 768, 1200, 1600]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+      loading="eager"
+      fetchpriority="high"
+    />
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="relative flex items-center justify-center" style="min-height: 576px;">
+      <h2 class="text-white font-bold text-center px-6 leading-tight" style="font-size: clamp(1.8rem, 4.5vw, 3.2rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+        Kinderzauberer in NRW –<br />Zaubershow für unvergessliche Momente
+      </h2>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Intro Text -->
+  <section class="py-12">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <p class="hero-subtitle text-[#374151] text-lg leading-relaxed mb-4">
+        Kinderzauberer LIAR (Michaël Prescler) ist ein professioneller Kinderzauberer aus Gladbeck und tritt in ganz NRW auf. Er gestaltet eine interaktive Kinderzaubershow für Kindergeburtstage, Schulfeste und Familienfeiern – für Kinder von 4 bis 12 Jahren, ab ca. 25–30 Minuten und für Kindergeburtstage zu transparenten Festpreisen buchbar.
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-4">
+        Seit über 15 Jahren bringe ich Kinder und Familien bei Kindergeburtstagen, Schulfesten und Veranstaltungen in NRW zum Staunen – mit einer Mischung aus Clownerie, Zauberei und jeder Menge Mitmachmomenten.
+      </p>
+      <p class="text-[#374151] leading-relaxed mb-6">
+        Meine <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a> ist speziell für Kinder entwickelt: bunt, humorvoll und voller Mitmachmomente. Schauen Sie sich auch meine <a href="/galerie/" class="text-[#d7393e] hover:underline">Galerie</a> an!
+      </p>
+      <p class="font-bold text-[#1f2025] text-lg">
+        🎉 Perfekt für Kindergeburtstage, Feste, Kindergärten und Schulen.
+      </p>
+    </div>
+  </section>
+
+  <section class="py-12 bg-[#eff4ff]">
+    <div class="max-w-4xl mx-auto px-4">
+      <div class="relative w-full" style="padding-bottom: 56.25%;">
+        <iframe
+          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
+          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
+          class="absolute inset-0 w-full h-full rounded-lg"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+          loading="lazy"
+        ></iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- So läuft die Zaubershow ab -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+        <div>
+          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6">So läuft meine Kinderzaubershow ab</h2>
+          <hr class="border-[#1f2025] w-32 mb-6" />
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Meine Kinderzaubershow beginnt mit einer spannenden Geschichte, die die Kinder sofort in ihren Bann zieht. Schon nach wenigen Minuten wird aus der Geschichte eine rasante, witzige und zauberhafte Show, bei der die Grenzen zwischen Zauberer und Publikum verschwimmen.
+          </p>
+          <p class="font-semibold text-[#1f2025] mb-4">Die Kinder erleben:</p>
+          <ul class="space-y-2 text-[#374151] mb-6">
+            <li>✅ Verblüffende Zaubertricks mit Alltagsgegenständen</li>
+            <li>✅ Eigene Zaubermomente, wenn sie mir auf der „Bühne" assistieren</li>
+            <li>✅ Lustiges Chaos, wenn Tricks scheinbar schiefgehen</li>
+            <li>✅ Staunen und Lachen im ständigen Wechsel</li>
+            <li>✅ Das unbezahlbare Gefühl, selbst gezaubert zu haben</li>
+          </ul>
+          <p class="text-[#374151] mb-8 leading-relaxed">
+            Der beste Trick? Den gibt es nicht – denn der schönste Moment ist immer, wenn ich den Kindern ein echtes Lächeln ins Gesicht zaubere. Das ist die Magie, die wirklich zählt!
+          </p>
+          <a href="/kindergeburtstag/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+            Kindergeburtstag – Preise
+          </a>
+        </div>
+        <div class="flex justify-center">
+          <Image
+            src={kindergeburtstagMitKinderzauberer}
+            alt="Kinderzauberer auf einem Kindergeburtstag in Essen"
+            class="rounded-2xl object-cover object-[20%] portrait-zoom"
+            style="width: 300px; height: 300px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            loading="lazy"
+            widths={[300, 600]}
+            sizes="300px"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 3-Column Info Cards mit abgerundeten Bildern -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+        <!-- Einfach und unkompliziert -->
+        <div class="text-center px-4">
+          <div class="flex justify-center mb-4">
+            <Image
+              src={clownerieUndZauberei}
+              alt="Kinderzauberer LIAR verbindet Clownerie und Zauberei auf einem Kinderfest"
+              class="rounded-2xl object-cover object-[20%] portrait-zoom"
+              style="width: 150px; height: 150px; box-shadow: 0 8px 24px rgba(0,0,0,0.10);"
+              loading="lazy"
+              widths={[150, 300]}
+              sizes="150px"
+            />
+          </div>
+          <hr class="border-[#1f2025] border-2 mx-auto mb-4 w-4/5" />
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Einfach und unkompliziert</h3>
+          <p class="text-[#374151] leading-relaxed text-sm">
+            Mit wenig Aufwand und fast ohne Vorbereitungszeit komme ich vorbei… und lege mit meinem Programm los: lachende Kinder, ausgelassene Stimmung und entspannte Eltern!
+          </p>
+        </div>
+        <!-- Sehen und mit fiebern -->
+        <div class="text-center px-4">
+          <div class="flex justify-center mb-4">
+            <Image
+              src={fotogalerieClownZauberer16}
+              alt="Kinderzauberer bringt Kinder zum Staunen bei Zaubershow in NRW"
+              class="rounded-2xl object-cover object-[20%] portrait-zoom"
+              style="width: 150px; height: 150px; box-shadow: 0 8px 24px rgba(0,0,0,0.10);"
+              loading="lazy"
+              widths={[150, 300]}
+              sizes="150px"
+            />
+          </div>
+          <hr class="border-[#1f2025] border-2 mx-auto mb-4 w-4/5" />
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Sehen und mit fiebern</h3>
+          <p class="text-[#374151] leading-relaxed text-sm">
+            Die Kinder werden immer wieder mit eingebunden und pendeln die ganze Zeit zwischen Lachen und Staunen… und mein bester Trick funktioniert immer: den Kindern ein Lächeln ins Gesicht zu zaubern.
+          </p>
+        </div>
+        <!-- Witziger Kinderzauberer -->
+        <div class="text-center px-4">
+          <div class="flex justify-center mb-4">
+            <Image
+              src={zaubershowMitClownZaubererLiar}
+              alt="Kinderzauberer bei Zaubershow in einer Schule"
+              class="rounded-2xl object-cover object-[20%] portrait-zoom"
+              style="width: 150px; height: 150px; box-shadow: 0 8px 24px rgba(0,0,0,0.10);"
+              loading="lazy"
+              widths={[150, 300]}
+              sizes="150px"
+            />
+          </div>
+          <hr class="border-[#1f2025] border-2 mx-auto mb-4 w-4/5" />
+          <h3 class="font-bold text-[#1f2025] text-lg mb-3">Witziger Kinderzauberer</h3>
+          <p class="text-[#374151] leading-relaxed text-sm">
+            Ob Schulfeier, Weihnachtsfeier, Hochzeit, Gartenfest, oder Kommunion sowie Kindergärten oder Schulen sorge ich mit meiner Kinderzaubershow für staunende und lachende Gesichter. Auch im Wohnzimmer für den Kindergeburtstag!
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <!-- Google Reviews -->
+  <!-- Weitere Anlässe (SEO-Audit 06.08.2026, Massnahme H6): /clown/karneval/ und
+       /clown/walk-act/ hatten 0 bzw. 3 interne Content-Links. -->
+  <section class="py-12 bg-[#f9fafb]" data-related-services>
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-6">
+        Für welche Anlässe kann man Clown LIAR sonst buchen?
+      </h2>
+      <div class="grid gap-4 sm:grid-cols-2">
+        <a href="/clown/karneval/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
+          <p class="font-bold text-[#1f2025] mb-1">Clown für Karneval &amp; Kindersitzung</p>
+          <p class="text-sm text-[#595959]">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
+        </a>
+        <a href="/clown/walk-act/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
+          <p class="font-bold text-[#1f2025] mb-1">Walk-Act für Straßen- und Stadtfest</p>
+          <p class="text-sm text-[#595959]">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <GoogleReviews />
+
+  <section class="py-12 bg-[#fdf2f2]">
+    <div class="max-w-5xl mx-auto px-4">
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">😊</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
+        </div>
+        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
+          <div class="text-3xl mb-2">🪄</div>
+          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
+          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ / Wissenwertes -->
+  <section class="bg-white py-14">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">Was sollten Eltern über den Kinderzauberer wissen?</h2>
+      <div class="space-y-8">
+        <div>
+          <h3 class="font-bold text-[#1f2025] text-center mb-4">Was kostet ein Auftritt von Kinderzauberer LIAR?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Die Gage richtet sich nach Art und Umfang der Veranstaltung, Zuschauerzahl, Anfahrtsweg und Jahreszeit. Für Kindergeburtstage biete ich transparente Festpreise an. Kontaktieren Sie mich für ein unverbindliches Angebot – ich berate Sie gerne persönlich!
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-[#1f2025] text-center mb-4">Was kostet eine Kinderzaubershow?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Ich arbeite mit transparenten Festpreisen ohne versteckte Kosten. Die Gage hängt von Anlass, Dauer und Anfahrt ab – über die <a href="/kontakt/" class="text-[#d7393e] hover:underline">Kontaktseite</a> erstelle ich Ihnen gerne ein individuelles Angebot für Ihre Kinderzaubershow.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-[#1f2025] text-center mb-4">Wieviel Platz braucht man für die Zaubershow?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Ich benötige lediglich eine Fläche von etwa 2×2 Metern. Das bedeutet: Die Show ist möglich im Wohnzimmer, Kinderzimmer, Partykeller, auf der Terrasse, im Garten, in Turnhallen, Kindergärten, auf kleinen und großen Bühnen – praktisch überall!
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-[#1f2025] text-center mb-4">Wie lange dauert eine Vorführung mit dem Kinderzauberer?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Die Show ist ab 25-30 Minuten buchbar und lässt sich flexibel gestalten. Für größere Veranstaltungen oder wenn mehr Zeit zur Verfügung steht, biete ich auch Programme von 45-60 Minuten an. Die Dauer stimme ich individuell mit Ihnen ab.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-[#1f2025] text-center mb-4">Für welches Alter ist die Zaubershow geeignet?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Meine Kinderzaubershow ist für Kinder von 4 bis 12 Jahren konzipiert. Ich passe das Programm altersgerecht an: Für Kindergartenkinder gestalte ich die Show etwas einfacher und kürzer, für Grundschulkinder darf es komplexer und länger sein.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Content-Tiefe: Zauberer für Kindergeburtstag (Ziel-Keyword, antwortfertig) -->
+  <section class="py-14 bg-[#eff4ff]">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-6">Zauberer für den Kindergeburtstag – Ablauf, Kosten &amp; Planung</h2>
+      <hr class="border-[#1f2025] w-32 mx-auto mb-8" />
+      <div class="space-y-6">
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-2">Was kostet ein Zauberer für den Kindergeburtstag?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Ein Zauberer für den Kindergeburtstag ist bei LIAR zu einem <strong>transparenten Festpreis</strong> buchbar – ohne versteckte Kosten. Der Festpreis gilt für die interaktive Kinderzaubershow ab ca. 25–30 Minuten. Alle Details finden Sie unter <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag – Preise</a>.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-2">Wie läuft die Zaubershow am Geburtstag ab?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Die Show braucht nur etwa 2×2 Meter Platz und funktioniert im Wohnzimmer genauso wie im Partykeller oder Garten. Das Geburtstagskind steht im Mittelpunkt: Es assistiert bei den Zaubertricks und erlebt seinen eigenen Zaubermoment vor allen Gästen. Auf Wunsch ergänze ich die Show um <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonfiguren</a> für alle Kinder.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-2">Für welches Alter und wie viele Kinder?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Die Zaubershow ist für Kinder von 4 bis 12 Jahren konzipiert und wird altersgerecht angepasst – vom kleinen Kindergeburtstag bis zum Schulfest oder Kita-Fest. Auch bei größeren Gruppen kommt jedes Kind auf seine Kosten, denn Mitmachen ist das Herzstück der Show.
+          </p>
+        </div>
+        <div>
+          <h3 class="font-bold text-[#1f2025] mb-2">Wann sollte man den Zauberer buchen?</h3>
+          <p class="text-[#374151] leading-relaxed">
+            Beliebte Wochenend-Termine sind erfahrungsgemäß früh vergeben – eine rechtzeitige Anfrage lohnt sich. Kurzfristige Termine sind je nach Verfügbarkeit ebenfalls möglich. Tipp: Wer Zauberei und <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">Clownshow</a> kombiniert, bekommt ein abwechslungsreiches Programm aus einer Hand.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Content-Tiefe: Ablauf des Auftritts -->
+  <section class="py-14 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-2xl font-extrabold text-[#1f2025] mb-6">Wie läuft der Auftritt des Kinderzauberers ab?</h2>
+      <p class="text-[#374151] text-[17px] leading-relaxed mb-4">
+        Vom ersten Kontakt bis zum Applaus ist alles bewusst einfach gehalten. Nach Ihrer Anfrage stimmen wir Termin, Ort und Programmwunsch ab – meist antworte ich innerhalb von 24 Stunden. Am Veranstaltungstag komme ich rechtzeitig an und baue in wenigen Minuten auf; mehr als eine freie Fläche von 2×2 Metern brauche ich dafür nicht. Die Show selbst beginnt mit einer Geschichte, die die Kinder sofort in die Zauberwelt hineinzieht. Von da an sind sie mittendrin statt nur dabei: Sie assistieren bei den Tricks, sprechen Zaubersprüche und erleben, wie durch ihre Hilfe scheinbar Unmögliches gelingt. Zwischendurch sorgt die Clownerie dafür, dass auf jedes Staunen ein Lachen folgt. Zum Schluss steigert sich die Show zu einem Finale, das die Kinder noch Tage später nacherzählen. Danach baue ich genauso unkompliziert wieder ab – und Sie haben entspannte Gäste und strahlende Kinder.
+      </p>
+      <ul class="space-y-2 text-[#374151] text-sm">
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Anfrage – Antwort meist innerhalb von 24 Stunden</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Kurzer Aufbau, nur 2×2 Meter Platzbedarf</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Interaktive Show ab 25–30 Minuten, flexibel erweiterbar</li>
+        <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Kein Aufwand für Gastgeber – alles bringe ich selbst mit</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- Content-Tiefe: Was unterscheidet LIAR -->
+  <section class="py-14 bg-gray-50">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-2xl font-extrabold text-[#1f2025] mb-6">Was unterscheidet LIAR von anderen Kinderzauberern?</h2>
+      <p class="text-[#374151] text-[17px] leading-relaxed mb-4">
+        Der wichtigste Unterschied: Bei LIAR bekommen Sie Clown und Zauberer in einer Person. Während klassische Zauberer vor allem Tricks vorführen, verbinde ich Zauberei mit Clownerie – die Kinder pendeln ständig zwischen ehrfürchtigem Staunen und herzhaftem Lachen. Dahinter steckt Routine, die man nicht abkürzen kann: Seit 2009 stehe ich als professioneller Entertainer auf der Bühne, spiele rund 400 Shows im Jahr und habe in dieser Zeit über 110.000 Kinder zum Lachen gebracht. Diese Erfahrung merkt man in jeder Situation – ob ein schüchternes Kind behutsam ermutigt werden will oder ein wildes Energiebündel eine Aufgabe braucht. Dazu kommt ein praktischer Vorteil für internationale Familien: Ich bin zweisprachig und zaubere auf Deutsch und Französisch. Und weil die Show mit nur 2×2 Metern Platz auskommt, funktioniert sie im Wohnzimmer genauso wie in der Turnhalle – ohne Bühnentechnik, ohne Aufwand für Sie.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content-Tiefe: Anlässe -->
+  <section class="py-14 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-2xl font-extrabold text-[#1f2025] mb-6">Für welche Anlässe kann man den Kinderzauberer buchen?</h2>
+      <p class="text-[#374151] text-[17px] leading-relaxed mb-4">
+        Der Klassiker ist natürlich der <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a>: Die Show passt ins Wohnzimmer, das Geburtstagskind steht im Mittelpunkt, und die Eltern haben 40 Minuten Ruhe – gefühlt zum ersten Mal an diesem Tag. Genauso häufig bin ich in <a href="/zauberer/zaubershow/kindergarten-kita/" class="text-[#d7393e] hover:underline">Kindergärten und Kitas</a> unterwegs, etwa zum Abschlussfest, zu St. Martin oder einfach als Überraschung im Kita-Alltag – dort natürlich mit einem Programm, das auf die Jüngsten zugeschnitten ist. Für <a href="/zauberer/zaubershow/schule/" class="text-[#d7393e] hover:underline">Schulen</a> eignet sich die Show bei Schulfesten, Einschulungsfeiern und Projektwochen, denn auch größere Gruppen bleiben durch die vielen Mitmachmomente bei der Sache. Und dazwischen liegen all die Familienanlässe, bei denen Kinder unter den Gästen sind: Kommunion, Konfirmation, Taufe, Hochzeit oder das Sommerfest im Verein. Überall dort gilt dasselbe Prinzip – wo Kinder beschäftigt und begeistert sind, feiern auch die Erwachsenen entspannter.
+      </p>
+    </div>
+  </section>
+
+  <!-- Einsatzgebiet -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-2">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <h3 class="font-bold text-[#1f2025] text-center mb-10">Kinderzauberer Einsatzgebiet</h3>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+        <div>
+          <p class="text-[#374151] mb-4 leading-relaxed">
+            Ich trete regelmäßig in Städten wie: <a href="/kinderzauberer/kinderzauberer-in-oberhausen/" class="text-[#3b55d5] hover:underline">Oberhausen</a>, <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/" class="text-[#3b55d5] hover:underline">Gelsenkirchen</a>, <a href="/kinderzauberer/kinderzauberer-in-essen/" class="text-[#3b55d5] hover:underline">Essen</a>, <a href="/kinderzauberer/kinderzauberer-in-duisburg/" class="text-[#3b55d5] hover:underline">Duisburg</a>, <a href="/kinderzauberer/kinderzauberer-in-dorsten/" class="text-[#3b55d5] hover:underline">Dorsten</a>, <a href="/kinderzauberer/kinderzauberer-in-herten/" class="text-[#3b55d5] hover:underline">Herten</a>, <a href="/kinderzauberer/kinderzauberer-in-herne/" class="text-[#3b55d5] hover:underline">Herne</a>, <a href="/kinderzauberer/kinderzauberer-in-marl/" class="text-[#3b55d5] hover:underline">Marl</a>, <a href="/kinderzauberer/kinderzauberer-in-gladbeck/" class="text-[#3b55d5] hover:underline">Gladbeck</a>, <a href="/kinderzauberer/kinderzauberer-in-castrop-rauxel/" class="text-[#3b55d5] hover:underline">Castrop-Rauxel</a>, <a href="/kinderzauberer/kinderzauberer-in-waltrop/" class="text-[#3b55d5] hover:underline">Waltrop</a>, <a href="/kinderzauberer/kinderzauberer-in-wesel/" class="text-[#3b55d5] hover:underline">Wesel</a>, <a href="/kinderzauberer/kinderzauberer-in-xanten/" class="text-[#3b55d5] hover:underline">Xanten</a>, <a href="/kinderzauberer/kinderzauberer-in-muelheim/" class="text-[#3b55d5] hover:underline">Mülheim</a>, <a href="/kinderzauberer/kinderzauberer-in-duesseldorf/" class="text-[#3b55d5] hover:underline">Düsseldorf</a>, <a href="/kinderzauberer/kinderzauberer-in-dortmund/" class="text-[#3b55d5] hover:underline">Dortmund</a>, <a href="/kinderzauberer/kinderzauberer-in-moers/" class="text-[#3b55d5] hover:underline">Moers</a>, <a href="/kinderzauberer/kinderzauberer-in-bochum/" class="text-[#3b55d5] hover:underline">Bochum</a>, <a href="/kinderzauberer/kinderzauberer-in-bottrop/" class="text-[#3b55d5] hover:underline">Bottrop</a>, <a href="/kinderzauberer/kinderzauberer-in-datteln/" class="text-[#3b55d5] hover:underline">Datteln</a>, <a href="/kinderzauberer/kinderzauberer-in-dinslaken/" class="text-[#3b55d5] hover:underline">Dinslaken</a>, <a href="/kinderzauberer/kinderzauberer-in-haltern/" class="text-[#3b55d5] hover:underline">Haltern</a>, <a href="/kinderzauberer/kinderzauberer-in-recklinghausen/" class="text-[#3b55d5] hover:underline">Recklinghausen</a> … Jedoch kann man mich auch überregional und international (Frankreich, Belgien, Österreich, Schweiz) buchen!
+          </p>
+          <div class="space-y-3">
+            <p class="font-semibold text-[#1f2025]">Jetzt unverbindlich anfragen</p>
+            <p>📧 <a href="mailto:info@liar-entertainer.com" class="text-[#3b55d5] hover:underline">info@liar-entertainer.com</a></p>
+            <p>📞 <a href="tel:+491721517578" class="text-[#3b55d5] hover:underline">+49 172 1517578</a></p>
+          </div>
+        </div>
+        <div>
+          <Image
+            src={clownZaubererGladbeck}
+            alt="Einsatzgebiet Kinderzauberer LIAR in NRW – Karte mit Standort Gladbeck"
+            class="rounded-lg w-full h-auto img-hover-zoom"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="(min-width: 1024px) 50vw, 100vw"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact CTA -->
+  <section class="bg-white py-12 border-t border-gray-100">
+    <div class="max-w-3xl mx-auto px-4 text-center">
+      <h2 class="font-bold text-[#1f2025] text-xl mb-4">Einfach Kontakt aufnehmen</h2>
+      <p class="text-[#374151] mb-6 leading-relaxed">
+        Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben. Ich helfe Ihnen gerne weiter.
+      </p>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+        Kontaktformular
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

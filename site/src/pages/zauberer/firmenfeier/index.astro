@@ -1,0 +1,226 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import HeroStage from '../../../components/HeroStage.astro';
+import GoogleReviews from '../../../components/GoogleReviews.astro';
+import { Image } from 'astro:assets';
+import heroImg from '../../../assets/images/galerie/zauberer-firmenfeier.jpg';
+import weihnachtImg from '../../../assets/images/zauberer/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
+import buehneImg from '../../../assets/images/galerie/buehnen-zauberer-essen.jpg';
+import closeupImg from '../../../assets/images/galerie/close-up-zauberei-muelheim.jpg';
+
+const seoTitle = 'Zauberer Firmenfeier NRW | Weihnachtsfeier & Gala | LIAR';
+const seoDescription = 'Zauberer für Firmenfeier & Weihnachtsfeier in NRW ✓ Bühnenshow & Close-up an den Tischen ✓ Deutsch & Französisch ✓ 370+ Top-Bewertungen ✓ Jetzt anfragen!';
+
+const features = [
+  { icon: '🎭', title: 'Bühnenshow als Highlight', text: 'Eine elegante Stand-up-Zauberei begeistert Ihr gesamtes Team gleichzeitig – ideal als zentraler Programmpunkt der Feier.' },
+  { icon: '🍸', title: 'Close-up am Empfang', text: 'Beim Sektempfang oder zwischen den Gängen zaubere ich direkt an den Tischen und bringe die Kolleginnen und Kollegen ins Gespräch.' },
+  { icon: '🎄', title: 'Perfekt zur Weihnachtsfeier', text: 'Zur Weihnachtsfeier sorgt die Zauberei für den besonderen Moment, an den sich Ihr Team noch lange erinnert.' },
+  { icon: '🇫🇷', title: 'Deutsch & Französisch', text: 'Als gebürtiger Franzose unterhalte ich auch internationale Teams und Gäste – zweisprachig auf Deutsch und Französisch.' },
+  { icon: '⭐', title: '370+ Top-Bewertungen', text: 'Über 400 zufriedene Kunden, bewertet mit 5,0 von 5 Sternen. Verlässlichkeit und Qualität für Ihr Firmenevent.' },
+  { icon: '⚡', title: 'Minimaler Aufwand', text: 'Kurze Aufbauzeit, geringe technische Anforderungen, flexible Anpassung an Ihr Programm – ich mache es Ihrem Orga-Team leicht.' },
+];
+
+const faqItems = [
+  { q: 'Welche Zauberei passt zu einer Firmenfeier?', a: 'Beides funktioniert hervorragend: eine Bühnenshow (Stand-up-Zauberei) als gemeinsames Highlight für das ganze Team sowie Close-up-Zauberei direkt an den Tischen beim Empfang oder zwischen den Gängen. Oft ist die Kombination die beste Lösung.' },
+  { q: 'Eignet sich die Show auch für die Weihnachtsfeier?', a: 'Ja, die Weihnachtsfeier ist einer der beliebtesten Anlässe. Die Zauberei lässt sich stimmungsvoll in den Abend einbinden – als Bühnen-Highlight oder als Unterhaltung an den Tischen.' },
+  { q: 'Für wie viele Mitarbeitende ist die Show geeignet?', a: 'Für die Bühnenshow sind 10 bis 150 Personen optimal; bei größeren Gruppen besprechen wir das Setup. Close-up-Zauberei funktioniert für jede Gruppengröße, da ich von Tisch zu Tisch wechsle.' },
+  { q: 'Ist die Show auch auf Französisch oder für internationale Teams möglich?', a: 'Absolut. Als gebürtiger Franzose biete ich Shows auf Deutsch und Französisch an – ideal für internationale Firmen, zweisprachige Events oder Gäste aus dem Ausland.' },
+  { q: 'In welchen Städten sind Sie für Firmenfeiern buchbar?', a: 'In ganz NRW – u. a. Essen, Düsseldorf, Dortmund, Köln, Duisburg, Bochum, Gladbeck und im gesamten Ruhrgebiet. Auf Anfrage deutschlandweit sowie in Frankreich, Belgien, den Niederlanden, Österreich und der Schweiz.' },
+];
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": faqItems.map(item => ({
+    "@type": "Question",
+    "name": item.q,
+    "acceptedAnswer": { "@type": "Answer", "text": item.a },
+  })),
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Zauberer für Firmenfeiern & Weihnachtsfeiern in NRW",
+  "serviceType": "Firmenevent-Zauberer / Bühnen- und Close-up-Zauberei",
+  "description": "Zauberer LIAR für Firmenfeiern, Betriebsfeiern und Weihnachtsfeiern in NRW – Bühnenshow und Close-up-Zauberei an den Tischen. Deutsch und Französisch.",
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": { "@type": "State", "name": "Nordrhein-Westfalen" },
+  "url": "https://liar-entertainer.com/zauberer/firmenfeier/"
+};
+---
+
+<BaseLayout
+  title={seoTitle}
+  description={seoDescription}
+  keywords="Zauberer Firmenfeier, Zauberer Weihnachtsfeier NRW, Firmenevent Zauberer, Betriebsfeier Zauberer, Gala Zauberer NRW"
+  canonical="https://liar-entertainer.com/zauberer/firmenfeier/"
+  structuredData={[serviceSchema, faqSchema]}
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Firmenfeier', url: '/zauberer/firmenfeier/' }]}
+>
+
+  <!-- Page Title -->
+  <section class="bg-white pt-8 pb-0">
+    <div class="max-w-6xl mx-auto px-4">
+      <p class="text-sm text-[#595959] mb-4">
+        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
+        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
+        <span>Firmenfeier</span>
+      </p>
+      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Zauberer für Firmenfeier &amp; Weihnachtsfeier in NRW</h1>
+    </div>
+  </section>
+
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 560px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+        <Image
+          src={heroImg}
+          alt="Zauberer für die Firmenfeier – Unterhaltung für Ihr Team in NRW"
+          class="absolute inset-0 w-full h-full object-cover object-center"
+          loading="eager"
+          fetchpriority="high"
+          widths={[600, 900, 1200]}
+          sizes="(max-width: 1152px) 100vw, 1120px"
+        />
+        <div class="absolute inset-0 bg-black/50"></div>
+        <div class="relative flex items-center justify-center" style="min-height: 560px;">
+          <div class="text-center px-6">
+            <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+              Unvergessliche Unterhaltung für Ihr Firmenevent
+            </h2>
+            <p class="text-white/90 text-lg font-medium">Bühnenshow &amp; Close-up-Zauberei – auch zur Weihnachtsfeier</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Intro -->
+  <section class="py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
+        <div>
+          <p class="text-[#374151] leading-relaxed mb-6">
+            Ob Sommerfest, Jubiläum, Betriebsfeier oder Weihnachtsfeier: Als Zauberer bringe ich frischen Schwung in Ihr Firmenevent. Als gemeinsames Highlight eine elegante <a href="/zauberer/buehnen-zauberer/" class="text-[#d7393e] hover:underline">Bühnenshow</a>, für den Empfang und die Tische die persönliche <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">Close-up-Zauberei</a> – auf Wunsch kombiniert und auf Deutsch oder Französisch.
+          </p>
+          <ul class="space-y-3">
+            {['✓ Bühnenshow & Close-up an den Tischen', '✓ Deutsch & Französisch', '✓ 370+ TOP-Bewertungen ⭐⭐⭐⭐⭐', '✓ Minimaler Aufwand, flexibel im Ablauf'].map(item => (
+              <li class="flex items-center gap-3 text-[#374151]">
+                <span class="text-[#d7393e] font-bold">{item.split(' ').slice(0,1)}</span>
+                <span>{item.split(' ').slice(1).join(' ')}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-4">📊 Auf einen Blick</h3>
+          <dl class="space-y-3 text-sm">
+            {[
+              ['Format', 'Bühnenshow & / oder Close-up-Zauberei'],
+              ['Anlässe', 'Firmenfeier, Betriebsfeier, Weihnachtsfeier, Jubiläum, Gala'],
+              ['Publikum', 'Bühne 10–150 Personen · Close-up jede Größe'],
+              ['Sprachen', 'Deutsch, Französisch'],
+              ['Techn. Aufwand', 'Minimal, kurze Aufbauzeit'],
+              ['Gebiet', 'NRW, deutschlandweit & international'],
+            ].map(([k, v]) => (
+              <div class="flex gap-4">
+                <dt class="font-semibold text-[#1f2025] w-28 flex-shrink-0">{k}:</dt>
+                <dd class="text-[#374151]">{v}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  </HeroStage>
+  <GoogleReviews />
+
+  <!-- Formate -->
+  <section class="bg-gray-50 py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">Zwei Formate – ein unvergesslicher Abend</h2>
+      <p class="text-center text-[#374151] mb-8">Einzeln oder kombiniert, ganz nach Ablauf Ihrer Feier</p>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+        {[
+          { title: '🎭 Bühnenshow', text: 'Stand-up-Comedy-Zauberei für alle Gäste gleichzeitig – elegant, humorvoll und interaktiv. Das zentrale Highlight Ihres Abends.' },
+          { title: '🍸 Close-up an den Tischen', text: 'Zauberei zum Anfassen direkt an den Gästen – perfekt für Empfang, Networking und die Zeit zwischen den Gängen.' },
+          { title: '🎄 Weihnachtsfeier', text: 'Stimmungsvoll eingebunden in Ihre Weihnachtsfeier – der Moment, über den das Team noch im neuen Jahr spricht.' },
+        ].map(item => (
+          <div class="bg-white rounded-lg p-5 shadow-sm card-hover reveal">
+            <h4 class="font-bold text-[#1f2025] mb-2">{item.title}</h4>
+            <p class="text-[#374151] text-sm leading-relaxed">{item.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Gallery -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-[#1f2025] text-2xl text-center mb-4">📸 Eindrücke</h2>
+      <p class="text-[#374151] text-center mb-8">Weitere Fotos und Videos in meiner <a href="/galerie/" class="text-[#d7393e] hover:underline">Foto- und Videogalerie</a>.</p>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        <Image src={buehneImg} alt="Bühnenshow bei einer Firmenfeier in Essen" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
+        <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Mülheim" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
+        <Image src={weihnachtImg} alt="Zaubervorführung auf einem Weihnachtsmarkt in Dortmund" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
+      </div>
+    </div>
+  </section>
+
+  <!-- Why LIAR -->
+  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="font-bold text-2xl sm:text-3xl text-center mb-10 text-[#1f2025]">Warum LIAR für Ihr Firmenevent?</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+        {features.map(f => (
+          <div class="bg-white rounded-xl p-5 border border-[#c5d3f7] shadow-sm card-hover reveal">
+            <p class="text-2xl mb-2">{f.icon}</p>
+            <h3 class="font-bold mb-2 text-[#1f2025]">{f.title}</h3>
+            <p class="text-[#374151] text-sm leading-relaxed">{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-14 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center text-2xl font-extrabold text-[#1f2025] mb-8">Häufig gestellte Fragen</h2>
+      <div class="space-y-4">
+        {faqItems.map((i) => (
+          <details class="bg-[#f9fafb] rounded-xl p-5 group">
+            <summary class="font-bold cursor-pointer text-[#1f2025] flex justify-between items-center gap-4">
+              <span>{i.q}</span>
+              <span class="text-[#d7393e] transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+            </summary>
+            <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">{i.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="bg-[#1f2025] py-14 text-white text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎉 Zauberei für Ihre Firmenfeier anfragen</h2>
+      <p class="text-gray-300 mb-6">Gerade zur Weihnachtszeit sind Termine schnell vergeben – fragen Sie frühzeitig an. Schildern Sie mir kurz Ihr Event, ich erstelle Ihnen ein unverbindliches Angebot.</p>
+      <div class="space-y-2 text-gray-300 mb-8">
+        <p>📞 Telefon: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172 – 1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
+        <p>📍 Standort: Gladbeck, NRW (mobil in ganz Deutschland)</p>
+      </div>
+      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+        Jetzt unverbindlich anfragen
+      </a>
+    </div>
+  </section>
+
+</BaseLayout>

@@ -1,0 +1,427 @@
+---
+import { Image } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import HeroStage from '../../components/HeroStage.astro';
+import GoogleReviews from '../../components/GoogleReviews.astro';
+import heroImg from '../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
+import zaubershowImg from '../../assets/images/shows/zaubershow.jpg';
+import ballonImg from '../../assets/images/shows/ballonmodellage.jpg';
+import glitzerImg from '../../assets/images/shows/glitzer-tattoos.jpg';
+
+const title = "Preise & Pakete – Kindergeburtstag ab 150 € | LIAR";
+const description = 'Transparente Preise für Kindergeburtstag mit Clown Zauberer LIAR – Zaubershow ab 150€ – Ballontiere +20€ – Glitzer Tattoos +40€ – Keine versteckten Kosten!';
+
+const faqSchema = {
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "Was kostet ein Clown für den Kindergeburtstag?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Zaubershow für den Kindergeburtstag kostet 150€ für 40 Minuten (bis ca. 12 Kinder). Zusätzlich buchbar: Ballonmodellage (+20€) und Glitzer Tattoos (+40€). Hinzu kommen Fahrtkosten von 0,40€ pro Kilometer (Hin- und Rückfahrt) ab Gladbeck."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Gibt es versteckte Kosten?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Nein. Der genannte Preis enthält die komplette Show inklusive aller Materialien. Es kommen lediglich die Fahrtkosten hinzu, die vorab transparent berechnet werden."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Kann ich auch nur Ballonmodellage oder Glitzer Tattoos buchen?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Ballonmodellage und Glitzer Tattoos sind als Ergänzung zur Zaubershow konzipiert. Für eigenständige Buchungen (z.B. auf Straßenfesten) kontaktieren Sie mich bitte für ein individuelles Angebot."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Wie bezahle ich?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Die Bezahlung erfolgt in der Regel bar vor Ort am Tag der Veranstaltung. Auf Wunsch ist auch Überweisung vorab möglich."
+      }
+    }
+  ]
+};
+
+const serviceSchema = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "name": "Clown Zauberer LIAR – Kindergeburtstag",
+  "provider": { "@id": "https://liar-entertainer.com/#business" },
+  "areaServed": {
+    "@type": "State",
+    "name": "Nordrhein-Westfalen"
+  },
+  "hasOfferCatalog": {
+    "@type": "OfferCatalog",
+    "name": "Kindergeburtstag-Pakete",
+    "itemListElement": [
+      {
+        "@type": "Offer",
+        "name": "Zaubershow",
+        "price": "150",
+        "priceCurrency": "EUR",
+        "description": "40 Minuten interaktive Zaubershow für bis zu 12 Kinder, inkl. Material"
+      },
+      {
+        "@type": "Offer",
+        "name": "Zaubershow + Ballonmodellage",
+        "price": "170",
+        "priceCurrency": "EUR",
+        "description": "Zaubershow plus Ballontiere für jedes Kind, ca. 55 Minuten"
+      },
+      {
+        "@type": "Offer",
+        "name": "Komplett-Paket",
+        "price": "210",
+        "priceCurrency": "EUR",
+        "description": "Zaubershow + Ballonmodellage + Glitzer Tattoos, ca. 90 Minuten"
+      }
+    ]
+  }
+};
+
+const videoSchema = {
+  "@context": "https://schema.org",
+  "@type": "VideoObject",
+  "name": "Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!",
+  "description": "Clown Zauberer LIAR zeigt seine Zaubershow für Kinder in NRW. Ab 150€ – professionell, lustig und unvergesslich.",
+  "thumbnailUrl": "https://img.youtube.com/vi/Cop0SqRIX4Y/maxresdefault.jpg",
+  "uploadDate": "2018-02-04",
+  "duration": "PT2M30S",
+  "contentUrl": "https://www.youtube.com/watch?v=Cop0SqRIX4Y",
+  "embedUrl": "https://www.youtube.com/embed/Cop0SqRIX4Y",
+  "publisher": { "@type": "Organization", "name": "Clown Zauberer LIAR", "url": "https://liar-entertainer.com" }
+};
+---
+
+<BaseLayout
+  title={title}
+  description={description}
+  keywords="Preise Clown Zauberer, Kindergeburtstag Kosten, Zaubershow Preis, Clown buchen Kosten NRW, Kinderzauberer Preise"
+  canonical="https://liar-entertainer.com/preise/"
+  breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Preise & Pakete', url: '/preise/' }]}
+  structuredData={[faqSchema, serviceSchema, videoSchema]}
+>
+
+  <!-- Hero -->
+  <HeroStage blobOpacity={0.45}>
+  <section class="pt-6 sm:pt-8">
+    <div class="max-w-6xl mx-auto px-4">
+      <div class="relative overflow-hidden rounded-3xl" style="min-height: 440px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
+    <Image
+      src={heroImg}
+      alt="Preise und Pakete – Clown Zauberer LIAR für Kindergeburtstag"
+      class="absolute inset-0 w-full h-full object-cover"
+      style="object-position: 50% 30%"
+      loading="eager"
+      fetchpriority="high"
+      widths={[400, 800, 1200]}
+      sizes="(max-width: 1152px) 100vw, 1120px"
+    />
+    <div class="absolute inset-0 bg-black/45"></div>
+    <div class="relative flex items-end justify-center pb-12 pt-28" style="min-height: 440px;">
+      <div class="max-w-3xl mx-auto px-4 text-center">
+        <h1 class="text-white font-extrabold text-3xl sm:text-4xl lg:text-5xl mb-4 drop-shadow-lg">Preise & Pakete – Transparent und fair</h1>
+        <p class="text-gray-200 text-lg drop-shadow">Bei Clown Zauberer LIAR gibt es keine versteckten Kosten. Alle Kindergeburtstag-Preise sind fest kalkuliert. Für Firmenfeiern, Stadtfeste und andere Events wird ein individuelles Angebot erstellt.</p>
+      </div>
+    </div>
+  </div>
+    </div>
+  </section>
+
+  <!-- Einleitungstext -->
+  <section class="py-14 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl sm:text-3xl mb-5">Was kostet ein Clown Zauberer?</h2>
+      <p class="text-[#374151] text-[17px] leading-relaxed mb-4">
+        Die Kosten für einen professionellen Clown Zauberer hängen von mehreren Faktoren ab: der <strong>Art der Veranstaltung</strong> (Kindergeburtstag, Firmenfeier, Stadtfest, Kita-Fest), der <strong>gewünschten Showdauer</strong>, der <strong>Anzahl der Kinder oder Gäste</strong>, den gebuchten <strong>Zusatzleistungen</strong> wie Ballonmodellage oder Glitzer Tattoos sowie der <strong>Anfahrtsentfernung</strong> ab Gladbeck. Auch spielt es eine Rolle, ob die Show drinnen oder draußen stattfindet und ob besondere Wünsche berücksichtigt werden sollen.
+      </p>
+      <p class="text-[#374151] text-[17px] leading-relaxed mb-4">
+        Für den <strong>Kindergeburtstag</strong> biete ich feste, transparente Paketpreise an – damit Sie von Anfang an genau wissen, was auf Sie zukommt. Diese finden Sie weiter unten auf dieser Seite.
+      </p>
+      <p class="text-[#374151] text-[17px] leading-relaxed">
+        Alle anderen Leistungen – ob <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">Clownshow</a>, <a href="/zauberer/buehnen-zauberer/" class="text-[#d7393e] hover:underline">Bühnenzauberei</a>, <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">Tischzauberei</a>, <a href="/clown/walk-act/" class="text-[#d7393e] hover:underline">Walk-Act</a> oder Auftritte bei Firmenfeiern, Stadtfesten und Schulen – laufen <strong>ausschließlich auf Anfrage</strong>. So erhalten Sie ein individuelles Angebot, das exakt zu Ihrem Event passt. Rufen Sie einfach an unter <a href="tel:+491721517578" class="text-[#d7393e] font-semibold hover:underline">0172-1517578</a> oder nutzen Sie das <a href="/kontakt/" class="text-[#d7393e] hover:underline">Kontaktformular</a> – ich berate Sie gerne persönlich!
+      </p>
+    </div>
+  </section>
+
+  </HeroStage>
+  <GoogleReviews />
+
+  <!-- PREISLISTE — Kindergeburtstag-Pakete -->
+  <section class="bg-white py-14">
+    <div class="max-w-6xl mx-auto px-4">
+      <h2 class="text-[#d7393e] font-bold text-3xl sm:text-4xl text-center mb-10">Kindergeburtstag-Pakete</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Zaubershow -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎩 Zaubershow</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">150 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> 40 Minuten interaktive Zaubershow</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Bis ca. 12 Kinder, Mindestalter 4 Jahre</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Inkl. Material</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Das Geburtstagskind steht im Mittelpunkt</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
+          </ul>
+          <p class="text-[#595959] text-xs">Gesamtdauer: ca. 40 Minuten</p>
+        </div>
+        <!-- Zaubershow + Ballons -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">🎈 Zaubershow + Ballons</h3>
+          <p class="text-[#3b55d5] font-bold text-2xl mb-4">170 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Alles aus "Zaubershow"</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Ballonmodellage für jedes Kind</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> Große Auswahl: Hund, Schwert, Blume, Krone, Dino u.v.m.</li>
+            <li class="flex items-start gap-2"><span class="text-[#3b55d5]">✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
+          </ul>
+          <p class="text-[#595959] text-xs">Gesamtdauer: ca. 55 Minuten</p>
+        </div>
+        <!-- Komplett-Paket -->
+        <div class="bg-white rounded-xl p-8 shadow-sm border-t-4 border-[#ffb546] relative card-hover reveal">
+          <span class="absolute -top-3 right-4 bg-[#ffb546] text-[#1f2025] text-xs font-bold px-3 py-1 rounded-full">Beliebteste</span>
+          <h3 class="font-bold text-[#1f2025] text-xl mb-2">✨ Komplett-Paket</h3>
+          <p class="text-[#d7393e] font-bold text-2xl mb-4">210 €</p>
+          <ul class="space-y-2 text-[#374151] text-sm mb-6">
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Alles aus "Zaubershow + Ballons"</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Glitzer Tattoos für jedes Kind</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Hautverträglich, hält 4-8 Tage</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> Viele Motive: Einhörner, Schmetterlinge, Dinos, Sterne u.v.m.</li>
+            <li class="flex items-start gap-2"><span class="text-[#d7393e]">✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
+          </ul>
+          <p class="text-[#595959] text-xs">Gesamtdauer: ca. 90 Minuten</p>
+        </div>
+      </div>
+      <!-- CTA -->
+      <div class="text-center mt-10">
+        <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors text-base">
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Bilder: Unsere Leistungen -->
+  <section class="py-14 bg-[#f9fafb]">
+    <div class="max-w-5xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl sm:text-3xl text-center mb-8">Das erwartet Sie</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
+        <div class="text-center">
+          <Image
+            src={zaubershowImg}
+            alt="Zaubershow für Kindergeburtstag mit Clown Zauberer LIAR"
+            class="rounded-xl w-full object-cover shadow-sm mb-3 img-hover-zoom" style="height:280px"
+            loading="lazy"
+            widths={[300, 500]}
+            sizes="(max-width: 640px) 100vw, 33vw"
+          />
+          <p class="font-bold text-[#1f2025]">Zaubershow</p>
+          <p class="text-[#595959] text-sm">40 Min. interaktive Magie</p>
+        </div>
+        <div class="text-center">
+          <Image
+            src={ballonImg}
+            alt="Ballonmodellage – bunte Ballontiere für Kinder"
+            class="rounded-xl w-full object-cover shadow-sm mb-3 img-hover-zoom" style="height:280px"
+            loading="lazy"
+            widths={[300, 500]}
+            sizes="(max-width: 640px) 100vw, 33vw"
+          />
+          <p class="font-bold text-[#1f2025]">Ballonmodellage</p>
+          <p class="text-[#595959] text-sm">Wunschtiere für jedes Kind</p>
+        </div>
+        <div class="text-center">
+          <Image
+            src={glitzerImg}
+            alt="Glitzer Tattoos – funkelnde Motive für Kinder"
+            class="rounded-xl w-full object-cover shadow-sm mb-3 img-hover-zoom" style="height:280px"
+            loading="lazy"
+            widths={[300, 500]}
+            sizes="(max-width: 640px) 100vw, 33vw"
+          />
+          <p class="font-bold text-[#1f2025]">Glitzer Tattoos</p>
+          <p class="text-[#595959] text-sm">Hautverträglich, hält Tage</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fahrtkosten -->
+  <section class="py-14 bg-[#f9fafb]">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl sm:text-3xl text-center mb-2">Fahrtkosten ab Gladbeck</h2>
+      <p class="text-center text-[#595959] text-sm mb-8">(Hin- und Rückfahrt, 0,40 €/km)</p>
+      <div class="bg-white rounded-xl shadow-sm overflow-hidden">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="bg-[#1f2025] text-white">
+              <th class="text-left px-6 py-3 font-semibold">Stadt / Region</th>
+              <th class="text-right px-6 py-3 font-semibold">ca. Fahrtkosten</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-100">
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-3 text-[#374151]">Gladbeck, Bottrop, Dorsten</td>
+              <td class="px-6 py-3 text-right text-[#374151] font-medium">8 – 12 €</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-3 text-[#374151]">Oberhausen, Gelsenkirchen, Herten, Marl</td>
+              <td class="px-6 py-3 text-right text-[#374151] font-medium">10 – 25 €</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-3 text-[#374151]">Essen, Bochum, Recklinghausen</td>
+              <td class="px-6 py-3 text-right text-[#374151] font-medium">15 – 30 €</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-3 text-[#374151]">Duisburg, Dortmund, Herne</td>
+              <td class="px-6 py-3 text-right text-[#374151] font-medium">25 – 40 €</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-3 text-[#374151]">Düsseldorf, Münster</td>
+              <td class="px-6 py-3 text-right text-[#374151] font-medium">40 – 60 €</td>
+            </tr>
+            <tr class="hover:bg-gray-50">
+              <td class="px-6 py-3 text-[#374151]">Köln, Bonn</td>
+              <td class="px-6 py-3 text-right text-[#374151] font-medium">60 – 80 €</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="text-center text-[#595959] text-sm mt-4">Alle Fahrtkosten verstehen sich für Hin- und Rückfahrt (0,40 €/km). Die genauen Kosten werden bei der Buchung individuell berechnet.</p>
+    </div>
+  </section>
+
+  <!-- Events & Firmen -->
+  <section class="py-14 bg-white">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl sm:text-3xl text-center mb-8">Events & Firmen</h2>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-[#f9fafb] rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-1">🎩 Close-up Zauberei / Tischzauberer</h3>
+          <p class="text-[#d7393e] font-semibold">Preis auf Anfrage</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-1">🎭 Bühnenzauberer / Stand-up Show</h3>
+          <p class="text-[#d7393e] font-semibold">Preis auf Anfrage</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-1">🤡 Clownshow</h3>
+          <p class="text-[#d7393e] font-semibold">Preis auf Anfrage</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-1">🚶 Walk-Act</h3>
+          <p class="text-[#d7393e] font-semibold">Preis auf Anfrage</p>
+        </div>
+        <div class="bg-[#f9fafb] rounded-xl p-6 sm:col-span-2 card-hover reveal">
+          <h3 class="font-bold text-[#1f2025] mb-1">🏫 Kindergarten / Schule (große Gruppen)</h3>
+          <p class="text-[#d7393e] font-semibold">Preis auf Anfrage</p>
+        </div>
+      </div>
+      <p class="text-center text-[#374151] mt-6">
+        Kontaktieren Sie mich für ein individuelles Angebot: <a href="tel:+491721517578" class="text-[#d7393e] font-bold hover:underline">0172-1517578</a>
+      </p>
+    </div>
+  </section>
+
+  <section class="py-14 bg-[#eff4ff]">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-[#1f2025] font-extrabold text-2xl sm:text-3xl mb-4 text-center">Was ist im Preis enthalten?</h2>
+      <p class="text-[#374151] text-center mb-10 max-w-2xl mx-auto">Bei Clown Zauberer LIAR ist alles dabei, was Sie für ein unvergessliches Event brauchen. Sie müssen sich um nichts kümmern – nur für gute Laune sorgen!</p>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 max-w-2xl mx-auto">
+        <div class="flex items-start gap-3">
+          <span class="text-xl mt-0.5 flex-shrink-0">🎩</span>
+          <div>
+            <span class="text-[#1f2025] font-semibold">Komplettes Showprogramm</span>
+            <p class="text-[#374151] text-sm mt-0.5">Zaubershow, Clownerie oder beides – individuell auf Ihr Event abgestimmt</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-xl mt-0.5 flex-shrink-0">🧳</span>
+          <div>
+            <span class="text-[#1f2025] font-semibold">Alle Materialien & Requisiten</span>
+            <p class="text-[#374151] text-sm mt-0.5">Zaubertricks, Ballons, Glitzer-Utensilien – alles wird mitgebracht</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-xl mt-0.5 flex-shrink-0">📞</span>
+          <div>
+            <span class="text-[#1f2025] font-semibold">Persönliche Vorbesprechung</span>
+            <p class="text-[#374151] text-sm mt-0.5">Telefonische Absprache zu Ablauf, Alter der Kinder und Ihren Wünschen</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-xl mt-0.5 flex-shrink-0">⏱️</span>
+          <div>
+            <span class="text-[#1f2025] font-semibold">Auf- und Abbau inklusive</span>
+            <p class="text-[#374151] text-sm mt-0.5">Pünktliches Erscheinen, Aufbau und Abbau – Sie müssen nichts vorbereiten</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-xl mt-0.5 flex-shrink-0">🎂</span>
+          <div>
+            <span class="text-[#1f2025] font-semibold">Geburtstagskind im Mittelpunkt</span>
+            <p class="text-[#374151] text-sm mt-0.5">Das Geburtstagskind wird zum Star der Show – ein unvergesslicher Moment</p>
+          </div>
+        </div>
+        <div class="flex items-start gap-3">
+          <span class="text-xl mt-0.5 flex-shrink-0">💰</span>
+          <div>
+            <span class="text-[#1f2025] font-semibold">Keine versteckten Kosten</span>
+            <p class="text-[#374151] text-sm mt-0.5">Der vereinbarte Preis gilt – es kommen nur die transparenten Fahrtkosten hinzu</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="py-14 bg-white">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-center text-2xl font-extrabold mb-8">Häufige Fragen zu Preisen</h2>
+      <div class="space-y-4">
+        <details class="bg-[#f9fafb] rounded-xl p-4 group faq-item">
+          <summary class="font-bold cursor-pointer text-[#1f2025]">Was kostet ein Clown für den Kindergeburtstag?</summary>
+          <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">Die Zaubershow für den Kindergeburtstag kostet 150€ für 40 Minuten (bis ca. 12 Kinder). Zusätzlich buchbar: Ballonmodellage (+20€) und Glitzer Tattoos (+40€). Hinzu kommen Fahrtkosten von 0,40€ pro Kilometer (Hin- und Rückfahrt) ab Gladbeck.</p>
+        </details>
+        <details class="bg-[#f9fafb] rounded-xl p-4 group faq-item">
+          <summary class="font-bold cursor-pointer text-[#1f2025]">Gibt es versteckte Kosten?</summary>
+          <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">Nein. Der genannte Preis enthält die komplette Show inklusive aller Materialien. Es kommen lediglich die Fahrtkosten hinzu, die vorab transparent berechnet werden.</p>
+        </details>
+        <details class="bg-[#f9fafb] rounded-xl p-4 group faq-item">
+          <summary class="font-bold cursor-pointer text-[#1f2025]">Kann ich auch nur Ballonmodellage oder Glitzer Tattoos buchen?</summary>
+          <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">Die Ballonmodellage und Glitzer Tattoos sind als Ergänzung zur Zaubershow konzipiert. Für eigenständige Buchungen (z.B. auf Straßenfesten) kontaktieren Sie mich bitte für ein individuelles Angebot.</p>
+        </details>
+        <details class="bg-[#f9fafb] rounded-xl p-4 group faq-item">
+          <summary class="font-bold cursor-pointer text-[#1f2025]">Wie bezahle ich?</summary>
+          <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">Die Bezahlung erfolgt in der Regel bar vor Ort am Tag der Veranstaltung. Auf Wunsch ist auch Überweisung vorab möglich.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="py-14 bg-[#1f2025] text-white text-center">
+    <div class="max-w-3xl mx-auto px-4">
+      <h2 class="text-2xl font-extrabold mb-4">Jetzt unverbindlich anfragen!</h2>
+      <p class="text-gray-300 text-[17px] mb-6">Rufen Sie an, schreiben Sie per WhatsApp oder nutzen Sie das Kontaktformular – wir melden uns innerhalb von 24 Stunden!</p>
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+        <a href="tel:+491721517578" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+          📞 0172-1517578
+        </a>
+        <a href="/kontakt/" class="inline-block bg-white/15 hover:bg-white/25 text-white font-bold px-8 py-3 rounded transition-colors">
+          Kontaktformular →
+        </a>
+      </div>
+    </div>
+  </section>
+
+</BaseLayout>

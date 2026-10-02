@@ -24,3 +24,7 @@ Verbindlicher Auftrag: siehe **docs/CLAUDE-CODE-BUILD-BRIEF.md**. Vor jeder Arbe
 - Zonen (vom Nutzer bestätigt): `/zauberer/zaubershow/kindergarten-kita/`, `/schule/`, `/strassen-sommer-fest/` = kids; Startseite/Kontakt/Preise/Galerie/Blog/Rechtliches = neutral.
 - URL-Vertrag: `docs/url-contract-de.txt` (143 URLs aus Live-Sitemap).
 - TDD: `npm test` (Unit, site-map) · `npm run test:dist` (Build + Tests gegen `dist/` HTML). Erst Test (RED), dann Code.
+- Migration: Altcode (origin/main @ ec7dcd1) übernommen, wird Template für Template umgestaltet. Details + **Drift-Warnung vor Cutover**: `docs/migration-notes.md`.
+- Tests: zusätzlich `npm run test:seo` (45 Legacy-SEO-Assertions, muss grün bleiben) und `npm run test:e2e` (braucht `astro preview` auf :4322).
+- hreflang erst, wenn FR/EN gebaut: `PUBLISHED_LOCALES` in site-map.ts erweitern. Test `tests/dist/hreflang.test.ts` verbietet Ziele ohne Seite.
+- Bewertungen: KEIN AggregateRating/Review-Schema (Nutzerentscheidung). Formular → Netlify Forms, reviews.php → Netlify Function.
