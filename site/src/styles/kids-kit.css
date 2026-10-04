@@ -195,3 +195,8 @@
    so no content (e.g. a button) ever sits on a wave. */
 .v2 main > section:has(+ .kg-band) { padding-bottom: calc(var(--space-6) + clamp(2.6rem, 5vw, 4.2rem)); }
 .v2 main > .kg-band + section { padding-top: calc(var(--space-6) + clamp(2.6rem, 5vw, 4.2rem)); }
+
+/* Bands paint above the next section's background, so their bottom wave edge is never covered by it.
+   Content of the next section still sits above the wave (its .container has the same z-index and
+   comes later in the DOM). */
+.v2 main > .kg-band { z-index: 1; }
