@@ -1,0 +1,21 @@
+---
+// Relaunch look: zone tokens, v2 header/footer/sticky contact. No legacy CSS on these pages.
+import Document from './Document.astro';
+import type { Props as DocumentProps } from './Document.astro';
+import SiteHeader from '../components/v2/SiteHeader.astro';
+import SiteFooter from '../components/v2/SiteFooter.astro';
+import StickyCta from '../components/v2/StickyCta.astro';
+import FontPreloads from '../components/v2/FontPreloads.astro';
+
+export type Props = Omit<DocumentProps, 'bodyClass'>;
+---
+
+<Document {...Astro.props} bodyClass="v2">
+  <FontPreloads slot="head" />
+  <SiteHeader />
+  <main>
+    <slot />
+  </main>
+  <SiteFooter />
+  <StickyCta />
+</Document>

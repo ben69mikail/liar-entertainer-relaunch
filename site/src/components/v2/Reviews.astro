@@ -2,6 +2,7 @@
 import { CONTACT, REVIEWS } from '../../data/site';
 import { colorFor, featuredReviews, initialsOf } from '../../lib/reviews';
 // Same wording as the legacy GoogleReviews block (L1), redesigned. Server-rendered only.
+const SUITS = ['♠', '♥', '♣', '♦'];
 ---
 
 <section class="rv" id="bewertungen" aria-labelledby="rv-title">
@@ -15,7 +16,7 @@ import { colorFor, featuredReviews, initialsOf } from '../../lib/reviews';
 
     <div class="rv__grid">
       {featuredReviews.map((r, i) => (
-        <figure class="rv__card" data-reveal data-reveal-delay={i * 0.06}>
+        <figure class="rv__card" data-reveal="deal" data-reveal-delay={i * 0.06} data-suit={SUITS[i % 4]} style={i % 2 ? '--suit-color: var(--accent)' : undefined}>
           <div class="rv__who">
             <div class="rv__avatar" style={`background:${colorFor(r.name)}`}>{initialsOf(r.name)}</div>
             <div>
@@ -72,7 +73,14 @@ import { colorFor, featuredReviews, initialsOf } from '../../lib/reviews';
   .rv__text { margin: 0; font-size: 0.98rem; color: var(--ink-soft); }
   .rv__more { text-align: center; margin: var(--space-4) 0 0; }
 
-  :global([data-zone='adult']) .rv__card { rotate: none; background: linear-gradient(180deg, #161a29, #11141f); }
-  :global([data-zone='adult']) .rv__text { font-style: italic; }
-  :global([data-zone='adult']) .rv__eyebrow { color: var(--accent); }
+  /* adult: each review is a playing card with a suit in the corner */
+  :global([data-zone='adult']) .rv__card { position: relative; padding-top: calc(var(--space-3) + 0.6rem); }
+  :global([data-zone='adult']) .rv__card::before {
+    content: attr(data-suit); position: absolute; top: 0.55rem; right: 0.8rem;
+    font-family: var(--font-display); font-size: 1.35rem; line-height: 1; color: var(--suit-color, var(--ink));
+  }
+  :global([data-zone='adult']) .rv__text { color: var(--ink); }
+  :global([data-zone='adult']) .rv__text::before { content: '„'; font-family: var(--font-display); font-size: 1.6em; line-height: 0; color: var(--accent); margin-right: 0.1em; }
+  :global([data-zone='adult']) .rv__eyebrow { color: var(--accent-strong); }
+  :global([data-zone='adult']) .rv__title { letter-spacing: 0.04em; }
 </style>

@@ -1,0 +1,52 @@
+---
+import PlayingCard from './PlayingCard.astro';
+// Interactive toy (fx.ts pickACard). Without JS the deck stays hidden and the link is simply there.
+const deck = [0, 1, 2, 3, 4];
+---
+
+<div class="pac" data-pick-a-card>
+  <p class="pac__title">Ein kleiner Trick zum Schluss</p>
+  <p class="pac__hint">Ziehen Sie eine Karte. Irgendeine.</p>
+  <div class="pac__deck" hidden>
+    {deck.map((i) => (
+      <button type="button" class="pac__card" style={`--i:${i}`}>
+        <span class="sr-only">Karte {i + 1} von 5 ziehen</span>
+        <span class="pac__faces" aria-hidden="true">
+          <PlayingCard back class="pac__back" />
+          <PlayingCard rank="A" suit="♥" class="pac__front" />
+        </span>
+      </button>
+    ))}
+  </div>
+  <div class="pac__result">
+    <p class="pac__reveal">Herz-Ass. Egal welche Karte Sie ziehen: Sie führt direkt zu mir.</p>
+    <a class="btn btn--primary" href="/kontakt/" data-magnetic>Jetzt unverbindlich anfragen</a>
+  </div>
+</div>
+
+<style>
+  .pac { text-align: center; padding: var(--space-5) var(--space-2); }
+  .pac__title { font-family: var(--font-display); font-style: italic; font-size: clamp(1.8rem, 4vw, 2.6rem); margin: 0; }
+  .pac__hint { color: var(--ink-soft); margin: 0.3rem 0 var(--space-4); }
+  .pac__deck { display: flex; justify-content: center; padding-block: 1rem 2rem; }
+  .pac__deck[hidden] { display: none; }
+  .pac__card {
+    position: relative; width: clamp(5.2rem, 15vw, 8.5rem); aspect-ratio: 5 / 7;
+    margin-inline: -1.1rem; padding: 0; border: 0; background: none; cursor: pointer;
+    rotate: calc((var(--i) - 2) * 7deg); translate: 0 calc(max(var(--i) - 2, 2 - var(--i)) * 0.6rem);
+    transform-style: preserve-3d;
+    transition: translate 0.2s var(--ease-out);
+  }
+  .pac__faces { position: absolute; inset: 0; transform-style: preserve-3d; }
+  .pac__card :global(.pc) { position: absolute; inset: 0; padding: 0.6rem; backface-visibility: hidden; }
+  .pac__card :global(.pac__front) { transform: rotateY(180deg); padding: 1.4rem 0.8rem; }
+  .pac__card :global(.pac__front .pc__index) { font-size: 0.8rem; }
+  .pac__card :global(.pac__front .pc__pip) { font-size: 2.6rem; }
+  @media (hover: hover) and (pointer: fine) {
+    .pac__card:hover:not(:disabled) { translate: 0 -1.2rem; }
+  }
+  .pac__card:focus-visible { outline: 3px solid var(--accent); outline-offset: 4px; border-radius: var(--radius); }
+  .pac__card:disabled { cursor: default; }
+  .pac__reveal { font-family: var(--font-display); font-size: 1.35rem; font-style: italic; margin-bottom: var(--space-3); }
+  .pac__result[hidden] { display: none; }
+</style>

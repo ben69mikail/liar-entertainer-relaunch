@@ -1,0 +1,17 @@
+---
+// Section divider: a hairline with the four suits, popping in one after another.
+const suits = ['♠', '♥', '♣', '♦'];
+---
+
+<div class="sr" aria-hidden="true">
+  <span class="sr__line"></span>
+  {suits.map((s, i) => <span class:list={['sr__suit', { 'sr__suit--red': i % 2 }]} data-reveal="pop" data-reveal-delay={i * 0.07}>{s}</span>)}
+  <span class="sr__line"></span>
+</div>
+
+<style>
+  .sr { display: flex; align-items: center; justify-content: center; gap: 0.9rem; margin: 0 auto var(--space-3); max-width: 28rem; }
+  .sr__line { flex: 1; height: 1px; background: currentColor; opacity: 0.35; }
+  .sr__suit { font-family: var(--font-display); font-size: 1.3rem; line-height: 1; display: inline-block; }
+  .sr__suit--red { color: var(--accent); }
+</style>

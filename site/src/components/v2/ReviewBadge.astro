@@ -4,7 +4,7 @@ import { REVIEWS } from '../../data/site';
 ---
 
 <a class="rb" href="#bewertungen">
-  <span class="rb__stars" aria-hidden="true">★★★★★</span>
+  <span class="rb__stars" aria-hidden="true">{[0, 1, 2, 3, 4].map((i) => <span style={`--i:${i}`}>★</span>)}</span>
   <span class="rb__text"><strong>{REVIEWS.label}</strong> · {REVIEWS.count} Bewertungen auf {REVIEWS.source}</span>
 </a>
 
@@ -25,5 +25,10 @@ import { REVIEWS } from '../../data/site';
   }
   .rb:hover { transform: translateY(-2px); }
   .rb__stars { color: var(--star); letter-spacing: 0.08em; font-size: 1.05rem; }
-  :global([data-zone='adult']) .rb { background: rgba(20, 24, 38, 0.7); border-radius: 2px; letter-spacing: 0.04em; }
+  /* stars light up one after another on load, then glint now and then */
+  .rb__stars span { display: inline-block; animation: rb-on 0.5s var(--ease-out) calc(0.25s + var(--i) * 0.07s) backwards, rb-glint 5s ease-in-out calc(2s + var(--i) * 0.12s) infinite; }
+  @keyframes rb-on { from { transform: scale(0.4) rotate(-40deg); opacity: 0; } }
+  @keyframes rb-glint { 0%, 88%, 100% { transform: scale(1) rotate(0deg); } 94% { transform: scale(1.3) rotate(18deg); } }
+  @media (prefers-reduced-motion: reduce) { .rb__stars span { animation: none; } }
+  :global([data-zone='adult']) .rb { border-radius: var(--radius-sm); letter-spacing: 0.02em; }
 </style>

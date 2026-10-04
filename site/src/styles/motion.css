@@ -1,4 +1,45 @@
-.motion-ok :is([data-reveal], .reveal) {
+/* Reveal contract (lib/motion/reveal.ts): hidden only while JS is in charge and the
+   element has not been revealed yet. Start transforms are set inline by the script. */
+.motion-ok :is([data-reveal], .reveal):not(.is-in) {
   opacity: 0;
-  transform: translateY(1rem);
 }
+
+/* flip cards: the back face shows while the front is turned away */
+[data-reveal='flip'] { transform-style: preserve-3d; }
+[data-reveal='flip'] > .card-back {
+  position: absolute; inset: 0; transform: rotateY(180deg) translateZ(1px); backface-visibility: hidden;
+}
+[data-reveal='flip'] > :not(.card-back) { backface-visibility: hidden; }
+html:not(.motion-ok) [data-reveal='flip'] > .card-back,
+[data-reveal='flip'].is-in > .card-back { display: none; }
+
+/* fx.ts helpers */
+.fx-word { display: inline-block; white-space: nowrap; }
+.fx-letter { display: inline-block; will-change: transform; }
+.fx-confetti {
+  position: fixed; z-index: 90; width: 0.55rem; height: 0.8rem; border-radius: 2px;
+  pointer-events: none; transform: translate(-50%, -50%);
+}
+.fx-sparkle {
+  position: fixed; z-index: 90; left: -100px; top: -100px; pointer-events: none;
+  font-size: 0.95rem; opacity: 0; transform: translate(-50%, -50%);
+}
+[data-magnetic] { transition: translate 0.25s var(--ease-out, ease-out); }
+[data-tilt] { transition: transform 0.2s var(--ease-out, ease-out); transform-style: preserve-3d; }
+
+/* data-reveal="draw": wipe in left to right. clip-path is the sanctioned non-transform property. */
+.motion-ok [data-reveal='draw'] { clip-path: inset(0 100% 0 0); transition: clip-path 0.9s var(--ease-out, ease-out); }
+.motion-ok [data-reveal='draw']:is(.is-revealing, .is-in) { clip-path: inset(0 0 0 0); }
+
+/* data-reveal="puff": a small smoke cloud bursts behind the element as it appears (kids magic) */
+[data-reveal='puff'] { position: relative; }
+.motion-ok [data-reveal='puff']::after {
+  content: ''; position: absolute; inset: -12% -6%; z-index: -1; pointer-events: none; opacity: 0;
+  background:
+    radial-gradient(circle at 20% 50%, #fff 0 18%, transparent 19%),
+    radial-gradient(circle at 45% 35%, #fff 0 22%, transparent 23%),
+    radial-gradient(circle at 70% 55%, #fff 0 20%, transparent 21%),
+    radial-gradient(circle at 88% 40%, #fff 0 14%, transparent 15%);
+}
+.motion-ok [data-reveal='puff'].is-revealing::after { animation: puff 0.7s var(--ease-out, ease-out); }
+@keyframes puff { from { opacity: 0.95; transform: scale(0.7); } to { opacity: 0; transform: scale(1.25); } }

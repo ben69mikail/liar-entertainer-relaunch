@@ -8,8 +8,9 @@ import { zoneFor } from '../../lib/site-map';
 
 // L6: logos are fixed assets; each zone shows its own.
 const path = Astro.url.pathname;
+const isAdult = zoneFor(path) === 'adult';
 const logo =
-  zoneFor(path) === 'adult'
+  isAdult
     ? { src: goldLogo, alt: 'Zauberer LIAR – Zauberei & Comedy', width: 150 }
     : { src: clownLogo, alt: 'LOGO Clown Zauberer LIAR', width: 104 };
 const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
@@ -17,7 +18,7 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
 
 <header class="sh">
   <div class="sh__bar container">
-    <a href="/" class="sh__logo" aria-label="Startseite Clown Zauberer LIAR">
+    <a href="/" class:list={['sh__logo', { 'sh__logo--card': isAdult }]} aria-label="Startseite Clown Zauberer LIAR">
       <Image src={logo.src} alt={logo.alt} width={logo.width} loading="eager" />
     </a>
 
@@ -86,7 +87,17 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
   .sh__logo { flex: none; }
   .sh__cta { flex: none; }
   .sh__logo img { display: block; height: 3.6rem; width: auto; }
-  :global([data-zone='adult']) .sh__logo img { height: 3.1rem; }
+  /* adult: gold logo (unchanged, L6) on a black playing-card back for contrast on paper */
+  .sh__logo--card {
+    display: block; padding: 0.35rem 0.6rem; border-radius: 0.55rem; rotate: -3deg;
+    background:
+      repeating-linear-gradient(45deg, rgba(255, 255, 255, 0.05) 0 2px, transparent 2px 7px),
+      #141210;
+    box-shadow: 0 0 0 2px #fffdf7, 0 0 0 3px #141210, 0 8px 18px -8px rgba(0, 0, 0, 0.6);
+    transition: rotate 0.25s var(--ease-out);
+  }
+  @media (hover: hover) and (pointer: fine) { .sh__logo--card:hover { rotate: 2deg; } }
+  .sh__logo--card img { height: 2.6rem; }
   .sh__nav { margin-left: auto; }
   .sh__menu { display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0; }
   .sh__item { position: relative; }
@@ -161,10 +172,10 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
   :global([data-zone='adult']) .sh__mobile summary {
     font-family: var(--font-body);
     font-weight: 500;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.06em;
     text-transform: uppercase;
-    font-size: 0.72rem;
-    padding-inline: 0.45rem;
+    font-size: 0.7rem;
+    padding-inline: 0.4rem;
   }
   :global([data-zone='adult']) .sh__item > a:hover,
   :global([data-zone='adult']) .sh__item > a[aria-current='page'] { background: transparent; color: var(--accent-strong); }

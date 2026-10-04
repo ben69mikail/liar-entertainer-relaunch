@@ -6,3 +6,6 @@ node_modules/
 .env.*
 !.env.example
 *.log
+
+# review videos (large, regenerable via site/scripts/record-tour.mjs)
+*.webm

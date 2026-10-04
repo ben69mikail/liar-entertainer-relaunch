@@ -1,0 +1,16 @@
+---
+// Hand-drawn confetti line that "draws" itself when seen (clip-path reveal, data-reveal="draw").
+interface Props { color?: string; }
+const { color = 'var(--brand-red)' } = Astro.props;
+---
+
+<div class="sq" aria-hidden="true">
+  <svg viewBox="0 0 600 40" preserveAspectRatio="none" data-reveal="draw">
+    <path d="M4 22c40-26 70 22 110 0s70-26 110 0 70 22 110 0 70-26 110 0 70 22 110 0 30-14 42-10" fill="none" stroke={color} stroke-width="5" stroke-linecap="round" />
+  </svg>
+</div>
+
+<style>
+  .sq { max-width: 30rem; margin: 0 auto var(--space-3); }
+  .sq svg { display: block; width: 100%; height: 1.6rem; }
+</style>

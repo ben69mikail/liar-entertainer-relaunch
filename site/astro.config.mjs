@@ -17,6 +17,12 @@ export default defineConfig({
   },
   vite: {
     plugins: [tailwindcss()],
-    build: { cssMinify: true, minify: true, assetsInlineLimit: 20000 },
+    build: {
+      cssMinify: true,
+      minify: true,
+      // Never inline fonts: as base64 they bloat every page; as files they are cached and only the
+      // unicode-range subsets actually needed get downloaded. Other small assets may still inline.
+      assetsInlineLimit: (file) => (/\.(woff2?|ttf|otf)$/.test(file) ? false : undefined),
+    },
   },
 });

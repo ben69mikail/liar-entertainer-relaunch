@@ -1,0 +1,69 @@
+---
+/**
+ * A playing card. Face: white stock with corner indices (decorative, aria-hidden) and
+ * any content in the slot (usually a photo, shown unchanged per L6). Back: patterned.
+ */
+interface Props {
+  rank?: string;
+  suit?: '♠' | '♥' | '♣' | '♦';
+  back?: boolean;
+  class?: string;
+  style?: string;
+  'aria-hidden'?: 'true' | 'false';
+  [key: `data-${string}`]: unknown;
+}
+const { rank = 'A', suit = '♠', back = false, class: cls, style, ...rest } = Astro.props;
+const red = suit === '♥' || suit === '♦';
+---
+
+<div class:list={['pc', { 'pc--back': back, 'pc--red': red }, cls]} style={style} {...rest}>
+  {back ? (
+    <span class="pc__pattern" aria-hidden="true"></span>
+  ) : (
+    <>
+      <span class="pc__index pc__index--tl" aria-hidden="true">{rank}<br />{suit}</span>
+      <div class="pc__face"><slot>{<span class="pc__pip" aria-hidden="true">{suit}</span>}</slot></div>
+      <span class="pc__index pc__index--br" aria-hidden="true">{rank}<br />{suit}</span>
+    </>
+  )}
+</div>
+
+<style>
+  .pc {
+    position: relative;
+    aspect-ratio: 5 / 7;
+    padding: 2.1rem 1.6rem;
+    background: #fffdf7;
+    border-radius: var(--radius, 0.85rem);
+    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
+    color: #141210;
+  }
+  .pc--red { color: #c8102e; }
+  .pc__index {
+    position: absolute;
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.05rem;
+    line-height: 1;
+    text-align: center;
+  }
+  .pc__index--tl { top: 0.55rem; left: 0.6rem; }
+  .pc__index--br { bottom: 0.55rem; right: 0.6rem; rotate: 180deg; }
+  .pc__face { height: 100%; display: grid; place-items: center; overflow: hidden; border-radius: 0.35rem; }
+  .pc__face :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .pc__pip { font-size: clamp(3rem, 8vw, 5rem); line-height: 1; }
+  .pc--back {
+    padding: 0.6rem;
+    background: #141210;
+  }
+  .pc__pattern {
+    display: block; height: 100%;
+    border-radius: 0.45rem;
+    border: 1px solid rgba(255, 253, 247, 0.35);
+    background:
+      radial-gradient(circle at 50% 50%, transparent 0 34%, rgba(200, 16, 46, 0.9) 35% 37%, transparent 38%),
+      repeating-linear-gradient(45deg, rgba(255, 253, 247, 0.12) 0 2px, transparent 2px 9px),
+      repeating-linear-gradient(-45deg, rgba(255, 253, 247, 0.12) 0 2px, transparent 2px 9px),
+      #1c1916;
+  }
+</style>

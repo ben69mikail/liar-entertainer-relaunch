@@ -42,3 +42,11 @@ Verbindlicher Auftrag: siehe **docs/CLAUDE-CODE-BUILD-BRIEF.md**. Vor jeder Arbe
 - L6 Schlüssel-Fotos = Hero-Fotos der Hauptseiten + alle Porträts. Rest darf per L7 getauscht werden.
 - Bewertungen: 370+ ist korrekt. „Über 400 …“ auf /zauberer/ wird korrigiert (doku in docs/CHANGES-METAS.md).
 - Kein Framer-Motion-Skill verfügbar; Engine `motion` + lokale Skills animate / improve-animations / emil-design-eng nutzen.
+
+## Umsetzung Design-Revision (04.10.2026)
+- Layouts: `Document.astro` (head/SEO/Schema/Scripts, gemeinsam) + `BaseLayout.astro` (Alt-Look, lädt Tailwind+Poppins) + `V2Layout.astro` (neue Seiten, KEIN Alt-CSS). Neue Seiten importieren `V2Layout` (kein `design`-Prop mehr). Astro bündelt CSS aller *importierten* Komponenten → Alt- und v2-Chrome nie im selben Layout importieren.
+- Effekte: `src/lib/motion/fx.ts` (Kern, ohne Bibliothek: Reveals via IntersectionObserver+WAAPI, `data-letters`) + `fx-rich.ts` (motion, per dynamischem Import im Idle: data-count/confetti/tilt/magnetic/scroll-tilt/hat/parallax-up/pick-a-card, Kids-Funkenspur). Reveal-Varianten: up/pop/puff/tilt/deal/flip/draw. Start-JS ~5 KB.
+- Performance-Gate: `npm run test:perf -- /pfad/` (Lighthouse mobil). Stand: /kindergeburtstag/ 97, /zauberer/ 99, a11y 100, CLS ~0.
+- Fonts nie inline (assetsInlineLimit-Funktion in astro.config). Bodoni Moda als **wght**-Variante (opsz war +44 KB und kostete LCP). Preload nur LCP-Schriften (FontPreloads.astro).
+- Cookie-Banner auf v2: kompakte Karte unten links (vorher größtes Element → LCP).
+- Dokumentierte Textänderungen: `site/tests/fixtures/content-changes.json` + `docs/CHANGES-METAS.md`.

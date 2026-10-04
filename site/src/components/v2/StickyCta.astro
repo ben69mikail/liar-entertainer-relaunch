@@ -64,8 +64,7 @@ import { CONTACT } from '../../data/site';
     :global(body.v2) { padding-bottom: calc(4.2rem + env(safe-area-inset-bottom)); }
   }
 
-  :global([data-zone='adult']) .sc__btn { border-radius: 2px; font-family: var(--font-body); font-weight: 600; letter-spacing: 0.06em; }
-  :global([data-zone='adult']) .sc { border-radius: 2px; }
-  :global([data-zone='adult']) .sc__btn--wa { color: #5fd38a; }
-  :global([data-zone='adult']) .sc__btn--main { background: linear-gradient(135deg, var(--gold-deep), var(--accent) 45%, var(--accent-strong)); }
+  :global([data-zone='adult']) .sc__btn { border-radius: var(--radius-sm); font-family: var(--font-body); font-weight: 600; letter-spacing: 0.04em; }
+  :global([data-zone='adult']) .sc { border-radius: var(--radius); }
+  :global([data-zone='adult']) .sc__btn--main { background: var(--ink); }
 </style>

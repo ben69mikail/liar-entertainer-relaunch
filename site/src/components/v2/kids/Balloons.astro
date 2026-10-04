@@ -1,0 +1,33 @@
+---
+// Decorative balloons drifting up the edge of a section (aria-hidden). CSS bob on the
+// balloon, scroll parallax on the wrapper (fx.ts data-scroll-tilt is not used here:
+// the wrapper rises with scroll via data-parallax-up).
+interface Props { side?: 'left' | 'right'; }
+const { side = 'right' } = Astro.props;
+const balloons = side === 'right'
+  ? [{ c: 'var(--brand-red)', x: 0, s: 1, d: 0 }, { c: 'var(--brand-blue)', x: 2.6, s: 0.8, d: -1.2 }, { c: 'var(--brand-yellow)', x: 1.2, s: 0.65, d: -2.1 }]
+  : [{ c: 'var(--brand-yellow)', x: 0, s: 0.9, d: -0.6 }, { c: 'var(--brand-red)', x: 2.2, s: 0.7, d: -1.8 }];
+---
+
+<div class:list={['bl', `bl--${side}`]} aria-hidden="true" data-parallax-up>
+  {balloons.map((b) => (
+    <svg class="bl__b" viewBox="0 0 60 110" style={`--c:${b.c};--x:${b.x}rem;--s:${b.s};--d:${b.d}s`}>
+      <path d="M30 4C14 4 4 18 4 34c0 20 16 36 26 40 10-4 26-20 26-40C56 18 46 4 30 4z" fill="var(--c)" stroke="var(--line)" stroke-width="2.5" />
+      <ellipse cx="20" cy="22" rx="5" ry="9" fill="#fff" opacity=".45" transform="rotate(-20 20 22)" />
+      <path d="M27 74l3 5 3-5z" fill="var(--c)" stroke="var(--line)" stroke-width="2" />
+      <path d="M30 79c-6 8 6 14 0 22s4 10 0 8" fill="none" stroke="var(--line)" stroke-width="1.5" />
+    </svg>
+  ))}
+</div>
+
+<style>
+  .bl { position: absolute; top: 18%; width: 6rem; height: 12rem; pointer-events: none; z-index: 0; }
+  .bl--right { right: max(0.5rem, calc((100vw - var(--container)) / 2 - 7rem)); }
+  .bl--left { left: max(0.5rem, calc((100vw - var(--container)) / 2 - 7rem)); }
+  .bl__b {
+    position: absolute; left: var(--x); top: 0; width: calc(3.6rem * var(--s)); overflow: visible;
+    animation: bob 4.5s ease-in-out var(--d) infinite alternate;
+  }
+  @keyframes bob { from { transform: translateY(0) rotate(-4deg); } to { transform: translateY(-1.2rem) rotate(5deg); } }
+  @media (max-width: 1100px) { .bl { display: none; } }
+</style>

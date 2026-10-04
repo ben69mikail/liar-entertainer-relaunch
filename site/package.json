@@ -16,13 +16,14 @@
     "generate-overlays": "node --import tsx scripts/generate-overlays.mjs",
     "prebuild": "npm run generate-overlays && node --input-type=commonjs -e \"const fs=require('fs');const src='src/assets/images/home/clown-zauberer-hero.jpg';const dst='public/images/og-startseite.jpg';try{fs.unlinkSync(dst)}catch(e){}fs.copyFileSync(src,dst)\"",
     "test:seo": "node scripts/seo-assertions.mjs",
-    "snapshot:content": "tsx scripts/snapshot-content.ts"
+    "snapshot:content": "tsx scripts/snapshot-content.ts",
+    "test:perf": "node scripts/lighthouse-gate.mjs"
   },
   "dependencies": {
+    "@fontsource-variable/bodoni-moda": "^5.3.0",
     "@fontsource-variable/fredoka": "^5.3.0",
-    "@fontsource-variable/jost": "^5.3.0",
+    "@fontsource-variable/instrument-sans": "^5.3.0",
     "@fontsource-variable/nunito": "^5.3.0",
-    "@fontsource-variable/playfair-display": "^5.3.0",
     "astro": "^7.3.5",
     "motion": "^13.5.0",
     "sharp": "^0.35.5"
@@ -34,6 +35,7 @@
     "@tailwindcss/vite": "^4.3.3",
     "cheerio": "^1.2.0",
     "gray-matter": "^4.0.3",
+    "lighthouse": "^13.5.0",
     "playwright": "^1.63.0",
     "tailwindcss": "^4.3.3",
     "tsx": "^4.23.15",

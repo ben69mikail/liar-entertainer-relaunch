@@ -1,0 +1,14 @@
+---
+// Preload the fonts the first screen of each zone renders with (latin subset only), so the
+// headline paints in its real face early. Same hashed files as the @font-face rules (Vite dedupes).
+import fredoka from '@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2?url';
+import nunito from '@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2?url';
+import bodoni from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-normal.woff2?url';
+import bodoniItalic from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-italic.woff2?url';
+import { zoneFor } from '../../lib/site-map';
+
+// Only what the LCP headline needs: extra preloads compete with it for bandwidth on slow mobile.
+const fonts = zoneFor(Astro.url.pathname) === 'adult' ? [bodoni, bodoniItalic] : [fredoka, nunito];
+---
+
+{fonts.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}

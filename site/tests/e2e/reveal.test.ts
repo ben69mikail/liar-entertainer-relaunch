@@ -28,7 +28,7 @@ describe('scroll reveal in a real browser', () => {
     expect(await revealState('no-preference')).toEqual({
       motionOk: true,
       opacity: '1',
-      transform: 'matrix(1, 0, 0, 1, 0, 0)',
+      transform: expect.stringMatching(/^(none|matrix\(1, 0, 0, 1, 0, 0\))$/), // at rest
     });
   });
 

@@ -54,3 +54,22 @@ describe('facts (L3: no unverified claims)', () => {
     expect(text).toContain('370+');
   });
 });
+
+describe('adult zone is its own design, not a zauberer-liar.de copy', () => {
+  const css = page(ADULT)('style').text();
+
+  it('uses the playing-card editorial typefaces', () => {
+    expect(css).toContain('Bodoni Moda Variable');
+    expect(css).toContain('Instrument Sans Variable');
+  });
+
+  it('drops the zauberer-liar.de typeface and night palette', () => {
+    expect(css).not.toContain('Playfair');
+    expect(css).not.toMatch(/#0a0c14/i);
+  });
+
+  it('presents the gold logo on a black card back (logo itself unchanged)', () => {
+    const $ = page(ADULT);
+    expect($('header .sh__logo--card img[alt="Zauberer LIAR – Zauberei & Comedy"]').length).toBe(1);
+  });
+});

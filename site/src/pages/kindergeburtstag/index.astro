@@ -1,5 +1,5 @@
 ---
-import BaseLayout from '../../layouts/BaseLayout.astro';
+import V2Layout from '../../layouts/V2Layout.astro';
 import { Image } from 'astro:assets';
 import heroImg from '../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
 import kinderzaubererImg from '../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
@@ -7,6 +7,9 @@ import karteImg from '../../assets/images/home/clown-zauberer-gladbeck-karte.jpg
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
 import Bunting from '../../components/v2/kids/Bunting.astro';
+import Balloons from '../../components/v2/kids/Balloons.astro';
+import MagicHat from '../../components/v2/kids/MagicHat.astro';
+import Squiggle from '../../components/v2/kids/Squiggle.astro';
 import YouTubeFacade from '../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../data/site';
 
@@ -120,14 +123,13 @@ const videoSchema = {
 const structuredData = [serviceSchema, faqSchema, videoSchema];
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   keywords="Kindergeburtstag NRW, Kindergeburtstag Clown, Kindergeburtstag Zauberer, Clown Kindergeburtstag buchen, Zauberer für Kindergeburtstag, Kinderparty NRW, Kindergeburtstag Unterhaltung"
   canonical="https://liar-entertainer.com/kindergeburtstag/"
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kindergeburtstag', url: '/kindergeburtstag/' }]}
-  design="v2"
 >
   <!-- ── Hero: Zirkus-Plakat. No reveal here (LCP). ───────────── -->
   <section class="kg-hero">
@@ -135,11 +137,11 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     <div class="container kg-hero__grid">
       <div class="kg-hero__copy">
         <ReviewBadge />
-        <h1 class="kg-hero__title">
+        <h1 class="kg-hero__title" data-letters>
           Zauberer für <span class="kg-mark">Kindergeburtstag</span> in NRW<br />mit Clown & Lachgarantie
         </h1>
         <div class="kg-hero__actions">
-          <a class="btn btn--primary" href="/kontakt/">Jetzt unverbindlich anfragen</a>
+          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
           <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
         <nav class="kg-quick" aria-label="Schnell zu den Infos">
@@ -168,6 +170,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
   <section class="kg-intro">
+    <Balloons side="right" />
     <div class="container kg-intro__grid">
       <div class="kg-intro__text" data-reveal>
         <h2 class="kg-kicker">Clown Zauberer für Kindergeburtstage in NRW</h2>
@@ -188,6 +191,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           src={kinderzaubererImg}
           alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
           class="kg-expect__img"
+          data-scroll-tilt="3"
           widths={[320, 640]}
           sizes="320px"
           loading="lazy"
@@ -208,6 +212,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <!-- ── Zaubershow (blue band) ────────────────────────────── -->
   <section class="kg-band kg-band--blue">
     <div class="container kg-narrow" data-reveal>
+      <MagicHat />
       <p class="kg-eyebrow">VOLLTREFFER</p>
       <h2 class="kg-h2">✨ Zaubershow für Geburtstag – mit Herz &amp; Humor</h2>
       <p>
@@ -229,7 +234,9 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <!-- ── Preise ────────────────────────────────────────────── -->
   <section class="kg-prices" id="preise">
+    <Balloons side="left" />
     <div class="container">
+      <Squiggle color="var(--brand-blue)" />
       <h2 class="kg-h2 kg-center" data-reveal>Was kostet ein Zauberer für den Kindergeburtstag?</h2>
 
       <div class="kg-table-wrap" data-reveal>
@@ -273,9 +280,9 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       </div>
 
       <div class="kg-cards">
-        <article class="kg-card kg-card--red" data-reveal>
+        <article class="kg-card kg-card--red" data-reveal="pop">
           <h3>🎩 Zaubershow</h3>
-          <p class="kg-card__price">150 €</p>
+          <p class="kg-card__price" data-count>150 €</p>
           <ul>
             <li><span>✓</span> 40 Minuten voller Zauber, Lachen und Staunen</li>
             <li><span>✓</span> Bis ca. 12 Kinder – Mindestalter: 4 Jahre</li>
@@ -286,9 +293,9 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           <p class="kg-card__note">Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</p>
         </article>
 
-        <article class="kg-card kg-card--blue" data-reveal data-reveal-delay="0.1">
+        <article class="kg-card kg-card--blue" data-reveal="pop" data-reveal-delay="0.1">
           <h3>🎈 Luftballonmodellage</h3>
-          <p class="kg-card__price">+ 20 €</p>
+          <p class="kg-card__price" data-count>+ 20 €</p>
           <ul>
             <li><span>✓</span> Für jedes Kind 1 Ballon</li>
             <li><span>✓</span> Ca. 15 Minuten</li>
@@ -299,9 +306,9 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           <p class="kg-card__note">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
         </article>
 
-        <article class="kg-card kg-card--yellow" data-reveal data-reveal-delay="0.2">
+        <article class="kg-card kg-card--yellow" data-reveal="pop" data-reveal-delay="0.2">
           <h3>✨ Glitzer-Tattoos</h3>
-          <p class="kg-card__price">+ 40 €</p>
+          <p class="kg-card__price" data-count>+ 40 €</p>
           <ul>
             <li><span>✓</span> Für jedes Kind 1 Tattoo</li>
             <li><span>✓</span> Ca. 30 Minuten</li>
@@ -314,7 +321,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       </div>
 
       <p class="kg-center kg-cta-row">
-        <a href="/kontakt/" class="btn btn--primary">Jetzt unverbindlich anfragen</a>
+        <a href="/kontakt/" class="btn btn--primary" data-confetti>Jetzt unverbindlich anfragen</a>
       </p>
     </div>
   </section>
@@ -331,7 +338,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       </p>
 
       <div class="kg-extras__grid">
-        <article class="kg-extra" data-reveal>
+        <article class="kg-extra" data-reveal="tilt">
           <h4>🎈 Ballonmodellage</h4>
           <p>
             Bunte Figuren, Tiere und Überraschungen – live vor den Augen der Kinder geformt. Jedes Kind bekommt sein Wunschtier mit nach Hause!
@@ -346,7 +353,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           </p>
         </article>
 
-        <article class="kg-extra" data-reveal data-reveal-delay="0.1">
+        <article class="kg-extra" data-reveal="tilt" data-reveal-delay="0.1">
           <h4>✨ Glitzer Tattoos</h4>
           <p>
             Kleine Kunstwerke, die Kinder lieben – hautfreundlich, farbenfroh und mit glänzenden Augen garantiert. Die Tattoos halten 4-8 Tage und sind wasserfest!
@@ -378,7 +385,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
       <div class="kg-faq__list">
         {faqItems.map((item) => (
-          <details class="kg-faq__item" data-reveal>
+          <details class="kg-faq__item" data-reveal="puff">
             <summary><span>{item.question}</span></summary>
             <div class="kg-faq__answer">{item.answer}</div>
           </details>
@@ -390,7 +397,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         <p>
           Sie können mir Ihre Anfrage für einen Kindergeburtstag unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben. Ich helfe Ihnen gerne weiter.
         </p>
-        <a href="/kontakt/" class="btn btn--primary">Kontaktformular</a>
+        <a href="/kontakt/" class="btn btn--primary" data-confetti>Kontaktformular</a>
       </div>
     </div>
   </section>
@@ -399,7 +406,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <section class="kg-band kg-band--yellow">
     <div class="container kg-narrow kg-center">
       <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal>
+      <div class="kg-video" data-reveal="pop">
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
       <h3 class="kg-h3">
@@ -412,6 +419,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
   <section class="kg-area" id="einsatzgebiet">
     <div class="container">
+      <Squiggle />
       <h2 class="kg-h2 kg-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
       <div class="kg-area__grid">
         <div class="kg-area__text">
@@ -431,6 +439,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           <Image
             src={karteImg}
             alt="Karte Einsatzgebiet Kindergeburtstag: Wohnort Clown Zauberer LIAR"
+            data-scroll-tilt="2"
             widths={[400, 600, 800]}
             sizes="(max-width: 1024px) 100vw, 50vw"
             loading="lazy"
@@ -452,11 +461,12 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       </p>
     </div>
   </section>
-</BaseLayout>
+</V2Layout>
 
 <style>
   /* ── shared section rhythm ── */
-  section { padding-block: var(--space-6); }
+  section { padding-block: var(--space-6); position: relative; }
+  .container { position: relative; z-index: 1; }
   .kg-center { text-align: center; }
   .kg-narrow { max-width: 46rem; margin-inline: auto; }
   .kg-h2 { font-size: clamp(1.9rem, 4.2vw, 3rem); margin: 0 0 var(--space-3); }
@@ -503,7 +513,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     padding: 0.35rem 0.85rem; border-radius: 999px; background: var(--bg-alt); border: 2px dashed var(--line);
     transition: background-color 0.2s, rotate 0.25s var(--ease-spring);
   }
-  .kg-quick a:hover { background: var(--surface); rotate: -2deg; }
+  @media (hover: hover) and (pointer: fine) { .kg-quick a:hover { background: var(--surface); rotate: -2deg; } }
   .kg-hero__photo { position: relative; margin: 0; rotate: 2deg; }
   .kg-hero__photo img {
     display: block; width: 100%; aspect-ratio: 4 / 3.4; object-fit: cover;
@@ -515,10 +525,12 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     background: var(--brand-yellow); color: var(--ink); text-decoration: none;
     clip-path: polygon(50% 0%, 61% 12%, 77% 6%, 80% 22%, 96% 26%, 89% 41%, 100% 54%, 86% 63%, 89% 80%, 72% 80%, 63% 96%, 50% 86%, 37% 96%, 28% 80%, 11% 80%, 14% 63%, 0% 54%, 11% 41%, 4% 26%, 20% 22%, 23% 6%, 39% 12%);
     rotate: -12deg;
-    animation: wobble 4s var(--ease-out) infinite;
+    /* stamped onto the photo on load, then a little wobble now and then */
+    animation: stamp 0.55s var(--ease-out) 0.7s backwards, wobble 4s var(--ease-out) 1.6s infinite;
   }
   .kg-sticker span { font-weight: 800; font-size: 0.95rem; }
   .kg-sticker strong { font-family: var(--font-display); font-size: 1.75rem; }
+  @keyframes stamp { from { transform: scale(1.7); opacity: 0; } 60% { opacity: 1; } }
   @keyframes wobble { 0%, 80%, 100% { rotate: -12deg; } 86% { rotate: -4deg; } 92% { rotate: -16deg; } }
 
   /* ── intro ── */
@@ -575,7 +587,11 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   .kg-card--red { rotate: -1.5deg; }
   .kg-card--blue { --c: var(--brand-blue); rotate: 1deg; }
   .kg-card--yellow { --c: var(--brand-yellow); rotate: -0.6deg; }
-  .kg-card:hover { transform: translate(-3px, -6px) rotate(0.8deg); box-shadow: var(--shadow-hover); }
+  @media (hover: hover) and (pointer: fine) {
+    .kg-card:hover { transform: translate(-3px, -6px) rotate(0.8deg); box-shadow: var(--shadow-hover); }
+    .kg-extra:hover, .kg-faq__item:hover { rotate: -0.6deg; }
+  }
+  .kg-extra, .kg-faq__item { transition: rotate 0.25s var(--ease-out); }
   .kg-card h3 { font-size: 1.5rem; margin: 0 0 0.25rem; }
   .kg-card__price { font-family: var(--font-display); font-size: 2.4rem; font-weight: 700; color: var(--c); margin: 0 0 var(--space-2); -webkit-text-stroke: 1.5px var(--line); paint-order: stroke fill; }
   .kg-card ul { list-style: none; margin: 0 0 var(--space-2); padding: 0; display: grid; gap: 0.45rem; font-size: 0.98rem; }
