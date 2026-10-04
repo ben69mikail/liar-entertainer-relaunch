@@ -202,3 +202,9 @@ html body.v2 .cc-btn-accept { background: var(--accent-strong); color: var(--acc
   content-visibility: auto;
   contain-intrinsic-size: auto 900px;
 }
+
+/* Desktop: consent card sits bottom-right above the contact dock, so it never covers the hero's
+   primary enquiry button (left column). Found by the e2e confetti test. */
+@media (min-width: 768px) {
+  html body.v2 .cc-banner { justify-content: flex-end; padding: 0 1.25rem 5.6rem; }
+}
