@@ -1,7 +1,14 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import HeroStage from '../../../components/HeroStage.astro';
-import GoogleReviews from '../../../components/GoogleReviews.astro';
+import V2Layout from '../../../layouts/V2Layout.astro';
+import Reviews from '../../../components/v2/Reviews.astro';
+import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
+import SectionEdge from '../../../components/v2/SectionEdge.astro';
+import Bunting from '../../../components/v2/kids/Bunting.astro';
+import Glitter from '../../../components/v2/kids/Glitter.astro';
+import Squiggle from '../../../components/v2/kids/Squiggle.astro';
+import YouTubeFacade from '../../../components/YouTubeFacade.astro';
+import { CONTACT } from '../../../data/site';
+import '../../../styles/kids-kit.css';
 import { Image } from 'astro:assets';
 import glitzerTattooHeroImg from '../../../assets/images/clown/glitzer-tattoo-hero.jpeg';
 import glitzerTattoosImg from '../../../assets/images/clown/glitzer-tattoos.jpg';
@@ -72,7 +79,7 @@ const videoSchema = {
 const structuredData = [serviceSchema, faqSchema, videoSchema];
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   keywords="Glitzer Tattoo Kindergeburtstag, Glitzer Tattoos NRW, Glitzer Tattoo buchen, Kinderschminken Alternative"
@@ -80,200 +87,183 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/clown/clownshow/' }, { name: 'Glitzer Tattoo', url: '/clown/glitzer-tattoo/' }]}
 >
-
-  <!-- Page Title -->
-  <section class="bg-white pt-8 pb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-sm text-[#595959] mb-4">
-        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
-        <a href="/" class="hover:text-[#d7393e]">Clown Zauberer LIAR</a> »
-        <span>Glitzer Tattoo</span>
-      </p>
-      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Glitzer Tattoo</h1>
-    </div>
-  </section>
-
-  <!-- Hero -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-    <Image
-      src={glitzerTattooHeroImg}
-      alt="Glitzer Tattoos für Kindergeburtstag & Events in NRW"
-      class="absolute inset-0 w-full h-full object-cover object-top"
-      style="object-position: 50% 0%"
-      loading="eager"
-      fetchpriority="high"
-      widths={[600, 900, 1200]}
-      sizes="(max-width: 1152px) 100vw, 1120px"
-    />
-    <div class="absolute inset-0 bg-black/45"></div>
-    <div class="relative flex items-center justify-center" style="min-height: 600px;">
-      <div class="text-center px-6">
-        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+  <!-- ── Hero. No reveal here (LCP). ── -->
+  <section class="kg-hero">
+    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
+    <Bunting />
+    <div class="container kg-hero__grid">
+      <div class="kg-hero__copy">
+        <p class="gt-crumbs">
+          <a href="/">Clown</a> »
+          <a href="/">Clown Zauberer LIAR</a> »
+          <span>Glitzer Tattoo</span>
+        </p>
+        <ReviewBadge />
+        <h1 class="kg-hero__title" data-letters>Glitzer <span class="kg-mark">Tattoo</span></h1>
+        <h2 class="gt-hero__sub">
           ✨ Glitzer Tattoos für Kindergeburtstag<br />&amp; Events in NRW
         </h2>
-        <p class="text-white/90 text-lg font-medium">Der Klassiker für Kindergeburtstage – Hautverträglich &amp; Langanhaltend</p>
+        <p class="gt-hero__claim">Der Klassiker für Kindergeburtstage – Hautverträglich &amp; Langanhaltend</p>
+        <div class="kg-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
+          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
+        </div>
       </div>
-    </div>
-  </div>
+      <figure class="kg-hero__photo">
+        <Image
+          src={glitzerTattooHeroImg}
+          alt="Glitzer Tattoos für Kindergeburtstag & Events in NRW"
+          widths={[400, 700, 1000, 1400]}
+          sizes="(max-width: 900px) 92vw, 560px"
+          loading="eager"
+          fetchpriority="high"
+          style="object-position: 50% 0%"
+        />
+        <Glitter />
+      </figure>
     </div>
   </section>
 
-  <!-- Intro / Highlights -->
-  <section class="py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <p class="hero-subtitle text-[#374151] leading-relaxed mb-6">
-            Glitzer Tattoos bei Clown LIAR (Michaël Prescler) sind funkelnde, hautverträgliche Klebe-Tattoos, die in 2–3 Minuten aufgetragen werden und 4–8 Tage wasser- und wischfest halten. Über 100 Motive – vom Einhorn bis zum Dino. Buchbar in ganz NRW für <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstage</a>, Kita- und Schulfeste, Straßenfeste und Events – ideal als Ergänzung zur <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">Clownshow</a> oder <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonmodellage</a>.
-          </p>
-          <ul class="space-y-3">
-            <li class="flex items-start gap-3"><span class="text-[#d7393e] font-bold mt-0.5">✨</span><span class="text-[#374151]">Hautverträglich &amp; dermatologisch getestet</span></li>
-            <li class="flex items-start gap-3"><span class="text-[#d7393e] font-bold mt-0.5">🎨</span><span class="text-[#374151]">Über 100 verschiedene tolle Motive</span></li>
-            <li class="flex items-start gap-3"><span class="text-[#d7393e] font-bold mt-0.5">⚡</span><span class="text-[#374151]">Schnell &amp; sauber (2–3 Min. pro Tattoo)</span></li>
-            <li class="flex items-start gap-3"><span class="text-[#d7393e] font-bold mt-0.5">💧</span><span class="text-[#374151]">Wasserfest &amp; wischfest (hält 4–8 Tage)</span></li>
-            <li class="flex items-start gap-3"><span class="text-[#d7393e] font-bold mt-0.5">👦👧</span><span class="text-[#374151]">Für Jungs &amp; Mädchen (3–12 Jahre)</span></li>
-            <li class="flex items-start gap-3"><span class="text-[#d7393e] font-bold mt-0.5">📍</span><span class="text-[#374151]">In ganz NRW buchbar</span></li>
-          </ul>
-        </div>
-        <div class="flex justify-center">
-          <Image
-            src={glitzerTattoosImg}
-            alt="Glitzer Tattoos für Kindergeburtstag & Events in NRW"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
-            loading="lazy"
-            widths={[400, 800]}
-            sizes="340px"
-          />
-        </div>
+  <!-- ── Intro / Highlights ── -->
+  <section class="kg-intro">
+    <div class="container kg-intro__grid">
+      <div class="kg-intro__text" data-reveal>
+        <p class="kg-lead">
+          Glitzer Tattoos bei Clown LIAR (Michaël Prescler) sind funkelnde, hautverträgliche Klebe-Tattoos, die in 2–3 Minuten aufgetragen werden und 4–8 Tage wasser- und wischfest halten. Über 100 Motive – vom Einhorn bis zum Dino. Buchbar in ganz NRW für <a href="/kindergeburtstag/">Kindergeburtstage</a>, Kita- und Schulfeste, Straßenfeste und Events – ideal als Ergänzung zur <a href="/clown/clownshow/">Clownshow</a> oder <a href="/clown/ballonmodellage/">Ballonmodellage</a>.
+        </p>
+        <ul class="gt-highlights">
+          <li><span class="gt-highlights__icon">✨</span><span>Hautverträglich &amp; dermatologisch getestet</span></li>
+          <li><span class="gt-highlights__icon">🎨</span><span>Über 100 verschiedene tolle Motive</span></li>
+          <li><span class="gt-highlights__icon">⚡</span><span>Schnell &amp; sauber (2–3 Min. pro Tattoo)</span></li>
+          <li><span class="gt-highlights__icon">💧</span><span>Wasserfest &amp; wischfest (hält 4–8 Tage)</span></li>
+          <li><span class="gt-highlights__icon">👦👧</span><span>Für Jungs &amp; Mädchen (3–12 Jahre)</span></li>
+          <li><span class="gt-highlights__icon">📍</span><span>In ganz NRW buchbar</span></li>
+        </ul>
       </div>
+      <figure class="gt-portrait" data-reveal="pop" data-reveal-delay="0.1">
+        <Image
+          src={glitzerTattoosImg}
+          alt="Glitzer Tattoos für Kindergeburtstag & Events in NRW"
+          data-scroll-tilt="3"
+          widths={[340, 680]}
+          sizes="340px"
+          loading="lazy"
+        />
+        <Glitter />
+      </figure>
     </div>
   </section>
 
-  </HeroStage>
-  <!-- Weitere Anlässe (SEO-Audit 06.08.2026, Massnahme H6): /clown/karneval/ und
-       /clown/walk-act/ hatten 0 bzw. 3 interne Content-Links. -->
-  <section class="py-12 bg-[#f9fafb]" data-related-services>
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-6">
+  <!-- ── Weitere Anlässe (SEO-Audit 06.08.2026, H6: internal links to /clown/karneval/ + /clown/walk-act/) ── -->
+  <section class="gt-related" data-related-services>
+    <div class="container kg-narrow">
+      <h2 class="kg-h2 kg-center" data-reveal>
         Für welche Anlässe kann man Clown LIAR sonst buchen?
       </h2>
-      <div class="grid gap-4 sm:grid-cols-2">
-        <a href="/clown/karneval/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
-          <p class="font-bold text-[#1f2025] mb-1">Clown für Karneval &amp; Kindersitzung</p>
-          <p class="text-sm text-[#595959]">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
+      <div class="gt-related__grid">
+        <a href="/clown/karneval/" class="gt-related__card" data-reveal="pop">
+          <p class="gt-related__title">Clown für Karneval &amp; Kindersitzung</p>
+          <p class="gt-related__text">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
         </a>
-        <a href="/clown/walk-act/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
-          <p class="font-bold text-[#1f2025] mb-1">Walk-Act für Straßen- und Stadtfest</p>
-          <p class="text-sm text-[#595959]">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
+        <a href="/clown/walk-act/" class="gt-related__card" data-reveal="pop" data-reveal-delay="0.1">
+          <p class="gt-related__title">Walk-Act für Straßen- und Stadtfest</p>
+          <p class="gt-related__text">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
         </a>
       </div>
     </div>
   </section>
 
-  <GoogleReviews />
+  <Reviews />
 
-  <!-- Was sind Glitzer Tattoos? -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-8">Was sind Glitzer Tattoos?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center">
-        <div>
-          <p class="text-[#374151] leading-relaxed mb-6">
-            Glitzer Tattoos sind temporäre Körperkunst, die mit hautfreundlichem Spezialkleber und funkelndem Glitzer aufgetragen werden. Sie sind der absolute Hit auf jedem Kindergeburtstag, Straßenfest oder Event! Besonders beliebt als Ergänzung zu meiner <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">Clownshow</a> oder in Kombination mit <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonmodellage</a>.
+  <!-- ── Was sind Glitzer Tattoos? ── -->
+  <section class="gt-what">
+    <div class="container">
+      <Squiggle color="var(--brand-blue)" />
+      <h2 class="kg-h2 kg-center" data-reveal>Was sind Glitzer Tattoos?</h2>
+      <div class="kg-intro__grid gt-what__grid">
+        <div data-reveal>
+          <p class="gt-what__text">
+            Glitzer Tattoos sind temporäre Körperkunst, die mit hautfreundlichem Spezialkleber und funkelndem Glitzer aufgetragen werden. Sie sind der absolute Hit auf jedem Kindergeburtstag, Straßenfest oder Event! Besonders beliebt als Ergänzung zu meiner <a href="/clown/clownshow/">Clownshow</a> oder in Kombination mit <a href="/clown/ballonmodellage/">Ballonmodellage</a>.
           </p>
-          <h3 class="font-bold text-[#1f2025] mb-4">Warum Glitzer Tattoos so beliebt sind:</h3>
-          <div class="space-y-3">
+          <h3 class="kg-h3">Warum Glitzer Tattoos so beliebt sind:</h3>
+          <ul class="gt-pros">
             {vorteile.map((v) => (
-              <div class="flex items-start gap-3">
-                <span class="text-green-500 font-bold mt-0.5 flex-shrink-0">✅</span>
-                <p class="text-[#374151] text-sm"><strong>{v.title}</strong> – {v.text}</p>
-              </div>
+              <li>
+                <span class="gt-pros__tick">✅</span>
+                <p><strong>{v.title}</strong> – {v.text}</p>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
-        <div class="flex justify-center">
+        <figure class="gt-portrait gt-portrait--tilt" data-reveal="pop">
           <Image
             src={fotogalerieClown10Img}
             alt="Glitzer Tattoo bei Clown LIAR"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
-            loading="lazy"
-            widths={[400, 800]}
+            data-scroll-tilt="3"
+            widths={[340, 680]}
             sizes="340px"
+            loading="lazy"
           />
-        </div>
+          <Glitter />
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- Video Sektion -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
-        <iframe
-          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
-          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
-          class="absolute inset-0 w-full h-full rounded-lg"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+  <!-- ── Video (yellow band) ── -->
+  <section class="kg-band kg-band--yellow">
+    <SectionEdge color="var(--brand-yellow)" side="top" />
+    <SectionEdge color="var(--brand-yellow)" side="bottom" />
+    <div class="container kg-narrow kg-center">
+      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="kg-video" data-reveal="pop">
+        <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
-      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+      <h3 class="kg-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
-      <a
-        href="/galerie/"
-        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
-      >
-        Zur Foto- und Videogalerie
-      </a>
+      <a href="/galerie/" class="btn btn--primary">Zur Foto- und Videogalerie</a>
     </div>
   </section>
 
-  <!-- Motive -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">🎨 Unsere Glitzer Tattoo Motive</h2>
-      <p class="text-center text-[#374151] mb-8">Unsere Motivauswahl ist riesig! Jedes Kind darf sich sein Lieblingsmotiv aussuchen.</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {motive.map((cat) => (
-          <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
-            <h3 class="font-bold text-[#1f2025] mb-4">{cat.title}</h3>
-            <div class="flex flex-wrap gap-2">
+  <!-- ── Motive: sticker sheets ── -->
+  <section class="gt-motifs">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>🎨 Unsere Glitzer Tattoo Motive</h2>
+      <p class="kg-center kg-sub">Unsere Motivauswahl ist riesig! Jedes Kind darf sich sein Lieblingsmotiv aussuchen.</p>
+      <div class="gt-motifs__grid">
+        {motive.map((cat, i) => (
+          <article class="gt-sheet" data-reveal="tilt" data-reveal-delay={i * 0.08}>
+            <h3>{cat.title}</h3>
+            <div class="gt-sheet__pills">
               {cat.items.map((item) => (
-                <span class="bg-white border border-gray-200 rounded-full px-3 py-1 text-sm text-[#374151]">{item}</span>
+                <span class="gt-pill">{item}</span>
               ))}
             </div>
-          </div>
+          </article>
         ))}
       </div>
-      <div class="mt-6 bg-[#fff3e0] rounded-xl p-4 text-center">
-        <p class="text-[#374151]">💡 <strong>Tipp:</strong> Sie haben ein spezielles Motto (z.B. Prinzessinnen-Party, Dino-Geburtstag)? Ich bringe passende Motive mit!</p>
-      </div>
+      <p class="kg-center kg-tip gt-tip" data-reveal>💡 <strong>Tipp:</strong> Sie haben ein spezielles Motto (z.B. Prinzessinnen-Party, Dino-Geburtstag)? Ich bringe passende Motive mit!</p>
     </div>
   </section>
 
-  <!-- Vorteile vs Kinderschminken (pastel red bg) -->
-  <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-14">
-    <div class="max-w-4xl mx-auto px-4 text-center">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-4">Glitzer Tattoos vs. Kinderschminken</h2>
-      <p class="text-[#374151] mb-8">Warum Glitzer Tattoos besser sind als Kinderschminken</p>
-      <div class="overflow-x-auto">
-        <table class="w-full text-sm bg-white/10 rounded-xl overflow-hidden">
+  <!-- ── Vergleich (blue band) ── -->
+  <section class="kg-band kg-band--blue gt-vs">
+    <SectionEdge color="var(--brand-blue)" side="top" />
+    <SectionEdge color="var(--brand-blue)" side="bottom" />
+    <div class="container">
+      <h2 class="kg-h2">Glitzer Tattoos vs. Kinderschminken</h2>
+      <p class="gt-vs__sub">Warum Glitzer Tattoos besser sind als Kinderschminken</p>
+      <div class="kg-table-wrap gt-vs__table" data-reveal="pop">
+        <table class="kg-table">
           <thead>
-            <tr class="bg-[#f0c4c4]">
-              <th class="p-3 text-left text-[#1f2025]">Kriterium</th>
-              <th class="p-3 text-center text-[#1f2025]">Glitzer Tattoos ✨</th>
-              <th class="p-3 text-center text-[#1f2025]">Kinderschminken</th>
+            <tr>
+              <th scope="col">Kriterium</th>
+              <th scope="col" class="gt-vs__win">Glitzer Tattoos ✨</th>
+              <th scope="col">Kinderschminken</th>
             </tr>
           </thead>
-          <tbody class="divide-y divide-[#f0c4c4]">
+          <tbody>
             {[
               ['Haltbarkeit', '4–8 Tage', 'Wenige Stunden'],
               ['Wischfest', '✅ Ja', '❌ Nein'],
@@ -284,9 +274,9 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
               ['Entfernung', 'Einfach mit Öl', 'Abwaschen'],
             ].map(([k, g, s]) => (
               <tr>
-                <td class="p-3 text-left text-[#374151]">{k}</td>
-                <td class="p-3 text-center font-medium text-[#d7393e]">{g}</td>
-                <td class="p-3 text-center text-[#374151]">{s}</td>
+                <th scope="row">{k}</th>
+                <td class="gt-vs__win">{g}</td>
+                <td>{s}</td>
               </tr>
             ))}
           </tbody>
@@ -295,21 +285,111 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="bg-white py-12 border-t border-gray-100">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="font-bold text-[#1f2025] text-xl mb-4">Jetzt Glitzer Tattoos buchen!</h2>
-      <p class="text-[#374151] mb-6 leading-relaxed">
-        Perfekt für Kindergeburtstag, Straßenfest oder Event – ab 3 Jahren funkeln Kinderaugen mit tollen Glitzer-Motiven! Kombinieren Sie Glitzer Tattoos mit meiner <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline font-semibold">Clownshow</a> und <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline font-semibold">Ballonmodellage</a> zum kompletten Kinderpaket.
+  <!-- ── CTA ── -->
+  <section class="gt-cta">
+    <div class="container kg-narrow kg-center" data-reveal>
+      <h2 class="kg-h2">Jetzt Glitzer Tattoos buchen!</h2>
+      <p>
+        Perfekt für Kindergeburtstag, Straßenfest oder Event – ab 3 Jahren funkeln Kinderaugen mit tollen Glitzer-Motiven! Kombinieren Sie Glitzer Tattoos mit meiner <a href="/clown/clownshow/">Clownshow</a> und <a href="/clown/ballonmodellage/">Ballonmodellage</a> zum kompletten Kinderpaket.
       </p>
-      <div class="space-y-2 text-[#374151] mb-6">
-        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
-        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+      <div class="gt-cta__contact">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
       </div>
-      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+      <a href="/kontakt/" class="btn btn--primary" data-confetti>
         Jetzt unverbindlich anfragen
       </a>
     </div>
   </section>
+</V2Layout>
 
-</BaseLayout>
+<style>
+  /* ── hero ── */
+  .gt-crumbs { font-size: 0.88rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2); }
+  .gt-crumbs a { color: inherit; }
+  .gt-hero__sub { font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 650; color: var(--brand-blue); margin: 0 0 0.5rem; }
+  .gt-hero__claim { font-weight: 800; margin-bottom: var(--space-3); }
+
+  /* ── intro ── */
+  .gt-highlights { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
+  .gt-highlights li {
+    display: flex; gap: 0.6rem; align-items: center; padding: 0.6rem 0.85rem;
+    font-weight: 700; background: var(--bg); border: 2px solid var(--line); border-radius: var(--radius-sm);
+    box-shadow: 3px 3px 0 var(--line);
+  }
+  .gt-highlights__icon { flex: none; font-size: 1.2rem; }
+  .gt-portrait { position: relative; margin: 0; justify-self: center; rotate: 2deg; }
+  .gt-portrait--tilt { rotate: -2.5deg; }
+  .gt-portrait :global(img) {
+    display: block; width: min(21.25rem, 80vw); height: auto; aspect-ratio: 1; object-fit: cover;
+    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
+  }
+
+  /* ── related ── */
+  .gt-related { background: var(--bg); }
+  .gt-related__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+  .gt-related__card {
+    display: block; padding: var(--space-3); color: var(--ink); text-decoration: none;
+    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
+  }
+  .gt-related__card:nth-child(1) { rotate: -1deg; }
+  .gt-related__card:nth-child(2) { rotate: 1deg; }
+  .gt-related__card .gt-related__title { font-family: var(--font-display); font-weight: 650; font-size: 1.2rem; margin-bottom: 0.3rem; }
+  .gt-related__card .gt-related__text { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+  @media (hover: hover) and (pointer: fine) {
+    .gt-related__card:hover { transform: translate(-3px, -5px); box-shadow: var(--shadow-hover); }
+  }
+
+  /* ── was sind ── */
+  .gt-what { background: var(--surface); border-block: var(--border); }
+  .gt-what__grid { margin-top: var(--space-3); align-items: center; }
+  .gt-what__text { color: var(--ink-soft); }
+  .gt-pros { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.55rem; }
+  .gt-pros li { display: flex; gap: 0.6rem; align-items: flex-start; }
+  .gt-pros__tick { flex: none; }
+  .gt-pros li p { margin: 0; color: var(--ink-soft); }
+  .gt-pros strong { color: var(--ink); }
+
+  /* ── motive: each category is a sticker sheet, motifs are peel-off stickers ── */
+  .gt-motifs__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-top: var(--space-4); }
+  .gt-sheet {
+    padding: var(--space-3); background: var(--surface); border: var(--border); border-radius: var(--radius);
+    box-shadow: var(--shadow); transition: rotate 0.25s var(--ease-out);
+  }
+  .gt-sheet:nth-child(1) { rotate: -1.2deg; }
+  .gt-sheet:nth-child(2) { rotate: 0.8deg; }
+  .gt-sheet:nth-child(3) { rotate: -0.5deg; }
+  .gt-sheet h3 { font-size: 1.35rem; margin: 0 0 var(--space-2); }
+  .gt-sheet__pills { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+  .gt-pill {
+    position: relative; overflow: hidden; display: inline-block; padding: 0.35rem 0.85rem;
+    font-weight: 700; font-size: 0.95rem; background: var(--bg); border: 2px solid var(--line); border-radius: 999px;
+    transition: transform 0.25s var(--ease-out-expo), background-color 0.2s;
+  }
+  /* a glint sweeps across a sticker on hover */
+  .gt-pill::after {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: linear-gradient(110deg, transparent 30%, rgba(255, 255, 255, 0.85) 50%, transparent 70%);
+    translate: -120% 0;
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .gt-sheet:hover { rotate: 0deg; }
+    .gt-pill:hover { transform: translateY(-2px) rotate(-3deg); background: color-mix(in srgb, var(--brand-yellow) 40%, var(--bg)); }
+    .gt-pill:hover::after { translate: 120% 0; transition: translate 0.6s var(--ease-out); }
+  }
+  .gt-tip { max-width: 46rem; margin-inline: auto; padding: var(--space-2) var(--space-3); background: var(--surface); border: 2px dashed var(--line); border-radius: var(--radius); }
+
+  /* ── vergleich (blue band): the table keeps ink text ── */
+  .gt-vs__sub { font-family: var(--font-display); font-size: 1.25rem; }
+  .gt-vs__table { color: var(--ink); text-align: left; margin-top: var(--space-3); margin-bottom: 0; rotate: -0.5deg; }
+  .gt-vs__table td { text-align: center; }
+  .gt-vs__table thead th:not(:first-child) { text-align: center; }
+  .gt-vs__table .gt-vs__win { font-weight: 800; color: var(--accent-strong); background: color-mix(in srgb, var(--brand-yellow) 18%, transparent); }
+  .gt-vs__table thead .gt-vs__win { background: var(--accent-strong); color: #fff; }
+
+  /* ── cta ── */
+  .gt-cta { background: var(--bg); }
+  .gt-cta p { color: var(--ink-soft); }
+  .gt-cta__contact { margin: var(--space-3) 0; font-weight: 700; }
+</style>

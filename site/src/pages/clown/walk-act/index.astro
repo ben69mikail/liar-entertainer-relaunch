@@ -1,7 +1,13 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import HeroStage from '../../../components/HeroStage.astro';
-import GoogleReviews from '../../../components/GoogleReviews.astro';
+import V2Layout from '../../../layouts/V2Layout.astro';
+import Reviews from '../../../components/v2/Reviews.astro';
+import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
+import SectionEdge from '../../../components/v2/SectionEdge.astro';
+import Bunting from '../../../components/v2/kids/Bunting.astro';
+import Squiggle from '../../../components/v2/kids/Squiggle.astro';
+import YouTubeFacade from '../../../components/YouTubeFacade.astro';
+import { CONTACT } from '../../../data/site';
+import '../../../styles/kids-kit.css';
 import { Image } from 'astro:assets';
 import walkActHeroImg from '../../../assets/images/clown/walk-act-hero.jpg';
 import walkActFestEssenImg from '../../../assets/images/clown/walk-act-fest-essen.jpg';
@@ -89,7 +95,7 @@ const ablauf = [
 ];
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   keywords="Walk Act NRW, Walk Act buchen, Clown Walk Act, Zauberer Walk Act, Walk Act Straßenfest, Walk Act Firmenevent"
@@ -97,306 +103,394 @@ const ablauf = [
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/' }, { name: 'Walk Act', url: '/clown/walk-act/' }]}
 >
-
-  <!-- Page Title -->
-  <section class="bg-white pt-8 pb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-sm text-[#595959] mb-4">
-        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
-        <a href="/" class="hover:text-[#d7393e]">Clown Zauberer LIAR</a> »
-        <span>Walk Act</span>
-      </p>
-      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Walk Act</h1>
-    </div>
-  </section>
-
-  <!-- Hero Section -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-    <Image
-      src={walkActHeroImg}
-      alt="Walk Act NRW – Clown Zauberer LIAR – Pantomime"
-      class="absolute inset-0 w-full h-full object-cover object-top"
-      style="object-position: 55% 24%"
-      loading="eager"
-      fetchpriority="high"
-      widths={[600, 900, 1200]}
-      sizes="(max-width: 1152px) 100vw, 1120px"
-    />
-    <div class="absolute inset-0 bg-black/50"></div>
-    <div class="relative flex items-center justify-center" style="min-height: 600px;">
-      <div class="text-center px-6">
-        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.8rem, 4.5vw, 3.2rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+  <!-- ── Hero. No reveal here (LCP). ── -->
+  <section class="kg-hero">
+    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
+    <Bunting />
+    <div class="container kg-hero__grid">
+      <div class="kg-hero__copy">
+        <p class="wa-crumbs">
+          <a href="/">Clown</a> »
+          <a href="/">Clown Zauberer LIAR</a> »
+          <span>Walk Act</span>
+        </p>
+        <ReviewBadge />
+        <h1 class="kg-hero__title" data-letters>Walk <span class="kg-mark">Act</span></h1>
+        <h2 class="wa-hero__sub">
           Walk Act in NRW –<br />Clown Zauberer LIAR – Pantomime
         </h2>
-        <p class="text-white/90 text-lg font-medium">Mobil. Interaktiv. Unvergesslich.</p>
+        <p class="wa-hero__claim">Mobil. Interaktiv. Unvergesslich.</p>
+        <div class="kg-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
+          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
+        </div>
       </div>
-    </div>
-  </div>
+      <figure class="kg-hero__photo">
+        <Image
+          src={walkActHeroImg}
+          alt="Walk Act NRW – Clown Zauberer LIAR – Pantomime"
+          widths={[400, 700, 1000, 1400]}
+          sizes="(max-width: 900px) 92vw, 560px"
+          loading="eager"
+          fetchpriority="high"
+          style="object-position: 55% 24%"
+        />
+        <span class="wa-steps-deco" aria-hidden="true"><span>👣</span><span>👣</span><span>👣</span></span>
+      </figure>
     </div>
   </section>
 
-  <!-- Intro -->
-  <section class="py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6">Walk Act Zauberer in NRW – Clown Zauberer LIAR</h2>
-      <p class="hero-subtitle text-[#374151] leading-relaxed mb-4">
+  <!-- ── Intro ── -->
+  <section class="kg-intro">
+    <div class="container kg-narrow" data-reveal>
+      <h2 class="kg-h2">Walk Act Zauberer in NRW – Clown Zauberer LIAR</h2>
+      <p class="kg-lead">
         Ein Walk Act mit Clown Zauberer LIAR (Michaël Prescler) ist mobile, interaktive Walking-Unterhaltung, die sich frei unter die Gäste mischt – buchbar in ganz <strong>NRW</strong> (u. a. Köln, Düsseldorf, Essen, Dortmund) für Messen, Stadt- und Straßenfeste, Firmenevents und Empfänge. Ohne Bühne und Technik, je nach Anlass flexibel von rund 30 Minuten bis zu mehreren Stunden.
       </p>
-      <p class="text-[#374151] leading-relaxed mb-4">
-        Als <a href="/" class="text-[#d7393e] hover:underline font-medium">Clown</a> <a href="/zauberer/" class="text-[#d7393e] hover:underline font-medium">Zauberer</a> <strong>LIAR</strong> bringe ich Magie, Humor und charmante Unterhaltung direkt zu Ihren Gästen – mitten im Publikum, auf Messen, Stadtfesten oder Firmenfeiern in NRW.
+      <p>
+        Als <a href="/">Clown</a> <a href="/zauberer/">Zauberer</a> <strong>LIAR</strong> bringe ich Magie, Humor und charmante Unterhaltung direkt zu Ihren Gästen – mitten im Publikum, auf Messen, Stadtfesten oder Firmenfeiern in NRW.
       </p>
-      <p class="text-[#374151] leading-relaxed mb-4">
+      <p>
         Ich kombiniere <strong>Zauberkunst, Pantomime und spontane Comedy</strong>, um Menschen auf natürliche Weise zu begeistern, zu vernetzen und bleibende Eindrücke zu schaffen.
       </p>
-      <p class="text-[#374151] leading-relaxed">
+      <p class="wa-intro__punch">
         Kein Bühnenaufbau, kein Aufwand – nur pure, mobile Unterhaltung mit Herz.
       </p>
     </div>
   </section>
 
-  </HeroStage>
-  <GoogleReviews />
+  <Reviews />
 
-  <!-- Was ist ein Walk-Act? -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div class="flex justify-center">
-          <Image
-            src={walkActFestEssenImg}
-            alt="Fest Essen Walk Act"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
-            loading="lazy"
-            widths={[400, 800]}
-            sizes="340px"
-          />
-        </div>
-        <div>
-          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-2">Was ist ein Walk-Act?</h2>
-          <hr class="border-[#1f2025] border-t-2 mb-6 w-64" />
-          <p class="text-[#374151] leading-relaxed mb-4">
-            Ein Walk-Act ist eine <strong>bewegliche, interaktive Showform</strong>, bei der ich mich frei unter Ihre Gäste mische.
-            Ob auf einer Messe, einem Straßenfest oder einer privaten Feier – ich zaubere direkt vor den Augen der Besucher, wechsle von Gruppe zu Gruppe und erschaffe dabei magische Begegnungen voller Lachen und Staunen.
-          </p>
-          <p class="text-[#374151] leading-relaxed">
-            Diese Art der Animation ist ideal, wenn Sie Ihrem Event <strong>eine besondere Atmosphäre</strong> verleihen möchten – lebendig, sympathisch und unvergesslich.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- WALK ACT Highlights -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-2">WALK ACT Highlights</h2>
-          <hr class="border-[#1f2025] border-t-2 mb-2 w-64" />
-          <p class="text-[#374151] mb-6">Meine Walk-Act Highlights</p>
-          <div class="space-y-4 mb-8">
-            {highlights.map((h) => (
-              <div>
-                <p class="font-bold text-[#1f2025]">
-                  <span class="mr-2">{h.icon}</span>{h.title}:
-                </p>
-                <p class="text-[#374151] text-sm ml-7">{h.text}</p>
-              </div>
-            ))}
-          </div>
-          <a
-            href="/kontakt/"
-            class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded uppercase tracking-wide transition-colors"
-          >
-            Kontaktformular
-          </a>
-        </div>
-        <div class="flex justify-center">
-          <Image
-            src={ballonmodellage2Img}
-            alt="Herzballon bei Ballonmodellage"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
-            loading="lazy"
-            widths={[400, 800]}
-            sizes="340px"
-          />
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Reviews -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="text-center mb-8">
-        <p class="text-2xl font-bold text-[#1f2025]">⭐⭐⭐⭐⭐ Google Bewertungen</p>
-      </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:#e91e63;">SJ</div>
-            <div>
-              <p class="font-semibold text-[#1f2025] text-sm">Smilson Johnson</p>
-              <p class="text-xs text-[#595959]">vor 2 Monaten</p>
-            </div>
-          </div>
-          <div class="text-yellow-400 text-sm mb-2">★★★★★</div>
-          <p class="text-[#374151] text-sm">In jeder Hinsicht wirklich empfehlenswert!</p>
-        </div>
-        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:#009688;">TA</div>
-            <div>
-              <p class="font-semibold text-[#1f2025] text-sm">Thorsten Andres</p>
-              <p class="text-xs text-[#595959]">vor 2 Monaten</p>
-            </div>
-          </div>
-          <div class="text-yellow-400 text-sm mb-2">★★★★★</div>
-          <p class="text-[#374151] text-sm">Was ein geiler Typ! Witz, Charme und Humor im Herzen ❤️</p>
-        </div>
-        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
-          <div class="flex items-center gap-3 mb-3">
-            <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold text-sm" style="background:#3b55d5;">NK</div>
-            <div>
-              <p class="font-semibold text-[#1f2025] text-sm">Nina Keller</p>
-              <p class="text-xs text-[#595959]">vor 2 Monaten</p>
-            </div>
-          </div>
-          <div class="text-yellow-400 text-sm mb-2">★★★★★</div>
-          <p class="text-[#374151] text-sm">Mit unglaublich viel Charme und Humor begeistert Michaël die kleinen UND die großen Zuschauer. Ganz große Klasse 🐻</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- STRASSENFEST, STADTFEST, KINDERFEST -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-        <div class="flex justify-center">
-          <Image
-            src={walkActStadtfestImg}
-            alt="Walk Act Stadtfest"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 340px; height: 340px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
-            loading="lazy"
-            widths={[400, 800]}
-            sizes="340px"
-          />
-        </div>
-        <div>
-          <h2 class="font-black text-[#1f2025] text-3xl sm:text-4xl mb-2 uppercase leading-tight">
-            Straßenfest,<br />Stadtfest,<br />Kinderfest
-          </h2>
-          <hr class="border-[#1f2025] border-t-2 mb-6 w-48" />
-          <p class="text-[#374151] leading-relaxed mb-4">
-            Clown Zauberer LIAR unterhält und verblüfft die Zuschauer mit seinem Zauberprogramm. Das Publikum kann die Zauberei und Magie hautnah miterleben – denn die Zaubershow findet mitten unter den Zuschauern statt. Es ist somit die wohl faszinierendste Form der Zauberei bei Straßenfesten, <a href="/zauberer/zaubershow/strassen-sommer-fest/" class="text-[#d7393e] hover:underline">Stadtfesten</a> und Kinderfesten.
-          </p>
-          <p class="text-[#374151] leading-relaxed">
-            Da es sich um kein „festes" Programm handelt, werden die Inhalte und die Zaubertricks immer wieder auf das vorhandene Publikum angepasst. Die Straßen-Zauberei kann sehr gut mit der <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonmodellage</a> kombiniert werden.
-          </p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- IDEAL FÜR + VORTEILE (pastel bg) -->
-  <section class="bg-[#eff4ff] border-y border-[#c5d3f7] py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
-        <div>
-          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6 uppercase tracking-wider">Ideal für</h2>
-          <ul class="space-y-3">
-            {idealFuer.map((item) => (
-              <li class="flex items-start gap-3">
-                <span class="text-[#d7393e] mt-1 flex-shrink-0">●</span>
-                <p class="text-[#374151]"><strong class="text-[#1f2025]">{item.bold}</strong>{item.rest}</p>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div>
-          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6 uppercase tracking-wider">Ihre Vorteile</h2>
-          <ol class="space-y-3">
-            {['Keine Bühne oder Technik erforderlich ✅', 'Direkte Interaktion mit Gästen oder Kunden ✅', 'Flexibel einsetzbar, indoor & outdoor ✅', 'In ganz NRW buchbar (z. B. Köln, Düsseldorf, Essen, Dortmund) ✅', 'Professioneller Auftritt mit künstlerischer Qualität ✅'].map((v, i) => (
-              <li class="flex items-start gap-3">
-                <span class="text-[#d7393e] font-bold flex-shrink-0">{i + 1}.</span>
-                <p class="text-[#374151]">{v}</p>
-              </li>
-            ))}
-          </ol>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ABLAUF -->
-  <section class="bg-white py-14">
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center uppercase tracking-wider mb-10">Ablauf eines Walk Acts</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-        {ablauf.map((step, i) => (
-          <div class="bg-gray-50 rounded-xl p-6 flex gap-4 items-start card-hover reveal">
-            <div class="w-10 h-10 rounded-full bg-[#d7393e] text-white font-bold flex items-center justify-center flex-shrink-0">
-              {i + 1}
-            </div>
-            <div>
-              <p class="font-bold text-[#1f2025] mb-1">{step.title}</p>
-              <p class="text-[#374151] text-sm leading-relaxed">{step.text}</p>
-            </div>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Sektion (pastel bg) -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
-        <iframe
-          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
-          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
-          class="absolute inset-0 w-full h-full rounded-lg"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
+  <!-- ── Was ist ein Walk-Act? ── -->
+  <section class="wa-split">
+    <div class="container wa-split__grid">
+      <figure class="wa-photo" data-reveal="pop">
+        <Image
+          src={walkActFestEssenImg}
+          alt="Fest Essen Walk Act"
+          data-scroll-tilt="3"
+          widths={[340, 680]}
+          sizes="340px"
           loading="lazy"
-        ></iframe>
+        />
+      </figure>
+      <div data-reveal>
+        <h2 class="kg-h2">Was ist ein Walk-Act?</h2>
+        <Squiggle />
+        <p>
+          Ein Walk-Act ist eine <strong>bewegliche, interaktive Showform</strong>, bei der ich mich frei unter Ihre Gäste mische.
+          Ob auf einer Messe, einem Straßenfest oder einer privaten Feier – ich zaubere direkt vor den Augen der Besucher, wechsle von Gruppe zu Gruppe und erschaffe dabei magische Begegnungen voller Lachen und Staunen.
+        </p>
+        <p>
+          Diese Art der Animation ist ideal, wenn Sie Ihrem Event <strong>eine besondere Atmosphäre</strong> verleihen möchten – lebendig, sympathisch und unvergesslich.
+        </p>
       </div>
-      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+    </div>
+  </section>
+
+  <!-- ── WALK ACT Highlights ── -->
+  <section class="wa-split wa-split--alt">
+    <div class="container wa-split__grid wa-split__grid--flip">
+      <div data-reveal>
+        <h2 class="kg-h2">WALK ACT Highlights</h2>
+        <p class="kg-sub wa-sub">Meine Walk-Act Highlights</p>
+        <div class="wa-hl">
+          {highlights.map((h, i) => (
+            <div class="wa-hl__item" data-reveal="tilt" data-reveal-delay={i * 0.08}>
+              <p class="wa-hl__title"><span class="wa-hl__icon">{h.icon}</span>{h.title}:</p>
+              <p class="wa-hl__text">{h.text}</p>
+            </div>
+          ))}
+        </div>
+        <a href="/kontakt/" class="btn btn--primary" data-confetti>
+          Kontaktformular
+        </a>
+      </div>
+      <figure class="wa-photo wa-photo--tilt" data-reveal="pop" data-reveal-delay="0.1">
+        <Image
+          src={ballonmodellage2Img}
+          alt="Herzballon bei Ballonmodellage"
+          data-scroll-tilt="3"
+          widths={[340, 680]}
+          sizes="340px"
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </section>
+
+  <!-- ── Google-Bewertungen (legacy cards of this page) ── -->
+  <section class="wa-voices">
+    <div class="container">
+      <p class="wa-voices__title kg-center">⭐⭐⭐⭐⭐ Google Bewertungen</p>
+      <div class="wa-voices__grid">
+        <figure class="wa-voice" data-reveal="pop">
+          <div class="wa-voice__who">
+            <div class="wa-voice__avatar">SJ</div>
+            <div>
+              <p class="wa-voice__name">Smilson Johnson</p>
+              <p class="wa-voice__when">vor 2 Monaten</p>
+            </div>
+          </div>
+          <div class="wa-voice__stars">★★★★★</div>
+          <p class="wa-voice__text">In jeder Hinsicht wirklich empfehlenswert!</p>
+        </figure>
+        <figure class="wa-voice wa-voice--blue" data-reveal="pop" data-reveal-delay="0.08">
+          <div class="wa-voice__who">
+            <div class="wa-voice__avatar">TA</div>
+            <div>
+              <p class="wa-voice__name">Thorsten Andres</p>
+              <p class="wa-voice__when">vor 2 Monaten</p>
+            </div>
+          </div>
+          <div class="wa-voice__stars">★★★★★</div>
+          <p class="wa-voice__text">Was ein geiler Typ! Witz, Charme und Humor im Herzen ❤️</p>
+        </figure>
+        <figure class="wa-voice wa-voice--yellow" data-reveal="pop" data-reveal-delay="0.16">
+          <div class="wa-voice__who">
+            <div class="wa-voice__avatar">NK</div>
+            <div>
+              <p class="wa-voice__name">Nina Keller</p>
+              <p class="wa-voice__when">vor 2 Monaten</p>
+            </div>
+          </div>
+          <div class="wa-voice__stars">★★★★★</div>
+          <p class="wa-voice__text">Mit unglaublich viel Charme und Humor begeistert Michaël die kleinen UND die großen Zuschauer. Ganz große Klasse 🐻</p>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Straßenfest, Stadtfest, Kinderfest ── -->
+  <section class="wa-split">
+    <div class="container wa-split__grid">
+      <figure class="wa-photo" data-reveal="pop">
+        <Image
+          src={walkActStadtfestImg}
+          alt="Walk Act Stadtfest"
+          data-scroll-tilt="3"
+          widths={[340, 680]}
+          sizes="340px"
+          loading="lazy"
+        />
+      </figure>
+      <div data-reveal>
+        <h2 class="kg-h2 wa-fest__title">
+          Straßenfest,<br />Stadtfest,<br />Kinderfest
+        </h2>
+        <p>
+          Clown Zauberer LIAR unterhält und verblüfft die Zuschauer mit seinem Zauberprogramm. Das Publikum kann die Zauberei und Magie hautnah miterleben – denn die Zaubershow findet mitten unter den Zuschauern statt. Es ist somit die wohl faszinierendste Form der Zauberei bei Straßenfesten, <a href="/zauberer/zaubershow/strassen-sommer-fest/">Stadtfesten</a> und Kinderfesten.
+        </p>
+        <p>
+          Da es sich um kein „festes" Programm handelt, werden die Inhalte und die Zaubertricks immer wieder auf das vorhandene Publikum angepasst. Die Straßen-Zauberei kann sehr gut mit der <a href="/clown/ballonmodellage/">Ballonmodellage</a> kombiniert werden.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Ideal für + Vorteile (blue band) ── -->
+  <section class="kg-band kg-band--blue wa-ideal">
+    <SectionEdge color="var(--brand-blue)" side="top" />
+    <SectionEdge color="var(--brand-blue)" side="bottom" />
+    <div class="container wa-ideal__grid">
+      <div class="wa-ideal__card" data-reveal="pop">
+        <h2 class="kg-h2">Ideal für</h2>
+        <ul class="wa-ideal__list">
+          {idealFuer.map((item) => (
+            <li>
+              <span class="wa-ideal__dot">●</span>
+              <p><strong>{item.bold}</strong>{item.rest}</p>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="wa-ideal__card wa-ideal__card--tilt" data-reveal="pop" data-reveal-delay="0.1">
+        <h2 class="kg-h2">Ihre Vorteile</h2>
+        <ol class="wa-ideal__list">
+          {['Keine Bühne oder Technik erforderlich ✅', 'Direkte Interaktion mit Gästen oder Kunden ✅', 'Flexibel einsetzbar, indoor & outdoor ✅', 'In ganz NRW buchbar (z. B. Köln, Düsseldorf, Essen, Dortmund) ✅', 'Professioneller Auftritt mit künstlerischer Qualität ✅'].map((v, i) => (
+            <li>
+              <span class="wa-ideal__num">{i + 1}.</span>
+              <p>{v}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Ablauf: a walking route, stop by stop ── -->
+  <section class="wa-route">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>Ablauf eines Walk Acts</h2>
+      <div class="wa-route__track">
+        <svg class="wa-route__line" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden="true" data-reveal="draw">
+          <path d="M20 12 C 180 -4, 320 28, 500 12 S 820 -4, 980 12" fill="none" stroke="var(--line)" stroke-width="3" stroke-dasharray="10 9" stroke-linecap="round" />
+        </svg>
+        <ol class="wa-route__steps">
+          {ablauf.map((step, i) => (
+            <li class="wa-stop" data-reveal="tilt" data-reveal-delay={i * 0.12}>
+              <div class="wa-stop__num">{i + 1}</div>
+              <div>
+                <p class="wa-stop__title">{step.title}</p>
+                <p class="wa-stop__text">{step.text}</p>
+              </div>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Video (yellow band) ── -->
+  <section class="kg-band kg-band--yellow">
+    <SectionEdge color="var(--brand-yellow)" side="top" />
+    <SectionEdge color="var(--brand-yellow)" side="bottom" />
+    <div class="container kg-narrow kg-center">
+      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="kg-video" data-reveal="pop">
+        <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
+      </div>
+      <h3 class="kg-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
-      <a
-        href="/galerie/"
-        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
-      >
-        Zur Foto- und Videogalerie
-      </a>
+      <a href="/galerie/" class="btn btn--primary">Zur Foto- und Videogalerie</a>
     </div>
   </section>
 
-  <!-- CTA Booking -->
-  <section class="bg-white py-12 border-t border-gray-100">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="font-bold text-[#1f2025] text-xl mb-4">Einfach Kontakt aufnehmen</h2>
-      <p class="text-[#374151] mb-4 leading-relaxed">
+  <!-- ── Kontakt ── -->
+  <section class="wa-cta">
+    <div class="container kg-narrow kg-center" data-reveal>
+      <h2 class="kg-h2">Einfach Kontakt aufnehmen</h2>
+      <p>
         Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten.
       </p>
-      <div class="space-y-2 text-[#374151] mb-6">
-        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
-        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+      <div class="wa-cta__contact">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
         <p>📍 Standort: Beethovenstr. 15, 45966 Gladbeck</p>
       </div>
-      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+      <a href="/kontakt/" class="btn btn--primary" data-confetti>
         Jetzt unverbindlich anfragen
       </a>
     </div>
   </section>
+</V2Layout>
 
-</BaseLayout>
+<style>
+  /* ── hero ── */
+  .wa-crumbs { font-size: 0.88rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2); }
+  .wa-crumbs a { color: inherit; }
+  .wa-hero__sub { font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 650; color: var(--brand-blue); margin: 0 0 0.5rem; }
+  .wa-hero__claim { font-family: var(--font-display); font-size: 1.3rem; font-weight: 650; letter-spacing: 0.02em; margin-bottom: var(--space-3); }
+  /* footprints walk across the photo's lower edge, one step after another */
+  .wa-steps-deco { position: absolute; left: 1.2rem; bottom: -1.5rem; display: flex; gap: 0.5rem; font-size: 1.9rem; line-height: 1; }
+  .wa-steps-deco span { display: inline-block; rotate: 80deg; filter: drop-shadow(2px 2px 0 var(--line)); animation: wa-step 3.6s var(--ease-out) infinite; }
+  .wa-steps-deco span:nth-child(2) { animation-delay: 0.45s; translate: 0 -0.5rem; }
+  .wa-steps-deco span:nth-child(3) { animation-delay: 0.9s; }
+  @keyframes wa-step { 0%, 100% { opacity: 0.25; } 12%, 55% { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .wa-steps-deco span { animation: none; } }
+
+  /* ── intro ── */
+  .wa-intro__punch { font-family: var(--font-display); font-size: 1.25rem; font-weight: 650; color: var(--accent-strong); }
+
+  /* ── split sections (photo + text) ── */
+  .wa-split { background: var(--bg); }
+  .wa-split--alt { background: var(--surface); border-block: var(--border); }
+  .wa-split__grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr 1.4fr; align-items: center; }
+  .wa-split__grid--flip { grid-template-columns: 1.4fr 1fr; }
+  .wa-split__grid :global(.sq) { margin: 0 0 var(--space-3); max-width: 16rem; }
+  .wa-split p { color: var(--ink-soft); }
+  .wa-split strong { color: var(--ink); }
+  .wa-photo { margin: 0; justify-self: center; rotate: -2deg; }
+  .wa-photo--tilt { rotate: 2.5deg; }
+  .wa-photo :global(img) {
+    display: block; width: min(21.25rem, 80vw); height: auto; aspect-ratio: 1; object-fit: cover;
+    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
+  }
+  .wa-sub { margin-top: 0; }
+  .wa-fest__title { text-transform: uppercase; line-height: 1.05; }
+
+  /* ── highlights ── */
+  .wa-hl { display: grid; gap: var(--space-2); margin-bottom: var(--space-4); }
+  .wa-hl__item {
+    padding: var(--space-2) var(--space-3); background: var(--bg); border: 2px solid var(--line);
+    border-radius: var(--radius-sm); box-shadow: 3px 3px 0 var(--line); transition: rotate 0.25s var(--ease-out);
+  }
+  .wa-hl__item:nth-child(2) { rotate: 0.8deg; margin-left: var(--space-2); }
+  .wa-hl__item:nth-child(3) { rotate: -0.6deg; margin-left: var(--space-4); }
+  .wa-split .wa-hl__title { font-weight: 800; color: var(--ink); margin-bottom: 0.2rem; }
+  .wa-hl__icon { margin-right: 0.5rem; }
+  .wa-split .wa-hl__text { margin: 0; font-size: 0.97rem; }
+  @media (hover: hover) and (pointer: fine) { .wa-hl__item:hover { rotate: -1.2deg; } }
+
+  /* ── legacy review cards ── */
+  .wa-voices { background: var(--bg); }
+  .wa-voices__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 650; }
+  .wa-voices__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); margin-top: var(--space-3); }
+  .wa-voice {
+    --c: var(--brand-red);
+    margin: 0; padding: var(--space-3); background: var(--surface); border: var(--border);
+    border-top: 0.7rem solid var(--c); border-radius: var(--radius); box-shadow: var(--shadow); rotate: -1deg;
+  }
+  .wa-voice--blue { --c: var(--brand-blue); rotate: 0.8deg; }
+  .wa-voice--yellow { --c: var(--brand-yellow); rotate: -0.4deg; }
+  .wa-voice__who { display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.6rem; }
+  .wa-voice__avatar {
+    flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%;
+    background: var(--c); color: #fff; font-weight: 800; font-size: 0.9rem; border: 2px solid var(--line);
+  }
+  .wa-voice--yellow .wa-voice__avatar { color: var(--ink); }
+  .wa-voice .wa-voice__name { font-weight: 800; margin: 0; font-size: 0.95rem; }
+  .wa-voice .wa-voice__when { margin: 0; font-size: 0.82rem; color: var(--ink-soft); }
+  .wa-voice__stars { color: var(--star); letter-spacing: 0.06em; margin-bottom: 0.4rem; }
+  .wa-voice .wa-voice__text { margin: 0; color: var(--ink-soft); }
+
+  /* ── ideal für (blue band): two white cards ── */
+  .wa-ideal__grid { display: grid; gap: var(--space-4); grid-template-columns: 1fr 1fr; text-align: left; }
+  .wa-ideal__card {
+    padding: var(--space-4) var(--space-3) var(--space-3); color: var(--ink);
+    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line); rotate: -1deg;
+  }
+  .wa-ideal__card--tilt { rotate: 1deg; }
+  .wa-ideal__card .kg-h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.04em; }
+  .wa-ideal__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
+  .wa-ideal__list li { display: flex; gap: 0.65rem; align-items: flex-start; }
+  .wa-ideal__list p { margin: 0; color: var(--ink-soft); }
+  .kg-band--blue .wa-ideal__card strong { color: var(--ink); }
+  .wa-ideal__dot { color: var(--accent-strong); flex: none; font-size: 0.8rem; margin-top: 0.3rem; }
+  .wa-ideal__num { color: var(--accent-strong); font-weight: 900; flex: none; font-family: var(--font-display); }
+
+  /* ── ablauf: route with four stops ── */
+  .wa-route__track { position: relative; margin-top: var(--space-4); }
+  .wa-route__line { position: absolute; left: 0; right: 0; top: 1.3rem; width: 100%; height: 1.5rem; }
+  .wa-route__steps { position: relative; list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(4, 1fr); text-align: center; }
+  .wa-stop { display: grid; justify-items: center; gap: var(--space-2); }
+  .wa-stop__num {
+    display: grid; place-items: center; width: 4rem; height: 4rem; border-radius: 50%;
+    font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: #fff;
+    background: var(--brand-red); border: var(--border); box-shadow: 4px 4px 0 var(--line); rotate: -6deg;
+    transition: rotate 0.3s var(--ease-out-expo), translate 0.3s var(--ease-out-expo);
+  }
+  .wa-stop:nth-child(2) .wa-stop__num { background: var(--brand-blue); rotate: 5deg; }
+  .wa-stop:nth-child(3) .wa-stop__num { background: var(--brand-yellow); color: var(--ink); rotate: -3deg; }
+  .wa-stop:nth-child(4) .wa-stop__num { rotate: 7deg; }
+  .wa-route .wa-stop__title { font-weight: 800; margin-bottom: 0.3rem; }
+  .wa-route .wa-stop__text { margin: 0; color: var(--ink-soft); font-size: 0.97rem; }
+  @media (hover: hover) and (pointer: fine) {
+    .wa-stop:hover .wa-stop__num { rotate: 0deg; translate: 0 -4px; }
+  }
+
+  /* ── kontakt ── */
+  .wa-cta { background: var(--surface); border-top: var(--border); }
+  .wa-cta p { color: var(--ink-soft); }
+  .wa-cta__contact { margin: var(--space-3) 0; font-weight: 700; }
+
+  @media (max-width: 900px) {
+    .wa-split__grid, .wa-split__grid--flip, .wa-ideal__grid { grid-template-columns: 1fr; }
+    .wa-split__grid--flip > figure { order: -1; }
+    .wa-hl__item:nth-child(n) { margin-left: 0; }
+    .wa-route__line { display: none; }
+    .wa-route__steps { grid-template-columns: 1fr; text-align: left; gap: var(--space-3); border-left: 3px dashed var(--line); margin-left: 2rem; padding-left: 0; }
+    .wa-stop { grid-template-columns: auto 1fr; justify-items: start; align-items: center; margin-left: -2rem; }
+  }
+</style>

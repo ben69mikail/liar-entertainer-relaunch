@@ -189,4 +189,9 @@
 
 /* links inside coloured bands take the band's contrast colour (red on yellow was 3.5:1) */
 .kg-band--yellow a:not(.btn) { color: var(--ink); text-decoration-color: var(--ink); }
-.kg-band--blue a:not(.btn), .hm-stats a:not(.btn) { color: #fff; text-decoration-color: var(--brand-yellow); }
+.kg-band--blue a:not(.btn), .hm-stats a:not(.btn) { color: #fff; text-decoration-color: currentColor; }
+
+/* Wave edges reach ~4.2rem into the neighbouring sections: give those sections that much extra room
+   so no content (e.g. a button) ever sits on a wave. */
+.v2 main > section:has(+ .kg-band) { padding-bottom: calc(var(--space-6) + clamp(2.6rem, 5vw, 4.2rem)); }
+.v2 main > .kg-band + section { padding-top: calc(var(--space-6) + clamp(2.6rem, 5vw, 4.2rem)); }

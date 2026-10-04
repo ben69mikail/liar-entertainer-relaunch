@@ -1,9 +1,15 @@
 ---
-import BaseLayout from '../../../../layouts/BaseLayout.astro';
-import HeroSlider from '../../../../components/HeroSlider.astro';
-import HeroStage from '../../../../components/HeroStage.astro';
-import CountUp from '../../../../components/CountUp.astro';
-import GoogleReviews from '../../../../components/GoogleReviews.astro';
+import V2Layout from '../../../../layouts/V2Layout.astro';
+import Reviews from '../../../../components/v2/Reviews.astro';
+import ReviewBadge from '../../../../components/v2/ReviewBadge.astro';
+import Bunting from '../../../../components/v2/kids/Bunting.astro';
+import Squiggle from '../../../../components/v2/kids/Squiggle.astro';
+import BalloonDog from '../../../../components/v2/kids/BalloonDog.astro';
+import Glitter from '../../../../components/v2/kids/Glitter.astro';
+import SectionEdge from '../../../../components/v2/SectionEdge.astro';
+import YouTubeFacade from '../../../../components/YouTubeFacade.astro';
+import { CONTACT } from '../../../../data/site';
+import '../../../../styles/kids-kit.css';
 import { Image } from 'astro:assets';
 import heroImg from '../../../../assets/images/zauberer/strassenfest-essen-hero.jpg';
 import festBottropImg from '../../../../assets/images/zauberer/fest-bottrop.jpg';
@@ -60,267 +66,363 @@ const _pageGallery = [
   { src: kostenPreisImg, alt: 'Kosten Preis Clown NRW' },
 ];
 
+const cardColors = ['red', 'blue', 'yellow'];
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   keywords="Straßenfest Zauberer, Sommerfest Entertainer NRW, Stadtfest Clown, Walk Act Straßenfest, Sommerfest Programm"
   canonical="https://liar-entertainer.com/zauberer/zaubershow/strassen-sommer-fest/"
 >
-
-  <!-- Page Title -->
-  <section class="bg-white pt-8 pb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-sm text-[#595959] mb-4">
-        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
-        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
-        <a href="/zauberer/zaubershow/" class="hover:text-[#d7393e]">Zaubershow</a> »
-        <span>Strassen – Sommer -Fest</span>
-      </p>
-      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Straßen- &amp; Sommerfest</h1>
-    </div>
-  </section>
-
-  <!-- Hero -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-    <Image
-      src={heroImg}
-      alt="Straßenfest Zauberer NRW – Clown LIAR auf Stadtfesten und Sommerfesten"
-      class="absolute inset-0 w-full h-full object-cover object-top"
-      style="object-position: 58% 47%"
-      loading="eager"
-      fetchpriority="high"
-      widths={[600, 900, 1200]}
-      sizes="(max-width: 1152px) 100vw, 1120px"
-    />
-    <div class="absolute inset-0 bg-black/50"></div>
-    <div class="relative flex items-center justify-center" style="min-height: 600px;">
-      <div class="text-center px-6">
-        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+  <!-- Hero: no reveal here (LCP) -->
+  <section class="kg-hero">
+    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
+    <Bunting />
+    <div class="container kg-hero__grid">
+      <div class="kg-hero__copy">
+        <p class="sf-crumbs">
+          <a href="/">Clown</a> »
+          <a href="/zauberer/">Zauberer</a> »
+          <a href="/zauberer/zaubershow/">Zaubershow</a> »
+          <span>Strassen – Sommer -Fest</span>
+        </p>
+        <ReviewBadge />
+        <h1 class="kg-hero__title" data-letters><span class="kg-mark">Straßen-</span> &amp; Sommerfest</h1>
+        <h2 class="sf-hero__sub">
           🎉 Straßen- und Sommerfest Zauberer –<br />Ihr Highlight für Stadtfeste in NRW
         </h2>
-        <p class="text-white/90 text-lg font-medium">Der Zauberer für Ihr erfolgreiches Straßen- und Sommerfest</p>
+        <p class="sf-hero__tag">Der Zauberer für Ihr erfolgreiches Straßen- und Sommerfest</p>
+        <div class="kg-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
+          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
+        </div>
       </div>
-    </div>
-  </div>
+      <figure class="kg-hero__photo">
+        <Image
+          src={heroImg}
+          alt="Straßenfest Zauberer NRW – Clown LIAR auf Stadtfesten und Sommerfesten"
+          widths={[400, 700, 1000, 1400]}
+          sizes="(max-width: 900px) 92vw, 560px"
+          loading="eager"
+          fetchpriority="high"
+          style="object-position: 58% 47%"
+        />
+      </figure>
     </div>
   </section>
 
   <!-- Intro -->
-  <section class="py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div>
-          <h2 class="font-bold text-[#1f2025] text-2xl mb-4">Wenn Ihr Fest zum magischen Event wird</h2>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            Sie planen ein Fest, Straßenfest, Sommerfest, Stadtteilfest oder Vereinsfest in Nordrhein-Westfalen? Als professioneller Pantomime, Zauberer, Clown und Allround-Entertainer bringe ich seit über 30 Jahren Magie, Spaß und Begeisterung auf Feste aller Art!
-          </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            Das Besondere: Ich bin nicht auf eine feste Bühne angewiesen! Ob auf großen Stadtfesten mit tausenden Besuchern, gemütlichen Straßenfesten im Wohnviertel oder Vereinssommerfesten – ich passe mich flexibel an und sorge überall für strahlende Gesichter bei Groß und Klein.
-          </p>
-          <p class="text-[#374151] leading-relaxed">
-            Für Veranstalter bedeutet das: Professionelles, vielseitiges Entertainment aus einer Hand, das sich nahtlos in Ihr Festprogramm einfügt. Ich mache Ihr Fest zum Erlebnis! Informieren Sie sich auch über meine Angebote für <a href="/zauberer/zaubershow/kindergarten-kita/" class="text-[#d7393e] hover:underline">Kita- und Kindergartenfeste</a> oder <a href="/zauberer/zaubershow/schule/" class="text-[#d7393e] hover:underline">Schulveranstaltungen</a>.
-          </p>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">✨ Entertainment-Formate für Ihr Fest</h3>
-          <ul class="space-y-3 text-sm">
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🚶‍♂️</span> <span class="text-[#374151]"><strong>Walk-Act:</strong> Zauberkunst mobil & hautnah – direkt zu den Besuchern</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🎭</span> <span class="text-[#374151]"><strong>Bühnenzaubershow:</strong> Das Highlight für 50–500+ Zuschauer</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🎈</span> <span class="text-[#374151]"><strong>Ballonmodellage:</strong> Bunte Kunstwerke für Kinder als Dauerprogramm</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🔀</span> <span class="text-[#374151]"><strong>Kombiniert buchbar:</strong> Alle Formate lassen sich individuell kombinieren</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">⚡</span> <span class="text-[#374151]"><strong>Unkompliziert:</strong> Minimaler Technikaufwand, ich bringe alles mit</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">📅</span> <span class="text-[#374151]"><strong>30 Jahre Erfahrung:</strong> Auf Festen aller Größen von 100 bis 50.000 Besucher</span></li>
-          </ul>
-        </div>
+  <section class="kg-intro">
+    <div class="container kg-intro__grid">
+      <div class="kg-intro__text" data-reveal>
+        <h2 class="kg-h2">Wenn Ihr Fest zum magischen Event wird</h2>
+        <p class="kg-lead">
+          Sie planen ein Fest, Straßenfest, Sommerfest, Stadtteilfest oder Vereinsfest in Nordrhein-Westfalen? Als professioneller Pantomime, Zauberer, Clown und Allround-Entertainer bringe ich seit über 30 Jahren Magie, Spaß und Begeisterung auf Feste aller Art!
+        </p>
+        <p>
+          Das Besondere: Ich bin nicht auf eine feste Bühne angewiesen! Ob auf großen Stadtfesten mit tausenden Besuchern, gemütlichen Straßenfesten im Wohnviertel oder Vereinssommerfesten – ich passe mich flexibel an und sorge überall für strahlende Gesichter bei Groß und Klein.
+        </p>
+        <p>
+          Für Veranstalter bedeutet das: Professionelles, vielseitiges Entertainment aus einer Hand, das sich nahtlos in Ihr Festprogramm einfügt. Ich mache Ihr Fest zum Erlebnis! Informieren Sie sich auch über meine Angebote für <a href="/zauberer/zaubershow/kindergarten-kita/">Kita- und Kindergartenfeste</a> oder <a href="/zauberer/zaubershow/schule/">Schulveranstaltungen</a>.
+        </p>
       </div>
+      <aside class="kg-expect" data-reveal data-reveal-delay="0.1">
+        <h3 class="kg-expect__title">✨ Entertainment-Formate für Ihr Fest</h3>
+        <ul class="kg-expect__list sf-list">
+          <li><span>🚶‍♂️</span> <span><strong>Walk-Act:</strong> Zauberkunst mobil & hautnah – direkt zu den Besuchern</span></li>
+          <li><span>🎭</span> <span><strong>Bühnenzaubershow:</strong> Das Highlight für 50–500+ Zuschauer</span></li>
+          <li><span>🎈</span> <span><strong>Ballonmodellage:</strong> Bunte Kunstwerke für Kinder als Dauerprogramm</span></li>
+          <li><span>🔀</span> <span><strong>Kombiniert buchbar:</strong> Alle Formate lassen sich individuell kombinieren</span></li>
+          <li><span>⚡</span> <span><strong>Unkompliziert:</strong> Minimaler Technikaufwand, ich bringe alles mit</span></li>
+          <li><span>📅</span> <span><strong>30 Jahre Erfahrung:</strong> Auf Festen aller Größen von 100 bis 50.000 Besucher</span></li>
+        </ul>
+      </aside>
     </div>
   </section>
 
-  </HeroStage>
-  <GoogleReviews />
+  <Reviews />
 
-  <!-- Entertainment Formate -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-4">✨ Entertainment-Formate für Ihr Fest</h2>
-      <p class="text-center text-[#374151] mb-10">Vielseitiges Entertainment aus einer Hand – einzeln oder kombiniert buchbar</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+  <!-- Entertainment-Formate -->
+  <section class="sf-formats" id="formate">
+    <div class="container">
+      <Squiggle color="var(--brand-blue)" />
+      <h2 class="kg-h2 kg-center" data-reveal>✨ Entertainment-Formate für Ihr Fest</h2>
+      <p class="kg-center kg-sub">Vielseitiges Entertainment aus einer Hand – einzeln oder kombiniert buchbar</p>
+      <div class="kg-cards sf-formats__grid">
         {formate.map((f, i) => (
-          <div class={`bg-white rounded-xl p-6 shadow-sm border-t-4 ${['border-[#d7393e]','border-[#3b55d5]','border-[#ffb546]'][i % 3]} card-hover`}>
-            <p class="text-3xl mb-3">{f.icon}</p>
-            <h3 class="font-bold text-[#1f2025] mb-3">{f.title}</h3>
-            <p class="text-[#374151] text-xs mb-1">{f.dauer}</p>
-            <p class="text-[#374151] text-xs mb-1">{f.publikum}</p>
-            <p class="text-[#374151] text-xs mb-4">{f.location}</p>
-            <p class="font-semibold text-[#1f2025] text-sm mb-2">Perfekt für:</p>
-            <ul class="space-y-1 mb-4">
-              {f.perfektFuer.map(p => (
-                <li class="text-[#374151] text-xs flex items-start gap-1"><span class="text-green-500">✓</span> {p}</li>
+          <article class:list={['kg-card', `kg-card--${cardColors[i % 3]}`, { 'sf-card--dog': i === 2 }]} data-reveal="pop" data-reveal-delay={String(i * 0.1)}>
+            {i === 2 && <BalloonDog />}
+            <p class="sf-icon">{f.icon}</p>
+            <h3>{f.title}</h3>
+            <p class="sf-meta">{f.dauer}</p>
+            <p class="sf-meta">{f.publikum}</p>
+            <p class="sf-meta sf-meta--last">{f.location}</p>
+            <p class="sf-label">Perfekt für:</p>
+            <ul>
+              {f.perfektFuer.map((p) => (
+                <li><span>✓</span> {p}</li>
               ))}
             </ul>
-            <p class="font-semibold text-[#1f2025] text-sm mb-2">Was Besucher erleben:</p>
-            <ul class="space-y-1">
-              {f.highlights.map(h => (
-                <li class="text-[#374151] text-xs flex items-start gap-1"><span class="text-[#d7393e]">→</span> {h}</li>
+            <p class="sf-label">Was Besucher erleben:</p>
+            <ul class="sf-arrows">
+              {f.highlights.map((h) => (
+                <li><span>→</span> {h}</li>
               ))}
             </ul>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Galerie: a fanned stack of festival snapshots -->
+  <section class="sf-photos">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="sf-photos__fan">
+        {_pageGallery.map((s, i) => (
+          <figure class="sf-snap" data-reveal="tilt" data-reveal-delay={String(i * 0.1)}>
+            <Image
+              src={s.src}
+              alt={s.alt}
+              data-scroll-tilt="3"
+              widths={[360, 720]}
+              sizes="(max-width: 760px) 86vw, 340px"
+              loading="lazy"
+            />
+          </figure>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Zahlen (red band) -->
+  <section class="kg-band sf-stats">
+    <SectionEdge color="var(--brand-red)" side="top" />
+    <SectionEdge color="var(--brand-red)" side="bottom" />
+    <div class="container sf-stats__grid">
+      <div class="sf-stat" data-reveal="pop">
+        <div class="sf-stat__icon">🪄</div>
+        <div class="sf-stat__num" data-count>400</div>
+        <div class="sf-stat__label">Shows im Jahr</div>
+      </div>
+      <div class="sf-stat" data-reveal="pop" data-reveal-delay="0.08">
+        <div class="sf-stat__icon">😊</div>
+        <div class="sf-stat__num">110.000</div>
+        <div class="sf-stat__label">Lachende Kinder</div>
+      </div>
+      <div class="sf-stat" data-reveal="pop" data-reveal-delay="0.16">
+        <div class="sf-stat__icon">🪄</div>
+        <div class="sf-stat__num" data-count>15</div>
+        <div class="sf-stat__label">Jahre Erfahrung</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Arten von Festen: fairground tickets under a second bunting -->
+  <section class="sf-fests">
+    <Bunting />
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>🎊 Für welche Feste bin ich buchbar?</h2>
+      <p class="kg-center kg-sub">Von A wie Altstadtfest bis Z wie Zeltfest</p>
+      <div class="sf-fests__grid">
+        {festarten.map((f, i) => (
+          <div class={`sf-ticket sf-ticket--${cardColors[i % 3]}`} data-reveal="pop" data-reveal-delay={String((i % 4) * 0.06)}>
+            <p class="sf-ticket__icon">{f.icon}</p>
+            <div class="sf-ticket__body">
+              <h3>{f.title}</h3>
+              <p>👥 {f.groesse}</p>
+              <p>🎭 {f.formate}</p>
+            </div>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Galerie -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <HeroSlider slides={_pageGallery} class="reveal" />
-    </div>
-  </section>
-
-  <!-- Stats Section (pastel redesign) -->
-  <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-10 text-center">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">🪄</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
-        </div>
-        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">😊</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
-        </div>
-        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">🪄</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
-        </div>
+  <!-- Video (yellow band) -->
+  <section class="kg-band kg-band--yellow">
+    <SectionEdge color="var(--brand-yellow)" side="top" />
+    <SectionEdge color="var(--brand-yellow)" side="bottom" />
+    <div class="container kg-narrow kg-center">
+      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="kg-video" data-reveal="pop">
+        <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
-    </div>
-  </section>
-
-  <!-- Arten von Festen -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-4">🎊 Für welche Feste bin ich buchbar?</h2>
-      <p class="text-center text-[#374151] mb-10">Von A wie Altstadtfest bis Z wie Zeltfest</p>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        {festarten.map(f => (
-          <div class="bg-gray-50 rounded-xl p-5 card-hover reveal">
-            <p class="text-2xl mb-2">{f.icon}</p>
-            <h3 class="font-bold text-[#1f2025] text-sm mb-2">{f.title}</h3>
-            <p class="text-[#374151] text-xs mb-1">👥 {f.groesse}</p>
-            <p class="text-[#374151] text-xs">🎭 {f.formate}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- Video Sektion (pastel redesign) -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
-        <iframe
-          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
-          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
-          class="absolute inset-0 w-full h-full rounded-lg"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
-      </div>
-      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+      <h3 class="kg-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
-      <a
-        href="/galerie/"
-        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
-      >
+      <a href="/galerie/" class="btn btn--primary">
         Zur Foto- und Videogalerie
       </a>
     </div>
   </section>
 
-  <!-- Atmosphäre Beschreibung -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
-        <div>
-          <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6">🌈 So entsteht die perfekte Fest-Atmosphäre</h2>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            Stellen Sie sich vor: Ihr Straßenfest ist in vollem Gange. An der Hauptbühne versammeln sich Familien – Kinder sitzen vorne, Eltern stehen entspannt dahinter mit einem Getränk in der Hand. Dann beginnt meine Show!
-          </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            Ein Kind wird auf die Bühne gerufen. Unter den staunenden Blicken von hundert Zuschauern verschwindet ein Ring – und taucht in der Tasche des Kindes wieder auf! Gelächter und Applaus. Ein Seil wird durchgeschnitten, heilt sich magisch wieder. 🎩
-          </p>
-          <p class="text-[#374151] leading-relaxed">
-            Zwischen den Show-Zeiten schlendere ich als Walk Act durch die Festmeile. An einem Essensstand lasse ich eine Münze verschwinden. Am Ballon-Stand bildet sich eine Schlange – jedes Kind will eine Wunschfigur! Das Ergebnis: Zufriedene Besucher, die länger bleiben.
-          </p>
-        </div>
-        <div>
-          <Image
-            src={weihnachtsmarktDortmundImg}
-            alt="Zaubervorführung auf dem Weihnachtsmarkt Dortmund"
-            class="w-full rounded-xl shadow-sm img-hover-zoom"
-            loading="lazy"
-            widths={[400, 800]}
-            sizes="(max-width: 768px) 100vw, 50vw"
-          />
-        </div>
+  <!-- Atmosphäre -->
+  <section class="sf-story">
+    <div class="container sf-story__grid">
+      <div data-reveal>
+        <h2 class="kg-h2">🌈 So entsteht die perfekte Fest-Atmosphäre</h2>
+        <p>
+          Stellen Sie sich vor: Ihr Straßenfest ist in vollem Gange. An der Hauptbühne versammeln sich Familien – Kinder sitzen vorne, Eltern stehen entspannt dahinter mit einem Getränk in der Hand. Dann beginnt meine Show!
+        </p>
+        <p>
+          Ein Kind wird auf die Bühne gerufen. Unter den staunenden Blicken von hundert Zuschauern verschwindet ein Ring – und taucht in der Tasche des Kindes wieder auf! Gelächter und Applaus. Ein Seil wird durchgeschnitten, heilt sich magisch wieder. 🎩
+        </p>
+        <p>
+          Zwischen den Show-Zeiten schlendere ich als Walk Act durch die Festmeile. An einem Essensstand lasse ich eine Münze verschwinden. Am Ballon-Stand bildet sich eine Schlange – jedes Kind will eine Wunschfigur! Das Ergebnis: Zufriedene Besucher, die länger bleiben.
+        </p>
       </div>
+      <figure class="sf-story__photo" data-reveal data-reveal-delay="0.1">
+        <Image
+          src={weihnachtsmarktDortmundImg}
+          alt="Zaubervorführung auf dem Weihnachtsmarkt Dortmund"
+          data-scroll-tilt="3"
+          widths={[400, 800]}
+          sizes="(max-width: 900px) 100vw, 50vw"
+          loading="lazy"
+        />
+      </figure>
     </div>
   </section>
 
   <!-- Einsatzgebiet -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-8">📍 Wo bin ich als Fest-Zauberer buchbar?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h3 class="font-bold text-[#1f2025] mb-3">🏙️ Haupteinsatzgebiet: Nordrhein-Westfalen</h3>
-          <p class="text-[#374151] text-sm leading-relaxed mb-4">
+  <section class="kg-area" id="einsatzgebiet">
+    <div class="container">
+      <Squiggle />
+      <h2 class="kg-h2 kg-center">📍 Wo bin ich als Fest-Zauberer buchbar?</h2>
+      <div class="kg-area__grid">
+        <div class="kg-area__text">
+          <h3 class="kg-h3">🏙️ Haupteinsatzgebiet: Nordrhein-Westfalen</h3>
+          <p class="kg-cities">
             Essen • Düsseldorf • Dortmund • Köln • Duisburg • Oberhausen • Gelsenkirchen • Bochum • Gladbeck • Mülheim an der Ruhr • Herne • Marl • Dorsten • Herten • Recklinghausen • Krefeld • Moers • Münster • Hagen • Lünen • Bottrop • Castrop-Rauxel • Wuppertal • Ahaus • Reken
           </p>
-          <h3 class="font-bold text-[#1f2025] mb-2">🌍 Überregional & International</h3>
-          <p class="text-[#374151] text-sm mb-6">Deutschland: Gesamtes Bundesgebiet<br />International: Frankreich, Belgien, Niederlande, Österreich, Schweiz</p>
-          <p class="text-[#374151] text-sm italic">💡 <strong>Tipp für Veranstalter:</strong> Beliebte Fest-Termine (Mai bis September, Wochenenden) sind oft Monate im Voraus ausgebucht. Für etablierte Stadtfeste empfehle ich eine Buchung mindestens 3–6 Monate im Voraus!</p>
+          <h3 class="kg-h3">🌍 Überregional & International</h3>
+          <p>Deutschland: Gesamtes Bundesgebiet<br />International: Frankreich, Belgien, Niederlande, Österreich, Schweiz</p>
+          <p class="sf-tip">💡 <strong>Tipp für Veranstalter:</strong> Beliebte Fest-Termine (Mai bis September, Wochenenden) sind oft Monate im Voraus ausgebucht. Für etablierte Stadtfeste empfehle ich eine Buchung mindestens 3–6 Monate im Voraus!</p>
         </div>
-        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">📞 Direkt anfragen</h3>
-          <div class="space-y-3 text-[#374151]">
-            <p>📱 Telefon & WhatsApp: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
-            <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+        <aside class="kg-expect sf-direct" data-reveal>
+          <h3 class="kg-expect__title">📞 Direkt anfragen</h3>
+          <div class="sf-direct__lines">
+            <p>📱 Telefon & WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>
+            <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
             <p>📍 Standort: Beethovenstr. 15, 45966 Gladbeck</p>
             <p>⚡ Reaktionszeit: Meist innerhalb 24 Stunden</p>
           </div>
-        </div>
+        </aside>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="bg-[#1f2025] py-14 text-white text-center">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎉 Jetzt für Ihr Straßen- oder Sommerfest buchen!</h2>
-      <p class="text-gray-300 mb-6">Ob Straßenfest, Stadtfest, Vereinssommerfest oder Firmenevent – lassen Sie uns gemeinsam Ihr Fest zum magischen Erlebnis machen! Informieren Sie sich auch über meine Shows speziell für <a href="/zauberer/zaubershow/kindergarten-kita/" class="text-white hover:underline font-semibold">Kindergärten und Kitas</a> und <a href="/zauberer/zaubershow/schule/" class="text-white hover:underline font-semibold">Schulen</a>.</p>
-      <div class="space-y-2 text-gray-300 mb-8">
-        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172-1517578</a></p>
-        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
+  <!-- CTA (blue band) with sparkles -->
+  <section class="kg-band kg-band--blue sf-cta">
+    <SectionEdge color="var(--brand-blue)" side="top" />
+    <SectionEdge color="var(--brand-blue)" side="bottom" />
+    <div class="container kg-narrow" data-reveal>
+      <div class="sf-cta__burst">
+        <Glitter />
+        <h2 class="kg-h2">🎉 Jetzt für Ihr Straßen- oder Sommerfest buchen!</h2>
+      </div>
+      <p>Ob Straßenfest, Stadtfest, Vereinssommerfest oder Firmenevent – lassen Sie uns gemeinsam Ihr Fest zum magischen Erlebnis machen! Informieren Sie sich auch über meine Shows speziell für <a href="/zauberer/zaubershow/kindergarten-kita/">Kindergärten und Kitas</a> und <a href="/zauberer/zaubershow/schule/">Schulen</a>.</p>
+      <div class="sf-cta__lines">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
         <p>⚡ Schnelle Antwort: Meist innerhalb 24 Stunden</p>
       </div>
-      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+      <a href="/kontakt/" class="btn btn--primary" data-confetti>
         Jetzt unverbindlich anfragen
       </a>
     </div>
   </section>
+</V2Layout>
 
-</BaseLayout>
+<style>
+  /* hero */
+  .sf-crumbs { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2); }
+  .sf-crumbs a { color: var(--ink-soft); text-decoration: none; }
+  @media (hover: hover) and (pointer: fine) { .sf-crumbs a:hover { color: var(--accent-strong); } }
+  .sf-hero__sub { font-size: clamp(1.15rem, 2.2vw, 1.55rem); font-weight: 600; color: var(--brand-blue); margin: 0 0 var(--space-1); }
+  .sf-hero__tag { font-weight: 800; color: var(--ink-soft); margin-bottom: var(--space-3); }
+
+  .kg-expect__title { margin-top: 0; }
+  .sf-list li { display: flex; gap: 0.5rem; align-items: flex-start; }
+  .sf-list li > span:first-child { flex: none; }
+
+  /* formats */
+  .sf-formats { background: var(--bg); }
+  .sf-formats__grid { margin-top: var(--space-4); }
+  .sf-formats :global(.bd) { top: 1.6rem; }
+  .sf-card--dog h3 { padding-right: 7rem; }
+  .sf-icon { font-size: 2.2rem; line-height: 1; margin-bottom: 0.6rem; }
+  .sf-meta { margin: 0 0 0.2rem; font-size: 0.95rem; color: var(--ink-soft); font-weight: 600; }
+  .sf-meta--last { margin-bottom: var(--space-2); }
+  .sf-label { font-weight: 800; margin: var(--space-2) 0 0.4rem; }
+  .sf-arrows li span { color: var(--brand-blue); }
+
+  /* fanned snapshots */
+  .sf-photos__fan { display: flex; justify-content: center; margin-top: var(--space-4); padding-inline: var(--space-2); }
+  .sf-snap { margin: 0 -1.2rem; width: min(21rem, 34%); background: var(--surface); padding: 0.6rem; border: var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow); rotate: -5deg; transition: rotate 0.35s var(--ease-out-expo), translate 0.35s var(--ease-out-expo); }
+  .sf-snap:nth-child(2) { rotate: 2deg; translate: 0 -1rem; z-index: 1; }
+  .sf-snap:nth-child(3) { rotate: 6deg; }
+  .sf-snap :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 0.4rem; }
+  @media (hover: hover) and (pointer: fine) {
+    .sf-snap:hover { rotate: 0deg; translate: 0 -0.8rem; z-index: 2; }
+  }
+
+  /* stats */
+  .sf-stats { background: var(--brand-red); color: #fff; }
+  .sf-stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-3); }
+  .sf-stat { padding: var(--space-3); border-radius: var(--radius); background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45); }
+  .sf-stat__icon { font-size: 2rem; line-height: 1; margin-bottom: 0.4rem; }
+  .sf-stat__num { font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; }
+  .sf-stat__label { font-weight: 800; margin-top: 0.3rem; }
+
+  /* fest tickets: coloured stub, dashed perforation */
+  .sf-fests { padding-top: var(--space-4); }
+  .sf-fests__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); margin-top: var(--space-4); }
+  .sf-ticket {
+    --c: var(--brand-red);
+    display: flex; overflow: hidden;
+    background: var(--surface); border: var(--border); border-radius: var(--radius-sm); box-shadow: 4px 4px 0 var(--line);
+    transition: transform 0.3s var(--ease-out-expo);
+  }
+  .sf-ticket--blue { --c: var(--brand-blue); }
+  .sf-ticket--yellow { --c: var(--brand-yellow); }
+  .sf-ticket:nth-child(odd) { rotate: -1deg; }
+  .sf-ticket:nth-child(even) { rotate: 1deg; }
+  .sf-ticket__icon {
+    flex: none; display: grid; place-items: center; width: 3.6rem; margin: 0; font-size: 1.7rem;
+    background: color-mix(in srgb, var(--c) 30%, var(--surface)); border-right: 3px dashed var(--line);
+  }
+  .sf-ticket__body { padding: 0.9rem 1rem; }
+  .sf-ticket h3 { font-size: 1.1rem; margin: 0 0 0.4rem; }
+  .sf-ticket p { font-size: 0.92rem; color: var(--ink-soft); margin: 0 0 0.2rem; }
+  @media (hover: hover) and (pointer: fine) { .sf-ticket:hover { transform: translateY(-4px) rotate(-1deg); } }
+
+  /* story */
+  .sf-story { background: var(--surface); border-block: var(--border); }
+  .sf-story__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-5); align-items: center; }
+  .sf-story p { color: var(--ink-soft); }
+  .sf-story__photo { margin: 0; rotate: 2deg; }
+  .sf-story__photo :global(img) { display: block; width: 100%; height: auto; border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line); }
+
+  /* area */
+  .sf-tip { font-style: italic; }
+  .sf-direct { margin-top: var(--space-3); }
+  .sf-direct__lines p { margin-bottom: 0.5rem; font-weight: 600; }
+
+  /* CTA */
+  .sf-cta__burst { position: relative; display: inline-block; padding: 0.6rem 1.2rem; }
+  .sf-cta__lines { margin: var(--space-3) 0; font-weight: 700; }
+  .sf-cta__lines p { margin-bottom: 0.4rem; }
+
+  @media (max-width: 900px) {
+    .sf-story__grid { grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px) {
+    .sf-photos__fan { flex-direction: column; align-items: center; gap: var(--space-3); }
+    .sf-snap { width: min(21rem, 86%); margin: 0; }
+    .sf-snap:nth-child(2) { translate: none; }
+  }
+</style>

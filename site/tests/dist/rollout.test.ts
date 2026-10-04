@@ -8,6 +8,16 @@ const V2_PAGES = [
   '/',
   '/kindergeburtstag/',
   '/zauberer/',
+  // wave 1: kids core pages
+  '/kinderzauberer/',
+  '/clown/clownshow/',
+  '/clown/karneval/',
+  '/clown/ballonmodellage/',
+  '/clown/glitzer-tattoo/',
+  '/clown/walk-act/',
+  '/zauberer/zaubershow/kindergarten-kita/',
+  '/zauberer/zaubershow/schule/',
+  '/zauberer/zaubershow/strassen-sommer-fest/',
 ];
 
 const LOGO_ALT = {
@@ -34,7 +44,13 @@ describe('v2 rollout', () => {
         expect(css).not.toMatch(/--tw-/);
       });
 
-      it('carries its zone and the matching logo', () => {
+      it('has no yellow underlines or highlighter marks (user ban, 2026-10-04)', () => {
+        const css = $('style').text().replace(/\s+/g, '');
+        expect(css).not.toMatch(/text-decoration-color:var\(--brand-yellow\)/);
+        expect(css).not.toMatch(/linear-gradient\(transparent\d+%,[^)]*(brand-yellow|ffb546)/i);
+      });
+
+            it('carries its zone and the matching logo', () => {
         const zone = zoneFor(path);
         expect($('html').attr('data-zone')).toBe(zone);
         expect($(`header img[alt="${LOGO_ALT[zone]}"]`).length).toBe(1);

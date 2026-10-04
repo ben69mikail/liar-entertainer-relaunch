@@ -1,7 +1,5 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import HeroStage from '../../../components/HeroStage.astro';
-import CountUp from '../../../components/CountUp.astro';
+import V2Layout from '../../../layouts/V2Layout.astro';
 import { Image } from 'astro:assets';
 import heroImg from '../../../assets/images/home/clown-zauberer-hero.jpg';
 import clownBeiClownshowImg from '../../../assets/images/clown/clown-bei-clownshow.jpg';
@@ -9,7 +7,15 @@ import zaubershowImg from '../../../assets/images/shows/zaubershow.jpg';
 import kinderzaubererKindergartenImg from '../../../assets/images/clown/kinderzauberer-kindergarten-essen.jpg';
 import clownZaubererGladbeckImg from '../../../assets/images/clown/clown-zauberer-gladbeck.jpg';
 import fotogalerieClownZauberer3Img from '../../../assets/images/galerie/fotogalerie-clown-zauberer-3.jpg';
-import GoogleReviews from '../../../components/GoogleReviews.astro';
+import Reviews from '../../../components/v2/Reviews.astro';
+import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
+import SectionEdge from '../../../components/v2/SectionEdge.astro';
+import Bunting from '../../../components/v2/kids/Bunting.astro';
+import Squiggle from '../../../components/v2/kids/Squiggle.astro';
+import BalloonDog from '../../../components/v2/kids/BalloonDog.astro';
+import YouTubeFacade from '../../../components/YouTubeFacade.astro';
+import { CONTACT } from '../../../data/site';
+import '../../../styles/kids-kit.css';
 
 const seoTitle = 'Clown für Kindergeburtstag NRW buchen | Clown LIAR';
 const seoDescription = 'Clown für den Kindergeburtstag mieten: lustige Clownshow mit Comedy & Zauberei, Ballonfiguren für jedes Kind ✓ 370+ Top-Bewertungen im Ruhrgebiet & NRW!';
@@ -85,7 +91,7 @@ const videoSchema = {
 const structuredData = [serviceSchema, faqSchema, videoSchema];
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   keywords="Clownshow NRW, Clown buchen Kindergeburtstag, Clown für Kinder, Clownshow Kindergeburtstag, Clown NRW"
@@ -93,414 +99,472 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/clown/clownshow/' }, { name: 'Clownshow', url: '/clown/clownshow/' }]}
 >
-
-  <!-- Page Title -->
-  <section class="bg-white pt-8 pb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-sm text-[#595959] mb-4">
-        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
-        <a href="/" class="hover:text-[#d7393e]">Clownshow</a>
-      </p>
-      <h1 class="font-black text-[#1f2025] text-2xl sm:text-4xl lg:text-5xl mb-6">Clownshow in NRW – Clown für Kindergeburtstag buchen</h1>
+  <!-- ── Hero: Zirkus-Plakat. No reveal here (LCP). ───────────── -->
+  <section class="kg-hero">
+    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
+    <Bunting />
+    <div class="container kg-hero__grid">
+      <div class="kg-hero__copy">
+        <p class="cs-crumbs">
+          <a href="/">Clown</a> »
+          <a href="/">Clownshow</a>
+        </p>
+        <ReviewBadge />
+        <h1 class="kg-hero__title" data-letters><span class="kg-mark">Clownshow</span> in NRW – Clown für Kindergeburtstag buchen</h1>
+        <h2 class="cs-hero__sub">
+          Clownshow in NRW – Lachen,<br />Spaß und lustige Unterhaltung für Kinder
+        </h2>
+        <div class="kg-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
+          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
+        </div>
+        <nav class="kg-quick" aria-label="Schnell zu den Infos">
+          <a href="#programme">Programme</a>
+          <a href="#faq">Fragen</a>
+          <a href="#bewertungen">Bewertungen</a>
+          <a href="#einsatzgebiet">Städte</a>
+        </nav>
+      </div>
+      <figure class="kg-hero__photo">
+        <Image
+          src={heroImg}
+          alt="Clown Zauberer LIAR – Clownshow NRW mit Top-Bewertungen"
+          widths={[400, 700, 1000, 1400]}
+          sizes="(max-width: 900px) 92vw, 560px"
+          loading="eager"
+          fetchpriority="high"
+          style="object-position: 51% 70%"
+        />
+        <a class="kg-sticker" href="#faq">
+          <span>nur</span><strong>2×2&nbsp;m</strong>
+        </a>
+      </figure>
     </div>
   </section>
 
-  <!-- Hero Section -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 570px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-    <Image
-      src={heroImg}
-      alt="Clown Zauberer LIAR – Clownshow NRW mit Top-Bewertungen"
-      class="absolute inset-0 w-full h-full object-cover object-top"
-      style="object-position: 51% 70%"
-      loading="eager"
-      fetchpriority="high"
-      widths={[600, 900, 1400]}
-      sizes="(max-width: 1152px) 100vw, 1120px"
-    />
-    <div class="absolute inset-0 bg-[#1f2025]/45"></div>
-    <div class="relative flex items-center justify-center" style="min-height: 570px;">
-      <h2 class="text-white font-bold text-center px-6 leading-tight" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
-        Clownshow in NRW – Lachen,<br />Spaß und lustige Unterhaltung für Kinder
-      </h2>
-    </div>
-  </div>
-    </div>
-  </section>
-
-  <!-- Intro Section -->
-  <section class="py-14">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <p class="hero-subtitle text-[#374151] leading-relaxed mb-4">
+  <!-- ── Intro ─────────────────────────────────────────────── -->
+  <section class="kg-intro">
+    <div class="container kg-narrow" data-reveal>
+      <p class="kg-lead">
         Clown LIAR (Michaël Prescler) ist ein professioneller Kinderclown aus Gladbeck und tritt in ganz NRW auf. Buchbar für Kindergeburtstage, Kita- und Schulfeste sowie Familienfeiern – eine lustige Clownshow mit Comedy, Gags und Zauberei für Kinder von 4 bis 12 Jahren, ab ca. 25–30 Minuten und für Kindergeburtstage zu transparenten Festpreisen.
       </p>
-      <p class="text-[#374151] leading-relaxed mb-4">
-        Als professioneller Kinderclown und <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Kinderzauberer</a> bringe ich seit über 15 Jahren Lachen, Spaß und gute Laune zu Kindergeburtstagen, Kinderfesten und Familienveranstaltungen in ganz Nordrhein-Westfalen. Meine Clownshow ist eine bunte Mischung aus Comedy, Clown-Gags und <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a> – perfekt auf Kinder zwischen 4 und 12 Jahren abgestimmt!
+      <p class="cs-soft">
+        Als professioneller Kinderclown und <a href="/kinderzauberer/">Kinderzauberer</a> bringe ich seit über 15 Jahren Lachen, Spaß und gute Laune zu Kindergeburtstagen, Kinderfesten und Familienveranstaltungen in ganz Nordrhein-Westfalen. Meine Clownshow ist eine bunte Mischung aus Comedy, Clown-Gags und <a href="/zauberer/zaubershow/">Zaubershow</a> – perfekt auf Kinder zwischen 4 und 12 Jahren abgestimmt!
       </p>
-      <p class="text-[#374151] leading-relaxed mb-4">
+      <p class="cs-note">
         <strong>Das Besondere an meiner Clownshow:</strong> Der Clown findet den besten Draht zu den Kindern! Mit lustigen Missgeschicken, witzigen Gags und viel Interaktion sorge ich dafür, dass die Kinder ständig lachen, mitmachen und Teil der Show werden. Und wenn zwischendurch auch noch gezaubert wird, ist das Staunen groß!
       </p>
-      <p class="text-[#374151] leading-relaxed">
-        Ob für Ihren <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">Kindergeburtstag</a> zu Hause, Kinderfest im Kindergarten, Schulfest oder Familienfeiern – ich komme zu Ihnen und verwandle jeden Anlass in ein fröhliches Spektakel. Mit minimalem Aufwand für Sie: Ich bringe alles mit, benötige nur 2×2 Meter Platz und keine technische Vorbereitung! Sie wünschen mehr Magie als Comedy? Dann ist der <a href="/kinderzauberer/" class="text-[#d7393e] hover:underline">Zauberer für den Kindergeburtstag</a> die richtige Wahl.
+      <p class="cs-soft">
+        Ob für Ihren <a href="/kindergeburtstag/">Kindergeburtstag</a> zu Hause, Kinderfest im Kindergarten, Schulfest oder Familienfeiern – ich komme zu Ihnen und verwandle jeden Anlass in ein fröhliches Spektakel. Mit minimalem Aufwand für Sie: Ich bringe alles mit, benötige nur 2×2 Meter Platz und keine technische Vorbereitung! Sie wünschen mehr Magie als Comedy? Dann ist der <a href="/kinderzauberer/">Zauberer für den Kindergeburtstag</a> die richtige Wahl.
       </p>
     </div>
   </section>
 
-  </HeroStage>
-  <!-- Google Reviews -->
-  <!-- Weitere Anlässe (SEO-Audit 06.08.2026, Massnahme H6): /clown/karneval/ und
-       /clown/walk-act/ hatten 0 bzw. 3 interne Content-Links. -->
-  <section class="py-12 bg-[#f9fafb]" data-related-services>
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-6">
+  <!-- ── Weitere Anlässe (SEO-Audit 06.08.2026, H6: internal links to /clown/karneval/ + /clown/walk-act/) ── -->
+  <section class="cs-related" data-related-services>
+    <div class="container kg-narrow">
+      <h2 class="kg-h2 kg-center" data-reveal>
         Für welche Anlässe kann man Clown LIAR sonst buchen?
       </h2>
-      <div class="grid gap-4 sm:grid-cols-2">
-        <a href="/clown/karneval/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
-          <p class="font-bold text-[#1f2025] mb-1">Clown für Karneval &amp; Kindersitzung</p>
-          <p class="text-sm text-[#595959]">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
+      <div class="cs-related__grid">
+        <a href="/clown/karneval/" class="cs-related__card" data-reveal="tilt">
+          <p class="cs-related__title">Clown für Karneval &amp; Kindersitzung</p>
+          <p class="cs-related__text">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
         </a>
-        <a href="/clown/walk-act/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
-          <p class="font-bold text-[#1f2025] mb-1">Walk-Act für Straßen- und Stadtfest</p>
-          <p class="text-sm text-[#595959]">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
+        <a href="/clown/walk-act/" class="cs-related__card" data-reveal="tilt" data-reveal-delay="0.1">
+          <p class="cs-related__title">Walk-Act für Straßen- und Stadtfest</p>
+          <p class="cs-related__text">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
         </a>
       </div>
     </div>
   </section>
 
-  <GoogleReviews />
+  <Reviews />
 
-  <!-- Was ist eine Clownshow? -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-black text-[#1f2025] text-2xl sm:text-3xl mb-10 uppercase text-center">Was ist eine Clownshow?</h2>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-        <div class="flex justify-center">
+  <!-- ── Was ist eine Clownshow? ───────────────────────────── -->
+  <section class="kg-intro cs-what">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>Was ist eine Clownshow?</h2>
+      <div class="kg-intro__grid cs-what__grid">
+        <figure class="cs-photo cs-photo--tilt" data-reveal="pop">
           <Image
             src={clownBeiClownshowImg}
             alt="Clown LIAR unterhält Kinder bei einer Clownshow in NRW"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 350px; height: 350px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            data-scroll-tilt="3"
             loading="lazy"
             widths={[350, 700]}
-            sizes="350px"
+            sizes="(max-width: 900px) 80vw, 350px"
           />
-        </div>
-        <div>
-          <hr class="border-[#1f2025] border-2 mb-6 w-full" />
-          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Clownshow – Mehr als nur Witze und rote Nasen</h3>
-          <p class="text-[#374151] leading-relaxed mb-6">
+        </figure>
+        <div data-reveal data-reveal-delay="0.1">
+          <h3 class="kg-h3 cs-what__h3">Clownshow – Mehr als nur Witze und rote Nasen</h3>
+          <p class="cs-soft">
             Eine Clownshow ist pure Comedy für Kinder! Anders als bei einer reinen Zaubershow steht hier das Lachen im Vordergrund. Mit clownesken Gags, lustigen Missgeschicken (die natürlich geplant sind!), Slapstick und viel Bewegung bringe ich die Kinder zum Lachen und Mitmachen.
           </p>
-          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Was macht eine gute Clownshow aus?</h3>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            <strong>Comedy &amp; Humor :</strong> für Kinder Keine Erwachsenen-Witze, sondern kindgerechter Humor: Dinge fallen runter, der Clown stolpert, Tricks gehen „schief" (und dann doch wieder gut) – all das lieben Kinder!
-          </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            <strong>Interaktion &amp; Mitmachen :</strong> Die Kinder sind nicht nur Zuschauer, sondern aktive Teilnehmer! Sie kommen nach vorne, helfen dem Clown, machen Geräusche mit und sind mittendrin statt nur dabei.
-          </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            <strong>Slapstick &amp; Action :</strong> Viel Bewegung, lustige Körperkomik und actionreiche Momente halten die Aufmerksamkeit der Kinder durchgehend hoch.
-          </p>
-          <p class="text-[#374151] leading-relaxed">
-            <strong>Clownerie trifft Zaubershow :</strong> Das Beste aus beiden Welten: Der Clown zaubert auch – aber auf clowneske, witzige Art. Als Kinderzauberer überrasche ich die Kinder mit echten magischen Momenten, bei denen Tricks auch mal „schiefgehen" und dann doch wieder klappen!
-          </p>
+          <h3 class="kg-h3">Was macht eine gute Clownshow aus?</h3>
+          <div class="cs-traits">
+            <p>
+              <strong>Comedy &amp; Humor :</strong> für Kinder Keine Erwachsenen-Witze, sondern kindgerechter Humor: Dinge fallen runter, der Clown stolpert, Tricks gehen „schief" (und dann doch wieder gut) – all das lieben Kinder!
+            </p>
+            <p>
+              <strong>Interaktion &amp; Mitmachen :</strong> Die Kinder sind nicht nur Zuschauer, sondern aktive Teilnehmer! Sie kommen nach vorne, helfen dem Clown, machen Geräusche mit und sind mittendrin statt nur dabei.
+            </p>
+            <p>
+              <strong>Slapstick &amp; Action :</strong> Viel Bewegung, lustige Körperkomik und actionreiche Momente halten die Aufmerksamkeit der Kinder durchgehend hoch.
+            </p>
+            <p>
+              <strong>Clownerie trifft Zaubershow :</strong> Das Beste aus beiden Welten: Der Clown zaubert auch – aber auf clowneske, witzige Art. Als Kinderzauberer überrasche ich die Kinder mit echten magischen Momenten, bei denen Tricks auch mal „schiefgehen" und dann doch wieder klappen!
+            </p>
+          </div>
         </div>
       </div>
     </div>
   </section>
 
-  <section class="py-10 bg-[#fdf2f2] border-y border-[#f0c4c4] text-center">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">🪄</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
-        </div>
-        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">😊</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
-        </div>
-        <div class="bg-white rounded-2xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">🪄</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
-        </div>
+  <!-- ── Zahlen (red band) ─────────────────────────────────── -->
+  <section class="kg-band cs-stats">
+    <SectionEdge color="var(--brand-red)" side="top" />
+    <SectionEdge color="var(--brand-red)" side="bottom" />
+    <div class="container cs-stats__grid">
+      <div class="cs-stat" data-reveal="pop">
+        <div class="cs-stat__icon">🪄</div>
+        <div class="cs-stat__num" data-count>400</div>
+        <div class="cs-stat__label">Shows im Jahr</div>
+      </div>
+      <div class="cs-stat" data-reveal="pop" data-reveal-delay="0.08">
+        <div class="cs-stat__icon">😊</div>
+        <div class="cs-stat__num">110.000</div>
+        <div class="cs-stat__label">Lachende Kinder</div>
+      </div>
+      <div class="cs-stat" data-reveal="pop" data-reveal-delay="0.16">
+        <div class="cs-stat__icon">🪄</div>
+        <div class="cs-stat__num" data-count>15</div>
+        <div class="cs-stat__label">Jahre Erfahrung</div>
       </div>
     </div>
   </section>
 
-  <!-- Clownshow Programme -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-center font-black text-[#1f2025] text-2xl sm:text-3xl mb-12 uppercase">Clownshow-Programme</h2>
+  <!-- ── Clownshow-Programme ───────────────────────────────── -->
+  <section class="cs-programs" id="programme">
+    <div class="container">
+      <Squiggle color="var(--brand-blue)" />
+      <h2 class="kg-h2 kg-center" data-reveal>Clownshow-Programme</h2>
 
-      <!-- Programm 1: Kindergeburtstag (Bild rechts) -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12">
-        <div>
-          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Clownshow für Kindergeburtstag</h3>
-          <p class="text-[#374151] leading-relaxed mb-4">
+      <article class="cs-prog">
+        <div class="cs-prog__text" data-reveal>
+          <BalloonDog />
+          <h3 class="kg-h3 cs-prog__h3--dog">Clownshow für Kindergeburtstag</h3>
+          <p>
             Der absolute Klassiker! Der Clown kommt zu Ihnen nach Hause und sorgt für ausgelassene Stimmung bei der Geburtstagsfeier. Die Kinder erleben Comedy, Zauberei und bekommen am Ende Ballontiere – ein unvergesslicher Geburtstag!
           </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
+          <p class="cs-prog__facts">
             Showdauer: 40 Minuten (optimal für Kindergeburtstage) Altersgruppe: 4-12 Jahre Location: Wohnzimmer, Kinderzimmer, Garten, Partykeller
           </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
+          <p>
             Was die Kinder erleben: ✓ Lustige Clown-Gags und Missgeschicke ✓ Interaktive Spiele und Mitmach-Momente ✓ Verblüffende Zaubertricks ✓ Ballontiere für jedes Kind (optional) ✓ Das Geburtstagskind steht im Mittelpunkt!
           </p>
-          <p class="text-[#374151] leading-relaxed">
+          <p class="cs-prog__fit">
             Perfekt für: Kindergeburtstage zu Hause, auch bei begrenztem Platz
           </p>
         </div>
-        <div class="flex justify-center">
+        <figure class="cs-photo" data-reveal="pop" data-reveal-delay="0.1">
           <Image
             src={zaubershowImg}
             alt="Clown verzaubert Kinder bei einer Clownshow auf dem Kindergeburtstag"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 320px; height: 320px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            data-scroll-tilt="3"
             loading="lazy"
             widths={[320, 640]}
-            sizes="320px"
+            sizes="(max-width: 900px) 80vw, 320px"
           />
-        </div>
-      </div>
+        </figure>
+      </article>
 
-      <hr class="border-gray-200 mb-12" />
-
-      <!-- Programm 2: Kindergarten & Kita (Bild links) -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center mb-12">
-        <div class="order-2 lg:order-1 flex justify-center">
+      <article class="cs-prog cs-prog--flip">
+        <figure class="cs-photo cs-photo--tilt" data-reveal="pop">
           <Image
             src={kinderzaubererKindergartenImg}
             alt="Clown LIAR begeistert Kinder bei Clownshow im Kindergarten"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 320px; height: 320px; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            data-scroll-tilt="3"
             loading="lazy"
             widths={[320, 640]}
-            sizes="320px"
+            sizes="(max-width: 900px) 80vw, 320px"
           />
-        </div>
-        <div class="order-1 lg:order-2">
-          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Clownshow für Kindergarten &amp; Kita</h3>
-          <p class="text-[#374151] leading-relaxed mb-4">
+        </figure>
+        <div class="cs-prog__text" data-reveal data-reveal-delay="0.1">
+          <h3 class="kg-h3">Clownshow für Kindergarten &amp; Kita</h3>
+          <p>
             Für Sommerfeste, Abschiedsfeiern der Vorschulkinder, Karneval oder einfach als Überraschung – die Clownshow begeistert ganze Kindergartengruppen!
           </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
+          <p class="cs-prog__facts">
             Showdauer: 30-40 Minuten Altersgruppe: 3-6 Jahre Gruppengröße: 20-100 Kinder
           </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
+          <p>
             Besonderheiten: ✓ Altersgerecht für Kindergartenkinder ✓ Viel Bewegung und Action ✓ Alle Kinder werden eingebunden ✓ Auch für große Gruppen geeignet
           </p>
-          <p class="text-[#374151] leading-relaxed">
+          <p class="cs-prog__fit">
             Perfekt für: Kita-Feste, Sommerfeste, Abschiedsfeiern, Karnevalsfeiern
           </p>
         </div>
-      </div>
+      </article>
 
-      <hr class="border-gray-200 mb-12" />
-
-      <!-- Programm 3: Schule & Schulfeste (Bild rechts) -->
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
-        <div>
-          <h3 class="font-bold text-[#1f2025] text-xl mb-4">Clownshow für Schule &amp; Schulfeste</h3>
-          <p class="text-[#374151] leading-relaxed mb-4">
+      <article class="cs-prog">
+        <div class="cs-prog__text" data-reveal>
+          <h3 class="kg-h3">Clownshow für Schule &amp; Schulfeste</h3>
+          <p>
             Auch für Grundschulkinder ist die Clownshow ein Hit! Bei Schulfesten, Einschulungen oder Projekttagen sorgt der Clown für Lacher bei Groß und Klein.
           </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
+          <p class="cs-prog__facts">
             Showdauer: 35-45 Minuten Altersgruppe: 6-10 Jahre (Klasse 1-4) Gruppengröße: 30-150 Schüler
           </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
+          <p>
             Besonderheiten: ✓ Humor für Schulkinder (etwas anspruchsvoller) ✓ Auch für Erwachsene (Eltern) unterhaltsam ✓ Funktioniert in Turnhallen und auf Bühnen
           </p>
-          <p class="text-[#374151] leading-relaxed">
+          <p class="cs-prog__fit">
             Perfekt für: Schulfeste, Einschulungsfeiern, Projekttage, Abschlussfeiern
           </p>
         </div>
-        <div class="flex justify-center">
+        <figure class="cs-photo" data-reveal="pop" data-reveal-delay="0.1">
           <Image
             src={fotogalerieClownZauberer3Img}
             alt="Clown Zauberer LIAR bringt Schulkinder zum Lachen bei Clownshow"
-            class="rounded-2xl object-cover shadow-lg portrait-zoom"
-            style="width: 320px; height: 320px; object-position: 75% 30%; box-shadow: 0 8px 24px rgba(0,0,0,0.12);"
+            data-scroll-tilt="3"
             loading="lazy"
             widths={[320, 640]}
-            sizes="320px"
+            sizes="(max-width: 900px) 80vw, 320px"
+            style="object-position: 75% 30%"
           />
-        </div>
-      </div>
+        </figure>
+      </article>
     </div>
   </section>
 
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7] text-center">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl mb-6">Die WITZIGSTE Clownshow NRW mit TOP BEWERTUNGEN!</h2>
-      <p class="text-[#374151] leading-relaxed mb-4">
+  <!-- ── Witzigste Clownshow (blue band) ───────────────────── -->
+  <section class="kg-band kg-band--blue">
+    <SectionEdge color="var(--brand-blue)" side="top" />
+    <SectionEdge color="var(--brand-blue)" side="bottom" />
+    <div class="container kg-narrow" data-reveal>
+      <h2 class="kg-h2">Die WITZIGSTE Clownshow NRW mit TOP BEWERTUNGEN!</h2>
+      <p>
         <strong>Diese farbenfrohe, humorvolle und magische Show ist liebevoll auf das Alter der Kinder abgestimmt.</strong>
       </p>
-      <p class="text-[#374151] leading-relaxed mb-4">
+      <p>
         Die kleinen Zuschauer dürfen mitmachen, selbst zaubern und erleben hautnah, wie plötzlich unglaubliche Dinge geschehen.
       </p>
-      <p class="text-[#374151] leading-relaxed">
+      <p>
         Für jedes Kind wird diese Clown- und Zaubershow zu einem intensiven, fröhlichen – und vor allem unvergesslichen Erlebnis.
       </p>
     </div>
   </section>
 
-  <!-- Clown oder Zauberer? -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-center font-black text-[#1f2025] text-2xl sm:text-3xl mb-10 uppercase">Clown oder Zauberer?</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div class="text-center">
-          <hr class="border-gray-300 mb-6" />
-          <h3 class="font-bold text-[#1f2025] text-lg mb-4">Buchen Sie die Clownshow, wenn…</h3>
-          <p class="text-[#374151] leading-relaxed mb-4">
+  <!-- ── Clown oder Zauberer? ──────────────────────────────── -->
+  <section class="cs-choice">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>Clown oder Zauberer?</h2>
+      <div class="kg-cards cs-choice__grid">
+        <article class="kg-card kg-card--red" data-reveal="pop">
+          <h3>Buchen Sie die Clownshow, wenn…</h3>
+          <p class="cs-choice__list">
             ✓ Die Kinder eher jünger sind (4-7 Jahre) ✓ Sie viel Lachen und Comedy wünschen ✓ Die Kinder Slapstick und lustige Gags lieben ✓ Sie Ballontiere als Erinnerung möchten ✓ Die Stimmung ausgelassen und fröhlich sein soll
           </p>
-          <p class="text-[#374151] text-sm">
+          <p class="kg-card__note">
             Perfekt für: Kindergeburtstage mit jüngeren Kindern, Kita-Feste, Familienfeiern mit Kleinkindern
           </p>
-        </div>
-        <div class="text-center">
-          <hr class="border-gray-300 mb-6" />
-          <h3 class="font-bold text-[#1f2025] text-lg mb-4">Buchen Sie die Zaubershow, wenn…</h3>
-          <p class="text-[#374151] leading-relaxed mb-4">
+        </article>
+        <article class="kg-card kg-card--blue" data-reveal="pop" data-reveal-delay="0.1">
+          <h3>Buchen Sie die Zaubershow, wenn…</h3>
+          <p class="cs-choice__list">
             ✓ Die Kinder eher älter sind (7-12 Jahre) ✓ Sie mehr Staunen und Magie wünschen ✓ Die Kinder komplexere Tricks sehen wollen ✓ Eine etwas „coolere", weniger clowneske Show gewünscht ist ✓ Auch Erwachsene begeistert werden sollen
           </p>
-          <p class="text-[#374151] text-sm">
+          <p class="kg-card__note">
             Perfekt für: Kindergeburtstage mit älteren Kindern, Schulfeste, gemischte Veranstaltungen
           </p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
 
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
-        <iframe
-          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
-          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
-          class="absolute inset-0 w-full h-full rounded-lg"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+  <!-- ── Video (yellow band) ───────────────────────────────── -->
+  <section class="kg-band kg-band--yellow">
+    <SectionEdge color="var(--brand-yellow)" side="top" />
+    <SectionEdge color="var(--brand-yellow)" side="bottom" />
+    <div class="container kg-narrow kg-center">
+      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="kg-video" data-reveal="pop">
+        <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" label="Clownshow ansehen" />
       </div>
-      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+      <h3 class="kg-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
-      <a
-        href="/galerie/"
-        class="inline-block bg-[#f5a623] hover:bg-[#e69420] text-[#1f2025] font-bold px-10 py-4 rounded-full text-base transition-colors"
-      >
+      <a href="/galerie/" class="btn btn--primary">
         Zur Foto- und Videogalerie
       </a>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-3xl mx-auto px-4">
-      <p class="text-center text-sm font-bold text-[#d7393e] uppercase tracking-widest mb-2">Häufige Fragen zur Clownshow</p>
-      <h2 class="text-center font-black text-[#1f2025] text-2xl sm:text-3xl mb-10 uppercase">Hier sind ein paar Antworten</h2>
-      <div class="space-y-3" id="faq-list">
+  <!-- ── FAQ: native <details>, works without JS ───────────── -->
+  <section class="kg-faq" id="faq">
+    <div class="container kg-narrow">
+      <p class="kg-kicker kg-center">Häufige Fragen zur Clownshow</p>
+      <h2 class="kg-h2 kg-center">Hier sind ein paar Antworten</h2>
+      <div class="kg-faq__list">
         {faqItems.map((item) => (
-          <div class="faq-item bg-white border border-gray-200 rounded-lg overflow-hidden">
-            <button
-              class="faq-btn w-full text-left px-6 py-4 font-semibold text-[#1f2025] flex items-center justify-between gap-4"
-              aria-expanded="false"
-            >
-              <span>{item.question}</span>
-              <svg class="w-5 h-5 flex-shrink-0 transition-transform faq-chevron" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-              </svg>
-            </button>
-            <div class="faq-answer hidden px-6 pb-5 text-[#374151] leading-relaxed">
-              {item.answer}
-            </div>
-          </div>
+          <details class="kg-faq__item" data-reveal="puff">
+            <summary><span>{item.question}</span></summary>
+            <div class="kg-faq__answer">{item.answer}</div>
+          </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Einsatzgebiet -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-black text-[#1f2025] text-2xl sm:text-3xl mb-2 uppercase">Einsatzgebiete NRW</h2>
-      <h3 class="font-bold text-[#1f2025] text-xl mb-6">Clownshow in ganz NRW – Ihre Regionen</h3>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-        <div>
-          <p class="text-[#374151] leading-relaxed mb-4">Als Kinderclown bin ich in ganz Nordrhein-Westfalen unterwegs. Ergänzend zur Clownshow biete ich auch <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">Ballonmodellage</a>, <a href="/clown/glitzer-tattoo/" class="text-[#d7393e] hover:underline">Glitzer Tattoos</a> und <a href="/clown/walk-act/" class="text-[#d7393e] hover:underline">Walk-Act</a> an. Überzeugen Sie sich in meiner <a href="/galerie/" class="text-[#d7393e] hover:underline">Galerie</a>!</p>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            <strong>Ruhrgebiet:</strong> <a href="/clown/clownshow/clown-in-essen/" class="text-[#d7393e] hover:underline">Essen</a>, <a href="/clown/clownshow/clown-in-duisburg/" class="text-[#d7393e] hover:underline">Duisburg</a>, <a href="/clown/clownshow/clown-in-oberhausen/" class="text-[#d7393e] hover:underline">Oberhausen</a>, <a href="/clown/clownshow/clown-in-gelsenkirchen/" class="text-[#d7393e] hover:underline">Gelsenkirchen</a>, <a href="/clown/clownshow/clown-in-bochum/" class="text-[#d7393e] hover:underline">Bochum</a>, <a href="/clown/clownshow/clown-in-dortmund/" class="text-[#d7393e] hover:underline">Dortmund</a>, <a href="/clown/clownshow/clown-in-bottrop/" class="text-[#d7393e] hover:underline">Bottrop</a>, <a href="/clown/clownshow/clown-in-muelheim/" class="text-[#d7393e] hover:underline">Mülheim</a>, <a href="/clown/clownshow/clown-in-herne/" class="text-[#d7393e] hover:underline">Herne</a>, <a href="/clown/clownshow/clown-in-herten/" class="text-[#d7393e] hover:underline">Herten</a>, <a href="/clown/clownshow/clown-in-gladbeck/" class="text-[#d7393e] hover:underline">Gladbeck</a>, <a href="/clown/clownshow/clown-in-marl/" class="text-[#d7393e] hover:underline">Marl</a>, <a href="/clown/clownshow/clown-in-dorsten/" class="text-[#d7393e] hover:underline">Dorsten</a>, <a href="/clown/clownshow/clown-in-recklinghausen/" class="text-[#d7393e] hover:underline">Recklinghausen</a>, <a href="/clown/clownshow/clown-in-castrop-rauxel/" class="text-[#d7393e] hover:underline">Castrop-Rauxel</a>, <a href="/clown/clownshow/clown-in-waltrop/" class="text-[#d7393e] hover:underline">Waltrop</a>, <a href="/clown/clownshow/clown-in-datteln/" class="text-[#d7393e] hover:underline">Datteln</a>, <a href="/clown/clownshow/clown-in-haltern/" class="text-[#d7393e] hover:underline">Haltern</a>, <a href="/clown/clownshow/clown-in-dinslaken/" class="text-[#d7393e] hover:underline">Dinslaken</a>
+  <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
+  <section class="kg-area cs-area" id="einsatzgebiet">
+    <div class="container">
+      <Squiggle />
+      <h2 class="kg-h2 kg-center">Einsatzgebiete NRW</h2>
+      <h3 class="kg-h3 kg-center">Clownshow in ganz NRW – Ihre Regionen</h3>
+      <div class="kg-area__grid">
+        <div class="kg-area__text">
+          <p>Als Kinderclown bin ich in ganz Nordrhein-Westfalen unterwegs. Ergänzend zur Clownshow biete ich auch <a href="/clown/ballonmodellage/">Ballonmodellage</a>, <a href="/clown/glitzer-tattoo/">Glitzer Tattoos</a> und <a href="/clown/walk-act/">Walk-Act</a> an. Überzeugen Sie sich in meiner <a href="/galerie/">Galerie</a>!</p>
+          <p class="kg-cities">
+            <strong>Ruhrgebiet:</strong> <a href="/clown/clownshow/clown-in-essen/">Essen</a>, <a href="/clown/clownshow/clown-in-duisburg/">Duisburg</a>, <a href="/clown/clownshow/clown-in-oberhausen/">Oberhausen</a>, <a href="/clown/clownshow/clown-in-gelsenkirchen/">Gelsenkirchen</a>, <a href="/clown/clownshow/clown-in-bochum/">Bochum</a>, <a href="/clown/clownshow/clown-in-dortmund/">Dortmund</a>, <a href="/clown/clownshow/clown-in-bottrop/">Bottrop</a>, <a href="/clown/clownshow/clown-in-muelheim/">Mülheim</a>, <a href="/clown/clownshow/clown-in-herne/">Herne</a>, <a href="/clown/clownshow/clown-in-herten/">Herten</a>, <a href="/clown/clownshow/clown-in-gladbeck/">Gladbeck</a>, <a href="/clown/clownshow/clown-in-marl/">Marl</a>, <a href="/clown/clownshow/clown-in-dorsten/">Dorsten</a>, <a href="/clown/clownshow/clown-in-recklinghausen/">Recklinghausen</a>, <a href="/clown/clownshow/clown-in-castrop-rauxel/">Castrop-Rauxel</a>, <a href="/clown/clownshow/clown-in-waltrop/">Waltrop</a>, <a href="/clown/clownshow/clown-in-datteln/">Datteln</a>, <a href="/clown/clownshow/clown-in-haltern/">Haltern</a>, <a href="/clown/clownshow/clown-in-dinslaken/">Dinslaken</a>
           </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            <strong>Rheinland:</strong> <a href="/clown/clownshow/clown-in-duesseldorf/" class="text-[#d7393e] hover:underline">Düsseldorf</a>, <a href="/clown/clownshow/clown-in-moers/" class="text-[#d7393e] hover:underline">Moers</a>, <a href="/clown/clownshow/clown-in-wesel/" class="text-[#d7393e] hover:underline">Wesel</a>, <a href="/clown/clownshow/clown-in-xanten/" class="text-[#d7393e] hover:underline">Xanten</a>, Köln, Krefeld, Mönchengladbach, Neuss, Leverkusen, Bonn
+          <p class="kg-cities">
+            <strong>Rheinland:</strong> <a href="/clown/clownshow/clown-in-duesseldorf/">Düsseldorf</a>, <a href="/clown/clownshow/clown-in-moers/">Moers</a>, <a href="/clown/clownshow/clown-in-wesel/">Wesel</a>, <a href="/clown/clownshow/clown-in-xanten/">Xanten</a>, Köln, Krefeld, Mönchengladbach, Neuss, Leverkusen, Bonn
           </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
+          <p class="kg-cities">
             <strong>Münsterland &amp; Westfalen:</strong> Münster, Coesfeld, Borken, Ahaus, Reken, Lünen, Hamm
           </p>
-          <p class="text-[#374151] font-medium">Auch überregional buchbar für besondere Anlässe!</p>
+          <p class="cs-area__more">Auch überregional buchbar für besondere Anlässe!</p>
         </div>
-        <div>
+        <figure class="kg-area__map" data-reveal>
           <Image
             src={clownZaubererGladbeckImg}
             alt="Einsatzgebiet Clown Zauberer LIAR – Karte NRW"
-            class="w-full rounded-xl shadow-sm img-hover-zoom"
+            data-scroll-tilt="2"
             loading="lazy"
             widths={[400, 800]}
             sizes="(min-width: 1024px) 50vw, 100vw"
           />
-        </div>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- CTA: Einfach Kontakt aufnehmen -->
-  <section class="bg-white py-14 text-center">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="font-black text-[#1f2025] text-2xl sm:text-3xl mb-2 uppercase">Einfach Kontakt aufnehmen</h2>
-      <p class="font-bold text-[#1f2025] text-xl mb-6">Jetzt Clownshow buchen – Lachen garantiert!</p>
-      <p class="text-[#374151] leading-relaxed mb-6">
+  <!-- ── Kontakt ───────────────────────────────────────────── -->
+  <section class="kg-contact cs-cta">
+    <div class="container kg-narrow kg-center" data-reveal>
+      <h2 class="kg-h2">Einfach Kontakt aufnehmen</h2>
+      <p class="kg-sub">Jetzt Clownshow buchen – Lachen garantiert!</p>
+      <p class="cs-soft">
         Machen Sie Ihren Kindergeburtstag, Ihr Kita-Fest oder Ihre Familienfeier zu einem fröhlichen Erlebnis! Mit meiner Clownshow sorge ich für Lachen, Spaß und strahlende Kinderaugen!
       </p>
-      <p class="text-[#374151] mb-2">Jetzt unverbindlich anfragen:</p>
-      <div class="space-y-1 text-[#374151] mb-6">
-        <p>Telefon: <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
-        <p>WhatsApp: <a href="https://wa.me/491721517578" class="text-[#d7393e] hover:underline font-semibold">0172-1517578</a></p>
-        <p>E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">info@liar-entertainer.com</a></p>
+      <p class="cs-cta__label">Jetzt unverbindlich anfragen:</p>
+      <div class="cs-cta__lines">
+        <p>Telefon: <a href="tel:+491721517578">0172-1517578</a></p>
+        <p>WhatsApp: <a href="https://wa.me/491721517578">0172-1517578</a></p>
+        <p>E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
       </div>
-      <p class="text-[#374151] font-bold mb-8">Bitte beachten Sie, dass ich auf Ihre Anfrage nur mit einer korrekten eMail-Adresse reagieren kann.</p>
-      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+      <p class="cs-cta__hint">Bitte beachten Sie, dass ich auf Ihre Anfrage nur mit einer korrekten eMail-Adresse reagieren kann.</p>
+      <a href="/kontakt/" class="btn btn--primary" data-confetti>
         Jetzt unverbindlich anfragen
       </a>
     </div>
   </section>
+</V2Layout>
 
-</BaseLayout>
+<style>
+  /* ── hero ── */
+  .cs-crumbs { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 var(--space-2); }
+  .cs-crumbs a { color: inherit; text-decoration: none; }
+  .cs-hero__sub { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 650; color: var(--ink-soft); margin: 0 0 var(--space-3); }
 
-<script>
-  document.querySelectorAll('.faq-btn').forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const answer = btn.nextElementSibling as HTMLElement;
-      const chevron = btn.querySelector('.faq-chevron');
-      const isOpen = !answer?.classList.contains('hidden');
-      if (isOpen) {
-        answer?.classList.add('hidden');
-        chevron?.classList.remove('rotate-180');
-        btn.setAttribute('aria-expanded', 'false');
-      } else {
-        answer?.classList.remove('hidden');
-        chevron?.classList.add('rotate-180');
-        btn.setAttribute('aria-expanded', 'true');
-      }
-    });
-  });
-</script>
+  .cs-soft { color: var(--ink-soft); }
+  .cs-note {
+    padding: var(--space-2) var(--space-3); background: var(--bg); border: var(--border);
+    border-radius: var(--radius-sm); box-shadow: 4px 4px 0 var(--line); rotate: -0.6deg;
+  }
+
+  /* ── related services ── */
+  .cs-related__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-top: var(--space-3); }
+  .cs-related__card {
+    display: block; padding: var(--space-3); color: var(--ink); text-decoration: none;
+    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
+  }
+  .cs-related__card:nth-child(1) { rotate: -1deg; }
+  .cs-related__card:nth-child(2) { rotate: 1deg; }
+  .cs-related__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 650; margin-bottom: 0.3rem; }
+  .cs-related__text { color: var(--ink-soft); margin: 0; }
+  @media (hover: hover) and (pointer: fine) {
+    .cs-related__card:hover { transform: translate(-3px, -5px); box-shadow: var(--shadow-hover); }
+  }
+
+  /* ── photos: framed poster prints ── */
+  .cs-photo { margin: 0; justify-self: center; rotate: 2deg; }
+  .cs-photo--tilt { rotate: -2deg; }
+  .cs-photo :global(img) {
+    display: block; width: min(20rem, 80vw); height: auto; aspect-ratio: 1; object-fit: cover;
+    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
+  }
+
+  /* ── was ist eine clownshow ── */
+  .cs-what__grid { grid-template-columns: 1fr 1.5fr; align-items: center; margin-top: var(--space-3); }
+  .cs-what__h3 { margin-top: 0; }
+  .cs-traits { display: grid; gap: 0.7rem; }
+  .cs-traits p {
+    margin: 0; padding: 0.8rem 1rem; color: var(--ink-soft);
+    background: var(--bg); border-left: 6px solid var(--brand-red); border-radius: var(--radius-sm);
+  }
+  .cs-traits p:nth-child(2) { border-left-color: var(--brand-blue); }
+  .cs-traits p:nth-child(3) { border-left-color: var(--brand-yellow); }
+  .cs-traits p:nth-child(4) { border-left-color: var(--accent-2); }
+  .cs-traits strong { color: var(--ink); }
+
+  /* ── stats (red band) ── */
+  .cs-stats { background: var(--brand-red); color: #fff; }
+  .cs-stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-3); }
+  .cs-stat {
+    text-align: center; padding: var(--space-3); border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45);
+  }
+  .cs-stat__icon { font-size: 2rem; line-height: 1; margin-bottom: 0.4rem; }
+  .cs-stat__num { font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; }
+  .cs-stat__label { font-weight: 800; margin-top: 0.3rem; }
+
+  /* ── programmes: alternating poster rows ── */
+  .cs-prog {
+    display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-4); align-items: center;
+    margin-top: var(--space-5);
+  }
+  .cs-prog--flip { grid-template-columns: 1fr 1.4fr; }
+  .cs-prog__text {
+    position: relative; padding: var(--space-3); background: var(--surface);
+    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .cs-prog__text p { color: var(--ink-soft); }
+  .cs-prog__text :global(.bd) { top: -1.6rem; right: 0.6rem; }
+  .cs-prog__h3--dog { padding-right: 7.5rem; }
+  .cs-prog__text .kg-h3 { margin-top: 0; }
+  .cs-prog__text .cs-prog__facts {
+    padding: 0.6rem 0.9rem; font-weight: 700; color: var(--ink);
+    background: color-mix(in srgb, var(--brand-yellow) 30%, transparent); border: 2px dashed var(--line); border-radius: var(--radius-sm);
+  }
+  .cs-prog__fit { font-weight: 700; margin: 0; }
+
+  /* ── clown oder zauberer ── */
+  .cs-choice__grid { max-width: 56rem; margin: var(--space-4) auto 0; }
+  .cs-choice__list { color: var(--ink-soft); }
+
+  /* ── area + contact ── */
+  .cs-area__more { font-weight: 700; }
+  .cs-cta { padding-block: var(--space-5); }
+  .cs-cta__label { font-weight: 700; margin-top: var(--space-3); }
+  .cs-cta__lines p { margin-bottom: 0.3rem; font-weight: 700; }
+  .cs-cta__hint { font-weight: 800; margin: var(--space-3) 0; }
+
+  @media (max-width: 900px) {
+    .cs-what__grid, .cs-prog, .cs-prog--flip { grid-template-columns: 1fr; }
+    .cs-prog--flip .cs-photo { order: 2; }
+  }
+</style>

@@ -1,9 +1,13 @@
 ---
-import BaseLayout from '../../../../layouts/BaseLayout.astro';
-import HeroSlider from '../../../../components/HeroSlider.astro';
-import HeroStage from '../../../../components/HeroStage.astro';
-import CountUp from '../../../../components/CountUp.astro';
-import GoogleReviews from '../../../../components/GoogleReviews.astro';
+import V2Layout from '../../../../layouts/V2Layout.astro';
+import Reviews from '../../../../components/v2/Reviews.astro';
+import ReviewBadge from '../../../../components/v2/ReviewBadge.astro';
+import Bunting from '../../../../components/v2/kids/Bunting.astro';
+import Squiggle from '../../../../components/v2/kids/Squiggle.astro';
+import SectionEdge from '../../../../components/v2/SectionEdge.astro';
+import YouTubeFacade from '../../../../components/YouTubeFacade.astro';
+import { CONTACT } from '../../../../data/site';
+import '../../../../styles/kids-kit.css';
 import { Image } from 'astro:assets';
 import heroImg from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-3.jpg';
 import kitaEssenImg from '../../../../assets/images/clown/kinderzauberer-kindergarten-essen.jpg';
@@ -52,280 +56,353 @@ const _pageGallery = [
   { src: kindergartenGelsenkirchenImg, alt: 'Kinderzauberer Kindergarten Gelsenkirchen' },
 ];
 
+const cardColors = ['red', 'blue', 'yellow'];
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   structuredData={[faqSchema]}
   keywords="Zaubershow Kindergarten, Zauberer Kita, Zaubershow Kita NRW, Kindergarten Programm, Sommerfest Kindergarten"
   canonical="https://liar-entertainer.com/zauberer/zaubershow/kindergarten-kita/"
 >
-
-  <!-- Page Title -->
-  <section class="bg-white pt-8 pb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-sm text-[#595959] mb-4">
-        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
-        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
-        <a href="/zauberer/zaubershow/" class="hover:text-[#d7393e]">Zaubershow</a> »
-        <span>Kindergarten – Kita</span>
-      </p>
-      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Zaubershow für Kindergarten &amp; Kita in NRW</h1>
-    </div>
-  </section>
-
-  <!-- Hero -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-    <Image
-      src={heroImg}
-      alt="Zaubershow für Kindergarten & Kita NRW"
-      class="absolute inset-0 w-full h-full object-cover object-top"
-      style="object-position: 50% 30%"
-      loading="eager"
-      fetchpriority="high"
-      widths={[600, 900, 1200]}
-      sizes="(max-width: 1152px) 100vw, 1120px"
-    />
-    <div class="absolute inset-0 bg-black/50"></div>
-    <div class="relative flex items-center justify-center" style="min-height: 600px;">
-      <div class="text-center px-6">
-        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+  <!-- Hero: no reveal here (LCP) -->
+  <section class="kg-hero">
+    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
+    <Bunting />
+    <div class="container kg-hero__grid">
+      <div class="kg-hero__copy">
+        <p class="kk-crumbs">
+          <a href="/">Clown</a> »
+          <a href="/zauberer/">Zauberer</a> »
+          <a href="/zauberer/zaubershow/">Zaubershow</a> »
+          <span>Kindergarten – Kita</span>
+        </p>
+        <ReviewBadge />
+        <h1 class="kg-hero__title" data-letters>Zaubershow für <span class="kg-mark">Kindergarten &amp; Kita</span> in NRW</h1>
+        <h2 class="kk-hero__sub">
           🎪 Wo Lernen auf Magie trifft –<br />zauberhafte Momente für Ihre Kita!
         </h2>
-        <p class="text-white/90 text-lg font-medium">Pädagogisch wertvoll. Altersgerecht. Unvergesslich.</p>
+        <p class="kk-hero__tag">Pädagogisch wertvoll. Altersgerecht. Unvergesslich.</p>
+        <div class="kg-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
+          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
+        </div>
       </div>
-    </div>
-  </div>
+      <figure class="kg-hero__photo">
+        <Image
+          src={heroImg}
+          alt="Zaubershow für Kindergarten & Kita NRW"
+          widths={[400, 700, 1000, 1400]}
+          sizes="(max-width: 900px) 92vw, 560px"
+          loading="eager"
+          fetchpriority="high"
+          style="object-position: 50% 30%"
+        />
+        <a class="kg-sticker" href="#details">
+          <span>Alter</span><strong>3–6</strong>
+        </a>
+      </figure>
     </div>
   </section>
 
   <!-- Intro -->
-  <section class="py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            Sie planen ein Sommerfest, eine Abschiedsfeier für die Vorschulkinder oder suchen ein besonderes Highlight für Ihre Kita? Als erfahrener Kinderzauberer bringe ich seit über 15 Jahren Magie in Kindergärten und Kitas in ganz NRW. Meine Shows sind nicht nur unterhaltsam – sie sind pädagogisch wertvoll, altersgerecht und perfekt auf die Bedürfnisse von Bildungseinrichtungen abgestimmt! ✨
-          </p>
-          <p class="text-[#374151] leading-relaxed mb-4">
-            Das Beste? Für Sie als Erzieher bedeutet es minimalen Aufwand bei maximalem Erfolg. Ich bringe alles mit, benötige keine Vorbereitung und nur 2×2 Meter Platz. Ich biete auch spezielle Shows für <a href="/zauberer/zaubershow/schule/" class="text-[#d7393e] hover:underline">Grundschulen</a> sowie auf <a href="/zauberer/zaubershow/strassen-sommer-fest/" class="text-[#d7393e] hover:underline">Straßen- und Sommerfesten</a> an.
-          </p>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">⭐ Das macht meine Show kindergartengerecht:</h3>
-          <ul class="space-y-3 text-sm">
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🎯</span> <span class="text-[#374151]"><strong>Altersgerecht für 3–6 Jahre:</strong> Einfache Tricks, kurze Geschichten, viel Bewegung</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">👥</span> <span class="text-[#374151]"><strong>Große Gruppen kein Problem:</strong> Erfahrung mit 20–100 Kindern</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">📚</span> <span class="text-[#374151]"><strong>Pädagogischer Mehrwert:</strong> Fördert Fantasie, Kreativität und Selbstbewusstsein</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">🤝</span> <span class="text-[#374151]"><strong>Inklusion:</strong> Alle Kinder werden eingebunden – schüchterne wie wilde</span></li>
-            <li class="flex items-start gap-2"><span class="text-[#d7393e] font-bold">⚡</span> <span class="text-[#374151]"><strong>Unkompliziert:</strong> Minimaler Vorbereitungsaufwand, nur 2×2 Meter Platz</span></li>
-          </ul>
-        </div>
+  <section class="kg-intro">
+    <div class="container kg-intro__grid">
+      <div class="kg-intro__text" data-reveal>
+        <p class="kg-lead">
+          Sie planen ein Sommerfest, eine Abschiedsfeier für die Vorschulkinder oder suchen ein besonderes Highlight für Ihre Kita? Als erfahrener Kinderzauberer bringe ich seit über 15 Jahren Magie in Kindergärten und Kitas in ganz NRW. Meine Shows sind nicht nur unterhaltsam – sie sind pädagogisch wertvoll, altersgerecht und perfekt auf die Bedürfnisse von Bildungseinrichtungen abgestimmt! ✨
+        </p>
+        <p>
+          Das Beste? Für Sie als Erzieher bedeutet es minimalen Aufwand bei maximalem Erfolg. Ich bringe alles mit, benötige keine Vorbereitung und nur 2×2 Meter Platz. Ich biete auch spezielle Shows für <a href="/zauberer/zaubershow/schule/">Grundschulen</a> sowie auf <a href="/zauberer/zaubershow/strassen-sommer-fest/">Straßen- und Sommerfesten</a> an.
+        </p>
       </div>
+      <aside class="kg-expect" data-reveal data-reveal-delay="0.1">
+        <h3 class="kg-expect__title">⭐ Das macht meine Show kindergartengerecht:</h3>
+        <ul class="kg-expect__list kk-list">
+          <li><span>🎯</span> <span><strong>Altersgerecht für 3–6 Jahre:</strong> Einfache Tricks, kurze Geschichten, viel Bewegung</span></li>
+          <li><span>👥</span> <span><strong>Große Gruppen kein Problem:</strong> Erfahrung mit 20–100 Kindern</span></li>
+          <li><span>📚</span> <span><strong>Pädagogischer Mehrwert:</strong> Fördert Fantasie, Kreativität und Selbstbewusstsein</span></li>
+          <li><span>🤝</span> <span><strong>Inklusion:</strong> Alle Kinder werden eingebunden – schüchterne wie wilde</span></li>
+          <li><span>⚡</span> <span><strong>Unkompliziert:</strong> Minimaler Vorbereitungsaufwand, nur 2×2 Meter Platz</span></li>
+        </ul>
+      </aside>
     </div>
   </section>
 
-  </HeroStage>
-  <GoogleReviews />
+  <Reviews />
 
   <!-- Anlässe -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">🎉 Perfekt für diese Anlässe in Kindergarten & Kita</h2>
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+  <section class="kk-occasions">
+    <div class="container">
+      <Squiggle color="var(--brand-blue)" />
+      <h2 class="kg-h2 kg-center" data-reveal>🎉 Perfekt für diese Anlässe in Kindergarten & Kita</h2>
+      <div class="kg-cards kk-occasions__grid">
         {anlaesse.map((a, i) => (
-          <div class={`bg-white rounded-xl p-6 shadow-sm border-t-4 card-hover ${['border-[#d7393e]','border-[#3b55d5]','border-[#ffb546]'][i % 3]}`}>
-            <p class="text-3xl mb-3">{a.icon}</p>
-            <h3 class="font-bold text-[#1f2025] mb-2">{a.title}</h3>
-            <p class="text-[#374151] text-sm leading-relaxed">{a.text}</p>
+          <article class={`kg-card kg-card--${cardColors[i % 3]}`} data-reveal="pop" data-reveal-delay={String((i % 3) * 0.1)}>
+            <p class="kk-icon">{a.icon}</p>
+            <h3>{a.title}</h3>
+            <p class="kk-card__text">{a.text}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Zahlen (red band) -->
+  <section class="kg-band kk-stats">
+    <SectionEdge color="var(--brand-red)" side="top" />
+    <SectionEdge color="var(--brand-red)" side="bottom" />
+    <div class="container kk-stats__grid">
+      <div class="kk-stat" data-reveal="pop">
+        <div class="kk-stat__icon">🪄</div>
+        <div class="kk-stat__num" data-count>400</div>
+        <div class="kk-stat__label">Shows im Jahr</div>
+      </div>
+      <div class="kk-stat" data-reveal="pop" data-reveal-delay="0.08">
+        <div class="kk-stat__icon">😊</div>
+        <div class="kk-stat__num">110.000</div>
+        <div class="kk-stat__label">Lachende Kinder</div>
+      </div>
+      <div class="kk-stat" data-reveal="pop" data-reveal-delay="0.16">
+        <div class="kk-stat__icon">🪄</div>
+        <div class="kk-stat__num" data-count>15</div>
+        <div class="kk-stat__label">Jahre Erfahrung</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pädagogischer Mehrwert: soft crayon-coloured tiles -->
+  <section class="kk-learn">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>🎯 Pädagogischer Mehrwert</h2>
+      <p class="kg-center kg-sub">Was Kinder bei der Zaubershow lernen:</p>
+      <div class="kk-learn__grid">
+        {paedagogisch.map((p, i) => (
+          <div class={`kk-tile kk-tile--${cardColors[i % 3]}`} data-reveal="pop" data-reveal-delay={String((i % 3) * 0.08)}>
+            <p class="kk-icon">{p.icon}</p>
+            <p class="kk-tile__title">{p.title}</p>
+            <p class="kk-tile__text">{p.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Stats Section (pastel redesign) -->
-  <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-10 text-center">
-    <div class="max-w-5xl mx-auto px-4">
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">🪄</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={400} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Shows im Jahr</div>
-        </div>
-        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">😊</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={110000} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Lachende Kinder</div>
-        </div>
-        <div class="bg-white rounded-xl p-6 text-center border border-[#f0c4c4] shadow-sm">
-          <div class="text-3xl mb-2">🪄</div>
-          <div class="text-4xl font-extrabold text-[#d7393e]"><CountUp value={15} /></div>
-          <div class="text-sm mt-1 text-[#374151]">Jahre Erfahrung</div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Pädagogischer Mehrwert -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">🎯 Pädagogischer Mehrwert</h2>
-      <p class="text-center text-[#374151] mb-10">Was Kinder bei der Zaubershow lernen:</p>
-      <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
-        {paedagogisch.map(p => (
-          <div class="bg-gray-50 rounded-xl p-5 text-center">
-            <p class="text-3xl mb-2">{p.icon}</p>
-            <p class="font-bold text-[#1f2025] text-sm mb-1">{p.title}</p>
-            <p class="text-[#374151] text-xs">{p.text}</p>
-          </div>
+  <!-- Eindrücke: polaroids on a line -->
+  <section class="kk-photos">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>📸 Eindrücke</h2>
+      <div class="kk-photos__grid">
+        {_pageGallery.map((s, i) => (
+          <figure class="kk-polaroid" data-reveal="tilt" data-reveal-delay={String(i * 0.08)}>
+            <Image
+              src={s.src}
+              alt={s.alt}
+              data-scroll-tilt="3"
+              widths={[320, 640]}
+              sizes="(max-width: 640px) 80vw, 280px"
+              loading="lazy"
+            />
+          </figure>
         ))}
       </div>
-    </div>
-  </section>
-
-  <!-- Gallery: Eindrücke -->
-  <section class="bg-white py-12">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl text-center mb-8">📸 Eindrücke</h2>
-      <HeroSlider slides={_pageGallery} class="reveal" />
     </div>
   </section>
 
   <!-- Praktische Details -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-10">📋 Praktische Details für Kitas</h2>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
-        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#d7393e] card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">📐 Platzbedarf & Räume</h3>
-          <p class="text-[#374151] text-sm mb-3">Minimaler Platzbedarf: <strong>2×2 Meter</strong> (ideal 3×3 Meter)</p>
-          <p class="font-semibold text-[#1f2025] text-sm mb-2">Geeignete Räume:</p>
-          <ul class="text-[#374151] text-sm space-y-1">
+  <section class="kk-details" id="details">
+    <div class="container">
+      <h2 class="kg-h2 kg-center" data-reveal>📋 Praktische Details für Kitas</h2>
+      <div class="kg-extras__grid kk-details__grid">
+        <article class="kg-extra kk-detail kk-detail--red" data-reveal="tilt">
+          <h3 class="kk-detail__title">📐 Platzbedarf & Räume</h3>
+          <p>Minimaler Platzbedarf: <strong>2×2 Meter</strong> (ideal 3×3 Meter)</p>
+          <p class="kk-detail__label">Geeignete Räume:</p>
+          <ul class="kk-plain">
             <li>✓ Turnraum / Bewegungsraum (optimal!)</li>
             <li>✓ Mehrzweckraum</li>
             <li>✓ Großer Gruppenraum</li>
             <li>✓ Außenbereich (überdacht)</li>
           </ul>
-        </div>
-        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#3b55d5] card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">👶 Gruppengrößen</h3>
-          <ul class="text-[#374151] text-sm space-y-2">
+        </article>
+        <article class="kg-extra kk-detail kk-detail--blue" data-reveal="tilt" data-reveal-delay="0.1">
+          <h3 class="kk-detail__title">👶 Gruppengrößen</h3>
+          <ul class="kk-plain kk-plain--spaced">
             <li><strong>Ideal: 20–60 Kinder</strong><br />Perfekte Größe für intensive Interaktion</li>
             <li><strong>Möglich: 60–100 Kinder</strong><br />Show bleibt effektiv</li>
             <li><strong>Auch möglich: 100+ Kinder</strong><br />Bitte anfragen</li>
             <li><strong>Kleine Gruppen: 10–20 Kinder</strong><br />Auch buchbar!</li>
           </ul>
-        </div>
-        <div class="bg-white rounded-xl p-6 shadow-sm border-t-4 border-[#ffb546] card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">⏱️ Showdauer</h3>
-          <ul class="text-[#374151] text-sm space-y-2">
+        </article>
+        <article class="kg-extra kk-detail kk-detail--yellow" data-reveal="tilt" data-reveal-delay="0.2">
+          <h3 class="kk-detail__title">⏱️ Showdauer</h3>
+          <ul class="kk-plain kk-plain--spaced">
             <li><strong>Kurze Show: 25–30 Min.</strong><br />Für jüngere Kinder (3–4 Jahre)</li>
             <li><strong>Standard-Show: 35–40 Min.</strong><br />Ideal für gemischte Altersgruppen</li>
             <li><strong>Lange Show: 45 Min.</strong><br />Für ältere Kinder oder besondere Anlässe</li>
           </ul>
-          <p class="text-[#374151] text-xs mt-3 italic">Technik: Fast keine! Kein Strom, kein Mikrofon (normal), keine Bühne nötig.</p>
-        </div>
+          <p class="kg-extra__dur kk-note">Technik: Fast keine! Kein Strom, kein Mikrofon (normal), keine Bühne nötig.</p>
+        </article>
       </div>
     </div>
   </section>
 
-  <!-- Video Sektion (pastel redesign) -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-[#1f2025] font-extrabold text-xl uppercase tracking-widest mb-6">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="relative w-full max-w-2xl mx-auto mb-8" style="padding-bottom: 56.25%; position: relative;">
-        <iframe
-          src="https://www.youtube.com/embed/Cop0SqRIX4Y"
-          title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
-          class="absolute inset-0 w-full h-full rounded-lg"
-          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-          allowfullscreen
-          loading="lazy"
-        ></iframe>
+  <!-- Video (yellow band) -->
+  <section class="kg-band kg-band--yellow">
+    <SectionEdge color="var(--brand-yellow)" side="top" />
+    <SectionEdge color="var(--brand-yellow)" side="bottom" />
+    <div class="container kg-narrow kg-center">
+      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="kg-video" data-reveal="pop">
+        <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
-      <h3 class="text-[#1f2025] font-bold text-xl mb-6">
+      <h3 class="kg-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
-      <a
-        href="/galerie/"
-        class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded-full text-base transition-colors"
-      >
+      <a href="/galerie/" class="btn btn--primary">
         Zur Foto- und Videogalerie
       </a>
     </div>
   </section>
 
-
-
   <!-- Einsatzgebiet -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-8">Zaubershow für Kindergärten in ganz NRW</h2>
-      <p class="text-[#374151] text-center mb-8">Als erfahrener Kinderzauberer bin ich in ganz Nordrhein-Westfalen für Kindergärten und Kitas buchbar.</p>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
-        <div>
-          <h3 class="font-bold text-[#1f2025] mb-3">Ruhrgebiet</h3>
-          <p class="text-[#374151] text-sm leading-relaxed mb-4">Oberhausen, Essen, Duisburg, Mülheim, Gelsenkirchen, Bochum, Dortmund, Bottrop, Gladbeck, Herten, Herne, Marl, Recklinghausen, Castrop-Rauxel, Waltrop</p>
-          <h3 class="font-bold text-[#1f2025] mb-3">Rheinland</h3>
-          <p class="text-[#374151] text-sm leading-relaxed mb-4">Düsseldorf, Krefeld, Moers, Neuss, Köln, Leverkusen, Mönchengladbach</p>
-          <h3 class="font-bold text-[#1f2025] mb-3">Münsterland</h3>
-          <p class="text-[#374151] text-sm leading-relaxed mb-4">Münster, Haltern am See, Dorsten, Coesfeld, Dülmen</p>
-          <h3 class="font-bold text-[#1f2025] mb-3">Weitere Städte</h3>
-          <p class="text-[#374151] text-sm leading-relaxed">Ahaus, Reken, Lünen, Hagen, Witten und viele mehr</p>
-          <p class="text-[#374151] text-sm mt-2">🌍 Auf Anfrage auch deutschlandweit sowie in Belgien, Niederlande, Frankreich, Österreich und der Schweiz buchbar!</p>
+  <section class="kg-area" id="einsatzgebiet">
+    <div class="container">
+      <Squiggle />
+      <h2 class="kg-h2 kg-center">Zaubershow für Kindergärten in ganz NRW</h2>
+      <p class="kg-center kg-narrow">Als erfahrener Kinderzauberer bin ich in ganz Nordrhein-Westfalen für Kindergärten und Kitas buchbar.</p>
+      <div class="kg-area__grid">
+        <div class="kg-area__text">
+          <h3 class="kg-h3">Ruhrgebiet</h3>
+          <p class="kg-cities">Oberhausen, Essen, Duisburg, Mülheim, Gelsenkirchen, Bochum, Dortmund, Bottrop, Gladbeck, Herten, Herne, Marl, Recklinghausen, Castrop-Rauxel, Waltrop</p>
+          <h3 class="kg-h3">Rheinland</h3>
+          <p class="kg-cities">Düsseldorf, Krefeld, Moers, Neuss, Köln, Leverkusen, Mönchengladbach</p>
+          <h3 class="kg-h3">Münsterland</h3>
+          <p class="kg-cities">Münster, Haltern am See, Dorsten, Coesfeld, Dülmen</p>
+          <h3 class="kg-h3">Weitere Städte</h3>
+          <p class="kg-cities">Ahaus, Reken, Lünen, Hagen, Witten und viele mehr</p>
+          <p>🌍 Auf Anfrage auch deutschlandweit sowie in Belgien, Niederlande, Frankreich, Österreich und der Schweiz buchbar!</p>
         </div>
-        <div>
+        <figure class="kg-area__map" data-reveal>
           <Image
             src={karteImg}
             alt="Wohnort Clown Zauberer LIAR"
-            class="rounded-xl shadow-sm w-full max-w-md img-hover-zoom"
-            loading="lazy"
+            data-scroll-tilt="2"
             widths={[400, 800]}
-            sizes="(max-width: 768px) 100vw, 50vw"
+            sizes="(max-width: 900px) 100vw, 50vw"
+            loading="lazy"
           />
-        </div>
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="bg-[#1f2025] py-14 text-white text-center">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎪 Jetzt anfragen für Ihren Kindergarten!</h2>
-      <p class="text-gray-300 mb-6">Ob Sommerfest, Abschiedsfeier oder Projektwoche – lassen Sie uns gemeinsam ein unvergessliches Erlebnis für Ihre Kinder schaffen! Ich trete auch bei <a href="/zauberer/zaubershow/schule/" class="text-white hover:underline font-semibold">Schulveranstaltungen</a> und <a href="/zauberer/zaubershow/strassen-sommer-fest/" class="text-white hover:underline font-semibold">Straßen- und Sommerfesten</a> auf.</p>
-      <div class="space-y-2 text-gray-300 mb-8">
-        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172-1517578</a></p>
-        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
+  <!-- CTA (blue band) -->
+  <section class="kg-band kg-band--blue kk-cta">
+    <SectionEdge color="var(--brand-blue)" side="top" />
+    <SectionEdge color="var(--brand-blue)" side="bottom" />
+    <div class="container kg-narrow" data-reveal>
+      <h2 class="kg-h2">🎪 Jetzt anfragen für Ihren Kindergarten!</h2>
+      <p>Ob Sommerfest, Abschiedsfeier oder Projektwoche – lassen Sie uns gemeinsam ein unvergessliches Erlebnis für Ihre Kinder schaffen! Ich trete auch bei <a href="/zauberer/zaubershow/schule/">Schulveranstaltungen</a> und <a href="/zauberer/zaubershow/strassen-sommer-fest/">Straßen- und Sommerfesten</a> auf.</p>
+      <div class="kk-cta__lines">
+        <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
         <p>⚡ Schnelle Antwort: Meist innerhalb 24 Stunden</p>
-        <p class="text-yellow-300">💡 Tipp: Sommerfest-Termine sind schnell ausgebucht – frühzeitig anfragen lohnt sich!</p>
+        <p class="kk-cta__tip">💡 Tipp: Sommerfest-Termine sind schnell ausgebucht – frühzeitig anfragen lohnt sich!</p>
       </div>
-      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+      <a href="/kontakt/" class="btn btn--primary" data-confetti>
         Jetzt unverbindlich anfragen
       </a>
     </div>
   </section>
 
-
-  <!-- FAQ (sichtbar + FAQPage-Schema) -->
-  <section class="py-14 bg-white">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="text-center text-2xl font-extrabold text-[#1f2025] mb-8">Häufig gestellte Fragen</h2>
-      <div class="space-y-4">
+  <!-- FAQ: native <details>; the visible "+" stays real text (legacy content) -->
+  <section class="kg-faq kk-faq" id="faq">
+    <div class="container kg-narrow">
+      <h2 class="kg-h2 kg-center">Häufig gestellte Fragen</h2>
+      <div class="kg-faq__list">
         {faqItems.map((i) => (
-          <details class="bg-[#f9fafb] rounded-xl p-5 group">
-            <summary class="font-bold cursor-pointer text-[#1f2025] flex justify-between items-center gap-4">
-              <span>{i.q}</span>
-              <span class="text-[#d7393e] transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
-            </summary>
-            <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">{i.a}</p>
+          <details class="kg-faq__item" data-reveal="puff">
+            <summary><span>{i.q}</span><span class="kk-plus">+</span></summary>
+            <div class="kg-faq__answer">{i.a}</div>
           </details>
         ))}
       </div>
     </div>
   </section>
-</BaseLayout>
+</V2Layout>
+
+<style>
+  /* hero */
+  .kk-crumbs { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2); }
+  .kk-crumbs a { color: var(--ink-soft); text-decoration: none; }
+  .kk-hero__sub { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 600; color: var(--brand-blue); margin: 0 0 var(--space-1); }
+  .kk-hero__tag { font-weight: 800; color: var(--ink-soft); margin-bottom: var(--space-3); }
+  @media (hover: hover) and (pointer: fine) { .kk-crumbs a:hover { color: var(--accent-strong); } }
+
+  .kk-list li { display: flex; gap: 0.5rem; align-items: flex-start; }
+  .kk-list li > span:first-child { flex: none; }
+  .kg-expect__title { margin-top: 0; }
+
+  /* occasions */
+  .kk-occasions { background: var(--bg); }
+  .kk-occasions__grid { margin-top: var(--space-4); }
+  .kk-icon { font-size: 2rem; line-height: 1; margin-bottom: 0.6rem; }
+  .kk-card__text { color: var(--ink-soft); margin: 0; }
+
+  /* stats */
+  .kk-stats { background: var(--brand-red); color: #fff; }
+  .kk-stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-3); }
+  .kk-stat { padding: var(--space-3); border-radius: var(--radius); background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45); }
+  .kk-stat__icon { font-size: 2rem; line-height: 1; margin-bottom: 0.4rem; }
+  .kk-stat__num { font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; }
+  .kk-stat__label { font-weight: 800; margin-top: 0.3rem; }
+
+  /* learning tiles: soft pastel washes of the logo colours */
+  .kk-learn { background: var(--surface); border-block: var(--border); }
+  .kk-learn__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); margin-top: var(--space-4); }
+  .kk-tile {
+    --c: var(--brand-red);
+    text-align: center; padding: var(--space-3); border-radius: var(--radius);
+    background: color-mix(in srgb, var(--c) 14%, var(--surface));
+    border: 2px dashed color-mix(in srgb, var(--c) 60%, var(--line));
+  }
+  .kk-tile--blue { --c: var(--brand-blue); }
+  .kk-tile--yellow { --c: var(--brand-yellow); }
+  .kk-tile__title { font-family: var(--font-display); font-weight: 650; font-size: 1.2rem; margin-bottom: 0.3rem; }
+  .kk-tile__text { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
+
+  /* polaroids */
+  .kk-photos__grid { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); margin-top: var(--space-4); }
+  .kk-polaroid { margin: 0; padding: 0.7rem 0.7rem 2.2rem; background: var(--surface); border: var(--border); border-radius: 0.4rem; box-shadow: var(--shadow); rotate: -2deg; }
+  .kk-polaroid:nth-child(even) { rotate: 2deg; }
+  .kk-polaroid :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 0.2rem; }
+
+  /* practical details */
+  .kk-details { background: var(--bg); }
+  .kk-detail { border-top-width: 0.6rem; border-top-color: var(--c); }
+  .kk-detail--red { --c: var(--brand-red); }
+  .kk-detail--blue { --c: var(--brand-blue); }
+  .kk-detail--yellow { --c: var(--brand-yellow); }
+  .kk-detail__title { font-size: 1.35rem; margin: 0 0 var(--space-2); }
+  .kk-detail__label { font-weight: 800; color: var(--ink); margin-bottom: 0.4rem; }
+  .kk-plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; color: var(--ink-soft); }
+  .kk-plain--spaced { gap: 0.8rem; }
+  .kk-note { font-style: italic; font-size: 0.95rem; }
+
+  /* CTA */
+  .kk-cta__lines { margin: var(--space-3) 0; font-weight: 700; }
+  .kk-cta__lines p { margin-bottom: 0.4rem; }
+  .kk-cta__tip { display: inline-block; margin-top: var(--space-1); padding: 0.45rem 1rem; border-radius: 999px; background: var(--brand-yellow); color: var(--ink); }
+
+  /* FAQ: real "+" badge replaces the kit's ::after */
+  .kk-faq .kg-faq__item summary::after { content: none; }
+  .kk-plus {
+    flex: none; display: grid; place-items: center; width: 2rem; height: 2rem;
+    border-radius: 50%; background: var(--brand-yellow); border: 2px solid var(--line);
+    font-family: var(--font-display); font-size: 1.3rem; line-height: 1;
+    transition: rotate 0.3s var(--ease-out-expo), background-color 0.2s;
+  }
+  .kg-faq__item[open] .kk-plus { rotate: 45deg; background: var(--accent); color: #fff; }
+</style>

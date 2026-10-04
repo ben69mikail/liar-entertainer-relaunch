@@ -195,13 +195,6 @@ html body.v2 .cc-btn-accept { background: var(--accent-strong); color: var(--acc
 [data-zone='adult'] body.v2 .cc-btn { border-radius: var(--radius-sm); }
 @media (max-width: 767.98px) { html body.v2 .cc-banner { bottom: calc(4.4rem + env(safe-area-inset-bottom)); } }
 
-/* Long pages: let the browser skip style/layout/paint for sections far below the fold until they
-   approach the viewport. 'auto' in contain-intrinsic-size remembers the real height once rendered,
-   so the scrollbar stays stable. The hero (first section) is never skipped. */
-.v2 main > section:not(:first-child) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 900px;
-}
 
 /* Desktop: consent card sits bottom-right above the contact dock, so it never covers the hero's
    primary enquiry button (left column). Found by the e2e confetti test. */
