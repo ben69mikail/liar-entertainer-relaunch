@@ -1,0 +1,55 @@
+---
+/**
+ * Soft, layered wave edge between sections (replaces the cheap scallop border).
+ * Three translucent layers of the band colour drift sideways at different speeds; each SVG
+ * holds an exactly periodic path twice as wide as the viewport, so translateX(-50%) loops
+ * seamlessly. Decorative (aria-hidden). Place it inside a position:relative section.
+ */
+interface Props {
+  color: string; // the band colour, e.g. var(--brand-blue)
+  side?: 'top' | 'bottom';
+}
+const { color, side = 'top' } = Astro.props;
+
+const W = 2400; // two copies of 1200 units → seamless at -50%
+const H = 90;
+function wave(period: number, amp: number, mid: number, phase: number): string {
+  // smooth sine built from cubic Béziers, one period at a time
+  let d = `M ${-phase} ${mid}`;
+  for (let x = -phase; x < W + period; x += period) {
+    const h = period / 2;
+    d += ` C ${x + h * 0.36} ${mid - amp}, ${x + h * 0.64} ${mid - amp}, ${x + h} ${mid}`;
+    d += ` C ${x + h * 1.36} ${mid + amp}, ${x + h * 1.64} ${mid + amp}, ${x + period} ${mid}`;
+  }
+  return `${d} L ${W + period} ${H} L ${-phase} ${H} Z`;
+}
+const layers = [
+  { d: wave(400, 14, 34, 0), mix: 28, dur: 38 },
+  { d: wave(600, 18, 46, 150), mix: 55, dur: 26 },
+  { d: wave(300, 9, 62, 75), mix: 100, dur: 18 },
+];
+---
+
+<div class:list={['edge', `edge--${side}`]} aria-hidden="true">
+  {layers.map((l) => (
+    <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="none" style={`--dur:${l.dur}s`}>
+      <path d={l.d} fill={`color-mix(in srgb, ${color} ${l.mix}%, transparent)`} />
+    </svg>
+  ))}
+</div>
+
+<style>
+  .edge {
+    position: absolute; left: 0; right: 0; height: clamp(2.6rem, 5vw, 4.2rem);
+    overflow: hidden; pointer-events: none; z-index: 0;
+  }
+  .edge--top { bottom: 100%; }
+  .edge--bottom { top: 100%; scale: 1 -1; }
+  .edge svg {
+    position: absolute; inset: 0 auto 0 0; width: 200%; max-width: none; height: 100%; /* beats the v2 img/svg reset */
+    animation: edge-drift var(--dur) linear infinite;
+  }
+  .edge svg:nth-child(2) { animation-direction: reverse; }
+  @keyframes edge-drift { to { transform: translateX(-50%); } }
+  @media (prefers-reduced-motion: reduce) { .edge svg { animation: none; } }
+</style>

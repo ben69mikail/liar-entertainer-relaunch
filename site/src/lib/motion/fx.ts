@@ -5,7 +5,8 @@ import { initReveals } from './reveal';
  * Core (this file, no library, runs at once): reveals (see reveal.ts) and
  *   data-letters        h1 letters hop once on load (transform only: text never hidden → LCP safe)
  * Rich (fx-rich.ts, loads the motion library when the browser is idle):
- *   data-count, data-confetti, data-tilt, data-magnetic, data-scroll-tilt, data-hat,
+ *   data-count, data-confetti, data-tilt, data-magnetic, data-scroll-tilt, data-hat-trick,
+ *   data-rabbit-run, data-balloon-dog,
  *   data-parallax-up, data-pick-a-card, kids sparkle trail.
  *
  * Reduced motion: decorative motion is skipped; the pick-a-card trick still works
@@ -60,11 +61,32 @@ function letters(): void {
 const whenIdle = (fn: () => void) =>
   'requestIdleCallback' in window ? requestIdleCallback(fn, { timeout: 1500 }) : setTimeout(fn, 300);
 
+/** Heavy, purely decorative work waits until the visitor actually engages (keeps first load free). */
+function afterFirstInteraction(fn: () => void): void {
+  const events = ['pointermove', 'pointerdown', 'scroll', 'touchstart', 'keydown'] as const;
+  const go = () => {
+    events.forEach((e) => removeEventListener(e, go));
+    whenIdle(fn);
+  };
+  events.forEach((e) => addEventListener(e, go, { once: true, passive: true }));
+}
+
 export function initFx(): void {
   initReveals();
   if (!reduced()) letters(); // hero entrance: needed right away
   const wantsRich = document.querySelector(
-    '[data-count], [data-confetti], [data-tilt], [data-magnetic], [data-scroll-tilt], [data-hat], [data-parallax-up], [data-pick-a-card]',
+    '[data-count], [data-confetti], [data-tilt], [data-magnetic], [data-scroll-tilt], [data-hat-trick], [data-rabbit-run], [data-balloon-dog], [data-parallax-up], [data-pick-a-card]',
   );
   if (wantsRich) whenIdle(() => import('./fx-rich').then((m) => m.initRichFx()));
+  const fluid = document.querySelector<HTMLCanvasElement>('canvas[data-ferrofluid]');
+  if (fluid && !reduced())
+    afterFirstInteraction(() =>
+      import('./ferrofluid').then((m) => {
+        try {
+          m.mountFerrofluid(fluid, fluid.parentElement ?? fluid, JSON.parse(fluid.dataset.ferrofluid || '{}'));
+        } catch {
+          /* no WebGL / shader error: the static background simply stays */
+        }
+      }),
+    );
 }

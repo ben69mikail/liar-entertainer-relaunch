@@ -73,3 +73,16 @@ describe('adult zone is its own design, not a zauberer-liar.de copy', () => {
     expect($('header .sh__logo--card img[alt="Zauberer LIAR – Zauberei & Comedy"]').length).toBe(1);
   });
 });
+
+describe('kids decoration quality (user feedback 2026-10-04)', () => {
+  const css = page(KIDS)('style').text();
+
+  it('has no scallop (half-circle) section borders anymore', () => {
+    expect(css).not.toMatch(/radial-gradient\(circle at \.9rem 0/);
+    expect(page(KIDS)('.kg-band .edge').length).toBeGreaterThanOrEqual(4);
+  });
+
+  it('has no yellow marker underlines behind words', () => {
+    expect(css).not.toMatch(/linear-gradient\(transparent (62|70)%/);
+  });
+});

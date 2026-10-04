@@ -1,0 +1,37 @@
+---
+// A balloon dog that inflates piece by piece when seen (Ballonmodellage). Decorative.
+// Without JS / reduced motion it is simply shown complete.
+const ink = '#2b1d17';
+const red = 'var(--brand-red)';
+---
+
+<svg class="bd" viewBox="20 0 145 112" aria-hidden="true" data-balloon-dog>
+  <g stroke={ink} stroke-width="2.5" fill={red}>
+    <g transform="rotate(-6 46 88)"><ellipse class="bd__p" style="--o:46px 88px" cx="46" cy="88" rx="7" ry="17" /></g>
+    <g transform="rotate(6 58 88)"><ellipse class="bd__p" style="--o:58px 88px" cx="58" cy="88" rx="7" ry="17" /></g>
+    <g transform="rotate(-6 104 88)"><ellipse class="bd__p" style="--o:104px 88px" cx="104" cy="88" rx="7" ry="17" /></g>
+    <g transform="rotate(6 116 88)"><ellipse class="bd__p" style="--o:116px 88px" cx="116" cy="88" rx="7" ry="17" /></g>
+    <g transform="rotate(0 81 66)"><ellipse class="bd__p" style="--o:81px 66px" cx="81" cy="66" rx="38" ry="10" /></g>
+    <g transform="rotate(-35 34 52)"><ellipse class="bd__p" style="--o:34px 52px" cx="34" cy="52" rx="6" ry="14" /></g>
+    <g transform="rotate(25 124 48)"><ellipse class="bd__p" style="--o:124px 48px" cx="124" cy="48" rx="7" ry="16" /></g>
+    <g transform="rotate(-8 140 34)"><ellipse class="bd__p" style="--o:140px 34px" cx="140" cy="34" rx="16" ry="9" /></g>
+    <g transform="rotate(-25 124 22)"><ellipse class="bd__p" style="--o:124px 22px" cx="124" cy="22" rx="6" ry="14" /></g>
+    <g transform="rotate(10 135 20)"><ellipse class="bd__p" style="--o:135px 20px" cx="135" cy="20" rx="6" ry="14" /></g>
+  </g>
+  <circle cx="150" cy="31" r="3.2" fill={ink} />
+  <g fill="#fff" opacity=".55">
+    <ellipse cx="70" cy="62" rx="12" ry="2.5" /><ellipse cx="138" cy="30" rx="6" ry="2" />
+  </g>
+</svg>
+
+<style>
+  /* sits inside the card's top-right corner (the card reserves room next to its heading) */
+  .bd { position: absolute; top: 0.6rem; right: 0.9rem; width: 7.5rem; rotate: 4deg; overflow: visible; }
+  .bd__p { transform-box: view-box; transform-origin: var(--o); }
+  :global(.bd.is-inflating) .bd__p {
+    animation: bd-inflate 0.45s var(--ease-out-expo) backwards;
+  }
+  /* each balloon part pops up in turn (stagger set inline by fx-rich.ts) */
+  @keyframes bd-inflate { from { transform: scale(0.1); opacity: 0; } 70% { opacity: 1; } }
+  @media (max-width: 640px) { .bd { width: 5.6rem; } }
+</style>

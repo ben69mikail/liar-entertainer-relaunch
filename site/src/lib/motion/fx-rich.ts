@@ -132,15 +132,61 @@ function parallaxUp(): void {
   }
 }
 
-function hats(): void {
-  for (const hat of all('[data-hat]')) {
-    const pop = hat.querySelector<HTMLElement>('.hat__pop');
-    if (!pop) continue;
-    pop.style.transform = 'translateY(85%) rotate(0deg)';
-    inView(hat, () => {
-      animate(pop, { transform: ['translateY(85%) rotate(0deg)', 'translateY(-6%) rotate(-8deg)'] }, { type: 'spring', bounce: 0.45, duration: 0.8, delay: 0.25 });
-      hat.classList.add('is-in');
-    });
+/** Kids hat trick: each tap brings something new out of the hat. First view: the rabbit peeks out. */
+function hatTrick(): void {
+  for (const root of all('[data-hat-trick]')) {
+    const items = [...root.querySelectorAll<SVGElement>('.ht__item')];
+    const puff = root.querySelector<HTMLElement>('.ht__puff');
+    const hat = root.querySelector<HTMLElement>('.ht__hat');
+    const live = root.querySelector<HTMLElement>('[data-hat-live]');
+    if (!items.length || !hat) continue;
+    const DOWN = 'translateY(105%) rotate(0deg)';
+    const UP = 'translateY(-4%) rotate(-6deg)';
+    items.forEach((it) => { it.classList.remove('is-up'); it.style.transform = DOWN; });
+    let current = -1;
+    const show = async (next: number) => {
+      const prev = current;
+      current = next;
+      if (reduced()) {
+        // same result, no flight: an interaction must keep working under reduced motion
+        if (prev >= 0) items[prev].style.transform = DOWN;
+        items[next].style.transform = UP;
+        if (live) live.textContent = items[next].dataset.name ?? '';
+        return;
+      }
+      animate(hat, { transform: ['scale(1, 1)', 'scale(1.08, 0.9)', 'scale(1, 1)'] }, { duration: 0.35, ease: EASE_OUT });
+      if (prev >= 0) await animate(items[prev], { transform: DOWN }, { duration: 0.22, ease: EASE_OUT });
+      if (puff) animate(puff, { opacity: [0.95, 0], transform: ['scale(0.6)', 'scale(1.35)'] }, { duration: 0.6, ease: EASE_OUT });
+      await animate(items[next], { transform: [DOWN, UP] }, { duration: 0.55, ease: [0.16, 1, 0.3, 1] });
+      const wing = items[next].querySelector('.ht__wing');
+      if (wing) animate(wing, { transform: ['rotate(0deg)', 'rotate(-14deg)', 'rotate(0deg)'] }, { duration: 0.5, repeat: 2, ease: 'easeInOut' });
+      if (live) live.textContent = items[next].dataset.name ?? '';
+    };
+    inView(root, () => { if (current < 0) show(0); }, { amount: 0.6 });
+    hat.addEventListener('click', () => show((current + 1) % items.length));
+  }
+}
+
+/** A party rabbit hops across the bottom of its section once, when the section is well in view. */
+function rabbitRun(): void {
+  for (const rr of all('[data-rabbit-run]')) {
+    const runner = rr.querySelector<HTMLElement>('.rr__runner');
+    if (!runner) continue;
+    rr.hidden = false;
+    inView(rr.parentElement ?? rr, () => {
+      rr.classList.add('is-running');
+      const width = rr.getBoundingClientRect().width;
+      animate(runner, { transform: ['translateX(-130%)', `translateX(${width + 40}px)`] }, { duration: Math.max(4.5, width / 260), ease: 'linear' })
+        .then(() => rr.classList.remove('is-running'));
+    }, { amount: 0.55 });
+  }
+}
+
+/** Balloon dog: parts inflate one after another the first time it is seen. */
+function balloonDog(): void {
+  for (const dog of all('[data-balloon-dog]')) {
+    dog.querySelectorAll<SVGElement>('.bd__p').forEach((p, i) => (p.style.animationDelay = `${i * 0.09}s`));
+    inView(dog, () => dog.classList.add('is-inflating'), { amount: 0.8 });
   }
 }
 
@@ -164,7 +210,7 @@ function pickACard(): void {
         await new Promise((r) => setTimeout(r, reduced() ? 0 : 450));
         deck.hidden = true;
         result.hidden = false;
-        if (!reduced()) animate(result, { transform: ['scale(0.92) rotate(-4deg)', 'scale(1) rotate(0deg)'], opacity: [0, 1] }, { type: 'spring', bounce: 0.35, duration: 0.6 });
+        if (!reduced()) animate(result, { transform: ['scale(0.92) rotate(-4deg)', 'scale(1) rotate(0deg)'], opacity: [0, 1] }, { type: 'spring', bounce: 0, duration: 0.6 });
         result.querySelector<HTMLElement>('a')?.focus();
       }),
     );
@@ -173,6 +219,7 @@ function pickACard(): void {
 
 export function initRichFx(): void {
   pickACard();
+  hatTrick(); // interactions work under reduced motion too (without flight)
   if (reduced()) return;
   countUp();
   confetti();
@@ -181,5 +228,6 @@ export function initRichFx(): void {
   magnetic();
   scrollTilt();
   parallaxUp();
-  hats();
+  rabbitRun();
+  balloonDog();
 }

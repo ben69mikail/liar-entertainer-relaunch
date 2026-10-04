@@ -15,9 +15,9 @@
  */
 const SELECTOR = '[data-reveal], .reveal';
 const IDENTITY_2D = 'translate(0px, 0px) rotate(0deg) scale(1)';
-// curves from the animate skill (tokens.css --ease-out / --ease-spring)
+// curves from tokens.css (--ease-out / --ease-out-expo). No bounce/elastic (impeccable rule).
 const EASE_OUT = 'cubic-bezier(0.23, 1, 0.32, 1)';
-const EASE_SPRING = 'cubic-bezier(0.34, 1.56, 0.64, 1)';
+const EASE_EXPO = 'cubic-bezier(0.16, 1, 0.3, 1)';
 
 type Variant = { from: string; to: string; spring?: boolean; duration: number };
 
@@ -61,7 +61,7 @@ function reveal(el: HTMLElement): void {
       { transform: el.style.transform || v.from, opacity: 0 },
       { transform: v.to, opacity: 1 },
     ],
-    { duration: v.duration, delay, easing: v.spring ? EASE_SPRING : EASE_OUT, fill: 'both' },
+    { duration: v.duration, delay, easing: v.spring ? EASE_EXPO : EASE_OUT, fill: 'both' },
   );
   anim.finished
     .then(() => {

@@ -8,8 +8,12 @@ import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
 import Bunting from '../../components/v2/kids/Bunting.astro';
 import Balloons from '../../components/v2/kids/Balloons.astro';
-import MagicHat from '../../components/v2/kids/MagicHat.astro';
+import HatTrick from '../../components/v2/kids/HatTrick.astro';
+import RabbitRun from '../../components/v2/kids/RabbitRun.astro';
+import BalloonDog from '../../components/v2/kids/BalloonDog.astro';
+import Glitter from '../../components/v2/kids/Glitter.astro';
 import Squiggle from '../../components/v2/kids/Squiggle.astro';
+import SectionEdge from '../../components/v2/SectionEdge.astro';
 import YouTubeFacade from '../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../data/site';
 
@@ -133,6 +137,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 >
   <!-- ── Hero: Zirkus-Plakat. No reveal here (LCP). ───────────── -->
   <section class="kg-hero">
+    <canvas class="kg-fluid" aria-hidden="true" data-ferrofluid='{"colors":["#d7393e","#3b55d5","#ffb546"],"speed":0.32,"scale":1.35,"opacity":0.6,"glow":1.6}'></canvas>
     <Bunting />
     <div class="container kg-hero__grid">
       <div class="kg-hero__copy">
@@ -211,8 +216,10 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <!-- ── Zaubershow (blue band) ────────────────────────────── -->
   <section class="kg-band kg-band--blue">
+    <SectionEdge color="var(--brand-blue)" side="top" />
+    <SectionEdge color="var(--brand-blue)" side="bottom" />
     <div class="container kg-narrow" data-reveal>
-      <MagicHat />
+      <HatTrick />
       <p class="kg-eyebrow">VOLLTREFFER</p>
       <h2 class="kg-h2">✨ Zaubershow für Geburtstag – mit Herz &amp; Humor</h2>
       <p>
@@ -324,6 +331,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         <a href="/kontakt/" class="btn btn--primary" data-confetti>Jetzt unverbindlich anfragen</a>
       </p>
     </div>
+    <RabbitRun />
   </section>
 
   <!-- ── Zusatzleistungen ──────────────────────────────────── -->
@@ -339,6 +347,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
       <div class="kg-extras__grid">
         <article class="kg-extra" data-reveal="tilt">
+          <BalloonDog />
           <h4>🎈 Ballonmodellage</h4>
           <p>
             Bunte Figuren, Tiere und Überraschungen – live vor den Augen der Kinder geformt. Jedes Kind bekommt sein Wunschtier mit nach Hause!
@@ -354,6 +363,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         </article>
 
         <article class="kg-extra" data-reveal="tilt" data-reveal-delay="0.1">
+          <Glitter />
           <h4>✨ Glitzer Tattoos</h4>
           <p>
             Kleine Kunstwerke, die Kinder lieben – hautfreundlich, farbenfroh und mit glänzenden Augen garantiert. Die Tattoos halten 4-8 Tage und sind wasserfest!
@@ -404,6 +414,8 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <!-- ── Video ─────────────────────────────────────────────── -->
   <section class="kg-band kg-band--yellow">
+    <SectionEdge color="var(--brand-yellow)" side="top" />
+    <SectionEdge color="var(--brand-yellow)" side="bottom" />
     <div class="container kg-narrow kg-center">
       <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
       <div class="kg-video" data-reveal="pop">
@@ -447,6 +459,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         </figure>
       </div>
     </div>
+    <RabbitRun />
   </section>
 
   <!-- ── Kontakt ───────────────────────────────────────────── -->
@@ -491,6 +504,10 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       radial-gradient(circle at 40% 80%, color-mix(in srgb, var(--brand-red) 22%, transparent) 0 0.28rem, transparent 0.33rem) 0 0 / 8rem 8rem,
       var(--bg);
   }
+  /* Ferrofluid (fx.ts → ferrofluid.ts) fades in over the confetti dots once it is running */
+  .kg-fluid { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.4s var(--ease-out); pointer-events: none; }
+  .kg-fluid:global(.is-live) { opacity: 1; }
+  .kg-hero > :not(.kg-fluid) { position: relative; z-index: 1; }
   .kg-hero__grid {
     display: grid; gap: var(--space-4); align-items: center;
     grid-template-columns: 1.05fr 1fr;
@@ -501,17 +518,13 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     margin: var(--space-2) 0 var(--space-3);
     font-weight: 700;
   }
-  .kg-mark {
-    color: var(--accent-strong);
-    background: linear-gradient(transparent 62%, color-mix(in srgb, var(--brand-yellow) 70%, transparent) 62% 92%, transparent 92%);
-    padding-inline: 0.08em;
-  }
+  .kg-mark { color: var(--accent-strong); }
   .kg-hero__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; }
   .kg-quick { display: flex; flex-wrap: wrap; gap: 0.5rem; margin-top: var(--space-3); }
   .kg-quick a {
     font-weight: 800; font-size: 0.92rem; color: var(--ink); text-decoration: none;
     padding: 0.35rem 0.85rem; border-radius: 999px; background: var(--bg-alt); border: 2px dashed var(--line);
-    transition: background-color 0.2s, rotate 0.25s var(--ease-spring);
+    transition: background-color 0.2s, rotate 0.25s var(--ease-out-expo);
   }
   @media (hover: hover) and (pointer: fine) { .kg-quick a:hover { background: var(--surface); rotate: -2deg; } }
   .kg-hero__photo { position: relative; margin: 0; rotate: 2deg; }
@@ -550,15 +563,8 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   .kg-band { position: relative; text-align: center; }
   .kg-band--blue { background: var(--brand-blue); color: #fff; }
   .kg-band--blue .kg-eyebrow { background: var(--brand-yellow); color: var(--ink); }
-  .kg-band--blue strong { color: #fff; background: linear-gradient(transparent 70%, color-mix(in srgb, var(--brand-yellow) 85%, transparent) 70%); }
+  .kg-band--blue strong { color: #fff; font-weight: 800; }
   .kg-band--yellow { background: var(--brand-yellow); }
-  .kg-band::before, .kg-band::after {
-    content: ''; position: absolute; left: 0; right: 0; height: 1.2rem;
-    background: inherit;
-    mask: radial-gradient(circle at 0.9rem 0, transparent 0.85rem, #000 0.9rem) 0 0 / 1.8rem 100%;
-  }
-  .kg-band::before { top: -1.15rem; rotate: 180deg; }
-  .kg-band::after { bottom: -1.15rem; }
 
   /* ── prices ── */
   .kg-prices { padding-top: calc(var(--space-6) + 1rem); }
@@ -578,7 +584,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     --c: var(--brand-red);
     position: relative; padding: var(--space-4) var(--space-3) var(--space-3);
     background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
-    transition: transform 0.35s var(--ease-spring), box-shadow 0.3s var(--ease-out);
+    transition: transform 0.35s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
   }
   .kg-card::before {
     content: ''; position: absolute; inset: -2.5px -2.5px auto; height: 1.1rem;
@@ -604,8 +610,9 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   /* ── extras ── */
   .kg-extras { background: var(--bg); }
   .kg-extras__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); margin-top: var(--space-4); }
-  .kg-extra { background: var(--surface); border: var(--border); border-radius: var(--radius); padding: var(--space-3); box-shadow: var(--shadow); }
+  .kg-extra { position: relative; background: var(--surface); border: var(--border); border-radius: var(--radius); padding: var(--space-3); box-shadow: var(--shadow); }
   .kg-extra h4 { font-size: 1.45rem; margin: 0 0 var(--space-2); }
+  .kg-extra:has(.bd) h4 { padding-right: 7.5rem; min-height: 4.5rem; }
   .kg-extra p { color: var(--ink-soft); }
   .kg-extra strong { color: var(--ink); }
   .kg-extra__dur { margin: var(--space-2) 0 0; padding-top: var(--space-2); border-top: 2px dashed color-mix(in srgb, var(--line) 30%, transparent); }
@@ -622,7 +629,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   .kg-faq__item summary::after {
     content: '+'; flex: none; display: grid; place-items: center; width: 2rem; height: 2rem;
     border-radius: 50%; background: var(--brand-yellow); border: 2px solid var(--line);
-    font-family: var(--font-display); font-size: 1.3rem; transition: rotate 0.3s var(--ease-spring);
+    font-family: var(--font-display); font-size: 1.3rem; transition: rotate 0.3s var(--ease-out-expo);
   }
   .kg-faq__item[open] summary::after { rotate: 45deg; background: var(--accent); color: #fff; }
   .kg-faq__answer { padding: 0 1.25rem 1.1rem; color: var(--ink-soft); }

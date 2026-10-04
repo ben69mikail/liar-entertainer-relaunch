@@ -104,3 +104,51 @@ describe('reduced motion', () => {
     await page.close();
   });
 });
+
+describe('kids hat trick', () => {
+  it('brings something new out of the hat on every tap and announces it', async () => {
+    const page = await open('/kindergeburtstag/');
+    const hat = page.locator('.ht__hat');
+    await hat.scrollIntoViewIfNeeded();
+    await page.waitForTimeout(1500);
+    const said: string[] = [];
+    for (let i = 0; i < 2; i++) {
+      await hat.click();
+      await page.waitForTimeout(1000);
+      said.push((await page.locator('[data-hat-live]').textContent()) ?? '');
+    }
+    expect(new Set(said).size).toBe(2);
+    expect(said.every((s) => s.endsWith('!'))).toBe(true);
+    await page.close();
+  });
+
+  it('still works with reduced motion', async () => {
+    const page = await open('/kindergeburtstag/', 'reduce');
+    await page.waitForLoadState('networkidle');
+    await page.waitForTimeout(500);
+    await page.locator('.ht__hat').click();
+    await expect.poll(() => page.locator('[data-hat-live]').textContent()).toMatch(/!$/);
+    await page.close();
+  });
+});
+
+describe('ferrofluid hero background', () => {
+  it('runs on a real GPU, stays off on software rendering and under reduced motion', async () => {
+    const state = async (rm: 'reduce' | 'no-preference') => {
+      const page = await open('/kindergeburtstag/', rm);
+      await page.mouse.move(400, 300); // starts on first interaction
+      await page.waitForTimeout(3000);
+      const v = await page.evaluate(() => {
+        const gl = document.createElement('canvas').getContext('webgl')!;
+        const ext = gl.getExtension('WEBGL_debug_renderer_info');
+        const renderer = String(ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : '');
+        return { live: document.querySelector('.kg-fluid')!.classList.contains('is-live'), software: /swiftshader|llvmpipe|software/i.test(renderer) };
+      });
+      await page.close();
+      return v;
+    };
+    const normal = await state('no-preference');
+    expect(normal.live).toBe(!normal.software);
+    expect((await state('reduce')).live).toBe(false);
+  }, 20_000);
+});
