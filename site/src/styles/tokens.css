@@ -183,13 +183,22 @@ body.v2 { margin: 0; }
 html body.v2 .cc-banner { justify-content: flex-start; padding: 0.75rem; }
 html body.v2 .cc-inner {
   max-width: 23rem; flex-direction: column; align-items: stretch; gap: 0.75rem;
-  padding: 1rem 1.1rem; font-family: var(--font-body); background: var(--surface); color: var(--ink);
+  /* system font on purpose: no web-font swap, so this (often largest) text block paints once, early (LCP) */
+  padding: 1rem 1.1rem; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif; background: var(--surface); color: var(--ink);
   border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
 }
 html body.v2 .cc-desc { font-size: 0.82rem; line-height: 1.45; color: var(--ink-soft); }
-html body.v2 .cc-title { font-family: var(--font-display); font-size: 1.05rem; }
+html body.v2 .cc-title { font-family: inherit; font-weight: 700; font-size: 1rem; }
 html body.v2 .cc-actions { width: 100%; }
-html body.v2 .cc-btn { flex: 1; border-radius: 999px; font-family: var(--font-body); }
+html body.v2 .cc-btn { flex: 1; border-radius: 999px; font-family: inherit; }
 html body.v2 .cc-btn-accept { background: var(--accent-strong); color: var(--accent-ink); }
 [data-zone='adult'] body.v2 .cc-btn { border-radius: var(--radius-sm); }
 @media (max-width: 767.98px) { html body.v2 .cc-banner { bottom: calc(4.4rem + env(safe-area-inset-bottom)); } }
+
+/* Long pages: let the browser skip style/layout/paint for sections far below the fold until they
+   approach the viewport. 'auto' in contain-intrinsic-size remembers the real height once rendered,
+   so the scrollbar stays stable. The hero (first section) is never skipped. */
+.v2 main > section:not(:first-child) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 900px;
+}

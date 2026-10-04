@@ -186,3 +186,7 @@
     .kg-sticker strong { font-size: 1.4rem; }
     .v2 main > section { padding-block: var(--space-5); }
   }
+
+/* links inside coloured bands take the band's contrast colour (red on yellow was 3.5:1) */
+.kg-band--yellow a:not(.btn) { color: var(--ink); text-decoration-color: var(--ink); }
+.kg-band--blue a:not(.btn), .hm-stats a:not(.btn) { color: #fff; text-decoration-color: var(--brand-yellow); }

@@ -286,9 +286,11 @@ const webPageSchema = {
     )}
   </head>
   <body class={bodyClass}>
+    <!-- Consent first: fixed-position, so no visual change; it paints with the first frame instead of
+         arriving late as a large LCP candidate, and it is first in tab order, where a consent dialog belongs. -->
+    <CookieConsent />
     <slot />
 
-    <CookieConsent />
 
     <!-- Minimal JS: sticky nav + mobile menu handled inline in Header -->
 

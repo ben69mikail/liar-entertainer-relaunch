@@ -8,7 +8,7 @@ import PlayingCard from '../components/v2/adult/PlayingCard.astro';
 import adultWorldImg from '../assets/images/zauberer/zauberer-nrw.png';
 import '../styles/kids-kit.css';
 import YouTubeFacade from '../components/YouTubeFacade.astro';
-import { Image, getImage } from 'astro:assets';
+import { Image } from 'astro:assets';
 
 import heroImg from '../assets/images/home/clown-zauberer-hero.jpg';
 import heroSlide2 from '../assets/images/Slider/kinderzauberer-hero.jpg';
@@ -16,7 +16,6 @@ import heroSlide3 from '../assets/images/Slider/zaubershow-hero.jpg';
 import heroSlide4 from '../assets/images/Slider/kindergeburtstag-hero.jpg';
 import heroSlide5 from '../assets/images/Slider/zaubershow-mit-clown-zauberer-liar.jpg';
 // Sommer-/Outdoor-Motiv zuerst (saisonale Reihenfolge; Weihnachts-Innenraum ans Ende)
-const heroOptimized = await getImage({ src: heroSlide5, width: 1200, format: 'webp' });
 const heroSlides = [
   { src: heroSlide5, alt: 'LIAR bei einer Open-Air-Zaubershow für Kinder' },
   { src: heroSlide3, alt: 'Zaubershow von LIAR vor großem Kinderpublikum' },
@@ -180,7 +179,6 @@ const videoSchema = {
   canonical="https://liar-entertainer.com/"
   ogImage={ogImage}
   structuredData={[faqSchema, videoSchema]}
-  heroPreload={heroOptimized.src}
 >
   <!-- ── Hero: one stage, two worlds (kids poster · adult playing card). No reveal (LCP). ── -->
   <section class="kg-hero hm-hero">
@@ -218,7 +216,7 @@ const videoSchema = {
       <a class="hm-world hm-world--kids" href="/kindergeburtstag/">
         <span class="hm-world__label">Für Kinder</span>
         <span class="hm-world__photo">
-          <Image src={heroSlides[0].src} alt={heroSlides[0].alt} widths={[400, 700, 1000]} sizes="(max-width: 760px) 92vw, 520px" loading="eager" fetchpriority="high" />
+          <Image src={heroSlides[0].src} alt={heroSlides[0].alt} widths={[400, 700, 1000]} sizes="(max-width: 760px) 92vw, 520px" loading="eager" fetchpriority="low" />
         </span>
         <span class="hm-world__links" aria-hidden="true">Kindergeburtstag · Kinderzauberer · Clownshow</span>
         <span class="hm-world__go" aria-hidden="true">Zur Kinderwelt →</span>
@@ -226,7 +224,7 @@ const videoSchema = {
       <a class="hm-world hm-world--adult" href="/zauberer/">
         <span class="hm-world__card">
           <PlayingCard rank="A" suit="♠" class="hm-world__pc">
-            <Image src={adultWorldImg} alt="Zauberer LIAR wirft Spielkarten auf der Bühne" widths={[400, 700]} sizes="(max-width: 760px) 70vw, 360px" loading="eager" style="object-position: 30% 30%" />
+            <Image src={adultWorldImg} alt="Zauberer LIAR wirft Spielkarten auf der Bühne" widths={[400, 700]} sizes="(max-width: 760px) 70vw, 360px" loading="lazy" style="object-position: 30% 30%" />
           </PlayingCard>
         </span>
         <span class="hm-world__label">Für Erwachsene</span>
