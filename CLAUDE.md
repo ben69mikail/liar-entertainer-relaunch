@@ -50,3 +50,8 @@ Verbindlicher Auftrag: siehe **docs/CLAUDE-CODE-BUILD-BRIEF.md**. Vor jeder Arbe
 - Fonts nie inline (assetsInlineLimit-Funktion in astro.config). Bodoni Moda als **wght**-Variante (opsz war +44 KB und kostete LCP). Preload nur LCP-Schriften (FontPreloads.astro).
 - Cookie-Banner auf v2: kompakte Karte unten links (vorher größtes Element → LCP).
 - Dokumentierte Textänderungen: `site/tests/fixtures/content-changes.json` + `docs/CHANGES-METAS.md`.
+
+## Rollout v2 auf alle Seiten (Start 04.10.2026, Nutzerentscheidungen)
+- Wellen mit Freigabe: W1 Startseite + Kids-Kernseiten · W2 Erwachsenen-Seiten · W3 Stadtseiten (3 Templates + extrahierte Daten, 1:1) · W4 Blog, Galerie, Kontakt (→ Netlify Forms), Preise, Über mich · W5 Rechtstexte, Alt-Posts (Catch-all), 404.
+- Tests je Welle: Parität 1:1 (alle Seiten) · Seite nutzt V2-Layout ohne Alt-CSS (`tests/dist/rollout.test.ts`, Liste wächst je Welle) · richtige Zone + Logo · Lighthouse ≥ 90 je Template.
+- Stadtseiten nie einzeln von Hand: Daten aus den Alt-Dateien extrahieren, ein Template pro Familie.

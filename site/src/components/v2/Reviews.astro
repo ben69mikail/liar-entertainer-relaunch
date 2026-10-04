@@ -25,7 +25,7 @@ const SUITS = ['♠', '♥', '♣', '♦'];
             </div>
           </div>
           <div class="rv__cardstars" aria-label={`${r.rating || 5} von 5 Sternen`}>{'★'.repeat(r.rating || 5)}</div>
-          <p class="rv__text">{r.text}</p>
+          <p class="rv__text" data-review-text>{r.text}</p>
         </figure>
       ))}
     </div>

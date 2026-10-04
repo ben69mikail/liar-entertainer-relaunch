@@ -43,8 +43,9 @@ const layers = [
     position: absolute; left: 0; right: 0; height: clamp(2.6rem, 5vw, 4.2rem);
     overflow: hidden; pointer-events: none; z-index: 0;
   }
-  .edge--top { bottom: 100%; }
-  .edge--bottom { top: 100%; scale: 1 -1; }
+  /* 1px overlap hides the sub-pixel seam between band and edge */
+  .edge--top { bottom: calc(100% - 1px); }
+  .edge--bottom { top: calc(100% - 1px); scale: 1 -1; }
   .edge svg {
     position: absolute; inset: 0 auto 0 0; width: 200%; max-width: none; height: 100%; /* beats the v2 img/svg reset */
     animation: edge-drift var(--dur) linear infinite;
