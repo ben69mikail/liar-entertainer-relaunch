@@ -31,3 +31,14 @@ Verbindlicher Auftrag: siehe **docs/CLAUDE-CODE-BUILD-BRIEF.md**. Vor jeder Arbe
 - Design v2 (Phase 3): Seiten opt-in per `<BaseLayout design="v2">`. Tokens `site/src/styles/tokens.css` (kids/neutral = Zirkus-Plakat: Fredoka+Nunito, Creme, Logo-Farben, Sticker-Schatten; adult = Zauberei bei Nacht: Playfair+Jost, Nacht/Gold wie zauberer-liar.de). Komponenten `site/src/components/v2/`. Daten zentral `site/src/data/site.ts`.
 - Logo je Zone (Nutzerentscheidung): kids/neutral bunt `logo-clown-nrw.png`, adult Gold `brand/logo-liar-gold.webp` (von zauberer-liar.de, unverändert).
 - L1-Wächter: `tests/fixtures/content-baseline.json` (aus Alt-Build, aria-hidden ausgenommen). Abweichung erklären: `MSYS_NO_PATHCONV=1 npx tsx scripts/parity-diff.ts /pfad/`. Baseline NIE aus umgebautem Build neu ziehen — nur aus Alt-Stand (git worktree + `SNAPSHOT_DIST`).
+
+## Design-Revision nach Gate-3-Feedback (Grill 04.10.2026, Nutzerentscheidungen)
+- Kids-Design bleibt (Zirkus-Plakat), braucht VIEL mehr Animation: Hero-Auftritt, Scroll-Spaß, Mikro-Interaktionen, Zauber-Momente (alle vier).
+- Adult NEU: **Spielkarten-Editorial** statt Nacht/Gold (zu nah an zauberer-liar.de, nicht kopieren). Cremepapier, tiefes Schwarz, Karten-Rot, Magazin-Typo **Bodoni Moda + Instrument Sans**. Animationen: Hero-Kartentrick, Scroll „Austeilen“, Hover-Flip/Tilt/magnetische Buttons, Mitmach-Trick „Ziehen Sie eine Karte“ → wird zum Anfrage-Button.
+- Adult-Logo: Gold-Logo unverändert auf schwarzer Spielkarten-Rückseite im Header.
+- Adult-Fotos: in Farbe, unverändert, im Spielkarten-Rahmen (weißer Rand, runde Ecken, Eckindex).
+- Neutral: gemeinsames Cremepapier; Startseite links Zirkus-Plakat „Für Kinder“, rechts Spielkarte „Für Erwachsene“.
+- Performance-Gate bleibt hart (Lighthouse mobil ≥ 90): nur transform/opacity, nichts blockiert LCP, kein WebGL/Video-BG.
+- L6 Schlüssel-Fotos = Hero-Fotos der Hauptseiten + alle Porträts. Rest darf per L7 getauscht werden.
+- Bewertungen: 370+ ist korrekt. „Über 400 …“ auf /zauberer/ wird korrigiert (doku in docs/CHANGES-METAS.md).
+- Kein Framer-Motion-Skill verfügbar; Engine `motion` + lokale Skills animate / improve-animations / emil-design-eng nutzen.
