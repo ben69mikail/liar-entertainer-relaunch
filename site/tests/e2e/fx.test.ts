@@ -132,7 +132,7 @@ describe('kids hat trick', () => {
   });
 });
 
-describe('ferrofluid hero background', () => {
+describe('side rays hero spotlights', () => {
   it('runs on a real GPU, stays off on software rendering and under reduced motion', async () => {
     const state = async (rm: 'reduce' | 'no-preference') => {
       const page = await open('/kindergeburtstag/', rm);
@@ -142,7 +142,7 @@ describe('ferrofluid hero background', () => {
         const gl = document.createElement('canvas').getContext('webgl')!;
         const ext = gl.getExtension('WEBGL_debug_renderer_info');
         const renderer = String(ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : '');
-        return { live: document.querySelector('.kg-fluid')!.classList.contains('is-live'), software: /swiftshader|llvmpipe|software/i.test(renderer) };
+        return { live: document.querySelector('.kg-rays')!.classList.contains('is-live'), software: /swiftshader|llvmpipe|software/i.test(renderer) };
       });
       await page.close();
       return v;

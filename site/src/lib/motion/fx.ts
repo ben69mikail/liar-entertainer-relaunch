@@ -6,7 +6,7 @@ import { initReveals } from './reveal';
  *   data-letters        h1 letters hop once on load (transform only: text never hidden → LCP safe)
  * Rich (fx-rich.ts, loads the motion library when the browser is idle):
  *   data-count, data-confetti, data-tilt, data-magnetic, data-scroll-tilt, data-hat-trick,
- *   data-rabbit-run, data-balloon-dog,
+ *   data-balloon-dog,
  *   data-parallax-up, data-pick-a-card, kids sparkle trail.
  *
  * Reduced motion: decorative motion is skipped; the pick-a-card trick still works
@@ -75,15 +75,15 @@ export function initFx(): void {
   initReveals();
   if (!reduced()) letters(); // hero entrance: needed right away
   const wantsRich = document.querySelector(
-    '[data-count], [data-confetti], [data-tilt], [data-magnetic], [data-scroll-tilt], [data-hat-trick], [data-rabbit-run], [data-balloon-dog], [data-parallax-up], [data-pick-a-card]',
+    '[data-count], [data-confetti], [data-tilt], [data-magnetic], [data-scroll-tilt], [data-hat-trick], [data-balloon-dog], [data-parallax-up], [data-pick-a-card]',
   );
   if (wantsRich) whenIdle(() => import('./fx-rich').then((m) => m.initRichFx()));
-  const fluid = document.querySelector<HTMLCanvasElement>('canvas[data-ferrofluid]');
-  if (fluid && !reduced())
+  const rays = document.querySelector<HTMLCanvasElement>('canvas[data-side-rays]');
+  if (rays && !reduced())
     afterFirstInteraction(() =>
-      import('./ferrofluid').then((m) => {
+      import('./siderays').then((m) => {
         try {
-          m.mountFerrofluid(fluid, fluid.parentElement ?? fluid, JSON.parse(fluid.dataset.ferrofluid || '{}'));
+          m.mountSideRays(rays, JSON.parse(rays.dataset.sideRays || '{}'));
         } catch {
           /* no WebGL / shader error: the static background simply stays */
         }

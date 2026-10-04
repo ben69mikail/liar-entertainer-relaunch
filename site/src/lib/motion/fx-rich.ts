@@ -167,21 +167,6 @@ function hatTrick(): void {
   }
 }
 
-/** A party rabbit hops across the bottom of its section once, when the section is well in view. */
-function rabbitRun(): void {
-  for (const rr of all('[data-rabbit-run]')) {
-    const runner = rr.querySelector<HTMLElement>('.rr__runner');
-    if (!runner) continue;
-    rr.hidden = false;
-    inView(rr.parentElement ?? rr, () => {
-      rr.classList.add('is-running');
-      const width = rr.getBoundingClientRect().width;
-      animate(runner, { transform: ['translateX(-130%)', `translateX(${width + 40}px)`] }, { duration: Math.max(4.5, width / 260), ease: 'linear' })
-        .then(() => rr.classList.remove('is-running'));
-    }, { amount: 0.55 });
-  }
-}
-
 /** Balloon dog: parts inflate one after another the first time it is seen. */
 function balloonDog(): void {
   for (const dog of all('[data-balloon-dog]')) {
@@ -228,6 +213,5 @@ export function initRichFx(): void {
   magnetic();
   scrollTilt();
   parallaxUp();
-  rabbitRun();
   balloonDog();
 }
