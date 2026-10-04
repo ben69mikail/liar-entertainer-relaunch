@@ -1,0 +1,9 @@
+{
+  "/zauberer/": [
+    {
+      "from": "Über 400 begeisterte 5-Sterne-Bewertungen auf Google",
+      "to": "370+ begeisterte Bewertungen auf Google",
+      "why": "L3: real Google count is 370+ (user, 2026-10-04); 'all 5-star' not verifiable. See docs/CHANGES-METAS.md."
+    }
+  ]
+}

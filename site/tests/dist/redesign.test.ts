@@ -46,3 +46,11 @@ describe('parents reach key info fast (brief UX goals)', () => {
     expect($('#faq details .kg-faq__answer').first().text()).toContain('pflegeleicht');
   });
 });
+
+describe('facts (L3: no unverified claims)', () => {
+  it('/zauberer/ states the real Google review count, not "Über 400"', () => {
+    const text = page(ADULT)('main').text();
+    expect(text).not.toMatch(/Über 400/);
+    expect(text).toContain('370+');
+  });
+});
