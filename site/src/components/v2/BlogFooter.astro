@@ -1,0 +1,111 @@
+---
+/**
+ * v2 version of components/BlogFooter.astro (legacy one stays for the legacy catch-all posts).
+ * Same content and wording 1:1: 3 related posts, 3 testimonials picked deterministically per
+ * slug, 3 CTA buttons. Only the form is new.
+ */
+import BlogCards from './BlogCards.astro';
+import { getRelatedPosts } from '../../utils/allPosts';
+import { colorFor, initialsOf, type Testimonial } from '../../lib/reviews';
+import testimonialsData from '../../data/testimonials.json';
+
+interface Props {
+  currentSlug: string;
+  categories?: string[];
+}
+
+const { currentSlug, categories = [] } = Astro.props;
+const related = await getRelatedPosts(currentSlug, categories, 3);
+
+// Same deterministic pick as the legacy footer: one article always shows the same three.
+function pick3DeterministicallyForSlug(items: Testimonial[], slug: string): Testimonial[] {
+  let hash = 0;
+  for (let i = 0; i < slug.length; i++) hash = ((hash << 5) - hash + slug.charCodeAt(i)) | 0;
+  const sorted = [...items].sort((a, b) => {
+    const ah = (a.name + slug).split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, hash);
+    const bh = (b.name + slug).split('').reduce((h, c) => ((h << 5) - h + c.charCodeAt(0)) | 0, hash);
+    return ah - bh;
+  });
+  return sorted.slice(0, 3);
+}
+const testimonials = pick3DeterministicallyForSlug(testimonialsData as Testimonial[], currentSlug);
+---
+
+<section class="bf-related">
+  <div class="container">
+    {related.length > 0 && (
+      <>
+        <header class="bf-head" data-reveal>
+          <h2 class="kg-h2">Weiterlesen</h2>
+          <p class="bf-sub">Diese Artikel könnten dich auch interessieren</p>
+        </header>
+        <BlogCards posts={related} heading="h3" moreLabel="Mehr lesen →" compact />
+      </>
+    )}
+  </div>
+</section>
+
+<section class="bf-voices">
+  <div class="container">
+    <header class="bf-head" data-reveal>
+      <h2 class="kg-h2">Was Eltern sagen</h2>
+      <div class="bf-stars">★★★★★</div>
+    </header>
+    <div class="bf-quotes">
+      {testimonials.map((t, i) => (
+        <figure class="bf-quote" data-reveal="pop" data-reveal-delay={i ? String(i * 0.08) : undefined}>
+          <div class="bf-who">
+            <div class="bf-avatar" style={`background:${colorFor(t.name)}`}>{initialsOf(t.name)}</div>
+            <div>
+              <p class="bf-name">{t.name}</p>
+              <p class="bf-when">{t.when}</p>
+            </div>
+          </div>
+          <div class="bf-cardstars">{'★'.repeat(t.rating)}</div>
+          <p class="bf-text">"{t.text}"</p>
+        </figure>
+      ))}
+    </div>
+  </div>
+</section>
+
+<section class="bf-book">
+  <div class="container kg-center" data-reveal="tilt">
+    <h2 class="kg-h2">Jetzt LIAR buchen</h2>
+    <p class="bf-sub">Termin sichern oder mehr erfahren</p>
+    <div class="bf-actions">
+      <a href="/kontakt/" class="btn btn--primary" data-confetti>📞 Termin anfragen</a>
+      <a href="/preise/" class="btn btn--ghost">💰 Preise ansehen</a>
+      <a href="/kinderzauberer/" class="btn btn--ghost">🎩 Alle Leistungen</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .bf-related { background: var(--bg-alt); border-top: var(--border); }
+  .bf-head { text-align: center; margin-bottom: var(--space-4); }
+  .bf-head .kg-h2 { margin-bottom: var(--space-1); }
+  .bf-sub { color: var(--ink-soft); font-size: 1.05rem; }
+
+  .bf-voices { background: var(--bg); }
+  .bf-stars { color: var(--star); font-size: 2rem; letter-spacing: 0.12em; line-height: 1; }
+  .bf-quotes { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+  .bf-quote {
+    margin: 0; padding: var(--space-3); background: var(--surface);
+    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .bf-quote:nth-child(odd) { rotate: -0.8deg; }
+  .bf-quote:nth-child(even) { rotate: 1deg; }
+  .bf-who { display: flex; align-items: center; gap: 0.75rem; }
+  .bf-avatar {
+    width: 2.6rem; height: 2.6rem; border-radius: 50%; flex: none;
+    display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 0.9rem;
+  }
+  .bf-name { font-weight: 800; margin: 0; line-height: 1.2; }
+  .bf-when { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
+  .bf-cardstars { color: var(--star); margin: 0.75rem 0 0.25rem; letter-spacing: 0.08em; }
+  .bf-text { margin: 0; color: var(--ink-soft); font-size: 0.98rem; }
+
+  .bf-book { background: var(--surface); border-top: var(--border); }
+  .bf-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: var(--space-3); }
+</style>

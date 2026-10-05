@@ -1,12 +1,15 @@
 ---
 import { getCollection, render } from 'astro:content';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import GoogleReviews from '../../components/GoogleReviews.astro';
-import BlogFooter from '../../components/BlogFooter.astro';
+import V2Layout from '../../layouts/V2Layout.astro';
+import Reviews from '../../components/v2/Reviews.astro';
+import BlogFooter from '../../components/v2/BlogFooter.astro';
+import { CONTACT } from '../../data/site';
 import postsData from '../../data/posts.json';
 import { generateHeroWithOverlay } from '../../utils/heroOverlay';
 import { generateStoryImage } from '../../utils/storyOverlay';
 import { catToSlug } from '../../utils/allPosts';
+import '../../styles/kids-kit.css';
+import '../../styles/article.css';
 
 type WPPost = { slug: string };
 
@@ -55,7 +58,7 @@ if (entry.data.heroImage) {
 }
 
 // BlogPosting schema.org structured data — Publisher referenziert das globale
-// LocalBusiness aus BaseLayout via @id (https://liar-entertainer.com/#business)
+// LocalBusiness aus Document via @id (https://liar-entertainer.com/#business)
 const modifiedIso = entry.data.updatedDate
   ? entry.data.updatedDate.toISOString()
   : isoDate;
@@ -78,7 +81,8 @@ const articleSchema = {
 };
 ---
 
-<BaseLayout
+
+<V2Layout
   title={pageTitle}
   description={desc}
   canonical={canonical}
@@ -87,115 +91,95 @@ const articleSchema = {
   heroPreload={heroDisplayUrl}
   structuredData={articleSchema}
 >
-  {/* Breadcrumb-Header — wie auf den Legacy-Blog-Artikeln */}
-  <section class="bg-white pt-8 pb-2">
-    <div class="max-w-[750px] mx-auto px-4">
-      <nav class="text-sm text-[#595959] mb-4">
-        <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
-        <span class="mx-1">»</span>
-        <a href="/blog/" class="text-[#d7393e] hover:underline">Blog</a>
-        <span class="mx-1">»</span>
+  <!-- ── Article head: crumbs, title, meta, cover. No reveals on the article (reading first). ── -->
+  <section class="bp-head">
+    <div class="bp-col">
+      <nav class="bp-crumbs" aria-label="Brotkrumen">
+        <a href="/">Clown</a>
+        <span>»</span>
+        <a href="/blog/">Blog</a>
+        <span>»</span>
         <span>{entry.data.title}</span>
       </nav>
-      <h1 class="text-[#1f2025] font-extrabold text-3xl sm:text-4xl leading-tight mb-3">
-        {entry.data.title}
-      </h1>
-      <div class="flex flex-wrap items-center gap-3 text-sm text-[#595959] mb-6 pb-4 border-b border-gray-100">
+      <h1 class="bp-title">{entry.data.title}</h1>
+      <div class="bp-meta">
         <time datetime={isoDate}>{dateLabel}</time>
         {entry.data.author && <span>· von {entry.data.author}</span>}
         {entry.data.categories.length > 0 && (
-          <span class="flex flex-wrap gap-1">
+          <span class="bp-cats">
             {entry.data.categories.map((c) => (
-              <a
-                href={`/blog/kategorie/${catToSlug(c)}/`}
-                class="bg-[#f4f4f4] hover:bg-[#d7393e] hover:text-white text-[#555] px-2 py-0.5 rounded text-xs transition-colors"
-              >
-                {c}
-              </a>
+              <a class="bp-cat" href={`/blog/kategorie/${catToSlug(c)}/`}>{c}</a>
             ))}
           </span>
         )}
       </div>
+      {heroDisplayUrl && (
+        <figure class="bp-hero">
+          <img
+            src={heroDisplayUrl}
+            alt={entry.data.heroImageAlt ?? entry.data.title}
+            loading="eager"
+            fetchpriority="high"
+            decoding="async"
+            width="1200"
+            height="630"
+          />
+        </figure>
+      )}
     </div>
   </section>
 
-  {/* Service-Schnellzugriff — wie auf den Legacy-Blog-Artikeln */}
-  <section class="py-10 bg-[#f9fafb]">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <p class="text-[#595959] font-bold text-sm uppercase tracking-widest mb-4">Unsere Leistungen</p>
-      <div class="flex flex-wrap justify-center gap-3">
-        <a href="/clown/clownshow/" class="bg-white px-5 py-3 rounded-lg shadow-sm text-[#d7393e] hover:underline font-medium text-sm">🤡 Clownshow</a>
-        <a href="/zauberer/" class="bg-white px-5 py-3 rounded-lg shadow-sm text-[#3b55d5] hover:underline font-medium text-sm">🎩 Zauberer</a>
-        <a href="/kinderzauberer/" class="bg-white px-5 py-3 rounded-lg shadow-sm text-[#d7393e] hover:underline font-medium text-sm">✨ Kinderzauberer</a>
-        <a href="/kindergeburtstag/" class="bg-white px-5 py-3 rounded-lg shadow-sm text-[#3b55d5] hover:underline font-medium text-sm">🎂 Zauberer für Kindergeburtstag</a>
-        <a href="/zauberer/zaubershow/" class="bg-white px-5 py-3 rounded-lg shadow-sm text-[#d7393e] hover:underline font-medium text-sm">🪄 Zaubershow</a>
-        <a href="/galerie/" class="bg-white px-5 py-3 rounded-lg shadow-sm text-[#3b55d5] hover:underline font-medium text-sm">📸 Galerie</a>
-      </div>
-    </div>
-  </section>
-
-  {/* Hero-Image (Cover mit Title-Overlay aus sharp/build-time) */}
-  {heroDisplayUrl && (
-    <section class="bg-white pt-6">
-      <div class="max-w-[750px] mx-auto px-4">
-        <img
-          src={heroDisplayUrl}
-          alt={entry.data.heroImageAlt ?? entry.data.title}
-          class="w-full rounded-lg"
-          loading="eager"
-          decoding="async"
-          width="1200"
-          height="630"
-          style="aspect-ratio: 1200/630"
-        />
-      </div>
-    </section>
-  )}
-
-  {/* Article Body — gleiche Breite + prose-Stil wie Legacy-Blog-Artikel (max-w-[750px]) */}
-  <section class="bg-white pt-6 pb-12">
-    <div class="max-w-[750px] mx-auto px-4">
-      <article class="prose prose-lg max-w-none [&_h2]:text-[#1f2025] [&_h2]:font-bold [&_h2]:mt-10 [&_h2]:mb-4 [&_h2]:text-2xl [&_h3]:text-[#1f2025] [&_h3]:font-semibold [&_h3]:mt-6 [&_h3]:text-xl [&_a]:text-[#d7393e] [&_a]:underline hover:[&_a]:text-[#b62e32] [&_p]:leading-relaxed [&_img]:rounded-lg [&_img]:my-6 [&_img]:w-full [&_ul]:my-4 [&_li]:my-1">
+  <!-- ── Article body: calm reading column ── -->
+  <section class="bp-body">
+    <div class="bp-col">
+      <article class="bp-prose">
         <Content />
       </article>
-    </div>
-  </section>
 
-  {/* Autorbox — E-E-A-T-Signal, verknüpft mit Person-Schema (#person) */}
-  <section class="bg-white pb-4">
-    <div class="max-w-[750px] mx-auto px-4">
-      <div class="bg-[#f9fafb] border border-gray-200 rounded-xl p-5 flex flex-col sm:flex-row gap-4 items-start">
-        <div class="text-4xl shrink-0">🎩</div>
+      <!-- Autorbox: E-E-A-T signal, linked to the Person schema (#person) -->
+      <aside class="bp-author">
+        <div class="bp-author__icon">🎩</div>
         <div>
-          <p class="font-bold text-[#1f2025] mb-1">Über den Autor: {entry.data.author || 'Michaël Prescler'}</p>
-          <p class="text-sm text-[#374151] leading-relaxed mb-2">
+          <p class="bp-author__title">Über den Autor: {entry.data.author || 'Michaël Prescler'}</p>
+          <p class="bp-author__text">
             Michaël Prescler alias <strong>Clown Zauberer LIAR</strong> ist seit 2009 professioneller
             Clown, Zauberer und Kinderentertainer aus Gladbeck. Mit rund 400 Shows pro Jahr, über
             110.000 begeisterten Kindern und 370+ Google-Bewertungen (5,0 ★) gehört er zu den
             aktivsten Kinderzauberern in NRW. Er schreibt hier aus der Praxis – über das, was auf
             echten Kindergeburtstagen und Festen wirklich funktioniert.
           </p>
-          <a href="/ueber-mich/" class="text-[#d7393e] text-sm font-bold hover:underline">Mehr über LIAR →</a>
+          <a href="/ueber-mich/" class="bp-author__more">Mehr über LIAR →</a>
         </div>
+      </aside>
+
+      <!-- Service quick links (legacy: above the cover; moved below the article for reading flow) -->
+      <nav class="bp-services" aria-labelledby="bp-services-title">
+        <p class="bp-services__title" id="bp-services-title">Unsere Leistungen</p>
+        <div class="kg-quick">
+          <a href="/clown/clownshow/">🤡 Clownshow</a>
+          <a href="/zauberer/">🎩 Zauberer</a>
+          <a href="/kinderzauberer/">✨ Kinderzauberer</a>
+          <a href="/kindergeburtstag/">🎂 Zauberer für Kindergeburtstag</a>
+          <a href="/zauberer/zaubershow/">🪄 Zaubershow</a>
+          <a href="/galerie/">📸 Galerie</a>
+        </div>
+      </nav>
+    </div>
+  </section>
+
+  <Reviews />
+
+  <!-- ── Book-now CTA ── -->
+  <section class="bp-cta">
+    <div class="container kg-narrow kg-center">
+      <h2 class="kg-h2">Jetzt LIAR buchen</h2>
+      <p class="bp-cta__text">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
+      <div class="bp-cta__actions">
+        <a href="/kontakt/" class="btn btn--primary" data-confetti>Kontakt aufnehmen</a>
+        <a href={CONTACT.phoneHref} class="btn btn--ghost">+49 172 1517578</a>
       </div>
     </div>
   </section>
 
-  {/* Google Reviews — wie auf Legacy-Blog-Artikeln */}
-  <GoogleReviews bgColor="bg-[#f9fafb]" />
-
-  {/* Jetzt-Buchen CTA — wie auf Legacy-Blog-Artikeln */}
-  <section class="bg-white py-10 border-t border-gray-100">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <h2 class="text-[#1f2025] font-bold text-xl mb-3">Jetzt LIAR buchen</h2>
-      <p class="text-[#595959] mb-5">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
-      <div class="flex flex-col sm:flex-row gap-3 justify-center">
-        <a href="/kontakt/" class="inline-flex items-center justify-center gap-2 bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">Kontakt aufnehmen</a>
-        <a href="tel:+491721517578" class="inline-flex items-center justify-center bg-white border border-gray-200 text-[#1f2025] font-bold px-8 py-3 rounded hover:bg-gray-50 transition-colors">+49 172 1517578</a>
-      </div>
-    </div>
-  </section>
-
-  {/* BlogFooter (Aufgabe 3): Verwandte Artikel + Bewertungen + zusaetzliche CTAs */}
   <BlogFooter currentSlug={slug} categories={entry.data.categories} />
-</BaseLayout>
+</V2Layout>

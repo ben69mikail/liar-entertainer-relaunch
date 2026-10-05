@@ -22,3 +22,6 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# generated in prebuild (scripts/generate-card-thumbs.mjs)
+/public/card-thumbs/

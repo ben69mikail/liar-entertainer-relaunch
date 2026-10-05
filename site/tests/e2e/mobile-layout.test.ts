@@ -10,6 +10,9 @@ const PAGES = [
   '/clown/clownshow/', '/clown/karneval/', '/clown/ballonmodellage/', '/clown/glitzer-tattoo/', '/clown/walk-act/',
   '/zauberer/zaubershow/kindergarten-kita/', '/zauberer/zaubershow/schule/', '/zauberer/zaubershow/strassen-sommer-fest/',
   '/zauberer/zaubershow/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/',
+  '/kontakt/', '/kontakt/danke/', '/preise/', '/ueber-mich/', '/galerie/', '/blog/', '/blog/kategorie/feste/',
+  '/blog/clown-oder-zauberer-kindergeburtstag/', '/blog/kidzival-2024/', '/impressum/', '/datenschutzerklaerung-2/',
+  '/clown/clown-zauberer/', '/zauberer/zaubershow/karneval/',
   '/kinderzauberer/kinderzauberer-in-bochum/', '/kindergeburtstag/geburtstag-in-dorsten/', '/clown/clownshow/clown-in-oberhausen/',
 ];
 let browser: Browser;

@@ -5,5 +5,12 @@
       "to": "370+ begeisterte Bewertungen auf Google",
       "why": "L3: real Google count is 370+ (user, 2026-10-04); 'all 5-star' not verifiable. See docs/CHANGES-METAS.md."
     }
+  ],
+  "/ueber-mich/": [
+    {
+      "from": "Über 400 Familien und Veranstalter haben mich mit der Bestnote bewertet. Lesen Sie echte Stimmen in meinen Google-Bewertungen.",
+      "to": "370+ Familien und Veranstalter haben mich mit der Bestnote bewertet. Lesen Sie echte Stimmen in meinen Google-Bewertungen.",
+      "why": "L3: real Google count is 370+ (user, 2026-10-04), same correction as /zauberer/. See docs/CHANGES-METAS.md."
+    }
   ]
 }

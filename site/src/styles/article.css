@@ -1,0 +1,102 @@
+/* Shared reading layout for blog posts (content collection) and legacy WP posts/pages (catch-all). */
+/* One reading column for head, cover, body and author box: ~68ch of body text. */
+  .bp-col { width: min(100% - 2rem, 46rem); margin-inline: auto; }
+
+  /* ── head ── */
+  .bp-head { background: var(--bg); padding-block: var(--space-4) var(--space-3); }
+  .bp-crumbs {
+    display: flex; flex-wrap: wrap; gap: 0.35rem 0.5rem; align-items: baseline;
+    font-size: 0.9rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2);
+  }
+  .bp-crumbs a { color: var(--link); }
+  .bp-title {
+    font-size: clamp(2rem, 5vw, 3.1rem); line-height: 1.12; margin: 0 0 var(--space-2);
+    text-wrap: balance; overflow-wrap: break-word;
+  }
+  .bp-meta {
+    display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem 0.75rem;
+    padding-bottom: var(--space-2); border-bottom: 2px dashed color-mix(in srgb, var(--line) 30%, transparent);
+    color: var(--ink-soft); font-weight: 700; font-size: 0.95rem;
+  }
+  .bp-cats { display: inline-flex; flex-wrap: wrap; gap: 0.4rem; }
+  .bp-cat {
+    display: inline-flex; align-items: center; min-height: 2rem; padding: 0.1rem 0.75rem;
+    border-radius: 999px; font-size: 0.85rem; font-weight: 800; text-decoration: none;
+    color: var(--ink); background: var(--surface); border: 2px solid var(--line);
+    transition: background-color 0.2s, color 0.2s;
+  }
+  @media (hover: hover) and (pointer: fine) { .bp-cat:hover { background: var(--accent-strong); color: #fff; } }
+  .bp-hero { margin: var(--space-3) 0 0; }
+  .bp-hero img {
+    display: block; width: 100%; height: auto; aspect-ratio: 1200 / 630;
+    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+
+  /* ── body: calm, highly readable article style for the rendered markdown ── */
+  .bp-body { background: var(--surface); border-top: var(--border); padding-block: var(--space-4) var(--space-5); }
+  /* overflow-wrap: long URLs/e-mails in legal texts must wrap instead of pushing the page sideways */
+  .bp-prose { font-size: 1.125rem; line-height: 1.75; color: var(--ink); max-width: 68ch; overflow-wrap: anywhere; }
+  .bp-prose > :first-child { margin-top: 0; }
+  .bp-prose p { margin: 0 0 1.25em; }
+  .bp-prose :is(h2, h3, h4) { font-family: var(--font-display); color: var(--ink); text-wrap: balance; scroll-margin-top: 6rem; }
+  .bp-prose h2 { font-size: clamp(1.55rem, 3.2vw, 2rem); line-height: 1.2; margin: 2.2em 0 0.7em; }
+  .bp-prose h3 { font-size: clamp(1.25rem, 2.4vw, 1.45rem); line-height: 1.3; margin: 1.8em 0 0.5em; }
+  .bp-prose h4 { font-size: 1.15rem; margin: 1.5em 0 0.4em; }
+  .bp-prose :is(h2, h3, h4) + :is(h2, h3, h4) { margin-top: 0.6em; }
+  .bp-prose a { color: var(--link); text-decoration: underline; text-decoration-thickness: 0.08em; text-underline-offset: 0.18em; }
+  @media (hover: hover) and (pointer: fine) { .bp-prose a:hover { text-decoration-thickness: 0.14em; } }
+  .bp-prose strong { font-weight: 800; }
+  .bp-prose :is(ul, ol) { margin: 0 0 1.4em; padding-left: 1.4em; }
+  .bp-prose li { margin: 0.4em 0; padding-left: 0.2em; }
+  .bp-prose li > p { margin: 0; }
+  .bp-prose ul > li::marker { color: var(--accent-strong); }
+  .bp-prose ol > li::marker { color: var(--accent-strong); font-family: var(--font-display); font-weight: 650; }
+  .bp-prose blockquote {
+    margin: 1.75em 0; padding: 1em 1.25em; font-size: 1.05em;
+    background: var(--bg); border: var(--border); border-radius: var(--radius-sm);
+  }
+  .bp-prose blockquote > :last-child { margin-bottom: 0; }
+  .bp-prose img {
+    display: block; width: 100%; height: auto; margin: 1.75em 0;
+    border: var(--border); border-radius: var(--radius);
+  }
+  .bp-prose hr { border: 0; border-top: 2px dashed color-mix(in srgb, var(--line) 30%, transparent); margin: 2.5em 0; }
+  .bp-prose code { font-size: 0.9em; padding: 0.1em 0.35em; background: var(--bg); border-radius: 0.3em; }
+  /* tables scroll inside themselves on phones instead of pushing the page sideways */
+  .bp-prose table {
+    display: block; max-width: 100%; overflow-x: auto; margin: 1.75em 0;
+    border-collapse: collapse; font-size: 0.95rem; line-height: 1.5;
+    border: var(--border); border-radius: var(--radius-sm);
+  }
+  .bp-prose :is(th, td) { padding: 0.65rem 0.85rem; text-align: left; vertical-align: top; border-bottom: 1px solid color-mix(in srgb, var(--line) 18%, transparent); }
+  .bp-prose thead th { background: var(--ink); color: var(--bg); font-family: var(--font-display); font-weight: 600; white-space: nowrap; }
+  .bp-prose tbody tr:nth-child(even) { background: color-mix(in srgb, var(--bg) 60%, transparent); }
+  .bp-prose tbody tr:last-child :is(th, td) { border-bottom: 0; }
+
+  /* ── author box ── */
+  .bp-author {
+    display: flex; gap: var(--space-2); align-items: flex-start;
+    margin-top: var(--space-5); padding: var(--space-3);
+    background: var(--bg); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .bp-author__icon {
+    flex: none; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; font-size: 2rem; line-height: 1;
+    background: var(--brand-yellow); border: var(--border); border-radius: 50%; rotate: -8deg;
+  }
+  .bp-author__title { font-family: var(--font-display); font-weight: 650; font-size: 1.2rem; margin-bottom: 0.4rem; }
+  .bp-author__text { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.65; }
+  .bp-author__more { font-family: var(--font-display); font-weight: 650; color: var(--accent-strong); text-decoration: none; }
+  @media (hover: hover) and (pointer: fine) { .bp-author__more:hover { text-decoration: underline; } }
+
+  .bp-services { margin-top: var(--space-4); text-align: center; }
+  .bp-services__title { font-family: var(--font-display); font-weight: 650; font-size: 1.15rem; margin-bottom: 0; }
+  .bp-services .kg-quick { justify-content: center; margin-top: var(--space-2); }
+
+  /* ── cta ── */
+  .bp-cta { background: var(--surface); border-top: var(--border); }
+  .bp-cta__text { color: var(--ink-soft); font-size: 1.08rem; }
+  .bp-cta__actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: var(--space-3); }
+
+  @media (max-width: 600px) {
+    .bp-author { flex-direction: column; }
+  }

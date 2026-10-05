@@ -1,6 +1,9 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-import GoogleReviews from '../components/GoogleReviews.astro';
+import V2Layout from '../layouts/V2Layout.astro';
+import Reviews from '../components/v2/Reviews.astro';
+import { CONTACT } from '../data/site';
+import '../styles/kids-kit.css';
+import '../styles/article.css';
 import pagesData from '../data/pages.json';
 import postsData from '../data/posts.json';
 import scrapedData from '../data/scraped-pages.json';
@@ -1086,29 +1089,54 @@ const schemas = [
   isCityPage && cityName ? { '@context': 'https://schema.org', '@type': 'Service', name: `Clown Zauberer in ${cityName}`, serviceType: 'Kinderunterhaltung', areaServed: { '@type': 'City', name: cityName }, provider: { "@id": "https://liar-entertainer.com/#business" } } : null,
   isBlogPost ? { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: seoTitle, description: rawDesc, image: heroImg.startsWith('http') ? heroImg : `https://liar-entertainer.com${heroImg}`, author: { '@type': 'Person', '@id': 'https://liar-entertainer.com/#person', name: 'Michaël Prescler', url: 'https://liar-entertainer.com/ueber-mich/' }, publisher: { '@id': 'https://liar-entertainer.com/#business' }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl }, datePublished: page.date, dateModified: page.date } : null,
 ].filter(Boolean);
+
+/**
+ * Old WPForms contact forms inside the scraped HTML posted back to their own (static) page, so every
+ * enquiry was lost. Route them to Netlify Forms (same fields, labels and texts) and drop the dead
+ * WordPress token / reCAPTCHA inputs (the hidden reCAPTCHA input also failed the a11y label audit).
+ */
+function netlifyWpForms(html: string): string {
+  let n = 0;
+  return html
+    .replace(/<form([^>]*?)\sclass="([^"]*\bwpforms-form\b[^"]*)"([^>]*)>/gi, (_m, a: string, cls: string, b: string) => {
+      const attrs = `${a} class="${cls}"${b}`
+        .replace(/\s(action|method|data-token|data-token-time|enctype)="[^"]*"/gi, '');
+      n++;
+      const name = n === 1 ? 'kontakt-alt' : `kontakt-alt-${n}`;
+      return `<form${attrs} name="${name}" method="POST" action="/kontakt/danke/" data-netlify="true"><input type="hidden" name="form-name" value="${name}" />`;
+    })
+    .replace(/<input[^>]*name="g-recaptcha-hidden"[^>]*>/gi, '')
+    .replace(/<input[^>]*name="wpforms\[(token|post_id|id)\]"[^>]*>/gi, '');
+}
+if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
 ---
 
-<BaseLayout title={seoTitle || page.title} description={rawDesc} keywords={pageKeywords || undefined} canonical={canonicalUrl} ogImage={heroImg} heroPreload={heroImg} structuredData={schemas.length > 0 ? schemas : undefined}>
+{/*
+  v2 (wave 5): legacy WordPress posts + pages (Rechtstexte, /clown/clown-zauberer/, …) in the shared
+  reading layout of the blog (styles/article.css). The old city branches and their inline
+  "design-system" script are gone: city URLs have their own routes since wave 3, so they never ran.
+*/}
+<V2Layout title={seoTitle || page.title} description={rawDesc} keywords={pageKeywords || undefined} canonical={canonicalUrl} ogImage={heroImg} heroPreload={heroImg} structuredData={schemas.length > 0 ? schemas : undefined}>
 
 {scrapedContent ? (
   <>
     {isBlogPost && (
-      <section class="bg-white pt-8 pb-2">
-        <div class="max-w-[750px] mx-auto px-4">
-          <nav class="text-sm text-[#595959] mb-4">
-            <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
-            <span class="mx-1">»</span>
-            <a href="/blog/" class="text-[#d7393e] hover:underline">Blog</a>
-            <span class="mx-1">»</span>
+      <section class="bp-head">
+        <div class="bp-col">
+          <nav class="bp-crumbs" aria-label="Brotkrumen">
+            <a href="/">Clown</a>
+            <span>»</span>
+            <a href="/blog/">Blog</a>
+            <span>»</span>
             <span>{page.title}</span>
           </nav>
-          <h1 class="text-[#1f2025] font-extrabold text-3xl sm:text-4xl leading-tight mb-3">{page.title}</h1>
-          <div class="flex flex-wrap items-center gap-3 text-sm text-[#595959] mb-6 pb-4 border-b border-gray-100">
+          <h1 class="bp-title">{page.title}</h1>
+          <div class="bp-meta">
             <time>{new Date(page.date).toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' })}</time>
             {page.categories && page.categories.length > 0 && (
-              <span class="flex flex-wrap gap-1">
-                {page.categories.map((c: {slug: string; name: string}) => (
-                  <span class="bg-[#f4f4f4] text-[#555] px-2 py-0.5 rounded text-xs">{c.name}</span>
+              <span class="bp-cats">
+                {page.categories.map((c: { slug: string; name: string }) => (
+                  <span class="bp-cat">{c.name}</span>
                 ))}
               </span>
             )}
@@ -1117,264 +1145,126 @@ const schemas = [
       </section>
     )}
 
-    {isCityPage && displayCity && heroTitle && (
-      <>
-        {/* Hero-Sektion */}
-        <section class="relative py-36 overflow-hidden">
-          <div class="absolute inset-0 bg-cover" style={`background-image: url('${heroImg}'); background-position: center 20%;`} />
-          <div class="absolute inset-0 bg-black/50" />
-          <div class="relative max-w-[750px] mx-auto px-4 text-center">
-            <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4 backdrop-blur-sm">
-              <span>📍</span> {displayCity}
+    <section class:list={['bp-body', { 'bp-body--page': !isBlogPost }]}>
+      <div class="bp-col">
+        <div class="bp-prose wp-scraped">
+          <Fragment set:html={scrapedContent} />
+        </div>
+
+        {isBlogPost && (
+          <nav class="bp-services" aria-labelledby="bp-services-title">
+            <p class="bp-services__title" id="bp-services-title">Unsere Leistungen</p>
+            <div class="kg-quick">
+              <a href="/clown/clownshow/">🤡 Clownshow</a>
+              <a href="/zauberer/">🎩 Zauberer</a>
+              <a href="/kinderzauberer/">✨ Kinderzauberer</a>
+              <a href="/kindergeburtstag/">🎂 Zauberer für Kindergeburtstag</a>
+              <a href="/zauberer/zaubershow/">🪄 Zaubershow</a>
+              <a href="/galerie/">📸 Galerie</a>
             </div>
-            <h1 class="text-white font-extrabold text-3xl sm:text-4xl leading-tight mb-3">{heroTitle}</h1>
-            <p class="text-gray-200 text-base leading-relaxed max-w-xl mx-auto">{heroSubtitle}</p>
-          </div>
-        </section>
-        {/* Breadcrumb */}
-        <section class="bg-white pt-4 pb-0">
-          <div class="max-w-6xl mx-auto px-4">
-            <nav class="text-sm text-[#595959]">
-              <a href="/" class="text-[#d7393e] hover:underline">Clown</a>
-              <span class="mx-1">»</span>
-              <a href={heroBreadcrumbParent.href} class="text-[#d7393e] hover:underline">{heroBreadcrumbParent.label}</a>
-              <span class="mx-1">»</span>
-              <span>{heroTitle}</span>
-            </nav>
-          </div>
-        </section>
-      </>
-    )}
-
-    <div class={`wp-scraped${isCityPage ? ' city-page' : ''}`}>
-      <Fragment set:html={scrapedContent} />
-    </div>
-
-    {/* Removed: legacy "City-Page Design-System Enforcement" inline script (~56 KB). It had a syntax error and never ran on the live site (verified 2026-10-02), so dropping it keeps rendered output identical. See docs/migration-notes.md. */}
-
-    {/* NEUES Design-System Script — überschreibt alle vorherigen Fixes */}
-    <script is:inline>
-        (function() {
-        if (!document.querySelector('.city-page')) return;
-
-        window.addEventListener('load', () => {
-          const cp = document.querySelector('.city-page');
-          if (!cp) return;
-
-          // === 1. WordPress-Waves verstecken ===
-          cp.querySelectorAll('.top, .bottom, .rotate').forEach(el => {
-            el.style.display = 'none';
-          });
-
-          // === 2. Leere Sektionen entfernen ===
-          cp.querySelectorAll('section, .alignfull, .wp-block-themeisle-blocks-advanced-columns, .wp-block-columns').forEach(s => {
-            if (s.closest('.price-grid') || s.closest('[class*="stats-banner"]')) return;
-            const text = s.textContent.trim();
-            const hasImg = s.querySelector('img');
-            const hasVid = s.querySelector('iframe');
-            const hasPG = s.querySelector('.price-grid');
-            if (text.length < 15 && !hasImg && !hasVid && !hasPG && s.offsetHeight > 30) {
-              s.style.display = 'none';
-            }
-          });
-
-          // === 3. Max 2 farbige Sektionen — Rest wird weiß ===
-          const coloredSections = [];
-          cp.querySelectorAll('section, .alignfull, div').forEach(s => {
-            if (s.closest('[class*="stats-banner"]')) return;
-            if (s.offsetHeight < 50 || s.offsetWidth < 200) return;
-            // Skip wrapper sections that contain child sections (they wrap entire page content)
-            // Also strip their gradients so they don't bleed through
-            const childSections = s.querySelectorAll('section, .alignfull');
-            if (childSections.length > 1) {
-              const bg = getComputedStyle(s).backgroundImage || '';
-              if (bg.includes('gradient')) {
-                s.style.setProperty('background-image', 'none', 'important');
-                s.style.setProperty('background-color', 'transparent', 'important');
-              }
-              return;
-            }
-            const bg = getComputedStyle(s).backgroundImage || '';
-            const bgC = getComputedStyle(s).backgroundColor || '';
-            const isColored = bg.includes('gradient') ||
-              (bgC !== 'rgba(0, 0, 0, 0)' && bgC !== 'rgb(255, 255, 255)' && bgC !== 'rgb(249, 250, 251)');
-            if (isColored && s.textContent.trim().length > 20) {
-              // Prüfe: ist es ein erlaubter farbiger Bereich?
-              const isRed = bg.includes('215, 57') || bg.includes('d7393e');
-              const isBlue = bg.includes('59, 85') || bg.includes('3b55d5');
-              const isDark = bg.includes('31, 32') || bg.includes('1f2025');
-              if (isRed || isBlue || isDark) {
-                // Skip if already inside a found colored section
-                const isNested = coloredSections.some(cs => cs.el.contains(s) && cs.el !== s);
-                if (!isNested) {
-                  coloredSections.push({ el: s, color: isRed ? 'red' : isBlue ? 'blue' : 'dark' });
-                }
-              } else {
-                // Unerlaubte Farbe → weiß machen
-                s.style.setProperty('background', '#fff', 'important');
-                s.querySelectorAll('h2, h3, h4, p, span, strong, li').forEach(t => {
-                  if (getComputedStyle(t).color === 'rgb(255, 255, 255)') {
-                    t.style.setProperty('color', '#1f2025', 'important');
-                  }
-                });
-                s.querySelectorAll('a').forEach(a => a.style.setProperty('color', '#d7393e', 'important'));
-              }
-            }
-          });
-
-          // Wenn mehr als 2 farbige Sektionen: überschüssige weiß machen
-          if (coloredSections.length > 2) {
-            // Behalte die ersten 2, mache den Rest weiß
-            coloredSections.slice(2).forEach(({ el }) => {
-              el.style.setProperty('background', '#fff', 'important');
-              el.querySelectorAll('h2, h3, h4, p, span, strong, li').forEach(t => {
-                if (getComputedStyle(t).color === 'rgb(255, 255, 255)') {
-                  t.style.setProperty('color', '#1f2025', 'important');
-                }
-              });
-              el.querySelectorAll('a').forEach(a => a.style.setProperty('color', '#d7393e', 'important'));
-            });
-          }
-
-          // === 4. Verbleibende farbige Sektionen → Pastell (keine Waves mehr) ===
-          const pastelBg = { red: '#fdf2f2', blue: '#eff4ff', dark: '#eff4ff' };
-          const pastelBorder = { red: '#f0c4c4', blue: '#c5d3f7', dark: '#c5d3f7' };
-          coloredSections.forEach(({ el, color }) => {
-            if (el.closest('[class*="stats-banner"]')) return;
-            // Entferne existierende Waves (WordPress-Klassen UND dynamisch erstellte)
-            el.querySelectorAll('.top, .bottom').forEach(w => w.remove());
-            for (const child of [...el.children]) {
-              if (child.querySelector && child.querySelector('svg[viewBox*="1440"]') && child.children.length === 1) {
-                child.remove();
-              }
-            }
-            // Pastell-Hintergrund + dunkle Texte (Kontrast ≥ 9:1)
-            el.style.setProperty('background', pastelBg[color] || '#eff4ff', 'important');
-            el.style.setProperty('border-top', '1px solid ' + (pastelBorder[color] || '#c5d3f7'), 'important');
-            el.style.setProperty('border-bottom', '1px solid ' + (pastelBorder[color] || '#c5d3f7'), 'important');
-            el.querySelectorAll('h2, h3, h4, p, span, strong, li, div').forEach(t => {
-              const c = getComputedStyle(t).color;
-              if (c === 'rgb(255, 255, 255)' || c === 'rgb(219, 234, 254)' || c === 'rgb(254, 226, 226)') {
-                t.style.setProperty('color', '#1f2025', 'important');
-              }
-            });
-            el.querySelectorAll('a').forEach(a => {
-              const bg = getComputedStyle(a).backgroundColor;
-              const isButton = bg && bg !== 'rgba(0, 0, 0, 0)' && bg !== 'transparent';
-              if (!isButton) a.style.setProperty('color', '#d7393e', 'important');
-            });
-          });
-
-          // === 5. Preis-Karten: Immer 3 Spalten ===
-          cp.querySelectorAll('.price-grid').forEach(pg => {
-            pg.style.cssText = 'display:grid;grid-template-columns:repeat(3,1fr);gap:1.25rem;max-width:1000px;margin:1rem auto 1.5rem;';
-            // Entferne Extra-Cards über 3
-            const cards = pg.querySelectorAll('.price-card');
-            if (cards.length > 3) {
-              for (let i = 3; i < cards.length; i++) cards[i].remove();
-            }
-          });
-
-          // === 6. Overlay-Divs minimieren ===
-          cp.querySelectorAll('.wp-block-themeisle-blocks-advanced-columns-overlay').forEach(o => {
-            o.style.cssText = 'max-height:0;overflow:hidden;padding:0;';
-          });
-        });
-        })();
-      </script>
-
-    {/* Service-Links für Blog-Posts */}
-    {isBlogPost && (
-      <section class="py-10 bg-[#eff4ff] border-y border-[#c5d3f7]">
-        <div class="max-w-3xl mx-auto px-4 text-center">
-          <p class="text-[#3b55d5] font-bold text-sm uppercase tracking-widest mb-4">Unsere Leistungen</p>
-          <div class="flex flex-wrap justify-center gap-3">
-            <a href="/clown/clownshow/" class="bg-white px-5 py-3 rounded-lg border border-[#f0c4c4] text-[#d7393e] hover:underline font-medium text-sm">🤡 Clownshow</a>
-            <a href="/zauberer/" class="bg-white px-5 py-3 rounded-lg border border-[#c5d3f7] text-[#3b55d5] hover:underline font-medium text-sm">🎩 Zauberer</a>
-            <a href="/kinderzauberer/" class="bg-white px-5 py-3 rounded-lg border border-[#f0c4c4] text-[#d7393e] hover:underline font-medium text-sm">✨ Kinderzauberer</a>
-            <a href="/kindergeburtstag/" class="bg-white px-5 py-3 rounded-lg border border-[#c5d3f7] text-[#3b55d5] hover:underline font-medium text-sm">🎂 Zauberer für Kindergeburtstag</a>
-            <a href="/zauberer/zaubershow/" class="bg-white px-5 py-3 rounded-lg border border-[#f0c4c4] text-[#d7393e] hover:underline font-medium text-sm">🪄 Zaubershow</a>
-            <a href="/galerie/" class="bg-white px-5 py-3 rounded-lg border border-[#c5d3f7] text-[#3b55d5] hover:underline font-medium text-sm">📸 Galerie</a>
-          </div>
-        </div>
-      </section>
-    )}
-
-    {/* Google Reviews – nach dem Content wie in der Referenz */}
-    <GoogleReviews />
-
-    {/* CTA-Sektion im Referenz-Stil */}
-    {isCityPage ? (
-      <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-14">
-        <div class="max-w-3xl mx-auto px-4 text-center">
-          <p class="font-bold text-[#d7393e] text-sm uppercase tracking-widest mb-2">EINFACH KONTAKT AUFNEHMEN</p>
-          <h2 class="text-[#1f2025] font-bold text-2xl sm:text-3xl mb-6">{cityName ? `Clown Zauberer buchen in ${displayCity}` : 'Jetzt buchen'}</h2>
-          <p class="text-[#374151] mb-6 text-sm leading-relaxed max-w-xl mx-auto">
-            Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben.
-          </p>
-          <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
-            Kontaktformular
-          </a>
-        </div>
-      </section>
-    ) : (
-      <section class="pb-12 bg-white">
-        <div class="max-w-[750px] mx-auto px-4">
-          <div class="mt-10 bg-[#fdf2f2] border border-[#f0c4c4] rounded-2xl p-8 text-center">
-            <h2 class="text-[#1f2025] font-bold text-xl mb-3">Jetzt buchen</h2>
-            <p class="text-[#595959] mb-5">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
-            <div class="flex flex-col sm:flex-row gap-3 justify-center">
-              <a href="/kontakt/" class="inline-flex items-center justify-center gap-2 bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">Kontakt aufnehmen</a>
-              <a href="tel:+491721517578" class="inline-flex items-center justify-center bg-white border border-gray-200 text-[#1f2025] font-bold px-8 py-3 rounded hover:bg-gray-50 transition-colors">+49 172 1517578</a>
-            </div>
-          </div>
-        </div>
-      </section>
-    )}
-
-    {/* Kontakt-Info-Zeile */}
-    {isCityPage && (
-      <section class="bg-white py-10 border-t border-[#f0c4c4]">
-        <div class="max-w-3xl mx-auto px-4 text-center">
-          <p class="font-bold text-[#1f2025] text-lg mb-2">Clown Zauberer LIAR</p>
-          <p class="text-[#374151] mb-2">Anschrift : Beethovenstr. 15, 45966 Gladbeck</p>
-          <p class="text-[#374151] mb-4">
-            TEL : <a href="tel:+491721517578" class="hover:text-[#d7393e] transition-colors">0172 – 1517578</a>
-            {' '}// Email :
-            <a href="mailto:info@liar-entertainer.com" class="hover:text-[#d7393e] transition-colors">info@liar-entertainer.com</a>
-          </p>
-        </div>
-      </section>
-    )}
+          </nav>
+        )}
+      </div>
+    </section>
   </>
 ) : (
   <>
-    <section class="relative py-36 overflow-hidden">
-      <div class="absolute inset-0 bg-cover" style={`background-image: url('${heroImg}'); background-position: center 20%;`} />
-      <div class="absolute inset-0 bg-black/50" />
-      <div class="relative max-w-[750px] mx-auto px-4 text-center">
-        {isCityPage && cityName && <div class="inline-flex items-center gap-2 bg-white/20 text-white rounded-full px-4 py-1.5 text-sm font-medium mb-4">📍 {cityName}</div>}
-        <h1 class="text-white font-bold text-3xl sm:text-4xl leading-tight mb-3">{seoTitle || page.title}</h1>
-        {rawDesc && <p class="text-gray-200 text-base leading-relaxed">{rawDesc}</p>}
+    <section class="bp-head">
+      <div class="bp-col">
+        <h1 class="bp-title">{seoTitle || page.title}</h1>
+        {rawDesc && <p class="bp-lead">{rawDesc}</p>}
       </div>
     </section>
-    <section class="pt-4 pb-12 bg-white">
-      <div class="max-w-[750px] mx-auto px-4">
-        {fixedPageContent && <div class="wp-content"><Fragment set:html={fixedPageContent} /></div>}
-      </div>
-    </section>
-    <GoogleReviews />
-    <section class="bg-[#fdf2f2] border-y border-[#f0c4c4] py-10">
-      <div class="max-w-3xl mx-auto px-4 text-center">
-        <h2 class="text-[#1f2025] font-bold text-xl mb-3">{isCityPage && cityName ? `Clown Zauberer buchen in ${cityName}` : 'Jetzt buchen'}</h2>
-        <p class="text-[#595959] mb-5">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
-        <div class="flex flex-col sm:flex-row gap-3 justify-center">
-          <a href="/kontakt/" class="inline-flex items-center justify-center gap-2 bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">Kontakt aufnehmen</a>
-          <a href="tel:+491721517578" class="inline-flex items-center justify-center bg-white border border-gray-200 text-[#1f2025] font-bold px-8 py-3 rounded hover:bg-gray-50 transition-colors">+49 172 1517578</a>
-        </div>
+    <section class="bp-body">
+      <div class="bp-col">
+        {fixedPageContent && <div class="bp-prose wp-content"><Fragment set:html={fixedPageContent} /></div>}
       </div>
     </section>
   </>
 )}
 
-</BaseLayout>
+  <Reviews />
+
+  <section class="bp-cta">
+    <div class="container kg-narrow kg-center">
+      <h2 class="kg-h2">Jetzt buchen</h2>
+      <p class="bp-cta__text">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
+      <div class="bp-cta__actions">
+        <a href="/kontakt/" class="btn btn--primary" data-confetti>Kontakt aufnehmen</a>
+        <a href={CONTACT.phoneHref} class="btn btn--ghost">+49 172 1517578</a>
+      </div>
+    </div>
+  </section>
+</V2Layout>
+
+<style>
+  .bp-body--page { border-top: 0; }
+  .bp-lead { color: var(--ink-soft); font-size: 1.15rem; max-width: 60ch; }
+
+  /* ── WordPress/Neve markup inside the scraped body ── */
+  .wp-scraped :global(:is(.container, .row, .col, article, .nv-content-wrap, .nv-single-post-wrap, .nv-single-page-wrap)) {
+    display: block; width: auto; max-width: none; margin: 0; padding: 0;
+  }
+  .wp-scraped :global(.nv-thumb-wrap:empty) { display: none; }
+  /* the theme's own title block repeats on pages: keep it, but calm */
+  .wp-scraped :global(.nv-page-title-wrap) { margin-bottom: var(--space-3); }
+  .wp-scraped :global(.nv-page-title h1) { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 0.4em; }
+  .wp-scraped :global(.nv--yoast-breadcrumb) { font-size: 0.9rem; font-weight: 700; color: var(--ink-soft); }
+  .wp-scraped :global(.nv-meta-list) {
+    display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; list-style: none; padding: 0; margin: var(--space-3) 0 0;
+    color: var(--ink-soft); font-size: 0.9rem; font-weight: 700;
+  }
+  .wp-scraped :global(.nv-meta-list li) { margin: 0; padding: 0; }
+  .wp-scraped :global(.nv-meta-list li::marker) { content: none; }
+  .wp-scraped :global(.nv-tags-list) { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-top: var(--space-3); font-weight: 700; }
+  .wp-scraped :global(.nv-tags-list a) {
+    display: inline-flex; align-items: center; min-height: 2rem; padding: 0.1rem 0.75rem; border-radius: 999px;
+    border: 2px solid var(--line); background: var(--bg); color: var(--ink); text-decoration: none; font-size: 0.85rem;
+  }
+  .wp-scraped :global(.nv-related-posts) {
+    margin-top: var(--space-5); padding: var(--space-3); background: var(--bg);
+    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+  }
+  .wp-scraped :global(.nv-related-posts .section-title h2) { margin-top: 0; }
+  .wp-scraped :global(.nv-related-posts .posts-wrapper) {
+    display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr));
+  }
+  .wp-scraped :global(.nv-related-posts .related-post) { font-size: 0.98rem; line-height: 1.45; }
+  .wp-scraped :global(.nv-related-posts :is(h3, h4)) { font-size: 1.05rem; margin: 0 0 0.3em; }
+  .wp-scraped :global(.nv-related-posts img) { margin: 0 0 0.5rem; aspect-ratio: 4 / 3; object-fit: cover; }
+  /* Gutenberg layout blocks */
+  .wp-scraped :global(:is(.wp-block-columns, .wp-block-group.is-layout-flex, .wp-block-buttons)) { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+  .wp-scraped :global(.wp-block-column) { flex: 1 1 16rem; min-width: 0; }
+  /* theme decorations: overlay tints + curved section separators (their fill var no longer exists → black blobs) */
+  .wp-scraped :global(:is(.wp-block-themeisle-blocks-advanced-columns-overlay, .wp-block-themeisle-blocks-advanced-columns-separators)) { display: none; }
+  .wp-scraped :global(.has-text-align-center) { text-align: center; }
+  .wp-scraped :global(.wp-block-button__link) {
+    display: inline-flex; align-items: center; min-height: 3rem; padding: 0.7rem 1.4rem; border-radius: 999px;
+    background: var(--accent-strong); color: var(--accent-ink); border: var(--border); font-family: var(--font-display);
+    font-weight: 650; text-decoration: none; box-shadow: 3px 3px 0 var(--line);
+  }
+  .wp-scraped :global(iframe) { max-width: 100%; }
+  /* themeisle counters: number + label were two inline spans ("400Shows im Jahr") */
+  .wp-scraped :global(div:has(> span.wp-block-themeisle-blocks-advanced-heading + span.wp-block-themeisle-blocks-advanced-heading)) {
+    display: flex; align-items: baseline; gap: 0.5rem; margin: 0.4rem 0;
+  }
+  .wp-scraped :global(div:has(> span.wp-block-themeisle-blocks-advanced-heading + span.wp-block-themeisle-blocks-advanced-heading) > span:first-of-type) {
+    font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--accent-strong);
+  }
+  /* themeisle accordion → the kit's FAQ look */
+  .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item) {
+    margin: 0 0 0.75rem; background: var(--surface); border: var(--border); border-radius: var(--radius-sm);
+    box-shadow: 3px 3px 0 var(--line);
+  }
+  .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item__title) {
+    display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 3rem;
+    padding: 0.75rem 1rem; cursor: pointer; font-weight: 800; list-style: none;
+  }
+  .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item__title::-webkit-details-marker) { display: none; }
+  .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item__title::after) {
+    content: '+'; flex: none; display: grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%;
+    background: var(--brand-yellow); border: 2px solid var(--line); font-family: var(--font-display); transition: rotate 0.2s var(--ease-out);
+  }
+  .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item[open] > .wp-block-themeisle-blocks-accordion-item__title::after) { rotate: 45deg; }
+  .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item__content) { padding: 0 1rem 1rem; }
+</style>

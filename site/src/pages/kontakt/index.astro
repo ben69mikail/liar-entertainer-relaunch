@@ -1,323 +1,385 @@
 ---
 import { Image } from 'astro:assets';
-import BaseLayout from '../../layouts/BaseLayout.astro';
-import HeroStage from '../../components/HeroStage.astro';
-import GoogleReviews from '../../components/GoogleReviews.astro';
+import V2Layout from '../../layouts/V2Layout.astro';
+import Reviews from '../../components/v2/Reviews.astro';
+import ReviewBadge from '../../components/v2/ReviewBadge.astro';
+import Bunting from '../../components/v2/kids/Bunting.astro';
+import { CONTACT } from '../../data/site';
 import heroImage from '../../assets/images/general/clown-zauberer-liar-kontaktformular.jpg';
+import '../../styles/kids-kit.css';
+
+const trust = [
+  '⭐ 370+ Bewertungen – durchschnittlich 5/5 Sterne',
+  '✅ 15+ Jahre Erfahrung als Profi-Entertainer',
+  '🎉 Über 400 Shows jährlich in NRW',
+  '🔒 Versichert & mit polizeilichem Führungszeugnis',
+  '📞 Persönliche Beratung und schnelle Antwort',
+];
+
+const services = [
+  { href: '/kindergeburtstag/', label: '🎂 Zauberer für Kindergeburtstag' },
+  { href: '/zauberer/zaubershow/', label: '🎩 Zaubershow' },
+  { href: '/clown/clownshow/', label: '🤡 Clownshow' },
+  { href: '/clown/ballonmodellage/', label: '🎈 Ballonmodellage' },
+  { href: '/clown/glitzer-tattoo/', label: '✨ Glitzer Tattoos' },
+  { href: '/clown/walk-act/', label: '🚶 Walk-Act' },
+  { href: '/zauberer/tisch-zauberer/', label: '🃏 Tischzauberer' },
+  { href: '/galerie/', label: '📸 Galerie' },
+];
 ---
 
-<BaseLayout
+<V2Layout
   title="Kontakt | Clown Zauberer LIAR | Jetzt anfragen"
   description="Kontaktieren Sie Clown Zauberer LIAR ✓ Unverbindliche Anfrage ✓ Antwort in 24h ✓ Tel: 0172 1517578 ✓ Aus Gladbeck für ganz NRW ✓ Jetzt anfragen!"
   keywords="Clown Zauberer buchen, Kontakt Zauberer NRW, Anfrage Clown, Zauberer NRW Kontakt"
   canonical="https://liar-entertainer.com/kontakt/"
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kontakt', url: '/kontakt/' }]}
 >
-  <!-- Hero -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 540px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-    <Image
-      src={heroImage}
-      alt="Kontakt Clown Zauberer LIAR"
-      class="absolute inset-0 w-full h-full object-cover object-top"
-      style="object-position: 50% top"
-      loading="eager"
-      fetchpriority="high"
-      widths={[400, 800, 1200]}
-      sizes="(max-width: 1152px) 100vw, 1120px"
-    />
-    <div class="absolute inset-0 bg-black/40"></div>
-    <div class="relative flex items-end justify-center pb-12 pt-28" style="min-height: 540px;">
-      <div class="max-w-[750px] mx-auto px-4 text-center">
-        <h1 class="text-white font-extrabold text-3xl sm:text-4xl mb-3 drop-shadow-lg">Einfach und unverbindlich kontaktieren</h1>
-        <p class="text-gray-100 text-base drop-shadow">Stellen Sie Ihre Anfrage – wir melden uns innerhalb von 24 Stunden!</p>
+  <!-- ── Hero: compact, so the form is one thumb-scroll away. No reveal here (LCP). ── -->
+  <section class="kg-hero kt-hero">
+    <Bunting />
+    <div class="container kg-hero__grid">
+      <div class="kg-hero__copy">
+        <ReviewBadge />
+        <h1 class="kg-hero__title kt-hero__title" data-letters>Einfach und unverbindlich kontaktieren</h1>
+        <p class="kt-hero__lead">Stellen Sie Ihre Anfrage – wir melden uns innerhalb von 24 Stunden!</p>
+        <div class="kg-hero__actions">
+          <a class="btn btn--primary" href="#anfrage" data-confetti>Zum Anfrageformular</a>
+          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
+        </div>
       </div>
-    </div>
-  </div>
+      <figure class="kg-hero__photo kt-hero__photo">
+        <Image
+          src={heroImage}
+          alt="Kontakt Clown Zauberer LIAR"
+          widths={[400, 600, 820]}
+          sizes="(max-width: 900px) 92vw, 540px"
+          loading="eager"
+          fetchpriority="high"
+          style="object-position: 52% 25%"
+        />
+        <span class="kg-sticker kt-sticker" aria-hidden="true"><span>Antwort in</span><strong>24 h</strong></span>
+      </figure>
     </div>
   </section>
 
-  <!-- Content -->
-  <section class="py-14 bg-white">
-    <div class="max-w-[960px] mx-auto px-4">
-      <div class="max-w-[760px] mb-10 text-[#374151] leading-relaxed">
-        <p class="mb-3">
-          Sie suchen einen <strong>Kinderzauberer für den Kindergeburtstag</strong> in Gladbeck oder in der
-          Umgebung? Schreiben Sie mir einfach kurz, worum es geht – meistens antworte ich noch am selben Tag,
-          spätestens innerhalb von 24 Stunden.
-        </p>
-        <p>
-          Nach Gladbeck komme ich ohne Anfahrtskosten. Im Umkreis von rund 20 Kilometern bin ich ohnehin
-          regelmäßig unterwegs – unter anderem in
-          <a href="/kinderzauberer/kinderzauberer-in-bottrop/" class="text-[#d7393e] hover:underline">Bottrop</a>,
-          <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/" class="text-[#d7393e] hover:underline">Gelsenkirchen</a>,
-          <a href="/kinderzauberer/kinderzauberer-in-essen/" class="text-[#d7393e] hover:underline">Essen</a> und
-          <a href="/kinderzauberer/kinderzauberer-in-oberhausen/" class="text-[#d7393e] hover:underline">Oberhausen</a>.
-          Für andere Anlässe – Kita-Fest, Firmenfeier oder Stadtfest – nutzen Sie gern dasselbe Formular.
-        </p>
-      </div>
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-
-        <!-- Contact Form (Static HTML form → Netlify/Formspree-compatible) -->
-        <div>
-          <h2 class="text-[#1f2025] font-bold text-2xl mb-6">Anfrage senden</h2>
-          <!-- Fehlermeldungen -->
-          <div id="form-error" class="hidden bg-red-50 border border-red-200 text-red-700 rounded-lg p-4 mb-4 text-sm">
-            <span id="error-text"></span>
-          </div>
-          <script>
-            (function() {
-              const params = new URLSearchParams(window.location.search);
-              const fehler = params.get('fehler');
-              if (fehler) {
-                const errorEl = document.getElementById('form-error');
-                const textEl = document.getElementById('error-text');
-                if (errorEl && textEl) {
-                  errorEl.classList.remove('hidden');
-                  const messages = {
-                    '1': 'Bitte füllen Sie alle Pflichtfelder korrekt aus.',
-                    '2': 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.',
-                    'captcha': 'Die Antwort auf die Mathe-Frage war leider falsch. Bitte versuchen Sie es erneut.',
-                    'timeout': 'Das Formular war zu lange offen. Bitte laden Sie die Seite neu und versuchen Sie es erneut.'
-                  };
-                  textEl.textContent = messages[fehler] || 'Ein unbekannter Fehler ist aufgetreten.';
-                }
-              }
-            })();
-          </script>
-          <form
-            method="POST"
-            action="/contact.php"
-            class="space-y-4"
-          >
-            <!-- Honeypot-Feld gegen Spam (versteckt) -->
-            <div style="display:none" aria-hidden="true">
-              <label for="website">Website leer lassen</label>
-              <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
-            </div>
-            <div>
-              <label for="name" class="block text-sm font-medium text-[#1f2025] mb-1">Ihr Name *</label>
-              <input
-                type="text"
-                id="name"
-                name="name"
-                required
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] focus:ring-1 focus:ring-[#d7393e]"
-                placeholder="Max Mustermann"
-              />
-            </div>
-            <div>
-              <label for="email" class="block text-sm font-medium text-[#1f2025] mb-1">E-Mail *</label>
-              <input
-                type="email"
-                id="email"
-                name="email"
-                required
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e]"
-                placeholder="max@example.de"
-              />
-            </div>
-            <div>
-              <label for="phone" class="block text-sm font-medium text-[#1f2025] mb-1">Telefon</label>
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e]"
-                placeholder="+49 ..."
-              />
-            </div>
-            <div>
-              <label for="event-date" class="block text-sm font-medium text-[#1f2025] mb-1">Veranstaltungsdatum</label>
-              <input
-                type="date"
-                id="event-date"
-                name="event-date"
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e]"
-              />
-            </div>
-            <div>
-              <label for="event-time" class="block text-sm font-medium text-[#1f2025] mb-1">Gewünschte Uhrzeit</label>
-              <input
-                type="time"
-                id="event-time"
-                name="event-time"
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e]"
-              />
-            </div>
-            <div>
-              <label for="event-city" class="block text-sm font-medium text-[#1f2025] mb-1">Ort / Stadt *</label>
-              <input
-                type="text"
-                id="event-city"
-                name="event-city"
-                required
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] focus:ring-1 focus:ring-[#d7393e]"
-                placeholder="z.B. Essen, Dortmund, Bochum..."
-              />
-            </div>
-            <div>
-              <label for="event-type" class="block text-sm font-medium text-[#1f2025] mb-1">Art der Veranstaltung</label>
-              <select
-                id="event-type"
-                name="event-type"
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] bg-white"
-              >
-                <option value="">Bitte wählen...</option>
-                <option>Kindergeburtstag</option>
-                <option>Firmenfeier</option>
-                <option>Stadtfest / Open Air</option>
-                <option>Kindergarten / Kita</option>
-                <option>Schule</option>
-                <option>Karneval</option>
-                <option>Sonstiges</option>
-              </select>
-            </div>
-            <div>
-              <label for="message" class="block text-sm font-medium text-[#1f2025] mb-1">Ihre Nachricht</label>
-              <textarea
-                id="message"
-                name="message"
-                rows="5"
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] resize-y"
-                placeholder="Erzählen Sie mir von Ihrem Event..."
-              ></textarea>
-            </div>
-            <!-- CAPTCHA: Mathe-Frage (DSGVO-konform, keine Drittanbieter) -->
-            <div>
-              <label for="captcha" class="block text-sm font-medium text-[#1f2025] mb-1">
-                Spam-Schutz: <span id="captcha-question" class="font-bold text-[#d7393e]"></span> *
-              </label>
-              <input
-                type="number"
-                id="captcha"
-                name="captcha"
-                required
-                class="w-full border border-gray-300 rounded px-4 py-2.5 text-sm focus:outline-none focus:border-[#d7393e] focus:ring-1 focus:ring-[#d7393e]"
-                placeholder="Ihre Antwort"
-                autocomplete="off"
-              />
-              <input type="hidden" id="captcha-hash" name="captcha_hash" />
-              <input type="hidden" id="form-token" name="form_token" />
-            </div>
-            <button
-              type="submit"
-              class="w-full bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold py-3 px-6 rounded transition-colors"
-            >
-              Anfrage absenden →
-            </button>
-          </form>
-        </div>
-
-        <!-- Contact Info -->
-        <div>
-          <h2 class="text-[#1f2025] font-bold text-2xl mb-6">Direkt Kontakt</h2>
-          <div class="space-y-6">
-            <div class="flex items-start gap-4">
-              <div class="w-10 h-10 bg-[#d7393e] rounded-full flex items-center justify-center text-white flex-shrink-0">📞</div>
-              <div>
-                <div class="font-bold text-[#1f2025] mb-0.5">Telefon</div>
-                <a href="tel:+491721517578" class="text-[#d7393e] hover:underline text-lg font-semibold">
-                  +49 172 1517578
-                </a>
-                <p class="text-[#595959] text-sm mt-0.5">Mo–Sa 8:00 – 20:00 Uhr</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div class="w-10 h-10 bg-[#d7393e] rounded-full flex items-center justify-center text-white flex-shrink-0">✉</div>
-              <div>
-                <div class="font-bold text-[#1f2025] mb-0.5">E-Mail</div>
-                <a href="mailto:info@liar-entertainer.com" class="text-[#d7393e] hover:underline">
-                  info@liar-entertainer.com
-                </a>
-                <p class="text-[#595959] text-sm mt-0.5">Antwort innerhalb 24 Stunden</p>
-              </div>
-            </div>
-            <div class="flex items-start gap-4">
-              <div class="w-10 h-10 bg-[#d7393e] rounded-full flex items-center justify-center text-white flex-shrink-0">📍</div>
-              <div>
-                <div class="font-bold text-[#1f2025] mb-0.5">Adresse</div>
-                <address class="not-italic text-[#374151] text-sm">
-                  Beethovenstr. 15<br />
-                  45966 Gladbeck<br />
-                  Nordrhein-Westfalen
-                </address>
-              </div>
-            </div>
-          </div>
-
-          <!-- Trust signals -->
-          <div class="mt-8 bg-[#fdf2f2] border border-[#f0c4c4] rounded-lg p-6 card-hover reveal">
-            <h3 class="font-bold text-[#1f2025] mb-3">Warum Clown Zauberer LIAR?</h3>
-            <ul class="space-y-2 text-sm text-[#374151]">
-              {['⭐ 370+ Bewertungen – durchschnittlich 5/5 Sterne',
-                '✅ 15+ Jahre Erfahrung als Profi-Entertainer',
-                '🎉 Über 400 Shows jährlich in NRW',
-                '🔒 Versichert & mit polizeilichem Führungszeugnis',
-                '📞 Persönliche Beratung und schnelle Antwort'].map(t => (
-                <li>{t}</li>
-              ))}
-            </ul>
-          </div>
-
-          <!-- Service-Links -->
-          <div class="mt-6">
-            <h3 class="font-bold text-[#1f2025] mb-3">Unsere Leistungen</h3>
-            <div class="grid grid-cols-2 gap-2 text-sm">
-              <a href="/kindergeburtstag/" class="text-[#d7393e] hover:underline">🎂 Zauberer für Kindergeburtstag</a>
-              <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">🎩 Zaubershow</a>
-              <a href="/clown/clownshow/" class="text-[#d7393e] hover:underline">🤡 Clownshow</a>
-              <a href="/clown/ballonmodellage/" class="text-[#d7393e] hover:underline">🎈 Ballonmodellage</a>
-              <a href="/clown/glitzer-tattoo/" class="text-[#d7393e] hover:underline">✨ Glitzer Tattoos</a>
-              <a href="/clown/walk-act/" class="text-[#d7393e] hover:underline">🚶 Walk-Act</a>
-              <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">🃏 Tischzauberer</a>
-              <a href="/galerie/" class="text-[#d7393e] hover:underline">📸 Galerie</a>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- ── Intro ─────────────────────────────────────────────── -->
+  <section class="kg-intro kt-intro">
+    <div class="container kg-narrow" data-reveal>
+      <p class="kg-lead">
+        Sie suchen einen <strong>Kinderzauberer für den Kindergeburtstag</strong> in Gladbeck oder in der
+        Umgebung? Schreiben Sie mir einfach kurz, worum es geht – meistens antworte ich noch am selben Tag,
+        spätestens innerhalb von 24 Stunden.
+      </p>
+      <p>
+        Nach Gladbeck komme ich ohne Anfahrtskosten. Im Umkreis von rund 20 Kilometern bin ich ohnehin
+        regelmäßig unterwegs – unter anderem in
+        <a href="/kinderzauberer/kinderzauberer-in-bottrop/">Bottrop</a>,
+        <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/">Gelsenkirchen</a>,
+        <a href="/kinderzauberer/kinderzauberer-in-essen/">Essen</a> und
+        <a href="/kinderzauberer/kinderzauberer-in-oberhausen/">Oberhausen</a>.
+        Für andere Anlässe – Kita-Fest, Firmenfeier oder Stadtfest – nutzen Sie gern dasselbe Formular.
+      </p>
     </div>
   </section>
 
-  </HeroStage>
-  <GoogleReviews />
+  <!-- ── Form + direct contact ─────────────────────────────── -->
+  <section class="kt-main">
+    <div class="container kt-main__grid">
+      <div class="kt-form-card" id="anfrage">
+        <h2 class="kg-h2 kt-h2">Anfrage senden</h2>
+        <!-- Fehlermeldungen (?fehler=… and the browser-side maths check) -->
+        <div id="form-error" class="kt-error" role="alert" hidden>
+          <span id="error-text"></span>
+        </div>
+        <form
+          name="kontakt"
+          method="POST"
+          action="/kontakt/danke/"
+          data-netlify="true"
+          netlify-honeypot="website"
+          class="kt-form"
+          id="kontakt-form"
+        >
+          <input type="hidden" name="form-name" value="kontakt" />
+          <!-- Honeypot-Feld gegen Spam (versteckt) -->
+          <div class="kt-hp" aria-hidden="true">
+            <label for="website">Website leer lassen</label>
+            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off" />
+          </div>
+          <div class="kt-field">
+            <label for="name">Ihr Name *</label>
+            <input type="text" id="name" name="name" required autocomplete="name" placeholder="Max Mustermann" />
+          </div>
+          <div class="kt-field">
+            <label for="email">E-Mail *</label>
+            <input type="email" id="email" name="email" required autocomplete="email" inputmode="email" placeholder="max@example.de" />
+          </div>
+          <div class="kt-field">
+            <label for="phone">Telefon</label>
+            <input type="tel" id="phone" name="phone" autocomplete="tel" placeholder="+49 ..." />
+          </div>
+          <div class="kt-row">
+            <div class="kt-field">
+              <label for="event-date">Veranstaltungsdatum</label>
+              <input type="date" id="event-date" name="event-date" />
+            </div>
+            <div class="kt-field">
+              <label for="event-time">Gewünschte Uhrzeit</label>
+              <input type="time" id="event-time" name="event-time" />
+            </div>
+          </div>
+          <div class="kt-field">
+            <label for="event-city">Ort / Stadt *</label>
+            <input type="text" id="event-city" name="event-city" required autocomplete="address-level2" placeholder="z.B. Essen, Dortmund, Bochum..." />
+          </div>
+          <div class="kt-field">
+            <label for="event-type">Art der Veranstaltung</label>
+            <select id="event-type" name="event-type">
+              <option value="">Bitte wählen...</option>
+              <option>Kindergeburtstag</option>
+              <option>Firmenfeier</option>
+              <option>Stadtfest / Open Air</option>
+              <option>Kindergarten / Kita</option>
+              <option>Schule</option>
+              <option>Karneval</option>
+              <option>Sonstiges</option>
+            </select>
+          </div>
+          <div class="kt-field">
+            <label for="message">Ihre Nachricht</label>
+            <textarea id="message" name="message" rows="5" placeholder="Erzählen Sie mir von Ihrem Event..."></textarea>
+          </div>
+          <!-- CAPTCHA: Mathe-Frage (DSGVO-konform, keine Drittanbieter), checked in the browser before submit -->
+          <div class="kt-field kt-field--captcha">
+            <label for="captcha">
+              Spam-Schutz: <span id="captcha-question" class="kt-captcha__q"></span> *
+            </label>
+            <input
+              type="number"
+              id="captcha"
+              name="captcha"
+              required
+              inputmode="numeric"
+              placeholder="Ihre Antwort"
+              autocomplete="off"
+              aria-describedby="form-error"
+            />
+          </div>
+          <button type="submit" class="btn btn--primary kt-submit">
+            Anfrage absenden →
+          </button>
+        </form>
+      </div>
 
-  <!-- CAPTCHA Script (DSGVO-konform: kein externer Service, keine Cookies) -->
-  <script>
-    (function() {
-      const KEY = 'L1aR-c4ptch4-2024';
-      const a = Math.floor(Math.random() * 10) + 1;
-      const b = Math.floor(Math.random() * 10) + 1;
-      const ops = [
-        { symbol: '+', result: a + b },
-        { symbol: '-', result: Math.max(a, b) - Math.min(a, b) },
-      ];
-      const op = ops[Math.floor(Math.random() * ops.length)];
-      const num1 = op.symbol === '-' ? Math.max(a, b) : a;
-      const num2 = op.symbol === '-' ? Math.min(a, b) : b;
-      const answer = op.result;
+      <aside class="kt-side">
+        <h2 class="kg-h2 kt-h2">Direkt Kontakt</h2>
+        <div class="kt-reach" data-reveal="pop">
+          <div class="kt-reach__item">
+            <span class="kt-reach__icon">📞</span>
+            <div>
+              <div class="kt-reach__label">Telefon</div>
+              <a href={CONTACT.phoneHref} class="kt-reach__big">
+                +49 172 1517578
+              </a>
+              <p class="kt-reach__hint">Mo–Sa 8:00 – 20:00 Uhr</p>
+            </div>
+          </div>
+          <div class="kt-reach__item">
+            <span class="kt-reach__icon kt-reach__icon--blue">✉</span>
+            <div>
+              <div class="kt-reach__label">E-Mail</div>
+              <a href={`mailto:${CONTACT.email}`} class="kt-reach__mail">
+                {CONTACT.email}
+              </a>
+              <p class="kt-reach__hint">Antwort innerhalb 24 Stunden</p>
+            </div>
+          </div>
+          <div class="kt-reach__item">
+            <span class="kt-reach__icon kt-reach__icon--yellow">📍</span>
+            <div>
+              <div class="kt-reach__label">Adresse</div>
+              <address class="kt-reach__addr">
+                Beethovenstr. 15<br />
+                45966 Gladbeck<br />
+                Nordrhein-Westfalen
+              </address>
+            </div>
+          </div>
+        </div>
 
-      // Question anzeigen
-      const qEl = document.getElementById('captcha-question');
-      if (qEl) qEl.textContent = 'Was ist ' + num1 + ' ' + op.symbol + ' ' + num2 + '?';
+        <!-- Trust signals -->
+        <div class="kt-trust" data-reveal="tilt">
+          <h3 class="kt-h3">Warum Clown Zauberer LIAR?</h3>
+          <ul class="kt-trust__list">
+            {trust.map((t) => <li>{t}</li>)}
+          </ul>
+        </div>
 
-      // Hash generieren (einfache Verschleierung, kein Krypto nötig)
-      const ts = Date.now();
-      const raw = answer + ':' + ts + ':' + KEY;
-      let hash = 0;
-      for (let i = 0; i < raw.length; i++) {
-        const c = raw.charCodeAt(i);
-        hash = ((hash << 5) - hash) + c;
-        hash |= 0;
-      }
+        <!-- Service-Links -->
+        <div class="kt-services" data-reveal>
+          <h3 class="kt-h3">Unsere Leistungen</h3>
+          <div class="kt-services__list">
+            {services.map((s) => <a href={s.href}>{s.label}</a>)}
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
 
-      const hashEl = document.getElementById('captcha-hash');
-      if (hashEl) hashEl.value = answer + ':' + ts + ':' + Math.abs(hash);
+  <Reviews />
+</V2Layout>
 
-      const tokenEl = document.getElementById('form-token');
-      if (tokenEl) tokenEl.value = ts.toString();
-    })();
-  </script>
-</BaseLayout>
+<script>
+  // Maths question (DSGVO-konform: kein externer Service, keine Cookies). There is no server to
+  // verify a hash any more (Netlify Forms), so the answer is checked here before submitting.
+  const messages: Record<string, string> = {
+    '1': 'Bitte füllen Sie alle Pflichtfelder korrekt aus.',
+    '2': 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.',
+    captcha: 'Die Antwort auf die Mathe-Frage war leider falsch. Bitte versuchen Sie es erneut.',
+    timeout: 'Das Formular war zu lange offen. Bitte laden Sie die Seite neu und versuchen Sie es erneut.',
+  };
+  const errorEl = document.getElementById('form-error');
+  const textEl = document.getElementById('error-text');
+  const showError = (key: string) => {
+    if (!errorEl || !textEl) return;
+    textEl.textContent = messages[key] || 'Ein unbekannter Fehler ist aufgetreten.';
+    errorEl.hidden = false;
+  };
+
+  const fehler = new URLSearchParams(window.location.search).get('fehler');
+  if (fehler) showError(fehler);
+
+  const a = Math.floor(Math.random() * 10) + 1;
+  const b = Math.floor(Math.random() * 10) + 1;
+  const minus = Math.random() < 0.5;
+  const num1 = minus ? Math.max(a, b) : a;
+  const num2 = minus ? Math.min(a, b) : b;
+  const answer = minus ? num1 - num2 : num1 + num2;
+  const qEl = document.getElementById('captcha-question');
+  if (qEl) qEl.textContent = 'Was ist ' + num1 + ' ' + (minus ? '-' : '+') + ' ' + num2 + '?';
+
+  const form = document.getElementById('kontakt-form') as HTMLFormElement | null;
+  const input = document.getElementById('captcha') as HTMLInputElement | null;
+  form?.addEventListener('submit', (e) => {
+    if (!input) return;
+    if (Number(input.value.trim()) !== answer || input.value.trim() === '') {
+      e.preventDefault();
+      input.setAttribute('aria-invalid', 'true');
+      showError('captcha');
+      input.focus();
+    }
+  });
+  input?.addEventListener('input', () => {
+    if (input.getAttribute('aria-invalid') !== 'true') return;
+    input.removeAttribute('aria-invalid');
+    if (errorEl) errorEl.hidden = true;
+  });
+</script>
+
+<style>
+  /* ── hero ── */
+  .kt-hero { padding-bottom: var(--space-5); }
+  .kt-hero__title { font-size: clamp(2.1rem, 4.4vw, 3.4rem); }
+  .kt-hero__lead { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-3); }
+  .kt-hero__photo :global(img) { aspect-ratio: 4 / 3; }
+  .kt-sticker span { font-size: 0.8rem; }
+  .kt-sticker strong { font-size: 1.6rem; }
+
+  /* ── intro ── */
+  .kt-intro p:not(.kg-lead) { color: var(--ink-soft); }
+
+  /* ── main ── */
+  .kt-main { background: var(--bg); }
+  .kt-main__grid { display: grid; gap: var(--space-5); align-items: start; }
+  @media (min-width: 901px) {
+    .kt-main__grid { grid-template-columns: 1.15fr 1fr; }
+    .kt-row { grid-template-columns: 1fr 1fr; }
+  }
+  .kt-h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); }
+  .kt-h3 { font-size: 1.35rem; margin: 0 0 var(--space-2); }
+
+  .kt-form-card {
+    scroll-margin-top: 6rem;
+    padding: var(--space-4) var(--space-3);
+    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hover);
+  }
+  .kt-form { display: grid; gap: 1.1rem; }
+  .kt-row { display: grid; gap: 1.1rem; }
+  .kt-field { display: grid; gap: 0.35rem; }
+  .kt-field label { font-weight: 800; font-size: 0.98rem; color: var(--ink); }
+  .kt-field :is(input, select, textarea) {
+    width: 100%; min-height: 3.1rem; padding: 0.7rem 0.95rem;
+    font: inherit; font-size: 1rem; color: var(--ink);
+    background-color: var(--bg); border: var(--border); border-radius: var(--radius-sm);
+    box-shadow: 3px 3px 0 var(--line);
+    transition: box-shadow 0.2s var(--ease-out), transform 0.2s var(--ease-out), background-color 0.2s;
+  }
+  .kt-field textarea { resize: vertical; min-height: 8rem; }
+  .kt-field select { appearance: none; padding-right: 2.6rem; cursor: pointer;
+    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+    background-position: calc(100% - 1.3rem) 55%, calc(100% - 0.95rem) 55%;
+    background-size: 0.38rem 0.38rem; background-repeat: no-repeat;
+  }
+  .kt-field ::placeholder { color: color-mix(in srgb, var(--ink-soft) 80%, transparent); }
+  .kt-field :is(input, select, textarea):focus { outline: none; }
+  .kt-field :is(input, select, textarea):focus-visible {
+    outline: 3px solid var(--accent-2); outline-offset: 2px;
+    background-color: var(--surface); transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--line);
+  }
+  .kt-field [aria-invalid='true'] { border-color: var(--accent-strong); box-shadow: 3px 3px 0 var(--accent-strong); }
+  .kt-captcha__q { font-family: var(--font-display); font-weight: 700; color: var(--accent-strong); }
+  .kt-submit { width: 100%; min-height: 3.5rem; font-size: 1.15rem; cursor: pointer; }
+  .kt-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
+
+  .kt-error {
+    margin: 0 0 var(--space-3); padding: 0.85rem 1rem; font-weight: 700;
+    color: var(--accent-strong); background: color-mix(in srgb, var(--brand-red) 10%, var(--surface));
+    border: 2.5px solid var(--accent-strong); border-radius: var(--radius-sm);
+  }
+  .kt-error[hidden] { display: none; }
+
+  /* ── direct contact ── */
+  .kt-reach {
+    display: grid; gap: var(--space-3); padding: var(--space-3);
+    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: -1deg;
+  }
+  .kt-reach__item { display: flex; gap: 0.9rem; align-items: flex-start; }
+  .kt-reach__icon {
+    flex: none; display: grid; place-items: center; width: 2.9rem; height: 2.9rem;
+    border-radius: 50%; border: 2.5px solid var(--line); background: var(--brand-red); color: #fff; font-size: 1.2rem;
+  }
+  .kt-reach__icon--blue { background: var(--brand-blue); }
+  .kt-reach__icon--yellow { background: var(--brand-yellow); }
+  .kt-reach__label { font-weight: 900; }
+  .kt-reach__big { font-family: var(--font-display); font-size: 1.45rem; font-weight: 650; color: var(--accent-strong); text-decoration: none; }
+  .kt-reach__mail { font-weight: 800; color: var(--accent-strong); overflow-wrap: anywhere; }
+  .kt-reach__hint { margin: 0.1rem 0 0; font-size: 0.92rem; color: var(--ink-soft); }
+  .kt-reach__addr { font-style: normal; color: var(--ink-soft); }
+
+  .kt-trust {
+    margin-top: var(--space-4); padding: var(--space-3);
+    background: color-mix(in srgb, var(--brand-yellow) 30%, var(--surface));
+    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: 0.8deg;
+  }
+  .kt-trust__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; font-weight: 700; }
+
+  .kt-services { margin-top: var(--space-4); }
+  .kt-services__list { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+  .kt-services__list a {
+    display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.4rem 0.95rem;
+    font-weight: 800; font-size: 0.95rem; color: var(--ink); text-decoration: none;
+    background: var(--surface); border: 2px dashed var(--line); border-radius: 999px;
+    transition: background-color 0.2s, rotate 0.25s var(--ease-out-expo);
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .kt-services__list a:hover { background: var(--bg-alt); rotate: -2deg; }
+    .kt-reach__big:hover { text-decoration: underline; }
+    .kt-field :is(input, select, textarea):hover { background-color: var(--surface); }
+  }
+  @media (max-width: 900px) {
+    .kt-form-card { padding: var(--space-3) 1rem; }
+    .kt-reach, .kt-trust { rotate: 0deg; }
+  }
+</style>

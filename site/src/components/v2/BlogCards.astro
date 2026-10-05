@@ -1,0 +1,152 @@
+---
+/**
+ * v2 blog teaser list (neutral / Zirkus-Plakat zone). Used by /blog/, /blog/kategorie/*,
+ * and the "Weiterlesen" block under every post (components/v2/BlogFooter.astro).
+ * Text per card is the legacy wording 1:1 (date, title, excerpt, link text); the category
+ * label is new UI built from the post's own data.
+ */
+import type { BlogPostSummary } from '../../utils/allPosts';
+import { cardThumb } from '../../utils/cardThumb';
+
+interface Props {
+  posts: Pick<BlogPostSummary, 'href' | 'title' | 'date' | 'excerpt' | 'image' | 'categories'>[];
+  /** first post spans the row, image beside the text on desktop */
+  featureFirst?: boolean;
+  /** how many leading images load eagerly (the first one also gets fetchpriority=high) */
+  eager?: number;
+  heading?: 'h2' | 'h3';
+  moreLabel?: string;
+  /** smaller cards (related posts under an article) */
+  compact?: boolean;
+}
+
+const {
+  posts,
+  featureFirst = false,
+  eager = 0,
+  heading = 'h2',
+  moreLabel = 'Weiterlesen →',
+  compact = false,
+} = Astro.props;
+const Heading = heading;
+const BANDS = ['red', 'blue', 'yellow'] as const;
+
+function formatDate(d: Date) {
+  return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
+}
+---
+
+<div class:list={['bc-grid', { 'bc-grid--compact': compact }]}>
+  {posts.map((post, i) => {
+    const feature = featureFirst && i === 0;
+    const isEager = i < eager;
+    return (
+      <article
+        class:list={['bc-card', `bc-card--${BANDS[i % 3]}`, { 'bc-card--feature': feature }]}
+        data-reveal={isEager ? undefined : 'up'}
+      >
+        <a class="bc-media" href={post.href} tabindex="-1" aria-hidden="true">
+          <img
+            src={cardThumb(post.image)}
+            alt={post.title}
+            loading={isEager ? 'eager' : 'lazy'}
+            fetchpriority={i === 0 && isEager ? 'high' : undefined}
+            decoding="async"
+            width="400"
+            height="240"
+          />
+        </a>
+        <div class="bc-body">
+          <p class="bc-meta">
+            <time datetime={post.date.toISOString()}>{formatDate(post.date)}</time>
+            {post.categories[0] && <span class="bc-cat">{post.categories[0]}</span>}
+          </p>
+          <Heading class="bc-title">
+            <a href={post.href}>{post.title}</a>
+          </Heading>
+          <p class="bc-excerpt">{post.excerpt}</p>
+          <a class="bc-more" href={post.href}>{moreLabel}</a>
+        </div>
+      </article>
+    );
+  })}
+</div>
+
+<style>
+  .bc-grid {
+    display: grid;
+    gap: var(--space-4) var(--space-3);
+    grid-template-columns: repeat(auto-fill, minmax(min(100%, 19rem), 1fr));
+  }
+  .bc-grid--compact { grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--space-3); }
+
+  .bc-card {
+    --c: var(--brand-red);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    background: var(--surface);
+    border: var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    overflow: hidden;
+    transition: transform 0.35s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
+  }
+  .bc-card--blue { --c: var(--brand-blue); }
+  .bc-card--yellow { --c: var(--brand-yellow); }
+  /* printed-poster rhythm: neighbours lean a little, never the featured card */
+  .bc-card:nth-child(3n + 2):not(.bc-card--feature) { rotate: 0.6deg; }
+  .bc-card:nth-child(3n):not(.bc-card--feature) { rotate: -0.5deg; }
+
+  .bc-media { display: block; position: relative; border-bottom: var(--border); background: var(--bg-alt); }
+  .bc-media::after {
+    /* colour band along the image's bottom edge, like a ticket stub */
+    content: ''; position: absolute; inset: auto 0 0; height: 0.5rem; background: var(--c);
+    border-top: var(--border);
+  }
+  .bc-media img { display: block; width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: cover; object-position: top; }
+
+  .bc-body { display: flex; flex-direction: column; flex: 1; padding: var(--space-3); }
+  .bc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; margin: 0 0 0.5rem; font-size: 0.9rem; font-weight: 700; color: var(--ink-soft); }
+  .bc-cat {
+    padding: 0.1rem 0.6rem; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
+    background: var(--bg); border: 2px dashed var(--line); color: var(--ink);
+  }
+  .bc-title { font-size: clamp(1.2rem, 2vw, 1.4rem); line-height: 1.2; margin: 0 0 0.6rem; text-wrap: balance; }
+  .bc-title a { color: var(--ink); text-decoration: none; }
+  /* the whole card is one big target; the title link stretches over it */
+  .bc-title a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  .bc-title a:focus-visible { outline: none; }
+  .bc-card:has(.bc-title a:focus-visible) { outline: 3px solid var(--accent-2); outline-offset: 4px; }
+  .bc-excerpt { color: var(--ink-soft); font-size: 0.98rem; margin: 0 0 var(--space-2); }
+  .bc-more {
+    margin-top: auto; align-self: flex-start; position: relative; z-index: 2;
+    font-family: var(--font-display); font-weight: 650; color: var(--accent-strong); text-decoration: none;
+  }
+
+  .bc-grid--compact .bc-body { padding: var(--space-2) var(--space-3) var(--space-3); }
+  .bc-grid--compact .bc-title { font-size: 1.15rem; }
+  .bc-grid--compact .bc-excerpt {
+    font-size: 0.93rem;
+    display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;
+  }
+
+  .bc-card--feature { grid-column: 1 / -1; }
+  .bc-card--feature .bc-title { font-size: clamp(1.5rem, 3.4vw, 2.3rem); }
+  .bc-card--feature .bc-excerpt { font-size: 1.08rem; }
+  @media (min-width: 901px) {
+    .bc-card--feature { display: grid; grid-template-columns: 1.15fr 1fr; }
+    .bc-card--feature .bc-media { border-bottom: 0; border-right: var(--border); }
+    .bc-card--feature .bc-media img { height: 100%; min-height: 20rem; aspect-ratio: auto; }
+    .bc-card--feature .bc-body { padding: var(--space-4); justify-content: center; }
+    .bc-card--feature .bc-more { margin-top: var(--space-1); }
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    .bc-card:hover { transform: translate(-3px, -6px) rotate(0.4deg); box-shadow: var(--shadow-hover); }
+    .bc-card--feature:hover { transform: translate(-3px, -4px); }
+    .bc-card:hover .bc-title a { color: var(--accent-strong); }
+    .bc-more { transition: translate 0.25s var(--ease-out-expo); }
+    .bc-card:hover .bc-more { translate: 4px 0; }
+  }
+</style>

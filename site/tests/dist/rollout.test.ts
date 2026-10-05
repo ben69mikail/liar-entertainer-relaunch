@@ -1,41 +1,23 @@
 import { describe, it, expect } from 'vitest';
 import { page } from './helpers';
 import { zoneFor } from '../../src/lib/site-map';
-import kinderzauberer from '../../src/data/cities/kinderzauberer.json';
-import kindergeburtstag from '../../src/data/cities/kindergeburtstag.json';
-import clownshow from '../../src/data/cities/clownshow.json';
+import { readdirSync, readFileSync, statSync, existsSync } from 'node:fs';
+import { join } from 'node:path';
+import * as cheerio from 'cheerio';
 
-// wave 3: all city pages, straight from the data that generates them
-const CITY_PAGES = [
-  ...Object.keys(kinderzauberer).map((c) => `/kinderzauberer/${c}/`),
-  ...Object.keys(kindergeburtstag).map((c) => `/kindergeburtstag/${c}/`),
-  ...Object.keys(clownshow).map((c) => `/clown/clownshow/${c}/`),
-];
-
-// Pages already on the relaunch design. Grows wave by wave (CLAUDE.md "Rollout v2");
-// the final wave replaces this list with every built page.
-const V2_PAGES = [
-  '/',
-  '/kindergeburtstag/',
-  '/zauberer/',
-  // wave 1: kids core pages
-  '/kinderzauberer/',
-  '/clown/clownshow/',
-  '/clown/karneval/',
-  '/clown/ballonmodellage/',
-  '/clown/glitzer-tattoo/',
-  '/clown/walk-act/',
-  '/zauberer/zaubershow/kindergarten-kita/',
-  '/zauberer/zaubershow/schule/',
-  '/zauberer/zaubershow/strassen-sommer-fest/',
-  // wave 2: adult pages
-  '/zauberer/zaubershow/',
-  '/zauberer/buehnen-zauberer/',
-  '/zauberer/tisch-zauberer/',
-  '/zauberer/hochzeit/',
-  '/zauberer/firmenfeier/',
-  ...CITY_PAGES,
-];
+// Final wave: EVERY built page must be on the relaunch design (CLAUDE.md "Rollout v2").
+// Walk dist/ instead of keeping a list, so a page added later can never slip through.
+const DIST = join(import.meta.dirname, '../../dist');
+function builtPages(dir = DIST, base = '/'): string[] {
+  const out: string[] = [];
+  if (existsSync(join(dir, 'index.html'))) out.push(base);
+  for (const name of readdirSync(dir)) {
+    if (name.startsWith('_') || !statSync(join(dir, name)).isDirectory()) continue;
+    out.push(...builtPages(join(dir, name), `${base}${name}/`));
+  }
+  return out;
+}
+const V2_PAGES = builtPages();
 
 const LOGO_ALT = {
   adult: 'Zauberer LIAR – Zauberei & Comedy',
@@ -44,9 +26,11 @@ const LOGO_ALT = {
 } as const;
 
 describe('v2 rollout', () => {
-  for (const path of V2_PAGES) {
+  it('covers the whole site', () => expect(V2_PAGES.length).toBeGreaterThan(160));
+
+  for (const path of [...V2_PAGES, '/404.html']) {
     describe(path, () => {
-      const $ = page(path);
+      const $ = path.endsWith('.html') ? cheerio.load(readFileSync(join(DIST, path), 'utf8')) : page(path);
 
       it('uses the relaunch layout (header, footer, sticky contact)', () => {
         expect($('body').hasClass('v2')).toBe(true);
@@ -68,7 +52,7 @@ describe('v2 rollout', () => {
       });
 
             it('carries its zone and the matching logo', () => {
-        const zone = zoneFor(path);
+        const zone = zoneFor(path === '/404.html' ? '/404/' : path);
         expect($('html').attr('data-zone')).toBe(zone);
         expect($(`header img[alt="${LOGO_ALT[zone]}"]`).length).toBe(1);
       });

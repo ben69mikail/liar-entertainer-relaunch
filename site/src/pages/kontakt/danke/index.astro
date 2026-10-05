@@ -1,54 +1,98 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
+import V2Layout from '../../../layouts/V2Layout.astro';
+import Bunting from '../../../components/v2/kids/Bunting.astro';
+import { CONTACT } from '../../../data/site';
+import '../../../styles/kids-kit.css';
 ---
 
-<BaseLayout
+<V2Layout
   title="Vielen Dank für Ihre Anfrage – Clown Zauberer LIAR"
   description="Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns innerhalb von 24 Stunden bei Ihnen!"
   noindex={true}
 >
-  <section class="py-20 bg-white">
-    <div class="max-w-3xl mx-auto px-4 text-center">
-      <!-- Erfolgs-Icon -->
-      <div class="w-20 h-20 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6">
-        <svg class="w-10 h-10 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path>
+  <!-- One celebratory card. Text is visible from the first paint (no reveal: it is the LCP). -->
+  <section class="kg-hero kd">
+    <Bunting />
+    <div class="container kd__wrap">
+      <!-- Erfolgs-Icon: stamped on like a ticket check -->
+      <div class="kd__check" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
         </svg>
       </div>
 
-      <h1 class="text-[#1f2025] font-extrabold text-3xl sm:text-4xl mb-4">Vielen Dank für Ihre Anfrage!</h1>
-      <p class="text-[#374151] text-lg mb-8 max-w-xl mx-auto">
+      <h1 class="kd__title" data-letters>Vielen Dank für Ihre Anfrage!</h1>
+      <p class="kd__lead">
         Ihre Nachricht wurde erfolgreich gesendet. Ich melde mich innerhalb von <strong>24 Stunden</strong> bei Ihnen zurück.
       </p>
 
       <!-- Was passiert als nächstes -->
-      <div class="bg-[#f9fafb] rounded-xl p-8 mb-10 text-left max-w-lg mx-auto">
-        <h2 class="font-bold text-[#1f2025] text-lg mb-4">Was passiert jetzt?</h2>
-        <ul class="space-y-3 text-[#374151] text-sm">
-          <li class="flex items-start gap-3">
-            <span class="text-[#d7393e] font-bold text-lg leading-none mt-0.5">1.</span>
+      <div class="kd__next">
+        <h2 class="kd__h2">Was passiert jetzt?</h2>
+        <ul class="kd__steps">
+          <li>
+            <span class="kd__num">1.</span>
             <span>Ich prüfe Ihre Anfrage persönlich</span>
           </li>
-          <li class="flex items-start gap-3">
-            <span class="text-[#d7393e] font-bold text-lg leading-none mt-0.5">2.</span>
+          <li>
+            <span class="kd__num kd__num--blue">2.</span>
             <span>Sie erhalten innerhalb von 24h eine Antwort per E-Mail</span>
           </li>
-          <li class="flex items-start gap-3">
-            <span class="text-[#d7393e] font-bold text-lg leading-none mt-0.5">3.</span>
-            <span>Bei dringenden Fragen erreichen Sie mich unter <a href="tel:+491721517578" class="text-[#d7393e] hover:underline font-semibold">+49 172 1517578</a></span>
+          <li>
+            <span class="kd__num kd__num--yellow">3.</span>
+            <span>Bei dringenden Fragen erreichen Sie mich unter <a href={CONTACT.phoneHref}>+49 172 1517578</a></span>
           </li>
         </ul>
       </div>
 
       <!-- Zurück-Links -->
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
-        <a href="/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-8 py-3 rounded transition-colors">
+      <div class="kd__actions">
+        <a href="/" class="btn btn--primary" data-confetti>
           Zur Startseite
         </a>
-        <a href="/kindergeburtstag/" class="inline-block bg-white border-2 border-[#d7393e] text-[#d7393e] hover:bg-[#d7393e] hover:text-white font-bold px-8 py-3 rounded transition-colors">
+        <a href="/kindergeburtstag/" class="btn btn--ghost">
           Kindergeburtstag ansehen
         </a>
       </div>
     </div>
   </section>
-</BaseLayout>
+</V2Layout>
+
+<style>
+  .kd { padding-bottom: var(--space-6); }
+  .kd__wrap { max-width: 44rem; text-align: center; padding-top: var(--space-4); }
+  .kd__check {
+    display: grid; place-items: center; width: 5.5rem; height: 5.5rem; margin: 0 auto var(--space-3);
+    border-radius: 50%; background: var(--brand-yellow); color: var(--ink);
+    border: var(--border); box-shadow: var(--shadow); rotate: -8deg;
+    animation: kd-stamp 0.55s var(--ease-out) 0.2s backwards;
+  }
+  .kd__check svg { width: 2.8rem; height: 2.8rem; }
+  .kd__check path { stroke-dasharray: 24; animation: kd-draw 0.5s var(--ease-out) 0.6s backwards; }
+  @keyframes kd-stamp { from { transform: scale(1.6); opacity: 0; } 60% { opacity: 1; } }
+  @keyframes kd-draw { from { stroke-dashoffset: 24; } }
+
+  .kd__title { font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 700; margin-bottom: var(--space-2); }
+  .kd__lead { font-size: 1.2rem; color: var(--ink-soft); max-width: 36rem; margin-inline: auto; }
+  .kd__lead strong { color: var(--accent-strong); }
+
+  .kd__next {
+    margin: var(--space-4) auto var(--space-4); max-width: 32rem; text-align: left;
+    padding: var(--space-3); background: var(--surface);
+    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: -1deg;
+  }
+  .kd__h2 { font-size: 1.5rem; margin-bottom: var(--space-2); }
+  .kd__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; font-weight: 600; }
+  .kd__steps li { display: flex; gap: 0.8rem; align-items: flex-start; }
+  .kd__num {
+    flex: none; display: grid; place-items: center; width: 2.2rem; height: 2.2rem;
+    font-family: var(--font-display); font-weight: 700; line-height: 1;
+    background: var(--brand-red-strong); color: #fff; border: 2px solid var(--line); border-radius: 50%;
+  }
+  .kd__num--blue { background: var(--brand-blue); }
+  .kd__num--yellow { background: var(--brand-yellow); color: var(--ink); }
+  .kd__steps a { font-weight: 800; white-space: nowrap; }
+
+  .kd__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  @media (max-width: 900px) { .kd__next { rotate: 0deg; } }
+</style>
