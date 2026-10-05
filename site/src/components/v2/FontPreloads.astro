@@ -5,10 +5,14 @@ import fredoka from '@fontsource-variable/fredoka/files/fredoka-latin-wght-norma
 import nunito from '@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2?url';
 import bodoni from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-normal.woff2?url';
 import bodoniItalic from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-italic.woff2?url';
+import bodoniSuits from '@fontsource-variable/bodoni-moda/files/bodoni-moda-symbols-wght-normal.woff2?url';
+import instrument from '@fontsource-variable/instrument-sans/files/instrument-sans-latin-wght-normal.woff2?url';
 import { zoneFor } from '../../lib/site-map';
 
-// Only what the LCP headline needs: extra preloads compete with it for bandwidth on slow mobile.
-const fonts = zoneFor(Astro.url.pathname) === 'adult' ? [bodoni, bodoniItalic] : [fredoka, nunito];
+// Only what the first screen needs: extra preloads compete with the LCP for bandwidth on slow mobile.
+// Adult also preloads the body face and the suit glyphs (♠♥♦♣ live in Bodoni's "symbols" subset):
+// discovered late, each swap re-shaped the whole page after first paint (≈400 ms TBT on 4× CPU).
+const fonts = zoneFor(Astro.url.pathname) === 'adult' ? [bodoni, bodoniItalic, instrument, bodoniSuits] : [fredoka, nunito];
 ---
 
 {fonts.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}

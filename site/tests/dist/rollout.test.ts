@@ -1,6 +1,16 @@
 import { describe, it, expect } from 'vitest';
 import { page } from './helpers';
 import { zoneFor } from '../../src/lib/site-map';
+import kinderzauberer from '../../src/data/cities/kinderzauberer.json';
+import kindergeburtstag from '../../src/data/cities/kindergeburtstag.json';
+import clownshow from '../../src/data/cities/clownshow.json';
+
+// wave 3: all city pages, straight from the data that generates them
+const CITY_PAGES = [
+  ...Object.keys(kinderzauberer).map((c) => `/kinderzauberer/${c}/`),
+  ...Object.keys(kindergeburtstag).map((c) => `/kindergeburtstag/${c}/`),
+  ...Object.keys(clownshow).map((c) => `/clown/clownshow/${c}/`),
+];
 
 // Pages already on the relaunch design. Grows wave by wave (CLAUDE.md "Rollout v2");
 // the final wave replaces this list with every built page.
@@ -24,6 +34,7 @@ const V2_PAGES = [
   '/zauberer/tisch-zauberer/',
   '/zauberer/hochzeit/',
   '/zauberer/firmenfeier/',
+  ...CITY_PAGES,
 ];
 
 const LOGO_ALT = {

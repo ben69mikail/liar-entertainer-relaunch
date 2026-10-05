@@ -1,0 +1,277 @@
+---
+/**
+ * One v2 template for all 69 city pages (kinderzauberer-in-*, geburtstag-in-*, clown-in-*).
+ * Data comes from src/data/cities/*.json (scripts/extract-cities.ts): seo + hero + the city's own
+ * ordered blocks. Text is 1:1 legacy; layout intent was translated into c-* classes.
+ */
+import type { ImageMetadata } from 'astro';
+import { Image, getImage } from 'astro:assets';
+import V2Layout from '../../../layouts/V2Layout.astro';
+import Reviews from '../Reviews.astro';
+import ReviewBadge from '../ReviewBadge.astro';
+import SectionEdge from '../SectionEdge.astro';
+import Bunting from './Bunting.astro';
+import Squiggle from './Squiggle.astro';
+import YouTubeFacade from '../../YouTubeFacade.astro';
+import { CONTACT } from '../../../data/site';
+import '../../../styles/kids-kit.css';
+
+export interface CityData {
+  seo: {
+    title: string;
+    description: string;
+    keywords?: string;
+    canonical: string;
+    structuredData: object[];
+    breadcrumbs?: { name: string; url: string }[];
+  };
+  hero: { image: string; imageAlt: string; badge: string; h1: string; lead: string[]; crumbs: string; intro: string };
+  blocks: (
+    | { kind: 'reviews' }
+    | { kind: 'stats'; items: { icon: string; num: string; label: string }[] }
+    | { kind: 'faq'; head: string; items: { q: string; a: string }[] }
+    | { kind: 'video'; head: string; tail: string }
+    | { kind: 'gallery'; head: string; images: { asset: string; alt: string }[] }
+    | { kind: 'prose'; html: string; tone: 'plain' | 'tint' | 'band' }
+  )[];
+}
+interface Props { city: CityData }
+const { city } = Astro.props;
+
+const ASSETS = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpg,jpeg,png,webp}', { eager: true });
+const asset = (path: string) => {
+  const hit = ASSETS[path];
+  if (!hit) throw new Error(`CityPage: unknown asset ${path}`);
+  return hit.default;
+};
+
+/** Replace extractor placeholders <img data-asset="…" alt="…"> with optimized, sized images. */
+async function withImages(html: string): Promise<string> {
+  const re = /<img data-asset="([^"]+)" alt="([^"]*)">/g;
+  const jobs = [...html.matchAll(re)].map(async (m) => {
+    const img = await getImage({ src: asset(m[1]), width: 900, format: 'webp' });
+    return [m[0], `<img src="${img.src}" width="${img.attributes.width}" height="${img.attributes.height}" alt="${m[2]}" loading="lazy" decoding="async" class="c-img">`] as const;
+  });
+  let out = html;
+  for (const [from, to] of await Promise.all(jobs)) out = out.replace(from, to);
+  return out;
+}
+
+const heroAsset = asset(city.hero.image);
+const intro = await withImages(city.hero.intro);
+const blocks = await Promise.all(
+  city.blocks.map(async (b) => {
+    if (b.kind === 'prose') return { ...b, html: await withImages(b.html) };
+    if (b.kind === 'faq') return { ...b, head: await withImages(b.head), items: await Promise.all(b.items.map(async (i) => ({ ...i, a: await withImages(i.a) }))) };
+    if (b.kind === 'video') return { ...b, tail: await withImages(b.tail) };
+    if (b.kind === 'gallery') return { ...b, head: await withImages(b.head) };
+    return b;
+  }),
+);
+// legacy hero was a CSS background (no alt); describe the photo by the page's own headline
+const heroAlt = city.hero.imageAlt || `Clown Zauberer LIAR – ${city.hero.h1.replace(/<[^>]+>/g, '').replace(/\s+/g, ' ').trim()}`;
+---
+
+<V2Layout
+  title={city.seo.title}
+  description={city.seo.description}
+  keywords={city.seo.keywords}
+  canonical={city.seo.canonical}
+  ogImage={heroAsset.src}
+  structuredData={city.seo.structuredData}
+  breadcrumbs={city.seo.breadcrumbs}
+>
+  <!-- ── Hero (LCP: no reveal) ── -->
+  <section class="kg-hero">
+    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
+    <Bunting />
+    <div class="container kg-hero__grid">
+      <div class="kg-hero__copy">
+        {city.hero.crumbs && <p class="ct-crumbs" set:html={city.hero.crumbs} />}
+        <ReviewBadge />
+        <p class="ct-badge" set:html={city.hero.badge} />
+        <h1 class="kg-hero__title ct-title" data-letters set:html={city.hero.h1} />
+        {city.hero.lead.map((l) => <p class="ct-lead" set:html={l} />)}
+        <div class="kg-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
+          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
+        </div>
+      </div>
+      <figure class="kg-hero__photo">
+        <Image src={heroAsset} alt={heroAlt} widths={[400, 700, 1000]} sizes="(max-width: 900px) 92vw, 560px" loading="eager" fetchpriority="high" />
+      </figure>
+    </div>
+  </section>
+
+  {intro && (
+    <section class="kg-intro ct-intro">
+      <div class="container ct-prose" data-reveal set:html={intro} />
+    </section>
+  )}
+
+  {blocks.map((b, i) => {
+    if (b.kind === 'reviews') return <Reviews />;
+    if (b.kind === 'stats')
+      return (
+        <section class="kg-band ct-stats">
+          <SectionEdge color="var(--brand-red)" side="top" />
+          <SectionEdge color="var(--brand-red)" side="bottom" />
+          <div class="container ct-stats__grid">
+            {b.items.map((s, j) => (
+              <div class="ct-stat" data-reveal="pop" data-reveal-delay={j * 0.08}>
+                <div class="ct-stat__icon">{s.icon}</div>
+                <div class="ct-stat__num" data-count={/^\d{1,3}$/.test(s.num) ? '' : undefined}>{s.num}</div>
+                <div class="ct-stat__label">{s.label}</div>
+              </div>
+            ))}
+          </div>
+        </section>
+      );
+    if (b.kind === 'faq')
+      return (
+        <section class="kg-faq">
+          <div class="container kg-narrow">
+            <div class="ct-prose ct-center" set:html={b.head} />
+            <div class="kg-faq__list">
+              {b.items.map((q) => (
+                <details class="kg-faq__item" data-reveal="puff">
+                  <summary><span>{q.q}</span></summary>
+                  <div class="kg-faq__answer" set:html={q.a} />
+                </details>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    if (b.kind === 'video')
+      return (
+        <section class="kg-band kg-band--yellow">
+          <SectionEdge color="var(--brand-yellow)" side="top" />
+          <SectionEdge color="var(--brand-yellow)" side="bottom" />
+          <div class="container kg-narrow kg-center">
+            <h2 class="kg-h2">{b.head}</h2>
+            <div class="kg-video" data-reveal="pop">
+              <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
+            </div>
+            <div class="ct-prose" set:html={b.tail} />
+          </div>
+        </section>
+      );
+    if (b.kind === 'gallery')
+      return (
+        <section class="ct-gallery">
+          <div class="container">
+            {b.head && <div class="ct-prose ct-center" set:html={b.head} />}
+            <div class="ct-gallery__grid">
+              {b.images.map((g, j) => (
+                <figure class="ct-gallery__item" data-reveal="pop" data-reveal-delay={(j % 4) * 0.06}>
+                  <Image src={asset(g.asset)} alt={g.alt} widths={[300, 600]} sizes="(max-width: 700px) 46vw, 280px" loading="lazy" />
+                </figure>
+              ))}
+            </div>
+          </div>
+        </section>
+      );
+    // prose: the city's own sections, in their own order
+    const band = b.tone === 'band';
+    return (
+      <section class:list={[{ 'kg-band kg-band--blue': band, 'ct-tint': b.tone === 'tint' }]}>
+        {band && <SectionEdge color="var(--brand-blue)" side="top" />}
+        {band && <SectionEdge color="var(--brand-blue)" side="bottom" />}
+        {i % 3 === 1 && !band && <div class="container"><Squiggle color={i % 2 ? 'var(--brand-blue)' : 'var(--brand-red)'} /></div>}
+        <div class="container ct-prose" data-reveal set:html={b.html} />
+      </section>
+    );
+  })}
+</V2Layout>
+
+<style>
+  .ct-crumbs { font-size: 0.85rem; color: var(--ink-soft); margin-bottom: 0.6rem; }
+  .ct-crumbs :global(a) { color: inherit; }
+  .ct-badge {
+    display: inline-block; margin: var(--space-2) 0 0; padding: 0.3rem 0.9rem; border-radius: 999px;
+    font-weight: 800; background: var(--brand-yellow); border: var(--border); rotate: -2deg;
+  }
+  .ct-title { font-size: clamp(2.1rem, 4.6vw, 3.6rem); }
+  .ct-lead { font-size: 1.15rem; font-weight: 700; color: var(--ink-soft); }
+
+  /* ── prose: translated legacy layout (c-*) ── */
+  .ct-prose { max-width: 62rem; }
+  .ct-prose :global(h2) { font-size: clamp(1.7rem, 3.6vw, 2.6rem); margin: 0 0 var(--space-3); }
+  .ct-prose :global(h3) { font-size: clamp(1.2rem, 2.2vw, 1.5rem); margin: var(--space-3) 0 var(--space-1); }
+  .ct-prose :global(h4) { font-size: 1.1rem; margin: var(--space-2) 0 var(--space-1); }
+  .ct-prose :global(ul), .ct-prose :global(ol) { padding-left: 1.2rem; margin: 0 0 var(--space-2); }
+  .ct-prose :global(li) { margin-bottom: 0.35rem; }
+  .ct-prose :global(.c-center) { text-align: center; }
+  .ct-prose :global(.c-small) { font-size: 0.95rem; }
+  .ct-prose :global(.c-kicker) {
+    display: inline-block; font-family: var(--font-display); font-weight: 700; letter-spacing: 0.14em;
+    text-transform: uppercase; font-size: 0.85rem; color: var(--accent-strong);
+  }
+  .ct-prose :global(.c-grid) {
+    display: grid; gap: var(--space-3); align-items: start; margin: var(--space-2) 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr));
+  }
+  .ct-prose :global(.c-row) { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .ct-prose :global(.c-card) {
+    position: relative; padding: var(--space-3); background: var(--surface); color: var(--ink);
+    border: var(--border); border-radius: var(--radius); box-shadow: 4px 4px 0 var(--line);
+  }
+  .ct-prose :global(.c-card--red), .ct-prose :global(.c-card--blue), .ct-prose :global(.c-card--yellow) { padding-top: calc(var(--space-3) + 0.6rem); }
+  .ct-prose :global(.c-card--red)::before, .ct-prose :global(.c-card--blue)::before, .ct-prose :global(.c-card--yellow)::before {
+    content: ''; position: absolute; inset: -2.5px -2.5px auto; height: 0.8rem;
+    border: var(--border); border-radius: var(--radius) var(--radius) 0 0; background: var(--brand-red);
+  }
+  .ct-prose :global(.c-card--blue)::before { background: var(--brand-blue); }
+  .ct-prose :global(.c-card--yellow)::before { background: var(--brand-yellow); }
+  .ct-prose :global(.c-card:nth-child(3n + 1)) { rotate: -0.6deg; }
+  .ct-prose :global(.c-card:nth-child(3n + 2)) { rotate: 0.5deg; }
+  .ct-prose :global(.c-img) {
+    display: block; max-width: min(100%, 30rem); height: auto; margin: var(--space-2) auto;
+    border: 4px solid var(--line); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line);
+  }
+  .ct-prose :global(.c-num) {
+    display: grid; place-items: center; width: 2.6rem; height: 2.6rem; margin: 0 auto var(--space-1);
+    border: var(--border); border-radius: 50%; background: var(--brand-yellow); color: var(--ink);
+    font-family: var(--font-display); font-weight: 700; font-size: 1.2rem; box-shadow: 2px 2px 0 var(--line);
+  }
+  .ct-prose :global(.c-card:not(.c-center) .c-num) { margin-inline: 0; }
+  /* former JS carousel: three photos laid out like snapshots on a table */
+  .ct-prose :global(.c-strip) {
+    display: grid; gap: var(--space-3); margin: var(--space-3) 0 0;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr));
+  }
+  .ct-prose :global(.c-strip img) {
+    width: 100%; max-width: none; height: auto; margin: 0; aspect-ratio: 4 / 3; object-fit: cover;
+    border: 4px solid var(--line); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line);
+  }
+  .ct-prose :global(.c-strip img:nth-child(odd)) { rotate: -1.2deg; }
+  .ct-prose :global(.c-strip img:nth-child(even)) { rotate: 1deg; }
+  .kg-band--blue .ct-prose :global(.c-kicker) { color: var(--brand-yellow); }
+  /* centred running text is hard to read in a narrow column: phones get it ragged-right */
+  @media (max-width: 640px) {
+    .ct-prose :global(p.c-center:not(.c-kicker)), .ct-prose :global(div.c-center > p) { text-align: left; }
+  }
+  .ct-prose :global(.c-round) { border-radius: 50%; aspect-ratio: 1; object-fit: cover; width: min(20rem, 70vw); }
+  .ct-prose :global(.btn) { margin: var(--space-1) 0.25rem; }
+  .ct-intro .ct-prose :global(p:first-child) { font-size: 1.15rem; font-weight: 600; }
+  .kg-band--blue .ct-prose :global(.c-card) { color: var(--ink); }
+  .kg-band--blue .ct-prose :global(.c-card a:not(.btn)) { color: var(--link); }
+  .ct-tint { background: var(--bg-alt); }
+
+  /* ── stats ── */
+  .ct-stats { background: var(--brand-red); color: #fff; }
+  .ct-stats__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); }
+  .ct-stat { text-align: center; padding: var(--space-3); border-radius: var(--radius); background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45); }
+  .ct-stat__icon { font-size: 2rem; }
+  .ct-stat__num { font-family: var(--font-display); font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 700; line-height: 1; }
+  .ct-stat__label { font-weight: 800; margin-top: 0.3rem; }
+
+  /* ── gallery ── */
+  .ct-gallery__grid { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fill, minmax(min(46%, 15rem), 1fr)); margin-top: var(--space-3); }
+  .ct-gallery__item { margin: 0; }
+  .ct-gallery__item :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border: 4px solid var(--line); border-radius: var(--radius-sm); box-shadow: 4px 4px 0 var(--line); }
+  .ct-gallery__item:nth-child(odd) { rotate: -1.2deg; }
+  .ct-gallery__item:nth-child(even) { rotate: 1deg; }
+  .ct-center { text-align: center; }
+</style>

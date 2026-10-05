@@ -1,8 +1,10 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import HeroSlider from '../../../components/HeroSlider.astro';
-import HeroStage from '../../../components/HeroStage.astro';
-import GoogleReviews from '../../../components/GoogleReviews.astro';
+import V2Layout from '../../../layouts/V2Layout.astro';
+import Reviews from '../../../components/v2/Reviews.astro';
+import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
+import PlayingCard from '../../../components/v2/adult/PlayingCard.astro';
+import SuitRule from '../../../components/v2/adult/SuitRule.astro';
+import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
 import heroImg from '../../../assets/images/zauberer/buehnen-zauberer-hero.jpg';
 import feuerImg from '../../../assets/images/zauberer/tisch-zauberer-nrw-buehne.png';
@@ -66,7 +68,7 @@ const _pageGallery = [
 
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   keywords="Bühnenzauberer NRW, Stand-up Zauberer, Bühnenzauberei buchen, Gala Zauberer, Bühnenzauberer Firmenfeier"
@@ -74,204 +76,354 @@ const _pageGallery = [
   structuredData={[serviceSchema, faqSchema]}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Bühnen Zauberer', url: '/zauberer/buehnen-zauberer/' }]}
 >
-
-  <!-- Page Title -->
-  <section class="bg-white pt-8 pb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-sm text-[#595959] mb-4">
-        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
-        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
-        <span>Bühnen Zauberer</span>
-      </p>
-      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Bühnenzauberer NRW für Firmenfeiern &amp; Galas</h1>
-    </div>
-  </section>
-
-  <!-- Hero -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 600px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-    <Image
-      src={heroImg}
-      alt="Bühnenzauberer NRW – Professionelle Stand-up Zauberei"
-      title="Bühnenzauberer LIAR – Stand-up Zauberei in NRW"
-      class="absolute inset-0 w-full h-full object-cover object-top"
-      style="object-position: 47% 40%"
-      loading="eager"
-      fetchpriority="high"
-      widths={[600, 900, 1200]}
-      sizes="(max-width: 1152px) 100vw, 1120px"
-    />
-    <div class="absolute inset-0 bg-black/50"></div>
-    <div class="relative flex items-center justify-center" style="min-height: 600px;">
-      <div class="text-center px-6">
-        <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
+  <!-- ── Hero: house lights down, one card in the spotlight ── -->
+  <section class="ce-hero bz-hero">
+    <div class="container ce-hero__grid">
+      <div class="ce-hero__copy">
+        <p class="ce-crumbs">
+          <a href="/">Clown</a> »
+          <a href="/zauberer/">Zauberer</a> »
+          <span>Bühnen Zauberer</span>
+        </p>
+        <h1 class="ce-hero__title"><em>Bühnenzauberer</em> NRW für Firmenfeiern &amp; Galas</h1>
+        <SuitRule />
+        <h2 class="ce-hero__sub">
           Professionelle Bühnenzauberei in NRW
         </h2>
-        <p class="text-white/90 text-lg font-medium">Stand-up Comedy-Zauberei für Events, Galas &amp; Feiern</p>
+        <p class="ce-hero__claim ce-hero__claim--soft">Stand-up Comedy-Zauberei für Events, Galas &amp; Feiern</p>
+        <div class="ce-hero__actions">
+          <a class="btn btn--primary bz-btn" href="/kontakt/" data-magnetic>Unverbindlich anfragen</a>
+          <ReviewBadge />
+        </div>
       </div>
-    </div>
-  </div>
-    </div>
-  </section>
 
-  <!-- Intro -->
-  <section class="py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div>
-          <p class="text-[#374151] leading-relaxed mb-6">
-            Elegante Zauberkunst trifft auf französischen Charme – erleben Sie eine Show, die Ihre Gäste zwischen Staunen und Lachen pendeln lässt. Als professioneller Bühnenzauberer verwandle ich Ihre Veranstaltung in ein unvergessliches Erlebnis. Für kleinere Runden empfehle ich alternativ meine <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">Tischzauberei und Close-up Magie</a>.
-          </p>
-          <ul class="space-y-3">
-            {['✓ 35 Minuten Show', '✓ Für 10-150 Personen', '✓ 370+ TOP-Bewertungen ⭐⭐⭐⭐⭐', '✓ Auch auf Französisch verfügbar'].map(item => (
-              <li class="flex items-center gap-3 text-[#374151]">
-                <span class="text-[#d7393e] font-bold">{item.split(' ').slice(0,1)}</span>
-                <span>{item.split(' ').slice(1).join(' ')}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">📊 Eckdaten der Show</h3>
-          <dl class="space-y-3 text-sm">
-            {[
-              ['Dauer', '20–45 Minuten (flexibel)'],
-              ['Publikum', 'Optimal für 10–150 Personen'],
-              ['Platzbedarf', 'Ca. 3×3 Meter Fläche'],
-              ['Aufbauzeit', '15–20 Minuten'],
-              ['Sprachen', 'Deutsch, Französisch'],
-              ['Techn. Aufwand', 'Minimal'],
-            ].map(([k, v]) => (
-              <div class="flex gap-4">
-                <dt class="font-semibold text-[#1f2025] w-28 flex-shrink-0">{k}:</dt>
-                <dd class="text-[#374151]">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+      <div class="bz-spot">
+        <span class="bz-spot__beam" aria-hidden="true"></span>
+        <PlayingCard back class="bz-spot__back" aria-hidden="true" />
+        <PlayingCard rank="K" suit="♠" class="bz-spot__photo" data-tilt>
+          <Image
+            src={heroImg}
+            alt="Bühnenzauberer NRW – Professionelle Stand-up Zauberei"
+            title="Bühnenzauberer LIAR – Stand-up Zauberei in NRW"
+            widths={[400, 700, 1000]}
+            sizes="(max-width: 900px) 70vw, 380px"
+            loading="eager"
+            fetchpriority="high"
+            style="object-position: 47% 40%"
+          />
+        </PlayingCard>
       </div>
     </div>
   </section>
 
-  </HeroStage>
-  <!-- Weitere Anlässe (SEO-Audit 06.08.2026, Massnahme H6): /zauberer/hochzeit/ und
-       /zauberer/firmenfeier/ hatten null interne Content-Links und waren nur über die
-       Navigation erreichbar. -->
-  <section class="py-12 bg-[#f9fafb]" data-related-services>
-    <div class="max-w-4xl mx-auto px-4">
-      <h2 class="text-[#1f2025] font-extrabold text-2xl text-center mb-6">
+  <!-- ── Intro + playbill ──────────────────────────────────── -->
+  <section class="bz-intro">
+    <div class="container bz-intro__grid">
+      <div>
+        <p class="bz-intro__text" data-reveal>
+          Elegante Zauberkunst trifft auf französischen Charme – erleben Sie eine Show, die Ihre Gäste zwischen Staunen und Lachen pendeln lässt. Als professioneller Bühnenzauberer verwandle ich Ihre Veranstaltung in ein unvergessliches Erlebnis. Für kleinere Runden empfehle ich alternativ meine <a href="/zauberer/tisch-zauberer/">Tischzauberei und Close-up Magie</a>.
+        </p>
+        <ul class="bz-ticks">
+          {['✓ 35 Minuten Show', '✓ Für 10-150 Personen', '✓ 370+ TOP-Bewertungen ⭐⭐⭐⭐⭐', '✓ Auch auf Französisch verfügbar'].map((item, i) => (
+            <li data-reveal data-reveal-delay={i * 0.06}>
+              <span class="bz-tick">{item.split(' ').slice(0,1)}</span>
+              <span>{item.split(' ').slice(1).join(' ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="bz-bill" data-reveal="deal" data-tilt>
+        <span class="bz-bill__corner bz-bill__corner--tl" aria-hidden="true">♠</span>
+        <span class="bz-bill__corner bz-bill__corner--br ce-red" aria-hidden="true">♥</span>
+        <h3>📊 Eckdaten der Show</h3>
+        <dl>
+          {[
+            ['Dauer', '20–45 Minuten (flexibel)'],
+            ['Publikum', 'Optimal für 10–150 Personen'],
+            ['Platzbedarf', 'Ca. 3×3 Meter Fläche'],
+            ['Aufbauzeit', '15–20 Minuten'],
+            ['Sprachen', 'Deutsch, Französisch'],
+            ['Techn. Aufwand', 'Minimal'],
+          ].map(([k, v]) => (
+            <div class="bz-bill__row">
+              <dt>{k}:</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Anlässe ───────────────────────────────────────────── -->
+  <section class="ce-occasions" data-related-services>
+    <div class="container ce-narrow">
+      <h2 class="ce-h2 ce-center">
         Für welche Anlässe kann man Zauberer LIAR sonst buchen?
       </h2>
-      <div class="grid gap-4 sm:grid-cols-2">
-        <a href="/zauberer/hochzeit/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
-          <p class="font-bold text-[#1f2025] mb-1">Zauberer für die Hochzeit</p>
-          <p class="text-sm text-[#595959]">Close-up-Zauberei am Tisch, beim Sektempfang und während der Fotosession.</p>
+      <div class="ce-occasions__grid">
+        <a href="/zauberer/hochzeit/" class="ce-occasion" data-reveal="deal" data-tilt>
+          <span class="ce-occasion__suit ce-red" aria-hidden="true">♥</span>
+          <p class="ce-occasion__title">Zauberer für die Hochzeit</p>
+          <p class="ce-occasion__text">Close-up-Zauberei am Tisch, beim Sektempfang und während der Fotosession.</p>
         </a>
-        <a href="/zauberer/firmenfeier/" class="block bg-white border border-gray-200 rounded-xl p-5 hover:border-[#d7393e] transition-colors">
-          <p class="font-bold text-[#1f2025] mb-1">Zauberer für die Firmenfeier</p>
-          <p class="text-sm text-[#595959]">Walk-Act zwischen den Tischen oder Bühnenshow für Betriebsfeier und Jubiläum.</p>
+        <a href="/zauberer/firmenfeier/" class="ce-occasion" data-reveal="deal" data-reveal-delay="0.12" data-tilt>
+          <span class="ce-occasion__suit" aria-hidden="true">♠</span>
+          <p class="ce-occasion__title">Zauberer für die Firmenfeier</p>
+          <p class="ce-occasion__text">Walk-Act zwischen den Tischen oder Bühnenshow für Betriebsfeier und Jubiläum.</p>
         </a>
       </div>
     </div>
   </section>
 
-  <GoogleReviews />
+  <Reviews />
 
-  <!-- Was erwartet Sie? -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">Was ist Bühnenzauberei?</h2>
-      <p class="text-center text-[#374151] mb-8">Zauberkunst für Ihr gesamtes Publikum</p>
-      <div class="max-w-3xl mx-auto">
-        <p class="text-[#374151] leading-relaxed mb-8 text-center">
-          Bei der Bühnenzauberei (auch Stand-up Zauberei genannt) präsentiere ich meine Illusionen auf einer Bühne oder im Parkett für 10 bis 150 Zuschauer gleichzeitig. Im Gegensatz zur <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">Close-up Zauberei am Tisch</a> erleben bei einer Bühnenshow alle Gäste zur gleichen Zeit die gleichen verblüffenden Momente.
+  <!-- ── Was ist Bühnenzauberei? ───────────────────────────── -->
+  <section class="bz-what">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">Was ist Bühnenzauberei?</h2>
+      <p class="bz-what__sub ce-center">Zauberkunst für Ihr gesamtes Publikum</p>
+      <div class="ce-narrow">
+        <p class="ce-soft ce-center bz-what__text" data-reveal>
+          Bei der Bühnenzauberei (auch Stand-up Zauberei genannt) präsentiere ich meine Illusionen auf einer Bühne oder im Parkett für 10 bis 150 Zuschauer gleichzeitig. Im Gegensatz zur <a href="/zauberer/tisch-zauberer/">Close-up Zauberei am Tisch</a> erleben bei einer Bühnenshow alle Gäste zur gleichen Zeit die gleichen verblüffenden Momente.
         </p>
       </div>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+      <div class="bz-what__grid">
         {[
-          { title: 'Eleganter Stil mit Comedy-Elementen', text: 'Keine „klassische" <a href="/zauberer/zaubershow/" class="text-[#d7393e] hover:underline">Zaubershow</a>, sondern eine raffinierte Mischung aus Illusion und Humor.' },
+          { title: 'Eleganter Stil mit Comedy-Elementen', text: 'Keine „klassische" <a href="/zauberer/zaubershow/">Zaubershow</a>, sondern eine raffinierte Mischung aus Illusion und Humor.' },
           { title: 'Interaktiv & Einbindend', text: 'Ihr Publikum wird Teil der Show. Ausgewählte Gäste werden auf die Bühne geholt und erleben die Magie aus nächster Nähe.' },
           { title: 'Flexibel & Anpassbar', text: 'Elegant für Galas, humorvoll für Betriebsfeiern, zurückhaltend für feierliche Anlässe.' },
-        ].map(item => (
-          <div class="bg-white rounded-lg p-5 shadow-sm card-hover reveal">
-            <h4 class="font-bold text-[#1f2025] mb-2">{item.title}</h4>
-            <p class="text-[#374151] text-sm" set:html={item.text} />
+        ].map((item, i) => (
+          <div class="bz-what__card" data-reveal="deal" data-reveal-delay={i * 0.12} data-tilt>
+            <span class:list={['bz-what__suit', { 'ce-red': i === 1 }]} aria-hidden="true">{['♠', '♥', '♣'][i]}</span>
+            <h4>{item.title}</h4>
+            <p class="ce-soft" set:html={item.text} />
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Gallery -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl text-center mb-4">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <p class="text-[#374151] text-center mb-8">Weitere Fotos und Videos finden Sie in meiner <a href="/galerie/" class="text-[#d7393e] hover:underline">Foto- und Videogalerie</a>.</p>
-      <HeroSlider slides={_pageGallery} class="reveal" />
-    </div>
-  </section>
-
-  <!-- Why LIAR (pastel blue) -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-2xl sm:text-3xl text-center mb-10 text-[#1f2025]">Warum Bühnenzauberer LIAR?</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-        {features.map(f => (
-          <div class="bg-white rounded-xl p-5 border border-[#c5d3f7] shadow-sm card-hover reveal">
-            <p class="text-2xl mb-2">{f.icon}</p>
-            <h3 class="font-bold mb-2 text-[#1f2025]">{f.title}</h3>
-            <p class="text-[#374151] text-sm leading-relaxed">{f.text}</p>
+  <!-- ── Galerie: a spread of photo cards on the stage ─────── -->
+  <section class="bz-stageband bz-gallery">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <p class="ce-center bz-gallery__text">Weitere Fotos und Videos finden Sie in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
+      <div class="bz-spread">
+        {_pageGallery.map((g, i) => (
+          <div class="bz-spread__slot" style={`--i: ${i - 2}; --lift: ${Math.abs(i - 2)}`} data-reveal="deal" data-reveal-delay={i * 0.1}>
+            <PlayingCard
+              rank={['A', 'K', 'Q', 'J', '10'][i]}
+              suit={(['♠', '♥', '♣', '♦', '♠'] as const)[i]}
+              class="bz-spread__card"
+              style={`--sheen-delay: ${2 + i * 0.8}s`}
+            >
+              <Image src={g.src} alt={g.alt} widths={[300, 600]} sizes="(max-width: 700px) 44vw, 15rem" loading="lazy" />
+            </PlayingCard>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Einsatzgebiet -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="text-[#d7393e] font-bold text-2xl text-center mb-4">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
-      <h3 class="font-bold text-[#1f2025] text-xl text-center mb-8">Wo bin ich als Bühnenzauberer buchbar?</h3>
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-        <div>
-          <h4 class="font-bold text-[#1f2025] mb-3">🏙️ Haupteinsatzgebiet: Nordrhein-Westfalen</h4>
-          <p class="text-[#374151] text-sm leading-relaxed mb-4">
+  <!-- ── Warum ─────────────────────────────────────────────── -->
+  <section class="bz-why">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">Warum Bühnenzauberer LIAR?</h2>
+      <div class="bz-why__grid">
+        {features.map((f, i) => (
+          <div class="bz-why__item" data-reveal="tilt" data-reveal-delay={(i % 4) * 0.07}>
+            <p class="bz-why__icon">{f.icon}</p>
+            <h3>{f.title}</h3>
+            <p class="ce-soft">{f.text}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Einsatzgebiet + Kurz-FAQ ──────────────────────────── -->
+  <section class="bz-area">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <h3 class="bz-area__sub ce-center">Wo bin ich als Bühnenzauberer buchbar?</h3>
+      <div class="bz-area__grid">
+        <div data-reveal>
+          <h4>🏙️ Haupteinsatzgebiet: Nordrhein-Westfalen</h4>
+          <p class="ce-soft bz-area__cities">
             Essen • Düsseldorf • Dortmund • Köln • Duisburg • Oberhausen • Gelsenkirchen • Bochum • Gladbeck • Mülheim an der Ruhr • Herne • Marl • Dorsten • Herten • Recklinghausen • Krefeld • Moers • Münster • Hagen • Lünen • Bottrop • Castrop-Rauxel • Wuppertal
           </p>
-          <h4 class="font-bold text-[#1f2025] mb-2">🌍 Überregional & International</h4>
-          <p class="text-[#374151] text-sm">Deutschland: Gesamtes Bundesgebiet<br />International: Frankreich, Belgien, Niederlande, Österreich, Schweiz</p>
+          <h4>🌍 Überregional & International</h4>
+          <p class="ce-soft">Deutschland: Gesamtes Bundesgebiet<br />International: Frankreich, Belgien, Niederlande, Österreich, Schweiz</p>
         </div>
-        <div>
-          <h4 class="font-bold text-[#1f2025] mb-4">FAQ</h4>
-          <div class="space-y-3">
-            {faqItems.slice(0, 3).map(item => (
-              <div class="border-l-4 border-[#d7393e] pl-4">
-                <p class="font-semibold text-[#1f2025] text-sm mb-1">{item.q}</p>
-                <p class="text-[#374151] text-xs leading-relaxed">{item.a}</p>
-              </div>
-            ))}
-          </div>
+        <div class="bz-qa" data-reveal data-reveal-delay="0.1">
+          <h4>FAQ</h4>
+          {faqItems.slice(0, 3).map((item) => (
+            <div class="bz-qa__item">
+              <p class="bz-qa__q">{item.q}</p>
+              <p class="bz-qa__a">{item.a}</p>
+            </div>
+          ))}
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="bg-[#1f2025] py-14 text-white text-center">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎪 Jetzt buchen – Lassen Sie sich verzaubern!</h2>
-      <p class="text-gray-300 mb-6">Machen Sie Ihr Event zu einem unvergesslichen Erlebnis mit professioneller Bühnenzauberei. Über 400 zufriedene Kunden können nicht irren! Verschaffen Sie sich einen Eindruck in meiner <a href="/galerie/" class="text-white hover:underline font-semibold">Fotogalerie</a>.</p>
-      <div class="space-y-2 text-gray-300 mb-8">
-        <p>📞 Telefon: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172 – 1517578</a></p>
-        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
+  <!-- ── CTA: curtain call ─────────────────────────────────── -->
+  <section class="bz-stageband bz-cta">
+    <div class="container ce-narrow ce-center">
+      <h2 class="ce-h2">🎪 Jetzt buchen – Lassen Sie sich verzaubern!</h2>
+      <p class="bz-cta__text">Machen Sie Ihr Event zu einem unvergesslichen Erlebnis mit professioneller Bühnenzauberei. Über 400 zufriedene Kunden können nicht irren! Verschaffen Sie sich einen Eindruck in meiner <a href="/galerie/">Fotogalerie</a>.</p>
+      <div class="bz-cta__contact">
+        <p>📞 Telefon: <a href="tel:+491721517578">0172 – 1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
         <p>📍 Standort: Gladbeck, NRW (mobil in ganz Deutschland)</p>
       </div>
-      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
+      <a href="/kontakt/" class="btn btn--primary bz-btn" data-magnetic>
         Jetzt unverbindlich anfragen
       </a>
     </div>
   </section>
+</V2Layout>
 
-</BaseLayout>
+<style>
+  /* Stage palette: ink background, paper text. Red is lifted for contrast on black (#ec4a60: 4.9:1). */
+  .bz-hero, .bz-stageband {
+    --stage-red: #ec4a60;
+    --stage-soft: #d9d1c2;
+    background: var(--ink); color: var(--bg);
+  }
+
+  /* ── hero ── */
+  .bz-hero { isolation: isolate; }
+  :global(.v2) .bz-hero .ce-crumbs, :global(.v2) .bz-hero .ce-crumbs a { color: var(--stage-soft); }
+  :global(.v2) .bz-hero .ce-hero__title { color: var(--bg); }
+  :global(.v2) .bz-hero .ce-hero__title em { color: var(--stage-red); }
+  :global(.v2) .bz-hero .ce-hero__sub { color: var(--bg); }
+  :global(.v2) .bz-hero .ce-hero__claim--soft { color: var(--stage-soft); }
+  :global(.v2) .bz-hero .sr { color: var(--bg); }
+  :global(.v2) .bz-hero .sr__suit--red { color: var(--stage-red); }
+  :global(.v2) .bz-btn { background: var(--accent); color: var(--accent-ink); }
+  @media (hover: hover) and (pointer: fine) {
+    :global(.v2) .bz-btn:hover { background: var(--accent-strong); }
+  }
+
+  .bz-spot { position: relative; height: clamp(26rem, 44vw, 34rem); display: grid; place-items: center; }
+  /* the spotlight: a soft cone from above and a pool of light on the floor; fades up once */
+  .bz-spot__beam {
+    position: absolute; inset: -20% -10% -6%; z-index: -1; pointer-events: none;
+    background:
+      radial-gradient(ellipse 34% 9% at 50% 92%, rgba(255, 246, 225, 0.22), transparent 70%),
+      conic-gradient(at 50% -8%, transparent 0deg 162deg, rgba(255, 246, 225, 0.13) 170deg 190deg, transparent 198deg 360deg);
+    animation: bz-lights 1.6s var(--ease-out) 0.2s backwards;
+  }
+  @keyframes bz-lights { from { opacity: 0; } }
+  .bz-spot :global(.bz-spot__photo) { position: relative; z-index: 2; width: clamp(14rem, 25vw, 20rem); rotate: 2.5deg; }
+  .bz-spot :global(.bz-spot__back) {
+    position: absolute; left: 50%; top: 50%; width: clamp(12rem, 21vw, 17rem);
+    translate: -50% -50%;
+    transform: translate(-42%, 4%) rotate(-11deg);
+    box-shadow: 0 0 0 1px rgba(255, 253, 247, 0.25), var(--shadow);
+    animation: bz-slide 1s var(--ease-out) 0.5s backwards;
+  }
+  @keyframes bz-slide { from { transform: translate(0, 0) rotate(0deg); } }
+
+  /* ── intro + playbill ── */
+  .bz-intro__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-5); align-items: center; }
+  .bz-intro__text { font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.55rem); line-height: 1.5; }
+  .bz-ticks { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: 0.2rem; }
+  .bz-ticks li { display: flex; gap: 0.8rem; align-items: baseline; padding: 0.55rem 0; border-top: 1px solid rgba(20, 18, 16, 0.2); }
+  .bz-tick { color: var(--accent-strong); font-weight: 700; }
+  .bz-bill {
+    position: relative; padding: var(--space-4) var(--space-4) var(--space-3);
+    background: var(--surface); border-radius: var(--radius);
+    box-shadow: inset 0 0 0 0.5rem var(--surface), inset 0 0 0 calc(0.5rem + 1px) rgba(20, 18, 16, 0.5), 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
+  }
+  .bz-bill__corner { position: absolute; font-family: var(--font-display); font-size: 1.3rem; line-height: 1; }
+  .bz-bill__corner--tl { top: 1rem; left: 1.1rem; }
+  .bz-bill__corner--br { bottom: 1rem; right: 1.1rem; rotate: 180deg; }
+  .bz-bill h3 { font-size: 1.5rem; text-align: center; margin: 0 0 var(--space-3); }
+  .bz-bill dl { margin: 0; display: grid; gap: 0.55rem; }
+  /* programme rows with a dotted leader between label and value */
+  .bz-bill__row { display: flex; align-items: baseline; gap: 0.6rem; font-size: 0.95rem; }
+  .bz-bill__row::after { content: ''; order: 1; flex: 1; border-bottom: 1px dotted rgba(20, 18, 16, 0.45); min-width: 1rem; }
+  .bz-bill dt { font-weight: 600; white-space: nowrap; }
+  .bz-bill dd { order: 2; margin: 0; text-align: right; color: var(--ink-soft); }
+
+  /* ── what ── */
+  .bz-what { background: var(--bg-alt); }
+  .bz-what__sub { font-family: var(--font-display); font-style: italic; font-size: 1.35rem; margin-top: calc(var(--space-2) * -1) !important; }
+  .bz-what__text { margin-top: var(--space-3) !important; }
+  .bz-what__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); max-width: 62rem; margin: var(--space-4) auto 0; }
+  .bz-what__card {
+    position: relative; padding: var(--space-4) var(--space-3) var(--space-3);
+    background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16), var(--shadow);
+  }
+  .bz-what__suit { position: absolute; top: 0.8rem; left: 1rem; font-family: var(--font-display); font-size: 1.5rem; line-height: 1; }
+  .bz-what__card h4 { font-size: 1.35rem; margin: 0.4rem 0 0.5rem; }
+  .bz-what__card p { margin: 0; }
+
+  /* ── gallery: five photo cards fanned under the spotlight ── */
+  .bz-gallery { overflow: clip; }
+  .bz-gallery::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 55% 60% at 50% 0%, rgba(255, 246, 225, 0.14), transparent 70%);
+  }
+  :global(.v2) .bz-stageband .ce-h2 { color: var(--bg); }
+  .bz-stageband a:not(.btn) { color: var(--bg); text-decoration-color: var(--stage-red); text-underline-offset: 0.2em; }
+  .bz-gallery__text { color: var(--stage-soft); }
+  .bz-spread { position: relative; display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-4); }
+  .bz-spread__slot {
+    width: clamp(9.5rem, 17vw, 13rem); position: relative;
+    rotate: calc(var(--i) * 4deg);
+    translate: 0 calc(var(--lift) * 0.7rem);
+    transition: translate 0.35s var(--ease-out);
+  }
+  .bz-spread :global(.bz-spread__card) { box-shadow: 0 0 0 1px rgba(255, 253, 247, 0.2), 0 24px 40px -18px rgba(0, 0, 0, 0.8); }
+  @media (min-width: 901px) {
+    .bz-spread { flex-wrap: nowrap; gap: 0; }
+    .bz-spread__slot { margin-inline: -0.6rem; }
+  }
+  @media (hover: hover) and (pointer: fine) {
+    .bz-spread__slot:hover { z-index: 2; translate: 0 calc(var(--lift) * 0.7rem - 1.2rem); }
+  }
+
+  /* ── why ── */
+  .bz-why__grid { display: grid; gap: var(--space-2) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); margin-top: var(--space-4); }
+  .bz-why__item { padding: var(--space-3) 0 var(--space-2); border-top: 1px solid var(--ink); }
+  .bz-why__icon { font-size: 1.6rem; margin-bottom: 0.4rem !important; }
+  .bz-why__item h3 { font-size: 1.3rem; margin: 0 0 0.4rem; }
+  .bz-why__item .ce-soft { margin: 0; font-size: 0.95rem; }
+
+  /* ── area + short faq ── */
+  .bz-area__sub { font-size: clamp(1.25rem, 2.2vw, 1.6rem); font-style: italic; font-weight: 400; margin: 0 0 var(--space-4); }
+  .bz-area__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); align-items: start; }
+  .bz-area h4 { font-size: 1.25rem; margin: 0 0 0.6rem; }
+  .bz-area__cities { line-height: 1.9; }
+  .bz-qa { padding: var(--space-3); background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16); }
+  .bz-qa__item { margin-top: var(--space-2); }
+  .bz-qa__item + .bz-qa__item { padding-top: var(--space-2); border-top: 1px solid rgba(20, 18, 16, 0.12); }
+  .bz-qa__q::before { content: '\2660' / ''; margin-right: 0.45rem; color: var(--accent); }
+  .bz-qa__q { font-weight: 600; margin-bottom: 0.3rem !important; }
+  .bz-qa__a { font-size: 0.9rem; color: var(--ink-soft); margin: 0 !important; }
+
+  /* ── cta ── */
+  .bz-cta::before {
+    content: ''; position: absolute; inset: 0; pointer-events: none;
+    background: radial-gradient(ellipse 40% 70% at 50% 0%, rgba(255, 246, 225, 0.12), transparent 70%);
+  }
+  .bz-cta > .container { position: relative; }
+  .bz-cta__text, .bz-cta__contact { color: var(--stage-soft); }
+  .bz-cta__contact { margin: var(--space-3) 0; }
+  .bz-cta__contact p { margin-bottom: 0.4rem !important; }
+
+  @media (max-width: 900px) {
+    .bz-spot { height: 24rem; margin-top: var(--space-3); }
+    .bz-intro__grid, .bz-area__grid { grid-template-columns: 1fr; gap: var(--space-4); }
+    .bz-spread__slot { rotate: calc(var(--i) * 2deg); translate: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .bz-spot__beam, .bz-spot :global(.bz-spot__back) { animation: none !important; }
+    .bz-spread__slot { transition: none; }
+  }
+</style>

@@ -25,6 +25,7 @@
   /* ── hero ── */
   .kg-hero {
     position: relative;
+    overflow-x: clip; /* sticker + bunting tips must never make the phone page scroll sideways */
     padding-block: 0 var(--space-5);
     background:
       radial-gradient(circle at 12% 30%, color-mix(in srgb, var(--brand-yellow) 35%, transparent) 0 0.35rem, transparent 0.4rem) 0 0 / 7rem 7rem,
@@ -182,7 +183,7 @@
   @media (max-width: 900px) {
     .kg-hero__grid, .kg-intro__grid, .kg-area__grid { grid-template-columns: 1fr; }
     .kg-hero__photo { rotate: 1deg; margin-inline: 0.5rem; }
-    .kg-sticker { left: auto; right: -0.5rem; bottom: -1.2rem; width: 6rem; }
+    .kg-sticker { left: auto; right: 0; bottom: -1.2rem; width: 6rem; }
     .kg-sticker strong { font-size: 1.4rem; }
     .v2 main > section { padding-block: var(--space-5); }
   }

@@ -1,7 +1,10 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import HeroStage from '../../../components/HeroStage.astro';
-import GoogleReviews from '../../../components/GoogleReviews.astro';
+import V2Layout from '../../../layouts/V2Layout.astro';
+import Reviews from '../../../components/v2/Reviews.astro';
+import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
+import PlayingCard from '../../../components/v2/adult/PlayingCard.astro';
+import SuitRule from '../../../components/v2/adult/SuitRule.astro';
+import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
 import heroImg from '../../../assets/images/galerie/zauberer-firmenfeier.jpg';
 import weihnachtImg from '../../../assets/images/zauberer/zaubervorfuehrung-weihnachtsmarkt-dortmund.jpg';
@@ -50,7 +53,7 @@ const serviceSchema = {
 };
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   keywords="Zauberer Firmenfeier, Zauberer Weihnachtsfeier NRW, Firmenevent Zauberer, Betriebsfeier Zauberer, Gala Zauberer NRW"
@@ -58,169 +61,279 @@ const serviceSchema = {
   structuredData={[serviceSchema, faqSchema]}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Firmenfeier', url: '/zauberer/firmenfeier/' }]}
 >
-
-  <!-- Page Title -->
-  <section class="bg-white pt-8 pb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-sm text-[#595959] mb-4">
-        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
-        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
-        <span>Firmenfeier</span>
-      </p>
-      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Zauberer für Firmenfeier &amp; Weihnachtsfeier in NRW</h1>
-    </div>
-  </section>
-
-  <!-- Hero -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 560px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-        <Image
-          src={heroImg}
-          alt="Zauberer für die Firmenfeier – Unterhaltung für Ihr Team in NRW"
-          class="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
-          fetchpriority="high"
-          widths={[600, 900, 1200]}
-          sizes="(max-width: 1152px) 100vw, 1120px"
-        />
-        <div class="absolute inset-0 bg-black/50"></div>
-        <div class="relative flex items-center justify-center" style="min-height: 560px;">
-          <div class="text-center px-6">
-            <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
-              Unvergessliche Unterhaltung für Ihr Firmenevent
-            </h2>
-            <p class="text-white/90 text-lg font-medium">Bühnenshow &amp; Close-up-Zauberei – auch zur Weihnachtsfeier</p>
-          </div>
+  <!-- ── Hero: a squared deck, one card dealt from it. The photo card (LCP) never hides. ── -->
+  <section class="ce-hero">
+    <div class="container ce-hero__grid">
+      <div class="ce-hero__copy">
+        <p class="ce-crumbs">
+          <a href="/">Clown</a> »
+          <a href="/zauberer/">Zauberer</a> »
+          <span>Firmenfeier</span>
+        </p>
+        <h1 class="ce-hero__title">Zauberer für <em>Firmenfeier</em> &amp; Weihnachtsfeier in NRW</h1>
+        <SuitRule />
+        <h2 class="ce-hero__sub">
+          Unvergessliche Unterhaltung für Ihr Firmenevent
+        </h2>
+        <p class="ce-hero__claim">Bühnenshow &amp; Close-up-Zauberei – auch zur Weihnachtsfeier</p>
+        <div class="ce-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-magnetic>Jetzt unverbindlich anfragen</a>
+          <ReviewBadge />
         </div>
+      </div>
+
+      <div class="ff-deck">
+        <div class="ff-deck__stack" aria-hidden="true">
+          <PlayingCard back class="ff-deck__back" />
+          <PlayingCard back class="ff-deck__back" />
+          <PlayingCard back class="ff-deck__back" />
+        </div>
+        <PlayingCard rank="K" suit="♣" class="ff-deck__dealt" aria-hidden="true" />
+        <PlayingCard rank="A" suit="♠" class="ff-deck__photo" data-tilt>
+          <Image
+            src={heroImg}
+            alt="Zauberer für die Firmenfeier – Unterhaltung für Ihr Team in NRW"
+            loading="eager"
+            fetchpriority="high"
+            widths={[400, 700, 1000]}
+            sizes="(max-width: 900px) 64vw, 400px"
+          />
+        </PlayingCard>
       </div>
     </div>
   </section>
 
-  <!-- Intro -->
-  <section class="py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div>
-          <p class="text-[#374151] leading-relaxed mb-6">
-            Ob Sommerfest, Jubiläum, Betriebsfeier oder Weihnachtsfeier: Als Zauberer bringe ich frischen Schwung in Ihr Firmenevent. Als gemeinsames Highlight eine elegante <a href="/zauberer/buehnen-zauberer/" class="text-[#d7393e] hover:underline">Bühnenshow</a>, für den Empfang und die Tische die persönliche <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">Close-up-Zauberei</a> – auf Wunsch kombiniert und auf Deutsch oder Französisch.
-          </p>
-          <ul class="space-y-3">
-            {['✓ Bühnenshow & Close-up an den Tischen', '✓ Deutsch & Französisch', '✓ 370+ TOP-Bewertungen ⭐⭐⭐⭐⭐', '✓ Minimaler Aufwand, flexibel im Ablauf'].map(item => (
-              <li class="flex items-center gap-3 text-[#374151]">
-                <span class="text-[#d7393e] font-bold">{item.split(' ').slice(0,1)}</span>
-                <span>{item.split(' ').slice(1).join(' ')}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">📊 Auf einen Blick</h3>
-          <dl class="space-y-3 text-sm">
-            {[
-              ['Format', 'Bühnenshow & / oder Close-up-Zauberei'],
-              ['Anlässe', 'Firmenfeier, Betriebsfeier, Weihnachtsfeier, Jubiläum, Gala'],
-              ['Publikum', 'Bühne 10–150 Personen · Close-up jede Größe'],
-              ['Sprachen', 'Deutsch, Französisch'],
-              ['Techn. Aufwand', 'Minimal, kurze Aufbauzeit'],
-              ['Gebiet', 'NRW, deutschlandweit & international'],
-            ].map(([k, v]) => (
-              <div class="flex gap-4">
-                <dt class="font-semibold text-[#1f2025] w-28 flex-shrink-0">{k}:</dt>
-                <dd class="text-[#374151]">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+  <!-- ── Intro + "Auf einen Blick" as a briefing sheet ────── -->
+  <section class="ff-intro">
+    <div class="container ff-intro__grid">
+      <div>
+        <p class="ff-intro__text" data-reveal>
+          Ob Sommerfest, Jubiläum, Betriebsfeier oder Weihnachtsfeier: Als Zauberer bringe ich frischen Schwung in Ihr Firmenevent. Als gemeinsames Highlight eine elegante <a href="/zauberer/buehnen-zauberer/">Bühnenshow</a>, für den Empfang und die Tische die persönliche <a href="/zauberer/tisch-zauberer/">Close-up-Zauberei</a> – auf Wunsch kombiniert und auf Deutsch oder Französisch.
+        </p>
+        <ul class="ff-checks">
+          {['✓ Bühnenshow & Close-up an den Tischen', '✓ Deutsch & Französisch', '✓ 370+ TOP-Bewertungen ⭐⭐⭐⭐⭐', '✓ Minimaler Aufwand, flexibel im Ablauf'].map((item, i) => (
+            <li data-reveal data-reveal-delay={0.08 + i * 0.06}>
+              <span class="ff-checks__mark">{item.split(' ').slice(0,1)}</span>
+              <span>{item.split(' ').slice(1).join(' ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="ff-brief" data-reveal>
+        <h3 class="ff-brief__title">📊 Auf einen Blick</h3>
+        <dl class="ff-brief__list">
+          {[
+            ['Format', 'Bühnenshow & / oder Close-up-Zauberei'],
+            ['Anlässe', 'Firmenfeier, Betriebsfeier, Weihnachtsfeier, Jubiläum, Gala'],
+            ['Publikum', 'Bühne 10–150 Personen · Close-up jede Größe'],
+            ['Sprachen', 'Deutsch, Französisch'],
+            ['Techn. Aufwand', 'Minimal, kurze Aufbauzeit'],
+            ['Gebiet', 'NRW, deutschlandweit & international'],
+          ].map(([k, v]) => (
+            <div class="ff-brief__row">
+              <dt>{k}:</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
   </section>
 
-  </HeroStage>
-  <GoogleReviews />
+  <Reviews />
 
-  <!-- Formate -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">Zwei Formate – ein unvergesslicher Abend</h2>
-      <p class="text-center text-[#374151] mb-8">Einzeln oder kombiniert, ganz nach Ablauf Ihrer Feier</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+  <!-- ── Formate: an evening agenda ───────────────────────── -->
+  <section class="ff-formats">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">Zwei Formate – ein unvergesslicher Abend</h2>
+      <p class="ce-center ce-soft">Einzeln oder kombiniert, ganz nach Ablauf Ihrer Feier</p>
+      <ol class="ff-agenda">
         {[
           { title: '🎭 Bühnenshow', text: 'Stand-up-Comedy-Zauberei für alle Gäste gleichzeitig – elegant, humorvoll und interaktiv. Das zentrale Highlight Ihres Abends.' },
           { title: '🍸 Close-up an den Tischen', text: 'Zauberei zum Anfassen direkt an den Gästen – perfekt für Empfang, Networking und die Zeit zwischen den Gängen.' },
           { title: '🎄 Weihnachtsfeier', text: 'Stimmungsvoll eingebunden in Ihre Weihnachtsfeier – der Moment, über den das Team noch im neuen Jahr spricht.' },
-        ].map(item => (
-          <div class="bg-white rounded-lg p-5 shadow-sm card-hover reveal">
-            <h4 class="font-bold text-[#1f2025] mb-2">{item.title}</h4>
-            <p class="text-[#374151] text-sm leading-relaxed">{item.text}</p>
+        ].map((item, i) => (
+          <li class="ff-agenda__item" data-reveal data-reveal-delay={i * 0.14}>
+            <h4>{item.title}</h4>
+            <p class="ce-soft">{item.text}</p>
+          </li>
+        ))}
+      </ol>
+    </div>
+  </section>
+
+  <!-- ── Eindrücke: a hand dealt onto the ink table ───────── -->
+  <section class="ff-table">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">📸 Eindrücke</h2>
+      <p class="ce-center ff-table__note">Weitere Fotos und Videos in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
+      <div class="ff-table__hand">
+        <div data-reveal="deal">
+          <PlayingCard rank="10" suit="♠" class="ff-table__card" data-tilt style="--sheen-delay: 2.2s">
+            <Image src={buehneImg} alt="Bühnenshow bei einer Firmenfeier in Essen" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
+          </PlayingCard>
+        </div>
+        <div data-reveal="deal" data-reveal-delay="0.12">
+          <PlayingCard rank="J" suit="♣" class="ff-table__card" data-tilt style="--sheen-delay: 3.1s">
+            <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Mülheim" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
+          </PlayingCard>
+        </div>
+        <div data-reveal="deal" data-reveal-delay="0.24">
+          <PlayingCard rank="Q" suit="♦" class="ff-table__card" data-tilt style="--sheen-delay: 4s">
+            <Image src={weihnachtImg} alt="Zaubervorführung auf einem Weihnachtsmarkt in Dortmund" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
+          </PlayingCard>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Warum ─────────────────────────────────────────────── -->
+  <section class="ce-why">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">Warum LIAR für Ihr Firmenevent?</h2>
+      <div class="ce-why__grid">
+        {features.map((f, i) => (
+          <div class="ce-why__item" data-reveal="tilt" data-reveal-delay={(i % 3) * 0.07}>
+            <p class="ce-why__suit">{f.icon}</p>
+            <h3 class="ce-why__title">{f.title}</h3>
+            <p class="ce-soft">{f.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Gallery -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl text-center mb-4">📸 Eindrücke</h2>
-      <p class="text-[#374151] text-center mb-8">Weitere Fotos und Videos in meiner <a href="/galerie/" class="text-[#d7393e] hover:underline">Foto- und Videogalerie</a>.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Image src={buehneImg} alt="Bühnenshow bei einer Firmenfeier in Essen" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
-        <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Mülheim" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
-        <Image src={weihnachtImg} alt="Zaubervorführung auf einem Weihnachtsmarkt in Dortmund" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
-      </div>
-    </div>
-  </section>
-
-  <!-- Why LIAR -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-2xl sm:text-3xl text-center mb-10 text-[#1f2025]">Warum LIAR für Ihr Firmenevent?</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {features.map(f => (
-          <div class="bg-white rounded-xl p-5 border border-[#c5d3f7] shadow-sm card-hover reveal">
-            <p class="text-2xl mb-2">{f.icon}</p>
-            <h3 class="font-bold mb-2 text-[#1f2025]">{f.title}</h3>
-            <p class="text-[#374151] text-sm leading-relaxed">{f.text}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  </section>
-
-  <!-- FAQ -->
-  <section class="py-14 bg-white">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="text-center text-2xl font-extrabold text-[#1f2025] mb-8">Häufig gestellte Fragen</h2>
-      <div class="space-y-4">
-        {faqItems.map((i) => (
-          <details class="bg-[#f9fafb] rounded-xl p-5 group">
-            <summary class="font-bold cursor-pointer text-[#1f2025] flex justify-between items-center gap-4">
+  <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
+  <section class="ce-faq">
+    <div class="container ce-narrow">
+      <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
+      <div class="ce-faq__list">
+        {faqItems.map((i, n) => (
+          <details class="ce-faq__item" data-reveal data-reveal-delay={n * 0.05}>
+            <summary>
+              <span class="ce-faq__suit" aria-hidden="true">{['♠', '♥', '♣', '♦'][n % 4]}</span>
               <span>{i.q}</span>
-              <span class="text-[#d7393e] transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+              <span class="ff-faq__plus">+</span>
             </summary>
-            <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">{i.a}</p>
+            <p>{i.a}</p>
           </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="bg-[#1f2025] py-14 text-white text-center">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="font-bold text-2xl sm:text-3xl mb-4">🎉 Zauberei für Ihre Firmenfeier anfragen</h2>
-      <p class="text-gray-300 mb-6">Gerade zur Weihnachtszeit sind Termine schnell vergeben – fragen Sie frühzeitig an. Schildern Sie mir kurz Ihr Event, ich erstelle Ihnen ein unverbindliches Angebot.</p>
-      <div class="space-y-2 text-gray-300 mb-8">
-        <p>📞 Telefon: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172 – 1517578</a></p>
-        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
-        <p>📍 Standort: Gladbeck, NRW (mobil in ganz Deutschland)</p>
+  <!-- ── CTA ───────────────────────────────────────────────── -->
+  <section class="ff-cta">
+    <div class="container ff-cta__grid">
+      <div data-reveal>
+        <h2 class="ce-h2">🎉 Zauberei für Ihre Firmenfeier anfragen</h2>
+        <p class="ce-soft">Gerade zur Weihnachtszeit sind Termine schnell vergeben – fragen Sie frühzeitig an. Schildern Sie mir kurz Ihr Event, ich erstelle Ihnen ein unverbindliches Angebot.</p>
       </div>
-      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
-        Jetzt unverbindlich anfragen
-      </a>
+      <div class="ff-cta__contact" data-reveal data-reveal-delay="0.1">
+        <p>📞 Telefon: <a href="tel:+491721517578">0172 – 1517578</a></p>
+        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
+        <p>📍 Standort: Gladbeck, NRW (mobil in ganz Deutschland)</p>
+        <a href="/kontakt/" class="btn btn--primary" data-magnetic>
+          Jetzt unverbindlich anfragen
+        </a>
+      </div>
     </div>
   </section>
+</V2Layout>
 
-</BaseLayout>
+<style>
+  /* ── hero: squared deck + one dealt card ── */
+  .ff-deck { position: relative; height: clamp(24rem, 44vw, 32rem); }
+  .ff-deck__stack { position: absolute; right: 4%; top: 10%; width: clamp(10rem, 17vw, 13.5rem); aspect-ratio: 5 / 7; rotate: 7deg; }
+  .ff-deck__stack :global(.ff-deck__back) { position: absolute; inset: 0; }
+  .ff-deck__stack :global(.ff-deck__back:nth-child(1)) { translate: 8px 8px; }
+  .ff-deck__stack :global(.ff-deck__back:nth-child(2)) { translate: 4px 4px; }
+  /* K♣ slides off the deck to its place beside the photo */
+  .ff-deck :global(.ff-deck__dealt) {
+    position: absolute; right: 26%; top: 2%; width: clamp(9rem, 15vw, 12rem); rotate: -14deg; z-index: 1;
+    animation: ff-deal 0.9s var(--ease-out-expo) 0.35s backwards;
+  }
+  .ff-deck :global(.ff-deck__dealt .pc__pip) { font-size: clamp(3rem, 6vw, 4.2rem); }
+  .ff-deck :global(.ff-deck__photo) { position: absolute; left: 4%; bottom: 2%; width: clamp(13rem, 23vw, 18.5rem); rotate: -3deg; z-index: 2; }
+  .ff-deck :global(.ff-deck__photo img) { object-position: 50% 40%; }
+  @keyframes ff-deal { from { translate: 85% 25%; rotate: 7deg; } }
+
+  /* ── intro ── */
+  .ff-intro { padding-top: var(--space-4); }
+  .ff-intro__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-5); align-items: start; }
+  .ff-intro__text { font-family: var(--font-display); font-size: clamp(1.2rem, 2.1vw, 1.5rem); line-height: 1.5; margin-bottom: var(--space-3); }
+  .ff-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .ff-checks li { display: flex; gap: 0.8rem; align-items: baseline; font-weight: 600; }
+  .ff-checks__mark { color: var(--accent-strong); font-weight: 700; }
+
+  /* briefing sheet: ink header rule, label/value rows on hairlines */
+  .ff-brief { border-top: 4px solid var(--ink); padding-top: var(--space-2); }
+  .ff-brief__title { font-size: 1.6rem; font-weight: 600; margin-bottom: var(--space-2); }
+  .ff-brief__list { margin: 0; }
+  .ff-brief__row { display: grid; grid-template-columns: 9.5rem 1fr; gap: var(--space-2); padding: 0.8rem 0; border-bottom: 1px solid rgba(20, 18, 16, 0.22); }
+  .ff-brief__row dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-strong); padding-top: 0.2rem; }
+  .ff-brief__row dd { margin: 0; }
+
+  /* ── formats: agenda on a timeline ── */
+  .ff-formats { background: var(--bg-alt); }
+  .ff-agenda {
+    list-style: none; margin: var(--space-4) auto 0; padding: 0; max-width: 64rem; counter-reset: ff-step;
+    display: grid; gap: var(--space-3); grid-template-columns: repeat(3, 1fr); position: relative;
+  }
+  /* the timeline rule runs through the markers */
+  .ff-agenda::before { content: ''; position: absolute; left: 0; right: 0; top: 1.4rem; height: 1px; background: var(--ink); opacity: 0.4; }
+  .ff-agenda__item { position: relative; padding-top: 4rem; counter-increment: ff-step; }
+  .ff-agenda__item::before {
+    content: counter(ff-step, decimal-leading-zero); position: absolute; top: 0; left: 0;
+    width: 2.8rem; height: 2.8rem; display: grid; place-items: center;
+    font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--accent-ink);
+    background: var(--ink); border-radius: 50%; box-shadow: 0 0 0 0.4rem var(--bg-alt);
+  }
+  .ff-agenda__item:nth-child(2)::before { background: var(--accent-strong); }
+  .ff-agenda__item h4 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin: 0 0 0.5rem; }
+  .ff-agenda__item p { margin: 0; }
+
+  /* ── gallery on the ink table ── */
+  .ff-table { background: var(--ink); color: var(--bg); overflow: clip; }
+  .ff-table .ce-h2 { color: var(--bg); }
+  .ff-table__note { color: #d9d1c2; }
+  .ff-table__note a { color: #f4a7b2; } /* 9.6:1 on black */
+  .ff-table__hand { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); margin-top: var(--space-4); align-items: end; }
+  .ff-table__hand :global(.ff-table__card) { aspect-ratio: 4 / 3.6; }
+  .ff-table__hand > div:nth-child(1) :global(.ff-table__card) { rotate: -4deg; translate: 0.6rem 0.6rem; }
+  .ff-table__hand > div:nth-child(2) :global(.ff-table__card) { translate: 0 -1rem; }
+  .ff-table__hand > div:nth-child(3) :global(.ff-table__card) { rotate: 4deg; translate: -0.6rem 0.6rem; }
+
+  /* ── faq: keep the legacy "+" as text, hide the kit's generated one ── */
+  :global(.v2) .ce-faq__item summary::after { content: none; }
+  .ff-faq__plus {
+    position: absolute; right: 0.25rem; top: 50%; translate: 0 -50%;
+    font-family: var(--font-body); font-weight: 300; font-size: 1.8rem; line-height: 1; color: var(--accent-strong);
+    transition: rotate 0.25s var(--ease-out);
+  }
+  .ce-faq__item[open] .ff-faq__plus { rotate: 45deg; }
+
+  /* ── cta ── */
+  .ff-cta { border-top: 4px solid var(--ink); }
+  .ff-cta__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-5); align-items: center; }
+  .ff-cta__contact { padding-left: var(--space-4); border-left: 1px solid rgba(20, 18, 16, 0.3); }
+  .ff-cta__contact p { margin-bottom: 0.5rem; }
+  .ff-cta__contact .btn { margin-top: var(--space-2); }
+
+  @media (max-width: 900px) {
+    .ff-deck { height: 22rem; margin-top: var(--space-2); }
+    .ff-deck :global(.ff-deck__photo) { width: 12.5rem; left: 6%; }
+    .ff-deck__stack { width: 9.5rem; right: 6%; }
+    .ff-deck :global(.ff-deck__dealt) { width: 8.5rem; right: 22%; }
+    .ff-intro__grid, .ff-cta__grid { grid-template-columns: 1fr; gap: var(--space-4); }
+    .ff-agenda { grid-template-columns: 1fr; gap: var(--space-4); }
+    .ff-agenda::before { left: 1.4rem; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
+    .ff-agenda__item { padding: 0 0 0 4.4rem; }
+    .ff-table__hand { grid-template-columns: 1fr; max-width: 24rem; margin-inline: auto; }
+    .ff-table__hand > div :global(.ff-table__card) { translate: none; }
+    .ff-cta__contact { padding-left: 0; border-left: 0; padding-top: var(--space-3); border-top: 1px solid rgba(20, 18, 16, 0.3); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .ff-deck :global(.ff-deck__dealt) { animation: none; }
+  }
+</style>

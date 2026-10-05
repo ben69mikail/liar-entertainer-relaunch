@@ -10,6 +10,15 @@
 @import '@fontsource-variable/bodoni-moda/wght-italic.css';
 @import '@fontsource-variable/instrument-sans/wght.css';
 
+/* Emoji in copy (✨ 🎭 …) render as the system colour emoji, as on the legacy site. Without this
+   Bodoni's "symbols" subset claims ✨ and is fetched late, which delayed the LCP on adult pages.
+   The card suits U+2660–2667 are left out on purpose: they stay in Bodoni. local() = no download. */
+@font-face {
+  font-family: 'Emoji Glyphs';
+  src: local('Apple Color Emoji'), local('Segoe UI Emoji'), local('Noto Color Emoji');
+  unicode-range: U+2600-265F, U+2668-27BF, U+2B50, U+2B55, U+1F000-1FAFF;
+}
+
 :root {
   /* Brand colours from the clown logo */
   --brand-red: #d7393e;
@@ -79,7 +88,7 @@
   --link: #a30c25;
   --star: #c8102e;
 
-  --font-display: 'Bodoni Moda Variable', 'Didot', Georgia, serif;
+  --font-display: 'Emoji Glyphs', 'Bodoni Moda Variable', 'Didot', Georgia, serif;
   --font-body: 'Instrument Sans Variable', 'Segoe UI', sans-serif;
   --display-weight: 600;
   --display-tracking: -0.02em;

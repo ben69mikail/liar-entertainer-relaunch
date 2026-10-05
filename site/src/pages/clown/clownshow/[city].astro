@@ -1,0 +1,13 @@
+---
+// City pages of this family: data from src/data/cities/clownshow.json (extracted 1:1 from the legacy pages).
+import CityPage from '../../../components/v2/kids/CityPage.astro';
+import type { CityData } from '../../../components/v2/kids/CityPage.astro';
+import cities from '../../../data/cities/clownshow.json';
+
+export function getStaticPaths() {
+  return Object.entries(cities as Record<string, CityData>).map(([city, data]) => ({ params: { city }, props: { data } }));
+}
+const { data } = Astro.props as { data: CityData };
+---
+
+<CityPage city={data} />

@@ -1,7 +1,10 @@
 ---
-import BaseLayout from '../../../layouts/BaseLayout.astro';
-import HeroStage from '../../../components/HeroStage.astro';
-import GoogleReviews from '../../../components/GoogleReviews.astro';
+import V2Layout from '../../../layouts/V2Layout.astro';
+import Reviews from '../../../components/v2/Reviews.astro';
+import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
+import PlayingCard from '../../../components/v2/adult/PlayingCard.astro';
+import SuitRule from '../../../components/v2/adult/SuitRule.astro';
+import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
 import heroImg from '../../../assets/images/zauberer/tisch-zauberei-hero.jpg';
 import closeupImg from '../../../assets/images/zauberer/close-up-zauberei-duesseldorf.jpg';
@@ -50,7 +53,7 @@ const serviceSchema = {
 };
 ---
 
-<BaseLayout
+<V2Layout
   title={seoTitle}
   description={seoDescription}
   keywords="Zauberer Hochzeit, Hochzeitszauberer NRW, Tischzauberer Hochzeit, Zauberer Sektempfang, Close-up Hochzeit"
@@ -58,169 +61,292 @@ const serviceSchema = {
   structuredData={[serviceSchema, faqSchema]}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Hochzeit', url: '/zauberer/hochzeit/' }]}
 >
-
-  <!-- Page Title -->
-  <section class="bg-white pt-8 pb-0">
-    <div class="max-w-6xl mx-auto px-4">
-      <p class="text-sm text-[#595959] mb-4">
-        <a href="/" class="hover:text-[#d7393e]">Clown</a> »
-        <a href="/zauberer/" class="hover:text-[#d7393e]">Zauberer</a> »
-        <span>Hochzeit</span>
-      </p>
-      <h1 class="font-black text-[#1f2025] text-3xl sm:text-5xl mb-6">Zauberer für die Hochzeit in NRW</h1>
-    </div>
-  </section>
-
-  <!-- Hero -->
-  <HeroStage blobOpacity={0.45}>
-  <section class="pt-6 sm:pt-8">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="relative overflow-hidden rounded-3xl" style="min-height: 560px; box-shadow: 0 12px 32px rgba(0,0,0,0.14);">
-        <Image
-          src={heroImg}
-          alt="Zauberer für die Hochzeit – elegante Tischzauberei in NRW"
-          class="absolute inset-0 w-full h-full object-cover object-center"
-          loading="eager"
-          fetchpriority="high"
-          widths={[600, 900, 1200]}
-          sizes="(max-width: 1152px) 100vw, 1120px"
-        />
-        <div class="absolute inset-0 bg-black/50"></div>
-        <div class="relative flex items-center justify-center" style="min-height: 560px;">
-          <div class="text-center px-6">
-            <h2 class="text-white font-bold leading-tight mb-4" style="font-size: clamp(1.6rem, 4vw, 3rem); text-shadow: 2px 2px 8px rgba(0,0,0,0.5);">
-              Magische Momente für Ihre Hochzeit
-            </h2>
-            <p class="text-white/90 text-lg font-medium">Elegante Tischzauberei am Sektempfang &amp; Show als Highlight</p>
-          </div>
+  <!-- ── Hero: two hearts leaning on each other like a couple. The photo card (LCP) never hides. ── -->
+  <section class="ce-hero">
+    <div class="container ce-hero__grid">
+      <div class="ce-hero__copy">
+        <p class="ce-crumbs">
+          <a href="/">Clown</a> »
+          <a href="/zauberer/">Zauberer</a> »
+          <span>Hochzeit</span>
+        </p>
+        <h1 class="ce-hero__title">Zauberer für die <em>Hochzeit</em> in NRW</h1>
+        <SuitRule />
+        <h2 class="ce-hero__sub">
+          Magische Momente für Ihre Hochzeit
+        </h2>
+        <p class="ce-hero__claim">Elegante Tischzauberei am Sektempfang &amp; Show als Highlight</p>
+        <div class="ce-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-magnetic>Jetzt unverbindlich anfragen</a>
+          <ReviewBadge />
         </div>
+      </div>
+
+      <div class="hz-couple">
+        <PlayingCard rank="Q" suit="♥" class="hz-couple__partner" aria-hidden="true" />
+        <PlayingCard rank="K" suit="♥" class="hz-couple__photo" data-tilt>
+          <Image
+            src={heroImg}
+            alt="Zauberer für die Hochzeit – elegante Tischzauberei in NRW"
+            loading="eager"
+            fetchpriority="high"
+            widths={[400, 700, 1000]}
+            sizes="(max-width: 900px) 64vw, 400px"
+          />
+        </PlayingCard>
+        <span class="hz-couple__heart" aria-hidden="true">♥</span>
       </div>
     </div>
   </section>
 
-  <!-- Intro -->
-  <section class="py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12">
-        <div>
-          <p class="text-[#374151] leading-relaxed mb-6">
-            Der schönste Tag im Leben verdient besondere Unterhaltung. Als Zauberer sorge ich in den Wartezeiten Ihrer Hochzeit – am Sektempfang, während der Fotosession oder zwischen den Gängen – für Staunen und gelöste Stimmung. Im Mittelpunkt steht die <a href="/zauberer/tisch-zauberer/" class="text-[#d7393e] hover:underline">Tischzauberei (Close-up)</a> direkt an den Gästen; auf Wunsch ergänzt um eine elegante <a href="/zauberer/buehnen-zauberer/" class="text-[#d7393e] hover:underline">Bühnenshow</a> als gemeinsames Highlight.
-          </p>
-          <ul class="space-y-3">
-            {['✓ Zauberei direkt an den Tischen & Gruppen', '✓ Deutsch & Französisch', '✓ 370+ TOP-Bewertungen ⭐⭐⭐⭐⭐', '✓ Ohne Bühnenaufbau, flexibel im Ablauf'].map(item => (
-              <li class="flex items-center gap-3 text-[#374151]">
-                <span class="text-[#d7393e] font-bold">{item.split(' ').slice(0,1)}</span>
-                <span>{item.split(' ').slice(1).join(' ')}</span>
-              </li>
-            ))}
-          </ul>
-        </div>
-        <div class="bg-gray-50 rounded-xl p-6 card-hover reveal">
-          <h3 class="font-bold text-[#1f2025] mb-4">📊 Auf einen Blick</h3>
-          <dl class="space-y-3 text-sm">
-            {[
-              ['Format', 'Tischzauberei (Close-up) & optional Bühnenshow'],
-              ['Anlässe', 'Sektempfang, Fotopause, Abendprogramm'],
-              ['Gäste', 'Von der kleinen Feier bis zur großen Gesellschaft'],
-              ['Sprachen', 'Deutsch, Französisch'],
-              ['Aufbau', 'Für Close-up keiner – flexibel & mobil'],
-              ['Gebiet', 'NRW, deutschlandweit & international'],
-            ].map(([k, v]) => (
-              <div class="flex gap-4">
-                <dt class="font-semibold text-[#1f2025] w-28 flex-shrink-0">{k}:</dt>
-                <dd class="text-[#374151]">{v}</dd>
-              </div>
-            ))}
-          </dl>
-        </div>
+  <!-- ── Intro + "Auf einen Blick" as a menu card ─────────── -->
+  <section class="hz-intro">
+    <div class="container hz-intro__grid">
+      <div>
+        <p class="hz-intro__text" data-reveal>
+          Der schönste Tag im Leben verdient besondere Unterhaltung. Als Zauberer sorge ich in den Wartezeiten Ihrer Hochzeit – am Sektempfang, während der Fotosession oder zwischen den Gängen – für Staunen und gelöste Stimmung. Im Mittelpunkt steht die <a href="/zauberer/tisch-zauberer/">Tischzauberei (Close-up)</a> direkt an den Gästen; auf Wunsch ergänzt um eine elegante <a href="/zauberer/buehnen-zauberer/">Bühnenshow</a> als gemeinsames Highlight.
+        </p>
+        <ul class="hz-checks">
+          {['✓ Zauberei direkt an den Tischen & Gruppen', '✓ Deutsch & Französisch', '✓ 370+ TOP-Bewertungen ⭐⭐⭐⭐⭐', '✓ Ohne Bühnenaufbau, flexibel im Ablauf'].map((item, i) => (
+            <li data-reveal data-reveal-delay={0.08 + i * 0.06}>
+              <span class="hz-checks__mark">{item.split(' ').slice(0,1)}</span>
+              <span>{item.split(' ').slice(1).join(' ')}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+      <div class="hz-menu" data-reveal="tilt">
+        <h3 class="hz-menu__title">📊 Auf einen Blick</h3>
+        <dl class="hz-menu__list">
+          {[
+            ['Format', 'Tischzauberei (Close-up) & optional Bühnenshow'],
+            ['Anlässe', 'Sektempfang, Fotopause, Abendprogramm'],
+            ['Gäste', 'Von der kleinen Feier bis zur großen Gesellschaft'],
+            ['Sprachen', 'Deutsch, Französisch'],
+            ['Aufbau', 'Für Close-up keiner – flexibel & mobil'],
+            ['Gebiet', 'NRW, deutschlandweit & international'],
+          ].map(([k, v]) => (
+            <div class="hz-menu__row">
+              <dt>{k}:</dt>
+              <dd>{v}</dd>
+            </div>
+          ))}
+        </dl>
       </div>
     </div>
   </section>
 
-  </HeroStage>
-  <GoogleReviews />
+  <Reviews />
 
-  <!-- Ablauf -->
-  <section class="bg-gray-50 py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl sm:text-3xl text-center mb-2">So passt die Zauberei in Ihren Hochzeitstag</h2>
-      <p class="text-center text-[#374151] mb-8">Unterhaltung genau dann, wenn sonst Leerlauf entsteht</p>
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto">
+  <!-- ── Ablauf: three place cards along the wedding day ──── -->
+  <section class="hz-day">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">So passt die Zauberei in Ihren Hochzeitstag</h2>
+      <p class="ce-center ce-soft">Unterhaltung genau dann, wenn sonst Leerlauf entsteht</p>
+      <div class="hz-places">
         {[
           { title: '🥂 Sektempfang', text: 'Ich gehe von Gruppe zu Gruppe und verwandle das Warten in kleine Wow-Momente – ein perfekter Eisbrecher zwischen Gästen, die sich noch nicht kennen.' },
           { title: '📸 Fotopause', text: 'Während das Brautpaar für Fotos unterwegs ist, bleibt die Gesellschaft bestens unterhalten – keine Langeweile, keine Wartelücke.' },
           { title: '🎭 Abendprogramm', text: 'Als Übergang zum Abend eine kurze Bühnenshow – elegant, humorvoll und für alle Gäste gleichzeitig.' },
-        ].map(item => (
-          <div class="bg-white rounded-lg p-5 shadow-sm card-hover reveal">
-            <h4 class="font-bold text-[#1f2025] mb-2">{item.title}</h4>
-            <p class="text-[#374151] text-sm leading-relaxed">{item.text}</p>
+        ].map((item, i) => (
+          <div class="hz-place" data-reveal="deal" data-reveal-delay={i * 0.12} data-tilt>
+            <span class="hz-place__suit" aria-hidden="true">♥</span>
+            <h4>{item.title}</h4>
+            <p class="ce-soft">{item.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- Gallery -->
-  <section class="bg-white py-14">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-[#1f2025] text-2xl text-center mb-4">📸 Eindrücke</h2>
-      <p class="text-[#374151] text-center mb-8">Weitere Fotos und Videos in meiner <a href="/galerie/" class="text-[#d7393e] hover:underline">Foto- und Videogalerie</a>.</p>
-      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Düsseldorf" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
-        <Image src={tischImg} alt="Tischzauberei für Gäste in NRW" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
-        <Image src={buehneImg} alt="Elegante Bühnenshow von Zauberer LIAR" class="rounded-xl shadow-sm w-full h-56 object-cover" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 100vw, 33vw" />
+  <!-- ── Eindrücke ─────────────────────────────────────────── -->
+  <section class="hz-gallery">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">📸 Eindrücke</h2>
+      <p class="ce-center ce-soft">Weitere Fotos und Videos in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
+      <div class="hz-gallery__grid">
+        <div data-reveal="deal">
+          <PlayingCard rank="A" suit="♥" class="hz-gallery__card" data-tilt style="--sheen-delay: 2.2s">
+            <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Düsseldorf" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
+          </PlayingCard>
+        </div>
+        <div data-reveal="deal" data-reveal-delay="0.12">
+          <PlayingCard rank="K" suit="♦" class="hz-gallery__card" data-tilt style="--sheen-delay: 3.1s">
+            <Image src={tischImg} alt="Tischzauberei für Gäste in NRW" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
+          </PlayingCard>
+        </div>
+        <div data-reveal="deal" data-reveal-delay="0.24">
+          <PlayingCard rank="Q" suit="♥" class="hz-gallery__card" data-tilt style="--sheen-delay: 4s">
+            <Image src={buehneImg} alt="Elegante Bühnenshow von Zauberer LIAR" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
+          </PlayingCard>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Why LIAR -->
-  <section class="py-14 bg-[#eff4ff] border-y border-[#c5d3f7]">
-    <div class="max-w-6xl mx-auto px-4">
-      <h2 class="font-bold text-2xl sm:text-3xl text-center mb-10 text-[#1f2025]">Warum LIAR für Ihre Hochzeit?</h2>
-      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-        {features.map(f => (
-          <div class="bg-white rounded-xl p-5 border border-[#c5d3f7] shadow-sm card-hover reveal">
-            <p class="text-2xl mb-2">{f.icon}</p>
-            <h3 class="font-bold mb-2 text-[#1f2025]">{f.title}</h3>
-            <p class="text-[#374151] text-sm leading-relaxed">{f.text}</p>
+  <!-- ── Warum ─────────────────────────────────────────────── -->
+  <section class="ce-why">
+    <div class="container">
+      <h2 class="ce-h2 ce-center">Warum LIAR für Ihre Hochzeit?</h2>
+      <div class="ce-why__grid">
+        {features.map((f, i) => (
+          <div class="ce-why__item" data-reveal="tilt" data-reveal-delay={(i % 3) * 0.07}>
+            <p class="ce-why__suit">{f.icon}</p>
+            <h3 class="ce-why__title">{f.title}</h3>
+            <p class="ce-soft">{f.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- FAQ -->
-  <section class="py-14 bg-white">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="text-center text-2xl font-extrabold text-[#1f2025] mb-8">Häufig gestellte Fragen</h2>
-      <div class="space-y-4">
-        {faqItems.map((i) => (
-          <details class="bg-[#f9fafb] rounded-xl p-5 group">
-            <summary class="font-bold cursor-pointer text-[#1f2025] flex justify-between items-center gap-4">
+  <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
+  <section class="ce-faq">
+    <div class="container ce-narrow">
+      <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
+      <div class="ce-faq__list">
+        {faqItems.map((i, n) => (
+          <details class="ce-faq__item" data-reveal data-reveal-delay={n * 0.05}>
+            <summary>
+              <span class="ce-faq__suit" aria-hidden="true">♥</span>
               <span>{i.q}</span>
-              <span class="text-[#d7393e] transition-transform group-open:rotate-45 text-2xl leading-none">+</span>
+              <span class="hz-faq__plus">+</span>
             </summary>
-            <p class="mt-3 text-[#374151] text-[17px] leading-relaxed">{i.a}</p>
+            <p>{i.a}</p>
           </details>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- CTA -->
-  <section class="bg-[#1f2025] py-14 text-white text-center">
-    <div class="max-w-3xl mx-auto px-4">
-      <h2 class="font-bold text-2xl sm:text-3xl mb-4">💍 Zauberei für Ihre Hochzeit anfragen</h2>
-      <p class="text-gray-300 mb-6">Sichern Sie sich Ihren Wunschtermin frühzeitig. Erzählen Sie mir kurz von Ihrer Hochzeit – ich erstelle Ihnen ein passendes, unverbindliches Angebot.</p>
-      <div class="space-y-2 text-gray-300 mb-8">
-        <p>📞 Telefon: <a href="tel:+491721517578" class="text-white hover:underline font-semibold">0172 – 1517578</a></p>
-        <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com" class="text-white hover:underline">info@liar-entertainer.com</a></p>
-        <p>📍 Standort: Gladbeck, NRW (mobil in ganz Deutschland)</p>
+  <!-- ── CTA: an invitation card ──────────────────────────── -->
+  <section class="hz-invite">
+    <div class="container">
+      <div class="hz-invite__card" data-reveal>
+        <span class="hz-invite__index hz-invite__index--tl" aria-hidden="true">A<br />♥</span>
+        <span class="hz-invite__index hz-invite__index--br" aria-hidden="true">A<br />♥</span>
+        <h2 class="ce-h2">💍 Zauberei für Ihre Hochzeit anfragen</h2>
+        <p class="ce-soft">Sichern Sie sich Ihren Wunschtermin frühzeitig. Erzählen Sie mir kurz von Ihrer Hochzeit – ich erstelle Ihnen ein passendes, unverbindliches Angebot.</p>
+        <div class="hz-invite__contact">
+          <p>📞 Telefon: <a href="tel:+491721517578">0172 – 1517578</a></p>
+          <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
+          <p>📍 Standort: Gladbeck, NRW (mobil in ganz Deutschland)</p>
+        </div>
+        <a href="/kontakt/" class="btn btn--primary" data-magnetic>
+          Jetzt unverbindlich anfragen
+        </a>
       </div>
-      <a href="/kontakt/" class="inline-block bg-[#d7393e] hover:bg-[#b62e32] text-white font-bold px-10 py-4 rounded transition-colors">
-        Jetzt unverbindlich anfragen
-      </a>
     </div>
   </section>
+</V2Layout>
 
-</BaseLayout>
+<style>
+  /* ── hero: the couple ── */
+  .hz-couple { position: relative; height: clamp(24rem, 44vw, 32rem); }
+  .hz-couple :global(.hz-couple__partner),
+  .hz-couple :global(.hz-couple__photo) { position: absolute; bottom: 6%; transform-origin: 50% 100%; }
+  /* she leans right, he leans left: tops meet like an A-frame */
+  .hz-couple :global(.hz-couple__partner) {
+    left: 8%; width: clamp(11rem, 19vw, 15rem); rotate: 9deg;
+    animation: hz-lean 1.1s var(--ease-out-expo) 0.25s backwards;
+  }
+  .hz-couple :global(.hz-couple__partner .pc__pip) { font-size: clamp(3.5rem, 7vw, 5rem); }
+  .hz-couple :global(.hz-couple__photo) { right: 6%; width: clamp(13rem, 23vw, 18.5rem); rotate: -5deg; z-index: 2; }
+  .hz-couple :global(.hz-couple__photo img) { object-position: 50% 35%; }
+  .hz-couple__heart {
+    position: absolute; left: 44%; top: 4%; z-index: 3;
+    font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--accent);
+    animation: hz-heart 0.9s var(--ease-out) 1.1s backwards;
+  }
+  @keyframes hz-lean { from { rotate: -6deg; translate: -30% 0; opacity: 0; } }
+  @keyframes hz-heart { from { translate: 0 0.8rem; scale: 0.6; opacity: 0; } }
+
+  /* ── intro ── */
+  .hz-intro { padding-top: var(--space-4); }
+  .hz-intro__grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: var(--space-5); align-items: center; }
+  .hz-intro__text { font-family: var(--font-display); font-size: clamp(1.2rem, 2.1vw, 1.5rem); line-height: 1.5; margin-bottom: var(--space-3); }
+  .hz-checks { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+  .hz-checks li { display: flex; gap: 0.8rem; align-items: baseline; }
+  .hz-checks__mark { color: var(--accent-strong); font-weight: 700; }
+
+  /* menu card: card stock with an inset hairline frame, centred like a dinner menu */
+  .hz-menu {
+    position: relative; padding: var(--space-5) var(--space-4) var(--space-4); text-align: center;
+    background: var(--surface); border-radius: var(--radius);
+    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
+  }
+  .hz-menu::before {
+    content: ''; position: absolute; inset: 0.6rem; pointer-events: none;
+    border: 1px solid rgba(200, 16, 46, 0.45); border-radius: calc(var(--radius) - 0.35rem);
+  }
+  .hz-menu__title { font-size: 1.7rem; font-style: italic; font-weight: 500; margin-bottom: var(--space-3); }
+  .hz-menu__list { margin: 0; display: grid; gap: var(--space-2); }
+  .hz-menu__row + .hz-menu__row::before {
+    content: ''; display: block; width: 2.5rem; height: 1px; margin: 0 auto var(--space-2); background: rgba(20, 18, 16, 0.3);
+  }
+  .hz-menu__row dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent-strong); margin-bottom: 0.25rem; }
+  .hz-menu__row dd { margin: 0; font-family: var(--font-display); font-size: 1.1rem; }
+
+  /* ── wedding day: place cards ── */
+  .hz-day { background: var(--bg-alt); }
+  .hz-places { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); max-width: 64rem; margin: var(--space-4) auto 0; }
+  .hz-place {
+    position: relative; padding: 3.6rem var(--space-3) var(--space-3); text-align: center;
+    background: var(--surface); border-radius: var(--radius-sm);
+    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16), var(--shadow);
+  }
+  /* the fold of a tent place card */
+  .hz-place::before {
+    content: ''; position: absolute; inset: 0 0 auto; height: 2.4rem; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
+    background: linear-gradient(to bottom, rgba(20, 18, 16, 0.07), rgba(20, 18, 16, 0)); border-bottom: 1px solid rgba(20, 18, 16, 0.18);
+  }
+  .hz-place__suit { position: absolute; top: 0.55rem; left: 50%; translate: -50% 0; font-family: var(--font-display); font-size: 1.2rem; color: var(--accent); }
+  .hz-place h4 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 600; margin: 0 0 0.6rem; }
+  .hz-place p { margin: 0; }
+
+  /* ── gallery ── */
+  .hz-gallery__grid { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(3, 1fr); margin-top: var(--space-4); align-items: center; }
+  .hz-gallery__grid :global(.hz-gallery__card) { aspect-ratio: 4 / 3.6; }
+  .hz-gallery__grid > div:nth-child(1) :global(.hz-gallery__card) { rotate: -3deg; }
+  .hz-gallery__grid > div:nth-child(2) :global(.hz-gallery__card) { translate: 0 -0.8rem; }
+  .hz-gallery__grid > div:nth-child(3) :global(.hz-gallery__card) { rotate: 3deg; }
+
+  /* ── faq: keep the legacy "+" as text, hide the kit's generated one ── */
+  :global(.v2) .ce-faq__item summary::after { content: none; }
+  .hz-faq__plus {
+    position: absolute; right: 0.25rem; top: 50%; translate: 0 -50%;
+    font-family: var(--font-body); font-weight: 300; font-size: 1.8rem; line-height: 1; color: var(--accent-strong);
+    transition: rotate 0.25s var(--ease-out);
+  }
+  .ce-faq__item[open] .hz-faq__plus { rotate: 45deg; }
+
+  /* ── invitation ── */
+  .hz-invite__card {
+    position: relative; max-width: 44rem; margin-inline: auto; padding: var(--space-5) var(--space-4); text-align: center;
+    background: var(--surface); border-radius: var(--radius);
+    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
+  }
+  .hz-invite__card::before {
+    content: ''; position: absolute; inset: 0.7rem; pointer-events: none;
+    border: 1px solid rgba(20, 18, 16, 0.3); border-radius: calc(var(--radius) - 0.4rem);
+  }
+  .hz-invite__index { position: absolute; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1; text-align: center; color: var(--accent); }
+  .hz-invite__index--tl { top: 1.3rem; left: 1.4rem; }
+  .hz-invite__index--br { bottom: 1.3rem; right: 1.4rem; rotate: 180deg; }
+  .hz-invite__contact { margin: var(--space-3) 0; }
+  .hz-invite__contact p { margin-bottom: 0.4rem; }
+  .hz-invite .btn { margin-top: var(--space-1); }
+
+  @media (max-width: 900px) {
+    .hz-couple { height: 22rem; margin-top: var(--space-2); }
+    .hz-couple :global(.hz-couple__partner) { width: 10.5rem; left: 6%; }
+    .hz-couple :global(.hz-couple__photo) { width: 12.5rem; right: 6%; }
+    .hz-intro__grid { grid-template-columns: 1fr; gap: var(--space-4); }
+    .hz-gallery__grid { grid-template-columns: 1fr; max-width: 24rem; margin-inline: auto; }
+    .hz-gallery__grid > div :global(.hz-gallery__card) { translate: none; }
+    .hz-invite__card { padding: var(--space-5) var(--space-3); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .hz-couple :global(.hz-couple__partner), .hz-couple__heart { animation: none; }
+  }
+</style>
