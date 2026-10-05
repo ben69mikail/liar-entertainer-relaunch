@@ -152,3 +152,25 @@ describe('side rays hero spotlights', () => {
     expect((await state('reduce')).live).toBe(false);
   }, 20_000);
 });
+
+describe('playing-card photos (user feedback 2026-10-05)', () => {
+  for (const path of ['/zauberer/', '/']) {
+    it(`${path}: corner indices are fully visible, never covered by the photo`, async () => {
+      const page = await open(path);
+      await page.waitForTimeout(2500); // entrance animations settle
+      const overlaps = await page.$$eval('.pc--photo', (cards) =>
+        cards.flatMap((card) => {
+          const img = card.querySelector('.pc__face')!.getBoundingClientRect();
+          return [...card.querySelectorAll('.pc__index')].filter((ix) => {
+            const r = ix.getBoundingClientRect();
+            return r.left < img.right && r.right > img.left && r.top < img.bottom && r.bottom > img.top;
+          }).map((ix) => ix.textContent);
+        }),
+      );
+      const count = await page.locator('.pc--photo').count();
+      expect(count).toBeGreaterThan(0);
+      expect(overlaps).toEqual([]);
+      await page.close();
+    }, 15_000);
+  }
+});

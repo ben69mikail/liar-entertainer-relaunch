@@ -207,7 +207,7 @@ const whyUs = [
         {formats.map((format, i) => (
           <article class="ce-format" data-reveal="deal" data-reveal-delay={i * 0.12}>
             <div class="ce-format__card" data-tilt>
-              <PlayingCard rank={['A', 'K', 'Q'][i]} suit={(['♠', '♥', '♣'] as const)[i]} class="ce-format__photo">
+              <PlayingCard rank={['A', 'K', 'Q'][i]} suit={(['♠', '♥', '♣'] as const)[i]} class="ce-format__photo" style={`--sheen-delay: ${2.2 + i * 0.9}s`}>
                 <Image src={format.img} alt={format.imgAlt} loading="lazy" widths={[400, 800]} sizes="(max-width: 768px) 90vw, 30vw" />
               </PlayingCard>
             </div>
@@ -287,7 +287,7 @@ const whyUs = [
           <p class="ce-soft">🌍 <strong>Überregional &amp; International:</strong> Auf Anfrage auch außerhalb von NRW buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!</p>
         </div>
         <div class="ce-area__map" data-reveal="deal">
-          <PlayingCard rank="10" suit="♦" class="ce-map-card" data-scroll-tilt="2">
+          <PlayingCard rank="10" suit="♦" class="ce-map-card" data-scroll-tilt="2" style="--sheen-delay: 3.4s">
             <Image
               src={karteImg}
               alt="Einsatzgebiet Zauberer LIAR für Kindergeburtstag und Events in NRW – Karte"
@@ -393,7 +393,7 @@ const whyUs = [
   .ce-hand :global(.ce-hand__card--1) { transform: rotate(-22deg) translate(-38%, 6%); animation: ce-fan-1 0.9s var(--ease-out) 0.1s backwards; }
   .ce-hand :global(.ce-hand__card--2) { transform: rotate(-11deg) translate(-18%, 1%); animation: ce-fan-2 0.9s var(--ease-out) 0.18s backwards; }
   .ce-hand :global(.ce-hand__card--3) { transform: rotate(9deg) translate(20%, 2%); animation: ce-fan-3 0.9s var(--ease-out) 0.26s backwards; }
-  .ce-hand :global(.ce-hand__card--photo) { rotate: -2deg; padding: 2rem 1.1rem; z-index: 2; }
+  .ce-hand :global(.ce-hand__card--photo) { rotate: -2deg; z-index: 2; }
   @keyframes ce-fan-1 { from { transform: rotate(0deg) translate(0, 0); } }
   @keyframes ce-fan-2 { from { transform: rotate(0deg) translate(0, 0); } }
   @keyframes ce-fan-3 { from { transform: rotate(0deg) translate(0, 0); } }
@@ -436,7 +436,7 @@ const whyUs = [
   .ce-formats__grid { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); margin-top: var(--space-4); }
   .ce-format { display: flex; flex-direction: column; }
   .ce-format__card { width: 82%; margin: 0 auto -2.5rem; position: relative; z-index: 1; }
-  .ce-format__card :global(.ce-format__photo) { aspect-ratio: 4 / 3.2; padding: 1.9rem 1rem; }
+  .ce-format__card :global(.ce-format__photo) { aspect-ratio: 4 / 3.4; }
   .ce-format__body {
     flex: 1; display: flex; flex-direction: column; padding: 3.5rem var(--space-3) var(--space-3);
     background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.14);
@@ -481,7 +481,7 @@ const whyUs = [
   .ce-area__grid { display: grid; gap: var(--space-4); grid-template-columns: 1.1fr 1fr; align-items: center; margin-top: var(--space-3); }
   .ce-cities { line-height: 1.9; }
   .ce-area__map { max-width: 26rem; justify-self: center; width: 100%; }
-  .ce-area__map :global(.ce-map-card) { aspect-ratio: 4 / 3.4; padding: 1.9rem 1rem; }
+  .ce-area__map :global(.ce-map-card) { aspect-ratio: 4 / 3.6; }
 
   /* ── faq ── */
   .ce-faq__list { border-top: 1px solid var(--ink); }
