@@ -70,15 +70,15 @@ const photo = !back && Astro.slots.has('default');
     background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.08) 44%, rgba(236, 240, 247, 0.55) 49%, rgba(255, 255, 255, 0.85) 50%, rgba(214, 220, 230, 0.4) 52%, transparent 60%);
     transform: translateX(-75%);
     pointer-events: none;
-    /* on-screen movement: even ease-in-out so the glint is actually seen (~1.3 s of every 7 s) */
+    /* on-screen movement: even ease-in-out so the glint is actually seen (~2.5 s of every 7 s) */
     animation: pc-sheen 7s cubic-bezier(0.45, 0, 0.55, 1) var(--sheen-delay, 1.5s) infinite;
   }
   @keyframes pc-sheen {
     0% { transform: translateX(-75%); }
-    18%, 100% { transform: translateX(75%); }
+    36%, 100% { transform: translateX(75%); }
   }
   @media (hover: hover) and (pointer: fine) {
-    .pc--photo:hover .pc__face::after { animation: pc-sheen-hover 0.75s cubic-bezier(0.16, 1, 0.3, 1); }
+    .pc--photo:hover .pc__face::after { animation: pc-sheen-hover 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
   }
   @keyframes pc-sheen-hover { from { transform: translateX(-75%); } to { transform: translateX(75%); } }
   @media (prefers-reduced-motion: reduce) {
