@@ -18,6 +18,12 @@ const V2_PAGES = [
   '/zauberer/zaubershow/kindergarten-kita/',
   '/zauberer/zaubershow/schule/',
   '/zauberer/zaubershow/strassen-sommer-fest/',
+  // wave 2: adult pages
+  '/zauberer/zaubershow/',
+  '/zauberer/buehnen-zauberer/',
+  '/zauberer/tisch-zauberer/',
+  '/zauberer/hochzeit/',
+  '/zauberer/firmenfeier/',
 ];
 
 const LOGO_ALT = {

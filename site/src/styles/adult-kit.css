@@ -1,0 +1,183 @@
+/*
+ * Adult kit: shared building blocks of the "Spielkarten-Editorial" zone (ce-*), first designed on
+ * /zauberer/. Every adult page composes these instead of copying styles.
+ * Sections: ce-hero (+ ce-hand card fan), ce-intro, ce-occasions, ce-formats, ce-why, ce-steps (flip),
+ * ce-area, ce-faq, ce-contact; helpers ce-h2/ce-eyebrow/ce-label/ce-center/ce-narrow/ce-soft/ce-red/ce-ink-link.
+ */
+.v2 main > section { padding-block: var(--space-6); position: relative; }
+  .v2 .ce-center { text-align: center; }
+  .v2 .ce-narrow { max-width: 50rem; margin-inline: auto; }
+  .v2 .ce-narrow-wide { max-width: 66rem; }
+  .v2 .ce-soft { color: var(--ink-soft); }
+  .v2 .ce-red { color: var(--accent); }
+  .v2 main p { margin: 0 0 var(--space-2); }
+  .v2 .ce-h2 { font-size: clamp(2rem, 4.4vw, 3.4rem); margin: 0 0 var(--space-3); line-height: 1.02; }
+  .v2 .ce-eyebrow {
+    margin: 0 0 var(--space-2);
+    font-family: var(--font-body); font-size: 0.78rem; font-weight: 600;
+    letter-spacing: 0.34em; text-transform: uppercase; color: var(--accent-strong); /* small text: 6.4:1 on paper */
+  }
+  .v2 .ce-label { font-size: 0.72rem; letter-spacing: 0.24em; text-transform: uppercase; font-weight: 700; margin: var(--space-2) 0 0.5rem; }
+  .v2 .ce-ink-link {
+    align-self: flex-start; margin-top: auto; padding-top: var(--space-3);
+    font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; font-size: 0.8rem; color: var(--ink); text-decoration: none;
+    background: linear-gradient(var(--accent), var(--accent)) left bottom / 0 2px no-repeat;
+    transition: background-size 0.25s var(--ease-out), color 0.2s ease;
+  }
+  @media (hover: hover) and (pointer: fine) { .ce-ink-link:hover { background-size: 100% 2px; color: var(--accent); } }
+
+  /* ── hero ── */
+  .v2 .ce-hero { padding-block: var(--space-4) var(--space-6); overflow: clip; }
+  .v2 .ce-hero__grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--space-4); align-items: center; }
+  .v2 .ce-crumbs { font-size: 0.82rem; letter-spacing: 0.06em; color: var(--ink-soft); }
+  .v2 .ce-crumbs a { color: var(--ink-soft); text-decoration: none; }
+  .v2 .ce-hero__title {
+    font-size: clamp(2.6rem, 5.4vw, 4.6rem);
+    line-height: 0.96;
+    font-weight: 500;
+    margin: var(--space-2) 0 var(--space-3);
+  }
+  .v2 .ce-hero__title em { font-style: italic; font-weight: 400; color: var(--accent); }
+  .v2 .ce-hero .sr { margin-left: 0; color: var(--ink); }
+  .v2 .ce-hero__sub {
+    font-size: clamp(1.35rem, 2.6vw, 1.9rem); font-style: italic; font-weight: 400; margin: 0 0 var(--space-2);
+    /* turned over like a card (CSS-only, always completes) */
+    transform-origin: 50% 0;
+    animation: ce-turn 0.8s var(--ease-out) 0.35s backwards;
+  }
+  .v2 .ce-hero__claim { font-weight: 600; margin-bottom: 0.25rem; animation: ce-rise 0.6s var(--ease-out) 0.55s backwards; }
+  .v2 .ce-hero__claim--soft { font-weight: 400; color: var(--ink-soft); animation-delay: 0.62s; }
+  .v2 .ce-hero__actions { display: flex; flex-wrap: wrap; align-items: center; gap: 1rem; margin-top: var(--space-3); animation: ce-rise 0.6s var(--ease-out) 0.7s backwards; }
+  @keyframes ce-turn { from { transform: perspective(700px) rotateX(-90deg); opacity: 0; } }
+  @keyframes ce-rise { from { transform: translateY(14px); opacity: 0; } }
+
+  /* the hand of cards */
+  .v2 .ce-hand { position: relative; height: clamp(24rem, 46vw, 34rem); }
+  .v2 .ce-hand .ce-hand__card, .v2 .ce-hand .ce-hand__thrown {
+    position: absolute; left: 50%; top: 50%; width: clamp(13rem, 24vw, 19rem);
+    translate: -50% -50%;
+  }
+  .v2 .ce-hand .ce-hand__card--1 { transform: rotate(-22deg) translate(-38%, 6%); animation: ce-fan-1 0.9s var(--ease-out) 0.1s backwards; }
+  .v2 .ce-hand .ce-hand__card--2 { transform: rotate(-11deg) translate(-18%, 1%); animation: ce-fan-2 0.9s var(--ease-out) 0.18s backwards; }
+  .v2 .ce-hand .ce-hand__card--3 { transform: rotate(9deg) translate(20%, 2%); animation: ce-fan-3 0.9s var(--ease-out) 0.26s backwards; }
+  .v2 .ce-hand .ce-hand__card--photo { rotate: -2deg; z-index: 2; }
+  @keyframes ce-fan-1 { from { transform: rotate(0deg) translate(0, 0); } }
+  @keyframes ce-fan-2 { from { transform: rotate(0deg) translate(0, 0); } }
+  @keyframes ce-fan-3 { from { transform: rotate(0deg) translate(0, 0); } }
+  /* one card thrown across the stage, landing on top of the hand (decorative, aria-hidden) */
+  .v2 .ce-hand .ce-hand__thrown {
+    width: clamp(6rem, 10vw, 8rem); padding: 1.4rem 0.8rem; z-index: 3;
+    transform: translate(120%, -125%) rotate(24deg);
+    animation: ce-throw 1.25s var(--ease-out) 0.9s backwards;
+  }
+  .v2 .ce-hand .ce-hand__thrown .pc__pip { font-size: 2.2rem; }
+  .v2 .ce-hand .ce-hand__thrown .pc__index { font-size: 0.75rem; }
+  @keyframes ce-throw {
+    from { transform: translate(-480%, 80%) rotate(-540deg); opacity: 0; }
+    15% { opacity: 1; }
+  }
+
+  /* ── intro ── */
+  .v2 .ce-intro { padding-top: var(--space-4); }
+  .v2 .ce-lead { font-family: var(--font-display); font-size: clamp(1.35rem, 2.6vw, 1.85rem); line-height: 1.45; }
+  .v2 .ce-chips { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: var(--space-3); }
+  .v2 .ce-chips span {
+    display: inline-block; padding: 0.5rem 1rem; font-size: 0.85rem; font-weight: 600;
+    background: var(--surface); border-radius: 999px; box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.2);
+  }
+
+  /* ── occasions ── */
+  .v2 .ce-occasions { padding-top: 0; }
+  .v2 .ce-occasions__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); }
+  .v2 .ce-occasion {
+    position: relative; display: block; padding: var(--space-4) var(--space-3) var(--space-3);
+    color: var(--ink); text-decoration: none; background: var(--surface);
+    border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
+  }
+  .v2 .ce-occasion__suit { position: absolute; top: 0.8rem; left: 1rem; font-family: var(--font-display); font-size: 1.6rem; line-height: 1; }
+  .v2 .ce-occasion__title { font-family: var(--font-display); font-size: 1.6rem; font-weight: 600; margin-bottom: 0.4rem; }
+  .v2 .ce-occasion__text { color: var(--ink-soft); margin: 0; }
+
+  /* ── formats ── */
+  .v2 .ce-formats { background: var(--bg-alt); }
+  .v2 .ce-formats__grid { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); margin-top: var(--space-4); }
+  .v2 .ce-format { display: flex; flex-direction: column; }
+  .v2 .ce-format__card { width: 82%; margin: 0 auto -2.5rem; position: relative; z-index: 1; }
+  .v2 .ce-format__card .ce-format__photo { aspect-ratio: 4 / 3.4; }
+  .v2 .ce-format__body {
+    flex: 1; display: flex; flex-direction: column; padding: 3.5rem var(--space-3) var(--space-3);
+    background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.14);
+  }
+  .v2 .ce-format__icon { font-size: 1.5rem; }
+  .v2 .ce-format h3 { font-size: 1.7rem; margin: 0.3rem 0; }
+  .v2 .ce-format__sub { font-family: var(--font-display); font-style: italic; color: var(--accent); }
+  .v2 .ce-format ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.3rem; color: var(--ink-soft); font-size: 0.95rem; }
+  .v2 .ce-format__extra { font-size: 0.85rem; font-style: italic; color: var(--ink-soft); margin-top: var(--space-2); padding-top: var(--space-2); border-top: 1px dashed rgba(20, 18, 16, 0.3); }
+
+  /* ── why ── */
+  .v2 .ce-why__grid { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-top: var(--space-4); }
+  .v2 .ce-why__item { position: relative; padding: var(--space-3) var(--space-3) var(--space-3) 3.6rem; border-top: 1px solid rgba(20, 18, 16, 0.25); }
+  .v2 .ce-why__suit { position: absolute; left: 0.6rem; top: var(--space-3); font-family: var(--font-display); font-size: 1.8rem; line-height: 1; transition: rotate 0.25s var(--ease-out); }
+  @media (hover: hover) and (pointer: fine) { .ce-why__item:hover .ce-why__suit { rotate: 20deg; } }
+  .v2 .ce-why__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
+  .v2 .ce-why__item .ce-soft { margin: 0; }
+
+  /* ── steps (flip) ── */
+  .v2 .ce-steps { background: var(--ink); color: var(--bg); }
+  .v2 .ce-steps .ce-h2 { color: var(--bg); }
+  .v2 .ce-steps .ce-eyebrow { color: #f4a7b2; } /* 9.6:1 on black */
+  .v2 .ce-steps .ce-soft { color: #d9d1c2; }
+  .v2 .ce-steps__list { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+  .v2 .ce-step {
+    position: relative; padding: var(--space-4) var(--space-3); text-align: center;
+    background: var(--surface); color: var(--ink); border-radius: var(--radius);
+  }
+  .v2 .ce-steps .ce-step .ce-soft { color: var(--ink-soft); }
+  .v2 .ce-step .card-back {
+    border-radius: var(--radius);
+    background:
+      repeating-linear-gradient(45deg, rgba(255, 253, 247, 0.12) 0 2px, transparent 2px 9px),
+      repeating-linear-gradient(-45deg, rgba(255, 253, 247, 0.12) 0 2px, transparent 2px 9px),
+      var(--accent);
+    box-shadow: inset 0 0 0 0.6rem #fffdf7;
+  }
+  .v2 .ce-step__num { font-family: var(--font-display); font-style: italic; font-size: 5rem; line-height: 1; margin-bottom: var(--space-2); }
+  .v2 .ce-step h3 { font-size: 1.5rem; margin: 0 0 0.5rem; }
+
+  /* ── area ── */
+  .v2 .ce-area__grid { display: grid; gap: var(--space-4); grid-template-columns: 1.1fr 1fr; align-items: center; margin-top: var(--space-3); }
+  .v2 .ce-cities { line-height: 1.9; }
+  .v2 .ce-area__map { max-width: 26rem; justify-self: center; width: 100%; }
+  .v2 .ce-area__map .ce-map-card { aspect-ratio: 4 / 3.6; }
+
+  /* ── faq ── */
+  .v2 .ce-faq__list { border-top: 1px solid var(--ink); }
+  .v2 .ce-faq__item { border-bottom: 1px solid rgba(20, 18, 16, 0.3); }
+  .v2 .ce-faq__item summary {
+    cursor: pointer; list-style: none; position: relative; display: flex; gap: 1rem; align-items: baseline;
+    padding: var(--space-3) 2.5rem var(--space-3) 0; font-family: var(--font-display); font-size: 1.3rem; font-weight: 600;
+  }
+  .v2 .ce-faq__item summary::-webkit-details-marker { display: none; }
+  .v2 .ce-faq__item summary::after {
+    content: '+'; position: absolute; right: 0.25rem; top: 50%; translate: 0 -50%;
+    font-family: var(--font-body); font-weight: 300; font-size: 1.8rem; color: var(--accent);
+    transition: rotate 0.25s var(--ease-out);
+  }
+  .v2 .ce-faq__item[open] summary::after { rotate: 45deg; }
+  .v2 .ce-faq__suit { color: var(--accent); font-size: 1rem; }
+  .v2 .ce-faq__item p { color: var(--ink-soft); padding: 0 0 var(--space-3) 2rem; }
+
+  /* ── contact ── */
+  .v2 .ce-contact { border-top: 1px solid rgba(20, 18, 16, 0.25); }
+  .v2 .ce-contact__name { font-family: var(--font-display); font-size: 2.2rem; font-style: italic; }
+  .v2 .ce-contact .btn { margin-top: var(--space-2); }
+
+  @media (max-width: 900px) {
+    .v2 .ce-hero__grid, .v2 .ce-area__grid { grid-template-columns: 1fr; }
+    .v2 .ce-hand { height: 22rem; margin-top: var(--space-2); }
+    .v2 .ce-hand .ce-hand__card { width: 12rem; }
+    .v2 main > section { padding-block: var(--space-5); }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .v2 .ce-hero__sub, .v2 .ce-hero__claim, .v2 .ce-hero__actions, .v2 .ce-hand * { animation: none !important; }
+  }
