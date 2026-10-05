@@ -63,7 +63,8 @@
   .v2 .ce-hand .ce-hand__card--1 { transform: rotate(-22deg) translate(-38%, 6%); animation: ce-fan-1 0.9s var(--ease-out) 0.1s backwards; }
   .v2 .ce-hand .ce-hand__card--2 { transform: rotate(-11deg) translate(-18%, 1%); animation: ce-fan-2 0.9s var(--ease-out) 0.18s backwards; }
   .v2 .ce-hand .ce-hand__card--3 { transform: rotate(9deg) translate(20%, 2%); animation: ce-fan-3 0.9s var(--ease-out) 0.26s backwards; }
-  .v2 .ce-hand .ce-hand__card--photo { rotate: -2deg; z-index: 2; }
+  /* the photo card takes the photo's shape (a wide stage shot = a card dealt sideways across the fan) */
+  .v2 .ce-hand .ce-hand__card--photo { width: clamp(19rem, 36vw, 28rem); top: 60%; rotate: -2deg; z-index: 2; }
   @keyframes ce-fan-1 { from { transform: rotate(0deg) translate(0, 0); } }
   @keyframes ce-fan-2 { from { transform: rotate(0deg) translate(0, 0); } }
   @keyframes ce-fan-3 { from { transform: rotate(0deg) translate(0, 0); } }
@@ -106,7 +107,7 @@
   .v2 .ce-formats__grid { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); margin-top: var(--space-4); }
   .v2 .ce-format { display: flex; flex-direction: column; }
   .v2 .ce-format__card { width: 82%; margin: 0 auto -2.5rem; position: relative; z-index: 1; }
-  .v2 .ce-format__card .ce-format__photo { aspect-ratio: 4 / 3.4; }
+  
   .v2 .ce-format__body {
     flex: 1; display: flex; flex-direction: column; padding: 3.5rem var(--space-3) var(--space-3);
     background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.14);
@@ -151,7 +152,7 @@
   .v2 .ce-area__grid { display: grid; gap: var(--space-4); grid-template-columns: 1.1fr 1fr; align-items: center; margin-top: var(--space-3); }
   .v2 .ce-cities { line-height: 1.9; }
   .v2 .ce-area__map { max-width: 26rem; justify-self: center; width: 100%; }
-  .v2 .ce-area__map .ce-map-card { aspect-ratio: 4 / 3.6; }
+  
 
   /* ── faq ── */
   .v2 .ce-faq__list { border-top: 1px solid var(--ink); }
@@ -179,6 +180,7 @@
     .v2 .ce-hero__grid, .v2 .ce-area__grid { grid-template-columns: 1fr; }
     .v2 .ce-hand { height: 22rem; margin-top: var(--space-2); }
     .v2 .ce-hand .ce-hand__card { width: 12rem; }
+    .v2 .ce-hand .ce-hand__card--photo { width: min(92%, 24rem); top: 62%; }
     .v2 main > section { padding-block: var(--space-5); }
   }
   @media (prefers-reduced-motion: reduce) {

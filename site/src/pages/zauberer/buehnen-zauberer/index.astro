@@ -318,11 +318,12 @@ const _pageGallery = [
     animation: bz-lights 1.6s var(--ease-out) 0.2s backwards;
   }
   @keyframes bz-lights { from { opacity: 0; } }
-  .bz-spot :global(.bz-spot__photo) { position: relative; z-index: 2; width: clamp(14rem, 25vw, 20rem); rotate: 2.5deg; }
+  .bz-spot :global(.bz-spot__photo) { position: relative; z-index: 2; width: clamp(18rem, 36vw, 28rem); rotate: 2.5deg; }
   .bz-spot :global(.bz-spot__back) {
-    position: absolute; left: 50%; top: 50%; width: clamp(12rem, 21vw, 17rem);
+    /* lies sideways like the photo card and peeks out above-left of it */
+    position: absolute; left: 50%; top: 50%; width: clamp(16rem, 32vw, 25rem); aspect-ratio: 7 / 5;
     translate: -50% -50%;
-    transform: translate(-42%, 4%) rotate(-11deg);
+    transform: translate(-30%, -26%) rotate(-9deg);
     box-shadow: 0 0 0 1px rgba(255, 253, 247, 0.25), var(--shadow);
     animation: bz-slide 1s var(--ease-out) 0.5s backwards;
   }
@@ -418,7 +419,9 @@ const _pageGallery = [
   .bz-cta__contact p { margin-bottom: 0.4rem !important; }
 
   @media (max-width: 900px) {
-    .bz-spot { height: 24rem; margin-top: var(--space-3); }
+    .bz-spot { height: 20rem; margin-top: var(--space-3); }
+    .bz-spot :global(.bz-spot__photo) { width: min(88%, 24rem); }
+    .bz-spot :global(.bz-spot__back) { width: min(76%, 20rem); }
     .bz-intro__grid, .bz-area__grid { grid-template-columns: 1fr; gap: var(--space-4); }
     .bz-spread__slot { rotate: calc(var(--i) * 2deg); translate: none; }
   }

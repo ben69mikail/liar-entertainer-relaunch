@@ -55,9 +55,12 @@ const photo = !back && Astro.slots.has('default');
 
   /* Photo cards: the picture sits inside the card like a court-card frame, clear of both corner
      indices (index box: 2.1rem tall from 0.55rem → ends at 2.65rem), with rounded photo corners.
-     Insets are set here once; pages only choose the card's aspect ratio. */
-  .pc--photo { padding: 3rem 2.3rem; }
+     The card takes the PHOTO's shape (user, 2026-10-05: never cut people off): no fixed card ratio,
+     the picture keeps its natural proportions and the white frame grows around it. A wide photo
+     simply makes a card turned sideways. Pages set only the card's width, never its ratio. */
+  .pc--photo { padding: 3rem 2.3rem; aspect-ratio: auto; height: auto; }
   .pc--photo .pc__face {
+    height: auto;
     border-radius: 0.7rem;
     box-shadow: inset 0 0 0 1px rgba(20, 18, 16, 0.12);
   }
@@ -85,6 +88,7 @@ const photo = !back && Astro.slots.has('default');
     .pc--photo .pc__face::after { animation: none; transform: translateX(-75%); }
   }
   .pc__face :global(img) { width: 100%; height: 100%; object-fit: cover; }
+  .pc--photo .pc__face :global(img) { display: block; height: auto; aspect-ratio: auto; object-fit: contain; }
   .pc__pip { font-size: clamp(3rem, 8vw, 5rem); line-height: 1; }
   .pc--back {
     padding: 0.6rem;

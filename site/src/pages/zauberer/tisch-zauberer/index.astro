@@ -361,8 +361,9 @@ const _pageGallery = [
   /* ── hero: photo card in front, a small deck behind; the 7♦ rises out of the deck once ── */
   .tz-hand { position: relative; height: clamp(24rem, 42vw, 32rem); }
   .tz-hand :global(.tz-hand__photo) {
-    position: absolute; left: 6%; top: 50%; z-index: 4;
-    width: clamp(13.5rem, 24vw, 19rem); translate: 0 -50%; rotate: -4deg;
+    /* the panorama photo (3.4:1) shown whole: a wide card laid across the table, deck behind it */
+    position: absolute; left: 2%; top: 64%; z-index: 4;
+    width: clamp(20rem, 40vw, 31rem); translate: 0 -50%; rotate: -4deg;
   }
   .tz-hand :global(.tz-hand__deck) {
     position: absolute; right: 6%; top: 34%;
@@ -496,7 +497,8 @@ const _pageGallery = [
   .tz-faq[open] .tz-faq__plus { rotate: 45deg; }
 
   @media (max-width: 900px) {
-    .tz-hand { height: 22rem; margin-top: var(--space-2); }
+    .tz-hand { height: 20rem; margin-top: var(--space-2); }
+    .tz-hand :global(.tz-hand__photo) { width: min(94%, 24rem); left: 0; top: 66%; }
     .tz-intro__grid, .tz-area__grid { grid-template-columns: 1fr; gap: var(--space-4); }
     .tz-book__list { grid-template-columns: repeat(auto-fit, minmax(min(100%, 12rem), 1fr)) !important; }
     .tz-round__list::before { display: none; }

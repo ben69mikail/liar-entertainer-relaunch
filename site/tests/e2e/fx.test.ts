@@ -153,6 +153,37 @@ describe('side rays hero spotlights', () => {
   }, 20_000);
 });
 
+describe('playing-card photos are never cropped (user feedback 2026-10-05: no cut-off people)', () => {
+  const ADULT = ['/', '/zauberer/', '/zauberer/zaubershow/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'];
+  for (const path of ADULT) {
+    for (const width of [390, 1280]) {
+      it(`${path} @${width}px: every card photo shows its whole picture`, async () => {
+        const page = await browser.newPage({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
+        await page.goto(BASE + path);
+        // load lazy images so their natural size is known
+        await page.evaluate(async () => {
+          const imgs = [...document.querySelectorAll<HTMLImageElement>('.pc--photo img')];
+          imgs.forEach((i) => (i.loading = 'eager'));
+          await Promise.all(imgs.map((i) => (i.complete ? null : new Promise((r) => { i.onload = i.onerror = r; }))));
+        });
+        const cropped = await page.$$eval('.pc--photo img', (imgs) =>
+          (imgs as HTMLImageElement[]).flatMap((img) => {
+            const r = img.getBoundingClientRect();
+            if (!r.width || !img.naturalWidth) return [];
+            const shown = r.width / r.height;
+            const natural = img.naturalWidth / img.naturalHeight;
+            const fit = getComputedStyle(img).objectFit;
+            const crops = fit === 'cover' && Math.abs(shown / natural - 1) > 0.02;
+            return crops ? [`${img.alt} (shown ${shown.toFixed(2)} vs photo ${natural.toFixed(2)})`] : [];
+          }),
+        );
+        await page.close();
+        expect(cropped).toEqual([]);
+      }, 30_000);
+    }
+  }
+});
+
 describe('playing-card photos (user feedback 2026-10-05)', () => {
   for (const path of ['/zauberer/', '/']) {
     it(`${path}: corner indices are fully visible, never covered by the photo`, async () => {
