@@ -288,9 +288,23 @@
 
 /* ── hero on the dark-blue stage, lit like the extras (user 2026-10-06) ── */
 .k3-hero {
+  /* inside the big top (user reference, 2026-10-06): tent panels meeting at the crown, violet
+     haze, red glow along the sides, a magenta pool of light in the ring, a dotted light string
+     along the ring fence. Pure gradients: no image, no extra request. */
   background:
-    radial-gradient(ellipse 60% 45% at 50% 100%, rgba(120, 90, 220, 0.25), transparent 70%),
-    linear-gradient(180deg, #1b1446 0%, #2a1d5e 55%, #1d1748 100%) !important;
+    /* light string along the ring fence */
+    radial-gradient(circle, rgba(255, 214, 140, 0.95) 0 1.4px, transparent 2.4px) 0 calc(100% - 3.2rem) / 26px 8px repeat-x,
+    /* magenta pool in the ring */
+    radial-gradient(ellipse 34% 12% at 50% 100%, rgba(255, 70, 200, 0.55), transparent 75%),
+    /* red glow low on both sides */
+    radial-gradient(ellipse 22% 38% at 4% 82%, rgba(255, 40, 70, 0.45), transparent 75%),
+    radial-gradient(ellipse 22% 38% at 96% 82%, rgba(255, 40, 70, 0.4), transparent 75%),
+    /* violet haze and a cool glow at the crown */
+    radial-gradient(ellipse 50% 40% at 50% 0%, rgba(130, 120, 255, 0.4), transparent 75%),
+    radial-gradient(ellipse 80% 60% at 50% 60%, rgba(150, 60, 220, 0.35), transparent 80%),
+    /* tent panels: alternating stripes fanning out from the crown */
+    repeating-conic-gradient(from 90deg at 50% -30%, rgba(255, 255, 255, 0.045) 0deg 4deg, rgba(0, 0, 0, 0.06) 4deg 8deg),
+    linear-gradient(180deg, #1a1450 0%, #2b1a66 50%, #241355 78%, #1a0f3e 100%) !important;
   color: #f6ecdc;
 }
 .k3-spot--stagehero {
@@ -303,6 +317,13 @@
     conic-gradient(from 196deg at 90% 0%, transparent 0deg, rgba(120, 165, 255, 0.2) 6deg, rgba(175, 205, 255, 0.4) 14deg, rgba(110, 160, 255, 0.6) 23deg, rgba(120, 165, 255, 0.2) 32deg, transparent 36deg); }
 .k3-spot--stagehero::before { top: 2.2rem; }
 .motion-ok .k3-spot--stagehero { animation-delay: 2.2s; }
+/* projectors nearer the middle, not in the corners (user 2026-10-06) */
+.k3-spot--stagehero.k3-spot--red { left: 14%; width: 56%; }
+.k3-spot--stagehero.k3-spot--blue { right: 14%; width: 56%; }
+@media (max-width: 900px) {
+  .k3-spot--stagehero.k3-spot--red { left: 4%; width: 90%; }
+  .k3-spot--stagehero.k3-spot--blue { right: 4%; width: 90%; }
+}
 .k3-hero__title { color: #fff7ea; text-shadow: 0 2px 18px rgba(10, 5, 40, 0.55); }
 .k3-hero .k3-mark { color: #ff7a82; }
 .k3-hero .k3-quick a { background: rgba(255, 252, 245, 0.12); color: #fff3e2; box-shadow: inset 0 0 0 1px rgba(233, 200, 119, 0.7); }
