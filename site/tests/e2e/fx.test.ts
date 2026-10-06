@@ -59,23 +59,27 @@ describe('kids v3 hero curtain (user 2026-10-06: opens fully, like a real curtai
   });
 });
 
-describe('kids v3 curtain frames never hide part of a photo (no cut-off people)', () => {
-  it('curtains, cords and valance stay in the frame around the photo', async () => {
+describe('kids v3 curtain frames: photo right behind the curtains, the middle always clear', () => {
+  // user 2026-10-06: the photo sits where the reference's chequerboard is; curtains may cover its
+  // edges, as long as most of the picture shows → the central 70 % × 75 % is never covered.
+  it('curtains, cords and valance stay off the middle of every framed photo', async () => {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
     await page.goto(BASE + '/kindergeburtstag/');
     const frames = page.locator('.cf');
+    expect(await frames.count()).toBeGreaterThanOrEqual(2);
     for (let i = 0; i < (await frames.count()); i++) {
       await frames.nth(i).scrollIntoViewIfNeeded();
       await page.waitForTimeout(1600);
       const hits = await frames.nth(i).evaluate((f) => {
-        (f as HTMLElement).style.rotate = '0deg'; // measure the frame upright: rotation inflates boxes
-        const r = f.querySelector('img')!.getBoundingClientRect();
+        (f as HTMLElement).style.rotate = '0deg'; // measure upright: rotation inflates boxes
+        const p = f.querySelector('img')!.getBoundingClientRect();
+        const mid = { l: p.left + p.width * 0.15, r: p.right - p.width * 0.15, t: p.top + p.height * 0.125, b: p.bottom - p.height * 0.125 };
         return [...f.querySelectorAll('.cf__side, .cf__cord, .cf__valance')].filter((d) => {
           const c = d.getBoundingClientRect();
-          return c.left < r.right - 3 && c.right > r.left + 3 && c.top < r.bottom - 3 && c.bottom > r.top + 3; // 3px: rotated frames inflate their boxes
-        }).length;
+          return c.left < mid.r && c.right > mid.l && c.top < mid.b && c.bottom > mid.t;
+        }).map((d) => d.getAttribute('class'));
       });
-      expect(hits).toBe(0);
+      expect(hits).toEqual([]);
     }
     await page.close();
   }, 30_000);
