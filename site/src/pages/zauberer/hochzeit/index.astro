@@ -73,6 +73,20 @@ const serviceSchema = {
           <span>Hochzeit</span>
         </p>
         <h1 class="ce-hero__title">Zauberer für die <em>Hochzeit</em> in NRW</h1>
+        <div class="ce-spot">
+          <div class="ce-hero__frame ce-spot__frame">
+            <MagicFrame corner="tr" rank="K" suit="♥" data-tilt>
+              <Image
+                src={heroImg}
+                alt="Zauberer für die Hochzeit – elegante Tischzauberei in NRW"
+                loading="eager"
+                fetchpriority="high"
+                widths={[450, 720, 1080, 1440]}
+                sizes="(max-width: 900px) 88vw, 736px"
+              />
+            </MagicFrame>
+          </div>
+        </div>
         <SuitRule />
         <h2 class="ce-hero__sub">
           Magische Momente für Ihre Hochzeit
@@ -84,20 +98,6 @@ const serviceSchema = {
         </div>
       </div>
 
-      <div class="ce-spot">
-        <div class="ce-hero__frame ce-spot__frame">
-          <MagicFrame corner="tr" rank="K" suit="♥" data-tilt>
-            <Image
-              src={heroImg}
-              alt="Zauberer für die Hochzeit – elegante Tischzauberei in NRW"
-              loading="eager"
-              fetchpriority="high"
-              widths={[450, 720, 1080, 1440]}
-              sizes="(max-width: 900px) 92vw, (max-width: 1340px) 52vw, 700px"
-            />
-          </MagicFrame>
-        </div>
-      </div>
     </div>
   </section>
 

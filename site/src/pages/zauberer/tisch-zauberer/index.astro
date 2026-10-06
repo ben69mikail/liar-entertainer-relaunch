@@ -94,6 +94,21 @@ const _pageGallery = [
           <span>Tisch Zauberer</span>
         </p>
         <h1 class="ce-hero__title">Tischzauberer NRW – <em>Close-up Magie</em> für Hochzeit &amp; Event</h1>
+        <div class="ce-spot">
+          <div class="ce-hero__frame ce-spot__frame">
+            <MagicFrame corner="tr" rank="Q" suit="♥" data-tilt>
+              <Image
+                src={heroImg}
+                alt="Tischzauberer NRW – Close-up Zauberei für Hochzeiten & Events"
+                title="Tischzauberer LIAR – Close-up Zauberei in NRW"
+                widths={[450, 720, 1080, 1440]}
+                sizes="(max-width: 900px) 88vw, 736px"
+                loading="eager"
+                fetchpriority="high"
+              />
+            </MagicFrame>
+          </div>
+        </div>
         <SuitRule />
         <h2 class="ce-hero__sub">
           Tischzauberer &amp; Close-up Zauberei in NRW
@@ -105,21 +120,6 @@ const _pageGallery = [
         </div>
       </div>
 
-      <div class="ce-spot">
-        <div class="ce-hero__frame ce-spot__frame">
-          <MagicFrame corner="tr" rank="Q" suit="♥" data-tilt>
-            <Image
-              src={heroImg}
-              alt="Tischzauberer NRW – Close-up Zauberei für Hochzeiten & Events"
-              title="Tischzauberer LIAR – Close-up Zauberei in NRW"
-              widths={[450, 720, 1080, 1440]}
-              sizes="(max-width: 900px) 92vw, (max-width: 1340px) 52vw, 700px"
-              loading="eager"
-              fetchpriority="high"
-            />
-          </MagicFrame>
-        </div>
-      </div>
     </div>
   </section>
 
