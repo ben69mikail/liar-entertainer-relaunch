@@ -225,3 +225,60 @@
   box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), var(--shadow);
 }
 [data-zone='kids']:has(.k3-hero) .rv__title { font-weight: 600; }
+
+/* intro: the show photo fills the free space under the text */
+.k3-intro__photo { margin-top: var(--space-4); rotate: -1deg; }
+
+/* ── extras: dark stage with a red and a blue spotlight from either side (user 2026-10-06) ── */
+.k3-band--spot {
+  overflow: clip; isolation: isolate;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 100%, rgba(120, 90, 220, 0.25), transparent 70%),
+    linear-gradient(180deg, #1b1446 0%, #2a1d5e 55%, #1d1748 100%);
+}
+.k3-band--spot .container { z-index: 2; }
+.k3-band--spot .k3-sub { color: var(--gold-light); }
+.k3-band--spot .k3-tip { color: #f4ead6; }
+.k3-band--spot .k3-tip strong { color: #fff; }
+/* the cards stay light; each catches the colour of its spotlight */
+.k3-band--spot .k3-extra { color: var(--ink); }
+.k3-band--spot .k3-extra:nth-child(1) { box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.45), 0 0 0 1px rgba(255, 90, 100, 0.35), 0 0 60px -6px rgba(235, 50, 70, 0.55), var(--shadow); }
+.k3-band--spot .k3-extra:nth-child(2) { box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.45), 0 0 0 1px rgba(110, 150, 255, 0.4), 0 0 60px -6px rgba(70, 120, 255, 0.55), var(--shadow); }
+
+/* spotlights: lamp at a top corner, a soft cone of light swinging slowly towards its card */
+.k3-spot {
+  position: absolute; z-index: 1; top: -4%; width: 60%; height: 120%; pointer-events: none;
+  mix-blend-mode: screen; opacity: 1;
+  transition: opacity 0.6s ease;
+}
+.k3-spot--red {
+  left: -6%; transform-origin: 10% 0;
+  /* conic 0deg = up: the cone opens down and to the right, onto the balloon card */
+  background:
+    radial-gradient(ellipse 45% 30% at 62% 78%, rgba(255, 80, 100, 0.28), transparent 70%),
+    conic-gradient(from 128deg at 10% 0%, transparent 0deg, rgba(255, 90, 110, 0.18) 4deg, rgba(255, 70, 90, 0.55) 13deg, rgba(255, 150, 160, 0.35) 22deg, rgba(255, 70, 90, 0.18) 30deg, transparent 36deg);
+  animation: k3-sweep-l 9s ease-in-out infinite alternate;
+}
+.k3-spot--blue {
+  right: -6%; transform-origin: 90% 0;
+  /* mirrored: down and to the left, onto the glitter card */
+  background:
+    radial-gradient(ellipse 45% 30% at 38% 78%, rgba(90, 140, 255, 0.28), transparent 70%),
+    conic-gradient(from 196deg at 90% 0%, transparent 0deg, rgba(90, 140, 255, 0.18) 6deg, rgba(150, 185, 255, 0.35) 14deg, rgba(80, 130, 255, 0.55) 23deg, rgba(90, 140, 255, 0.18) 32deg, transparent 36deg);
+  animation: k3-sweep-r 10s ease-in-out infinite alternate;
+}
+/* the lamps themselves */
+.k3-spot::before {
+  content: ''; position: absolute; top: 3.2%; width: 3.2rem; height: 3.2rem; border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 18%, rgba(255, 255, 255, 0.6) 30%, transparent 70%);
+}
+.k3-spot--red::before { left: calc(10% - 1.6rem); box-shadow: 0 0 40px 12px rgba(255, 80, 100, 0.6); }
+.k3-spot--blue::before { right: calc(10% - 1.6rem); box-shadow: 0 0 40px 12px rgba(90, 140, 255, 0.6); }
+@keyframes k3-sweep-l { from { transform: rotate(-4deg); } to { transform: rotate(5deg); } }
+@keyframes k3-sweep-r { from { transform: rotate(4deg); } to { transform: rotate(-5deg); } }
+@media (max-width: 900px) {
+  .k3-spot { width: 100%; opacity: 0.7; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .k3-spot { animation: none; }
+}

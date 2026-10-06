@@ -3,6 +3,7 @@ import V2Layout from '../../layouts/V2Layout.astro';
 import { Image } from 'astro:assets';
 import heroImg from '../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
 import kinderzaubererImg from '../../assets/images/kindergeburtstag/kindergeburtstag-mit-kinderzauberer.jpg';
+import showImg from '../../assets/images/kindergeburtstag/clown-zauberer-kindergeburtstag-show.jpg';
 import karteImg from '../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
@@ -160,6 +161,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           src={heroImg}
           alt="Kindergeburtstag mit Clown Zauberer NRW"
           widths={[400, 700, 1000]}
+          quality={70}
           sizes="(max-width: 900px) 80vw, 500px"
           loading="eager"
           fetchpriority="high"
@@ -184,6 +186,17 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         <p>
           Ich bin <a href="/">Clown</a> <a href="/zauberer/">Zauberer</a> LIAR (Michaël Prescler) – professioneller <a href="/kinderzauberer/">Kinderzauberer</a> mit Herz, Humor und über 15 Jahren Erfahrung auf Familienfeiern, in Kindergärten und bei Stadtfesten in ganz NRW. Alle Details zum <a href="/kinderzauberer/">Zauberer für den Kindergeburtstag</a> – Ablauf, Alter und Buchung – finden Sie auf meiner Kinderzauberer-Seite.
         </p>
+        <CurtainFrame class="k3-intro__photo" shape="landscape">
+          <Image
+            src={showImg}
+            alt="Clown Zauberer LIAR begeistert Kinder bei einer interaktiven Zaubershow"
+            widths={[360, 560, 800]}
+            quality={60}
+            sizes="(max-width: 900px) 88vw, 620px"
+            loading="lazy"
+            fetchpriority="low"
+          />
+        </CurtainFrame>
       </div>
       <aside class="k3-expect" data-reveal data-reveal-delay="0.1">
         <CurtainFrame shape={kinderzaubererImg.width >= kinderzaubererImg.height ? 'landscape' : 'portrait'}>
@@ -191,8 +204,10 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             src={kinderzaubererImg}
             alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
             widths={[320, 640]}
+            quality={60}
             sizes="(max-width: 900px) 80vw, 340px"
             loading="lazy"
+            fetchpriority="low"
           />
         </CurtainFrame>
         <p class="k3-expect__title">✨ Was Sie erwartet:</p>
@@ -326,7 +341,10 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Zusatzleistungen ──────────────────────────────────── -->
-  <section class="k3-extras k3-alt">
+  <section class="k3-extras k3-band k3-band--spot">
+    <!-- light show: a red and a blue spotlight from either side pick out the two extras -->
+    <span class="k3-spot k3-spot--red" aria-hidden="true"></span>
+    <span class="k3-spot k3-spot--blue" aria-hidden="true"></span>
     <div class="container">
       <GoldDivider />
       <h3 class="k3-h2 k3-center" data-reveal>

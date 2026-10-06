@@ -1,6 +1,7 @@
 ---
 /**
- * Kids v3 photo frame (user, 2026-10-06): a little stage with blue velvet curtains, modelled on the
+ * Kids v3 photo frame (user, 2026-10-06): a little stage with red velvet curtains (same red as
+ * the hero curtain; shapes after the user's blue reference), modelled on the
  * user's reference („Scenes & Curtain 56/57“), redrawn as vectors so it stays sharp at any size.
  *   shape="portrait"  – tall side curtains, tie-backs low (for upright photos)
  *   shape="landscape" – slimmer side curtains, tie-backs mid-height (for wide photos: more photo)
@@ -33,8 +34,8 @@ const side = (mirror: boolean) =>
       <svg class:list={['cf__side', mirror ? 'cf__side--r' : 'cf__side--l']} viewBox="0 0 100 400" preserveAspectRatio="none">
         <defs>
           <linearGradient id={`${uid}-f${+mirror}`} x1="0" x2="0.24" spreadMethod="repeat">
-            <stop offset="0" stop-color="#16236e" /><stop offset=".3" stop-color="#2f47c4" />
-            <stop offset=".55" stop-color="#7189f2" /><stop offset=".8" stop-color="#2f47c4" /><stop offset="1" stop-color="#16236e" />
+            <stop offset="0" stop-color="#66101a" /><stop offset=".3" stop-color="#9a1828" />
+            <stop offset=".55" stop-color="#cf3a43" /><stop offset=".8" stop-color="#9a1828" /><stop offset="1" stop-color="#66101a" />
           </linearGradient>
           <linearGradient id={`${uid}-s${+mirror}`} x1="0" y1="0" x2="0" y2="1">
             <stop offset="0" stop-color="#000" stop-opacity=".28" /><stop offset=".25" stop-color="#000" stop-opacity="0" />
@@ -52,18 +53,18 @@ const side = (mirror: boolean) =>
     <svg class="cf__valance" viewBox="0 0 300 60" preserveAspectRatio="none">
       <defs>
         <linearGradient id={`${uid}-v`} x1="0" y1="0" x2="0" y2="1">
-          <stop offset="0" stop-color="#1a2a86" /><stop offset=".6" stop-color="#3d58d8" /><stop offset="1" stop-color="#2238a8" />
+          <stop offset="0" stop-color="#7d1220" /><stop offset=".6" stop-color="#b8222f" /><stop offset="1" stop-color="#8e1726" />
         </linearGradient>
       </defs>
       {[0, 1, 2].map((k) => (
         <g class="cf__swag" style={`--d:${-k * 1.7}s`}>
           <path d={`M${k * 100 - 3} 9H${k * 100 + 103}V13Q${k * 100 + 50} 62 ${k * 100 - 3} 13Z`} fill={`url(#${uid}-v)`} />
-          <path d={`M${k * 100 + 10} 17Q${k * 100 + 50} 44 ${k * 100 + 90} 17`} fill="none" stroke="rgba(10,16,60,.4)" stroke-width="1.4" />
-          <path d={`M${k * 100 + 20} 14Q${k * 100 + 50} 32 ${k * 100 + 80} 14`} fill="none" stroke="rgba(190,205,255,.35)" stroke-width="1.1" />
+          <path d={`M${k * 100 + 10} 17Q${k * 100 + 50} 44 ${k * 100 + 90} 17`} fill="none" stroke="rgba(60,0,8,.4)" stroke-width="1.4" />
+          <path d={`M${k * 100 + 20} 14Q${k * 100 + 50} 32 ${k * 100 + 80} 14`} fill="none" stroke="rgba(255,190,170,.3)" stroke-width="1.1" />
           <path d={`M${k * 100 - 3} 13Q${k * 100 + 50} 62 ${k * 100 + 103} 13`} fill="none" stroke="#d9a93c" stroke-width="3.2" stroke-dasharray="1.6 1.2" />
         </g>
       ))}
-      <rect x="0" y="0" width="300" height="9.5" fill="#15216a" />
+      <rect x="0" y="0" width="300" height="9.5" fill="#6e101c" />
       <rect x="0" y="8" width="300" height="2" fill="#e3b74e" />
     </svg>
   </span>
