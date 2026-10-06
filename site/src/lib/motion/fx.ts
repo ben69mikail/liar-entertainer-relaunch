@@ -71,8 +71,30 @@ function afterFirstInteraction(fn: () => void): void {
   events.forEach((e) => addEventListener(e, go, { once: true, passive: true }));
 }
 
+/**
+ * [data-stage]: element whose DECORATIONS play when it comes into view (class .is-staged).
+ * Unlike data-reveal the element itself is never hidden — safe for frames that carry the LCP photo.
+ * Without motion-ok (reduced motion / no JS) CSS shows the end state, so nothing is needed here.
+ */
+function stage(): void {
+  const els = all('[data-stage]');
+  if (!els.length) return;
+  const io = new IntersectionObserver(
+    (entries) => {
+      for (const e of entries) {
+        if (!e.isIntersecting) continue;
+        e.target.classList.add('is-staged');
+        io.unobserve(e.target);
+      }
+    },
+    { threshold: 0.25 },
+  );
+  els.forEach((el) => io.observe(el));
+}
+
 export function initFx(): void {
   initReveals();
+  if (!reduced()) stage();
   if (!reduced()) letters(); // hero entrance: needed right away
   const wantsRich = document.querySelector(
     '[data-count], [data-confetti], [data-tilt], [data-magnetic], [data-scroll-tilt], [data-hat-trick], [data-balloon-dog], [data-parallax-up], [data-pick-a-card]',

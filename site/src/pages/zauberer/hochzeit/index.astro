@@ -2,7 +2,7 @@
 import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import PlayingCard from '../../../components/v2/adult/PlayingCard.astro';
+import MagicFrame from '../../../components/v2/adult/MagicFrame.astro';
 import SuitRule from '../../../components/v2/adult/SuitRule.astro';
 import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
@@ -62,7 +62,7 @@ const serviceSchema = {
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Hochzeit', url: '/zauberer/hochzeit/' }]}
 >
   <!-- ── Hero: two hearts leaning on each other like a couple. The photo card (LCP) never hides. ── -->
-  <section class="ce-hero">
+  <section class="ce-hero ce-hero--stage">
     <div class="container ce-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">
@@ -82,19 +82,20 @@ const serviceSchema = {
         </div>
       </div>
 
-      <div class="hz-couple">
-        <PlayingCard rank="Q" suit="♥" class="hz-couple__partner" aria-hidden="true" />
-        <PlayingCard rank="K" suit="♥" class="hz-couple__photo" data-tilt>
-          <Image
-            src={heroImg}
-            alt="Zauberer für die Hochzeit – elegante Tischzauberei in NRW"
-            loading="eager"
-            fetchpriority="high"
-            widths={[400, 700, 1000]}
-            sizes="(max-width: 900px) 64vw, 400px"
-          />
-        </PlayingCard>
-        <span class="hz-couple__heart" aria-hidden="true">♥</span>
+      <div class="ce-spot">
+        <span class="ce-spot__beam" aria-hidden="true"></span>
+        <div class="ce-hero__frame ce-spot__frame">
+          <MagicFrame corner="tr" rank="K" suit="♥" data-tilt>
+            <Image
+              src={heroImg}
+              alt="Zauberer für die Hochzeit – elegante Tischzauberei in NRW"
+              loading="eager"
+              fetchpriority="high"
+              widths={[400, 700, 1000]}
+              sizes="(max-width: 900px) 80vw, 500px"
+            />
+          </MagicFrame>
+        </div>
       </div>
     </div>
   </section>
@@ -166,19 +167,19 @@ const serviceSchema = {
       <p class="ce-center ce-soft">Weitere Fotos und Videos in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
       <div class="hz-gallery__grid">
         <div data-reveal="deal">
-          <PlayingCard rank="A" suit="♥" class="hz-gallery__card" data-tilt style="--sheen-delay: 2.2s">
-            <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Düsseldorf" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
-          </PlayingCard>
+          <MagicFrame corner="tr" rank="A" suit="♥" class="hz-gallery__card" data-tilt style="--sheen-delay: 2.2s">
+            <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Düsseldorf" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+          </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.12">
-          <PlayingCard rank="K" suit="♦" class="hz-gallery__card" data-tilt style="--sheen-delay: 3.1s">
-            <Image src={tischImg} alt="Tischzauberei für Gäste in NRW" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
-          </PlayingCard>
+          <MagicFrame corner="tl" rank="K" suit="♦" class="hz-gallery__card" data-tilt style="--sheen-delay: 3.1s">
+            <Image src={tischImg} alt="Tischzauberei für Gäste in NRW" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+          </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.24">
-          <PlayingCard rank="Q" suit="♥" class="hz-gallery__card" data-tilt style="--sheen-delay: 4s">
-            <Image src={buehneImg} alt="Elegante Bühnenshow von Zauberer LIAR" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
-          </PlayingCard>
+          <MagicFrame corner="br" rank="Q" suit="♥" class="hz-gallery__card" data-tilt style="--sheen-delay: 4s">
+            <Image src={buehneImg} alt="Elegante Bühnenshow von Zauberer LIAR" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+          </MagicFrame>
         </div>
       </div>
     </div>
@@ -241,26 +242,7 @@ const serviceSchema = {
 </V2Layout>
 
 <style>
-  /* ── hero: the couple ── */
-  .hz-couple { position: relative; height: clamp(24rem, 44vw, 32rem); }
-  .hz-couple :global(.hz-couple__partner),
-  .hz-couple :global(.hz-couple__photo) { position: absolute; bottom: 6%; transform-origin: 50% 100%; }
-  /* she leans right, he leans left: tops meet like an A-frame */
-  .hz-couple :global(.hz-couple__partner) {
-    left: 6%; bottom: 22%; width: clamp(9rem, 15vw, 12rem); rotate: 9deg;
-    animation: hz-lean 1.1s var(--ease-out-expo) 0.25s backwards;
-  }
-  .hz-couple :global(.hz-couple__partner .pc__pip) { font-size: clamp(3.5rem, 7vw, 5rem); }
-  /* the panorama photo (3.4:1) shown whole: a wide card leaning on the queen of hearts */
-  .hz-couple :global(.hz-couple__photo) { right: 2%; width: clamp(20rem, 38vw, 30rem); rotate: -5deg; z-index: 2; }
-  .hz-couple :global(.hz-couple__photo img) { object-position: 50% 35%; }
-  .hz-couple__heart {
-    position: absolute; left: 44%; top: 4%; z-index: 3;
-    font-family: var(--font-display); font-size: 2rem; line-height: 1; color: var(--accent);
-    animation: hz-heart 0.9s var(--ease-out) 1.1s backwards;
-  }
-  @keyframes hz-lean { from { rotate: -6deg; translate: -30% 0; opacity: 0; } }
-  @keyframes hz-heart { from { translate: 0 0.8rem; scale: 0.6; opacity: 0; } }
+  /* ── hero: the photo in its magic frame (ce-hero__frame, adult-kit.css) ── */
 
   /* ── intro ── */
   .hz-intro { padding-top: var(--space-4); }
@@ -306,8 +288,9 @@ const serviceSchema = {
   .hz-place p { margin: 0; }
 
   /* ── gallery ── */
-  .hz-gallery__grid { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(3, 1fr); margin-top: var(--space-4); align-items: center; }
-  
+  .hz-gallery { overflow-x: clip; }
+  .hz-gallery__grid { display: grid; gap: var(--space-4) var(--space-3); max-width: 24rem; margin: var(--space-4) auto 0; align-items: center; }
+  @media (min-width: 901px) { .hz-gallery__grid { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; } }
   .hz-gallery__grid > div:nth-child(1) :global(.hz-gallery__card) { rotate: -3deg; }
   .hz-gallery__grid > div:nth-child(2) :global(.hz-gallery__card) { translate: 0 -0.8rem; }
   .hz-gallery__grid > div:nth-child(3) :global(.hz-gallery__card) { rotate: 3deg; }
@@ -339,15 +322,8 @@ const serviceSchema = {
   .hz-invite .btn { margin-top: var(--space-1); }
 
   @media (max-width: 900px) {
-    .hz-couple { height: 17rem; margin-top: var(--space-2); }
-    .hz-couple :global(.hz-couple__partner) { width: 8.5rem; left: 4%; }
-    .hz-couple :global(.hz-couple__photo) { width: min(94%, 24rem); right: 0; }
     .hz-intro__grid { grid-template-columns: 1fr; gap: var(--space-4); }
-    .hz-gallery__grid { grid-template-columns: 1fr; max-width: 24rem; margin-inline: auto; }
     .hz-gallery__grid > div :global(.hz-gallery__card) { translate: none; }
     .hz-invite__card { padding: var(--space-5) var(--space-3); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .hz-couple :global(.hz-couple__partner), .hz-couple__heart { animation: none; }
   }
 </style>

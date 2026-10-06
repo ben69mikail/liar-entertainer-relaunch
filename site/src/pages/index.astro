@@ -4,7 +4,7 @@ import Reviews from '../components/v2/Reviews.astro';
 import SectionEdge from '../components/v2/SectionEdge.astro';
 import Bunting from '../components/v2/kids/Bunting.astro';
 import Squiggle from '../components/v2/kids/Squiggle.astro';
-import PlayingCard from '../components/v2/adult/PlayingCard.astro';
+import MagicFrame from '../components/v2/adult/MagicFrame.astro';
 import adultWorldImg from '../assets/images/zauberer/zauberer-nrw.png';
 import '../styles/kids-kit.css';
 import YouTubeFacade from '../components/YouTubeFacade.astro';
@@ -222,11 +222,11 @@ const videoSchema = {
         <span class="hm-world__go" aria-hidden="true">Zur Kinderwelt →</span>
       </a>
       <a class="hm-world hm-world--adult" href="/zauberer/">
-        <span class="hm-world__card">
-          <PlayingCard rank="A" suit="♠" class="hm-world__pc">
-            <Image src={adultWorldImg} alt="Zauberer LIAR wirft Spielkarten auf der Bühne" widths={[400, 700]} sizes="(max-width: 760px) 70vw, 360px" loading="lazy" style="object-position: 30% 30%" />
-          </PlayingCard>
-        </span>
+        <div class="hm-world__card">
+          <MagicFrame corner="tr" rank="A" suit="♠" class="hm-world__pc">
+            <Image src={adultWorldImg} alt="Zauberer LIAR wirft Spielkarten auf der Bühne" widths={[400, 700]} sizes="(max-width: 760px) 80vw, 352px" loading="lazy" />
+          </MagicFrame>
+        </div>
         <span class="hm-world__label">Für Erwachsene</span>
         <span class="hm-world__links" aria-hidden="true">Close-up · Bühnenshow · Hochzeit · Firmenfeier</span>
         <span class="hm-world__go" aria-hidden="true">Zur Zauberei für Erwachsene →</span>
@@ -656,7 +656,7 @@ const videoSchema = {
   }
   .hm-world__photo :global(img) { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
   .hm-world--kids .hm-world__label { color: var(--brand-red); order: -1; }
-  /* adult: a playing card in its own typeface and colours (a preview of the adult zone) */
+  /* adult: the photo in a magic frame, in its own typeface and colours (a preview of the adult zone) */
   .hm-world--adult {
     --font-display: 'Bodoni Moda Variable', Georgia, serif;
     --radius: 0.85rem;

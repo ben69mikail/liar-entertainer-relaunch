@@ -2,7 +2,7 @@
 import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import PlayingCard from '../../../components/v2/adult/PlayingCard.astro';
+import MagicFrame from '../../../components/v2/adult/MagicFrame.astro';
 import SuitRule from '../../../components/v2/adult/SuitRule.astro';
 import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
@@ -62,7 +62,7 @@ const serviceSchema = {
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Firmenfeier', url: '/zauberer/firmenfeier/' }]}
 >
   <!-- ── Hero: a squared deck, one card dealt from it. The photo card (LCP) never hides. ── -->
-  <section class="ce-hero">
+  <section class="ce-hero ce-hero--stage">
     <div class="container ce-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">
@@ -82,23 +82,20 @@ const serviceSchema = {
         </div>
       </div>
 
-      <div class="ff-deck">
-        <div class="ff-deck__stack" aria-hidden="true">
-          <PlayingCard back class="ff-deck__back" />
-          <PlayingCard back class="ff-deck__back" />
-          <PlayingCard back class="ff-deck__back" />
+      <div class="ce-spot">
+        <span class="ce-spot__beam" aria-hidden="true"></span>
+        <div class="ce-hero__frame ce-spot__frame">
+          <MagicFrame corner="tl" rank="A" suit="♠" data-tilt>
+            <Image
+              src={heroImg}
+              alt="Zauberer für die Firmenfeier – Unterhaltung für Ihr Team in NRW"
+              loading="eager"
+              fetchpriority="high"
+              widths={[400, 700, 1000]}
+              sizes="(max-width: 900px) 80vw, 500px"
+            />
+          </MagicFrame>
         </div>
-        <PlayingCard rank="K" suit="♣" class="ff-deck__dealt" aria-hidden="true" />
-        <PlayingCard rank="A" suit="♠" class="ff-deck__photo" data-tilt>
-          <Image
-            src={heroImg}
-            alt="Zauberer für die Firmenfeier – Unterhaltung für Ihr Team in NRW"
-            loading="eager"
-            fetchpriority="high"
-            widths={[400, 700, 1000]}
-            sizes="(max-width: 900px) 64vw, 400px"
-          />
-        </PlayingCard>
       </div>
     </div>
   </section>
@@ -162,26 +159,26 @@ const serviceSchema = {
     </div>
   </section>
 
-  <!-- ── Eindrücke: a hand dealt onto the ink table ───────── -->
+  <!-- ── Eindrücke: framed photos dealt onto the ink table ─── -->
   <section class="ff-table">
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Eindrücke</h2>
       <p class="ce-center ff-table__note">Weitere Fotos und Videos in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
       <div class="ff-table__hand">
         <div data-reveal="deal">
-          <PlayingCard rank="10" suit="♠" class="ff-table__card" data-tilt style="--sheen-delay: 2.2s">
-            <Image src={buehneImg} alt="Bühnenshow bei einer Firmenfeier in Essen" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
-          </PlayingCard>
+          <MagicFrame corner="tl" rank="10" suit="♠" class="ff-table__card" data-tilt style="--sheen-delay: 2.2s">
+            <Image src={buehneImg} alt="Bühnenshow bei einer Firmenfeier in Essen" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+          </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.12">
-          <PlayingCard rank="J" suit="♣" class="ff-table__card" data-tilt style="--sheen-delay: 3.1s">
-            <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Mülheim" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
-          </PlayingCard>
+          <MagicFrame corner="tr" rank="J" suit="♣" class="ff-table__card" data-tilt style="--sheen-delay: 3.1s">
+            <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Mülheim" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+          </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.24">
-          <PlayingCard rank="Q" suit="♦" class="ff-table__card" data-tilt style="--sheen-delay: 4s">
-            <Image src={weihnachtImg} alt="Zaubervorführung auf einem Weihnachtsmarkt in Dortmund" loading="lazy" widths={[400,700]} sizes="(max-width:640px) 90vw, 30vw" />
-          </PlayingCard>
+          <MagicFrame corner="br" rank="Q" suit="♦" class="ff-table__card" data-tilt style="--sheen-delay: 4s">
+            <Image src={weihnachtImg} alt="Zaubervorführung auf einem Weihnachtsmarkt in Dortmund" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+          </MagicFrame>
         </div>
       </div>
     </div>
@@ -242,21 +239,7 @@ const serviceSchema = {
 </V2Layout>
 
 <style>
-  /* ── hero: squared deck + one dealt card ── */
-  .ff-deck { position: relative; height: clamp(24rem, 44vw, 32rem); }
-  .ff-deck__stack { position: absolute; right: 4%; top: 10%; width: clamp(10rem, 17vw, 13.5rem); aspect-ratio: 5 / 7; rotate: 7deg; }
-  .ff-deck__stack :global(.ff-deck__back) { position: absolute; inset: 0; }
-  .ff-deck__stack :global(.ff-deck__back:nth-child(1)) { translate: 8px 8px; }
-  .ff-deck__stack :global(.ff-deck__back:nth-child(2)) { translate: 4px 4px; }
-  /* K♣ slides off the deck to its place beside the photo */
-  .ff-deck :global(.ff-deck__dealt) {
-    position: absolute; right: 26%; top: 2%; width: clamp(9rem, 15vw, 12rem); rotate: -14deg; z-index: 1;
-    animation: ff-deal 0.9s var(--ease-out-expo) 0.35s backwards;
-  }
-  .ff-deck :global(.ff-deck__dealt .pc__pip) { font-size: clamp(3rem, 6vw, 4.2rem); }
-  .ff-deck :global(.ff-deck__photo) { position: absolute; left: 4%; bottom: 2%; width: clamp(13rem, 23vw, 18.5rem); rotate: -3deg; z-index: 2; }
-  .ff-deck :global(.ff-deck__photo img) { object-position: 50% 40%; }
-  @keyframes ff-deal { from { translate: 85% 25%; rotate: 7deg; } }
+  /* ── hero: the photo in its magic frame (ce-hero__frame, adult-kit.css) ── */
 
   /* ── intro ── */
   .ff-intro { padding-top: var(--space-4); }
@@ -298,7 +281,8 @@ const serviceSchema = {
   .ff-table .ce-h2 { color: var(--bg); }
   .ff-table__note { color: #d9d1c2; }
   .ff-table__note a { color: #f4a7b2; } /* 9.6:1 on black */
-  .ff-table__hand { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--space-3); margin-top: var(--space-4); align-items: end; }
+  .ff-table__hand { display: grid; gap: var(--space-3); max-width: 24rem; margin: var(--space-4) auto 0; align-items: end; }
+  @media (min-width: 901px) { .ff-table__hand { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; } }
   .ff-table__hand > div:nth-child(1) :global(.ff-table__card) { rotate: -4deg; translate: 0.6rem 0.6rem; }
   .ff-table__hand > div:nth-child(2) :global(.ff-table__card) { translate: 0 -1rem; }
   .ff-table__hand > div:nth-child(3) :global(.ff-table__card) { rotate: 4deg; translate: -0.6rem 0.6rem; }
@@ -320,19 +304,11 @@ const serviceSchema = {
   .ff-cta__contact .btn { margin-top: var(--space-2); }
 
   @media (max-width: 900px) {
-    .ff-deck { height: 22rem; margin-top: var(--space-2); }
-    .ff-deck :global(.ff-deck__photo) { width: 12.5rem; left: 6%; }
-    .ff-deck__stack { width: 9.5rem; right: 6%; }
-    .ff-deck :global(.ff-deck__dealt) { width: 8.5rem; right: 22%; }
     .ff-intro__grid, .ff-cta__grid { grid-template-columns: 1fr; gap: var(--space-4); }
     .ff-agenda { grid-template-columns: 1fr; gap: var(--space-4); }
     .ff-agenda::before { left: 1.4rem; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
     .ff-agenda__item { padding: 0 0 0 4.4rem; }
-    .ff-table__hand { grid-template-columns: 1fr; max-width: 24rem; margin-inline: auto; }
     .ff-table__hand > div :global(.ff-table__card) { translate: none; }
     .ff-cta__contact { padding-left: 0; border-left: 0; padding-top: var(--space-3); border-top: 1px solid rgba(20, 18, 16, 0.3); }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .ff-deck :global(.ff-deck__dealt) { animation: none; }
   }
 </style>

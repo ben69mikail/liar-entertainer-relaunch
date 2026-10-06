@@ -2,7 +2,7 @@
 import V2Layout from '../../layouts/V2Layout.astro';
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
-import PlayingCard from '../../components/v2/adult/PlayingCard.astro';
+import MagicFrame from '../../components/v2/adult/MagicFrame.astro';
 import SuitRule from '../../components/v2/adult/SuitRule.astro';
 import PickACard from '../../components/v2/adult/PickACard.astro';
 import '../../styles/adult-kit.css';
@@ -115,7 +115,7 @@ const whyUs = [
   structuredData={structuredData}
 >
   <!-- ── Hero: editorial headline + a fanned hand of cards. The photo card (LCP) never hides. ── -->
-  <section class="ce-hero">
+  <section class="ce-hero ce-hero--stage">
     <div class="container ce-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">
@@ -138,22 +138,20 @@ const whyUs = [
         </div>
       </div>
 
-      <div class="ce-hand">
-        <PlayingCard back class="ce-hand__card ce-hand__card--1" aria-hidden="true" />
-        <PlayingCard rank="K" suit="♣" class="ce-hand__card ce-hand__card--2" aria-hidden="true" />
-        <PlayingCard rank="Q" suit="♦" class="ce-hand__card ce-hand__card--3" aria-hidden="true" />
-        <PlayingCard rank="A" suit="♠" class="ce-hand__card ce-hand__card--photo" data-tilt>
-          <Image
-            src={heroImg}
-            alt="Zauberer NRW für Kindergeburtstag und Hochzeit – TOP Bewertet"
-            widths={[400, 700, 1000]}
-            sizes="(max-width: 900px) 70vw, 420px"
-            loading="eager"
-            fetchpriority="high"
-            style="object-position: 34% 30%"
-          />
-        </PlayingCard>
-        <PlayingCard rank="J" suit="♥" class="ce-hand__thrown" aria-hidden="true" />
+      <div class="ce-spot">
+        <span class="ce-spot__beam" aria-hidden="true"></span>
+        <div class="ce-hero__frame ce-spot__frame">
+          <MagicFrame corner="tr" rank="A" suit="♠" data-tilt>
+            <Image
+              src={heroImg}
+              alt="Zauberer NRW für Kindergeburtstag und Hochzeit – TOP Bewertet"
+              widths={[400, 700, 1000]}
+              sizes="(max-width: 900px) 80vw, 500px"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </MagicFrame>
+        </div>
       </div>
     </div>
   </section>
@@ -208,9 +206,9 @@ const whyUs = [
         {formats.map((format, i) => (
           <article class="ce-format" data-reveal="deal" data-reveal-delay={i * 0.12}>
             <div class="ce-format__card" data-tilt>
-              <PlayingCard rank={['A', 'K', 'Q'][i]} suit={(['♠', '♥', '♣'] as const)[i]} class="ce-format__photo" style={`--sheen-delay: ${2.2 + i * 0.9}s`}>
-                <Image src={format.img} alt={format.imgAlt} loading="lazy" widths={[400, 800]} sizes="(max-width: 768px) 90vw, 30vw" />
-              </PlayingCard>
+              <MagicFrame corner={(['tr', 'tl', 'tr'] as const)[i]} rank={['A', 'K', 'Q'][i]} suit={(['♠', '♥', '♣'] as const)[i]} style={`--sheen-delay: ${2.2 + i * 0.9}s`}>
+                <Image src={format.img} alt={format.imgAlt} loading="lazy" widths={[400, 800]} sizes="(max-width: 768px) 80vw, 28vw" />
+              </MagicFrame>
             </div>
             <div class="ce-format__body">
               <div class="ce-format__icon">{format.icon}</div>
@@ -288,7 +286,7 @@ const whyUs = [
           <p class="ce-soft">🌍 <strong>Überregional &amp; International:</strong> Auf Anfrage auch außerhalb von NRW buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!</p>
         </div>
         <div class="ce-area__map" data-reveal="deal">
-          <PlayingCard rank="10" suit="♦" class="ce-map-card" data-scroll-tilt="2" style="--sheen-delay: 3.4s">
+          <MagicFrame corner="br" rank="10" suit="♦" data-scroll-tilt="2" style="--sheen-delay: 3.4s">
             <Image
               src={karteImg}
               alt="Einsatzgebiet Zauberer LIAR für Kindergeburtstag und Events in NRW – Karte"
@@ -296,7 +294,7 @@ const whyUs = [
               widths={[400, 800]}
               sizes="(max-width: 768px) 90vw, 45vw"
             />
-          </PlayingCard>
+          </MagicFrame>
         </div>
       </div>
     </div>

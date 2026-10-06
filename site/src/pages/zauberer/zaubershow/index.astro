@@ -2,7 +2,7 @@
 import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import PlayingCard from '../../../components/v2/adult/PlayingCard.astro';
+import MagicFrame from '../../../components/v2/adult/MagicFrame.astro';
 import SuitRule from '../../../components/v2/adult/SuitRule.astro';
 import YouTubeFacade from '../../../components/YouTubeFacade.astro';
 import '../../../styles/adult-kit.css';
@@ -98,8 +98,8 @@ const whyUs = [
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Zaubershow', url: '/zauberer/zaubershow/' }]}
 >
-  <!-- ── Hero: the show photo on a card turned sideways, the deck tucked behind ── -->
-  <section class="ce-hero zs-hero">
+  <!-- ── Hero: the show photo in its magic frame ── -->
+  <section class="ce-hero ce-hero--stage zs-hero">
     <div class="container ce-hero__grid zs-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">
@@ -123,21 +123,20 @@ const whyUs = [
         </div>
       </div>
 
-      <div class="zs-stage">
-        <PlayingCard back class="zs-stage__back zs-stage__back--1" aria-hidden="true" />
-        <PlayingCard back class="zs-stage__back zs-stage__back--2" aria-hidden="true" />
-        <PlayingCard rank="A" suit="♥" class="zs-stage__photo" data-tilt>
-          <Image
-            src={heroImg}
-            alt="Zaubershow NRW – Interaktiv & Lustig für Kinder"
-            widths={[400, 600, 900, 1200]}
-            sizes="(max-width: 560px) 74vw, (max-width: 900px) 86vw, 500px"
-            loading="eager"
-            fetchpriority="high"
-            style="object-position: 50% 30%"
-          />
-        </PlayingCard>
-        <PlayingCard rank="5" suit="♣" class="zs-stage__mini" aria-hidden="true" />
+      <div class="ce-spot">
+        <span class="ce-spot__beam" aria-hidden="true"></span>
+        <div class="ce-hero__frame ce-spot__frame">
+          <MagicFrame corner="tr" rank="A" suit="♥" data-tilt>
+            <Image
+              src={heroImg}
+              alt="Zaubershow NRW – Interaktiv & Lustig für Kinder"
+              widths={[400, 600, 900, 1200]}
+              sizes="(max-width: 900px) 80vw, 500px"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </MagicFrame>
+        </div>
       </div>
     </div>
   </section>
@@ -184,7 +183,7 @@ const whyUs = [
       <SuitRule />
       <div class="zs-unique__grid">
         <div class="zs-unique__photo" data-reveal="deal">
-          <PlayingCard rank="Q" suit="♦" class="zs-unique__card" data-scroll-tilt="2" style="--sheen-delay: 2.6s">
+          <MagicFrame corner="tl" rank="Q" suit="♦" class="zs-unique__card" data-scroll-tilt="2" style="--sheen-delay: 2.6s">
             <Image
               src={staunendeKinderImg}
               alt="Staunende Kinder bei einer Zaubershow in NRW"
@@ -192,7 +191,7 @@ const whyUs = [
               sizes="(max-width: 900px) 80vw, 360px"
               loading="lazy"
             />
-          </PlayingCard>
+          </MagicFrame>
         </div>
         <div>
           <p class="ce-soft" data-reveal>
@@ -321,7 +320,7 @@ const whyUs = [
           <p class="ce-soft">🌍 Auf Anfrage auch deutschlandweit sowie in Belgien, Niederlande, Frankreich, Österreich und der Schweiz buchbar!</p>
         </div>
         <div class="ce-area__map" data-reveal="deal">
-          <PlayingCard rank="9" suit="♠" class="ce-map-card" data-scroll-tilt="2" style="--sheen-delay: 3.4s">
+          <MagicFrame corner="br" rank="9" suit="♠" data-scroll-tilt="2" style="--sheen-delay: 3.4s">
             <Image
               src={karteImg}
               alt="Einsatzgebiet Zaubershow in NRW – Karte mit Standort Gladbeck"
@@ -329,7 +328,7 @@ const whyUs = [
               widths={[400, 800]}
               sizes="(max-width: 768px) 90vw, 45vw"
             />
-          </PlayingCard>
+          </MagicFrame>
         </div>
       </div>
     </div>
@@ -431,31 +430,9 @@ const whyUs = [
 </V2Layout>
 
 <style>
-  /* ── hero: landscape photo card, two backs tucked behind, a small 5♣ for the five pillars ── */
+  /* ── hero: the show photo in its magic frame (ce-hero__frame, adult-kit.css) ── */
   @media (min-width: 901px) { .zs-hero__grid { grid-template-columns: 1fr 1.1fr; } }
   .zs-hero__lead { max-width: 36rem; }
-  .zs-stage { position: relative; height: clamp(22rem, 38vw, 30rem); }
-  .zs-stage :global(.zs-stage__photo) {
-    position: absolute; inset: 12% 0 auto 2%; width: 96%;
-    rotate: -2deg; z-index: 2;
-  }
-  .zs-stage :global(.zs-stage__back) {
-    position: absolute; top: 0; right: 4%; width: clamp(8rem, 14vw, 11rem);
-  }
-  .zs-stage :global(.zs-stage__back--1) { transform: rotate(14deg) translate(4%, -2%); animation: zs-tuck-1 0.9s var(--ease-out) 0.15s backwards; }
-  .zs-stage :global(.zs-stage__back--2) { transform: rotate(4deg) translate(-38%, -6%); animation: zs-tuck-2 0.9s var(--ease-out) 0.25s backwards; }
-  .zs-stage :global(.zs-stage__mini) {
-    position: absolute; left: -2%; bottom: 0; z-index: 3;
-    width: clamp(5.5rem, 9vw, 7rem); padding: 1.2rem 0.7rem;
-    transform: rotate(-12deg);
-    animation: zs-drop 0.8s var(--ease-out) 0.7s backwards;
-  }
-  .zs-stage :global(.zs-stage__mini .pc__pip) { font-size: 2rem; }
-  .zs-stage :global(.zs-stage__mini .pc__index) { font-size: 0.75rem; }
-  /* the backs slide out from under the photo card */
-  @keyframes zs-tuck-1 { from { transform: rotate(0deg) translate(-60%, 40%); } }
-  @keyframes zs-tuck-2 { from { transform: rotate(0deg) translate(-60%, 40%); } }
-  @keyframes zs-drop { from { transform: rotate(-30deg) translateY(-3rem); opacity: 0; } }
 
   /* ── intro ── */
   .zs-intro { font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.7; color: var(--ink-soft); }
@@ -566,14 +543,12 @@ const whyUs = [
   .zs-faq[open] .zs-faq__plus { rotate: 45deg; }
 
   @media (max-width: 900px) {
-    .zs-stage { height: auto; aspect-ratio: 7 / 6; margin-top: var(--space-3); }
     .zs-unique__grid { grid-template-columns: 1fr; gap: var(--space-4); }
   }
   @media (max-width: 560px) {
     .zs-checks { grid-template-columns: 1fr; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .zs-stage :global(*) { animation: none !important; }
     .zs-pillar { transition: none; }
   }
 </style>

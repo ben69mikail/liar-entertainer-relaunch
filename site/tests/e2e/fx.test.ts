@@ -153,7 +153,32 @@ describe('side rays hero spotlights', () => {
   }, 20_000);
 });
 
-describe('playing-card photos are never cropped (user feedback 2026-10-05: no cut-off people)', () => {
+describe('adult photos sit in magic frames, cards are only accents (user feedback 2026-10-06)', () => {
+  const ADULT = ['/', '/zauberer/', '/zauberer/zaubershow/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'];
+  for (const path of ADULT) {
+    it(`${path}: no photo inside a playing card, every adult photo in a frame`, async () => {
+      const page = await open(path);
+      const n = await page.evaluate(() => ({
+        inCards: document.querySelectorAll('.pc img').length,
+        framed: document.querySelectorAll('.mf img').length,
+      }));
+      await page.close();
+      expect(n.inCards).toBe(0);
+      expect(n.framed).toBeGreaterThan(0);
+    });
+  }
+
+  it('frame decorations play when the frame comes into view, the photo is never hidden', async () => {
+    const page = await open('/zauberer/');
+    const frame = page.locator('.mf').last();
+    expect(await frame.evaluate((f) => getComputedStyle(f.querySelector('img')!).opacity)).toBe('1');
+    await frame.scrollIntoViewIfNeeded();
+    await expect.poll(() => frame.evaluate((f) => f.classList.contains('is-staged'))).toBe(true);
+    await page.close();
+  });
+});
+
+describe('framed photos are never cropped (user feedback 2026-10-05: no cut-off people)', () => {
   const ADULT = ['/', '/zauberer/', '/zauberer/zaubershow/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'];
   for (const path of ADULT) {
     for (const width of [390, 1280]) {
@@ -162,11 +187,11 @@ describe('playing-card photos are never cropped (user feedback 2026-10-05: no cu
         await page.goto(BASE + path);
         // load lazy images so their natural size is known
         await page.evaluate(async () => {
-          const imgs = [...document.querySelectorAll<HTMLImageElement>('.pc--photo img')];
+          const imgs = [...document.querySelectorAll<HTMLImageElement>('.mf img, .pc--photo img')];
           imgs.forEach((i) => (i.loading = 'eager'));
           await Promise.all(imgs.map((i) => (i.complete ? null : new Promise((r) => { i.onload = i.onerror = r; }))));
         });
-        const cropped = await page.$$eval('.pc--photo img', (imgs) =>
+        const cropped = await page.$$eval('.mf img, .pc--photo img', (imgs) =>
           (imgs as HTMLImageElement[]).flatMap((img) => {
             const r = img.getBoundingClientRect();
             if (!r.width || !img.naturalWidth) return [];
@@ -181,27 +206,5 @@ describe('playing-card photos are never cropped (user feedback 2026-10-05: no cu
         expect(cropped).toEqual([]);
       }, 30_000);
     }
-  }
-});
-
-describe('playing-card photos (user feedback 2026-10-05)', () => {
-  for (const path of ['/zauberer/', '/']) {
-    it(`${path}: corner indices are fully visible, never covered by the photo`, async () => {
-      const page = await open(path);
-      await page.waitForTimeout(2500); // entrance animations settle
-      const overlaps = await page.$$eval('.pc--photo', (cards) =>
-        cards.flatMap((card) => {
-          const img = card.querySelector('.pc__face')!.getBoundingClientRect();
-          return [...card.querySelectorAll('.pc__index')].filter((ix) => {
-            const r = ix.getBoundingClientRect();
-            return r.left < img.right && r.right > img.left && r.top < img.bottom && r.bottom > img.top;
-          }).map((ix) => ix.textContent);
-        }),
-      );
-      const count = await page.locator('.pc--photo').count();
-      expect(count).toBeGreaterThan(0);
-      expect(overlaps).toEqual([]);
-      await page.close();
-    }, 15_000);
   }
 });

@@ -2,7 +2,7 @@
 import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import PlayingCard from '../../../components/v2/adult/PlayingCard.astro';
+import MagicFrame from '../../../components/v2/adult/MagicFrame.astro';
 import SuitRule from '../../../components/v2/adult/SuitRule.astro';
 import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
@@ -77,7 +77,7 @@ const _pageGallery = [
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Bühnen Zauberer', url: '/zauberer/buehnen-zauberer/' }]}
 >
   <!-- ── Hero: house lights down, one card in the spotlight ── -->
-  <section class="ce-hero bz-hero">
+  <section class="ce-hero ce-hero--stage">
     <div class="container ce-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">
@@ -92,26 +92,26 @@ const _pageGallery = [
         </h2>
         <p class="ce-hero__claim ce-hero__claim--soft">Stand-up Comedy-Zauberei für Events, Galas &amp; Feiern</p>
         <div class="ce-hero__actions">
-          <a class="btn btn--primary bz-btn" href="/kontakt/" data-magnetic>Unverbindlich anfragen</a>
+          <a class="btn btn--primary" href="/kontakt/" data-magnetic>Unverbindlich anfragen</a>
           <ReviewBadge />
         </div>
       </div>
 
-      <div class="bz-spot">
-        <span class="bz-spot__beam" aria-hidden="true"></span>
-        <PlayingCard back class="bz-spot__back" aria-hidden="true" />
-        <PlayingCard rank="K" suit="♠" class="bz-spot__photo" data-tilt>
-          <Image
-            src={heroImg}
-            alt="Bühnenzauberer NRW – Professionelle Stand-up Zauberei"
-            title="Bühnenzauberer LIAR – Stand-up Zauberei in NRW"
-            widths={[400, 700, 1000]}
-            sizes="(max-width: 900px) 70vw, 380px"
-            loading="eager"
-            fetchpriority="high"
-            style="object-position: 47% 40%"
-          />
-        </PlayingCard>
+      <div class="ce-spot">
+        <span class="ce-spot__beam" aria-hidden="true"></span>
+        <div class="ce-hero__frame ce-spot__frame">
+          <MagicFrame corner="tl" rank="K" suit="♠" data-tilt>
+            <Image
+              src={heroImg}
+              alt="Bühnenzauberer NRW – Professionelle Stand-up Zauberei"
+              title="Bühnenzauberer LIAR – Stand-up Zauberei in NRW"
+              widths={[400, 700, 1000]}
+              sizes="(max-width: 900px) 80vw, 500px"
+              loading="eager"
+              fetchpriority="high"
+            />
+          </MagicFrame>
+        </div>
       </div>
     </div>
   </section>
@@ -204,7 +204,7 @@ const _pageGallery = [
     </div>
   </section>
 
-  <!-- ── Galerie: a spread of photo cards on the stage ─────── -->
+  <!-- ── Galerie: a spread of framed photos on the stage ────── -->
   <section class="bz-stageband bz-gallery">
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
@@ -212,14 +212,14 @@ const _pageGallery = [
       <div class="bz-spread">
         {_pageGallery.map((g, i) => (
           <div class="bz-spread__slot" style={`--i: ${i - 2}; --lift: ${Math.abs(i - 2)}`} data-reveal="deal" data-reveal-delay={i * 0.1}>
-            <PlayingCard
+            <MagicFrame
+              corner={(['tl', 'tr', 'br', 'bl', 'tr'] as const)[i]}
               rank={['A', 'K', 'Q', 'J', '10'][i]}
               suit={(['♠', '♥', '♣', '♦', '♠'] as const)[i]}
-              class="bz-spread__card"
               style={`--sheen-delay: ${2 + i * 0.8}s`}
             >
-              <Image src={g.src} alt={g.alt} widths={[300, 600]} sizes="(max-width: 700px) 44vw, 15rem" loading="lazy" />
-            </PlayingCard>
+              <Image src={g.src} alt={g.alt} widths={[300, 600]} sizes="(max-width: 700px) 40vw, 12rem" loading="lazy" />
+            </MagicFrame>
           </div>
         ))}
       </div>
@@ -288,46 +288,17 @@ const _pageGallery = [
 
 <style>
   /* Stage palette: ink background, paper text. Red is lifted for contrast on black (#ec4a60: 4.9:1). */
-  .bz-hero, .bz-stageband {
+  .bz-stageband {
     --stage-red: #ec4a60;
     --stage-soft: #d9d1c2;
     background: var(--ink); color: var(--bg);
   }
 
-  /* ── hero ── */
-  .bz-hero { isolation: isolate; }
-  :global(.v2) .bz-hero .ce-crumbs, :global(.v2) .bz-hero .ce-crumbs a { color: var(--stage-soft); }
-  :global(.v2) .bz-hero .ce-hero__title { color: var(--bg); }
-  :global(.v2) .bz-hero .ce-hero__title em { color: var(--stage-red); }
-  :global(.v2) .bz-hero .ce-hero__sub { color: var(--bg); }
-  :global(.v2) .bz-hero .ce-hero__claim--soft { color: var(--stage-soft); }
-  :global(.v2) .bz-hero .sr { color: var(--bg); }
-  :global(.v2) .bz-hero .sr__suit--red { color: var(--stage-red); }
+  /* ── hero: ce-hero--stage + ce-spot (adult-kit.css) ── */
   :global(.v2) .bz-btn { background: var(--accent); color: var(--accent-ink); }
   @media (hover: hover) and (pointer: fine) {
     :global(.v2) .bz-btn:hover { background: var(--accent-strong); }
   }
-
-  .bz-spot { position: relative; height: clamp(26rem, 44vw, 34rem); display: grid; place-items: center; }
-  /* the spotlight: a soft cone from above and a pool of light on the floor; fades up once */
-  .bz-spot__beam {
-    position: absolute; inset: -20% -10% -6%; z-index: -1; pointer-events: none;
-    background:
-      radial-gradient(ellipse 34% 9% at 50% 92%, rgba(255, 246, 225, 0.22), transparent 70%),
-      conic-gradient(at 50% -8%, transparent 0deg 162deg, rgba(255, 246, 225, 0.13) 170deg 190deg, transparent 198deg 360deg);
-    animation: bz-lights 1.6s var(--ease-out) 0.2s backwards;
-  }
-  @keyframes bz-lights { from { opacity: 0; } }
-  .bz-spot :global(.bz-spot__photo) { position: relative; z-index: 2; width: clamp(18rem, 36vw, 28rem); rotate: 2.5deg; }
-  .bz-spot :global(.bz-spot__back) {
-    /* lies sideways like the photo card and peeks out above-left of it */
-    position: absolute; left: 50%; top: 50%; width: clamp(16rem, 32vw, 25rem); aspect-ratio: 7 / 5;
-    translate: -50% -50%;
-    transform: translate(-30%, -26%) rotate(-9deg);
-    box-shadow: 0 0 0 1px rgba(255, 253, 247, 0.25), var(--shadow);
-    animation: bz-slide 1s var(--ease-out) 0.5s backwards;
-  }
-  @keyframes bz-slide { from { transform: translate(0, 0) rotate(0deg); } }
 
   /* ── intro + playbill ── */
   .bz-intro__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-5); align-items: center; }
@@ -364,7 +335,7 @@ const _pageGallery = [
   .bz-what__card h4 { font-size: 1.35rem; margin: 0.4rem 0 0.5rem; }
   .bz-what__card p { margin: 0; }
 
-  /* ── gallery: five photo cards fanned under the spotlight ── */
+  /* ── gallery: five framed photos fanned under the spotlight ── */
   .bz-gallery { overflow: clip; }
   .bz-gallery::before {
     content: ''; position: absolute; inset: 0; pointer-events: none;
@@ -380,10 +351,8 @@ const _pageGallery = [
     translate: 0 calc(var(--lift) * 0.7rem);
     transition: translate 0.35s var(--ease-out);
   }
-  .bz-spread :global(.bz-spread__card) { box-shadow: 0 0 0 1px rgba(255, 253, 247, 0.2), 0 24px 40px -18px rgba(0, 0, 0, 0.8); }
   @media (min-width: 901px) {
-    .bz-spread { flex-wrap: nowrap; gap: 0; }
-    .bz-spread__slot { margin-inline: -0.6rem; }
+    .bz-spread { flex-wrap: nowrap; gap: var(--space-1); }
   }
   @media (hover: hover) and (pointer: fine) {
     .bz-spread__slot:hover { z-index: 2; translate: 0 calc(var(--lift) * 0.7rem - 1.2rem); }
@@ -419,14 +388,10 @@ const _pageGallery = [
   .bz-cta__contact p { margin-bottom: 0.4rem !important; }
 
   @media (max-width: 900px) {
-    .bz-spot { height: 20rem; margin-top: var(--space-3); }
-    .bz-spot :global(.bz-spot__photo) { width: min(88%, 24rem); }
-    .bz-spot :global(.bz-spot__back) { width: min(76%, 20rem); }
     .bz-intro__grid, .bz-area__grid { grid-template-columns: 1fr; gap: var(--space-4); }
     .bz-spread__slot { rotate: calc(var(--i) * 2deg); translate: none; }
   }
   @media (prefers-reduced-motion: reduce) {
-    .bz-spot__beam, .bz-spot :global(.bz-spot__back) { animation: none !important; }
     .bz-spread__slot { transition: none; }
   }
 </style>

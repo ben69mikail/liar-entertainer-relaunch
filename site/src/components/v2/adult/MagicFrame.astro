@@ -1,0 +1,129 @@
+---
+/**
+ * Adult photo frame (user, 2026-10-06): the photo — always whole, never cropped — sits on a cream
+ * passe-partout with a fine ink edge. Playing cards are only an accent: two small cards tucked
+ * behind one corner. When the frame comes into view (fx.ts adds .is-staged) a red hairline draws
+ * itself around the picture and the cards fan out from behind the photo. Hover fans them a
+ * little further. The photo itself is never animated in, so a
+ * frame can carry the LCP image. Decorations are aria-hidden; reduced motion shows the end state.
+ */
+type Suit = '♠' | '♥' | '♣' | '♦';
+interface Props {
+  /** corner the accent cards peek out from */
+  corner?: 'tl' | 'tr' | 'bl' | 'br';
+  rank?: string;
+  suit?: Suit;
+  class?: string;
+  style?: string;
+  [key: `data-${string}`]: unknown;
+}
+const { corner = 'tr', rank = 'A', suit = '♠', class: cls, style, ...rest } = Astro.props;
+const red = suit === '♥' || suit === '♦';
+---
+
+<figure class:list={['mf', `mf--${corner}`, cls]} style={style} data-stage {...rest}>
+  <span class="mf__cards" aria-hidden="true">
+    <span class="mf__card mf__card--back"></span>
+    <span class:list={['mf__card', 'mf__card--face', { 'mf__card--red': red }]}>
+      <span class="mf__idx">{rank}<br />{suit}</span>
+      <span class="mf__pip">{suit}</span>
+    </span>
+  </span>
+  <span class="mf__mat">
+    <span class="mf__photo"><slot /></span>
+  </span>
+  <svg class="mf__line" aria-hidden="true" focusable="false">
+    <rect pathLength="1"></rect>
+  </svg>
+</figure>
+
+<style>
+  .mf {
+    --mf-gap: clamp(0.6rem, 1.6vw, 0.95rem); /* passe-partout → red hairline distance */
+    --mf-ease: cubic-bezier(0.16, 1, 0.3, 1);
+    position: relative; isolation: isolate; display: block; margin: 0;
+    padding: var(--mf-gap);
+  }
+
+  /* ── passe-partout + photo (natural proportions, never cropped) ── */
+  .mf__mat {
+    position: relative; z-index: 3; display: block;
+    padding: clamp(0.45rem, 1.2vw, 0.7rem);
+    background: #fffdf7; border-radius: 0.85rem;
+    box-shadow:
+      0 0 0 1px rgba(20, 18, 16, 0.2),
+      0 2px 4px rgba(20, 18, 16, 0.06),
+      0 18px 40px -16px rgba(20, 18, 16, 0.45);
+    transition: transform 0.6s var(--mf-ease), box-shadow 0.6s var(--mf-ease);
+  }
+  .mf__photo { position: relative; display: block; overflow: hidden; border-radius: 0.5rem; }
+  .mf__photo :global(img) { display: block; width: 100%; height: auto; }
+
+  /* silver sheen across the photo now and then (kept from the card frames, 2026-10-05) */
+  .mf__photo::after {
+    content: ''; position: absolute; inset: -10% -60%; pointer-events: none;
+    background: linear-gradient(115deg, transparent 38%, rgba(255, 255, 255, 0.08) 44%, rgba(236, 240, 247, 0.5) 49%, rgba(255, 255, 255, 0.8) 50%, rgba(214, 220, 230, 0.35) 52%, transparent 60%);
+    transform: translateX(-75%);
+    animation: mf-sheen 7s cubic-bezier(0.45, 0, 0.55, 1) var(--sheen-delay, 2s) infinite;
+  }
+  @keyframes mf-sheen { 0% { transform: translateX(-75%); } 36%, 100% { transform: translateX(75%); } }
+
+  /* ── red hairline drawn around the picture ── */
+  .mf__line { position: absolute; inset: 0; z-index: 1; width: 100%; height: 100%; overflow: visible; pointer-events: none; }
+  .mf__line rect {
+    x: 0.75px; y: 0.75px; width: calc(100% - 1.5px); height: calc(100% - 1.5px); rx: 18px;
+    fill: none; stroke: var(--accent, #c8102e); stroke-width: 1.25; vector-effect: non-scaling-stroke;
+    stroke-dasharray: 1; stroke-dashoffset: 0;
+  }
+
+  /* ── accent cards behind one corner ── */
+  .mf__cards { position: absolute; z-index: 2; width: clamp(3.6rem, 19%, 6.4rem); aspect-ratio: 5 / 7; }
+  .mf--tr .mf__cards { right: -3%; top: -6%; }
+  .mf--tl .mf__cards { left: -3%; top: -6%; }
+  .mf--br .mf__cards { right: -3%; bottom: -6%; }
+  .mf--bl .mf__cards { left: -3%; bottom: -6%; }
+  .mf__card {
+    position: absolute; inset: 0; border-radius: 0.45rem;
+    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.22), 0 10px 22px -12px rgba(20, 18, 16, 0.55);
+    transition: transform 0.7s var(--mf-ease);
+  }
+  .mf__card--back {
+    background:
+      radial-gradient(circle at 50% 50%, transparent 0 30%, rgba(200, 16, 46, 0.9) 31% 34%, transparent 35%),
+      repeating-linear-gradient(45deg, rgba(255, 253, 247, 0.13) 0 2px, transparent 2px 7px),
+      repeating-linear-gradient(-45deg, rgba(255, 253, 247, 0.13) 0 2px, transparent 2px 7px),
+      #1c1916;
+    border: 3px solid #141210;
+  }
+  .mf__card--face { background: #fffdf7; color: #141210; display: grid; place-items: center; }
+  .mf__card--red { color: #c8102e; }
+  .mf__idx { position: absolute; left: 0.3rem; top: 0.25rem; font-family: var(--font-display); font-weight: 700; font-size: 0.7rem; line-height: 1; text-align: center; }
+  .mf__pip { font-family: var(--font-display); font-size: clamp(1.4rem, 3vw, 2rem); line-height: 1; }
+  /* resting fan (end state); mirrored for left corners */
+  .mf__card--back { transform: rotate(-8deg) translate(-6%, 4%); }
+  .mf__card--face { transform: rotate(14deg) translate(22%, -6%); }
+  .mf--tl .mf__card--back, .mf--bl .mf__card--back { transform: rotate(8deg) translate(6%, 4%); }
+  .mf--tl .mf__card--face, .mf--bl .mf__card--face { transform: rotate(-14deg) translate(-22%, -6%); }
+
+  /* ── entrance: only decorations wait for the stage; the photo is always visible ── */
+  :global(.motion-ok) .mf:not(.is-staged) .mf__line rect { stroke-dashoffset: 1; }
+  :global(.motion-ok) .mf:not(.is-staged) .mf__card { transform: rotate(0deg) translate(-35%, 35%); }
+  :global(.motion-ok) .mf--tl:not(.is-staged) .mf__card, :global(.motion-ok) .mf--bl:not(.is-staged) .mf__card { transform: rotate(0deg) translate(35%, 35%); }
+  .mf__line rect { transition: stroke-dashoffset 1.6s cubic-bezier(0.65, 0, 0.35, 1) 0.15s; }
+  .mf__card--back { transition-delay: 0.35s; }
+  .mf__card--face { transition-delay: 0.5s; }
+
+  @media (hover: hover) and (pointer: fine) {
+    .mf.is-staged:hover .mf__mat { transform: translateY(-4px); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.2), 0 2px 4px rgba(20, 18, 16, 0.06), 0 28px 50px -18px rgba(20, 18, 16, 0.5); }
+    .mf.is-staged:hover .mf__card { transition-delay: 0s; }
+    .mf.is-staged:hover .mf__card--face { transform: rotate(24deg) translate(42%, -14%); }
+    .mf.is-staged:hover .mf__card--back { transform: rotate(-14deg) translate(-12%, 6%); }
+    .mf--tl.is-staged:hover .mf__card--face, .mf--bl.is-staged:hover .mf__card--face { transform: rotate(-24deg) translate(-42%, -14%); }
+    .mf--tl.is-staged:hover .mf__card--back, .mf--bl.is-staged:hover .mf__card--back { transform: rotate(14deg) translate(12%, 6%); }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .mf__photo::after { animation: none; }
+    .mf__line rect, .mf__card, .mf__mat { transition: none; }
+  }
+</style>
