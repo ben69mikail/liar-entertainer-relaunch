@@ -24,6 +24,11 @@
   --border: 1px solid rgba(43, 29, 23, 0.16);
   --shadow: 0 2px 6px rgba(43, 29, 23, 0.06), 0 18px 36px -18px rgba(43, 29, 23, 0.38);
   --shadow-hover: 0 3px 8px rgba(43, 29, 23, 0.08), 0 26px 48px -20px rgba(43, 29, 23, 0.45);
+  /* circus-programme corner flourishes (price cards + review cards) */
+  --orn-tl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M2 26V9c0-4 3-7 7-7h17' fill='none' stroke='%23b8862f' stroke-width='1.2'/%3E%3Cpath d='M6 26V12c0-3 3-6 6-6h14' fill='none' stroke='%23b8862f' stroke-width='.7' opacity='.7'/%3E%3Ccircle cx='9' cy='9' r='1.6' fill='%23b8862f'/%3E%3C/svg%3E");
+  --orn-tr: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg transform='matrix(-1 0 0 1 28 0)'%3E%3Cpath d='M2 26V9c0-4 3-7 7-7h17' fill='none' stroke='%23b8862f' stroke-width='1.2'/%3E%3Cpath d='M6 26V12c0-3 3-6 6-6h14' fill='none' stroke='%23b8862f' stroke-width='.7' opacity='.7'/%3E%3Ccircle cx='9' cy='9' r='1.6' fill='%23b8862f'/%3E%3C/g%3E%3C/svg%3E");
+  --orn-bl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg transform='matrix(1 0 0 -1 0 28)'%3E%3Cpath d='M2 26V9c0-4 3-7 7-7h17' fill='none' stroke='%23b8862f' stroke-width='1.2'/%3E%3Cpath d='M6 26V12c0-3 3-6 6-6h14' fill='none' stroke='%23b8862f' stroke-width='.7' opacity='.7'/%3E%3Ccircle cx='9' cy='9' r='1.6' fill='%23b8862f'/%3E%3C/g%3E%3C/svg%3E");
+  --orn-br: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg transform='matrix(-1 0 0 -1 28 28)'%3E%3Cpath d='M2 26V9c0-4 3-7 7-7h17' fill='none' stroke='%23b8862f' stroke-width='1.2'/%3E%3Cpath d='M6 26V12c0-3 3-6 6-6h14' fill='none' stroke='%23b8862f' stroke-width='.7' opacity='.7'/%3E%3Ccircle cx='9' cy='9' r='1.6' fill='%23b8862f'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 /* buttons: soft, rounded, no hard offset shadow; hover lifts (fine pointers only) */
@@ -55,7 +60,7 @@
 
 /* ── hero: the stage between the curtains ── */
 .k3-hero {
-  --curtain: clamp(2.6rem, 11vw, 10.5rem);
+  --curtain: clamp(1.25rem, 5vw, 4.5rem);
   overflow: clip; isolation: isolate;
   padding-block: clamp(3.2rem, 6vw, 5rem) var(--space-5) !important;
   background:
@@ -65,7 +70,9 @@
 .k3-hero .kg-rays { position: absolute; inset: 0; z-index: 0; width: 100%; height: 100%; opacity: 0; transition: opacity 1.4s var(--ease-out); pointer-events: none; }
 .k3-hero .kg-rays.is-live { opacity: 0.85; }
 /* content stays clear of the curtains */
-.k3-hero .container { width: min(100% - 2 * (var(--curtain) + 2rem), 66rem); z-index: 3; }
+/* content keeps clear of the gathered curtain: one fabric panel is 1/7 of a half (≈7.15vw) */
+.k3-hero .container { width: min(100% - 2 * (max(var(--curtain), 7.4vw) + 1.25rem), 66rem); z-index: 3; }
+.k3-hero > .cu { z-index: 5; } /* the curtain opens in front of the stage */
 .k3-hero__grid { display: grid; gap: var(--space-4); align-items: center; }
 .k3-hero__title { font-size: clamp(2.1rem, 4.4vw, 3.6rem); line-height: 1.08; margin: var(--space-2) 0 var(--space-3); font-weight: 650; }
 .k3-mark { color: var(--accent-strong); }
@@ -113,10 +120,6 @@
 
 .k3-cards { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); align-items: start; }
 .k3-card {
-  --orn-tl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cpath d='M2 26V9c0-4 3-7 7-7h17' fill='none' stroke='%23b8862f' stroke-width='1.2'/%3E%3Cpath d='M6 26V12c0-3 3-6 6-6h14' fill='none' stroke='%23b8862f' stroke-width='.7' opacity='.7'/%3E%3Ccircle cx='9' cy='9' r='1.6' fill='%23b8862f'/%3E%3C/svg%3E");
-  --orn-tr: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg transform='matrix(-1 0 0 1 28 0)'%3E%3Cpath d='M2 26V9c0-4 3-7 7-7h17' fill='none' stroke='%23b8862f' stroke-width='1.2'/%3E%3Cpath d='M6 26V12c0-3 3-6 6-6h14' fill='none' stroke='%23b8862f' stroke-width='.7' opacity='.7'/%3E%3Ccircle cx='9' cy='9' r='1.6' fill='%23b8862f'/%3E%3C/g%3E%3C/svg%3E");
-  --orn-bl: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg transform='matrix(1 0 0 -1 0 28)'%3E%3Cpath d='M2 26V9c0-4 3-7 7-7h17' fill='none' stroke='%23b8862f' stroke-width='1.2'/%3E%3Cpath d='M6 26V12c0-3 3-6 6-6h14' fill='none' stroke='%23b8862f' stroke-width='.7' opacity='.7'/%3E%3Ccircle cx='9' cy='9' r='1.6' fill='%23b8862f'/%3E%3C/g%3E%3C/svg%3E");
-  --orn-br: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 28 28'%3E%3Cg transform='matrix(-1 0 0 -1 28 28)'%3E%3Cpath d='M2 26V9c0-4 3-7 7-7h17' fill='none' stroke='%23b8862f' stroke-width='1.2'/%3E%3Cpath d='M6 26V12c0-3 3-6 6-6h14' fill='none' stroke='%23b8862f' stroke-width='.7' opacity='.7'/%3E%3Ccircle cx='9' cy='9' r='1.6' fill='%23b8862f'/%3E%3C/g%3E%3C/svg%3E");
   position: relative; padding: calc(var(--space-4) + 0.25rem) var(--space-3) var(--space-3);
   background:
     var(--orn-tl) left 0.55rem top 0.55rem / 1.75rem no-repeat,
@@ -177,12 +180,20 @@
 .k3-faq__contact p:not(.k3-faq__contact-title) { color: var(--ink-soft); font-size: 0.98rem; }
 
 /* ── video ── */
-.k3-video { margin: var(--space-3) auto; border-radius: var(--radius); overflow: hidden; box-shadow: 0 0 0 1px rgba(233, 200, 119, 0.6), 0 24px 50px -22px rgba(0, 0, 0, 0.7); }
+.k3-video {
+  position: relative; isolation: isolate; max-width: 42rem; margin: var(--space-3) auto var(--space-4);
+  border-radius: 0.75rem; overflow: hidden;
+  box-shadow: 0 0 0 2px #e9c877, 0 0 0 5px rgba(28, 36, 83, 0.9), 0 0 0 6px rgba(233, 200, 119, 0.45), 0 24px 50px -22px rgba(0, 0, 0, 0.7);
+}
+/* the facade brings its own width cap + bottom margin: inside the frame it must fill it exactly */
+.v2 .k3-video .yt-frame { max-width: none; margin: 0; }
+.v2 .k3-video .yt-fill { border-radius: 0; }
 
 /* ── area ── */
 .k3-area__grid { display: grid; gap: var(--space-4); align-items: start; margin-top: var(--space-3); }
 .k3-cities { line-height: 2; color: var(--ink-soft); }
 .k3-area__map { margin: 0; }
+.k3-area__map img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
 
 /* ── contact ── */
 .k3-contact { padding-block: var(--space-4) !important; border-top: 1px solid rgba(184, 134, 47, 0.35); background: var(--surface); }
@@ -195,7 +206,22 @@
   .k3-area__grid { grid-template-columns: 1.2fr 1fr; }
 }
 @media (max-width: 900px) {
-  .k3-hero { --curtain: 1.5rem; }
-  .k3-hero .container { width: min(100% - 2 * (var(--curtain) + 0.6rem), 66rem); }
+  .k3-hero { --curtain: 0.9rem; }
+  .k3-hero .container { width: min(100% - 2 * (max(var(--curtain), 7.4vw) + 0.6rem), 66rem); }
   .v2 main > section { padding-block: var(--space-5); }
 }
+
+/* ── reviews: same circus-programme cards as the prices (user, 2026-10-06) ── */
+[data-zone='kids']:has(.k3-hero) .rv { border-block: 0; }
+[data-zone='kids']:has(.k3-hero) .rv__card {
+  rotate: none; border: 0;
+  padding: calc(var(--space-3) + 0.4rem) var(--space-3) var(--space-3);
+  background:
+    var(--orn-tl) left 0.55rem top 0.55rem / 1.5rem no-repeat,
+    var(--orn-tr) right 0.55rem top 0.55rem / 1.5rem no-repeat,
+    var(--orn-bl) left 0.55rem bottom 0.55rem / 1.5rem no-repeat,
+    var(--orn-br) right 0.55rem bottom 0.55rem / 1.5rem no-repeat,
+    var(--surface);
+  box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), var(--shadow);
+}
+[data-zone='kids']:has(.k3-hero) .rv__title { font-weight: 600; }

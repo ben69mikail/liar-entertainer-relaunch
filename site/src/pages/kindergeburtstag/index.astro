@@ -7,7 +7,7 @@ import karteImg from '../../assets/images/home/clown-zauberer-gladbeck-karte.jpg
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
 import Curtain from '../../components/v2/kids/Curtain.astro';
-import BulbFrame from '../../components/v2/kids/BulbFrame.astro';
+import StageFrame from '../../components/v2/kids/StageFrame.astro';
 import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import HatTrick from '../../components/v2/kids/HatTrick.astro';
 import BalloonDog from '../../components/v2/kids/BalloonDog.astro';
@@ -137,7 +137,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <!-- ── Hero: the stage between red velvet curtains. No reveal here (LCP). ── -->
   <section class="k3-hero">
     <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffd27a","rayColor2":"#ffb546","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Curtain />
+    <Curtain rest="var(--curtain)" />
     <div class="container k3-hero__grid">
       <div class="k3-hero__copy">
         <ReviewBadge />
@@ -155,7 +155,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           <a href="#einsatzgebiet">Städte</a>
         </nav>
       </div>
-      <BulbFrame class="k3-hero__photo">
+      <StageFrame class="k3-hero__photo">
         <Image
           src={heroImg}
           alt="Kindergeburtstag mit Clown Zauberer NRW"
@@ -164,7 +164,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           loading="eager"
           fetchpriority="high"
         />
-      </BulbFrame>
+      </StageFrame>
     </div>
   </section>
 
@@ -186,7 +186,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         </p>
       </div>
       <aside class="k3-expect" data-reveal data-reveal-delay="0.1">
-        <BulbFrame>
+        <StageFrame>
           <Image
             src={kinderzaubererImg}
             alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
@@ -194,7 +194,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             sizes="(max-width: 900px) 80vw, 340px"
             loading="lazy"
           />
-        </BulbFrame>
+        </StageFrame>
         <p class="k3-expect__title">✨ Was Sie erwartet:</p>
         <ul class="k3-expect__list">
           <li>🎪 Interaktive Zaubershow vom Kinderzauberer (40 Min.)</li>
@@ -363,6 +363,8 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           <p><strong>Beliebte Motive:</strong><br />
             🦄 Einhorn | 🌸 Blumen | 🦖 Dino | ✨ Sterne | 🦋 Schmetterling | 🏴‍☠️ Pirat
           </p>
+          <p><strong>Das Besondere:</strong> Jedes Kind darf sich sein Tattoo aussuchen – und seine Lieblingsfarben dazu, ob zwei oder drei spielt keine Rolle. Hauptsache: schön, bunt und lange haltbar!</p>
+          <p><strong>Perfekt als:</strong> – Ergänzung zu den Kindergeburtstags-Paketen – Feiern im kleinen Rahmen – Highlight für Groß und Klein</p>
           <p class="k3-extra__dur">
             <strong>Dauer:</strong> Ca. 30 Minuten für 12 Kinder (2-3 Min. pro Tattoo)
           </p>
@@ -411,6 +413,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       <GoldDivider />
       <h2 class="k3-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
       <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" />
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
       <h3 class="k3-h3">
@@ -439,7 +442,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             Auf Anfrage bin ich auch außerhalb von NRW für Kindergeburtstage buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
           </p>
         </div>
-        <BulbFrame class="k3-area__map">
+        <figure class="k3-area__map">
           <Image
             src={karteImg}
             alt="Karte Einsatzgebiet Kindergeburtstag: Wohnort Clown Zauberer LIAR"
@@ -447,7 +450,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             sizes="(max-width: 900px) 86vw, 460px"
             loading="lazy"
           />
-        </BulbFrame>
+        </figure>
       </div>
     </div>
   </section>

@@ -1,0 +1,72 @@
+---
+/**
+ * Kids v3 photo frame (user, 2026-10-06, replaces the bulb frame): a little stage portal. The
+ * photo — always whole, never cropped, never animated in (may carry the LCP) — sits behind a
+ * fine gold rule inside a red velvet surround. Two small velvet drapes hang in the top corners;
+ * when the frame comes into view (fx.ts data-stage → .is-staged) they are drawn back to the
+ * sides into the velvet border, like a mini curtain opening on the picture.
+ * Drapes are aria-hidden; reduced motion shows them drawn back.
+ */
+interface Props {
+  class?: string;
+  style?: string;
+  [key: `data-${string}`]: unknown;
+}
+const { class: cls, style, ...rest } = Astro.props;
+---
+
+<figure class:list={['stg', cls]} style={style} data-stage {...rest}>
+  <span class="stg__photo"><slot /></span>
+  <span class="stg__drape stg__drape--l" aria-hidden="true"></span>
+  <span class="stg__drape stg__drape--r" aria-hidden="true"></span>
+</figure>
+
+<style>
+  .stg {
+    position: relative; margin: 0; overflow: hidden; isolation: isolate;
+    padding: clamp(0.9rem, 2vw, 1.25rem);
+    border-radius: 1.1rem;
+    /* velvet surround: deep red with a soft sheen from above and a darker hem */
+    background:
+      radial-gradient(ellipse 80% 55% at 50% 0%, rgba(255, 170, 150, 0.28), transparent 70%),
+      repeating-linear-gradient(90deg, rgba(0, 0, 0, 0.12) 0 2px, transparent 2px 9px),
+      linear-gradient(180deg, #a81c2b, #861523 60%, #6a0f1b);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 210, 160, 0.25),
+      0 2px 6px rgba(43, 29, 23, 0.1),
+      0 24px 46px -22px rgba(70, 8, 16, 0.55);
+  }
+  .stg__photo {
+    position: relative; z-index: 1; display: block; overflow: hidden; border-radius: 0.55rem;
+    box-shadow: 0 0 0 2px #e9c877, 0 0 0 4px rgba(106, 15, 27, 0.9), 0 8px 18px -8px rgba(0, 0, 0, 0.6);
+  }
+  .stg__photo :global(img) { display: block; width: 100%; height: auto; }
+
+  /* drapes: a soft velvet fold hanging from each top corner, tied back with a gold cord */
+  .stg__drape {
+    position: absolute; z-index: 2; top: 0; width: 7rem; height: 62%; pointer-events: none;
+    background:
+      linear-gradient(90deg, rgba(0, 0, 0, 0.28), transparent 30%, rgba(255, 190, 170, 0.22) 55%, transparent 75%, rgba(0, 0, 0, 0.3)),
+      linear-gradient(180deg, #b52232, #8e1726);
+    box-shadow: 0 10px 18px -10px rgba(40, 0, 6, 0.7);
+    transition: transform 1.3s cubic-bezier(0.65, 0.02, 0.25, 1);
+  }
+  .stg__drape--l { left: 0; border-bottom-right-radius: 100% 100%; transform-origin: 0 0; }
+  .stg__drape--r { right: 0; border-bottom-left-radius: 100% 100%; transform-origin: 100% 0; }
+  .stg__drape::after {
+    content: ''; position: absolute; bottom: 22%; width: 46%; height: 3px; border-radius: 3px;
+    background: linear-gradient(90deg, #9c6f22, #f0cf7a, #b8862f);
+  }
+  .stg__drape--l::after { left: 6%; rotate: -28deg; }
+  .stg__drape--r::after { right: 6%; rotate: 28deg; }
+
+  /* open = gathered into the velvet side border, never over the photo (no cut-off people);
+     before the stage they hang over the picture's top corners and are drawn back on view */
+  .stg__drape { transform: scale(0.1, 0.7); }
+  .stg__drape::after { opacity: 0; transition: opacity 0.4s ease; }
+  :global(.motion-ok) .stg:not(.is-staged) .stg__drape { transform: scale(1, 1); }
+  :global(.motion-ok) .stg:not(.is-staged) .stg__drape::after { opacity: 1; }
+  @media (prefers-reduced-motion: reduce) {
+    .stg__drape { transition: none; }
+  }
+</style>

@@ -30,24 +30,54 @@ describe('kids hero letters', () => {
   });
 });
 
-describe('kids v3 curtain (LCP safety)', () => {
+describe('kids v3 hero curtain (user 2026-10-06: opens fully, like a real curtain)', () => {
+  const covered = () => {
+    const panels = [...document.querySelectorAll('.k3-hero .cu__panel')].map((p) => p.getBoundingClientRect());
+    const targets = [document.querySelector('.k3-hero h1')!, document.querySelector('.k3-hero .stg img')!];
+    return targets.flatMap((t) => {
+      const r = t.getBoundingClientRect();
+      return panels.some((c) => c.left < r.right - 1 && c.right > r.left + 1 && c.top < r.bottom && c.bottom > r.top) ? [t.tagName] : [];
+    });
+  };
   for (const width of [390, 1280]) {
-    it(`@${width}px: never covers the headline or the hero photo`, async () => {
+    it(`@${width}px: starts closed, then opens all the way to the sides`, async () => {
       const page = await browser.newPage({ viewport: { width, height: 900 } });
       await page.goto(BASE + '/kindergeburtstag/');
-      await page.waitForTimeout(200); // mid-animation: the gather starts wider
-      const hits = await page.evaluate(() => {
-        const halves = [...document.querySelectorAll('.cu__half')].map((h) => h.getBoundingClientRect());
-        const targets = [document.querySelector('.k3-hero h1')!, document.querySelector('.k3-hero .bf img')!];
-        return targets.flatMap((t) => {
-          const r = t.getBoundingClientRect();
-          return halves.filter((c) => c.left < r.right - 1 && c.right > r.left + 1 && c.top < r.bottom && c.bottom > r.top).map(() => t.tagName);
-        });
-      });
+      const closed = await page.evaluate(covered);
+      await page.waitForTimeout(3200);
+      const open = await page.evaluate(covered);
       await page.close();
-      expect(hits).toEqual([]);
-    });
+      expect(closed.length).toBeGreaterThan(0);
+      expect(open).toEqual([]);
+    }, 15_000);
   }
+  it('is open from the first frame under reduced motion', async () => {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 }, reducedMotion: 'reduce' });
+    await page.goto(BASE + '/kindergeburtstag/');
+    expect(await page.evaluate(covered)).toEqual([]);
+    await page.close();
+  });
+});
+
+describe('kids v3 stage frames never hide part of a photo once open (no cut-off people)', () => {
+  it('drapes are drawn back into the velvet border', async () => {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+    await page.goto(BASE + '/kindergeburtstag/');
+    const frames = page.locator('.stg');
+    for (let i = 0; i < (await frames.count()); i++) {
+      await frames.nth(i).scrollIntoViewIfNeeded();
+      await page.waitForTimeout(1600);
+      const hits = await frames.nth(i).evaluate((f) => {
+        const r = f.querySelector('img')!.getBoundingClientRect();
+        return [...f.querySelectorAll('.stg__drape')].filter((d) => {
+          const c = d.getBoundingClientRect();
+          return c.left < r.right - 3 && c.right > r.left + 3 && c.top < r.bottom - 3 && c.bottom > r.top + 3; // 3px: rotated frames inflate their boxes
+        }).length;
+      });
+      expect(hits).toBe(0);
+    }
+    await page.close();
+  }, 30_000);
 });
 
 describe('kids prices count up', () => {
