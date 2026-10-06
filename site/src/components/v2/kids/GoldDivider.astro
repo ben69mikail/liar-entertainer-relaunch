@@ -1,0 +1,37 @@
+---
+/**
+ * Kids v3 section divider (user, 2026-10-06): a thin gold line with a small star in the middle.
+ * When it comes into view (fx.ts data-stage → .is-staged) the line draws out from the centre and
+ * the star twinkles in. Decorative: aria-hidden. Replaces the old wave edges / squiggles.
+ */
+interface Props {
+  class?: string;
+}
+const { class: cls } = Astro.props;
+---
+
+<div class:list={['gd', cls]} data-stage aria-hidden="true">
+  <span class="gd__line gd__line--l"></span>
+  <svg class="gd__star" viewBox="0 0 24 24"><path d="M12 1.5l2.6 7.1 7.4.3-5.8 4.6 2 7.2L12 16.6 5.8 20.7l2-7.2L2 8.9l7.4-.3z" /></svg>
+  <span class="gd__line gd__line--r"></span>
+</div>
+
+<style>
+  .gd { display: flex; align-items: center; gap: 0.7rem; width: min(100%, 22rem); margin: 0 auto var(--space-3); }
+  .gd__line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, #b8862f 40%, #e2bd6a); }
+  .gd__line--l { transform-origin: 100% 50%; }
+  .gd__line--r { transform-origin: 0 50%; background: linear-gradient(90deg, #e2bd6a, #b8862f 60%, transparent); }
+  .gd__star { width: 1.05rem; height: 1.05rem; fill: #c9962f; }
+
+  .gd__line { transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1); }
+  .gd__star { transition: opacity 0.4s ease 0.55s, scale 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s, rotate 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s; }
+  :global(.motion-ok) .gd:not(.is-staged) .gd__line { transform: scaleX(0); }
+  :global(.motion-ok) .gd:not(.is-staged) .gd__star { opacity: 0; scale: 0.6; rotate: -40deg; }
+
+  /* on dark bands the line and star turn light gold */
+  :global(.k3-band) .gd__star { fill: #f0cf7a; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .gd__line, .gd__star { transition: none; }
+  }
+</style>

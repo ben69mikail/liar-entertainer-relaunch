@@ -6,16 +6,15 @@ import kinderzaubererImg from '../../assets/images/kindergeburtstag/kindergeburt
 import karteImg from '../../assets/images/home/clown-zauberer-gladbeck-karte.jpg';
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
-import Bunting from '../../components/v2/kids/Bunting.astro';
-import Balloons from '../../components/v2/kids/Balloons.astro';
+import Curtain from '../../components/v2/kids/Curtain.astro';
+import BulbFrame from '../../components/v2/kids/BulbFrame.astro';
+import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import HatTrick from '../../components/v2/kids/HatTrick.astro';
 import BalloonDog from '../../components/v2/kids/BalloonDog.astro';
 import Glitter from '../../components/v2/kids/Glitter.astro';
-import Squiggle from '../../components/v2/kids/Squiggle.astro';
-import SectionEdge from '../../components/v2/SectionEdge.astro';
 import YouTubeFacade from '../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../data/site';
-import '../../styles/kids-kit.css';
+import '../../styles/kids-v3.css';
 
 const seoTitle = 'Zauberer Kindergeburtstag NRW | Ab 150€ | Clown LIAR';
 const seoDescription = 'Zauberer für Kindergeburtstag in NRW buchen ✓ Clown Zauberer LIAR ✓ Zaubershow ab 150€ ✓ Ballonmodellage ✓ Glitzer-Tattoos ✓ 370+ Top-Bewertungen ✓ Jetzt buchen!';
@@ -135,52 +134,47 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kindergeburtstag', url: '/kindergeburtstag/' }]}
 >
-  <!-- ── Hero: Zirkus-Plakat. No reveal here (LCP). ───────────── -->
-  <section class="kg-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
+  <!-- ── Hero: the stage between red velvet curtains. No reveal here (LCP). ── -->
+  <section class="k3-hero">
+    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffd27a","rayColor2":"#ffb546","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
+    <Curtain />
+    <div class="container k3-hero__grid">
+      <div class="k3-hero__copy">
         <ReviewBadge />
-        <h1 class="kg-hero__title" data-letters>
-          Zauberer für <span class="kg-mark">Kindergeburtstag</span> in NRW<br />mit Clown & Lachgarantie
+        <h1 class="k3-hero__title" data-letters>
+          Zauberer für <span class="k3-mark">Kindergeburtstag</span> in NRW<br />mit Clown & Lachgarantie
         </h1>
-        <div class="kg-hero__actions">
+        <div class="k3-hero__actions">
           <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
           <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
-        <nav class="kg-quick" aria-label="Schnell zu den Infos">
+        <nav class="k3-quick" aria-label="Schnell zu den Infos">
           <a href="#preise">Preise &amp; Pakete</a>
           <a href="#faq">Ablauf &amp; Fragen</a>
           <a href="#bewertungen">Bewertungen</a>
           <a href="#einsatzgebiet">Städte</a>
         </nav>
       </div>
-      <figure class="kg-hero__photo">
+      <BulbFrame class="k3-hero__photo">
         <Image
           src={heroImg}
           alt="Kindergeburtstag mit Clown Zauberer NRW"
-          widths={[400, 700, 1000, 1400]}
-          sizes="(max-width: 900px) 92vw, 560px"
+          widths={[400, 700, 1000]}
+          sizes="(max-width: 900px) 80vw, 500px"
           loading="eager"
           fetchpriority="high"
-          style="object-position: 55% 26%"
         />
-        <a class="kg-sticker" href="#preise">
-          <span>ab</span><strong>150&nbsp;€</strong>
-        </a>
-      </figure>
+      </BulbFrame>
     </div>
   </section>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
-  <section class="kg-intro">
-    <Balloons side="right" />
-    <div class="container kg-intro__grid">
-      <div class="kg-intro__text" data-reveal>
-        <h2 class="kg-kicker">Clown Zauberer für Kindergeburtstage in NRW</h2>
-        <h3 class="kg-h3">Magische Momente voller Lachen, Staunen und Freude</h3>
-        <p class="kg-lead">
+  <section class="k3-intro">
+    <div class="container k3-intro__grid">
+      <div data-reveal>
+        <h2 class="k3-kicker">Clown Zauberer für Kindergeburtstage in NRW</h2>
+        <h3 class="k3-h3">Magische Momente voller Lachen, Staunen und Freude</h3>
+        <p class="k3-lead">
           Ein Zauberer für den Kindergeburtstag in NRW ist ab 150&nbsp;€ buchbar: Clown Zauberer LIAR (Michaël Prescler) gestaltet eine 40-minütige interaktive Zaubershow für bis zu 12 Kinder, auf Wunsch ergänzt um Ballonmodellage und Glitzer-Tattoos. Buchbar in ganz NRW, mit 370+ Top-Bewertungen.
         </p>
         <p>
@@ -191,18 +185,18 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           Ich bin <a href="/">Clown</a> <a href="/zauberer/">Zauberer</a> LIAR (Michaël Prescler) – professioneller <a href="/kinderzauberer/">Kinderzauberer</a> mit Herz, Humor und über 15 Jahren Erfahrung auf Familienfeiern, in Kindergärten und bei Stadtfesten in ganz NRW. Alle Details zum <a href="/kinderzauberer/">Zauberer für den Kindergeburtstag</a> – Ablauf, Alter und Buchung – finden Sie auf meiner Kinderzauberer-Seite.
         </p>
       </div>
-      <aside class="kg-expect" data-reveal data-reveal-delay="0.1">
-        <Image
-          src={kinderzaubererImg}
-          alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
-          class="kg-expect__img"
-          data-scroll-tilt="3"
-          widths={[320, 640]}
-          sizes="320px"
-          loading="lazy"
-        />
-        <p class="kg-expect__title">✨ Was Sie erwartet:</p>
-        <ul class="kg-expect__list">
+      <aside class="k3-expect" data-reveal data-reveal-delay="0.1">
+        <BulbFrame>
+          <Image
+            src={kinderzaubererImg}
+            alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
+            widths={[320, 640]}
+            sizes="(max-width: 900px) 80vw, 340px"
+            loading="lazy"
+          />
+        </BulbFrame>
+        <p class="k3-expect__title">✨ Was Sie erwartet:</p>
+        <ul class="k3-expect__list">
           <li>🎪 Interaktive Zaubershow vom Kinderzauberer (40 Min.)</li>
           <li>🎈 Ballonmodellage für jedes Kind (optional)</li>
           <li>✨ Glitzer Tattoos (optional)</li>
@@ -214,14 +208,13 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Zaubershow (blue band) ────────────────────────────── -->
-  <section class="kg-band kg-band--blue">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
-    <div class="container kg-narrow" data-reveal>
+  <!-- ── Zaubershow: the ring, red velvet ─────────────────── -->
+  <section class="k3-band k3-band--velvet">
+    <div class="container k3-narrow k3-center" data-reveal>
       <HatTrick />
-      <p class="kg-eyebrow">VOLLTREFFER</p>
-      <h2 class="kg-h2">✨ Zaubershow für Geburtstag – mit Herz &amp; Humor</h2>
+      <GoldDivider />
+      <p class="k3-kicker">VOLLTREFFER</p>
+      <h2 class="k3-h2">✨ Zaubershow für Geburtstag – mit Herz &amp; Humor</h2>
       <p>
         Meine <strong>Zaubershow</strong> ist speziell auf Kinder abgestimmt:<br />
         lebendig, interaktiv und voller Überraschungen.
@@ -240,14 +233,13 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Preise ────────────────────────────────────────────── -->
-  <section class="kg-prices" id="preise">
-    <Balloons side="left" />
+  <section class="k3-prices" id="preise">
     <div class="container">
-      <Squiggle color="var(--brand-blue)" />
-      <h2 class="kg-h2 kg-center" data-reveal>Was kostet ein Zauberer für den Kindergeburtstag?</h2>
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Was kostet ein Zauberer für den Kindergeburtstag?</h2>
 
-      <div class="kg-table-wrap" data-reveal>
-        <table class="kg-table">
+      <div class="k3-table-wrap" data-reveal>
+        <table class="k3-table">
           <caption class="sr-only">Pakete und Preise für den Kindergeburtstag mit Clown Zauberer LIAR</caption>
           <thead>
             <tr>
@@ -261,35 +253,35 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             <tr>
               <th scope="row">Zaubershow</th>
               <td>40 Minuten</td>
-              <td class="kg-price">150 €</td>
+              <td class="k3-price">150 €</td>
               <td>4–12 Jahre, bis ca. 12 Kinder</td>
             </tr>
             <tr>
               <th scope="row">Zaubershow + Ballonmodellage</th>
               <td>ca. 55 Minuten</td>
-              <td class="kg-price">170 €</td>
+              <td class="k3-price">170 €</td>
               <td>Jedes Kind bekommt eine Ballonfigur</td>
             </tr>
             <tr class="is-popular">
               <th scope="row">Komplett-Paket inkl. Glitzer-Tattoos</th>
               <td>ca. 90 Minuten</td>
-              <td class="kg-price">210 €</td>
+              <td class="k3-price">210 €</td>
               <td>Beliebteste Buchung</td>
             </tr>
             <tr class="is-muted">
               <th scope="row">Fahrtkosten</th>
               <td>–</td>
-              <td class="kg-price">0,40 €/km</td>
+              <td class="k3-price">0,40 €/km</td>
               <td>Hin- und Rückfahrt ab Gladbeck</td>
             </tr>
           </tbody>
         </table>
       </div>
 
-      <div class="kg-cards">
-        <article class="kg-card kg-card--red" data-reveal="pop">
+      <div class="k3-cards">
+        <article class="k3-card k3-card--star" data-reveal>
           <h3>🎩 Zaubershow</h3>
-          <p class="kg-card__price" data-count>150 €</p>
+          <p class="k3-card__price" data-count>150 €</p>
           <ul>
             <li><span>✓</span> 40 Minuten voller Zauber, Lachen und Staunen</li>
             <li><span>✓</span> Bis ca. 12 Kinder – Mindestalter: 4 Jahre</li>
@@ -297,12 +289,12 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             <li><span>✓</span> Das Geburtstagskind steht immer im Mittelpunkt</li>
             <li><span>✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
           </ul>
-          <p class="kg-card__note">Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</p>
+          <p class="k3-card__note">Direkt ab der ersten Minute nimmt die Show die kleinen Gäste mit auf eine fantasievolle Reise!</p>
         </article>
 
-        <article class="kg-card kg-card--blue" data-reveal="pop" data-reveal-delay="0.1">
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
           <h3>🎈 Luftballonmodellage</h3>
-          <p class="kg-card__price" data-count>+ 20 €</p>
+          <p class="k3-card__price" data-count>+ 20 €</p>
           <ul>
             <li><span>✓</span> Für jedes Kind 1 Ballon</li>
             <li><span>✓</span> Ca. 15 Minuten</li>
@@ -310,12 +302,12 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             <li><span>✓</span> Große Auswahl an Figuren: Hund, Schwert, Blume u.v.m.</li>
             <li><span>✓</span> Perfekte Ergänzung zur Zaubershow</li>
           </ul>
-          <p class="kg-card__note">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
+          <p class="k3-card__note">Ob Schwerter, Hunde oder Blumen – die Kinder staunen, wenn aus einem Ballon ihre Wunschfigur entsteht!</p>
         </article>
 
-        <article class="kg-card kg-card--yellow" data-reveal="pop" data-reveal-delay="0.2">
+        <article class="k3-card" data-reveal data-reveal-delay="0.16">
           <h3>✨ Glitzer-Tattoos</h3>
-          <p class="kg-card__price" data-count>+ 40 €</p>
+          <p class="k3-card__price" data-count>+ 40 €</p>
           <ul>
             <li><span>✓</span> Für jedes Kind 1 Tattoo</li>
             <li><span>✓</span> Ca. 30 Minuten</li>
@@ -323,29 +315,30 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             <li><span>✓</span> Viele Motive: Einhörner, Schmetterlinge, Sterne u.v.m.</li>
             <li><span>✓</span> Hält mehrere Tage auf der Haut</li>
           </ul>
-          <p class="kg-card__note">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
+          <p class="k3-card__note">Ein funkelndes Highlight, das die Kinder noch Tage nach der Feier begeistert!</p>
         </article>
       </div>
 
-      <p class="kg-center kg-cta-row">
+      <p class="k3-center k3-cta-row">
         <a href="/kontakt/" class="btn btn--primary" data-confetti>Jetzt unverbindlich anfragen</a>
       </p>
     </div>
   </section>
 
   <!-- ── Zusatzleistungen ──────────────────────────────────── -->
-  <section class="kg-extras">
+  <section class="k3-extras k3-alt">
     <div class="container">
-      <h3 class="kg-h2 kg-center" data-reveal>
+      <GoldDivider />
+      <h3 class="k3-h2 k3-center" data-reveal>
         Zusatzleistungen zur Zaubershow: Ballonmodellage &amp; Glitzer-Tattoos
       </h3>
-      <p class="kg-center kg-sub">Das i-Tüpfelchen für den perfekten Kindergeburtstag</p>
-      <p class="kg-center kg-narrow">
+      <p class="k3-center k3-sub">Das i-Tüpfelchen für den perfekten Kindergeburtstag</p>
+      <p class="k3-center k3-narrow">
         Optional lässt sich die Zaubershow um <a href="/clown/ballonmodellage/">Ballonmodellage</a> oder <a href="/clown/glitzer-tattoo/">Glitzer-Tattoos</a> ergänzen – der Fokus bleibt die interaktive Kinderzauberer-Show. Werfen Sie auch gerne einen Blick in meine <a href="/galerie/">Galerie</a>.
       </p>
 
-      <div class="kg-extras__grid">
-        <article class="kg-extra" data-reveal="tilt">
+      <div class="k3-extras__grid">
+        <article class="k3-extra" data-reveal>
           <BalloonDog />
           <h4>🎈 Ballonmodellage</h4>
           <p>
@@ -356,12 +349,12 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           </p>
           <p><strong>Das Besondere:</strong> Jedes Kind darf sich sein Lieblingstier wünschen, und der Clown zaubert es direkt vor den Augen der Kinder. Die Ballonfiguren sind robust und halten mehrere Tage – ein Andenken, das Freude macht!</p>
           <p><strong>Perfekt als:</strong> – Ergänzung zur Clown-Show – Eigenständige Attraktion auf Festen – Walk-Act auf Straßenfesten</p>
-          <p class="kg-extra__dur">
+          <p class="k3-extra__dur">
             <strong>Dauer:</strong> Ca. 15 Minuten für 12 Kinder (1-2 Min. pro Figur)
           </p>
         </article>
 
-        <article class="kg-extra" data-reveal="tilt" data-reveal-delay="0.1">
+        <article class="k3-extra" data-reveal data-reveal-delay="0.08">
           <Glitter />
           <h4>✨ Glitzer Tattoos</h4>
           <p>
@@ -370,13 +363,13 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           <p><strong>Beliebte Motive:</strong><br />
             🦄 Einhorn | 🌸 Blumen | 🦖 Dino | ✨ Sterne | 🦋 Schmetterling | 🏴‍☠️ Pirat
           </p>
-          <p class="kg-extra__dur">
+          <p class="k3-extra__dur">
             <strong>Dauer:</strong> Ca. 30 Minuten für 12 Kinder (2-3 Min. pro Tattoo)
           </p>
         </article>
       </div>
 
-      <p class="kg-center kg-tip">
+      <p class="k3-center k3-tip">
         💡 <strong>Tipp:</strong> Kombinieren Sie alle drei Leistungen für den perfekten Rundum-Sorglos-Kindergeburtstag!
       </p>
     </div>
@@ -385,24 +378,25 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <Reviews />
 
   <!-- ── FAQ: native <details>, works without JS ───────────── -->
-  <section class="kg-faq" id="faq">
-    <div class="container kg-narrow">
-      <h2 class="kg-eyebrow kg-center">Häufige Fragen zum Kindergeburtstag mit Kinderzauberer</h2>
-      <h3 class="kg-h2 kg-center">
+  <section class="k3-faq" id="faq">
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-kicker k3-center">Häufige Fragen zum Kindergeburtstag mit Kinderzauberer</h2>
+      <h3 class="k3-h2 k3-center">
         Kindergeburtstag organisieren? Hier sind ein paar Antworten für die perfekte Feier
       </h3>
 
-      <div class="kg-faq__list">
+      <div class="k3-faq__list">
         {faqItems.map((item) => (
-          <details class="kg-faq__item" data-reveal="puff">
+          <details class="k3-faq__item" data-reveal>
             <summary><span>{item.question}</span></summary>
-            <div class="kg-faq__answer">{item.answer}</div>
+            <div class="k3-faq__answer">{item.answer}</div>
           </details>
         ))}
       </div>
 
-      <div class="kg-center kg-faq__contact">
-        <p class="kg-faq__contact-title">Einfach Kontakt aufnehmen</p>
+      <div class="k3-center k3-faq__contact">
+        <p class="k3-faq__contact-title">Einfach Kontakt aufnehmen</p>
         <p>
           Sie können mir Ihre Anfrage für einen Kindergeburtstag unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben. Ich helfe Ihnen gerne weiter.
         </p>
@@ -412,15 +406,14 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Video ─────────────────────────────────────────────── -->
-  <section class="kg-band kg-band--yellow">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal="pop">
+  <section class="k3-band k3-band--night">
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="k3-video" data-reveal>
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
-      <h3 class="kg-h3">
+      <h3 class="k3-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
       <a href="/galerie/" class="btn btn--primary">Zur Foto- und Videogalerie</a>
@@ -428,42 +421,41 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
-  <section class="kg-area" id="einsatzgebiet">
+  <section class="k3-area" id="einsatzgebiet">
     <div class="container">
-      <Squiggle />
-      <h2 class="kg-h2 kg-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
-      <div class="kg-area__grid">
-        <div class="kg-area__text">
-          <h3 class="kg-h3">Haupteinsatzgebiet Kindergeburtstag</h3>
-          <p class="kg-cities">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <div class="k3-area__grid">
+        <div>
+          <h3 class="k3-h3">Haupteinsatzgebiet Kindergeburtstag</h3>
+          <p class="k3-cities">
             <a href="/kindergeburtstag/geburtstag-in-gladbeck/">Gladbeck</a> | <a href="/kindergeburtstag/geburtstag-in-oberhausen/">Oberhausen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/">Gelsenkirchen</a> | <a href="/kindergeburtstag/geburtstag-in-essen/">Essen</a> | <a href="/kindergeburtstag/geburtstag-in-duisburg/">Duisburg</a> | <a href="/kindergeburtstag/geburtstag-in-bottrop/">Bottrop</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/">Bochum</a> | <a href="/kindergeburtstag/geburtstag-in-dinslaken/">Dinslaken</a> | <a href="/kindergeburtstag/geburtstag-in-wesel/">Wesel</a> | <a href="/kindergeburtstag/geburtstag-in-castrop-rauxel/">Castrop-Rauxel</a> | <a href="/kindergeburtstag/geburtstag-in-dorsten/">Dorsten</a> | <a href="/kindergeburtstag/geburtstag-in-herten/">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-herne/">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-marl/">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/">Mülheim</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/">Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-datteln/">Datteln</a> | <a href="/kindergeburtstag/geburtstag-in-haltern-am-see/">Haltern am See</a> | <a href="/kindergeburtstag/geburtstag-in-moers/">Moers</a> | <a href="/kindergeburtstag/geburtstag-in-waltrop/">Waltrop</a> | <a href="/kindergeburtstag/geburtstag-in-xanten/">Xanten</a>
           </p>
-          <h3 class="kg-h3">Weitere NRW-Städte</h3>
-          <p class="kg-cities">
+          <h3 class="k3-h3">Weitere NRW-Städte</h3>
+          <p class="k3-cities">
             <a href="/kindergeburtstag/geburtstag-in-duesseldorf/">Düsseldorf</a> | <a href="/kindergeburtstag/geburtstag-in-dortmund/">Dortmund</a> | Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Moers | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn | Borken
           </p>
           <p>
             Auf Anfrage bin ich auch außerhalb von NRW für Kindergeburtstage buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
           </p>
         </div>
-        <figure class="kg-area__map" data-reveal>
+        <BulbFrame class="k3-area__map">
           <Image
             src={karteImg}
             alt="Karte Einsatzgebiet Kindergeburtstag: Wohnort Clown Zauberer LIAR"
-            data-scroll-tilt="2"
             widths={[400, 600, 800]}
-            sizes="(max-width: 1024px) 100vw, 50vw"
+            sizes="(max-width: 900px) 86vw, 460px"
             loading="lazy"
           />
-        </figure>
+        </BulbFrame>
       </div>
     </div>
   </section>
 
   <!-- ── Kontakt ───────────────────────────────────────────── -->
-  <section class="kg-contact">
-    <div class="container kg-center">
-      <p class="kg-contact__name">Clown Zauberer LIAR</p>
+  <section class="k3-contact">
+    <div class="container k3-center">
+      <p class="k3-contact__name">Clown Zauberer LIAR</p>
       <p>Anschrift : Beethovenstr. 15, 45966 Gladbeck</p>
       <p>
         TEL : <a href="tel:+491721517578">0172 – 1517578</a>

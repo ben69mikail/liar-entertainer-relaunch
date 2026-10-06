@@ -43,7 +43,7 @@ describe('parents reach key info fast (brief UX goals)', () => {
   it('kids FAQ answers are readable without JavaScript', () => {
     const $ = page(KIDS);
     expect($('#faq details summary').length).toBe(8);
-    expect($('#faq details .kg-faq__answer').first().text()).toContain('pflegeleicht');
+    expect($('#faq details .k3-faq__answer').first().text()).toContain('pflegeleicht');
   });
 });
 
@@ -79,7 +79,27 @@ describe('kids decoration quality (user feedback 2026-10-04)', () => {
 
   it('has no scallop (half-circle) section borders anymore', () => {
     expect(css).not.toMatch(/radial-gradient\(circle at \.9rem 0/);
-    expect(page(KIDS)('.kg-band .edge').length).toBeGreaterThanOrEqual(4);
+  });
+});
+
+describe('kids v3 „Manege im Zelt“ (user, 2026-10-06): more circus, nothing coarse', () => {
+  const $ = page(KIDS);
+  const css = $('style').text();
+
+  it('opens on a red velvet curtain stage, photos sit in gold bulb frames', () => {
+    expect($('.k3-hero .cu .cu__half').length).toBe(2);
+    expect($('.k3-hero .bf img[fetchpriority="high"]').length).toBe(1);
+    expect($('main .bf').length).toBeGreaterThanOrEqual(3);
+  });
+
+  it('separates sections with gold star lines instead of waves, bunting or squiggles', () => {
+    expect($('main .gd').length).toBeGreaterThanOrEqual(5);
+    expect($('main .edge, main .bunting, main .sq').length).toBe(0);
+  });
+
+  it('uses Fraunces headings and drops the coarse poster kit', () => {
+    expect(css).toContain('Fraunces Variable');
+    expect(css).not.toContain('.kg-card'); // kids-kit.css (thick borders, offset shadows) is not loaded
   });
 
   it('has no yellow marker underlines behind words', () => {

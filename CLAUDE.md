@@ -63,3 +63,13 @@ Verbindlicher Auftrag: siehe **docs/CLAUDE-CODE-BUILD-BRIEF.md**. Vor jeder Arbe
 - Kontakt = Netlify Forms (`name="kontakt"`, Honeypot `website`, Rechenfrage nur clientseitig). Alte WPForms in gescrapten Seiten → Netlify-Form `kontakt-alt` (vorher posteten sie ins Leere).
 - Zone `/zauberer/zaubershow/karneval/` = adult (Regel /zauberer/), Inhalt gemischt Kinderkarneval–Prunksitzung — bei Bedarf in site-map.ts umstellen.
 - Adult-Fotos (Nutzer 06.10.2026, ersetzt Fotokarten): Fotos NIE in Spielkarten, sondern in `components/v2/adult/MagicFrame.astro` (Passepartout + sich zeichnende rote Haarlinie, OHNE Kartenfarben in den Ecken; 2 kleine Akzentkarten hinter einer Ecke, fächern beim Erscheinen via `data-stage`/.is-staged auf). Foto immer ganz, nie beschnitten. Alle Adult-Heros = Bühnen-Look: `.ce-hero--stage` (dunkle Bühne) + `.ce-spot` (Lichtkegel) + `.ce-spot__frame` in adult-kit.css. Wächter: e2e fx.test.ts „magic frames“ + „never cropped“.
+
+## Kinder-Design v3 „Manege im Zelt“ (Grill 06.10.2026, Nutzerentscheidungen)
+- Ziel: mehr Zirkus, aber NICHT grob. Weg: dicke Tintenränder, harte Versatz-Schatten, Wimpelkette, Wellenkanten, Punktemuster (keine Halbkreis-/Scallop-Kanten!).
+- Schrift: Überschriften **Fraunces** (variable), Fließtext Nunito.
+- Hero: **roter Samtvorhang** links/rechts; rahmt von Anfang an (verdeckt NIE Foto/H1 → LCP), rafft sich beim Laden weiter. Side Rays bleiben als warme goldene Scheinwerfer zwischen den Vorhanghälften (Start nach erster Interaktion).
+- Fotos: feine Goldkontur mit Glühbirnen rundum, die beim Erscheinen nacheinander angehen und sanft funkeln; Fotos nie beschnitten.
+- Abschnittsübergänge: dünne Goldlinie mit kleinem Stern in der Mitte, zeichnet sich beim Scrollen von der Mitte aus.
+- Karten/Kästen: „Zirkusprogramm“ — helles Papier, feine Goldkontur mit Eck-Ornamenten, weicher Schatten; Highlight-Paket mit rotem Band.
+- Bleiben: Hut-Trick, Ballon-Hund, Konfetti, hüpfende Buchstaben. Animationen mit Skill improve-animations prüfen.
+- Ablauf: Prototyp /kindergeburtstag/ → Nutzerfreigabe → Kinder-Kernseiten + Stadtseiten → neutrale Seiten (teilen heute dieselben Tokens).

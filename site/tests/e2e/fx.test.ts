@@ -30,10 +30,30 @@ describe('kids hero letters', () => {
   });
 });
 
+describe('kids v3 curtain (LCP safety)', () => {
+  for (const width of [390, 1280]) {
+    it(`@${width}px: never covers the headline or the hero photo`, async () => {
+      const page = await browser.newPage({ viewport: { width, height: 900 } });
+      await page.goto(BASE + '/kindergeburtstag/');
+      await page.waitForTimeout(200); // mid-animation: the gather starts wider
+      const hits = await page.evaluate(() => {
+        const halves = [...document.querySelectorAll('.cu__half')].map((h) => h.getBoundingClientRect());
+        const targets = [document.querySelector('.k3-hero h1')!, document.querySelector('.k3-hero .bf img')!];
+        return targets.flatMap((t) => {
+          const r = t.getBoundingClientRect();
+          return halves.filter((c) => c.left < r.right - 1 && c.right > r.left + 1 && c.top < r.bottom && c.bottom > r.top).map(() => t.tagName);
+        });
+      });
+      await page.close();
+      expect(hits).toEqual([]);
+    });
+  }
+});
+
 describe('kids prices count up', () => {
   it('end on the real server price', async () => {
     const page = await open('/kindergeburtstag/');
-    const price = page.locator('.kg-card__price').first();
+    const price = page.locator('.k3-card__price').first();
     await price.scrollIntoViewIfNeeded();
     await page.waitForTimeout(1800);
     expect(await price.textContent()).toBe('150 €');
@@ -45,7 +65,7 @@ describe('confetti', () => {
   it('bursts when an enquiry button is pressed', async () => {
     const page = await open('/kindergeburtstag/');
     await page.waitForLoadState('networkidle');
-    const cta = page.locator('.kg-hero [data-confetti]');
+    const cta = page.locator('.k3-hero [data-confetti]');
     const box = (await cta.boundingBox())!;
     await page.mouse.move(box.x + 10, box.y + 10);
     await page.mouse.down();
@@ -98,7 +118,7 @@ describe('reduced motion', () => {
     const s = await page.evaluate(() => ({
       motionOk: document.documentElement.classList.contains('motion-ok'),
       letters: document.querySelectorAll('.fx-letter').length,
-      price: document.querySelector('.kg-card__price')?.textContent,
+      price: document.querySelector('.k3-card__price')?.textContent,
     }));
     expect(s).toEqual({ motionOk: false, letters: 0, price: '150 €' });
     await page.close();
