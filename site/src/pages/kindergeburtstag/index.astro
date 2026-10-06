@@ -7,7 +7,7 @@ import karteImg from '../../assets/images/home/clown-zauberer-gladbeck-karte.jpg
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
 import Curtain from '../../components/v2/kids/Curtain.astro';
-import StageFrame from '../../components/v2/kids/StageFrame.astro';
+import CurtainFrame from '../../components/v2/kids/CurtainFrame.astro';
 import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import HatTrick from '../../components/v2/kids/HatTrick.astro';
 import BalloonDog from '../../components/v2/kids/BalloonDog.astro';
@@ -137,7 +137,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <!-- ── Hero: the stage between red velvet curtains. No reveal here (LCP). ── -->
   <section class="k3-hero">
     <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffd27a","rayColor2":"#ffb546","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Curtain rest="var(--curtain)" />
+    <Curtain rest="var(--curtain)" tieback valance />
     <div class="container k3-hero__grid">
       <div class="k3-hero__copy">
         <ReviewBadge />
@@ -155,7 +155,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           <a href="#einsatzgebiet">Städte</a>
         </nav>
       </div>
-      <StageFrame class="k3-hero__photo">
+      <CurtainFrame class="k3-hero__photo" shape={heroImg.width >= heroImg.height ? 'landscape' : 'portrait'}>
         <Image
           src={heroImg}
           alt="Kindergeburtstag mit Clown Zauberer NRW"
@@ -164,7 +164,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           loading="eager"
           fetchpriority="high"
         />
-      </StageFrame>
+      </CurtainFrame>
     </div>
   </section>
 
@@ -186,7 +186,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         </p>
       </div>
       <aside class="k3-expect" data-reveal data-reveal-delay="0.1">
-        <StageFrame>
+        <CurtainFrame shape={kinderzaubererImg.width >= kinderzaubererImg.height ? 'landscape' : 'portrait'}>
           <Image
             src={kinderzaubererImg}
             alt="Kinderzauberer verzaubert Kinder auf einem Kindergeburtstag in NRW"
@@ -194,7 +194,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             sizes="(max-width: 900px) 80vw, 340px"
             loading="lazy"
           />
-        </StageFrame>
+        </CurtainFrame>
         <p class="k3-expect__title">✨ Was Sie erwartet:</p>
         <ul class="k3-expect__list">
           <li>🎪 Interaktive Zaubershow vom Kinderzauberer (40 Min.)</li>

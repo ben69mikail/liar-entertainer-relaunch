@@ -1,0 +1,143 @@
+---
+/**
+ * Kids v3 photo frame (user, 2026-10-06): a little stage with blue velvet curtains, modelled on the
+ * user's reference („Scenes & Curtain 56/57“), redrawn as vectors so it stays sharp at any size.
+ *   shape="portrait"  – tall side curtains, tie-backs low (for upright photos)
+ *   shape="landscape" – slimmer side curtains, tie-backs mid-height (for wide photos: more photo)
+ * The photo — always whole, never cropped, never animated in (may carry the LCP) — sits in the
+ * stage opening; curtains, swagged valance, gold fringe and tasselled cords stay in the frame
+ * around it and never cover it. On view (fx.ts data-stage → .is-staged) the curtains settle with
+ * a soft sway and the tassels start to swing; the valance barely stirs. Decor is aria-hidden;
+ * reduced motion keeps everything still.
+ */
+interface Props {
+  shape?: 'portrait' | 'landscape';
+  class?: string;
+  style?: string;
+  [key: `data-${string}`]: unknown;
+}
+const { shape = 'landscape', class: cls, style, ...rest } = Astro.props;
+const uid = `cf${Math.random().toString(36).slice(2, 8)}`;
+const tie = shape === 'portrait' ? 290 : 250; // tie-back height in the 0–400 side viewBox
+const side = (mirror: boolean) =>
+  `M${mirror ? 100 : 0} 0H${mirror ? 0 : 100}C${mirror ? 4 : 96} ${tie * 0.42} ${mirror ? 26 : 74} ${tie * 0.85} ${mirror ? 64 : 36} ${tie}C${mirror ? 42 : 58} ${tie + 40} ${mirror ? 10 : 90} ${tie + (400 - tie) * 0.65} ${mirror ? 0 : 100} 400H${mirror ? 100 : 0}Z`;
+---
+
+<figure class:list={['cf', `cf--${shape}`, cls]} style={style} data-stage {...rest}>
+  <span class="cf__stage">
+  <span class="cf__photo"><slot /></span>
+
+  <span class="cf__decor" aria-hidden="true">
+    {[false, true].map((mirror) => (
+      <svg class:list={['cf__side', mirror ? 'cf__side--r' : 'cf__side--l']} viewBox="0 0 100 400" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id={`${uid}-f${+mirror}`} x1="0" x2="0.24" spreadMethod="repeat">
+            <stop offset="0" stop-color="#16236e" /><stop offset=".3" stop-color="#2f47c4" />
+            <stop offset=".55" stop-color="#7189f2" /><stop offset=".8" stop-color="#2f47c4" /><stop offset="1" stop-color="#16236e" />
+          </linearGradient>
+          <linearGradient id={`${uid}-s${+mirror}`} x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0" stop-color="#000" stop-opacity=".28" /><stop offset=".25" stop-color="#000" stop-opacity="0" />
+            <stop offset=".8" stop-color="#000" stop-opacity="0" /><stop offset="1" stop-color="#000" stop-opacity=".3" />
+          </linearGradient>
+        </defs>
+        <path d={side(mirror)} fill={`url(#${uid}-f${+mirror})`} />
+        <path d={side(mirror)} fill={`url(#${uid}-s${+mirror})`} />
+        <path d={`M${mirror ? 100 : 0} 394H${mirror ? 0 : 100}`} stroke="#d9a93c" stroke-width="12" stroke-dasharray="2.5 2" />
+      </svg>
+    ))}
+    <span class="cf__cord cf__cord--l" style={`--tie:${tie / 4}%`}><span class="cf__tassel"></span></span>
+    <span class="cf__cord cf__cord--r" style={`--tie:${tie / 4}%`}><span class="cf__tassel"></span></span>
+
+    <svg class="cf__valance" viewBox="0 0 300 60" preserveAspectRatio="none">
+      <defs>
+        <linearGradient id={`${uid}-v`} x1="0" y1="0" x2="0" y2="1">
+          <stop offset="0" stop-color="#1a2a86" /><stop offset=".6" stop-color="#3d58d8" /><stop offset="1" stop-color="#2238a8" />
+        </linearGradient>
+      </defs>
+      {[0, 1, 2].map((k) => (
+        <g class="cf__swag" style={`--d:${-k * 1.7}s`}>
+          <path d={`M${k * 100 - 3} 9H${k * 100 + 103}V13Q${k * 100 + 50} 62 ${k * 100 - 3} 13Z`} fill={`url(#${uid}-v)`} />
+          <path d={`M${k * 100 + 10} 17Q${k * 100 + 50} 44 ${k * 100 + 90} 17`} fill="none" stroke="rgba(10,16,60,.4)" stroke-width="1.4" />
+          <path d={`M${k * 100 + 20} 14Q${k * 100 + 50} 32 ${k * 100 + 80} 14`} fill="none" stroke="rgba(190,205,255,.35)" stroke-width="1.1" />
+          <path d={`M${k * 100 - 3} 13Q${k * 100 + 50} 62 ${k * 100 + 103} 13`} fill="none" stroke="#d9a93c" stroke-width="3.2" stroke-dasharray="1.6 1.2" />
+        </g>
+      ))}
+      <rect x="0" y="0" width="300" height="9.5" fill="#15216a" />
+      <rect x="0" y="8" width="300" height="2" fill="#e3b74e" />
+    </svg>
+  </span>
+  </span>
+</figure>
+
+<style>
+  /* No container query (they made the page's first layout far more expensive): % padding on the
+     stage resolves against the figure's width, % sizes in the decor against the stage. */
+  .cf { margin: 0; }
+  .cf__stage {
+    --side: 12%;
+    --top: 11.5%;
+    position: relative; display: block; isolation: isolate;
+    padding: calc(var(--top) + 0.4%) var(--side) 2.6%;
+    border-radius: 0.9rem;
+    /* the dark stage behind the photo */
+    background:
+      radial-gradient(ellipse 70% 60% at 50% 35%, rgba(120, 140, 255, 0.18), transparent 70%),
+      linear-gradient(180deg, #0f1638, #1a2356 70%, #121a44);
+    box-shadow: 0 2px 6px rgba(20, 24, 60, 0.12), 0 26px 50px -24px rgba(20, 24, 60, 0.6);
+  }
+  .cf--portrait .cf__stage { --side: 16%; --top: 15%; padding-bottom: 3.4%; }
+
+  .cf__photo { position: relative; z-index: 1; display: block; overflow: hidden; border-radius: 0.4rem; box-shadow: 0 0 0 1.5px rgba(227, 183, 78, 0.85), 0 10px 22px -10px rgba(0, 0, 0, 0.7); }
+  .cf__photo :global(img) { display: block; width: 100%; height: auto; }
+
+  .cf__decor { position: absolute; inset: 0; z-index: 2; pointer-events: none; overflow: hidden; border-radius: inherit; }
+  .cf__side { position: absolute; top: 0; bottom: 0; width: var(--side); height: 100%; }
+  .cf__side--l { left: 0; transform-origin: 0 0; }
+  .cf__side--r { right: 0; transform-origin: 100% 0; }
+  /* valance height = --top of the width (11.5 % / 15 %): via aspect-ratio, % heights can't do it */
+  .cf__valance { position: absolute; left: -1%; top: 0; width: 102%; height: auto; aspect-ratio: 102 / 11.5; overflow: visible; }
+  .cf--portrait .cf__valance { aspect-ratio: 102 / 15; }
+  .cf__swag { transform-box: fill-box; transform-origin: 50% 0; }
+
+  /* gold cord from the wall to the tie point, tassel hanging from the knot */
+  .cf__cord {
+    position: absolute; top: var(--tie); height: 6px; margin-top: -3px;
+    width: calc(var(--side) * 0.62); border-radius: 4px;
+    background:
+      linear-gradient(180deg, rgba(255, 255, 255, 0.35), transparent 45%, rgba(60, 30, 0, 0.35)),
+      repeating-linear-gradient(118deg, #f6dc95 0 3px, #c39030 3px 6px, #8f6418 6px 7px);
+    box-shadow: 0 2px 3px rgba(0, 0, 20, 0.5);
+  }
+  .cf__cord--l { left: 0; rotate: -6deg; transform-origin: 0 50%; }
+  .cf__cord--r { right: 0; rotate: 6deg; transform-origin: 100% 50%; }
+  .cf__tassel {
+    position: absolute; top: -3px; width: 0.85rem; height: 2rem;
+    border-radius: 45% 45% 30% 30% / 22% 22% 40% 40%;
+    background:
+      radial-gradient(circle at 50% 13%, #fff3c9 0 10%, #e7bd5a 11% 24%, transparent 25%),
+      linear-gradient(180deg, transparent 32%, #9c6c1c 32% 36%, transparent 36%),
+      repeating-linear-gradient(90deg, #ecc35f 0 2px, #b07e22 2px 3px);
+    box-shadow: 0 3px 5px rgba(0, 0, 20, 0.45);
+    transform-origin: 50% 0;
+  }
+  .cf__cord--l .cf__tassel { right: -0.42rem; }
+  .cf__cord--r .cf__tassel { left: -0.42rem; }
+
+  /* on view: the curtains settle with a soft sway, then tassels swing and the valance barely stirs */
+  :global(.motion-ok) .cf.is-staged .cf__side--l { animation: cf-settle-l 1.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  :global(.motion-ok) .cf.is-staged .cf__side--r { animation: cf-settle-r 1.6s cubic-bezier(0.16, 1, 0.3, 1); }
+  @keyframes cf-settle-l { from { transform: skewX(4deg) scaleX(1.06); } }
+  @keyframes cf-settle-r { from { transform: skewX(-4deg) scaleX(1.06); } }
+  :global(.motion-ok) .cf.is-staged .cf__tassel { animation: cf-swing 4.8s ease-in-out 0.6s infinite alternate; }
+  .cf__cord--r .cf__tassel { animation-delay: 1.4s !important; }
+  @keyframes cf-swing { from { rotate: -4deg; } to { rotate: 4deg; } }
+  /* the valance barely stirs: one composited transform on the whole element (animating SVG groups
+     would repaint on the main thread every frame) */
+  .cf__valance { transform-origin: 50% 0; }
+  :global(.motion-ok) .cf.is-staged .cf__valance { animation: cf-wind 7s ease-in-out infinite alternate; }
+  @keyframes cf-wind { from { transform: skewX(-0.6deg) scaleY(0.97); } to { transform: skewX(0.6deg) scaleY(1.03); } }
+
+  @media (prefers-reduced-motion: reduce) {
+    .cf__side, .cf__tassel, .cf__valance { animation: none !important; }
+  }
+</style>

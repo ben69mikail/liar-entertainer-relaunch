@@ -33,7 +33,7 @@ describe('kids hero letters', () => {
 describe('kids v3 hero curtain (user 2026-10-06: opens fully, like a real curtain)', () => {
   const covered = () => {
     const panels = [...document.querySelectorAll('.k3-hero .cu__panel')].map((p) => p.getBoundingClientRect());
-    const targets = [document.querySelector('.k3-hero h1')!, document.querySelector('.k3-hero .stg img')!];
+    const targets = [document.querySelector('.k3-hero h1')!, document.querySelector('.k3-hero .cf img')!];
     return targets.flatMap((t) => {
       const r = t.getBoundingClientRect();
       return panels.some((c) => c.left < r.right - 1 && c.right > r.left + 1 && c.top < r.bottom && c.bottom > r.top) ? [t.tagName] : [];
@@ -59,17 +59,18 @@ describe('kids v3 hero curtain (user 2026-10-06: opens fully, like a real curtai
   });
 });
 
-describe('kids v3 stage frames never hide part of a photo once open (no cut-off people)', () => {
-  it('drapes are drawn back into the velvet border', async () => {
+describe('kids v3 curtain frames never hide part of a photo (no cut-off people)', () => {
+  it('curtains, cords and valance stay in the frame around the photo', async () => {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
     await page.goto(BASE + '/kindergeburtstag/');
-    const frames = page.locator('.stg');
+    const frames = page.locator('.cf');
     for (let i = 0; i < (await frames.count()); i++) {
       await frames.nth(i).scrollIntoViewIfNeeded();
       await page.waitForTimeout(1600);
       const hits = await frames.nth(i).evaluate((f) => {
+        (f as HTMLElement).style.rotate = '0deg'; // measure the frame upright: rotation inflates boxes
         const r = f.querySelector('img')!.getBoundingClientRect();
-        return [...f.querySelectorAll('.stg__drape')].filter((d) => {
+        return [...f.querySelectorAll('.cf__side, .cf__cord, .cf__valance')].filter((d) => {
           const c = d.getBoundingClientRect();
           return c.left < r.right - 3 && c.right > r.left + 3 && c.top < r.bottom - 3 && c.bottom > r.top + 3; // 3px: rotated frames inflate their boxes
         }).length;

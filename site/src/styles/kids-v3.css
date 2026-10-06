@@ -60,7 +60,7 @@
 
 /* ── hero: the stage between the curtains ── */
 .k3-hero {
-  --curtain: clamp(1.25rem, 5vw, 4.5rem);
+  --curtain: clamp(2.4rem, 8vw, 7rem);
   overflow: clip; isolation: isolate;
   padding-block: clamp(3.2rem, 6vw, 5rem) var(--space-5) !important;
   background:
@@ -206,7 +206,7 @@
   .k3-area__grid { grid-template-columns: 1.2fr 1fr; }
 }
 @media (max-width: 900px) {
-  .k3-hero { --curtain: 0.9rem; }
+  .k3-hero { --curtain: 1.6rem; }
   .k3-hero .container { width: min(100% - 2 * (max(var(--curtain), 7.4vw) + 0.6rem), 66rem); }
   .v2 main > section { padding-block: var(--space-5); }
 }

@@ -1,6 +1,10 @@
 ---
 import { CONTACT, REVIEWS } from '../../data/site';
 import { colorFor, featuredReviews, initialsOf } from '../../lib/reviews';
+import { zoneFor } from '../../lib/site-map';
+// Cards are dealt like playing cards only in the adult zone; elsewhere they simply rise in
+// (the deal reveal measures layout at start-up, which cost the kids pages a long task).
+const reveal = zoneFor(Astro.url.pathname) === 'adult' ? 'deal' : 'up';
 // Same wording as the legacy GoogleReviews block (L1), redesigned. Server-rendered only.
 const SUITS = ['♠', '♥', '♣', '♦'];
 ---
@@ -16,7 +20,7 @@ const SUITS = ['♠', '♥', '♣', '♦'];
 
     <div class="rv__grid">
       {featuredReviews.map((r, i) => (
-        <figure class="rv__card" data-reveal="deal" data-reveal-delay={i * 0.06} data-suit={SUITS[i % 4]} style={i % 2 ? '--suit-color: var(--accent)' : undefined}>
+        <figure class="rv__card" data-reveal={reveal} data-reveal-delay={i * 0.06} data-suit={SUITS[i % 4]} style={i % 2 ? '--suit-color: var(--accent)' : undefined}>
           <div class="rv__who">
             <div class="rv__avatar" style={`background:${colorFor(r.name)}`}>{initialsOf(r.name)}</div>
             <div>

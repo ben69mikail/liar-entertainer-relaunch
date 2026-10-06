@@ -18,8 +18,11 @@ const all = (sel: string) => [...document.querySelectorAll<HTMLElement>(sel)];
 
 function letters(): void {
   for (const h of all('[data-letters]')) {
-    // innerText honours <br> as a break, so the spoken name keeps its word boundaries
-    h.setAttribute('aria-label', h.innerText.replace(/\s+/g, ' ').trim());
+    // The spoken name keeps its word boundaries: <br> counts as a space. Not innerText — reading it
+    // forces a full page layout inside this script (≈450 ms long task on a throttled phone).
+    const spoken = h.cloneNode(true) as HTMLElement;
+    spoken.querySelectorAll('br').forEach((br) => br.replaceWith(' '));
+    h.setAttribute('aria-label', (spoken.textContent ?? '').replace(/\s+/g, ' ').trim());
     const walker = document.createTreeWalker(h, NodeFilter.SHOW_TEXT);
     const texts: Text[] = [];
     while (walker.nextNode()) texts.push(walker.currentNode as Text);
