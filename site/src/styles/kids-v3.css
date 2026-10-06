@@ -282,3 +282,25 @@
 @media (prefers-reduced-motion: reduce) {
   .k3-spot { animation: none; }
 }
+
+/* hero: the same spotlights on the light stage. Screen blending vanishes on cream, so here the
+   cones are plain translucent colour; they sit under the content and under the curtain. */
+.k3-spot--hero { z-index: 1; top: 0; height: 100%; mix-blend-mode: normal; opacity: 0.6; }
+.k3-spot--hero.k3-spot--red { left: 4%; width: 58%; }
+.k3-spot--hero.k3-spot--blue { right: 4%; width: 58%; }
+.k3-spot--hero {
+  /* fade out softly towards the floor and the sides: no hard box edges on the light stage */
+  -webkit-mask-image: radial-gradient(ellipse 75% 95% at 50% 0%, #000 55%, transparent 100%);
+  mask-image: radial-gradient(ellipse 75% 95% at 50% 0%, #000 55%, transparent 100%);
+}
+/* the lamps: a small dark can with a coloured glow at its mouth */
+.k3-spot--hero::before {
+  top: 1.35rem; width: 1.9rem; height: 1.5rem; border-radius: 0.5rem 0.5rem 45% 45%;
+  background: linear-gradient(180deg, #3a2c33, #1d1418);
+}
+.k3-spot--hero.k3-spot--red::before { left: calc(10% - 0.95rem); box-shadow: 0 0.7rem 16px 4px rgba(255, 70, 90, 0.75); }
+.k3-spot--hero.k3-spot--blue::before { right: calc(10% - 0.95rem); box-shadow: 0 0.7rem 16px 4px rgba(80, 130, 255, 0.75); }
+:global(.motion-ok) .k3-spot--hero, .motion-ok .k3-spot--hero { animation-delay: 2.2s; }
+@media (max-width: 900px) {
+  .k3-spot--hero { opacity: 0.4; }
+}

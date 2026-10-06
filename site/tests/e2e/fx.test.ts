@@ -190,7 +190,7 @@ describe('kids hat trick', () => {
 describe('side rays hero spotlights', () => {
   it('runs on a real GPU, stays off on software rendering and under reduced motion', async () => {
     const state = async (rm: 'reduce' | 'no-preference') => {
-      const page = await open('/kindergeburtstag/', rm);
+      const page = await open('/kinderzauberer/', rm);
       await page.mouse.move(400, 300); // starts on first interaction
       await page.waitForTimeout(3000);
       const v = await page.evaluate(() => {
