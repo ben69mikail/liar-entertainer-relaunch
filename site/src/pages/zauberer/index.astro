@@ -105,6 +105,7 @@ const whyUs = [
 ---
 
 <V2Layout
+  mainClass="ce-salon-page"
   title={seoTitle}
   description={seoDescription}
   keywords="Zauberer NRW, Zauberer buchen, Zauberer Kindergeburtstag, Kinderzauberer NRW, Zaubershow NRW, Zauberer Hochzeit, Close-up Zauberer, Bühnenzauberer"
@@ -157,38 +158,46 @@ const whyUs = [
     </div>
   </section>
 
+  <!-- ══ Body v2 (grill 2026-10-07): ivory "salon" with a gold card-back lattice; content laid out
+       as playing-card compositions with art-deco gold; dark stages only for reviews + finale. ══ -->
+
   <!-- ── Intro ─────────────────────────────────────────────── -->
-  <section class="ce-intro ce-smoke">
+  <section class="ce-intro ce-salon">
     <div class="container ce-narrow ce-center">
+      <span class="ce-ornament" aria-hidden="true"></span>
       <p class="ce-lead" data-reveal>
         Ob <a href="/kindergeburtstag/">Kindergeburtstag</a>, Hochzeit oder Firmenevent – als Clown Zauberer LIAR erleben Sie Magie, die begeistert und in Erinnerung bleibt. Als <a href="/kinderzauberer/">Kinderzauberer</a> bringe ich Kinderaugen zum Leuchten, als <a href="/zauberer/buehnen-zauberer/">Bühnenzauberer</a> fessle ich Ihr Publikum, und als <a href="/zauberer/tisch-zauberer/">Tischzauberer</a> verzaubere ich Ihre Gäste aus nächster Nähe.
       </p>
       <p class="ce-soft" data-reveal data-reveal-delay="0.08">
         Als Zauberer für Kinder passe ich Tempo, Humor und Requisiten an die Altersgruppe an.
       </p>
-      <div class="ce-chips">
-        <span data-reveal="pop">✓ Clown Zauberer: Close-up, Bühne, Kinderzauberei</span>
-        <span data-reveal="pop" data-reveal-delay="0.06">✓ Kurzfristige Buchungen möglich</span>
-        <span data-reveal="pop" data-reveal-delay="0.12">✓ Einsatz in ganz NRW & darüber hinaus</span>
+      <div class="ce-chips ce-tickets">
+        <span data-reveal="tilt">✓ Clown Zauberer: Close-up, Bühne, Kinderzauberei</span>
+        <span data-reveal="tilt" data-reveal-delay="0.08">✓ Kurzfristige Buchungen möglich</span>
+        <span data-reveal="tilt" data-reveal-delay="0.16">✓ Einsatz in ganz NRW & darüber hinaus</span>
       </div>
     </div>
   </section>
 
-  <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="ce-occasions ce-smoke" data-related-services>
+  <!-- ── Anlässe: two big cards, fanned ─────────────────────── -->
+  <section class="ce-occasions ce-salon" data-related-services>
     <div class="container ce-narrow">
       <SuitRule />
       <h2 class="ce-h2 ce-center">
         Für welche Anlässe kann man Zauberer LIAR sonst buchen?
       </h2>
-      <div class="ce-occasions__grid">
-        <a href="/zauberer/hochzeit/" class="ce-occasion" data-reveal="deal" data-tilt>
-          <span class="ce-occasion__suit ce-red" aria-hidden="true">♥</span>
+      <div class="ce-pair">
+        <a href="/zauberer/hochzeit/" class="ce-occasion ce-pcard ce-pcard--red" data-reveal="tilt">
+          <span class="ce-occasion__suit ce-pcard__idx" aria-hidden="true">D<br />♥</span>
+          <span class="ce-pcard__idx ce-pcard__idx--end" aria-hidden="true">D<br />♥</span>
+          <span class="ce-pcard__pip" aria-hidden="true">♥</span>
           <p class="ce-occasion__title">Zauberer für die Hochzeit</p>
           <p class="ce-occasion__text">Close-up-Zauberei am Tisch, beim Sektempfang und während der Fotosession.</p>
         </a>
-        <a href="/zauberer/firmenfeier/" class="ce-occasion" data-reveal="deal" data-reveal-delay="0.12" data-tilt>
-          <span class="ce-occasion__suit" aria-hidden="true">♠</span>
+        <a href="/zauberer/firmenfeier/" class="ce-occasion ce-pcard" data-reveal="tilt" data-reveal-delay="0.12">
+          <span class="ce-occasion__suit ce-pcard__idx" aria-hidden="true">K<br />♠</span>
+          <span class="ce-pcard__idx ce-pcard__idx--end" aria-hidden="true">K<br />♠</span>
+          <span class="ce-pcard__pip" aria-hidden="true">♠</span>
           <p class="ce-occasion__title">Zauberer für die Firmenfeier</p>
           <p class="ce-occasion__text">Walk-Act zwischen den Tischen oder Bühnenshow für Betriebsfeier und Jubiläum.</p>
         </a>
@@ -196,21 +205,26 @@ const whyUs = [
     </div>
   </section>
 
-  <Reviews />
-
-  <!-- ── Formate: dealt from the deck ─────────────────────── -->
-  <section class="ce-formats ce-formats--rows ce-night ce-lit">
+  <!-- ── Bewertungen: dark stage with spotlights ───────────── -->
+  <div class="ce-stage ce-lit">
     <StageLights soft />
+    <Reviews />
+  </div>
+
+  <!-- ── Formate: a fanned hand of three big cards ─────────── -->
+  <section class="ce-formats ce-salon">
     <div class="container">
-      <h2 class="ce-eyebrow ce-center">ZAUBEREI-FORMATE</h2>
+      <h2 class="ce-eyebrow ce-cartouche ce-center">ZAUBEREI-FORMATE</h2>
       <h3 class="ce-h2 ce-center">Welche Art von Zaubershow passt zu Ihrem Event?</h3>
       <p class="ce-center ce-narrow ce-soft">Tauchen Sie ein in die faszinierende Welt der Magie und buchen Sie den Zauberer aus Frankreich. Ob <a href="/zauberer/zaubershow/">Zaubershow</a> für Kinder oder elegante <a href="/clown/clownshow/">Clownshow</a> – lassen Sie sich von niveauvoller Kunst und unvergleichlichem Charme verzaubern.</p>
-      <div class="ce-formats__grid">
+      <div class="ce-hand">
         {formats.map((format, i) => (
-          <article class="ce-format" data-reveal="deal" data-reveal-delay={i * 0.12}>
-            <div class="ce-format__card" data-tilt>
-              <MagicFrame corner={(['tl', 'tr', 'tl'] as const)[i]} rank={['A', 'K', 'Q'][i]} suit={(['♠', '♥', '♣'] as const)[i]} style={`--sheen-delay: ${2.2 + i * 0.9}s`}>
-                <Image src={format.img} alt={format.imgAlt} loading="lazy" widths={[400, 600, 900]} sizes="(max-width: 900px) 88vw, 380px" />
+          <article class:list={['ce-hcard', 'ce-format', { 'ce-pcard--red': i === 1 }]} data-reveal="tilt" data-reveal-delay={i * 0.12}>
+            <span class="ce-pcard__idx" aria-hidden="true">{['A', 'K', 'D'][i]}<br />{['♠', '♥', '♣'][i]}</span>
+            <span class="ce-pcard__idx ce-pcard__idx--end" aria-hidden="true">{['A', 'K', 'D'][i]}<br />{['♠', '♥', '♣'][i]}</span>
+            <div class="ce-hcard__photo">
+              <MagicFrame corner="tr" rank={['A', 'K', 'Q'][i]} suit={(['♠', '♥', '♣'] as const)[i]} style={`--sheen-delay: ${2.2 + i * 0.9}s`}>
+                <Image src={format.img} alt={format.imgAlt} loading="lazy" widths={[400, 600, 900]} sizes="(max-width: 900px) 84vw, 340px" />
               </MagicFrame>
             </div>
             <div class="ce-format__body">
@@ -231,15 +245,15 @@ const whyUs = [
     </div>
   </section>
 
-  <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="ce-why ce-smoke">
+  <!-- ── Warum: a spread of cards laid out on the table ────── -->
+  <section class="ce-why ce-salon">
     <div class="container">
       <SuitRule />
       <p class="ce-eyebrow ce-center">WARUM ZAUBERER LIAR?</p>
       <h2 class="ce-h2 ce-center">🎯 Das macht mich aus</h2>
-      <div class="ce-why__grid">
+      <div class="ce-spread">
         {whyUs.map((item, i) => (
-          <div class="ce-why__item" data-reveal="tilt" data-reveal-delay={(i % 3) * 0.07}>
+          <div class:list={['ce-why__item', 'ce-scard', { 'ce-pcard--red': i % 2 }]} data-reveal="tilt" data-reveal-delay={(i % 4) * 0.08}>
             <span class:list={['ce-why__suit', { 'ce-red': i % 2 }]} aria-hidden="true">{['♠', '♥', '♣', '♦'][i % 4]}</span>
             <p class="ce-why__title">✓ {item.title}</p>
             <p class="ce-soft">{item.desc}</p>
@@ -249,26 +263,33 @@ const whyUs = [
     </div>
   </section>
 
-  <!-- ── Buchung: three cards turned over ─────────────────── -->
-  <section class="ce-steps ce-velvet">
+  <!-- ── Buchung: a dealt row, turned face up ──────────────── -->
+  <section class="ce-steps ce-salon">
     <div class="container ce-narrow-wide">
+      <SuitRule />
       <p class="ce-eyebrow ce-center">SO FUNKTIONIERT DIE BUCHUNG</p>
       <h2 class="ce-h2 ce-center">In 3 einfachen Schritten zu Ihrer Zaubershow</h2>
       <ol class="ce-steps__list">
         <li class="ce-step" data-reveal="flip">
           <span class="card-back" aria-hidden="true"></span>
+          <span class="ce-pcard__idx" aria-hidden="true">1<br />♠</span>
+          <span class="ce-pcard__idx ce-pcard__idx--end" aria-hidden="true">1<br />♠</span>
           <div class="ce-step__num">1</div>
           <h3>Anfrage stellen</h3>
           <p class="ce-soft">Kontaktieren Sie mich per Telefon (0172-1517578), E-Mail oder Kontaktformular mit Ihrem Wunschtermin und Event-Details.</p>
         </li>
-        <li class="ce-step" data-reveal="flip" data-reveal-delay="0.18">
+        <li class="ce-step ce-pcard--red" data-reveal="flip" data-reveal-delay="0.18">
           <span class="card-back" aria-hidden="true"></span>
-          <div class="ce-step__num ce-red">2</div>
+          <span class="ce-pcard__idx" aria-hidden="true">2<br />♥</span>
+          <span class="ce-pcard__idx ce-pcard__idx--end" aria-hidden="true">2<br />♥</span>
+          <div class="ce-step__num">2</div>
           <h3>Angebot erhalten</h3>
           <p class="ce-soft">Sie erhalten innerhalb von 24 Stunden ein individuelles, unverbindliches Angebot basierend auf Ihrer Veranstaltung.</p>
         </li>
         <li class="ce-step" data-reveal="flip" data-reveal-delay="0.36">
           <span class="card-back" aria-hidden="true"></span>
+          <span class="ce-pcard__idx" aria-hidden="true">3<br />♣</span>
+          <span class="ce-pcard__idx ce-pcard__idx--end" aria-hidden="true">3<br />♣</span>
           <div class="ce-step__num">3</div>
           <h3>Show erleben</h3>
           <p class="ce-soft">Nach der Buchungsbestätigung kümmere ich mich um alles – Sie lehnen sich zurück und genießen die Show!</p>
@@ -278,39 +299,37 @@ const whyUs = [
   </section>
 
   <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
-  <section class="ce-area ce-night">
+  <section class="ce-area ce-salon">
     <div class="container">
       <SuitRule />
       <h2 class="ce-h2 ce-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
       <div class="ce-area__grid">
-        <div>
+        <div class="ce-deco ce-area__panel">
           <p class="ce-label">Haupteinsatzgebiete:</p>
           <p class="ce-soft ce-cities">Oberhausen | Gelsenkirchen | Essen | Duisburg | Dorsten | Herten | Herne | Marl | Gladbeck | Mülheim | Dinslaken | Dortmund | Bochum | Bottrop | Recklinghausen</p>
           <p class="ce-label">Weitere Städte in NRW:</p>
           <p class="ce-soft ce-cities">Düsseldorf | Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Moers | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn</p>
           <p class="ce-soft">🌍 <strong>Überregional &amp; International:</strong> Auf Anfrage auch außerhalb von NRW buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!</p>
         </div>
-        <div class="ce-area__map" data-reveal="deal">
-          <MagicFrame corner="br" rank="10" suit="♦" data-scroll-tilt="2" style="--sheen-delay: 3.4s">
-            <Image
-              src={karteImg}
-              alt="Einsatzgebiet Zauberer LIAR für Kindergeburtstag und Events in NRW – Karte"
-              loading="lazy"
-              widths={[400, 600, 900, 1200]}
-              sizes="(max-width: 900px) 92vw, 540px"
-            />
-          </MagicFrame>
+        <div class="ce-area__map" data-reveal>
+          <Image
+            src={karteImg}
+            alt="Einsatzgebiet Zauberer LIAR für Kindergeburtstag und Events in NRW – Karte"
+            loading="lazy"
+            widths={[400, 600, 900, 1200]}
+            sizes="(max-width: 900px) 92vw, 560px"
+          />
         </div>
       </div>
     </div>
   </section>
 
   <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq ce-smoke">
+  <section class="ce-faq ce-salon">
     <div class="container ce-narrow">
       <SuitRule />
       <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
-      <div class="ce-faq__list">
+      <div class="ce-faq__list ce-deco">
         {faqSchema.mainEntity.map((item, i) => (
           <details class="ce-faq__item" data-reveal data-reveal-delay={i * 0.05}>
             <summary><span class="ce-faq__suit" aria-hidden="true">{['♠', '♥', '♣', '♦'][i % 4]}</span>{item.name}</summary>
@@ -321,7 +340,8 @@ const whyUs = [
     </div>
   </section>
 
-  <div class="ce-finale ce-velvet">
+  <!-- ── Finale: dark stage – the card trick, then the contact ── -->
+  <div class="ce-finale ce-stage ce-lit">
   <StageLights soft />
   <PickACard />
 

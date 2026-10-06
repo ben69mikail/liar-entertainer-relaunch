@@ -7,13 +7,14 @@ import SiteFooter from '../components/v2/SiteFooter.astro';
 import StickyCta from '../components/v2/StickyCta.astro';
 import FontPreloads from '../components/v2/FontPreloads.astro';
 
-export type Props = Omit<DocumentProps, 'bodyClass'>;
+export type Props = Omit<DocumentProps, 'bodyClass'> & { mainClass?: string };
+const { mainClass, ...docProps } = Astro.props;
 ---
 
-<Document {...Astro.props} bodyClass="v2">
+<Document {...docProps} bodyClass="v2">
   <FontPreloads slot="head" />
   <SiteHeader />
-  <main>
+  <main class={mainClass}>
     <slot />
   </main>
   <SiteFooter />

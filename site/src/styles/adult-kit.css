@@ -432,3 +432,238 @@
 /* a sheet keeps the red button even on velvet */
 .v2 main .ce-sheet .btn--primary { background: #c8102e; color: #fffdf7; }
 @media (hover: hover) and (pointer: fine) { .v2 main .ce-sheet .btn--primary:hover { background: #a30c25; } }
+
+/* ══ the salon: adult body v2 (grill 2026-10-07, replaces "just darker") ══════════════════════
+   OPT-IN while it is a prototype: only sections with .ce-salon (light) or .ce-stage (dark) use it
+   — so far only /zauberer/. The other adult pages keep "the house" above until the rollout.
+   · Ground: ivory with a barely visible gold diamond lattice, like the back of a playing card.
+   · The look comes from elements: playing-card compositions (a fanned pair, a fanned hand, a
+     spread, a dealt row) and gold foil / art deco (double gold rules, deco corners, embossed gold
+     numerals). Gold text uses --gold-ink (5:1 on ivory); --gold is for rules and ornaments only.
+   · Dark stages with spotlights (.ce-stage + StageLights soft) only for reviews and the finale.
+   · Motion: cards are dealt once (data-reveal="deal" / "flip"), resting angles use the individual
+     `rotate`/`translate` properties so they compose with the reveal's transform; hover lifts a
+     card a little (fine pointers only). Nothing loops here except the stage beams. */
+.v2 main.ce-salon-page { background: #fbf8f1; } /* set on <main> via the page, no :has() (style invalidation) */
+
+.v2 main > .ce-salon {
+  --bg: #fbf8f1; --bg-alt: #f5efe2; --surface: #fffdf7;
+  --ink: #141210; --ink-soft: #46413a; --line: #141210;
+  --accent: #c8102e; --accent-strong: #a30c25; --accent-2: #141210;
+  --link: #a30c25; --star: #c8102e;
+  --hair: rgb(20 18 16 / 0.14);
+  --gold: #b08a3e; /* foil: rules, ornaments (never small text) */
+  --gold-ink: #8a6420; /* gold text on ivory / card stock: 5.0–5.3:1 */
+  --card-shadow: 0 1px 1px rgb(60 44 14 / 0.08), 0 22px 40px -24px rgb(60 44 14 / 0.55);
+  --card-shadow-up: 0 1px 1px rgb(60 44 14 / 0.08), 0 34px 56px -26px rgb(60 44 14 / 0.6);
+  color: var(--ink);
+  overflow-x: clip; /* fanned cards never push the page sideways */
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 40%, rgb(255 255 255 / 0.55), transparent 75%),
+    repeating-linear-gradient(60deg, transparent 0 17px, rgb(176 138 62 / 0.085) 17px 18px),
+    repeating-linear-gradient(-60deg, transparent 0 17px, rgb(176 138 62 / 0.085) 17px 18px),
+    #fbf8f1;
+}
+.v2 main > .ce-salon a:not([class]) { color: var(--ink); text-decoration-color: rgb(200 16 46 / 0.55); text-underline-offset: 0.18em; }
+@media (hover: hover) and (pointer: fine) { .v2 main > .ce-salon a:not([class]):hover { color: var(--accent-strong); } }
+
+/* SuitRule on ivory: a double gold rule, black suits in ink, red in card red */
+.v2 main > .ce-salon .sr { color: var(--ink); }
+.v2 main > .ce-salon .sr__line {
+  height: 5px; opacity: 1;
+  background: linear-gradient(var(--gold), var(--gold)) top / 100% 1px no-repeat, linear-gradient(var(--gold), var(--gold)) bottom / 100% 1px no-repeat;
+}
+.v2 main > .ce-salon .ce-eyebrow { color: var(--gold-ink); }
+.v2 main > .ce-salon .ce-label { color: var(--gold-ink); }
+
+/* section label as a deco cartouche: gold rules with a diamond at the inner end */
+.v2 main > .ce-salon .ce-cartouche { display: flex; align-items: center; justify-content: center; gap: 1rem; }
+.v2 main > .ce-salon .ce-cartouche::before, .v2 main > .ce-salon .ce-cartouche::after {
+  content: ''; width: clamp(2.5rem, 8vw, 4.5rem); height: 8px; flex: none;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 72 8'%3E%3Cpath d='M0 4h62' stroke='%23b08a3e'/%3E%3Cpath d='M67 0.5l3.5 3.5-3.5 3.5-3.5-3.5z' fill='%23b08a3e'/%3E%3C/svg%3E") center / 100% 100% no-repeat;
+}
+.v2 main > .ce-salon .ce-cartouche::before { scale: -1 1; }
+
+/* gold-embossed figures: solid foil colour, lit from above, pressed into the stock (no gradient text) */
+.v2 main > .ce-salon :is(.ce-step__num, .ce-pcard__pip, .ce-why__suit:not(.ce-red)) {
+  color: var(--gold-ink);
+  text-shadow: 0 1px 0 rgb(255 251 235 / 0.95), 0 -1px 0 rgb(92 64 16 / 0.35), 0 4px 10px rgb(110 79 23 / 0.16);
+}
+.v2 main > .ce-salon .ce-pcard--red .ce-pcard__pip { color: var(--accent); text-shadow: 0 1px 0 rgb(255 251 235 / 0.95), 0 -1px 0 rgb(90 6 20 / 0.3), 0 4px 10px rgb(120 10 30 / 0.14); }
+
+/* ── a playing card: cream stock, double gold rule inside the edge, soft table shadow ── */
+.v2 main > .ce-salon :is(.ce-pcard, .ce-hcard, .ce-scard, .ce-step) {
+  --ty: 0px; --lift: 0px;
+  position: relative; color: var(--ink); background: #fffdf7; border: 0; border-radius: 1rem;
+  box-shadow:
+    inset 0 0 0 0.5rem #fffdf7, inset 0 0 0 calc(0.5rem + 1px) var(--gold),
+    inset 0 0 0 calc(0.5rem + 4px) #fffdf7, inset 0 0 0 calc(0.5rem + 5px) rgb(176 138 62 / 0.4),
+    0 0 0 1px rgb(20 18 16 / 0.1), var(--card-shadow);
+  translate: 0 calc(var(--ty) - var(--lift));
+  transition: translate 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+}
+.v2 main > .ce-salon .ce-pcard--red { --gold: #c39a52; }
+@media (hover: hover) and (pointer: fine) {
+  .v2 main > .ce-salon :is(.ce-pcard, .ce-hcard, .ce-scard, .ce-step):hover {
+    --lift: 8px;
+    box-shadow:
+      inset 0 0 0 0.5rem #fffdf7, inset 0 0 0 calc(0.5rem + 1px) var(--gold),
+      inset 0 0 0 calc(0.5rem + 4px) #fffdf7, inset 0 0 0 calc(0.5rem + 5px) rgb(176 138 62 / 0.4),
+      0 0 0 1px rgb(20 18 16 / 0.1), var(--card-shadow-up);
+  }
+}
+/* corner indices: rank over suit, mirrored in the opposite corner */
+.v2 main > .ce-salon .ce-pcard__idx {
+  position: absolute; z-index: 1; top: 1.35rem; left: 1.35rem; right: auto; bottom: auto;
+  font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1.05; text-align: center;
+  color: var(--ink);
+}
+.v2 main > .ce-salon .ce-pcard--red .ce-pcard__idx { color: var(--accent); }
+.v2 main > .ce-salon .ce-pcard__idx--end { top: auto; left: auto; bottom: 1.35rem; right: 1.35rem; rotate: 180deg; }
+
+/* ── intro: a deco fan over the lead, the three promises as gold-edged tickets ── */
+.v2 main > .ce-intro.ce-salon { padding-top: var(--space-5); }
+.v2 main > .ce-salon .ce-ornament {
+  display: block; width: 7.5rem; height: 2.4rem; margin: 0 auto var(--space-3);
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 38' fill='none' stroke='%23b08a3e' stroke-width='1'%3E%3Cpath d='M0 37h120'/%3E%3Cpath d='M30 37a30 30 0 0 1 60 0'/%3E%3Cpath d='M40 37a20 20 0 0 1 40 0'/%3E%3Cpath d='M60 37V7M60 37L39 16M60 37L81 16M60 37L32 30M60 37L88 30'/%3E%3Cpath d='M60 1l3 3-3 3-3-3z' fill='%23b08a3e'/%3E%3Cpath d='M6 33h16M98 33h16'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+.v2 main > .ce-salon .ce-lead { color: var(--ink); }
+.v2 main > .ce-salon .ce-tickets { gap: 1rem; margin-top: var(--space-4); }
+.v2 main > .ce-salon .ce-tickets span {
+  padding: 0.75rem 1.35rem; border-radius: 0.3rem; color: var(--ink); background: #fffdf7;
+  box-shadow: inset 0 0 0 3px #fffdf7, inset 0 0 0 4px rgb(176 138 62 / 0.75), 0 0 0 1px rgb(176 138 62 / 0.55), 0 10px 20px -14px rgb(60 44 14 / 0.55);
+}
+.v2 main > .ce-salon .ce-tickets span:nth-child(1) { rotate: -1.5deg; }
+.v2 main > .ce-salon .ce-tickets span:nth-child(2) { rotate: 1deg; translate: 0 -0.2rem; }
+.v2 main > .ce-salon .ce-tickets span:nth-child(3) { rotate: -0.6deg; }
+
+/* ── occasions: two big cards held as a fanned pair ── */
+.v2 main > .ce-salon .ce-pair { display: flex; flex-direction: column; align-items: center; gap: var(--space-3); margin-top: var(--space-4); }
+.v2 main > .ce-salon .ce-pair .ce-pcard {
+  width: min(100%, 19rem); aspect-ratio: 5 / 7; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 2.5rem 2.1rem 3.4rem; text-align: center; text-decoration: none;
+}
+.v2 main > .ce-salon .ce-pair .ce-pcard__pip {
+  position: absolute; top: 15%; left: 0; right: 0; text-align: center;
+  font-family: var(--font-display); font-size: 6.5rem; line-height: 1;
+}
+.v2 main > .ce-salon .ce-pair .ce-occasion__title { font-size: 1.55rem; line-height: 1.15; margin-bottom: 0.5rem; }
+.v2 main > .ce-salon .ce-pair .ce-occasion__text { font-size: 0.98rem; color: var(--ink-soft); }
+.v2 main > .ce-salon .ce-pair .ce-pcard:nth-child(1) { rotate: -2deg; }
+.v2 main > .ce-salon .ce-pair .ce-pcard:nth-child(2) { rotate: 2deg; }
+@media (min-width: 901px) {
+  .v2 main > .ce-salon .ce-pair { flex-direction: row; justify-content: center; gap: 0; padding-top: var(--space-2); }
+  .v2 main > .ce-salon .ce-pair .ce-pcard { width: 20rem; transform-origin: 50% 110%; }
+  .v2 main > .ce-salon .ce-pair .ce-pcard:nth-child(1) { rotate: -8deg; margin-right: -1.75rem; --ty: 0.6rem; }
+  .v2 main > .ce-salon .ce-pair .ce-pcard:nth-child(2) { rotate: 7deg; z-index: 1; }
+  .v2 main > .ce-salon .ce-pair .ce-pcard:hover { z-index: 2; }
+}
+
+/* ── formats: a fanned hand of three big cards ── */
+.v2 main > .ce-salon .ce-hand { display: grid; gap: var(--space-4); margin-top: var(--space-5); }
+.v2 main > .ce-salon .ce-hcard { padding: 2.9rem 1.6rem 2.2rem; }
+.v2 main > .ce-salon .ce-hcard__photo { margin: 0 0.4rem var(--space-2); }
+.v2 main > .ce-salon .ce-hcard .ce-format__body { padding: 0 0.6rem; background: none; box-shadow: none; border-radius: 0; }
+.v2 main > .ce-salon .ce-hcard:nth-child(odd) { rotate: -0.7deg; }
+.v2 main > .ce-salon .ce-hcard:nth-child(even) { rotate: 0.7deg; }
+.v2 main > .ce-salon .ce-format__extra { border-top: 1px solid rgb(176 138 62 / 0.5); }
+@media (min-width: 901px) {
+  .v2 main > .ce-salon .ce-hand { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.6rem; align-items: start; padding-inline: 1.75rem; }
+  .v2 main > .ce-salon .ce-hcard { transform-origin: 50% 100%; }
+  .v2 main > .ce-salon .ce-hcard:nth-child(1) { rotate: -2.2deg; --ty: 2.4rem; }
+  .v2 main > .ce-salon .ce-hcard:nth-child(2) { rotate: 0deg; z-index: 1; }
+  .v2 main > .ce-salon .ce-hcard:nth-child(3) { rotate: 2.2deg; --ty: 2.4rem; }
+}
+
+/* ── why: a spread laid out on the table (four over three) ── */
+.v2 main > .ce-salon .ce-spread { display: grid; gap: var(--space-3); margin-top: var(--space-4); }
+.v2 main > .ce-salon .ce-scard { padding: 2.4rem 1.8rem 2rem; border-top: 0; }
+.v2 main > .ce-salon .ce-scard .ce-why__suit { left: auto; right: 1.35rem; top: 1.2rem; font-size: 1.9rem; }
+.v2 main > .ce-salon .ce-scard .ce-why__title { font-size: 1.3rem; line-height: 1.2; padding-right: 2rem; margin-bottom: 0.6rem; }
+.v2 main > .ce-salon .ce-scard:nth-child(odd) { rotate: -0.8deg; }
+.v2 main > .ce-salon .ce-scard:nth-child(even) { rotate: 0.8deg; }
+@media (min-width: 901px) {
+  .v2 main > .ce-salon .ce-spread { display: flex; flex-wrap: wrap; justify-content: center; gap: 2rem 1.5rem; max-width: 68rem; margin-inline: auto; }
+  .v2 main > .ce-salon .ce-scard { width: calc((100% - 4.5rem) / 4); min-height: 15.5rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(1) { rotate: -3deg; --ty: 0.9rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(2) { rotate: 1.5deg; --ty: -0.3rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(3) { rotate: -1deg; --ty: 0.5rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(4) { rotate: 2.6deg; --ty: 1.1rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(5) { rotate: 2deg; --ty: -0.2rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(6) { rotate: -1.6deg; --ty: 0.7rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(7) { rotate: 1deg; --ty: 0rem; }
+}
+
+/* ── steps: a dealt row, each card turned face up; the backs carry the page's gold lattice ── */
+.v2 main > .ce-salon .ce-steps__list { position: relative; gap: var(--space-4); }
+.v2 main > .ce-salon .ce-step { padding: 2.6rem 2rem 2.4rem; }
+.v2 main > .ce-salon .ce-step__num { font-size: 5.5rem; font-style: normal; font-weight: 600; margin-bottom: var(--space-1); }
+.v2 main > .ce-salon .ce-step .card-back {
+  border-radius: 1rem;
+  background:
+    repeating-linear-gradient(60deg, transparent 0 9px, rgb(222 190 120 / 0.55) 9px 10px),
+    repeating-linear-gradient(-60deg, transparent 0 9px, rgb(222 190 120 / 0.55) 9px 10px),
+    #6d0d1c;
+  box-shadow: inset 0 0 0 0.55rem #fffdf7, inset 0 0 0 calc(0.55rem + 1px) var(--gold), 0 0 0 1px rgb(20 18 16 / 0.1), var(--card-shadow);
+}
+.v2 main > .ce-salon .ce-step:nth-child(2) { rotate: 1.2deg; }
+.v2 main > .ce-salon .ce-step:nth-child(odd) { rotate: -1.2deg; }
+@media (min-width: 901px) {
+  /* the row is dealt along a fine gold line across the table */
+  .v2 main > .ce-salon .ce-steps__list::before {
+    content: ''; position: absolute; left: 4%; right: 4%; top: 50%; height: 5px; z-index: -1;
+    background: linear-gradient(var(--gold), var(--gold)) top / 100% 1px no-repeat, linear-gradient(var(--gold), var(--gold)) bottom / 100% 1px no-repeat;
+  }
+  .v2 main > .ce-salon .ce-steps__list { isolation: isolate; }
+  .v2 main > .ce-salon .ce-step:nth-child(1) { rotate: -2deg; --ty: 0.8rem; }
+  .v2 main > .ce-salon .ce-step:nth-child(2) { rotate: 1deg; --ty: -0.4rem; }
+  .v2 main > .ce-salon .ce-step:nth-child(3) { rotate: -1deg; --ty: 0.6rem; }
+}
+
+/* ── art-deco frame for key blocks (area panel, FAQ): gold hairline + stepped corners ── */
+.v2 main > .ce-salon .ce-deco {
+  position: relative; background: #fffdf7; border-radius: 0.2rem;
+  box-shadow: 0 0 0 1px rgb(176 138 62 / 0.7), 0 1px 1px rgb(60 44 14 / 0.06), 0 24px 44px -28px rgb(60 44 14 / 0.5);
+}
+.v2 main > .ce-salon .ce-deco::before {
+  content: ''; position: absolute; inset: 0.5rem; pointer-events: none;
+  border: 1px solid rgb(176 138 62 / 0.45);
+  background:
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44' fill='none' stroke='%23b08a3e' stroke-width='1.2'%3E%3Cpath d='M0 20V0h20'/%3E%3Cpath d='M6 30V6h24'/%3E%3Cpath d='M0 0l12 12'/%3E%3Cpath d='M12 12h6v6h-6z' fill='%23b08a3e'/%3E%3C/svg%3E") top left / 2.75rem no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44' fill='none' stroke='%23b08a3e' stroke-width='1.2'%3E%3Cg transform='matrix(-1 0 0 1 44 0)'%3E%3Cpath d='M0 20V0h20'/%3E%3Cpath d='M6 30V6h24'/%3E%3Cpath d='M0 0l12 12'/%3E%3Cpath d='M12 12h6v6h-6z' fill='%23b08a3e'/%3E%3C/g%3E%3C/svg%3E") top right / 2.75rem no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44' fill='none' stroke='%23b08a3e' stroke-width='1.2'%3E%3Cg transform='matrix(1 0 0 -1 0 44)'%3E%3Cpath d='M0 20V0h20'/%3E%3Cpath d='M6 30V6h24'/%3E%3Cpath d='M0 0l12 12'/%3E%3Cpath d='M12 12h6v6h-6z' fill='%23b08a3e'/%3E%3C/g%3E%3C/svg%3E") bottom left / 2.75rem no-repeat,
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 44 44' fill='none' stroke='%23b08a3e' stroke-width='1.2'%3E%3Cg transform='matrix(-1 0 0 -1 44 44)'%3E%3Cpath d='M0 20V0h20'/%3E%3Cpath d='M6 30V6h24'/%3E%3Cpath d='M0 0l12 12'/%3E%3Cpath d='M12 12h6v6h-6z' fill='%23b08a3e'/%3E%3C/g%3E%3C/svg%3E") bottom right / 2.75rem no-repeat;
+}
+
+/* ── area: the cities on a deco panel, the map as it is (no frame) ── */
+.v2 main > .ce-salon .ce-area__panel { padding: var(--space-4) var(--space-4) var(--space-3); }
+.v2 main > .ce-salon .ce-area__panel .ce-label:first-child { margin-top: 0; }
+.v2 main > .ce-salon .ce-area__map { padding: 0; }
+.v2 main > .ce-salon .ce-area__map img { display: block; width: 100%; height: auto; border-radius: 0.5rem; box-shadow: var(--card-shadow); }
+@media (max-width: 900px) { .v2 main > .ce-salon .ce-area__panel { padding: var(--space-4) var(--space-3) var(--space-3); } }
+
+/* ── FAQ: one deco-framed programme ── */
+.v2 main > .ce-salon .ce-faq__list { padding: var(--space-3) var(--space-5); }
+.v2 main > .ce-salon .ce-faq__item { border-bottom: 1px solid rgb(176 138 62 / 0.35); }
+.v2 main > .ce-salon .ce-faq__item:last-child { border-bottom: 0; }
+@media (max-width: 900px) { .v2 main > .ce-salon .ce-faq__list { padding: var(--space-2) var(--space-3); } }
+
+/* ── the stages: black, a gold edge, spotlights (StageLights soft) — reviews and finale only ── */
+.v2 main > .ce-stage {
+  position: relative;
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 100%, rgb(255 236 200 / 0.07), transparent 72%),
+    radial-gradient(ellipse 80% 50% at 50% 0%, rgb(255 236 200 / 0.05), transparent 70%),
+    #0f0d0c;
+  box-shadow: inset 0 1px 0 rgb(176 138 62 / 0.8), inset 0 5px 0 -4px rgb(176 138 62 / 0.45),
+    inset 0 -1px 0 rgb(176 138 62 / 0.8), inset 0 -5px 0 -4px rgb(176 138 62 / 0.45);
+}
+.v2 main > .ce-stage .rv { background: transparent; border-block: 0; }
+.v2 main > .ce-stage .rv__eyebrow { color: #d9b46a; }
+.v2 main > .ce-stage .rv__card { --sheet-line: rgb(176 138 62 / 0.75); }
+/* phones: the spread staggers left and right instead of lining up */
+@media (max-width: 900px) {
+  .v2 main > .ce-salon .ce-spread { gap: 1.1rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(odd) { margin-right: 0.6rem; }
+  .v2 main > .ce-salon .ce-scard:nth-child(even) { margin-left: 0.6rem; }
+}
