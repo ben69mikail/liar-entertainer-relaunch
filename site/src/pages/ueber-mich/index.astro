@@ -2,13 +2,14 @@
 import V2Layout from '../../layouts/V2Layout.astro';
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
-import SectionEdge from '../../components/v2/SectionEdge.astro';
-import Bunting from '../../components/v2/kids/Bunting.astro';
-import Squiggle from '../../components/v2/kids/Squiggle.astro';
+import K3Hero from '../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../components/v2/kids/ProgramFrame.astro';
+import Curtain from '../../components/v2/kids/Curtain.astro';
+import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import YouTubeFacade from '../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../data/site';
 import { Image } from 'astro:assets';
-import '../../styles/kids-kit.css';
+import '../../styles/kids-v3.css';
 
 import heroImg from '../../assets/images/ueber-mich/ueber-mich-hero.jpg';
 import clownImg from '../../assets/images/ueber-mich/ueber-mich-als-clown.jpg';
@@ -52,63 +53,55 @@ const personSchema = {
   structuredData={personSchema}
 >
   <!-- ── Hero: the person first. No reveal here (LCP). ── -->
-  <section class="kg-hero um-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.55}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <p class="um-crumbs">
-          <a href="/">Clown</a> »
-          <span>Über mich</span>
-        </p>
-        <h1 class="kg-hero__title um-hero__title" data-letters>Über mich</h1>
-        <h2 class="um-hero__sub">
-          🎭 Über mich –<br />Clown Zauberer LIAR aus Gladbeck
-        </h2>
-        <p class="um-hero__tag">15+ Jahre Magie, Lachen &amp; unvergessliche Momente</p>
-        <ReviewBadge />
-        <div class="kg-hero__actions um-hero__actions">
-          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
-          <a class="btn btn--ghost" href="/galerie/">Zur Foto- und Videogalerie</a>
-        </div>
-      </div>
-      <figure class="kg-hero__photo um-hero__photo">
-        <Image
-          src={heroImg}
-          alt="Über mich – Clown Zauberer LIAR aus Gladbeck"
-          widths={[400, 600, 820]}
-          sizes="(max-width: 900px) 92vw, 540px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 52% 20%"
-        />
-        <span class="kg-sticker um-sticker" aria-hidden="true"><span>seit</span><strong>2009</strong></span>
-      </figure>
+  <K3Hero>
+    <p class="k3-crumbs">
+      <a href="/">Clown</a> »
+      <span>Über mich</span>
+    </p>
+    <h1 class="k3-hero__title um-hero__title" data-letters>Über mich</h1>
+    <h2 class="k3-hero__sub">
+      🎭 Über mich –<br />Clown Zauberer LIAR aus Gladbeck
+    </h2>
+    <p class="k3-hero__claim">15+ Jahre Magie, Lachen &amp; unvergessliche Momente</p>
+    <ReviewBadge />
+    <div class="k3-hero__actions um-hero__actions">
+      <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
+      <a class="btn btn--ghost" href="/galerie/">Zur Foto- und Videogalerie</a>
     </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={heroImg}
+        alt="Über mich – Clown Zauberer LIAR aus Gladbeck"
+        widths={[400, 600, 820]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <span class="k3-medal" aria-hidden="true"><span>seit</span><strong>2009</strong></span>
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Über mich: Bild links, Text rechts ────────────────── -->
-  <section class="kg-intro um-bio">
-    <div class="container um-split">
-      <figure class="um-portrait um-portrait--left" data-reveal="pop">
-        <div class="um-portrait__frame" data-tilt>
-          <Image
-            src={clownImg}
-            alt="Über mich als Clown"
-            widths={[340, 426]}
-            sizes="(max-width: 900px) 80vw, 340px"
-            loading="lazy"
-          />
-        </div>
-      </figure>
-      <div class="um-bio__text" data-reveal>
-        <h2 class="kg-h2 um-h2--red">Über mich ?</h2>
-        <p class="um-facts">
+  <section class="um-bio">
+    <div class="container k3-split k3-split--flip">
+      <ProgramFrame class="k3-photo k3-photo--l" data-reveal>
+        <Image
+          src={clownImg}
+          alt="Über mich als Clown"
+          widths={[340, 426]}
+          sizes="(max-width: 900px) 80vw, 340px"
+          loading="lazy"
+        />
+      </ProgramFrame>
+      <div data-reveal data-reveal-delay="0.1">
+        <h2 class="k3-h2 um-h2--red">Über mich ?</h2>
+        <p class="k3-lead um-facts">
           <strong>Alter:</strong> 49 / <strong>Geburtsland:</strong> Frankreich
         </p>
         <div>
           <p class="um-label">Bildungsweg:</p>
-          <p>Abitur, Studium Naturwissenschaften und Erziehungswissenschaften, zusätzliche komplette Ausbildung zum Animateur mit Schauspiel, Tanz, Zauberei, Ballonmodellage, Schminken, Stand Up, Comedy, Sportaktivitäten, PR &amp; Management inklusive 3-jähriger Tätigkeit im Bereich Kinderanimation in Frankreich. Eindrücke meiner Arbeit finden Sie in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
+          <p class="k3-soft">Abitur, Studium Naturwissenschaften und Erziehungswissenschaften, zusätzliche komplette Ausbildung zum Animateur mit Schauspiel, Tanz, Zauberei, Ballonmodellage, Schminken, Stand Up, Comedy, Sportaktivitäten, PR &amp; Management inklusive 3-jähriger Tätigkeit im Bereich Kinderanimation in Frankreich. Eindrücke meiner Arbeit finden Sie in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
         </div>
       </div>
     </div>
@@ -118,51 +111,52 @@ const personSchema = {
 
   <!-- ── Nach dem Studium: Text links, Bild rechts ─────────── -->
   <section class="um-story">
-    <div class="container um-split um-split--story">
-      <div class="um-story__text">
-        <h2 class="kg-h2" data-reveal>Nach dem Studium</h2>
-        <div class="um-prose" data-reveal>
-          <p>
-            4 Jahre Animation in Europa (Spanien, Griechenland u.a.), 5 Jahre Floor Manager im alpincenter Bottrop (Längste Skihalle der Welt) mit Zuständigkeiten auch im Bereich PR, Sales, Vertrieb und Kinderanimation. Aktuelle Geschichten und Erlebnisse teile ich in meinem <a href="/blog/">Blog</a>.
-          </p>
-          <p>
-            Seit 2004 wohnhaft in Deutschland und <a href="/zauberer/">Zauberer</a> seit 2009. Seit Februar 2005 Jahren Vater eines Sohnes und seit März 2009 eines weiteren und mit Begeisterung zunehmend im Kinderbereich tätig:
-          </p>
-          <p>
-            Aus dieser Arbeit ist mein heutiger Schwerpunkt geworden: Ich bin in erster Linie <a href="/kinderzauberer/">Kinderzauberer</a> und stehe den größten Teil des Jahres auf <a href="/kindergeburtstag/">Kindergeburtstagen</a> in Gladbeck und dem übrigen Ruhrgebiet – alles andere, von der Firmenfeier bis zum Stadtfest, kam später dazu.
-          </p>
-        </div>
-        <!-- Datierte Timeline (SEO-Audit 06.08.2026, Massnahme M5.2): "Nach dem
-             Studium..." laesst sich von einem LLM nicht zu einer Vita verdichten.
-             Die Jahreszahlen sind aus dem bestehenden Fliesstext abgeleitet
-             ("4 Jahre Animation in Europa", "5 Jahre alpincenter", "seit 2004",
-             "seit 2009") — BITTE VON MICHAEL GEGENPRUEFEN. -->
-        <div class="um-cv" data-reveal="tilt">
-          <p class="um-cv__title">Michaël Prescler im Überblick</p>
-          <ul class="um-cv__list">
-            <li><strong>2000–2004</strong> Animation in Spanien, Griechenland und weiteren Ländern Europas</li>
-            <li><strong>seit 2004</strong> wohnhaft in Gladbeck, Nordrhein-Westfalen</li>
-            <li><strong>2004–2009</strong> Floor Manager im alpincenter Bottrop (längste Skihalle der Welt)</li>
-            <li><strong>seit 2009</strong> hauptberuflich Clown und Zauberer, rund 400 Shows pro Jahr</li>
-            <li><strong>Schwerpunkt</strong> Kinderzauberer für Kindergeburtstage, Kita- und Schulfeste</li>
-            <li><strong>Sprachen</strong> Deutsch und Französisch</li>
-            <li><strong>Nachweise</strong> erweitertes polizeiliches Führungszeugnis, Haftpflichtversicherung</li>
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-split um-story__grid">
+        <div class="um-story__text">
+          <h2 class="k3-h2" data-reveal>Nach dem Studium</h2>
+          <div class="k3-soft" data-reveal>
+            <p>
+              4 Jahre Animation in Europa (Spanien, Griechenland u.a.), 5 Jahre Floor Manager im alpincenter Bottrop (Längste Skihalle der Welt) mit Zuständigkeiten auch im Bereich PR, Sales, Vertrieb und Kinderanimation. Aktuelle Geschichten und Erlebnisse teile ich in meinem <a href="/blog/">Blog</a>.
+            </p>
+            <p>
+              Seit 2004 wohnhaft in Deutschland und <a href="/zauberer/">Zauberer</a> seit 2009. Seit Februar 2005 Jahren Vater eines Sohnes und seit März 2009 eines weiteren und mit Begeisterung zunehmend im Kinderbereich tätig:
+            </p>
+            <p>
+              Aus dieser Arbeit ist mein heutiger Schwerpunkt geworden: Ich bin in erster Linie <a href="/kinderzauberer/">Kinderzauberer</a> und stehe den größten Teil des Jahres auf <a href="/kindergeburtstag/">Kindergeburtstagen</a> in Gladbeck und dem übrigen Ruhrgebiet – alles andere, von der Firmenfeier bis zum Stadtfest, kam später dazu.
+            </p>
+          </div>
+          <!-- Datierte Timeline (SEO-Audit 06.08.2026, Massnahme M5.2): "Nach dem
+               Studium..." laesst sich von einem LLM nicht zu einer Vita verdichten.
+               Die Jahreszahlen sind aus dem bestehenden Fliesstext abgeleitet
+               ("4 Jahre Animation in Europa", "5 Jahre alpincenter", "seit 2004",
+               "seit 2009") — BITTE VON MICHAEL GEGENPRUEFEN. -->
+          <div class="k3-card um-cv" data-reveal>
+            <p class="um-cv__title">Michaël Prescler im Überblick</p>
+            <ul class="um-cv__list">
+              <li><strong>2000–2004</strong> Animation in Spanien, Griechenland und weiteren Ländern Europas</li>
+              <li><strong>seit 2004</strong> wohnhaft in Gladbeck, Nordrhein-Westfalen</li>
+              <li><strong>2004–2009</strong> Floor Manager im alpincenter Bottrop (längste Skihalle der Welt)</li>
+              <li><strong>seit 2009</strong> hauptberuflich Clown und Zauberer, rund 400 Shows pro Jahr</li>
+              <li><strong>Schwerpunkt</strong> Kinderzauberer für Kindergeburtstage, Kita- und Schulfeste</li>
+              <li><strong>Sprachen</strong> Deutsch und Französisch</li>
+              <li><strong>Nachweise</strong> erweitertes polizeiliches Führungszeugnis, Haftpflichtversicherung</li>
+            </ul>
+          </div>
+
+          <ul class="k3-ticks um-dash" data-reveal>
+            <li>
+              <span class="um-dash__mark">–</span>
+              <span>Mitentwicklung von pädagogischen Kinderbewegungsprogrammen (Motorik, Motopädie und Physiotherapie in Prävention) und damit in Kleinkind (Krabbel-)Gruppen und <a href="/zauberer/zaubershow/kindergarten-kita/">Kindergärten</a> unterwegs.</span>
+            </li>
+            <li>
+              <span class="um-dash__mark">–</span>
+              <span>Ballonmodellage, Kinderschminken, Animation, Zauberei in Kindergärten, bei allen möglichen Feierlichkeiten</span>
+            </li>
           </ul>
         </div>
-
-        <ul class="um-dash" data-reveal>
-          <li>
-            <span class="um-dash__mark">–</span>
-            <span>Mitentwicklung von pädagogischen Kinderbewegungsprogrammen (Motorik, Motopädie und Physiotherapie in Prävention) und damit in Kleinkind (Krabbel-)Gruppen und <a href="/zauberer/zaubershow/kindergarten-kita/">Kindergärten</a> unterwegs.</span>
-          </li>
-          <li>
-            <span class="um-dash__mark">–</span>
-            <span>Ballonmodellage, Kinderschminken, Animation, Zauberei in Kindergärten, bei allen möglichen Feierlichkeiten</span>
-          </li>
-        </ul>
-      </div>
-      <figure class="um-portrait um-portrait--right" data-reveal="pop">
-        <div class="um-portrait__frame" data-tilt>
+        <ProgramFrame class="k3-photo um-story__photo" data-reveal data-reveal-delay="0.1">
           <Image
             src={clownZaubererImg}
             alt="Über mich als Clown Zauberer"
@@ -170,44 +164,44 @@ const personSchema = {
             sizes="(max-width: 900px) 80vw, 380px"
             loading="lazy"
           />
-        </div>
-      </figure>
+        </ProgramFrame>
+      </div>
     </div>
   </section>
 
   <!-- ── Vertrauen & Qualität (E-E-A-T) ────────────────────── -->
-  <section class="um-trust">
+  <section class="k3-alt um-trust">
     <div class="container">
-      <Squiggle color="var(--brand-blue)" />
-      <h2 class="kg-h2 kg-center" data-reveal>Warum Sie mir vertrauen können</h2>
-      <p class="kg-sub kg-center um-trust__sub">Echte Person, echte Erfahrung, echte Bewertungen</p>
-      <div class="kg-cards um-trust__grid">
-        <article class="kg-card kg-card--red" data-reveal="pop">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Warum Sie mir vertrauen können</h2>
+      <p class="k3-sub k3-center">Echte Person, echte Erfahrung, echte Bewertungen</p>
+      <div class="k3-grid k3-grid--3 um-trust__grid">
+        <article class="k3-card" data-reveal>
           <p class="um-icon">🗓️</p>
           <h3>Seit 2009 im Einsatz</h3>
           <p class="um-card__text">Über 15 Jahre als professioneller Clown und Zauberer – mit rund 400 Auftritten pro Jahr und über 6.000 Shows insgesamt.</p>
         </article>
-        <article class="kg-card kg-card--blue" data-reveal="pop" data-reveal-delay="0.08">
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
           <p class="um-icon">⭐</p>
           <h3>370+ Bewertungen mit 5,0</h3>
           <p class="um-card__text">370+ Familien und Veranstalter haben mich mit der Bestnote bewertet. Lesen Sie echte Stimmen in meinen <a href="/#bewertungen">Google-Bewertungen</a>.</p>
         </article>
-        <article class="kg-card kg-card--yellow" data-reveal="pop" data-reveal-delay="0.16">
+        <article class="k3-card" data-reveal data-reveal-delay="0.16">
           <p class="um-icon">🛡️</p>
           <h3>Erweitertes Führungszeugnis</h3>
           <p class="um-card__text">Für die Arbeit mit Kindern liegt ein erweitertes Führungszeugnis vor – Sicherheit und Vertrauen für Eltern, Kitas und Schulen.</p>
         </article>
-        <article class="kg-card kg-card--red" data-reveal="pop">
+        <article class="k3-card" data-reveal>
           <p class="um-icon">👤</p>
           <h3>Klarname &amp; echte Fotos</h3>
           <p class="um-card__text">Kein anonymes Künstlerprofil: Sie buchen Michaël Prescler persönlich. Alle Fotos und Videos zeigen echte Auftritte – nachzusehen in meiner <a href="/galerie/">Galerie</a>.</p>
         </article>
-        <article class="kg-card kg-card--blue" data-reveal="pop" data-reveal-delay="0.08">
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
           <p class="um-icon">🎓</p>
           <h3>Vollständige Ausbildung</h3>
           <p class="um-card__text">Studium sowie eine komplette Animateur-Ausbildung mit Schauspiel, Tanz, Zauberei, Ballonmodellage und Comedy – Entertainment auf professionellem Niveau.</p>
         </article>
-        <article class="kg-card kg-card--yellow" data-reveal="pop" data-reveal-delay="0.16">
+        <article class="k3-card" data-reveal data-reveal-delay="0.16">
           <p class="um-icon">🇫🇷</p>
           <h3>Deutsch &amp; Französisch</h3>
           <p class="um-card__text">Als gebürtiger Franzose unterhalte ich auch internationale Gäste zweisprachig – ein besonderes Extra für Hochzeiten und Firmenevents.</p>
@@ -216,13 +210,12 @@ const personSchema = {
     </div>
   </section>
 
-  <!-- ── Was kann man bei mir buchen? (blue band, programme bill) ── -->
-  <section class="kg-band kg-band--blue um-book">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
-    <div class="container">
-      <h2 class="kg-h2">Was kann man bei mir buchen?</h2>
-      <div class="um-bill" data-reveal="pop">
+  <!-- ── Was kann man bei mir buchen? (the ring: red velvet, programme bill) ── -->
+  <section class="k3-band k3-band--velvet um-book">
+    <div class="container k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Was kann man bei mir buchen?</h2>
+      <div class="k3-card um-bill" data-reveal>
         <div class="um-bill__row">
           <h3>🎩 Zaubershow</h3>
           <p>Eine interaktive Zaubershow voller Staunen und Lachen, bei der das Geburtstagskind immer im Mittelpunkt steht.</p>
@@ -243,18 +236,22 @@ const personSchema = {
     </div>
   </section>
 
-  <!-- ── Video ─────────────────────────────────────────────── -->
-  <section class="um-video">
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2" data-reveal>Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal="pop">
+  <!-- ── Video: premiere searchlights + the stage curtain ── -->
+  <section class="k3-band k3-band--night k3-premiere">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2" data-reveal>Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade
           id="Cop0SqRIX4Y"
           title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
           label="Zaubershow ansehen"
         />
       </div>
-      <h3 class="kg-h3">
+      <h3 class="k3-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
       <a href="/galerie/" class="btn btn--primary">
@@ -264,31 +261,31 @@ const personSchema = {
   </section>
 
   <!-- ── Wo findet man mich? ───────────────────────────────── -->
-  <section class="kg-area um-area">
+  <section class="k3-area">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>📍 Regional und deutschlandweit – Wo findet man mich?</h2>
-      <div class="kg-area__grid">
-        <div class="kg-area__text" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>📍 Regional und deutschlandweit – Wo findet man mich?</h2>
+      <div class="k3-area__grid">
+        <div data-reveal>
           <p>Ich wohne in Gladbeck und bin in folgende Städte buchbar:</p>
-          <p class="kg-cities">
+          <p class="k3-cities">
             Oberhausen, Gelsenkirchen, Essen, Duisburg, Dorsten, Herten, Herne, Marl, Gladbeck, Mülheim, Düsseldorf, Dortmund, Lünen, Hagen, Moers, Krefeld, Reken, Ahaus, Münster, Köln…
           </p>
           <p class="um-world">
             🌍 Jedoch kann man mich auch überregional und international (Frankreich, Belgien, Österreich, Schweiz) buchen!
           </p>
-          <div class="um-reach">
+          <div class="k3-panel um-reach">
             <p>📱 TEL: <a href={CONTACT.phoneHref}>0172 – 1517578</a></p>
             <p>✉️ Email: <a href={`mailto:${CONTACT.email}`}>{CONTACT.email}</a></p>
             <p>📍 Anschrift: Beethovenstr. 15, 45966 Gladbeck</p>
           </div>
         </div>
-        <figure class="kg-area__map" data-reveal="pop">
+        <figure class="k3-area__map" data-reveal>
           <Image
             src={karteImg}
             alt="Wohnort Clown Zauberer LIAR"
-            data-scroll-tilt="2"
             widths={[400, 600, 749]}
-            sizes="(max-width: 900px) 92vw, 480px"
+            sizes="(max-width: 900px) 86vw, 460px"
             loading="lazy"
           />
         </figure>
@@ -297,11 +294,11 @@ const personSchema = {
   </section>
 
   <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="um-cta">
-    <Bunting />
-    <div class="container kg-narrow kg-center" data-reveal>
-      <h2 class="kg-h2">📞 Einfach Kontakt aufnehmen</h2>
-      <p class="um-cta__text">
+  <section class="k3-contact um-cta">
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">📞 Einfach Kontakt aufnehmen</h2>
+      <p class="k3-soft um-cta__text">
         Sie können mir Ihre Anfrage als Clown unverbindlich senden. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Werfen Sie auch einen Blick in meine <a href="/galerie/">Foto- und Videogalerie</a> oder lesen Sie aktuelle Geschichten in meinem <a href="/blog/">Blog</a>.
       </p>
       <a href="/kontakt/" class="btn btn--primary" data-confetti>
@@ -313,115 +310,72 @@ const personSchema = {
 
 <style>
   /* ── hero ── */
-  .um-crumbs { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 var(--space-2); }
-  .um-crumbs a { color: inherit; text-decoration: none; }
-  .um-hero__title { font-size: clamp(3rem, 8vw, 5.6rem); line-height: 0.95; color: var(--accent-strong); margin-bottom: var(--space-2); }
-  .um-hero__sub { font-size: clamp(1.3rem, 2.6vw, 1.75rem); font-weight: 650; margin: 0 0 var(--space-2); }
-  .um-hero__tag {
-    display: inline-block; padding: 0.3rem 0.9rem; margin-bottom: var(--space-3);
-    font-family: var(--font-display); font-weight: 650; font-size: 1.05rem;
-    background: var(--brand-yellow); color: var(--ink); border: 2.5px solid var(--line); border-radius: 0.6rem; rotate: -2deg;
-  }
+  .um-hero__title { font-size: clamp(3rem, 8vw, 5.4rem); line-height: 0.98; margin-bottom: var(--space-2); }
   .um-hero__actions { margin-top: var(--space-3); }
-  .um-hero__photo :global(img) { aspect-ratio: 4 / 3.6; }
-  .um-sticker span { font-size: 0.95rem; }
-  .um-sticker strong { font-size: 1.55rem; }
-
-  /* ── shared split + portraits ── */
-  .um-split { display: grid; gap: var(--space-5); align-items: center; }
-  @media (min-width: 901px) {
-    .um-split { grid-template-columns: 0.85fr 1.15fr; }
-    .um-split--story { grid-template-columns: 1.3fr 0.9fr; align-items: start; }
-  }
-  .um-portrait { margin: 0; justify-self: center; width: min(100%, 22rem); }
-  .um-portrait--left { rotate: -2.5deg; }
-  .um-portrait--right { rotate: 2deg; }
-  .um-portrait__frame {
-    padding: 0.7rem 0.7rem 2.6rem; background: var(--surface);
-    border: var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow-hover);
-    transition: transform 0.3s var(--ease-out);
-  }
-  .um-portrait :global(img) { display: block; width: 100%; height: auto; border-radius: calc(var(--radius-sm) - 0.3rem); border: 2px solid var(--line); }
-  @media (max-width: 900px) {
-    /* story: photo above the text on phones, like the legacy order */
-    .um-portrait--right { order: -1; }
-  }
 
   /* ── bio ── */
   .um-h2--red { color: var(--accent-strong); }
-  .um-facts { font-size: 1.15rem; }
-  .um-facts strong { font-family: var(--font-display); font-weight: 650; }
-  .um-label { font-weight: 900; margin-bottom: 0.3rem; }
-  .um-bio__text p:not(.um-facts):not(.um-label) { color: var(--ink-soft); }
+  .um-facts strong { font-family: var(--font-display); font-weight: 600; }
+  .um-label { font-weight: 900; margin-bottom: 0.3rem !important; }
 
   /* ── story ── */
-  .um-story { background: var(--bg); }
-  .um-prose p { color: var(--ink-soft); }
-  .um-cv {
-    margin: var(--space-4) 0; padding: var(--space-3);
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: -0.8deg;
+  .um-story__grid { align-items: start; }
+  .um-story__photo { rotate: 1.5deg; }
+  @media (max-width: 900px) {
+    /* story: photo above the text on phones, like the legacy order */
+    .um-story__photo { order: -1; }
   }
-  .um-cv__title { font-family: var(--font-display); font-weight: 650; font-size: 1.35rem; }
+  .um-cv { margin: var(--space-4) 0; text-align: left; }
+  .um-cv:hover { transform: none; }
+  .um-cv__title { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; text-align: center; color: var(--ink) !important; }
   .um-cv__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
-  .um-cv__list li { line-height: 1.5; }
+  .um-cv__list li { line-height: 1.5; padding-bottom: 0.7rem; border-bottom: 1px solid rgba(184, 134, 47, 0.25); }
+  .um-cv__list li:last-child { border-bottom: 0; padding-bottom: 0; }
   .um-cv__list strong {
-    display: inline-block; margin-right: 0.35rem; padding: 0.05rem 0.65rem;
-    font-family: var(--font-display); font-weight: 650; font-size: 0.95rem; white-space: nowrap;
-    background: var(--brand-yellow); border: 2px solid var(--line); border-radius: 999px;
+    display: inline-block; margin-right: 0.35rem; padding: 0.05rem 0.7rem;
+    font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; white-space: nowrap; color: var(--velvet);
+    border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.6);
   }
-  .um-cv__list li:nth-child(n + 5) strong { background: var(--bg-alt); }
   @media (min-width: 901px) {
     .um-cv__list li { display: grid; grid-template-columns: 8.5rem 1fr; align-items: baseline; }
     .um-cv__list strong { justify-self: start; }
   }
-  .um-dash { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
-  .um-dash li { display: flex; gap: 0.6rem; color: var(--ink-soft); }
-  .um-dash__mark { color: var(--accent-strong); font-weight: 900; }
+  .um-dash li { color: var(--ink-soft); }
+  .um-dash .um-dash__mark { color: var(--velvet); }
 
   /* ── trust ── */
-  .um-trust { background: var(--surface); border-top: var(--border); }
-  .um-trust__sub { margin-top: 0; }
-  .um-trust__grid { margin-top: var(--space-4); }
-  .um-icon { font-size: 2.1rem; line-height: 1; margin-bottom: var(--space-1); }
-  .um-card__text { color: var(--ink-soft); margin: 0; font-size: 0.98rem; }
+  .um-icon { font-size: 2.1rem; line-height: 1; margin-bottom: var(--space-1) !important; text-align: center; }
+  .um-card__text { margin: 0 !important; font-size: 0.98rem; text-align: center; }
 
-  /* ── booking bill (blue band) ── */
-  .um-bill {
-    max-width: 50rem; margin: var(--space-4) auto var(--space-3); padding: 0.4rem var(--space-3); text-align: left;
-    background: var(--surface); color: var(--ink); border: var(--border); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line); rotate: -0.6deg;
-  }
-  .um-bill__row { padding: var(--space-3) 0; border-bottom: 2px dashed color-mix(in srgb, var(--line) 30%, transparent); }
+  /* ── booking bill (velvet ring) ── */
+  .um-bill { max-width: 50rem; margin: var(--space-4) auto var(--space-3); padding-block: var(--space-3); text-align: left; }
+  .um-bill:hover { transform: none; }
+  .um-bill__row { padding: var(--space-3) var(--space-2); border-bottom: 1px solid rgba(184, 134, 47, 0.3); }
   .um-bill__row:last-child { border-bottom: 0; }
-  .um-bill__row h3 { font-size: 1.5rem; margin: 0 0 0.4rem; }
+  .k3-card .um-bill__row h3 { font-size: 1.45rem; margin: 0 0 0.4rem; text-align: left; }
   .um-bill__row p { color: var(--ink-soft); }
   .um-book .um-bill__link {
     display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.3rem 1rem;
-    font-weight: 800; color: var(--ink); text-decoration: none;
-    background: var(--bg); border: 2px solid var(--line); border-radius: 999px; box-shadow: 3px 3px 0 var(--line);
-    transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+    font-weight: 800; color: var(--ink); text-decoration: none; white-space: nowrap;
+    background: var(--bg); border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.7);
+    transition: transform 0.25s var(--ease-out), background-color 0.2s ease;
   }
   @media (min-width: 901px) {
-    .um-bill__row { display: grid; grid-template-columns: 15rem 1fr auto; gap: 0.5rem var(--space-3); align-items: center; }
-    .um-bill__row h3, .um-bill__row p { margin: 0; }
+    .um-bill__row { display: grid; grid-template-columns: 14rem 1fr; gap: 0.6rem var(--space-3); align-items: center; }
+    .um-book .um-bill__link { grid-column: 2; justify-self: start; }
+    .k3-card .um-bill__row h3, .um-bill__row p { margin: 0; }
   }
 
-  /* ── video ── */
-  .um-video { background: var(--bg); }
-
   /* ── area ── */
-  .um-area { background: var(--surface); border-top: var(--border); }
   .um-world { font-weight: 700; }
-  .um-reach { margin-top: var(--space-3); padding: var(--space-3); background: var(--bg); border: var(--border); border-radius: var(--radius); box-shadow: 4px 4px 0 var(--line); rotate: -0.8deg; }
+  .um-reach { margin-top: var(--space-3); }
   .um-reach p { margin-bottom: 0.4rem; font-weight: 700; color: var(--ink); }
 
   /* ── cta ── */
-  .um-cta { background: var(--bg); border-top: var(--border); padding-top: 0; }
-  .um-cta__text { color: var(--ink-soft); font-size: 1.05rem; }
+  .um-cta { padding-block: var(--space-5) !important; }
+  .um-cta__text { font-size: 1.05rem; }
 
   @media (hover: hover) and (pointer: fine) {
-    .um-book .um-bill__link:hover { transform: translate(-2px, -2px); box-shadow: 5px 5px 0 var(--line); }
-  }
-  @media (max-width: 900px) {
-    .um-cv, .um-bill, .um-reach { rotate: 0deg; }
+    .um-book .um-bill__link:hover { transform: translateY(-2px); background: var(--surface); }
   }
 </style>

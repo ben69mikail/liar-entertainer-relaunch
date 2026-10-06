@@ -1,6 +1,7 @@
 /**
- * Card thumbnails for the blog teaser lists: 720×432 WebP crops of the blog covers (written by the
- * n8n automation into public/blog-images/) and of the fallback photos. Runs in `prebuild`, so new
+ * Card thumbnails for the blog teaser lists: WebP versions of the blog covers (written by the
+ * n8n automation into public/blog-images/) and of the fallback photos, scaled to fit 720×432 and
+ * never cropped (kids v3, 2026-10-06). Runs in `prebuild`, so new
  * automated posts get thumbnails on the next Netlify build without touching the automation.
  * Output: public/card-thumbs/<path with "/" → "__">.webp  (see src/utils/cardThumb.ts)
  */
@@ -30,8 +31,8 @@ for (const src of SOURCES) {
     const rel = relative(PUBLIC, file).split(sep).join('/');
     const out = join(OUT, rel.replace(/\.[^.]+$/, '').replaceAll('/', '__') + '.webp');
     if (existsSync(out) && statSync(out).mtimeMs >= statSync(file).mtimeMs) continue;
-    // cropped like the card (5:3, top), so a portrait cover does not ship 4x the pixels the card shows
-    await sharp(file).resize(720, 432, { fit: 'cover', position: 'top', withoutEnlargement: true }).webp({ quality: 72 }).toFile(out);
+    // whole cover, scaled to fit the card's 5:3 stage window (never cropped; user 2026-10-06)
+    await sharp(file).resize(720, 432, { fit: 'inside', withoutEnlargement: true }).webp({ quality: 72 }).toFile(out);
     made++;
   }
 }

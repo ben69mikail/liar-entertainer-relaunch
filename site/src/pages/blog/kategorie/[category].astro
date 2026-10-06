@@ -1,8 +1,10 @@
 ---
 import V2Layout from '../../../layouts/V2Layout.astro';
 import BlogCards from '../../../components/v2/BlogCards.astro';
+import K3Hero from '../../../components/v2/kids/K3Hero.astro';
+import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
 import { getAllBlogPosts, getAllCategories, catToSlug } from '../../../utils/allPosts';
-import '../../../styles/kids-kit.css';
+import '../../../styles/kids-v3.css';
 
 export async function getStaticPaths() {
   const cats = await getAllCategories();
@@ -68,54 +70,46 @@ const intro = CATEGORY_INTROS[canonicalSlug] ?? null;
   canonical={`https://liar-entertainer.com/blog/kategorie/${canonicalSlug}/`}
   noindex={isThin}
 >
-  <!-- ── Hero: crumbs, title, count, intro. No reveal (LCP). ── -->
-  <section class="kg-hero bk-hero">
-    <div class="container bk-hero__inner">
+  <!-- ── Hero: the big-top stage (K3Hero), crumbs, title, count, intro. No reveal (LCP). ── -->
+  <K3Hero>
+    <div class="k3-hero-center">
       <nav class="bk-crumbs" aria-label="Brotkrumen">
-        <a href="/blog/">← Blog</a>
+        <a class="k3-chip" href="/blog/">← Blog</a>
         <span class="bk-crumbs__sep">/</span>
         <span>{categoryName}</span>
       </nav>
 
-      <h1 class="bk-hero__title">{categoryName}</h1>
+      <h1 class="k3-hero__title bk-hero__title">{categoryName}</h1>
       <p class="bk-hero__count">
         {posts.length} {posts.length === 1 ? 'Artikel' : 'Artikel'} in dieser Kategorie
       </p>
 
-      {intro && <p class="bk-hero__intro" set:html={intro} />}
+      {intro && <p class="k3-hero__text bk-hero__intro" set:html={intro} />}
     </div>
-  </section>
+  </K3Hero>
 
   <section class="bk-list">
     <div class="container">
+      <GoldDivider />
       <BlogCards posts={posts} featureFirst={posts.length >= 3} eager={1} />
     </div>
   </section>
 </V2Layout>
 
 <style>
-  .bk-hero { padding-block: var(--space-4); text-align: center; }
-  .bk-hero__inner { max-width: 50rem; }
   .bk-crumbs {
-    display: inline-flex; flex-wrap: wrap; gap: 0.5rem; align-items: center;
-    font-size: 0.92rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2);
+    display: inline-flex; flex-wrap: wrap; gap: 0.5rem; align-items: center; justify-content: center;
+    font-size: 0.92rem; font-weight: 700; color: #eadcc6; margin-bottom: var(--space-2);
   }
-  .bk-crumbs a {
-    display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0 0.9rem; border-radius: 999px;
-    color: var(--ink); text-decoration: none; background: var(--surface); border: var(--border); box-shadow: 2px 2px 0 var(--line);
-    transition: transform 0.25s var(--ease-out-expo);
-  }
-  @media (hover: hover) and (pointer: fine) { .bk-crumbs a:hover { transform: translateX(-3px) rotate(-2deg); } }
   .bk-crumbs__sep { opacity: 0.6; }
-  .bk-hero__title {
-    font-size: clamp(2.6rem, 8vw, 5rem); line-height: 1; margin: 0 0 var(--space-2);
-    color: var(--accent-strong); overflow-wrap: anywhere; text-wrap: balance;
-  }
+  .bk-hero__title { overflow-wrap: anywhere; text-wrap: balance; margin-top: 0; }
+  /* the count as a little velvet ticket with a gold rule */
   .bk-hero__count {
-    display: inline-block; padding: 0.3rem 0.9rem; rotate: -1.5deg;
-    font-family: var(--font-display); font-weight: 650;
-    background: var(--brand-yellow); color: var(--ink); border: var(--border); border-radius: 0.6rem;
+    display: inline-block; padding: 0.35rem 1rem; margin: 0;
+    font-family: var(--font-display); font-weight: 600; color: #ffe3a3;
+    background: linear-gradient(180deg, #a8192a, var(--velvet)); border-radius: 0.5rem;
+    box-shadow: 0 0 0 1px #e9c877, 0 0 0 4px rgba(142, 21, 32, 0.9), 0 0 0 5px rgba(233, 200, 119, 0.5);
   }
-  .bk-hero__intro { max-width: 42rem; margin: var(--space-3) auto 0; text-align: left; font-size: 1.08rem; line-height: 1.7; color: var(--ink-soft); }
-  .bk-list { background: var(--bg); padding-top: var(--space-4); }
+  .bk-hero__intro { max-width: 42rem; margin: var(--space-4) auto 0 !important; text-align: left; line-height: 1.7; }
+  .bk-list { background: var(--bg); padding-top: var(--space-5); }
 </style>

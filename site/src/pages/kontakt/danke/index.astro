@@ -1,8 +1,9 @@
 ---
 import V2Layout from '../../../layouts/V2Layout.astro';
-import Bunting from '../../../components/v2/kids/Bunting.astro';
+import K3Hero from '../../../components/v2/kids/K3Hero.astro';
+import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
 import { CONTACT } from '../../../data/site';
-import '../../../styles/kids-kit.css';
+import '../../../styles/kids-v3.css';
 ---
 
 <V2Layout
@@ -10,43 +11,46 @@ import '../../../styles/kids-kit.css';
   description="Ihre Anfrage wurde erfolgreich gesendet. Wir melden uns innerhalb von 24 Stunden bei Ihnen!"
   noindex={true}
 >
-  <!-- One celebratory card. Text is visible from the first paint (no reveal: it is the LCP). -->
-  <section class="kg-hero kd">
-    <Bunting />
-    <div class="container kd__wrap">
-      <!-- Erfolgs-Icon: stamped on like a ticket check -->
+  <!-- The big-top stage takes a bow. Text is visible from the first paint (no reveal: it is the LCP). -->
+  <K3Hero>
+    <div class="k3-hero-center">
+      <!-- Erfolgs-Icon: a velvet medallion with a gold ring, the tick draws itself in -->
       <div class="kd__check" aria-hidden="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.6" d="M5 13l4 4L19 7"></path>
         </svg>
       </div>
-
-      <h1 class="kd__title" data-letters>Vielen Dank für Ihre Anfrage!</h1>
-      <p class="kd__lead">
+      <h1 class="k3-hero__title" data-letters>Vielen Dank für Ihre Anfrage!</h1>
+      <p class="k3-hero__sub kd__lead">
         Ihre Nachricht wurde erfolgreich gesendet. Ich melde mich innerhalb von <strong>24 Stunden</strong> bei Ihnen zurück.
       </p>
+    </div>
+  </K3Hero>
 
-      <!-- Was passiert als nächstes -->
-      <div class="kd__next">
-        <h2 class="kd__h2">Was passiert jetzt?</h2>
-        <ul class="kd__steps">
+  <!-- Was passiert als nächstes: one circus-programme card -->
+  <section class="kd-next">
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-card kd__card" data-reveal>
+        <h2 class="k3-h3 kd__h2">Was passiert jetzt?</h2>
+        <ol class="k3-steps">
           <li>
-            <span class="kd__num">1.</span>
+            <span class="k3-steps__num">1.</span>
             <span>Ich prüfe Ihre Anfrage persönlich</span>
           </li>
           <li>
-            <span class="kd__num kd__num--blue">2.</span>
+            <span class="k3-steps__num">2.</span>
             <span>Sie erhalten innerhalb von 24h eine Antwort per E-Mail</span>
           </li>
           <li>
-            <span class="kd__num kd__num--yellow">3.</span>
+            <span class="k3-steps__num">3.</span>
             <span>Bei dringenden Fragen erreichen Sie mich unter <a href={CONTACT.phoneHref}>+49 172 1517578</a></span>
           </li>
-        </ul>
+        </ol>
       </div>
 
       <!-- Zurück-Links -->
-      <div class="kd__actions">
+      <div class="k3-hero__actions k3-actions--center kd__actions">
         <a href="/" class="btn btn--primary" data-confetti>
           Zur Startseite
         </a>
@@ -59,40 +63,23 @@ import '../../../styles/kids-kit.css';
 </V2Layout>
 
 <style>
-  .kd { padding-bottom: var(--space-6); }
-  .kd__wrap { max-width: 44rem; text-align: center; padding-top: var(--space-4); }
   .kd__check {
-    display: grid; place-items: center; width: 5.5rem; height: 5.5rem; margin: 0 auto var(--space-3);
-    border-radius: 50%; background: var(--brand-yellow); color: var(--ink);
-    border: var(--border); box-shadow: var(--shadow); rotate: -8deg;
+    display: grid; place-items: center; width: 5.2rem; height: 5.2rem; margin: 0 auto var(--space-2);
+    border-radius: 50%; color: #ffe3a3;
+    background: radial-gradient(circle at 35% 30%, #c3283a, var(--velvet) 72%);
+    box-shadow: 0 0 0 2px #e9c877, 0 0 0 5px rgba(142, 21, 32, 0.9), 0 0 0 6px rgba(233, 200, 119, 0.6), 0 14px 28px -10px rgba(0, 0, 0, 0.6);
     animation: kd-stamp 0.55s var(--ease-out) 0.2s backwards;
   }
-  .kd__check svg { width: 2.8rem; height: 2.8rem; }
+  .kd__check svg { width: 2.6rem; height: 2.6rem; }
   .kd__check path { stroke-dasharray: 24; animation: kd-draw 0.5s var(--ease-out) 0.6s backwards; }
-  @keyframes kd-stamp { from { transform: scale(1.6); opacity: 0; } 60% { opacity: 1; } }
+  @keyframes kd-stamp { from { transform: scale(1.4); opacity: 0; } 60% { opacity: 1; } }
   @keyframes kd-draw { from { stroke-dashoffset: 24; } }
+  @media (prefers-reduced-motion: reduce) { .kd__check, .kd__check path { animation: none; } }
 
-  .kd__title { font-size: clamp(2.1rem, 5vw, 3.4rem); font-weight: 700; margin-bottom: var(--space-2); }
-  .kd__lead { font-size: 1.2rem; color: var(--ink-soft); max-width: 36rem; margin-inline: auto; }
-  .kd__lead strong { color: var(--accent-strong); }
+  .kd__lead { max-width: 36rem; margin-inline: auto; }
+  .kd__lead strong { color: #ffe3a3; }
 
-  .kd__next {
-    margin: var(--space-4) auto var(--space-4); max-width: 32rem; text-align: left;
-    padding: var(--space-3); background: var(--surface);
-    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: -1deg;
-  }
-  .kd__h2 { font-size: 1.5rem; margin-bottom: var(--space-2); }
-  .kd__steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; font-weight: 600; }
-  .kd__steps li { display: flex; gap: 0.8rem; align-items: flex-start; }
-  .kd__num {
-    flex: none; display: grid; place-items: center; width: 2.2rem; height: 2.2rem;
-    font-family: var(--font-display); font-weight: 700; line-height: 1;
-    background: var(--brand-red-strong); color: #fff; border: 2px solid var(--line); border-radius: 50%;
-  }
-  .kd__num--blue { background: var(--brand-blue); }
-  .kd__num--yellow { background: var(--brand-yellow); color: var(--ink); }
-  .kd__steps a { font-weight: 800; white-space: nowrap; }
-
-  .kd__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
-  @media (max-width: 900px) { .kd__next { rotate: 0deg; } }
+  .kd__card { max-width: 32rem; margin: 0 auto var(--space-4); }
+  .kd__h2 { margin-top: 0; text-align: center; }
+  .kd__actions { margin-top: var(--space-2); }
 </style>

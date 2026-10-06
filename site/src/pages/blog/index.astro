@@ -2,8 +2,10 @@
 import V2Layout from '../../layouts/V2Layout.astro';
 import Reviews from '../../components/v2/Reviews.astro';
 import BlogCards from '../../components/v2/BlogCards.astro';
+import K3Hero from '../../components/v2/kids/K3Hero.astro';
+import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import { getAllBlogPosts, getAllCategories } from '../../utils/allPosts';
-import '../../styles/kids-kit.css';
+import '../../styles/kids-v3.css';
 
 const posts = await getAllBlogPosts();
 const categories = await getAllCategories();
@@ -15,17 +17,17 @@ const categories = await getAllCategories();
   keywords="Clown Zauberer Blog, Zauberer Tipps, Kindergeburtstag Tipps, Clown NRW News"
   canonical="https://liar-entertainer.com/blog/"
 >
-  <!-- ── Hero: title, intro, service + category chips. No reveal (LCP). ── -->
-  <section class="kg-hero bl-hero">
-    <div class="container bl-hero__inner">
-      <h1 class="bl-hero__title" data-letters>Blog</h1>
-      <p class="bl-hero__sub">Aktuelles von Clown Zauberer LIAR</p>
-      <p class="bl-hero__text">
+  <!-- ── Hero: the big-top stage (K3Hero), title, intro, service + category chips. No reveal (LCP). ── -->
+  <K3Hero>
+    <div class="k3-hero-center">
+      <h1 class="k3-hero__title bl-hero__title" data-letters>Blog</h1>
+      <p class="k3-hero__sub">Aktuelles von Clown Zauberer LIAR</p>
+      <p class="k3-hero__text bl-hero__text">
         Hier berichte ich über meine Auftritte, Tipps und Neuigkeiten rund um Zaubershow und Kinderunterhaltung.
         <a href="/ueber-mich/">Mehr über mich erfahren</a>.
       </p>
 
-      <nav class="kg-quick bl-services" aria-label="Leistungen">
+      <nav class="k3-quick bl-services" aria-label="Leistungen">
         <a href="/clown/clownshow/">🤡 Clownshow</a>
         <a href="/zauberer/">🎩 Zauberer</a>
         <a href="/kinderzauberer/">✨ Kinderzauberer</a>
@@ -35,21 +37,22 @@ const categories = await getAllCategories();
       </nav>
 
       {categories.length > 0 && (
-        <nav class="bl-cats" aria-label="Blog-Kategorien">
+        <nav class="k3-chipnav bl-cats" aria-label="Blog-Kategorien">
           <span class="bl-cats__label">Kategorien:</span>
           {categories.slice(0, 12).map((cat) => (
-            <a class="bl-chip" href={`/blog/kategorie/${cat.slug}/`}>
-              {cat.name} <span class="bl-chip__count">({cat.count})</span>
+            <a class="k3-chip" href={`/blog/kategorie/${cat.slug}/`}>
+              {cat.name} <small>({cat.count})</small>
             </a>
           ))}
         </nav>
       )}
     </div>
-  </section>
+  </K3Hero>
 
-  <!-- ── Posts: newest first and featured, then the poster wall ── -->
+  <!-- ── Posts: newest first and featured, then the programme sheets ── -->
   <section class="bl-list">
     <div class="container">
+      <GoldDivider />
       <BlogCards posts={posts} featureFirst eager={1} />
     </div>
   </section>
@@ -58,34 +61,14 @@ const categories = await getAllCategories();
 </V2Layout>
 
 <style>
-  .bl-hero { padding-block: var(--space-5) var(--space-4); text-align: center; }
-  .bl-hero__inner { max-width: 52rem; }
-  .bl-hero__title {
-    font-size: clamp(3.4rem, 10vw, 6.5rem); line-height: 0.95; margin: 0 0 var(--space-1);
-    color: var(--accent-strong);
-  }
-  .bl-hero__sub { font-family: var(--font-display); font-weight: 650; font-size: clamp(1.25rem, 2.6vw, 1.6rem); color: var(--accent-2); }
-  .bl-hero__text { max-width: 40rem; margin-inline: auto; color: var(--ink-soft); font-size: 1.05rem; }
-  .bl-services { justify-content: center; }
+  .bl-hero__title { font-size: clamp(3.4rem, 10vw, 6rem); line-height: 0.95; margin-top: 0; }
+  .bl-hero__text { max-width: 40rem; margin-inline: auto; }
 
   .bl-cats {
-    display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 0.5rem;
     margin-top: var(--space-3); padding-top: var(--space-3);
-    border-top: 2px dashed color-mix(in srgb, var(--line) 30%, transparent);
+    border-top: 1px solid rgba(233, 200, 119, 0.4);
   }
-  .bl-cats__label { font-family: var(--font-display); font-weight: 650; margin-right: 0.25rem; }
-  .bl-chip {
-    display: inline-flex; align-items: center; gap: 0.3rem; min-height: 2.75rem;
-    padding: 0.35rem 0.9rem; border-radius: 999px; text-decoration: none; font-weight: 800; font-size: 0.92rem;
-    color: var(--ink); background: var(--surface); border: var(--border); box-shadow: 2px 2px 0 var(--line);
-    transition: transform 0.25s var(--ease-out-expo), background-color 0.2s, box-shadow 0.2s;
-  }
-  .bl-chip__count { font-weight: 600; color: var(--ink-soft); }
-  .bl-chip:nth-child(3n + 2) { background: color-mix(in srgb, var(--brand-yellow) 35%, var(--surface)); }
-  .bl-chip:nth-child(3n) { background: color-mix(in srgb, var(--brand-blue) 12%, var(--surface)); }
-  @media (hover: hover) and (pointer: fine) {
-    .bl-chip:hover { transform: translate(-2px, -2px) rotate(-2deg); box-shadow: 4px 4px 0 var(--line); }
-  }
+  .bl-cats__label { font-family: var(--font-display); font-weight: 600; margin-right: 0.25rem; color: #ffe3a3; }
 
-  .bl-list { background: var(--bg); padding-top: var(--space-4); }
+  .bl-list { background: var(--bg); padding-top: var(--space-5); }
 </style>

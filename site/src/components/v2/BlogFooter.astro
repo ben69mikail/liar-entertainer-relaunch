@@ -2,9 +2,11 @@
 /**
  * v2 version of components/BlogFooter.astro (legacy one stays for the legacy catch-all posts).
  * Same content and wording 1:1: 3 related posts, 3 testimonials picked deterministically per
- * slug, 3 CTA buttons. Only the form is new.
+ * slug, 3 CTA buttons. Only the form is new. Kids v3 look (2026-10-06): gold dividers, testimonials
+ * and the booking box as circus-programme sheets (needs kids-v3.css on the page).
  */
 import BlogCards from './BlogCards.astro';
+import GoldDivider from './kids/GoldDivider.astro';
 import { getRelatedPosts } from '../../utils/allPosts';
 import { colorFor, initialsOf, type Testimonial } from '../../lib/reviews';
 import testimonialsData from '../../data/testimonials.json';
@@ -36,7 +38,8 @@ const testimonials = pick3DeterministicallyForSlug(testimonialsData as Testimoni
     {related.length > 0 && (
       <>
         <header class="bf-head" data-reveal>
-          <h2 class="kg-h2">Weiterlesen</h2>
+          <GoldDivider />
+          <h2 class="k3-h2">Weiterlesen</h2>
           <p class="bf-sub">Diese Artikel könnten dich auch interessieren</p>
         </header>
         <BlogCards posts={related} heading="h3" moreLabel="Mehr lesen →" compact />
@@ -48,7 +51,8 @@ const testimonials = pick3DeterministicallyForSlug(testimonialsData as Testimoni
 <section class="bf-voices">
   <div class="container">
     <header class="bf-head" data-reveal>
-      <h2 class="kg-h2">Was Eltern sagen</h2>
+      <GoldDivider />
+      <h2 class="k3-h2">Was Eltern sagen</h2>
       <div class="bf-stars">★★★★★</div>
     </header>
     <div class="bf-quotes">
@@ -70,42 +74,53 @@ const testimonials = pick3DeterministicallyForSlug(testimonialsData as Testimoni
 </section>
 
 <section class="bf-book">
-  <div class="container kg-center" data-reveal="tilt">
-    <h2 class="kg-h2">Jetzt LIAR buchen</h2>
-    <p class="bf-sub">Termin sichern oder mehr erfahren</p>
-    <div class="bf-actions">
-      <a href="/kontakt/" class="btn btn--primary" data-confetti>📞 Termin anfragen</a>
-      <a href="/preise/" class="btn btn--ghost">💰 Preise ansehen</a>
-      <a href="/kinderzauberer/" class="btn btn--ghost">🎩 Alle Leistungen</a>
+  <div class="container k3-narrow k3-center">
+    <GoldDivider />
+    <div class="k3-prog bf-book__card" data-reveal="tilt">
+      <h2 class="k3-h2">Jetzt LIAR buchen</h2>
+      <p class="bf-sub">Termin sichern oder mehr erfahren</p>
+      <div class="bf-actions">
+        <a href="/kontakt/" class="btn btn--primary" data-confetti>📞 Termin anfragen</a>
+        <a href="/preise/" class="btn btn--ghost">💰 Preise ansehen</a>
+        <a href="/kinderzauberer/" class="btn btn--ghost">🎩 Alle Leistungen</a>
+      </div>
     </div>
   </div>
 </section>
 
 <style>
-  .bf-related { background: var(--bg-alt); border-top: var(--border); }
+  .bf-related { background: var(--bg-alt); }
   .bf-head { text-align: center; margin-bottom: var(--space-4); }
-  .bf-head .kg-h2 { margin-bottom: var(--space-1); }
+  .bf-head .k3-h2 { margin-bottom: var(--space-1); }
   .bf-sub { color: var(--ink-soft); font-size: 1.05rem; }
 
   .bf-voices { background: var(--bg); }
-  .bf-stars { color: var(--star); font-size: 2rem; letter-spacing: 0.12em; line-height: 1; }
-  .bf-quotes { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
+  .bf-stars { color: var(--gold); font-size: 1.6rem; letter-spacing: 0.18em; line-height: 1; }
+  .bf-quotes { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); align-items: start; }
+  /* circus-programme sheet, like the review cards */
   .bf-quote {
-    margin: 0; padding: var(--space-3); background: var(--surface);
-    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+    margin: 0; padding: calc(var(--space-3) + 0.4rem) var(--space-3) var(--space-3);
+    background:
+      var(--orn-tl) left 0.55rem top 0.55rem / 1.5rem no-repeat,
+      var(--orn-tr) right 0.55rem top 0.55rem / 1.5rem no-repeat,
+      var(--orn-bl) left 0.55rem bottom 0.55rem / 1.5rem no-repeat,
+      var(--orn-br) right 0.55rem bottom 0.55rem / 1.5rem no-repeat,
+      var(--surface);
+    border-radius: var(--radius);
+    box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), var(--shadow);
   }
-  .bf-quote:nth-child(odd) { rotate: -0.8deg; }
-  .bf-quote:nth-child(even) { rotate: 1deg; }
   .bf-who { display: flex; align-items: center; gap: 0.75rem; }
   .bf-avatar {
     width: 2.6rem; height: 2.6rem; border-radius: 50%; flex: none;
     display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 0.9rem;
+    box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px rgba(184, 134, 47, 0.6);
   }
-  .bf-name { font-weight: 800; margin: 0; line-height: 1.2; }
+  .bf-name { font-family: var(--font-display); font-weight: 600; font-size: 1.05rem; margin: 0; line-height: 1.2; }
   .bf-when { margin: 0; font-size: 0.85rem; color: var(--ink-soft); }
-  .bf-cardstars { color: var(--star); margin: 0.75rem 0 0.25rem; letter-spacing: 0.08em; }
+  .bf-cardstars { color: var(--gold); margin: 0.75rem 0 0.25rem; letter-spacing: 0.1em; }
   .bf-text { margin: 0; color: var(--ink-soft); font-size: 0.98rem; }
 
-  .bf-book { background: var(--surface); border-top: var(--border); }
+  .bf-book { background: var(--bg-alt); }
+  .bf-book__card { padding: var(--space-4) var(--space-3); }
   .bf-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; margin-top: var(--space-3); }
 </style>

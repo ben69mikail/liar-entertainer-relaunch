@@ -1,6 +1,7 @@
 ---
 /**
- * v2 blog teaser list (neutral / Zirkus-Plakat zone). Used by /blog/, /blog/kategorie/*,
+ * v2 blog teaser list, kids v3 look (2026-10-06): every post is a circus-programme sheet (gold
+ * rule + corner flourishes); its cover sits whole on a small big-top stage, never cropped. Used by /blog/, /blog/kategorie/*,
  * and the "Weiterlesen" block under every post (components/v2/BlogFooter.astro).
  * Text per card is the legacy wording 1:1 (date, title, excerpt, link text); the category
  * label is new UI built from the post's own data.
@@ -29,7 +30,6 @@ const {
   compact = false,
 } = Astro.props;
 const Heading = heading;
-const BANDS = ['red', 'blue', 'yellow'] as const;
 
 function formatDate(d: Date) {
   return d.toLocaleDateString('de-DE', { day: '2-digit', month: 'long', year: 'numeric' });
@@ -42,7 +42,7 @@ function formatDate(d: Date) {
     const isEager = i < eager;
     return (
       <article
-        class:list={['bc-card', `bc-card--${BANDS[i % 3]}`, { 'bc-card--feature': feature }]}
+        class:list={['bc-card', { 'bc-card--feature': feature }]}
         data-reveal={isEager ? undefined : 'up'}
       >
         <a class="bc-media" href={post.href} tabindex="-1" aria-hidden="true">
@@ -80,51 +80,51 @@ function formatDate(d: Date) {
   }
   .bc-grid--compact { grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); gap: var(--space-3); }
 
+  /* circus-programme sheet: light paper, fine double gold rule, gold corner flourishes */
   .bc-card {
-    --c: var(--brand-red);
     position: relative;
     display: flex;
     flex-direction: column;
-    background: var(--surface);
-    border: var(--border);
+    padding: 0.85rem;
+    background:
+      var(--orn-tl) left 0.4rem top 0.4rem / 1.3rem no-repeat,
+      var(--orn-tr) right 0.4rem top 0.4rem / 1.3rem no-repeat,
+      var(--orn-bl) left 0.4rem bottom 0.4rem / 1.3rem no-repeat,
+      var(--orn-br) right 0.4rem bottom 0.4rem / 1.3rem no-repeat,
+      var(--surface);
     border-radius: var(--radius);
-    box-shadow: var(--shadow);
-    overflow: hidden;
-    transition: transform 0.35s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
+    box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), var(--shadow);
+    transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
   }
-  .bc-card--blue { --c: var(--brand-blue); }
-  .bc-card--yellow { --c: var(--brand-yellow); }
-  /* printed-poster rhythm: neighbours lean a little, never the featured card */
-  .bc-card:nth-child(3n + 2):not(.bc-card--feature) { rotate: 0.6deg; }
-  .bc-card:nth-child(3n):not(.bc-card--feature) { rotate: -0.5deg; }
 
-  .bc-media { display: block; position: relative; border-bottom: var(--border); background: var(--bg-alt); }
-  .bc-media::after {
-    /* colour band along the image's bottom edge, like a ticket stub */
-    content: ''; position: absolute; inset: auto 0 0; height: 0.5rem; background: var(--c);
-    border-top: var(--border);
+  /* the cover on a small big-top stage: the whole image, letterboxed, never cropped */
+  .bc-media {
+    display: block; position: relative; overflow: hidden; border-radius: 0.5rem;
+    background: var(--k3-bigtop, #241355);
+    box-shadow: 0 0 0 1px rgba(184, 134, 47, 0.5);
   }
-  .bc-media img { display: block; width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: cover; object-position: top; }
+  .bc-media img { display: block; width: 100%; height: auto; aspect-ratio: 5 / 3; object-fit: contain; }
 
-  .bc-body { display: flex; flex-direction: column; flex: 1; padding: var(--space-3); }
+  .bc-body { display: flex; flex-direction: column; flex: 1; padding: var(--space-2) 0.6rem 0.9rem; }
   .bc-meta { display: flex; flex-wrap: wrap; align-items: center; gap: 0.4rem 0.6rem; margin: 0 0 0.5rem; font-size: 0.9rem; font-weight: 700; color: var(--ink-soft); }
   .bc-cat {
-    padding: 0.1rem 0.6rem; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
-    background: var(--bg); border: 2px dashed var(--line); color: var(--ink);
+    padding: 0.1rem 0.65rem; border-radius: 999px; font-size: 0.8rem; font-weight: 800;
+    background: #fbefd2; color: #6e4a0e; box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.6);
   }
-  .bc-title { font-size: clamp(1.2rem, 2vw, 1.4rem); line-height: 1.2; margin: 0 0 0.6rem; text-wrap: balance; }
+  .bc-title { font-size: clamp(1.2rem, 2vw, 1.4rem); font-weight: 600; line-height: 1.22; margin: 0 0 0.6rem; text-wrap: balance; }
   .bc-title a { color: var(--ink); text-decoration: none; }
   /* the whole card is one big target; the title link stretches over it */
-  .bc-title a::after { content: ''; position: absolute; inset: 0; z-index: 1; }
+  .bc-title a::after { content: ''; position: absolute; inset: 0; z-index: 1; border-radius: var(--radius); }
   .bc-title a:focus-visible { outline: none; }
   .bc-card:has(.bc-title a:focus-visible) { outline: 3px solid var(--accent-2); outline-offset: 4px; }
   .bc-excerpt { color: var(--ink-soft); font-size: 0.98rem; margin: 0 0 var(--space-2); }
   .bc-more {
     margin-top: auto; align-self: flex-start; position: relative; z-index: 2;
-    font-family: var(--font-display); font-weight: 650; color: var(--accent-strong); text-decoration: none;
+    padding-top: 0.6rem; border-top: 1px solid rgba(184, 134, 47, 0.35);
+    font-family: var(--font-display); font-weight: 600; color: var(--accent-strong); text-decoration: none;
   }
 
-  .bc-grid--compact .bc-body { padding: var(--space-2) var(--space-3) var(--space-3); }
+  .bc-grid--compact .bc-body { padding: var(--space-2) 0.5rem 0.8rem; }
   .bc-grid--compact .bc-title { font-size: 1.15rem; }
   .bc-grid--compact .bc-excerpt {
     font-size: 0.93rem;
@@ -135,18 +135,18 @@ function formatDate(d: Date) {
   .bc-card--feature .bc-title { font-size: clamp(1.5rem, 3.4vw, 2.3rem); }
   .bc-card--feature .bc-excerpt { font-size: 1.08rem; }
   @media (min-width: 901px) {
-    .bc-card--feature { display: grid; grid-template-columns: 1.15fr 1fr; }
-    .bc-card--feature .bc-media { border-bottom: 0; border-right: var(--border); }
-    .bc-card--feature .bc-media img { height: 100%; min-height: 20rem; aspect-ratio: auto; }
-    .bc-card--feature .bc-body { padding: var(--space-4); justify-content: center; }
+    .bc-card--feature { display: grid; grid-template-columns: 1.15fr 1fr; gap: var(--space-3); align-items: center; padding: 1.1rem; }
+    .bc-card--feature .bc-body { padding: var(--space-3) var(--space-3) var(--space-3) 0; justify-content: center; }
     .bc-card--feature .bc-more { margin-top: var(--space-1); }
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .bc-card:hover { transform: translate(-3px, -6px) rotate(0.4deg); box-shadow: var(--shadow-hover); }
-    .bc-card--feature:hover { transform: translate(-3px, -4px); }
+    .bc-card:hover {
+      transform: translateY(-4px);
+      box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.7), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.35), var(--shadow-hover);
+    }
     .bc-card:hover .bc-title a { color: var(--accent-strong); }
-    .bc-more { transition: translate 0.25s var(--ease-out-expo); }
+    .bc-more { transition: translate 0.25s var(--ease-out); }
     .bc-card:hover .bc-more { translate: 4px 0; }
   }
 </style>

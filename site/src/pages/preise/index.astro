@@ -3,15 +3,15 @@ import { Image } from 'astro:assets';
 import V2Layout from '../../layouts/V2Layout.astro';
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
-import SectionEdge from '../../components/v2/SectionEdge.astro';
-import Bunting from '../../components/v2/kids/Bunting.astro';
-import Squiggle from '../../components/v2/kids/Squiggle.astro';
+import K3Hero from '../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import { CONTACT } from '../../data/site';
 import heroImg from '../../assets/images/kindergeburtstag/kindergeburtstag-hero.jpg';
 import zaubershowImg from '../../assets/images/shows/zaubershow.jpg';
 import ballonImg from '../../assets/images/shows/ballonmodellage.jpg';
 import glitzerImg from '../../assets/images/shows/glitzer-tattoos.jpg';
-import '../../styles/kids-kit.css';
+import '../../styles/kids-v3.css';
 
 
 const title = "Preise & Pakete – Kindergeburtstag ab 150 € | LIAR";
@@ -152,52 +152,44 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
   structuredData={[faqSchema, serviceSchema, videoSchema]}
 >
   <!-- ── Hero: price tag first (trust before show). No reveal here (LCP). ── -->
-  <section class="kg-hero pr-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.55}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <ReviewBadge />
-        <h1 class="kg-hero__title pr-hero__title" data-letters>Preise &amp; Pakete – Transparent und fair</h1>
-        <p class="pr-hero__lead">Bei Clown Zauberer LIAR gibt es keine versteckten Kosten. Alle Kindergeburtstag-Preise sind fest kalkuliert. Für Firmenfeiern, Stadtfeste und andere Events wird ein individuelles Angebot erstellt.</p>
-        <div class="kg-hero__actions">
-          <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
-          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
-        </div>
-        <nav class="kg-quick" aria-label="Schnell zu den Infos">
-          <a href="#pakete">Pakete</a>
-          <a href="#fahrtkosten">Fahrtkosten</a>
-          <a href="#faq">Fragen</a>
-        </nav>
-      </div>
-      <figure class="kg-hero__photo">
-        <Image
-          src={heroImg}
-          alt="Preise und Pakete – Clown Zauberer LIAR für Kindergeburtstag"
-          widths={[400, 700, 1036]}
-          sizes="(max-width: 900px) 92vw, 560px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 50% 30%"
-        />
-        <a class="kg-sticker pr-sticker" href="#pakete">
-          <span>ab</span><strong>150 €</strong>
-        </a>
-      </figure>
+  <K3Hero>
+    <ReviewBadge />
+    <h1 class="k3-hero__title" data-letters>Preise &amp; Pakete – Transparent und fair</h1>
+    <p class="k3-hero__text">Bei Clown Zauberer LIAR gibt es keine versteckten Kosten. Alle Kindergeburtstag-Preise sind fest kalkuliert. Für Firmenfeiern, Stadtfeste und andere Events wird ein individuelles Angebot erstellt.</p>
+    <div class="k3-hero__actions">
+      <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
+      <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
     </div>
-  </section>
+    <nav class="k3-quick" aria-label="Schnell zu den Infos">
+      <a href="#pakete">Pakete</a>
+      <a href="#fahrtkosten">Fahrtkosten</a>
+      <a href="#faq">Fragen</a>
+    </nav>
+    <Fragment slot="photo">
+      <Image
+        src={heroImg}
+        alt="Preise und Pakete – Clown Zauberer LIAR für Kindergeburtstag"
+        widths={[400, 700, 1000]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <a class="k3-medal" href="#pakete"><span>ab</span><strong>150 €</strong></a>
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Einleitungstext ───────────────────────────────────── -->
-  <section class="kg-intro">
-    <div class="container kg-narrow" data-reveal>
-      <h2 class="kg-h2">Was kostet ein Clown Zauberer?</h2>
-      <p class="kg-lead">
+  <section class="pr-intro">
+    <div class="container k3-narrow" data-reveal>
+      <h2 class="k3-h2">Was kostet ein Clown Zauberer?</h2>
+      <p class="k3-lead">
         Die Kosten für einen professionellen Clown Zauberer hängen von mehreren Faktoren ab: der <strong>Art der Veranstaltung</strong> (Kindergeburtstag, Firmenfeier, Stadtfest, Kita-Fest), der <strong>gewünschten Showdauer</strong>, der <strong>Anzahl der Kinder oder Gäste</strong>, den gebuchten <strong>Zusatzleistungen</strong> wie Ballonmodellage oder Glitzer Tattoos sowie der <strong>Anfahrtsentfernung</strong> ab Gladbeck. Auch spielt es eine Rolle, ob die Show drinnen oder draußen stattfindet und ob besondere Wünsche berücksichtigt werden sollen.
       </p>
-      <p>
+      <p class="k3-soft">
         Für den <strong>Kindergeburtstag</strong> biete ich feste, transparente Paketpreise an – damit Sie von Anfang an genau wissen, was auf Sie zukommt. Diese finden Sie weiter unten auf dieser Seite.
       </p>
-      <p>
+      <p class="k3-soft">
         Alle anderen Leistungen – ob <a href="/clown/clownshow/">Clownshow</a>, <a href="/zauberer/buehnen-zauberer/">Bühnenzauberei</a>, <a href="/zauberer/tisch-zauberer/">Tischzauberei</a>, <a href="/clown/walk-act/">Walk-Act</a> oder Auftritte bei Firmenfeiern, Stadtfesten und Schulen – laufen <strong>ausschließlich auf Anfrage</strong>. So erhalten Sie ein individuelles Angebot, das exakt zu Ihrem Event passt. Rufen Sie einfach an unter <a href={CONTACT.phoneHref}>0172-1517578</a> oder nutzen Sie das <a href="/kontakt/">Kontaktformular</a> – ich berate Sie gerne persönlich!
       </p>
     </div>
@@ -206,14 +198,14 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
   <Reviews />
 
   <!-- ── PREISLISTE — Kindergeburtstag-Pakete ──────────────── -->
-  <section class="kg-prices pr-packages" id="pakete">
+  <section class="pr-packages" id="pakete">
     <div class="container">
-      <Squiggle />
-      <h2 class="kg-h2 kg-center" data-reveal>Kindergeburtstag-Pakete</h2>
-      <div class="kg-cards pr-cards">
-        <article class="kg-card kg-card--red" data-reveal="pop">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Kindergeburtstag-Pakete</h2>
+      <div class="k3-cards pr-cards">
+        <article class="k3-card" data-reveal>
           <h3>🎩 Zaubershow</h3>
-          <p class="kg-card__price" data-count>150 €</p>
+          <p class="k3-card__price" data-count>150 €</p>
           <ul>
             <li><span>✓</span> 40 Minuten interaktive Zaubershow</li>
             <li><span>✓</span> Bis ca. 12 Kinder, Mindestalter 4 Jahre</li>
@@ -221,23 +213,23 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
             <li><span>✓</span> Das Geburtstagskind steht im Mittelpunkt</li>
             <li><span>✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
           </ul>
-          <p class="pr-dur">Gesamtdauer: ca. 40 Minuten</p>
+          <p class="k3-card__note pr-dur">Gesamtdauer: ca. 40 Minuten</p>
         </article>
-        <article class="kg-card kg-card--blue" data-reveal="pop" data-reveal-delay="0.1">
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
           <h3>🎈 Zaubershow + Ballons</h3>
-          <p class="kg-card__price" data-count>170 €</p>
+          <p class="k3-card__price" data-count>170 €</p>
           <ul>
             <li><span>✓</span> Alles aus "Zaubershow"</li>
             <li><span>✓</span> Ballonmodellage für jedes Kind</li>
             <li><span>✓</span> Große Auswahl: Hund, Schwert, Blume, Krone, Dino u.v.m.</li>
             <li><span>✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
           </ul>
-          <p class="pr-dur">Gesamtdauer: ca. 55 Minuten</p>
+          <p class="k3-card__note pr-dur">Gesamtdauer: ca. 55 Minuten</p>
         </article>
-        <article class="kg-card kg-card--yellow pr-popular" data-reveal="pop" data-reveal-delay="0.2">
+        <article class="k3-card pr-popular" data-reveal data-reveal-delay="0.16">
           <span class="pr-flag">Beliebteste</span>
           <h3>✨ Komplett-Paket</h3>
-          <p class="kg-card__price" data-count>210 €</p>
+          <p class="k3-card__price" data-count>210 €</p>
           <ul>
             <li><span>✓</span> Alles aus "Zaubershow + Ballons"</li>
             <li><span>✓</span> Glitzer Tattoos für jedes Kind</li>
@@ -245,10 +237,10 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
             <li><span>✓</span> Viele Motive: Einhörner, Schmetterlinge, Dinos, Sterne u.v.m.</li>
             <li><span>✓</span> zzgl. Fahrtkosten (0,40€/km, Hin- &amp; Rückfahrt) ab Gladbeck</li>
           </ul>
-          <p class="pr-dur">Gesamtdauer: ca. 90 Minuten</p>
+          <p class="k3-card__note pr-dur">Gesamtdauer: ca. 90 Minuten</p>
         </article>
       </div>
-      <p class="kg-center kg-cta-row">
+      <p class="k3-center k3-cta-row">
         <a href="/kontakt/" class="btn btn--primary" data-confetti>
           Jetzt unverbindlich anfragen
         </a>
@@ -256,41 +248,39 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
     </div>
   </section>
 
-  <!-- ── Das erwartet Sie: three snapshots pinned to the board ── -->
-  <section class="pr-expect">
+  <!-- ── Das erwartet Sie: three acts on the programme ── -->
+  <section class="k3-alt pr-expect">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>Das erwartet Sie</h2>
-      <div class="pr-snaps">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Das erwartet Sie</h2>
+      <div class="k3-grid k3-grid--3 pr-snaps">
         {snaps.map((e, i) => (
-          <div class="pr-snap" data-reveal="tilt" data-reveal-delay={i ? String(i / 10) : undefined}>
-            <figure class="pr-snap__frame" data-tilt>
+          <div class="pr-snap" data-reveal data-reveal-delay={i ? String(i / 10) : undefined}>
+            <ProgramFrame>
               <Image
                 src={e.src}
                 alt={e.alt}
                 widths={[300, 450]}
-                sizes="(max-width: 900px) 84vw, 300px"
+                sizes="(max-width: 900px) 80vw, 300px"
                 loading="lazy"
               />
-              <figcaption>
-                <p class="pr-snap__title">{e.title}</p>
-                <p class="pr-snap__text">{e.text}</p>
-              </figcaption>
-            </figure>
+            </ProgramFrame>
+            <p class="pr-snap__title">{e.title}</p>
+            <p class="pr-snap__text">{e.text}</p>
           </div>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ── Fahrtkosten (yellow band) ─────────────────────────── -->
-  <section class="kg-band kg-band--yellow pr-travel" id="fahrtkosten">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container">
-      <h2 class="kg-h2">Fahrtkosten ab Gladbeck</h2>
-      <p class="pr-travel__sub">(Hin- und Rückfahrt, 0,40 €/km)</p>
-      <div class="kg-table-wrap pr-table" data-reveal="pop">
-        <table class="kg-table">
+  <!-- ── Fahrtkosten (the ring: red velvet) ─────────────────── -->
+  <section class="k3-band k3-band--velvet pr-travel" id="fahrtkosten">
+    <div class="container k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Fahrtkosten ab Gladbeck</h2>
+      <p class="k3-sub pr-travel__sub">(Hin- und Rückfahrt, 0,40 €/km)</p>
+      <div class="k3-table-wrap pr-table" data-reveal>
+        <table class="k3-table">
           <thead>
             <tr>
               <th scope="col">Stadt / Region</th>
@@ -301,7 +291,7 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
             {travel.map(([city, cost]) => (
               <tr>
                 <td>{city}</td>
-                <td class="pr-num"><span class="pr-cost">{cost}</span></td>
+                <td class="pr-num"><span class="k3-price">{cost}</span></td>
               </tr>
             ))}
           </tbody>
@@ -311,11 +301,12 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
     </div>
   </section>
 
-  <!-- ── Events & Firmen: one bill, every line "on request" ── -->
+  <!-- ── Events & Firmen: one programme bill, every line "on request" ── -->
   <section class="pr-events">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>Events &amp; Firmen</h2>
-      <div class="pr-bill" data-reveal="pop">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Events &amp; Firmen</h2>
+      <div class="k3-card pr-bill" data-reveal>
         {onRequest.map((t) => (
           <div class="pr-bill__row">
             <h3>{t}</h3>
@@ -323,22 +314,23 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
           </div>
         ))}
       </div>
-      <p class="kg-center pr-events__call">
+      <p class="k3-center pr-events__call">
         Kontaktieren Sie mich für ein individuelles Angebot: <a href={CONTACT.phoneHref}>0172-1517578</a>
       </p>
     </div>
   </section>
 
-  <!-- ── Was ist im Preis enthalten? (blue band) ───────────── -->
-  <section class="kg-band kg-band--blue pr-included">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
-    <div class="container">
-      <h2 class="kg-h2">Was ist im Preis enthalten?</h2>
-      <p class="pr-included__lead">Bei Clown Zauberer LIAR ist alles dabei, was Sie für ein unvergessliches Event brauchen. Sie müssen sich um nichts kümmern – nur für gute Laune sorgen!</p>
+  <!-- ── Was ist im Preis enthalten? (dark stage, red + blue spotlight) ── -->
+  <section class="k3-band k3-band--spot pr-included">
+    <span class="k3-spot k3-spot--red" aria-hidden="true"></span>
+    <span class="k3-spot k3-spot--blue" aria-hidden="true"></span>
+    <div class="container k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Was ist im Preis enthalten?</h2>
+      <p class="k3-narrow pr-included__lead">Bei Clown Zauberer LIAR ist alles dabei, was Sie für ein unvergessliches Event brauchen. Sie müssen sich um nichts kümmern – nur für gute Laune sorgen!</p>
       <ul class="pr-inc">
         {included.map((it, i) => (
-          <li class="pr-inc__item" data-reveal="pop" data-reveal-delay={String((i % 2) / 10)}>
+          <li class="pr-inc__item" data-reveal data-reveal-delay={String((i % 2) / 10)}>
             <span class="pr-inc__icon">{it.icon}</span>
             <div>
               <p class="pr-inc__title">{it.title}</p>
@@ -351,14 +343,15 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
   </section>
 
   <!-- ── FAQ ───────────────────────────────────────────────── -->
-  <section class="kg-faq" id="faq">
-    <div class="container kg-narrow">
-      <h2 class="kg-h2 kg-center" data-reveal>Häufige Fragen zu Preisen</h2>
-      <div class="kg-faq__list">
+  <section class="k3-faq" id="faq">
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Häufige Fragen zu Preisen</h2>
+      <div class="k3-faq__list">
         {faq.map((item) => (
-          <details class="kg-faq__item" data-reveal="puff">
-            <summary>{item.q}</summary>
-            <p class="kg-faq__answer">{item.a}</p>
+          <details class="k3-faq__item" data-reveal>
+            <summary><span>{item.q}</span></summary>
+            <p class="k3-faq__answer">{item.a}</p>
           </details>
         ))}
       </div>
@@ -366,12 +359,12 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
   </section>
 
   <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="pr-cta">
-    <Bunting />
-    <div class="container kg-narrow kg-center" data-reveal>
-      <h2 class="kg-h2">Jetzt unverbindlich anfragen!</h2>
-      <p class="pr-cta__text">Rufen Sie an, schreiben Sie per WhatsApp oder nutzen Sie das Kontaktformular – wir melden uns innerhalb von 24 Stunden!</p>
-      <div class="pr-cta__actions">
+  <section class="k3-contact pr-cta">
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Jetzt unverbindlich anfragen!</h2>
+      <p class="k3-soft pr-cta__text">Rufen Sie an, schreiben Sie per WhatsApp oder nutzen Sie das Kontaktformular – wir melden uns innerhalb von 24 Stunden!</p>
+      <div class="k3-hero__actions k3-actions--center">
         <a href={CONTACT.phoneHref} class="btn btn--primary" data-magnetic>📞 0172-1517578</a>
         <a href="/kontakt/" class="btn btn--ghost" data-confetti>Kontaktformular →</a>
       </div>
@@ -380,102 +373,74 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
 </V2Layout>
 
 <style>
-  /* ── hero ── */
-  .pr-hero__title { font-size: clamp(2.2rem, 4.6vw, 3.6rem); }
-  .pr-hero__lead { font-size: 1.12rem; color: var(--ink-soft); margin-bottom: var(--space-3); max-width: 36rem; }
-  .pr-sticker span { font-size: 1rem; }
-  .pr-sticker strong { font-size: 1.5rem; }
-
   /* ── packages ── */
   .pr-cards { margin-top: var(--space-4); }
-  .pr-dur {
-    margin: 0; padding-top: var(--space-2); font-weight: 800; font-size: 0.95rem;
-    border-top: 2px dashed color-mix(in srgb, var(--line) 30%, transparent);
-  }
-  .pr-popular { box-shadow: var(--shadow-hover); }
+  .pr-dur { font-style: normal; font-weight: 800; color: var(--ink); margin-bottom: 0 !important; }
+  /* the favourite: a velvet ribbon tag on top of the programme card */
+  .pr-popular { box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.7), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.35), 0 0 0 3px rgba(233, 200, 119, 0.35), var(--shadow-hover); }
   .pr-flag {
-    position: absolute; top: -1.05rem; right: 1rem; z-index: 1;
-    padding: 0.25rem 0.85rem; font-family: var(--font-display); font-weight: 700; font-size: 0.95rem;
-    background: var(--ink); color: var(--bg); border-radius: 999px; rotate: 4deg;
-    animation: pr-swing 3.6s var(--ease-out) 1.5s infinite;
+    position: absolute; top: -0.95rem; left: 50%; translate: -50% 0; z-index: 1;
+    padding: 0.25rem 1.3rem; font-family: var(--font-display); font-weight: 600; font-size: 0.95rem; color: #ffe3a3; white-space: nowrap;
+    background: linear-gradient(180deg, #d13a42, #a8192a); border-radius: 0.3rem;
+    clip-path: polygon(0 0, 100% 0, 94% 50%, 100% 100%, 0 100%, 6% 50%);
   }
-  @keyframes pr-swing { 0%, 84%, 100% { rotate: 4deg; } 90% { rotate: -3deg; } 95% { rotate: 7deg; } }
 
-  /* ── expect: pinned snapshots ── */
-  .pr-expect { background: var(--surface); border-block: var(--border); }
-  .pr-snaps { display: grid; gap: var(--space-4); margin-top: var(--space-4); justify-items: center; }
-  @media (min-width: 901px) { .pr-snaps { grid-template-columns: repeat(3, 1fr); } }
-  .pr-snap { width: min(100%, 21rem); }
-  .pr-snap:nth-child(1) { rotate: -2.5deg; }
-  .pr-snap:nth-child(2) { rotate: 1.5deg; }
-  .pr-snap:nth-child(3) { rotate: -1deg; }
-  .pr-snap__frame {
-    position: relative; margin: 0; padding: 0.75rem 0.75rem 1rem; text-align: center;
-    background: var(--bg); border: var(--border); border-radius: var(--radius-sm); box-shadow: var(--shadow);
-    transition: transform 0.3s var(--ease-out);
-  }
-  /* a strip of tape holding the photo to the board */
-  .pr-snap__frame::before {
-    content: ''; position: absolute; top: -0.8rem; left: 50%; width: 5.5rem; height: 1.6rem; translate: -50% 0; rotate: -4deg;
-    background: color-mix(in srgb, var(--brand-yellow) 75%, transparent); border: 2px solid color-mix(in srgb, var(--line) 35%, transparent);
-  }
-  .pr-snap :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: calc(var(--radius-sm) - 0.3rem); border: 2px solid var(--line); }
-  .pr-snap figcaption { padding-top: 0.75rem; }
-  .pr-snap__title { font-family: var(--font-display); font-weight: 650; font-size: 1.35rem; margin: 0; }
-  .pr-snap__text { color: var(--ink-soft); margin: 0; font-weight: 600; }
+  /* ── expect: three photos on the programme ── */
+  .pr-snaps { justify-items: center; }
+  .pr-snap { width: min(100%, 20rem); text-align: center; }
+  .pr-snap:nth-child(1) :global(.pf) { rotate: -1.5deg; }
+  .pr-snap:nth-child(2) :global(.pf) { rotate: 1deg; }
+  .pr-snap:nth-child(3) :global(.pf) { rotate: -0.8deg; }
+  .pr-snap__title { font-family: var(--font-display); font-weight: 600; font-size: 1.35rem; margin: var(--space-3) 0 0 !important; }
+  .pr-snap__text { color: var(--ink-soft); margin: 0 !important; font-weight: 600; }
 
-  /* ── travel (yellow band) ── */
-  .pr-travel__sub { font-weight: 800; }
-  .pr-table { margin-top: var(--space-3); margin-bottom: var(--space-3); max-width: 44rem; text-align: left; rotate: -0.6deg; }
-  .pr-num { text-align: right; }
-  .pr-cost { font-family: var(--font-display); font-weight: 700; font-size: 1.1rem; white-space: nowrap; }
-  .pr-table tbody tr:nth-child(odd) { background: color-mix(in srgb, var(--brand-yellow) 14%, transparent); }
+  /* ── travel (velvet ring) ── */
+  .pr-table { max-width: 44rem; margin: var(--space-3) auto; text-align: left; color: var(--ink); }
+  .pr-num { text-align: right !important; }
+  .pr-table tbody tr:nth-child(odd) { background: rgba(233, 200, 119, 0.12); }
   .pr-travel__note { max-width: 40rem; margin-inline: auto; font-weight: 600; }
+  .pr-travel .k3-sub { color: var(--gold-light); margin-top: calc(-1 * var(--space-2)); }
 
-  /* ── events: a hand-written bill ── */
-  .pr-bill {
-    max-width: 46rem; margin: var(--space-4) auto var(--space-3); padding: 0.5rem var(--space-3);
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: 0.6deg;
-  }
+  /* ── events: a programme bill ── */
+  .pr-bill { max-width: 46rem; margin: var(--space-4) auto var(--space-3); padding-block: var(--space-3); }
+  .pr-bill:hover { transform: none; }
   .pr-bill__row {
     display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 0.25rem 1rem;
-    padding: 1rem 0; border-bottom: 2px dashed color-mix(in srgb, var(--line) 30%, transparent);
+    padding: 0.9rem var(--space-2); border-bottom: 1px solid rgba(184, 134, 47, 0.3);
   }
   .pr-bill__row:last-child { border-bottom: 0; }
-  .pr-bill__row h3 { font-size: clamp(1.1rem, 2vw, 1.3rem); margin: 0; }
+  .k3-card .pr-bill__row h3 { font-size: clamp(1.1rem, 2vw, 1.3rem); margin: 0; text-align: left; }
   .pr-bill .pr-bill__price {
-    margin: 0; padding: 0.15rem 0.75rem; font-weight: 800; font-size: 0.92rem; white-space: nowrap;
-    color: var(--accent-strong); border: 2px solid currentColor; border-radius: 999px; rotate: -3deg;
+    margin: 0; padding: 0.15rem 0.8rem; font-weight: 800; font-size: 0.9rem; white-space: nowrap;
+    color: var(--accent-strong); border-radius: 999px; box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.7);
   }
   .pr-events__call { font-weight: 700; }
 
-  /* ── included (blue band) ── */
-  .pr-included__lead { max-width: 40rem; margin-inline: auto; }
+  /* ── included (dark stage): light programme slips ── */
+  .pr-included__lead { color: #f4ead6; }
   .pr-inc { list-style: none; margin: var(--space-4) auto 0; padding: 0; max-width: 54rem; display: grid; gap: var(--space-2); text-align: left; }
   @media (min-width: 901px) { .pr-inc { grid-template-columns: 1fr 1fr; gap: var(--space-3); } }
   .pr-inc__item {
     display: flex; gap: 1rem; align-items: flex-start; padding: var(--space-2) var(--space-3) var(--space-2) var(--space-2);
-    background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.5); border-radius: var(--radius);
+    color: var(--ink); background: var(--surface); border-radius: var(--radius);
+    box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), var(--shadow);
   }
   .pr-inc__icon {
-    flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; font-size: 1.45rem; line-height: 1;
-    background: var(--brand-yellow); border: 2.5px solid var(--line); border-radius: 50%; box-shadow: 3px 3px 0 var(--line);
+    flex: none; display: grid; place-items: center; width: 3rem; height: 3rem; font-size: 1.4rem; line-height: 1;
+    border-radius: 50%; background: radial-gradient(circle at 35% 30%, #c3283a, var(--velvet) 72%);
+    box-shadow: 0 0 0 1.5px #e9c877, 0 6px 14px -6px rgba(142, 21, 32, 0.6);
   }
-  .pr-inc__item:nth-child(odd) .pr-inc__icon { rotate: -8deg; }
-  .pr-inc__item:nth-child(even) .pr-inc__icon { rotate: 6deg; }
-  .pr-included .pr-inc__title { font-family: var(--font-display); font-weight: 650; font-size: 1.2rem; margin: 0 0 0.15rem; }
-  .pr-included .pr-inc__text { margin: 0; opacity: 0.92; }
+  .pr-included .pr-inc__title { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; margin: 0 0 0.15rem; }
+  .pr-included .pr-inc__text { margin: 0; color: var(--ink-soft); }
 
   /* ── cta ── */
-  .pr-cta { background: var(--surface); border-top: var(--border); padding-top: 0; }
-  .pr-cta__text { color: var(--ink-soft); font-size: 1.1rem; }
-  .pr-cta__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: var(--space-3); }
+  .pr-cta { padding-block: var(--space-5) !important; }
+  .pr-cta__text { font-size: 1.1rem; }
 
   @media (hover: hover) and (pointer: fine) {
     .pr-bill__row:hover h3 { color: var(--accent-strong); }
   }
   @media (max-width: 900px) {
-    .pr-table, .pr-bill { rotate: 0deg; }
-    .kg-table :is(th, td) { padding-inline: 0.75rem; }
+    .pr-table .k3-table :is(th, td) { padding-inline: 0.75rem; }
   }
 </style>

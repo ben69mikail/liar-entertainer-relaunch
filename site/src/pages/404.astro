@@ -1,8 +1,8 @@
 ---
 import V2Layout from '../layouts/V2Layout.astro';
-import Bunting from '../components/v2/kids/Bunting.astro';
+import K3Hero from '../components/v2/kids/K3Hero.astro';
 import HatTrick from '../components/v2/kids/HatTrick.astro';
-import '../styles/kids-kit.css';
+import '../styles/kids-v3.css';
 ---
 
 <V2Layout
@@ -10,29 +10,27 @@ import '../styles/kids-kit.css';
   description="Diese Seite konnte nicht gefunden werden."
   noindex={true}
 >
-  <!-- The page "vanished" like in a trick: the hat brings something back on every tap. -->
-  <section class="kg-hero nf">
-    <Bunting />
-    <div class="container nf__inner">
+  <!-- The page "vanished" like in a trick: the hat on the big-top stage brings something back on every tap. -->
+  <K3Hero>
+    <div class="k3-hero-center nf">
       <div class="nf__tent" aria-hidden="true">🎪</div>
-      <h1 class="nf__title">404 – Seite nicht gefunden</h1>
-      <p class="nf__lead">
+      <h1 class="k3-hero__title nf__title">404 – Seite nicht gefunden</h1>
+      <p class="k3-hero__sub nf__lead">
         Ups! Diese Seite scheint verschwunden zu sein – aber Clown Liar findet immer eine Lösung!
       </p>
-      <HatTrick />
-      <div class="nf__actions">
+      <div class="nf__hat"><HatTrick /></div>
+      <div class="k3-hero__actions k3-actions--center">
         <a class="btn btn--primary" href="/">Zur Startseite</a>
         <a class="btn btn--ghost" href="/kontakt/" data-confetti>Kontakt</a>
       </div>
     </div>
-  </section>
+  </K3Hero>
 </V2Layout>
 
 <style>
-  .nf { min-height: 70vh; display: grid; align-content: start; }
-  .nf__inner { max-width: 40rem; padding-block: var(--space-5) var(--space-4); text-align: center; }
-  .nf__tent { font-size: 4.5rem; line-height: 1; margin-bottom: var(--space-2); }
-  .nf__title { font-size: clamp(2rem, 6vw, 3.4rem); margin-bottom: var(--space-2); }
-  .nf__lead { font-size: 1.15rem; max-width: 34rem; margin: 0 auto var(--space-4); }
-  .nf__actions { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; margin-top: var(--space-2); }
+  .nf { min-height: 52vh; display: grid; align-content: center; }
+  .nf__tent { font-size: 4rem; line-height: 1; margin-bottom: var(--space-1); }
+  .nf__lead { max-width: 34rem; margin-inline: auto; }
+  /* the hat sits on a soft pool of light so the black hat reads on the dark stage */
+  .nf__hat { margin: 0 auto var(--space-3); padding: var(--space-2) var(--space-3); border-radius: 50%; background: radial-gradient(ellipse 60% 55% at 50% 60%, rgba(255, 236, 200, 0.28), transparent 72%); }
 </style>

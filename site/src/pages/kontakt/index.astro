@@ -3,10 +3,11 @@ import { Image } from 'astro:assets';
 import V2Layout from '../../layouts/V2Layout.astro';
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
-import Bunting from '../../components/v2/kids/Bunting.astro';
+import K3Hero from '../../components/v2/kids/K3Hero.astro';
+import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import { CONTACT } from '../../data/site';
 import heroImage from '../../assets/images/general/clown-zauberer-liar-kontaktformular.jpg';
-import '../../styles/kids-kit.css';
+import '../../styles/kids-v3.css';
 
 const trust = [
   '⭐ 370+ Bewertungen – durchschnittlich 5/5 Sterne',
@@ -36,42 +37,37 @@ const services = [
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kontakt', url: '/kontakt/' }]}
 >
   <!-- ── Hero: compact, so the form is one thumb-scroll away. No reveal here (LCP). ── -->
-  <section class="kg-hero kt-hero">
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <ReviewBadge />
-        <h1 class="kg-hero__title kt-hero__title" data-letters>Einfach und unverbindlich kontaktieren</h1>
-        <p class="kt-hero__lead">Stellen Sie Ihre Anfrage – wir melden uns innerhalb von 24 Stunden!</p>
-        <div class="kg-hero__actions">
-          <a class="btn btn--primary" href="#anfrage" data-confetti>Zum Anfrageformular</a>
-          <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
-        </div>
-      </div>
-      <figure class="kg-hero__photo kt-hero__photo">
-        <Image
-          src={heroImage}
-          alt="Kontakt Clown Zauberer LIAR"
-          widths={[400, 600, 820]}
-          sizes="(max-width: 900px) 92vw, 540px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 52% 25%"
-        />
-        <span class="kg-sticker kt-sticker" aria-hidden="true"><span>Antwort in</span><strong>24 h</strong></span>
-      </figure>
+  <K3Hero>
+    <ReviewBadge />
+    <h1 class="k3-hero__title" data-letters>Einfach und unverbindlich kontaktieren</h1>
+    <p class="k3-hero__sub">Stellen Sie Ihre Anfrage – wir melden uns innerhalb von 24 Stunden!</p>
+    <div class="k3-hero__actions">
+      <a class="btn btn--primary" href="#anfrage" data-confetti>Zum Anfrageformular</a>
+      <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
     </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={heroImage}
+        alt="Kontakt Clown Zauberer LIAR"
+        widths={[400, 600, 820]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <span class="k3-medal" aria-hidden="true"><span>Antwort in</span><strong>24 h</strong></span>
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
-  <section class="kg-intro kt-intro">
-    <div class="container kg-narrow" data-reveal>
-      <p class="kg-lead">
+  <section class="kt-intro">
+    <div class="container k3-narrow" data-reveal>
+      <p class="k3-lead">
         Sie suchen einen <strong>Kinderzauberer für den Kindergeburtstag</strong> in Gladbeck oder in der
         Umgebung? Schreiben Sie mir einfach kurz, worum es geht – meistens antworte ich noch am selben Tag,
         spätestens innerhalb von 24 Stunden.
       </p>
-      <p>
+      <p class="k3-soft">
         Nach Gladbeck komme ich ohne Anfahrtskosten. Im Umkreis von rund 20 Kilometern bin ich ohnehin
         regelmäßig unterwegs – unter anderem in
         <a href="/kinderzauberer/kinderzauberer-in-bottrop/">Bottrop</a>,
@@ -84,10 +80,12 @@ const services = [
   </section>
 
   <!-- ── Form + direct contact ─────────────────────────────── -->
-  <section class="kt-main">
-    <div class="container kt-main__grid">
-      <div class="kt-form-card" id="anfrage">
-        <h2 class="kg-h2 kt-h2">Anfrage senden</h2>
+  <section class="kt-main k3-alt">
+    <div class="container">
+    <GoldDivider />
+    <div class="kt-main__grid">
+      <div class="k3-card kt-form-card" id="anfrage">
+        <h2 class="k3-h2 kt-h2">Anfrage senden</h2>
         <!-- Fehlermeldungen (?fehler=… and the browser-side maths check) -->
         <div id="form-error" class="kt-error" role="alert" hidden>
           <span id="error-text"></span>
@@ -173,8 +171,8 @@ const services = [
       </div>
 
       <aside class="kt-side">
-        <h2 class="kg-h2 kt-h2">Direkt Kontakt</h2>
-        <div class="kt-reach" data-reveal="pop">
+        <h2 class="k3-h2 kt-h2">Direkt Kontakt</h2>
+        <div class="k3-panel kt-reach" data-reveal>
           <div class="kt-reach__item">
             <span class="kt-reach__icon">📞</span>
             <div>
@@ -186,7 +184,7 @@ const services = [
             </div>
           </div>
           <div class="kt-reach__item">
-            <span class="kt-reach__icon kt-reach__icon--blue">✉</span>
+            <span class="kt-reach__icon">✉</span>
             <div>
               <div class="kt-reach__label">E-Mail</div>
               <a href={`mailto:${CONTACT.email}`} class="kt-reach__mail">
@@ -196,7 +194,7 @@ const services = [
             </div>
           </div>
           <div class="kt-reach__item">
-            <span class="kt-reach__icon kt-reach__icon--yellow">📍</span>
+            <span class="kt-reach__icon">📍</span>
             <div>
               <div class="kt-reach__label">Adresse</div>
               <address class="kt-reach__addr">
@@ -209,9 +207,9 @@ const services = [
         </div>
 
         <!-- Trust signals -->
-        <div class="kt-trust" data-reveal="tilt">
+        <div class="k3-card kt-trust" data-reveal>
           <h3 class="kt-h3">Warum Clown Zauberer LIAR?</h3>
-          <ul class="kt-trust__list">
+          <ul class="k3-ticks kt-trust__list">
             {trust.map((t) => <li>{t}</li>)}
           </ul>
         </div>
@@ -219,11 +217,12 @@ const services = [
         <!-- Service-Links -->
         <div class="kt-services" data-reveal>
           <h3 class="kt-h3">Unsere Leistungen</h3>
-          <div class="kt-services__list">
+          <div class="k3-chips kt-services__list">
             {services.map((s) => <a href={s.href}>{s.label}</a>)}
           </div>
         </div>
       </aside>
+    </div>
     </div>
   </section>
 
@@ -278,32 +277,22 @@ const services = [
 </script>
 
 <style>
-  /* ── hero ── */
-  .kt-hero { padding-bottom: var(--space-5); }
-  .kt-hero__title { font-size: clamp(2.1rem, 4.4vw, 3.4rem); }
-  .kt-hero__lead { font-size: 1.2rem; font-weight: 700; margin-bottom: var(--space-3); }
-  .kt-hero__photo :global(img) { aspect-ratio: 4 / 3; }
-  .kt-sticker span { font-size: 0.8rem; }
-  .kt-sticker strong { font-size: 1.6rem; }
-
   /* ── intro ── */
-  .kt-intro p:not(.kg-lead) { color: var(--ink-soft); }
+  .kt-intro { padding-bottom: var(--space-4) !important; }
 
-  /* ── main ── */
-  .kt-main { background: var(--bg); }
+  /* ── main: the form is a light programme sheet, the side column holds the direct ways ── */
   .kt-main__grid { display: grid; gap: var(--space-5); align-items: start; }
   @media (min-width: 901px) {
     .kt-main__grid { grid-template-columns: 1.15fr 1fr; }
     .kt-row { grid-template-columns: 1fr 1fr; }
   }
   .kt-h2 { font-size: clamp(1.7rem, 3.2vw, 2.4rem); }
-  .kt-h3 { font-size: 1.35rem; margin: 0 0 var(--space-2); }
+  .kt-h3 { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin: 0 0 var(--space-2); }
 
-  .kt-form-card {
-    scroll-margin-top: 6rem;
-    padding: var(--space-4) var(--space-3);
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow-hover);
-  }
+  .kt-form-card { scroll-margin-top: 6rem; padding: calc(var(--space-4) + 0.25rem) var(--space-4) var(--space-4); }
+  /* a form sheet does not jump away from the pointer while someone types */
+  .kt-form-card:hover { transform: none; }
+  .kt-form-card .kt-h2 { text-align: center; }
   .kt-form { display: grid; gap: 1.1rem; }
   .kt-row { display: grid; gap: 1.1rem; }
   .kt-field { display: grid; gap: 0.35rem; }
@@ -311,75 +300,69 @@ const services = [
   .kt-field :is(input, select, textarea) {
     width: 100%; min-height: 3.1rem; padding: 0.7rem 0.95rem;
     font: inherit; font-size: 1rem; color: var(--ink);
-    background-color: var(--bg); border: var(--border); border-radius: var(--radius-sm);
-    box-shadow: 3px 3px 0 var(--line);
-    transition: box-shadow 0.2s var(--ease-out), transform 0.2s var(--ease-out), background-color 0.2s;
+    background-color: #fffefa; border: 0; border-radius: var(--radius-sm);
+    /* a fine gold rule instead of the old thick ink border */
+    box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 1px 3px rgba(43, 29, 23, 0.06);
+    transition: box-shadow 0.2s var(--ease-out), background-color 0.2s ease;
   }
   .kt-field textarea { resize: vertical; min-height: 8rem; }
   .kt-field select { appearance: none; padding-right: 2.6rem; cursor: pointer;
-    background-image: linear-gradient(45deg, transparent 50%, var(--ink) 50%), linear-gradient(135deg, var(--ink) 50%, transparent 50%);
+    background-image: linear-gradient(45deg, transparent 50%, var(--gold) 50%), linear-gradient(135deg, var(--gold) 50%, transparent 50%);
     background-position: calc(100% - 1.3rem) 55%, calc(100% - 0.95rem) 55%;
     background-size: 0.38rem 0.38rem; background-repeat: no-repeat;
   }
   .kt-field ::placeholder { color: color-mix(in srgb, var(--ink-soft) 80%, transparent); }
   .kt-field :is(input, select, textarea):focus { outline: none; }
+  /* clear focus: a velvet ring with a soft gold halo (visible on every field type) */
   .kt-field :is(input, select, textarea):focus-visible {
-    outline: 3px solid var(--accent-2); outline-offset: 2px;
-    background-color: var(--surface); transform: translate(-1px, -1px); box-shadow: 5px 5px 0 var(--line);
+    outline: 2px solid var(--velvet); outline-offset: 2px; background-color: #fff;
+    box-shadow: inset 0 0 0 1px var(--gold), 0 0 0 6px rgba(233, 200, 119, 0.45);
   }
-  .kt-field [aria-invalid='true'] { border-color: var(--accent-strong); box-shadow: 3px 3px 0 var(--accent-strong); }
-  .kt-captcha__q { font-family: var(--font-display); font-weight: 700; color: var(--accent-strong); }
+  .kt-field [aria-invalid='true'] { box-shadow: inset 0 0 0 2px var(--accent-strong); }
+  .kt-captcha__q { font-family: var(--font-display); font-weight: 650; color: var(--accent-strong); }
   .kt-submit { width: 100%; min-height: 3.5rem; font-size: 1.15rem; cursor: pointer; }
+  .kt-submit:focus-visible { outline: 3px solid var(--gold); outline-offset: 3px; }
   .kt-hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
 
   .kt-error {
     margin: 0 0 var(--space-3); padding: 0.85rem 1rem; font-weight: 700;
-    color: var(--accent-strong); background: color-mix(in srgb, var(--brand-red) 10%, var(--surface));
-    border: 2.5px solid var(--accent-strong); border-radius: var(--radius-sm);
+    color: var(--accent-strong); background: #fff1ef;
+    border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1.5px var(--accent-strong);
   }
   .kt-error[hidden] { display: none; }
 
   /* ── direct contact ── */
-  .kt-reach {
-    display: grid; gap: var(--space-3); padding: var(--space-3);
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: -1deg;
-  }
+  .kt-reach { display: grid; gap: var(--space-3); }
   .kt-reach__item { display: flex; gap: 0.9rem; align-items: flex-start; }
   .kt-reach__icon {
-    flex: none; display: grid; place-items: center; width: 2.9rem; height: 2.9rem;
-    border-radius: 50%; border: 2.5px solid var(--line); background: var(--brand-red); color: #fff; font-size: 1.2rem;
+    flex: none; display: grid; place-items: center; width: 2.9rem; height: 2.9rem; font-size: 1.15rem;
+    border-radius: 50%; color: #ffe3a3;
+    background: radial-gradient(circle at 35% 30%, #c3283a, var(--velvet) 72%);
+    box-shadow: 0 0 0 1.5px #e9c877, 0 6px 14px -6px rgba(142, 21, 32, 0.6);
   }
-  .kt-reach__icon--blue { background: var(--brand-blue); }
-  .kt-reach__icon--yellow { background: var(--brand-yellow); }
   .kt-reach__label { font-weight: 900; }
   .kt-reach__big { font-family: var(--font-display); font-size: 1.45rem; font-weight: 650; color: var(--accent-strong); text-decoration: none; }
   .kt-reach__mail { font-weight: 800; color: var(--accent-strong); overflow-wrap: anywhere; }
-  .kt-reach__hint { margin: 0.1rem 0 0; font-size: 0.92rem; color: var(--ink-soft); }
+  .kt-reach__hint { margin: 0.1rem 0 0 !important; font-size: 0.92rem; color: var(--ink-soft); }
   .kt-reach__addr { font-style: normal; color: var(--ink-soft); }
 
-  .kt-trust {
-    margin-top: var(--space-4); padding: var(--space-3);
-    background: color-mix(in srgb, var(--brand-yellow) 30%, var(--surface));
-    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: 0.8deg;
-  }
-  .kt-trust__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; font-weight: 700; }
+  .kt-trust { margin-top: var(--space-4); }
+  .kt-trust .kt-h3 { text-align: center; }
+  .kt-trust__list { margin: 0; font-weight: 700; }
 
   .kt-services { margin-top: var(--space-4); }
-  .kt-services__list { display: flex; flex-wrap: wrap; gap: 0.55rem; }
+  .kt-services__list { justify-content: flex-start; }
   .kt-services__list a {
-    display: inline-flex; align-items: center; min-height: 2.75rem; padding: 0.4rem 0.95rem;
-    font-weight: 800; font-size: 0.95rem; color: var(--ink); text-decoration: none;
-    background: var(--surface); border: 2px dashed var(--line); border-radius: 999px;
-    transition: background-color 0.2s, rotate 0.25s var(--ease-out-expo);
+    display: inline-flex; align-items: center; min-height: 2.75rem; color: var(--ink); text-decoration: none;
+    transition: background-color 0.2s ease, transform 0.25s var(--ease-out);
   }
 
   @media (hover: hover) and (pointer: fine) {
-    .kt-services__list a:hover { background: var(--bg-alt); rotate: -2deg; }
+    .kt-services__list a:hover { background: var(--bg); transform: translateY(-2px); }
     .kt-reach__big:hover { text-decoration: underline; }
-    .kt-field :is(input, select, textarea):hover { background-color: var(--surface); }
+    .kt-field :is(input, select, textarea):hover { background-color: #fff; }
   }
   @media (max-width: 900px) {
-    .kt-form-card { padding: var(--space-3) 1rem; }
-    .kt-reach, .kt-trust { rotate: 0deg; }
+    .kt-form-card { padding: calc(var(--space-3) + 0.5rem) 1.1rem var(--space-3); }
   }
 </style>

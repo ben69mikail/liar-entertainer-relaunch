@@ -477,3 +477,72 @@ html:is([data-zone='kids'], [data-zone='neutral']) .k3-hero .btn--primary { box-
 :where(section):has(> .k3-uplight) { overflow-x: clip; }
 /* glitter sparkles around a framed photo must not widen the page on phones */
 :where(section):has(.gl) { overflow-x: clip; }
+
+/* ── neutral pages: gallery, blog lists, articles (2026-10-06): generic helpers, additive only ── */
+/* the big-top stage of .k3-hero as one token, for slim stage headers without curtain */
+html:is([data-zone='kids'], [data-zone='neutral']) {
+  --k3-bigtop:
+    radial-gradient(ellipse 34% 22% at 50% 100%, rgba(255, 70, 200, 0.4), transparent 75%),
+    radial-gradient(ellipse 26% 70% at 6% 70%, rgba(255, 50, 80, 0.38), transparent 75%),
+    radial-gradient(ellipse 26% 70% at 94% 70%, rgba(110, 150, 255, 0.34), transparent 75%),
+    radial-gradient(ellipse 50% 60% at 50% 0%, rgba(130, 120, 255, 0.4), transparent 75%),
+    repeating-conic-gradient(from 90deg at 50% -30%, rgba(255, 255, 255, 0.045) 0deg 4deg, rgba(0, 0, 0, 0.06) 4deg 8deg),
+    linear-gradient(180deg, #1a1450 0%, #2b1a66 60%, #241355 100%);
+}
+/* K3Hero without a photo, copy centred: wrap the slot content in .k3-hero-center */
+.k3-hero__grid--solo:has(> .k3-hero__copy > .k3-hero-center) { justify-content: center; }
+.k3-hero-center { text-align: center; }
+.k3-hero-center :is(.k3-quick, .k3-hero__actions, .k3-chipnav) { justify-content: center; }
+/* running text + inline links on the dark stage */
+.k3-hero__text { color: #eadcc6; font-size: 1.05rem; }
+.k3-hero .k3-hero__text a:not(.btn) { color: #ffe3a3; }
+
+/* slim stage header (articles): the big-top background, no curtain, no lights that move */
+.k3-stagehead { background: var(--k3-bigtop); color: #f6ecdc; }
+.k3-stagehead :is(h1, h2) { color: #fff7ea; text-shadow: 0 2px 18px rgba(10, 5, 40, 0.5); }
+.k3-stagehead a:not(.btn) { color: #ffe3a3; }
+
+/* circus-programme sheet for any box (fine double gold rule + corner flourishes) */
+.k3-prog {
+  background:
+    var(--orn-tl) left 0.55rem top 0.55rem / 1.5rem no-repeat,
+    var(--orn-tr) right 0.55rem top 0.55rem / 1.5rem no-repeat,
+    var(--orn-bl) left 0.55rem bottom 0.55rem / 1.5rem no-repeat,
+    var(--orn-br) right 0.55rem bottom 0.55rem / 1.5rem no-repeat,
+    var(--surface);
+  border-radius: var(--radius);
+  box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), var(--shadow);
+}
+
+/* chip navigation (categories, filters): paper pills with a gold hairline; light variant on dark */
+.k3-chipnav { display: flex; flex-wrap: wrap; align-items: center; gap: 0.5rem; }
+.k3-chip {
+  display: inline-flex; align-items: center; gap: 0.3rem; min-height: 2.75rem; padding: 0.3rem 0.95rem;
+  border-radius: 999px; font-weight: 700; font-size: 0.92rem; text-decoration: none; color: var(--ink);
+  background: var(--surface); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.6);
+  transition: background-color 0.2s ease, transform 0.25s var(--ease-out);
+}
+.k3-chip small { font-size: 0.85em; font-weight: 600; color: var(--ink-soft); }
+:is(.k3-hero, .k3-stagehead, .k3-band) .k3-chip { color: #fff3e2; background: rgba(255, 252, 245, 0.1); box-shadow: inset 0 0 0 1px rgba(233, 200, 119, 0.7); }
+:is(.k3-hero, .k3-stagehead, .k3-band) .k3-chip small { color: #e9d9bd; }
+@media (hover: hover) and (pointer: fine) {
+  .k3-chip:hover { transform: translateY(-2px); background: #fff; }
+  :is(.k3-hero, .k3-stagehead, .k3-band) .k3-chip:hover { background: rgba(255, 252, 245, 0.22); }
+}
+
+/* ── neutral pages: kontakt, danke, preise, über mich, 404 (2026-10-06): generic helpers, additive only ── */
+/* a row of buttons centred outside the hero (CTA sections, thank-you page) */
+.k3-actions--center { justify-content: center; }
+/* numbered steps on a programme card: velvet medallions with a gold ring */
+.k3-steps { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.9rem; font-weight: 600; text-align: left; }
+.k3-steps li { display: flex; gap: 0.8rem; align-items: center; }
+.k3-steps__num {
+  flex: none; display: grid; place-items: center; width: 2.3rem; height: 2.3rem; border-radius: 50%;
+  font-family: var(--font-display); font-weight: 650; line-height: 1; color: #ffe3a3;
+  background: radial-gradient(circle at 35% 30%, #c3283a, var(--velvet) 72%);
+  box-shadow: 0 0 0 1.5px #e9c877, 0 6px 14px -6px rgba(142, 21, 32, 0.6);
+}
+.k3-steps a { font-weight: 800; white-space: nowrap; }
+/* inside a .k3-card the generic "li span = gold tick" rule must not recolour the steps */
+.k3-steps li > span { color: var(--ink); font-weight: 600; }
+.k3-steps li > .k3-steps__num { color: #ffe3a3; font-weight: 650; }

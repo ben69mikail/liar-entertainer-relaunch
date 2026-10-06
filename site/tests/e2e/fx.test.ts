@@ -187,28 +187,6 @@ describe('kids hat trick', () => {
   });
 });
 
-describe('side rays hero spotlights', () => {
-  it('runs on a real GPU, stays off on software rendering and under reduced motion', async () => {
-    const state = async (rm: 'reduce' | 'no-preference') => {
-      // kids pages moved to the v3 hero (CSS projectors, no WebGL rays); the home page still has them
-      const page = await open('/', rm);
-      await page.mouse.move(400, 300); // starts on first interaction
-      await page.waitForTimeout(3000);
-      const v = await page.evaluate(() => {
-        const gl = document.createElement('canvas').getContext('webgl')!;
-        const ext = gl.getExtension('WEBGL_debug_renderer_info');
-        const renderer = String(ext ? gl.getParameter(ext.UNMASKED_RENDERER_WEBGL) : '');
-        return { live: document.querySelector('.kg-rays')!.classList.contains('is-live'), software: /swiftshader|llvmpipe|software/i.test(renderer) };
-      });
-      await page.close();
-      return v;
-    };
-    const normal = await state('no-preference');
-    expect(normal.live).toBe(!normal.software);
-    expect((await state('reduce')).live).toBe(false);
-  }, 20_000);
-});
-
 describe('adult photos sit in magic frames, cards are only accents (user feedback 2026-10-06)', () => {
   const ADULT = ['/', '/zauberer/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'];
   for (const path of ADULT) {

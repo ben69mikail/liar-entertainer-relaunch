@@ -3,12 +3,14 @@ import { getCollection, render } from 'astro:content';
 import V2Layout from '../../layouts/V2Layout.astro';
 import Reviews from '../../components/v2/Reviews.astro';
 import BlogFooter from '../../components/v2/BlogFooter.astro';
+import ProgramFrame from '../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import { CONTACT } from '../../data/site';
 import postsData from '../../data/posts.json';
 import { generateHeroWithOverlay } from '../../utils/heroOverlay';
 import { generateStoryImage } from '../../utils/storyOverlay';
 import { catToSlug } from '../../utils/allPosts';
-import '../../styles/kids-kit.css';
+import '../../styles/kids-v3.css';
 import '../../styles/article.css';
 
 type WPPost = { slug: string };
@@ -91,7 +93,8 @@ const articleSchema = {
   heroPreload={heroDisplayUrl}
   structuredData={articleSchema}
 >
-  <!-- ── Article head: crumbs, title, meta, cover. No reveals on the article (reading first). ── -->
+  <!-- ── Article head: slim big-top stage (crumbs, title, meta), the cover hangs below it as a programme sheet.
+       No reveals on the article (reading first). ── -->
   <section class="bp-head">
     <div class="bp-col">
       <nav class="bp-crumbs" aria-label="Brotkrumen">
@@ -114,7 +117,7 @@ const articleSchema = {
         )}
       </div>
       {heroDisplayUrl && (
-        <figure class="bp-hero">
+        <ProgramFrame class="bp-hero">
           <img
             src={heroDisplayUrl}
             alt={entry.data.heroImageAlt ?? entry.data.title}
@@ -124,7 +127,7 @@ const articleSchema = {
             width="1200"
             height="630"
           />
-        </figure>
+        </ProgramFrame>
       )}
     </div>
   </section>
@@ -155,7 +158,7 @@ const articleSchema = {
       <!-- Service quick links (legacy: above the cover; moved below the article for reading flow) -->
       <nav class="bp-services" aria-labelledby="bp-services-title">
         <p class="bp-services__title" id="bp-services-title">Unsere Leistungen</p>
-        <div class="kg-quick">
+        <div class="k3-quick">
           <a href="/clown/clownshow/">🤡 Clownshow</a>
           <a href="/zauberer/">🎩 Zauberer</a>
           <a href="/kinderzauberer/">✨ Kinderzauberer</a>
@@ -171,12 +174,15 @@ const articleSchema = {
 
   <!-- ── Book-now CTA ── -->
   <section class="bp-cta">
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2">Jetzt LIAR buchen</h2>
-      <p class="bp-cta__text">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
-      <div class="bp-cta__actions">
-        <a href="/kontakt/" class="btn btn--primary" data-confetti>Kontakt aufnehmen</a>
-        <a href={CONTACT.phoneHref} class="btn btn--ghost">+49 172 1517578</a>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <div class="k3-prog bp-cta__card">
+        <h2 class="k3-h2">Jetzt LIAR buchen</h2>
+        <p class="bp-cta__text">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
+        <div class="bp-cta__actions">
+          <a href="/kontakt/" class="btn btn--primary" data-confetti>Kontakt aufnehmen</a>
+          <a href={CONTACT.phoneHref} class="btn btn--ghost">+49 172 1517578</a>
+        </div>
       </div>
     </div>
   </section>

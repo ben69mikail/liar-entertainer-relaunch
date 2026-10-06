@@ -2,7 +2,8 @@
 import V2Layout from '../layouts/V2Layout.astro';
 import Reviews from '../components/v2/Reviews.astro';
 import { CONTACT } from '../data/site';
-import '../styles/kids-kit.css';
+import GoldDivider from '../components/v2/kids/GoldDivider.astro';
+import '../styles/kids-v3.css';
 import '../styles/article.css';
 import pagesData from '../data/pages.json';
 import postsData from '../data/posts.json';
@@ -1154,7 +1155,7 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
         {isBlogPost && (
           <nav class="bp-services" aria-labelledby="bp-services-title">
             <p class="bp-services__title" id="bp-services-title">Unsere Leistungen</p>
-            <div class="kg-quick">
+            <div class="k3-quick">
               <a href="/clown/clownshow/">🤡 Clownshow</a>
               <a href="/zauberer/">🎩 Zauberer</a>
               <a href="/kinderzauberer/">✨ Kinderzauberer</a>
@@ -1186,30 +1187,44 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
   <Reviews />
 
   <section class="bp-cta">
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2">Jetzt buchen</h2>
-      <p class="bp-cta__text">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
-      <div class="bp-cta__actions">
-        <a href="/kontakt/" class="btn btn--primary" data-confetti>Kontakt aufnehmen</a>
-        <a href={CONTACT.phoneHref} class="btn btn--ghost">+49 172 1517578</a>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <div class="k3-prog bp-cta__card">
+        <h2 class="k3-h2">Jetzt buchen</h2>
+        <p class="bp-cta__text">Unvergessliche Unterhaltung für Ihr Event – einfach und unverbindlich anfragen!</p>
+        <div class="bp-cta__actions">
+          <a href="/kontakt/" class="btn btn--primary" data-confetti>Kontakt aufnehmen</a>
+          <a href={CONTACT.phoneHref} class="btn btn--ghost">+49 172 1517578</a>
+        </div>
       </div>
     </div>
   </section>
 </V2Layout>
 
 <style>
-  .bp-body--page { border-top: 0; }
-  .bp-lead { color: var(--ink-soft); font-size: 1.15rem; max-width: 60ch; }
+  /* pages (Impressum, AGB, Datenschutz, /clown/clown-zauberer/ …): the theme's own title block
+     becomes the slim big-top stage, bled to the full width behind the reading column */
+  .bp-body--page { overflow-x: clip; padding-top: 0; }
 
   /* ── WordPress/Neve markup inside the scraped body ── */
   .wp-scraped :global(:is(.container, .row, .col, article, .nv-content-wrap, .nv-single-post-wrap, .nv-single-page-wrap)) {
     display: block; width: auto; max-width: none; margin: 0; padding: 0;
   }
   .wp-scraped :global(.nv-thumb-wrap:empty) { display: none; }
-  /* the theme's own title block repeats on pages: keep it, but calm */
-  .wp-scraped :global(.nv-page-title-wrap) { margin-bottom: var(--space-3); }
-  .wp-scraped :global(.nv-page-title h1) { font-size: clamp(2rem, 5vw, 3rem); margin: 0 0 0.4em; }
-  .wp-scraped :global(.nv--yoast-breadcrumb) { font-size: 0.9rem; font-weight: 700; color: var(--ink-soft); }
+  .wp-scraped :global(.nv-page-title-wrap) {
+    position: relative; isolation: isolate; color: #f6ecdc;
+    margin-bottom: var(--space-4); padding-block: var(--space-5) var(--space-4);
+  }
+  .wp-scraped :global(.nv-page-title-wrap::before) {
+    content: ''; position: absolute; z-index: -1; inset: 0 -100vw; /* clipped by .bp-body--page */
+    background: var(--k3-bigtop, #241355);
+  }
+  .wp-scraped :global(.nv-page-title h1) {
+    font-size: clamp(2rem, 5vw, 3.1rem); font-weight: 600; line-height: 1.12; margin: 0.3em 0 0;
+    color: #fff7ea; text-shadow: 0 2px 18px rgba(10, 5, 40, 0.5);
+  }
+  .wp-scraped :global(.nv--yoast-breadcrumb) { font-size: 0.9rem; font-weight: 700; color: rgba(255, 243, 226, 0.78); }
+  .wp-scraped :global(.nv--yoast-breadcrumb a) { color: #ffe3a3; }
   .wp-scraped :global(.nv-meta-list) {
     display: flex; flex-wrap: wrap; gap: 0.25rem 0.9rem; list-style: none; padding: 0; margin: var(--space-3) 0 0;
     color: var(--ink-soft); font-size: 0.9rem; font-weight: 700;
@@ -1219,11 +1234,11 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
   .wp-scraped :global(.nv-tags-list) { display: flex; flex-wrap: wrap; gap: 0.4rem; align-items: center; margin-top: var(--space-3); font-weight: 700; }
   .wp-scraped :global(.nv-tags-list a) {
     display: inline-flex; align-items: center; min-height: 2rem; padding: 0.1rem 0.75rem; border-radius: 999px;
-    border: 2px solid var(--line); background: var(--bg); color: var(--ink); text-decoration: none; font-size: 0.85rem;
+    background: var(--surface); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.6); color: var(--ink); text-decoration: none; font-size: 0.85rem;
   }
   .wp-scraped :global(.nv-related-posts) {
-    margin-top: var(--space-5); padding: var(--space-3); background: var(--bg);
-    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
+    margin-top: var(--space-5); padding: calc(var(--space-3) + 0.4rem) var(--space-3) var(--space-3); background: var(--bg);
+    border-radius: var(--radius); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--bg), inset 0 0 0 6px rgba(184, 134, 47, 0.25), var(--shadow);
   }
   .wp-scraped :global(.nv-related-posts .section-title h2) { margin-top: 0; }
   .wp-scraped :global(.nv-related-posts .posts-wrapper) {
@@ -1231,7 +1246,7 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
   }
   .wp-scraped :global(.nv-related-posts .related-post) { font-size: 0.98rem; line-height: 1.45; }
   .wp-scraped :global(.nv-related-posts :is(h3, h4)) { font-size: 1.05rem; margin: 0 0 0.3em; }
-  .wp-scraped :global(.nv-related-posts img) { margin: 0 0 0.5rem; aspect-ratio: 4 / 3; object-fit: cover; }
+  .wp-scraped :global(.nv-related-posts img) { margin: 0 0 0.5rem; }
   /* Gutenberg layout blocks */
   .wp-scraped :global(:is(.wp-block-columns, .wp-block-group.is-layout-flex, .wp-block-buttons)) { display: flex; flex-wrap: wrap; gap: var(--space-2); }
   .wp-scraped :global(.wp-block-column) { flex: 1 1 16rem; min-width: 0; }
@@ -1240,8 +1255,8 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
   .wp-scraped :global(.has-text-align-center) { text-align: center; }
   .wp-scraped :global(.wp-block-button__link) {
     display: inline-flex; align-items: center; min-height: 3rem; padding: 0.7rem 1.4rem; border-radius: 999px;
-    background: var(--accent-strong); color: var(--accent-ink); border: var(--border); font-family: var(--font-display);
-    font-weight: 650; text-decoration: none; box-shadow: 3px 3px 0 var(--line);
+    background: linear-gradient(180deg, #d13a42, #a8192a); color: #fff; border: 0; font-family: var(--font-display);
+    font-weight: 600; text-decoration: none; box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 10px 22px -10px rgba(142, 21, 32, 0.7);
   }
   .wp-scraped :global(iframe) { max-width: 100%; }
   /* themeisle counters: number + label were two inline spans ("400Shows im Jahr") */
@@ -1251,10 +1266,10 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
   .wp-scraped :global(div:has(> span.wp-block-themeisle-blocks-advanced-heading + span.wp-block-themeisle-blocks-advanced-heading) > span:first-of-type) {
     font-family: var(--font-display); font-weight: 700; font-size: 1.6rem; color: var(--accent-strong);
   }
-  /* themeisle accordion → the kit's FAQ look */
+  /* themeisle accordion → the v3 FAQ look (paper, gold hairline) */
   .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item) {
-    margin: 0 0 0.75rem; background: var(--surface); border: var(--border); border-radius: var(--radius-sm);
-    box-shadow: 3px 3px 0 var(--line);
+    margin: 0 0 0.75rem; background: var(--bg); border-radius: var(--radius-sm);
+    box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.4);
   }
   .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item__title) {
     display: flex; justify-content: space-between; align-items: center; gap: 1rem; min-height: 3rem;
@@ -1263,8 +1278,9 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
   .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item__title::-webkit-details-marker) { display: none; }
   .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item__title::after) {
     content: '+'; flex: none; display: grid; place-items: center; width: 1.8rem; height: 1.8rem; border-radius: 50%;
-    background: var(--brand-yellow); border: 2px solid var(--line); font-family: var(--font-display); transition: rotate 0.2s var(--ease-out);
+    color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold); font-family: var(--font-display);
+    transition: rotate 0.3s var(--ease-out), background-color 0.2s ease, color 0.2s ease;
   }
-  .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item[open] > .wp-block-themeisle-blocks-accordion-item__title::after) { rotate: 45deg; }
+  .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item[open] > .wp-block-themeisle-blocks-accordion-item__title::after) { rotate: 45deg; background: var(--velvet); color: #fff3dd; box-shadow: none; }
   .wp-scraped :global(.wp-block-themeisle-blocks-accordion-item__content) { padding: 0 1rem 1rem; }
 </style>

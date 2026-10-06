@@ -1,12 +1,13 @@
 ---
 import V2Layout from '../layouts/V2Layout.astro';
 import Reviews from '../components/v2/Reviews.astro';
-import SectionEdge from '../components/v2/SectionEdge.astro';
-import Bunting from '../components/v2/kids/Bunting.astro';
-import Squiggle from '../components/v2/kids/Squiggle.astro';
+import K3Hero from '../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../components/v2/kids/GoldDivider.astro';
+import Curtain from '../components/v2/kids/Curtain.astro';
 import MagicFrame from '../components/v2/adult/MagicFrame.astro';
 import adultWorldImg from '../assets/images/zauberer/zauberer-nrw.png';
-import '../styles/kids-kit.css';
+import '../styles/kids-v3.css';
 import YouTubeFacade from '../components/YouTubeFacade.astro';
 import { Image } from 'astro:assets';
 
@@ -180,17 +181,15 @@ const videoSchema = {
   ogImage={ogImage}
   structuredData={[faqSchema, videoSchema]}
 >
-  <!-- ── Hero: one stage, two worlds (kids poster · adult playing card). No reveal (LCP). ── -->
-  <section class="kg-hero hm-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.55}'></canvas>
-    <Bunting />
-    <div class="container hm-hero__top">
+  <!-- ── Hero: the big-top stage, two doors (kids programme · adult magic frame). No reveal (LCP). ── -->
+  <K3Hero>
+    <div class="hm-hero__top">
       <div class="hm-badges">
         <span class="hm-badge"><span class="hm-badge__stars">★★★★★</span> 370+ Google-Rezensionen</span>
         <span class="hm-badge">🎩 15 Jahre Erfahrung</span>
         <span class="hm-badge">🪄 Interaktive Zaubershow</span>
       </div>
-      <h1 class="hm-title" data-letters>
+      <h1 class="k3-hero__title hm-title">
         <span class="hm-title__main">Clown Zauberer in NRW</span>
         <span class="sr-only"> – </span>
         <span class="hm-title__sub">Zaubershow &amp; Kindergeburtstag</span>
@@ -201,7 +200,7 @@ const videoSchema = {
       <p class="hm-lead">
         40 Minuten Mitmach-Magie ab 4 Jahren · nur 2×2 m Platz nötig · 370+ ★★★★★-Google-Bewertungen
       </p>
-      <div class="hm-actions">
+      <div class="k3-hero__actions hm-actions">
         <a href="/kontakt/" class="btn btn--primary" data-confetti>
           Jetzt unverbindlich anfragen
         </a>
@@ -212,35 +211,38 @@ const videoSchema = {
       </div>
     </div>
 
-    <nav class="container hm-worlds" aria-label="Für wen?">
+    <nav class="hm-worlds" aria-label="Für wen?">
+      <!-- kids door: a circus-programme sheet. The LCP is the hero headline (no letter split), so this photo loads quietly -->
       <a class="hm-world hm-world--kids" href="/kindergeburtstag/">
         <span class="hm-world__label">Für Kinder</span>
-        <span class="hm-world__photo">
-          <Image src={heroSlides[0].src} alt={heroSlides[0].alt} widths={[400, 700, 1000]} sizes="(max-width: 760px) 92vw, 520px" loading="eager" fetchpriority="low" />
-        </span>
+        <ProgramFrame class="hm-world__photo">
+          <Image src={heroSlides[0].src} alt={heroSlides[0].alt} widths={[300, 450, 600]} quality={65} sizes="(max-width: 900px) 62vw, 384px" loading="eager" fetchpriority="low" />
+        </ProgramFrame>
         <span class="hm-world__links" aria-hidden="true">Kindergeburtstag · Kinderzauberer · Clownshow</span>
         <span class="hm-world__go" aria-hidden="true">Zur Kinderwelt →</span>
       </a>
+      <!-- adult door: keeps the adult zone's look (magic frame, Bodoni, ink + card red) -->
       <a class="hm-world hm-world--adult" href="/zauberer/">
+        <span class="hm-world__label">Für Erwachsene</span>
         <div class="hm-world__card">
           <MagicFrame corner="tr" rank="A" suit="♠" class="hm-world__pc">
-            <Image src={adultWorldImg} alt="Zauberer LIAR wirft Spielkarten auf der Bühne" widths={[400, 700]} sizes="(max-width: 760px) 80vw, 352px" loading="lazy" />
+            <Image src={adultWorldImg} alt="Zauberer LIAR wirft Spielkarten auf der Bühne" widths={[400, 700]} sizes="(max-width: 900px) 74vw, 400px" loading="lazy" />
           </MagicFrame>
         </div>
-        <span class="hm-world__label">Für Erwachsene</span>
         <span class="hm-world__links" aria-hidden="true">Close-up · Bühnenshow · Hochzeit · Firmenfeier</span>
         <span class="hm-world__go" aria-hidden="true">Zur Zauberei für Erwachsene →</span>
       </a>
     </nav>
-  </section>
+  </K3Hero>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
   <section class="hm-intro">
-    <div class="container kg-narrow" data-reveal>
-      <h2 class="kg-h2">
-        <span class="hm-red">Lachen garantiert</span> – bei Ihnen zu Hause, in der Kita oder auf dem Fest
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">
+        <span class="k3-mark">Lachen garantiert</span> – bei Ihnen zu Hause, in der Kita oder auf dem Fest
       </h2>
-      <p class="kg-lead">
+      <p class="k3-lead">
         Sie suchen einen Clown, der Kinderaugen zum Leuchten bringt? Clown Zauberer Liar sorgt seit
         über 15 Jahren für unvergessliche Momente auf <a href="/kindergeburtstag/">Kindergeburtstagen</a>, Straßenfesten und
         Firmenevents in ganz NRW. Als erfahrener <a href="/kinderzauberer/">Kinderzauberer</a> und
@@ -248,7 +250,7 @@ const videoSchema = {
         <a href="/zauberer/">Zauberei</a>
         mit Interaktion — jede Veranstaltung wird zum Highlight!
       </p>
-      <p class="kg-center hm-cta">
+      <p class="k3-cta-row">
         <a href="/kontakt/" class="btn btn--primary" data-confetti>
           Jetzt unverbindlich anfragen
         </a>
@@ -257,41 +259,43 @@ const videoSchema = {
   </section>
 
   <!-- ── Was macht Clown Liar so besonders? ────────────────── -->
-  <section class="kg-intro hm-special">
-    <div class="container kg-intro__grid">
-      <div class="kg-intro__text" data-reveal>
-        <h2 class="kg-h2">
-          Was macht Clown Liar so besonders?
-        </h2>
-        <p>
-          Als professioneller Clown und Kinderzauberer bringe ich nicht nur Kinder, sondern auch Erwachsene zum Lachen.
-          Meine Show kombiniert klassische Clownerie mit modernen Entertainment-&nbsp;Elementen –
-          individuell abgestimmt auf Ihr Event und die Altersgruppe. Ob beim <a href="/kindergeburtstag/">Kindergeburtstag</a> oder auf der großen Bühne.
-        </p>
-        <p>
-          <a href="/zauberer/zaubershow/">Zaubershow</a>:
-          Verblüffende Zaubertricks, bei denen die Kinder aktiv mitmachen und selbst zu
-          kleinen Zauberern werden. Staunen und Lachen in perfekter Balance!
-        </p>
-        <p>
-          <strong>Walk-Act:</strong> Lustige Improvisation, witzige Gags und interaktive Clownerie, die garantiert
-          für Lacher sorgt. Jeder Pantomime- oder Clown-Auftritt wird auf Ihre Gäste abgestimmt.
-        </p>
-        <p>
-          <strong>Extras:</strong> Ballonmodellage, Glitzer Tattoos, Close-up… Ihr Clown Zauberer bringt alles
-          mit, was Ihr Event unvergesslich macht.
-        </p>
+  <section class="hm-special">
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-split">
+        <div data-reveal>
+          <h2 class="k3-h2">
+            Was macht Clown Liar so besonders?
+          </h2>
+          <p>
+            Als professioneller Clown und Kinderzauberer bringe ich nicht nur Kinder, sondern auch Erwachsene zum Lachen.
+            Meine Show kombiniert klassische Clownerie mit modernen Entertainment-&nbsp;Elementen –
+            individuell abgestimmt auf Ihr Event und die Altersgruppe. Ob beim <a href="/kindergeburtstag/">Kindergeburtstag</a> oder auf der großen Bühne.
+          </p>
+          <p>
+            <a href="/zauberer/zaubershow/">Zaubershow</a>:
+            Verblüffende Zaubertricks, bei denen die Kinder aktiv mitmachen und selbst zu
+            kleinen Zauberern werden. Staunen und Lachen in perfekter Balance!
+          </p>
+          <p>
+            <strong>Walk-Act:</strong> Lustige Improvisation, witzige Gags und interaktive Clownerie, die garantiert
+            für Lacher sorgt. Jeder Pantomime- oder Clown-Auftritt wird auf Ihre Gäste abgestimmt.
+          </p>
+          <p>
+            <strong>Extras:</strong> Ballonmodellage, Glitzer Tattoos, Close-up… Ihr Clown Zauberer bringt alles
+            mit, was Ihr Event unvergesslich macht.
+          </p>
+        </div>
+        <ProgramFrame class="k3-photo hm-photo--portrait" data-reveal data-reveal-delay="0.1">
+          <Image
+            src={portraitImg}
+            alt="Clown Zauberer LIAR bringt Kinder auf dem Geburtstag zum Lachen"
+            widths={[320]}
+            sizes="(max-width: 900px) 70vw, 240px"
+            loading="lazy"
+          />
+        </ProgramFrame>
       </div>
-      <figure class="hm-sticker" data-reveal="pop">
-        <Image
-          src={portraitImg}
-          alt="Clown Zauberer LIAR bringt Kinder auf dem Geburtstag zum Lachen"
-          loading="lazy"
-          width={360}
-          height={360}
-          data-scroll-tilt="3"
-        />
-      </figure>
     </div>
   </section>
 
@@ -299,204 +303,209 @@ const videoSchema = {
 
   <!-- ── Lernen Sie Clown Liar kennen ──────────────────────── -->
   <section class="hm-about">
-    <div class="container kg-intro__grid">
-      <div data-reveal>
-        <p class="kg-kicker">Über mich</p>
-        <h2 class="kg-h2">
-          Lernen Sie Clown Liar kennen – Ihr Entertainer mit Herz &amp; Humor
-        </h2>
-        <p>
-          Hallo, ich bin Liar – professioneller Clown, Zauberer und Entertainer aus
-          Nordrhein-Westfalen und seit über einem Jahrzehnt bringe ich Kinderherzen zum
-          Hüpfen und Erwachsene zum Schmunzeln. <a href="/ueber-mich/">Erfahren Sie mehr über mich und meinen Werdegang</a>.
-        </p>
-        <p>
-          Meine Mission? Jeden Moment zu etwas Besonderem machen! Daher ist es mir als
-          Clown wichtig, dass sich jedes Kind gesehen und einbezogen fühlt. Deshalb sind
-          meine Shows interaktiv, warmherzig und voller Überraschungen. In meinem <a href="/blog/">Blog</a> erzähle ich regelmäßig von solchen besonderen Momenten.
-        </p>
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-split k3-split--flip">
+        <ProgramFrame class="k3-photo k3-photo--l k3-photo--wide" data-reveal>
+          <Image
+            src={michaelImg}
+            alt="Foto von Michael Prescler – Clown Zauberer LIAR"
+            widths={[400, 700, 900]}
+            sizes="(max-width: 900px) 86vw, 400px"
+            quality={70}
+            loading="lazy"
+          />
+        </ProgramFrame>
+        <div data-reveal data-reveal-delay="0.1">
+          <p class="k3-kicker">Über mich</p>
+          <h2 class="k3-h2">
+            Lernen Sie Clown Liar kennen – Ihr Entertainer mit Herz &amp; Humor
+          </h2>
+          <p>
+            Hallo, ich bin Liar – professioneller Clown, Zauberer und Entertainer aus
+            Nordrhein-Westfalen und seit über einem Jahrzehnt bringe ich Kinderherzen zum
+            Hüpfen und Erwachsene zum Schmunzeln. <a href="/ueber-mich/">Erfahren Sie mehr über mich und meinen Werdegang</a>.
+          </p>
+          <p>
+            Meine Mission? Jeden Moment zu etwas Besonderem machen! Daher ist es mir als
+            Clown wichtig, dass sich jedes Kind gesehen und einbezogen fühlt. Deshalb sind
+            meine Shows interaktiv, warmherzig und voller Überraschungen. In meinem <a href="/blog/">Blog</a> erzähle ich regelmäßig von solchen besonderen Momenten.
+          </p>
+        </div>
       </div>
-      <figure class="hm-sticker hm-sticker--round" data-reveal="pop" data-reveal-delay="0.1">
-        <Image
-          src={michaelImg}
-          alt="Foto von Michael Prescler – Clown Zauberer LIAR"
-          loading="lazy"
-          width={320}
-          height={320}
-          quality={70}
-        />
-      </figure>
     </div>
   </section>
 
-  <!-- ── Zahlen (red band) ─────────────────────────────────── -->
-  <section class="kg-band hm-stats">
-    <SectionEdge color="var(--brand-red)" side="top" />
-    <SectionEdge color="var(--brand-red)" side="bottom" />
-    <div class="container hm-stats__grid">
-      <div class="hm-stat" data-reveal="pop">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4V2m0 20v-2m5-15 1.5-1.5M18.5 18.5 20 20M20 9h2M2 22 14 10m3-3 3 3-2.5 2.5-3-3L17 7Z"/></svg>
-        <div class="hm-stat__num" data-count>400</div>
-        <div class="hm-stat__label">Shows im Jahr</div>
-      </div>
-      <div class="hm-stat" data-reveal="pop" data-reveal-delay="0.08">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2.5 4 2.5 4-2.5 4-2.5M9 9.5h.01M15 9.5h.01"/></svg>
-        <div class="hm-stat__num">110.000</div>
-        <div class="hm-stat__label">Lachende Kinder</div>
-      </div>
-      <div class="hm-stat" data-reveal="pop" data-reveal-delay="0.16">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 2.9 6.26L21.5 9.27l-4.75 4.28 1.23 6.72L12 16.9l-5.98 3.37 1.23-6.72L2.5 9.27l6.6-1.01L12 2Z"/></svg>
-        <div class="hm-stat__num" data-count>15</div>
-        <div class="hm-stat__label">Jahre Erfahrung</div>
+  <!-- ── Zahlen: the velvet ring ───────────────────────────── -->
+  <section class="k3-band k3-band--velvet">
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-stats">
+        <div class="k3-stat" data-reveal>
+          <svg class="hm-stat__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M15 4V2m0 20v-2m5-15 1.5-1.5M18.5 18.5 20 20M20 9h2M2 22 14 10m3-3 3 3-2.5 2.5-3-3L17 7Z"/></svg>
+          <div class="k3-stat__num" data-count>400</div>
+          <div class="k3-stat__label">Shows im Jahr</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.08">
+          <svg class="hm-stat__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M8 14s1.5 2.5 4 2.5 4-2.5 4-2.5M9 9.5h.01M15 9.5h.01"/></svg>
+          <div class="k3-stat__num">110.000</div>
+          <div class="k3-stat__label">Lachende Kinder</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.16">
+          <svg class="hm-stat__icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m12 2 2.9 6.26L21.5 9.27l-4.75 4.28 1.23 6.72L12 16.9l-5.98 3.37 1.23-6.72L2.5 9.27l6.6-1.01L12 2Z"/></svg>
+          <div class="k3-stat__num" data-count>15</div>
+          <div class="k3-stat__label">Jahre Erfahrung</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ── Qualifikationen + Was mich auszeichnet ─────────────── -->
   <section class="hm-quali">
-    <div class="container kg-intro__grid">
-      <div data-reveal>
-        <p class="hm-quali__title">Meine Qualifikationen:</p>
-        <div class="hm-checks">
-          {[
-            'Über 15 Jahre Erfahrung als Clown & 30 Jahre als Entertainer',
-            'über 400 erfolgreiche Auftritte in NRW und deutschlandweit im Jahr',
-            'pädagogische Ausbildung',
-            'Spezialisiert auf Kinder von 3–12 Jahren',
-            'Versichert und polizeiliches Führungszeugnis (auf Anfrage)',
-          ].map((item) => (
-            <p>
-              <span class="hm-check">✓</span>
-              <span>{item}</span>
-            </p>
-          ))}
+    <div class="container">
+      <div class="k3-split">
+        <div data-reveal>
+          <p class="hm-quali__title">Meine Qualifikationen:</p>
+          <ul class="k3-ticks">
+            {[
+              'Über 15 Jahre Erfahrung als Clown & 30 Jahre als Entertainer',
+              'über 400 erfolgreiche Auftritte in NRW und deutschlandweit im Jahr',
+              'pädagogische Ausbildung',
+              'Spezialisiert auf Kinder von 3–12 Jahren',
+              'Versichert und polizeiliches Führungszeugnis (auf Anfrage)',
+            ].map((item) => (
+              <li>
+                <span>✓</span>
+                <span>{item}</span>
+              </li>
+            ))}
+          </ul>
         </div>
+        <ProgramFrame class="k3-photo hm-photo--small" data-reveal data-reveal-delay="0.1">
+          <Image
+            src={clownerieImg}
+            alt="Clownerie und Zauberei auf einem Kindergeburtstag in NRW"
+            loading="lazy"
+          />
+        </ProgramFrame>
       </div>
-      <figure class="hm-sticker hm-sticker--tilt" data-reveal="pop">
-        <Image
-          src={clownerieImg}
-          alt="Clownerie und Zauberei auf einem Kindergeburtstag in NRW"
-          loading="lazy"
-          width={300}
-          height={300}
-        />
-      </figure>
-    </div>
-    <div class="container kg-narrow hm-nocreepy" data-reveal="tilt">
-      <h3 class="kg-h3 kg-center">Was mich als Clown auszeichnet</h3>
-      <p>
-        Ich bin kein „gruseliger" Clown – ganz im Gegenteil: keine Schminke, keine
-        „komischen Haare" und keine rote Nase! Mein Clown-Charakter ist freundlich,
-        trotzdem bunt und lädt Kinder zum Mitmachen ein. Selbst schüchterne Kinder
-        tauen schnell auf, wenn Clown Liar die Bühne betritt.
-      </p>
+      <div class="k3-narrow k3-panel hm-nocreepy" data-reveal>
+        <h3 class="k3-h3 k3-center">Was mich als Clown auszeichnet</h3>
+        <p>
+          Ich bin kein „gruseliger" Clown – ganz im Gegenteil: keine Schminke, keine
+          „komischen Haare" und keine rote Nase! Mein Clown-Charakter ist freundlich,
+          trotzdem bunt und lädt Kinder zum Mitmachen ein. Selbst schüchterne Kinder
+          tauen schnell auf, wenn Clown Liar die Bühne betritt.
+        </p>
+      </div>
     </div>
   </section>
 
-  <!-- ── Programme (blue band) ─────────────────────────────── -->
-  <section class="kg-band kg-band--blue hm-programs">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
+  <!-- ── Programme: the dark stage, a red and a blue spotlight ── -->
+  <section class="k3-band k3-band--spot hm-programs">
+    <span class="k3-spot k3-spot--red" aria-hidden="true"></span>
+    <span class="k3-spot k3-spot--blue" aria-hidden="true"></span>
     <div class="container">
-      <p class="kg-eyebrow">Programme</p>
-      <h2 class="kg-h2">
+      <GoldDivider />
+      <p class="k3-kicker k3-center">Programme</p>
+      <h2 class="k3-h2 k3-center">
         Das bietet Clown Zauberer Liar für Ihr Event
       </h2>
-      <div class="hm-programs__grid">
-        <article class="hm-program" data-reveal="pop">
+      <div class="k3-grid k3-grid--3">
+        <article class="k3-card hm-program" data-reveal>
           <a href="/zauberer/zaubershow/" class="hm-program__media">
-            <Image src={zaubershowImg} alt="Clown Zauberer LIAR verzaubert Kinder bei einer Zaubershow in NRW" loading="lazy" width={600} height={340} />
+            <ProgramFrame>
+              <Image src={zaubershowImg} alt="Clown Zauberer LIAR verzaubert Kinder bei einer Zaubershow in NRW" widths={[240, 450]} sizes="200px" loading="lazy" />
+            </ProgramFrame>
             <span class="hm-program__title">Zaubershow</span>
           </a>
-          <div class="hm-program__body">
-            <p>
-              Clown trifft Zauberer – Die magischste Show in NRW! Wenn der Clown zum Zauberer wird,
-              passieren unglaubliche Dinge! Meine Zaubershow ist speziell für Kinder konzipiert und
-              verbindet Comedy mit verblüffender Magie.
-            </p>
-            <div class="hm-program__list">
-              <p><span class="hm-check">✓</span> <strong>Interaktive Zaubertricks</strong> – Kinder werden zu Co-Zauberern und erleben Magie hautnah</p>
-              <p><span class="hm-check">✓</span> <strong>Altersgerechte Magie</strong> – Von einfachen Tricks für die Kleinen bis zu verblüffenden Illusionen für ältere Kinder</p>
-              <p><span class="hm-check">✓</span> <strong>Comedy-Magie</strong> – Der Clown zaubert nicht perfekt – und genau das macht es so lustig!</p>
-              <p><span class="hm-check">✓</span> <strong>Große Finale</strong> – Ein spektakulärer Abschlusszauber, den niemand vergisst</p>
-            </div>
-            <p class="hm-program__dur"><strong>Dauer:</strong> ca. 40 Minuten</p>
-            <a href="/zauberer/zaubershow/" class="hm-program__more">
-              Mehr erfahren →
-            </a>
+          <p>
+            Clown trifft Zauberer – Die magischste Show in NRW! Wenn der Clown zum Zauberer wird,
+            passieren unglaubliche Dinge! Meine Zaubershow ist speziell für Kinder konzipiert und
+            verbindet Comedy mit verblüffender Magie.
+          </p>
+          <div class="hm-program__list">
+            <p><span class="hm-check">✓</span> <strong>Interaktive Zaubertricks</strong> – Kinder werden zu Co-Zauberern und erleben Magie hautnah</p>
+            <p><span class="hm-check">✓</span> <strong>Altersgerechte Magie</strong> – Von einfachen Tricks für die Kleinen bis zu verblüffenden Illusionen für ältere Kinder</p>
+            <p><span class="hm-check">✓</span> <strong>Comedy-Magie</strong> – Der Clown zaubert nicht perfekt – und genau das macht es so lustig!</p>
+            <p><span class="hm-check">✓</span> <strong>Große Finale</strong> – Ein spektakulärer Abschlusszauber, den niemand vergisst</p>
           </div>
+          <p class="k3-card__note"><strong>Dauer:</strong> ca. 40 Minuten</p>
+          <a href="/zauberer/zaubershow/" class="hm-program__more">
+            Mehr erfahren →
+          </a>
         </article>
 
-        <article class="hm-program" data-reveal="pop" data-reveal-delay="0.08">
+        <article class="k3-card hm-program" data-reveal data-reveal-delay="0.08">
           <a href="/clown/ballonmodellage/" class="hm-program__media">
-            <Image src={ballonImg} alt="Clown LIAR formt Ballontiere bei Ballonmodellage auf Kindergeburtstag" loading="lazy" width={600} height={340} />
+            <ProgramFrame>
+              <Image src={ballonImg} alt="Clown LIAR formt Ballontiere bei Ballonmodellage auf Kindergeburtstag" widths={[240, 480]} sizes="200px" loading="lazy" />
+            </ProgramFrame>
             <span class="hm-program__title">Ballonmodellage</span>
           </a>
-          <div class="hm-program__body">
-            <p>
-              Bunte Ballontiere vom Clown – Jedes Kind bekommt sein Wunschtier! Welches Kind liebt
-              nicht Ballontiere? Als erfahrener Clown und Ballonkünstler forme ich im Handumdrehen
-              die schönsten Figuren:
-            </p>
-            <div class="hm-program__list">
-              <p><span class="hm-check">✓</span> Klassiker: Hund, Katze, Herz, Schwert, Blume</p>
-              <p><span class="hm-check">✓</span> Spezial-Figuren: Wikinger Helm, Dinosaurier, Kronen, Marienkäfer</p>
-              <p><span class="hm-check">✓</span> Individuelle Wünsche werden erfüllt!</p>
-            </div>
-            <p class="hm-program__dur"><strong>Dauer:</strong> Je nach Kinderzahl (ca. 1-2 Minuten pro Figur)</p>
-            <a href="/clown/ballonmodellage/" class="hm-program__more">
-              Mehr erfahren →
-            </a>
+          <p>
+            Bunte Ballontiere vom Clown – Jedes Kind bekommt sein Wunschtier! Welches Kind liebt
+            nicht Ballontiere? Als erfahrener Clown und Ballonkünstler forme ich im Handumdrehen
+            die schönsten Figuren:
+          </p>
+          <div class="hm-program__list">
+            <p><span class="hm-check">✓</span> Klassiker: Hund, Katze, Herz, Schwert, Blume</p>
+            <p><span class="hm-check">✓</span> Spezial-Figuren: Wikinger Helm, Dinosaurier, Kronen, Marienkäfer</p>
+            <p><span class="hm-check">✓</span> Individuelle Wünsche werden erfüllt!</p>
           </div>
+          <p class="k3-card__note"><strong>Dauer:</strong> Je nach Kinderzahl (ca. 1-2 Minuten pro Figur)</p>
+          <a href="/clown/ballonmodellage/" class="hm-program__more">
+            Mehr erfahren →
+          </a>
         </article>
 
-        <article class="hm-program" data-reveal="pop" data-reveal-delay="0.16">
+        <article class="k3-card hm-program" data-reveal data-reveal-delay="0.16">
           <a href="/clown/glitzer-tattoo/" class="hm-program__media">
-            <Image src={glitzerImg} alt="Glitzer Tattoos von Clown Zauberer LIAR auf einem Kinderfest in NRW" loading="lazy" width={600} height={340} />
+            <ProgramFrame>
+              <Image src={glitzerImg} alt="Glitzer Tattoos von Clown Zauberer LIAR auf einem Kinderfest in NRW" widths={[240, 480]} sizes="200px" loading="lazy" />
+            </ProgramFrame>
             <span class="hm-program__title">Glitzer Tattoos</span>
           </a>
-          <div class="hm-program__body">
-            <p>
-              Funkel-Glamour vom Clown – Temporäre Tattoos mit WOW-Effekt! Glitzer Tattoos sind
-              der Hit auf jeder Party! Als Clown bringe ich eine große Auswahl an glitzernden
-              Motiven mit, die Kinderaugen leuchten lassen:
-            </p>
-            <div class="hm-program__list">
-              <p><span class="hm-check">✓</span> <strong>Hautverträglich &amp; sicher</strong> – Dermatologisch getestet, keine Allergene</p>
-              <p><span class="hm-check">✓</span> <strong>Riesige Motivauswahl</strong></p>
-              <p><span class="hm-check">✓</span> <strong>Schnell &amp; sauber</strong> – In 2-3 Minuten fertig, kein Rumschmieren</p>
-              <p><span class="hm-check">✓</span> <strong>Hält mehrere Tage</strong> – Wasserfest und wischfest</p>
-              <p><span class="hm-check">✓</span> <strong>Für Jungs &amp; Mädchen</strong> – Superhelden, Tiere, Blumen, Sterne u.v.m.</p>
-            </div>
-            <p class="hm-program__dur"><strong>Dauer:</strong> Ca. 2-3 Minuten pro Tattoo</p>
-            <a href="/clown/glitzer-tattoo/" class="hm-program__more">
-              Mehr erfahren →
-            </a>
+          <p>
+            Funkel-Glamour vom Clown – Temporäre Tattoos mit WOW-Effekt! Glitzer Tattoos sind
+            der Hit auf jeder Party! Als Clown bringe ich eine große Auswahl an glitzernden
+            Motiven mit, die Kinderaugen leuchten lassen:
+          </p>
+          <div class="hm-program__list">
+            <p><span class="hm-check">✓</span> <strong>Hautverträglich &amp; sicher</strong> – Dermatologisch getestet, keine Allergene</p>
+            <p><span class="hm-check">✓</span> <strong>Riesige Motivauswahl</strong></p>
+            <p><span class="hm-check">✓</span> <strong>Schnell &amp; sauber</strong> – In 2-3 Minuten fertig, kein Rumschmieren</p>
+            <p><span class="hm-check">✓</span> <strong>Hält mehrere Tage</strong> – Wasserfest und wischfest</p>
+            <p><span class="hm-check">✓</span> <strong>Für Jungs &amp; Mädchen</strong> – Superhelden, Tiere, Blumen, Sterne u.v.m.</p>
           </div>
+          <p class="k3-card__note"><strong>Dauer:</strong> Ca. 2-3 Minuten pro Tattoo</p>
+          <a href="/clown/glitzer-tattoo/" class="hm-program__more">
+            Mehr erfahren →
+          </a>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
-  <section class="kg-area hm-area" id="einsatzgebiet">
+  <!-- ── Einsatzgebiet (map without frame) ─────────────────── -->
+  <section class="k3-area" id="einsatzgebiet">
     <div class="container">
-      <Squiggle />
-      <p class="kg-kicker kg-center">Einsatzgebiet</p>
-      <h2 class="kg-h2 kg-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
-      <div class="kg-area__grid">
-        <div class="kg-area__text">
+      <GoldDivider />
+      <p class="k3-kicker k3-center">Einsatzgebiet</p>
+      <h2 class="k3-h2 k3-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <div class="k3-area__grid">
+        <div>
           <p>
             Als mobiler Clown Zauberer bin ich in folgenden Städten und Regionen
             regelmäßig unterwegs und für Buchungen verfügbar.
           </p>
-          <p class="kg-cities">
+          <p class="k3-cities">
             <strong>Haupteinsatzgebiete:</strong> Oberhausen | Gelsenkirchen | Essen |
             Duisburg | Dorsten | Herten | Herne | Marl | Gladbeck | Mülheim | Dinslaken |
             Dortmund | <a href="/clown/clownshow/clown-in-bochum/">Bochum</a>
             | Bottrop | Recklinghausen
           </p>
-          <p class="kg-cities">
+          <p class="k3-cities">
             <strong>Weitere Städte in NRW:</strong> Düsseldorf | Köln | Münster | Bielefeld |
             Bonn | Aachen | Krefeld | Moers | Lünen | Hagen | Hamm | Solingen | Wuppertal |
             Leverkusen | Neuss | Paderborn
@@ -506,28 +515,29 @@ const videoSchema = {
             außerhalb von NRW buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
           </p>
         </div>
-        <figure class="kg-area__map" data-reveal="pop">
+        <figure class="k3-area__map" data-reveal>
           <Image
             src={karteImg}
             alt="Einsatzgebiet Clown Zauberer und Kinderzauberer LIAR in NRW – Karte"
             loading="lazy"
             widths={[400, 600]}
-            sizes="(max-width: 1024px) 100vw, 50vw"
-            data-scroll-tilt="2"
+            sizes="(max-width: 900px) 86vw, 460px"
           />
         </figure>
       </div>
     </div>
   </section>
 
-  <!-- ── Galerie / Video (yellow band) ─────────────────────── -->
-  <section class="kg-band kg-band--yellow hm-gallery">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container kg-narrow kg-center">
-      <p class="kg-eyebrow">Galerie</p>
-      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal="pop">
+  <!-- ── Galerie / Video: Hollywood premiere ───────────────── -->
+  <section class="k3-band k3-band--night k3-premiere hm-gallery">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <p class="k3-kicker">Galerie</p>
+      <h2 class="k3-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade
           id="Cop0SqRIX4Y"
           title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!"
@@ -542,7 +552,7 @@ const videoSchema = {
         dargestellten Momenten und Geschichten zu verbinden…oder einfach spontane Eindrücke
         festzuhalten! Viel Spaß beim Stöbern! Schauen Sie auch in meinem <a href="/blog/">Blog</a> vorbei, wo ich regelmäßig über aktuelle Auftritte und Neuigkeiten berichte.
       </p>
-      <h3 class="kg-h3">
+      <h3 class="k3-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
       <a href="/galerie/" class="btn btn--primary">
@@ -551,63 +561,64 @@ const videoSchema = {
     </div>
   </section>
 
-  <!-- ── FAQ ───────────────────────────────────────────────── -->
-  <section class="kg-faq hm-faq" id="faq">
-    <div class="container kg-narrow">
-      <p class="kg-kicker kg-center">FAQ</p>
-      <h2 class="kg-h2 kg-center">Häufig gestellte Fragen</h2>
-      <div class="kg-faq__list">
-        <details class="kg-faq__item" data-reveal="puff">
+  <!-- ── FAQ: native <details>, works without JS ───────────── -->
+  <section class="k3-faq" id="faq">
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <p class="k3-kicker k3-center">FAQ</p>
+      <h2 class="k3-h2 k3-center">Häufig gestellte Fragen</h2>
+      <div class="k3-faq__list">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Was kostet ein Zauberer für den Kindergeburtstag?</span></summary>
-          <p class="kg-faq__answer">Die 40-minütige Zaubershow von Clown Zauberer LIAR kostet <strong>150 € Festpreis</strong> für bis zu 12 Kinder ab 4 Jahren, inklusive Material. Ballonmodellage kostet 20 € zusätzlich, Glitzer-Tattoos 40 €. Das Komplett-Paket mit allen drei Bausteinen liegt bei 210 € für rund 90 Minuten. Hinzu kommen 0,40 € pro Kilometer Fahrtkosten ab Gladbeck. Alle Pakete im Detail: <a href="/kindergeburtstag/">Kindergeburtstag</a>.</p>
+          <div class="k3-faq__answer">Die 40-minütige Zaubershow von Clown Zauberer LIAR kostet <strong>150 € Festpreis</strong> für bis zu 12 Kinder ab 4 Jahren, inklusive Material. Ballonmodellage kostet 20 € zusätzlich, Glitzer-Tattoos 40 €. Das Komplett-Paket mit allen drei Bausteinen liegt bei 210 € für rund 90 Minuten. Hinzu kommen 0,40 € pro Kilometer Fahrtkosten ab Gladbeck. Alle Pakete im Detail: <a href="/kindergeburtstag/">Kindergeburtstag</a>.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Macht Clown LIAR auch eine reine Zaubershow für Kinder?</span></summary>
-          <p class="kg-faq__answer">Ja. Neben der Kombination aus Clownerie und Magie bietet LIAR auch eine reine Zaubershow für Kinder an – ideal für Kindergeburtstage, Kitas, Schulen und Sommerfeste. Die Kinder machen aktiv mit und werden selbst zu kleinen Zauberern. Die Show dauert ca. 40 Minuten und ist für Kinder von 4 bis 12 Jahren geeignet.</p>
+          <div class="k3-faq__answer">Ja. Neben der Kombination aus Clownerie und Magie bietet LIAR auch eine reine Zaubershow für Kinder an – ideal für Kindergeburtstage, Kitas, Schulen und Sommerfeste. Die Kinder machen aktiv mit und werden selbst zu kleinen Zauberern. Die Show dauert ca. 40 Minuten und ist für Kinder von 4 bis 12 Jahren geeignet.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>In welchen Städten ist Clown LIAR buchbar?</span></summary>
-          <p class="kg-faq__answer">Clown LIAR ist in ganz NRW buchbar, insbesondere in Gladbeck, Oberhausen, Essen, Gelsenkirchen, Dortmund, Bochum, Duisburg und weiteren Städten.</p>
+          <div class="k3-faq__answer">Clown LIAR ist in ganz NRW buchbar, insbesondere in Gladbeck, Oberhausen, Essen, Gelsenkirchen, Dortmund, Bochum, Duisburg und weiteren Städten.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Wie lange dauert eine Clown Zaubershow?</span></summary>
-          <p class="kg-faq__answer">Die Standard-Zaubershow dauert ca. 40 Minuten und ist speziell auf Kinder von 4-12 Jahren zugeschnitten.</p>
+          <div class="k3-faq__answer">Die Standard-Zaubershow dauert ca. 40 Minuten und ist speziell auf Kinder von 4-12 Jahren zugeschnitten.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Wie läuft die Buchung von Clown Zauberer LIAR ab?</span></summary>
-          <p class="kg-faq__answer">Die Buchung ist einfach: Sie senden eine Anfrage über das Kontaktformular oder rufen direkt unter 0172-1517578 an. Nach Abstimmung von Datum, Ort und gewünschter Show erhalten Sie eine verbindliche Bestätigung. Eine Anfrage 4-8 Wochen im Voraus wird empfohlen, kurzfristige Termine sind aber oft möglich.</p>
+          <div class="k3-faq__answer">Die Buchung ist einfach: Sie senden eine Anfrage über das Kontaktformular oder rufen direkt unter 0172-1517578 an. Nach Abstimmung von Datum, Ort und gewünschter Show erhalten Sie eine verbindliche Bestätigung. Eine Anfrage 4-8 Wochen im Voraus wird empfohlen, kurzfristige Termine sind aber oft möglich.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Ist Clown LIAR ein "gruseliger" Clown?</span></summary>
-          <p class="kg-faq__answer">Nein! Clown LIAR tritt bewusst ohne Schminke, ohne rote Nase und ohne "komische Haare" auf. Sein Clown-Charakter ist freundlich, bunt und einladend. Selbst schüchterne Kinder tauen schnell auf.</p>
+          <div class="k3-faq__answer">Nein! Clown LIAR tritt bewusst ohne Schminke, ohne rote Nase und ohne "komische Haare" auf. Sein Clown-Charakter ist freundlich, bunt und einladend. Selbst schüchterne Kinder tauen schnell auf.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Kann ich Clown LIAR auch für Erwachsenen-Events buchen?</span></summary>
-          <p class="kg-faq__answer">Ja! Neben Kindergeburtstagen bietet Clown Zauberer LIAR auch Close-up Zauberei für Hochzeiten, Firmenfeiern und Gala-Events an. Die Tischzauberei funktioniert ohne Bühne direkt an den Tischen Ihrer Gäste.</p>
+          <div class="k3-faq__answer">Ja! Neben Kindergeburtstagen bietet Clown Zauberer LIAR auch Close-up Zauberei für Hochzeiten, Firmenfeiern und Gala-Events an. Die Tischzauberei funktioniert ohne Bühne direkt an den Tischen Ihrer Gäste.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Wie weit im Voraus sollte ich buchen?</span></summary>
-          <p class="kg-faq__answer">Eine Anfrage mindestens 4-8 Wochen im Voraus wird empfohlen, besonders an Wochenenden. Kurzfristige Buchungen sind aber oft auch möglich – einfach unter 0172-1517578 anrufen!</p>
+          <div class="k3-faq__answer">Eine Anfrage mindestens 4-8 Wochen im Voraus wird empfohlen, besonders an Wochenenden. Kurzfristige Buchungen sind aber oft auch möglich – einfach unter 0172-1517578 anrufen!</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Brauche ich eine Bühne oder spezielle Technik?</span></summary>
-          <p class="kg-faq__answer">Nein! Es werden nur 2×2 Meter Platz benötigt. Die Show funktioniert im Wohnzimmer, Garten, Turnhalle oder auf einer Bühne. Alles Nötige wird mitgebracht.</p>
+          <div class="k3-faq__answer">Nein! Es werden nur 2×2 Meter Platz benötigt. Die Show funktioniert im Wohnzimmer, Garten, Turnhalle oder auf einer Bühne. Alles Nötige wird mitgebracht.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Für welches Alter ist die Show geeignet?</span></summary>
-          <p class="kg-faq__answer">Die Shows sind für Kinder von 4 bis 12 Jahren konzipiert. Das Programm wird immer an die Altersgruppe angepasst: einfacher und kürzer für Kindergartenkinder, anspruchsvoller für Grundschulkinder.</p>
+          <div class="k3-faq__answer">Die Shows sind für Kinder von 4 bis 12 Jahren konzipiert. Das Programm wird immer an die Altersgruppe angepasst: einfacher und kürzer für Kindergartenkinder, anspruchsvoller für Grundschulkinder.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Welche Sprachen spricht Clown Zauberer LIAR?</span></summary>
-          <p class="kg-faq__answer">Clown Zauberer LIAR moderiert seine Shows auf Deutsch und Französisch. Dadurch sind auch zweisprachige Events und internationale Feiern in NRW und im Grenzgebiet problemlos möglich.</p>
+          <div class="k3-faq__answer">Clown Zauberer LIAR moderiert seine Shows auf Deutsch und Französisch. Dadurch sind auch zweisprachige Events und internationale Feiern in NRW und im Grenzgebiet problemlos möglich.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Was passiert bei schlechtem Wetter (Outdoor-Event)?</span></summary>
-          <p class="kg-faq__answer">Die Show ist flexibel und funktioniert drinnen wie draußen. Falls ein Outdoor-Event wegen Regen ins Haus verlegt werden muss, ist das kein Problem – es werden nur 2×2 Meter Platz benötigt.</p>
+          <div class="k3-faq__answer">Die Show ist flexibel und funktioniert drinnen wie draußen. Falls ein Outdoor-Event wegen Regen ins Haus verlegt werden muss, ist das kein Problem – es werden nur 2×2 Meter Platz benötigt.</div>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><span>Hat Clown LIAR eine Versicherung und ein Führungszeugnis?</span></summary>
-          <p class="kg-faq__answer">Ja, Clown Zauberer LIAR ist vollständig haftpflichtversichert und verfügt über ein aktuelles polizeiliches Führungszeugnis, das auf Anfrage vorgelegt wird.</p>
+          <div class="k3-faq__answer">Ja, Clown Zauberer LIAR ist vollständig haftpflichtversichert und verfügt über ein aktuelles polizeiliches Führungszeugnis, das auf Anfrage vorgelegt wird.</div>
         </details>
       </div>
     </div>
@@ -615,122 +626,93 @@ const videoSchema = {
 </V2Layout>
 
 <style>
-  /* ── hero: one stage, two worlds ── */
-  .hm-hero { padding-bottom: var(--space-5); }
-  .hm-hero__top { text-align: center; padding-top: var(--space-2); }
-  .hm-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; margin-bottom: var(--space-3); }
-  .hm-badge {
-    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.4rem 0.95rem;
-    font-weight: 800; font-size: 0.9rem; background: var(--surface); border: var(--border); border-radius: 999px;
-    box-shadow: 2px 2px 0 var(--line);
-  }
-  .hm-badge:nth-child(2) { rotate: -1.5deg; }
-  .hm-badge:nth-child(3) { rotate: 1deg; }
-  .hm-badge__stars { color: var(--star); letter-spacing: 0.06em; }
-  .hm-title { margin: 0 auto var(--space-2); }
-  .hm-title__main { display: block; font-size: clamp(2.3rem, 5.6vw, 4.4rem); font-weight: 700; line-height: 1.04; }
-  .hm-title__sub { display: block; margin-top: 0.4rem; color: var(--accent-strong); font-size: clamp(1.25rem, 2.8vw, 2rem); font-weight: 650; }
-  .hm-lead { color: var(--ink-soft); font-weight: 700; max-width: 46rem; margin: 0 auto var(--space-3); }
-  .hm-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.75rem; }
+  /* page-only touches; the v3 language lives in kids-v3.css */
 
-  .hm-worlds {
-    display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); align-items: center;
-    margin-top: var(--space-5); max-width: 62rem;
+  /* ── hero: centred copy, then the two doors side by side (K3Hero without photo slot) ── */
+  :global(.k3-hero__grid--solo):has(.hm-worlds) { grid-template-columns: minmax(0, 1fr); }
+  .hm-hero__top { text-align: center; max-width: 50rem; margin-inline: auto; }
+  .hm-badges { display: flex; flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-bottom: var(--space-2); }
+  .hm-badge {
+    display: inline-flex; align-items: center; gap: 0.4rem; padding: 0.35rem 0.9rem;
+    font-weight: 800; font-size: 0.88rem; color: #fff3e2; border-radius: 999px;
+    background: rgba(255, 252, 245, 0.1); box-shadow: inset 0 0 0 1px rgba(233, 200, 119, 0.7);
   }
+  .hm-badge__stars { color: #ffd166; letter-spacing: 0.06em; }
+  .hm-title { margin-inline: auto; }
+  .hm-title__main { display: block; }
+  .hm-title__sub { display: block; margin-top: 0.4rem; color: #ffd27a; font-size: 0.55em; font-weight: 550; }
+  .hm-lead { color: #f3e2c8; font-weight: 700; max-width: 46rem; margin: 0 auto var(--space-3) !important; }
+  .hm-actions { justify-content: center; }
+
+  .hm-worlds { display: grid; gap: var(--space-5); margin-top: var(--space-5); align-items: start; max-width: 60rem; margin-inline: auto; }
   .hm-world {
-    position: relative; display: grid; gap: 0.6rem; justify-items: center; text-align: center;
-    color: var(--ink); text-decoration: none;
-    transition: transform 0.3s var(--ease-out-expo);
+    display: grid; justify-items: center; gap: var(--space-2); text-align: center; text-decoration: none;
+    padding: var(--space-4) var(--space-3); border-radius: var(--radius);
+    transition: transform 0.35s var(--ease-out);
   }
-  .hm-world__label { font-family: var(--font-display); font-weight: 700; font-size: clamp(1.6rem, 3vw, 2.3rem); line-height: 1; }
-  .hm-world__links { font-weight: 700; font-size: 0.9rem; color: var(--ink-soft); }
+  .hm-world__label { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.6rem, 3vw, 2.2rem); line-height: 1.05; }
+  .hm-world__links { font-weight: 700; font-size: 0.9rem; }
   .hm-world__go {
-    font-weight: 800; font-size: 0.95rem; padding: 0.45rem 1rem; border-radius: 999px; border: var(--border);
-    background: var(--surface); transition: background-color 0.2s ease, color 0.2s ease;
+    font-weight: 800; font-size: 0.95rem; padding: 0.5rem 1.1rem; border-radius: 999px;
+    transition: background-color 0.2s ease, box-shadow 0.2s ease;
   }
-  /* kids: a circus poster */
-  .hm-world--kids { rotate: -2deg; }
-  .hm-world__photo {
-    display: block; width: 100%; border: 5px solid var(--line); border-radius: var(--radius);
-    box-shadow: 9px 9px 0 var(--line); overflow: hidden; background: var(--brand-yellow);
+  /* kids door: a circus-programme sheet (gold rules + corner flourishes), caught by the red light */
+  .hm-world--kids {
+    color: var(--ink);
+    background:
+      var(--orn-tl) left 0.55rem top 0.55rem / 1.75rem no-repeat,
+      var(--orn-tr) right 0.55rem top 0.55rem / 1.75rem no-repeat,
+      var(--orn-bl) left 0.55rem bottom 0.55rem / 1.75rem no-repeat,
+      var(--orn-br) right 0.55rem bottom 0.55rem / 1.75rem no-repeat,
+      var(--surface);
+    box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), 0 0 60px -10px rgba(255, 70, 90, 0.5), 0 30px 60px -24px rgba(0, 0, 0, 0.7);
   }
-  .hm-world__photo :global(img) { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
-  .hm-world--kids .hm-world__label { color: var(--brand-red); order: -1; }
-  /* adult: the photo in a magic frame, in its own typeface and colours (a preview of the adult zone) */
+  .hm-world--kids .hm-world__label { color: var(--accent-strong); }
+  .hm-world--kids .hm-world__links { color: var(--ink-soft); }
+  .hm-world--kids .hm-world__go { color: #fff3dd; background: linear-gradient(180deg, #d13a42, #a8192a); }
+  .hm-world--kids :global(.hm-world__photo) { width: min(100%, 24rem); padding: 1.1rem; }
+  /* adult door: a cream playing card with an ink edge and the adult zone's typeface, caught by the blue light */
   .hm-world--adult {
     --font-display: 'Bodoni Moda Variable', Georgia, serif;
-    --radius: 0.85rem;
-    rotate: 2.5deg;
+    color: #141210; background: #fbf7ee; border-radius: 0.85rem;
+    box-shadow: inset 0 0 0 1px rgba(20, 18, 16, 0.85), inset 0 0 0 6px #fbf7ee, inset 0 0 0 7px rgba(200, 16, 46, 0.45), 0 0 60px -10px rgba(110, 150, 255, 0.5), 0 30px 60px -24px rgba(0, 0, 0, 0.7);
   }
-  .hm-world--adult .hm-world__label { font-style: italic; font-weight: 500; color: #141210; }
-  .hm-world__card { display: block; width: min(100%, 22rem); }
-  .hm-world__card :global(.hm-world__pc) { transition: transform 0.45s var(--ease-out-expo); transform-style: preserve-3d; }
-  .hm-world--adult .hm-world__go { background: #141210; color: #fffdf7; border-color: #141210; border-radius: 0.5rem; }
+  .hm-world--adult .hm-world__label { font-style: italic; font-weight: 500; }
+  .hm-world--adult .hm-world__links { color: #4a423a; }
+  .hm-world--adult .hm-world__go { background: #141210; color: #fffdf7; border-radius: 0.5rem; }
+  .hm-world__card { display: block; width: min(100%, 25rem); }
+  .hm-world__card :global(.hm-world__pc) { transition: transform 0.45s var(--ease-out-expo); }
   @media (hover: hover) and (pointer: fine) {
-    .hm-world--kids:hover { transform: translateY(-8px) rotate(-1deg); }
-    .hm-world--kids:hover .hm-world__go { background: var(--brand-yellow); }
-    .hm-world--adult:hover { transform: translateY(-8px); }
-    .hm-world--adult:hover :global(.hm-world__pc) { transform: perspective(900px) rotateY(-14deg) rotateZ(-3deg); }
-    .hm-world--adult:hover .hm-world__go { background: #c8102e; border-color: #c8102e; }
+    .hm-world:hover { transform: translateY(-6px); }
+    .hm-world--kids:hover .hm-world__go { box-shadow: 0 10px 22px -10px rgba(142, 21, 32, 0.8); }
+    .hm-world--adult:hover :global(.hm-world__pc) { transform: perspective(900px) rotateY(-8deg) rotateZ(-1.5deg); }
+    .hm-world--adult:hover .hm-world__go { background: #c8102e; }
   }
 
   /* ── sections ── */
-  .hm-red { color: var(--accent-strong); }
-  .hm-cta { margin-top: var(--space-3); }
-  .hm-sticker { margin: 0; justify-self: center; rotate: 2deg; }
-  .hm-sticker :global(img) {
-    display: block; width: min(22rem, 80vw); height: auto; aspect-ratio: 1; object-fit: cover; object-position: 20%;
-    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
-  }
-  .hm-sticker--round :global(img) { border-radius: 50%; width: min(19rem, 72vw); }
-  .hm-sticker--tilt { rotate: -3deg; }
-  .hm-about { background: var(--bg); }
+  .hm-photo--portrait { width: min(100%, 16rem); }
+  .hm-photo--small { width: min(100%, 13rem); }
+  .hm-quali__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; }
+  .hm-nocreepy { margin-top: var(--space-5); }
+  .hm-nocreepy .k3-h3 { margin-top: 0; }
+  .hm-stat__icon { display: block; width: 2.2rem; height: 2.2rem; margin: 0 auto 0.5rem; color: var(--gold-light); }
 
-  .hm-stats { background: var(--brand-red); color: #fff; }
-  .hm-stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-3); }
-  .hm-stat {
-    text-align: center; padding: var(--space-3); border-radius: var(--radius);
-    background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45);
-  }
-  .hm-stat svg { width: 2.4rem; height: 2.4rem; margin: 0 auto 0.4rem; display: block; }
-  .hm-stat__num { font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; }
-  .hm-stat__label { font-weight: 800; margin-top: 0.3rem; }
+  /* programme cards: the photo on the sheet, the title in display type, gold ticks */
+  .hm-program { display: flex; flex-direction: column; }
+  .hm-program > p:not(.k3-card__note) { color: var(--ink-soft); }
+  .hm-program__media { display: grid; justify-items: center; gap: var(--space-2); margin-bottom: var(--space-2); color: var(--ink) !important; text-decoration: none; }
+  .hm-program__media :global(.pf) { width: min(100%, 13.5rem); padding: 0.9rem; }
+  .hm-program__title { font-family: var(--font-display); font-weight: 600; font-size: 1.45rem; line-height: 1.1; }
+  .hm-program__list p { margin-bottom: 0.45rem !important; font-size: 0.97rem; color: var(--ink-soft); }
+  .hm-program__list strong { color: var(--ink); }
+  .hm-check { color: var(--gold); font-weight: 900; }
+  .hm-program__more { margin-top: auto; padding-top: var(--space-1); font-weight: 800; }
 
-  .hm-quali__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 650; }
-  .hm-checks p { display: flex; gap: 0.6rem; align-items: flex-start; margin-bottom: 0.6rem; font-weight: 600; }
-  .hm-check { color: var(--accent-strong); font-weight: 900; flex: none; }
-  .hm-nocreepy { margin-top: var(--space-5); padding: var(--space-3); background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); }
-  .hm-nocreepy .kg-h3 { margin-top: 0; }
+  .hm-gallery__text { margin-block: var(--space-3) !important; color: #e9dcc6; }
 
-  .hm-programs__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); margin-top: var(--space-4); text-align: left; }
-  .hm-program {
-    display: flex; flex-direction: column; overflow: hidden; color: var(--ink);
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line);
-    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out-expo);
-  }
-  .hm-program:nth-child(1) { rotate: -1deg; }
-  .hm-program:nth-child(3) { rotate: 1deg; }
-  .hm-program__media { position: relative; display: block; overflow: hidden; border-bottom: var(--border); }
-  .hm-program__media :global(img) { display: block; width: 100%; height: 14rem; object-fit: cover; object-position: 20%; transition: transform 0.5s var(--ease-out); }
-  .hm-program__title {
-    position: absolute; left: 1rem; bottom: 1rem; padding: 0.3rem 0.9rem; rotate: -3deg;
-    font-family: var(--font-display); font-weight: 700; font-size: 1.35rem;
-    background: var(--brand-yellow); color: var(--ink); border: 2.5px solid var(--line); border-radius: 0.6rem;
-  }
-  .hm-program__body { display: flex; flex-direction: column; flex: 1; padding: var(--space-3); color: var(--ink-soft); font-size: 0.97rem; }
-  .hm-program__body strong { color: var(--ink); }
-  .hm-program__list p { margin-bottom: 0.4rem; }
-  .hm-program__dur { font-size: 0.9rem; }
-  .hm-program__more { margin-top: auto; padding-top: var(--space-2); font-weight: 800; color: var(--brand-blue); }
-  @media (hover: hover) and (pointer: fine) {
-    .hm-program:hover { transform: translate(-3px, -6px); box-shadow: 10px 10px 0 var(--line); }
-    .hm-program:hover .hm-program__media :global(img) { transform: scale(1.05); }
-  }
-
-  .hm-gallery__text { margin: var(--space-3) 0; }
-
-  @media (max-width: 760px) {
-    .hm-worlds { grid-template-columns: 1fr; gap: var(--space-5); }
-    .hm-world--adult { rotate: 1.5deg; }
+  @media (min-width: 901px) {
+    .hm-worlds { grid-template-columns: 1fr 1fr; }
+    .hm-world--kids { rotate: -1deg; }
+    .hm-world--adult { rotate: 1deg; }
   }
 </style>
