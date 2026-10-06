@@ -289,11 +289,8 @@
 /* ── hero on the dark-blue stage, lit like the extras (user 2026-10-06) ── */
 .k3-hero {
   /* inside the big top (user reference, 2026-10-06): tent panels meeting at the crown, violet
-     haze, red glow along the sides, a magenta pool of light in the ring, a dotted light string
-     along the ring fence. Pure gradients: no image, no extra request. */
+     haze, red glow along the sides, a magenta pool of light in the ring. Pure gradients: no image, no extra request. */
   background:
-    /* light string along the ring fence */
-    radial-gradient(circle, rgba(255, 214, 140, 0.95) 0 1.4px, transparent 2.4px) 0 calc(100% - 3.2rem) / 26px 8px repeat-x,
     /* magenta pool in the ring */
     radial-gradient(ellipse 34% 12% at 50% 100%, rgba(255, 70, 200, 0.55), transparent 75%),
     /* red glow low on both sides */
@@ -317,6 +314,8 @@
     conic-gradient(from 196deg at 90% 0%, transparent 0deg, rgba(120, 165, 255, 0.2) 6deg, rgba(175, 205, 255, 0.4) 14deg, rgba(110, 160, 255, 0.6) 23deg, rgba(120, 165, 255, 0.2) 32deg, transparent 36deg); }
 .k3-spot--stagehero::before { top: 2.2rem; }
 .motion-ok .k3-spot--stagehero { animation-delay: 2.2s; }
+/* user 2026-10-06: no lamp balls in the hero, only the light */
+.k3-spot--stagehero::before { content: none; }
 /* projectors nearer the middle, not in the corners (user 2026-10-06) */
 .k3-spot--stagehero.k3-spot--red { left: 14%; width: 56%; }
 .k3-spot--stagehero.k3-spot--blue { right: 14%; width: 56%; }

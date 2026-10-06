@@ -30,9 +30,8 @@ export const CORE_PAGES: Array<Record<Locale, string>> = [
 
 // Order matters: specific kids pages under /zauberer/ win over the adult section.
 const ZONE_RULES: Array<[prefix: string, zone: Zone]> = [
-  ['/zauberer/zaubershow/kindergarten-kita/', 'kids'],
-  ['/zauberer/zaubershow/schule/', 'kids'],
-  ['/zauberer/zaubershow/strassen-sommer-fest/', 'kids'],
+  // the Zaubershow and everything below it is a children's show (user, 2026-10-06)
+  ['/zauberer/zaubershow/', 'kids'],
   ['/zauberer/', 'adult'],
   ['/kindergeburtstag/', 'kids'],
   ['/kinderzauberer/', 'kids'],

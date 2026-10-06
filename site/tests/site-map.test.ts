@@ -25,6 +25,13 @@ describe('zoneFor (adult)', () => {
     expect(zoneFor('/zauberer/zaubershow/strassen-sommer-fest/')).toBe('kids');
   });
 
+  it('puts the Zaubershow and every page below it in the kids zone (user, 2026-10-06)', () => {
+    expect(zoneFor('/zauberer/zaubershow/')).toBe('kids');
+    expect(zoneFor('/zauberer/zaubershow/karneval/')).toBe('kids');
+    for (const p of ['/zauberer/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'])
+      expect(zoneFor(p)).toBe('adult');
+  });
+
   it('applies zones to translated paths', () => {
     expect(zoneFor('/fr/magicien/')).toBe('adult');
     expect(zoneFor('/en/magician/close-up/')).toBe('adult');
