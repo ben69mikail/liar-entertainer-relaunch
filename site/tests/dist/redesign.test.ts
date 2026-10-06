@@ -86,11 +86,12 @@ describe('kids v3 „Manege im Zelt“ (user, 2026-10-06): more circus, nothing 
   const $ = page(KIDS);
   const css = $('style').text();
 
-  it('opens on a red velvet curtain stage, photos sit in blue curtain stage frames', () => {
+  it('opens on a red velvet curtain stage, photos sit in programme-card photo frames', () => {
     expect($('.k3-hero .cu .cu__half').length).toBe(2);
-    expect($('.k3-hero .cf img[fetchpriority="high"]').length).toBe(1);
-    expect($('main .cf').length).toBeGreaterThanOrEqual(2);
-    expect($('.k3-area__map .cf, .k3-area__map .stg').length).toBe(0); // the map: no frame at all
+    // user 2026-10-06: photos in the same circus-programme card as the reviews
+    expect($('.k3-hero .pf img[fetchpriority="high"]').length).toBe(1);
+    expect($('main .pf').length).toBeGreaterThanOrEqual(3);
+    expect($('.k3-area__map .pf').length).toBe(0); // the map: no frame at all
   });
 
   it('separates sections with gold star lines instead of waves, bunting or squiggles', () => {

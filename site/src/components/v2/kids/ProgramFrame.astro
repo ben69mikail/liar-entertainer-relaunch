@@ -1,0 +1,43 @@
+---
+/**
+ * Kids v3 photo frame (user, 2026-10-06, replaces the curtain frame): the same circus-programme
+ * card as the reviews and price cards — light paper, a fine double gold rule and gold corner
+ * flourishes — with the photo set inside it, whole and never cropped. Corner flourishes come
+ * from the page tokens (--orn-tl … --orn-br in kids-v3.css). A soft lift on hover (fine
+ * pointers only). The photo is never animated in, so a frame may carry the LCP image.
+ */
+interface Props {
+  class?: string;
+  style?: string;
+  [key: `data-${string}`]: unknown;
+}
+const { class: cls, style, ...rest } = Astro.props;
+---
+
+<figure class:list={['pf', cls]} style={style} {...rest}>
+  <span class="pf__photo"><slot /></span>
+</figure>
+
+<style>
+  .pf {
+    margin: 0; padding: 1.55rem;
+    border-radius: var(--radius, 1rem);
+    background:
+      var(--orn-tl) left 0.55rem top 0.55rem / 1.5rem no-repeat,
+      var(--orn-tr) right 0.55rem top 0.55rem / 1.5rem no-repeat,
+      var(--orn-bl) left 0.55rem bottom 0.55rem / 1.5rem no-repeat,
+      var(--orn-br) right 0.55rem bottom 0.55rem / 1.5rem no-repeat,
+      var(--surface, #fffcf5);
+    box-shadow:
+      inset 0 0 0 1px rgba(184, 134, 47, 0.55),
+      inset 0 0 0 5px var(--surface, #fffcf5),
+      inset 0 0 0 6px rgba(184, 134, 47, 0.25),
+      var(--shadow);
+    transition: transform 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
+  }
+  .pf__photo { display: block; overflow: hidden; border-radius: 0.45rem; box-shadow: 0 0 0 1px rgba(184, 134, 47, 0.45); }
+  .pf__photo :global(img) { display: block; width: 100%; height: auto; }
+  @media (hover: hover) and (pointer: fine) {
+    .pf:hover { transform: translateY(-3px); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.7), inset 0 0 0 5px var(--surface, #fffcf5), inset 0 0 0 6px rgba(184, 134, 47, 0.35), var(--shadow-hover); }
+  }
+</style>

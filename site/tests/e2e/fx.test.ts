@@ -33,7 +33,7 @@ describe('kids hero letters', () => {
 describe('kids v3 hero curtain (user 2026-10-06: opens fully, like a real curtain)', () => {
   const covered = () => {
     const panels = [...document.querySelectorAll('.k3-hero .cu__panel')].map((p) => p.getBoundingClientRect());
-    const targets = [document.querySelector('.k3-hero h1')!, document.querySelector('.k3-hero .cf img')!];
+    const targets = [document.querySelector('.k3-hero h1')!, document.querySelector('.k3-hero .pf img')!];
     return targets.flatMap((t) => {
       const r = t.getBoundingClientRect();
       return panels.some((c) => c.left < r.right - 1 && c.right > r.left + 1 && c.top < r.bottom && c.bottom > r.top) ? [t.tagName] : [];
@@ -59,30 +59,30 @@ describe('kids v3 hero curtain (user 2026-10-06: opens fully, like a real curtai
   });
 });
 
-describe('kids v3 curtain frames: photo right behind the curtains, the middle always clear', () => {
-  // user 2026-10-06: the photo sits where the reference's chequerboard is; curtains may cover its
-  // edges, as long as most of the picture shows → the central 70 % × 75 % is never covered.
-  it('curtains, cords and valance stay off the middle of every framed photo', async () => {
+describe('kids v3 programme photo frames (user 2026-10-06)', () => {
+  it('show every photo whole: nothing lies over it, nothing is cropped', async () => {
     const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
     await page.goto(BASE + '/kindergeburtstag/');
-    const frames = page.locator('.cf');
-    expect(await frames.count()).toBeGreaterThanOrEqual(2);
-    for (let i = 0; i < (await frames.count()); i++) {
-      await frames.nth(i).scrollIntoViewIfNeeded();
-      await page.waitForTimeout(1600);
-      const hits = await frames.nth(i).evaluate((f) => {
-        (f as HTMLElement).style.rotate = '0deg'; // measure upright: rotation inflates boxes
-        const p = f.querySelector('img')!.getBoundingClientRect();
-        const mid = { l: p.left + p.width * 0.15, r: p.right - p.width * 0.15, t: p.top + p.height * 0.125, b: p.bottom - p.height * 0.125 };
-        return [...f.querySelectorAll('.cf__side, .cf__cord, .cf__valance')].filter((d) => {
-          const c = d.getBoundingClientRect();
-          return c.left < mid.r && c.right > mid.l && c.top < mid.b && c.bottom > mid.t;
-        }).map((d) => d.getAttribute('class'));
-      });
-      expect(hits).toEqual([]);
-    }
+    const res = await page.$$eval('.pf img', (imgs) =>
+      (imgs as HTMLImageElement[]).map((i) => getComputedStyle(i).objectFit === 'cover' && Math.abs(i.width / i.height - i.naturalWidth / i.naturalHeight) > 0.02),
+    );
     await page.close();
-  }, 30_000);
+    expect(res.length).toBeGreaterThanOrEqual(3);
+    expect(res.every((cropped) => !cropped)).toBe(true);
+  });
+
+  it('the show photo starts level with "Was Sie erwartet" on desktop', async () => {
+    const page = await browser.newPage({ viewport: { width: 1280, height: 900 } });
+    await page.goto(BASE + '/kindergeburtstag/');
+    const d = await page.evaluate(() => {
+      document.querySelectorAll<HTMLElement>('.k3-intro [data-reveal]').forEach((e) => (e.style.transform = 'none'));
+      const show = document.querySelector('.k3-intro__show')!.getBoundingClientRect();
+      const title = document.querySelector('.k3-expect__title')!.getBoundingClientRect();
+      return Math.abs(show.top - title.top);
+    });
+    await page.close();
+    expect(d).toBeLessThan(40);
+  });
 });
 
 describe('kids prices count up', () => {

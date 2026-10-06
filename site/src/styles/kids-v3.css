@@ -89,8 +89,8 @@
 
 /* ── intro ── */
 .k3-intro__grid { display: grid; gap: var(--space-5); align-items: start; }
-.k3-expect { display: grid; gap: var(--space-2); }
-.k3-expect__title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin-top: var(--space-2); }
+.k3-expect { display: grid; gap: var(--space-2); align-content: start; }
+.k3-expect__title { font-family: var(--font-display); font-size: 1.35rem; font-weight: 600; margin: 0 !important; }
 .k3-expect__list { list-style: none; padding: 0; margin: 0; display: grid; gap: 0.5rem; }
 .k3-expect__list li { padding: 0.55rem 0.85rem; background: var(--surface); border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.35); }
 
@@ -202,7 +202,8 @@
 /* ── desktop columns ── */
 @media (min-width: 901px) {
   .k3-hero__grid { grid-template-columns: 1.05fr 1fr; }
-  .k3-intro__grid { grid-template-columns: 1.4fr 1fr; }
+  /* 2 × 2: text | photo, show photo | "Was Sie erwartet" — the show photo starts level with the list title */
+  .k3-intro__grid { grid-template-columns: 1.4fr 1fr; row-gap: var(--space-4); }
   .k3-area__grid { grid-template-columns: 1.2fr 1fr; }
 }
 @media (max-width: 900px) {
@@ -227,7 +228,8 @@
 [data-zone='kids']:has(.k3-hero) .rv__title { font-weight: 600; }
 
 /* intro: the show photo fills the free space under the text */
-.k3-intro__photo { margin-top: var(--space-4); rotate: -1deg; }
+.k3-intro__show { width: 80%; rotate: -1deg; } /* user: about 20 % smaller */
+.k3-intro__photo { rotate: 1deg; }
 
 /* ── extras: dark stage with a red and a blue spotlight from either side (user 2026-10-06) ── */
 .k3-band--spot {
@@ -283,24 +285,28 @@
   .k3-spot { animation: none; }
 }
 
-/* hero: the same spotlights on the light stage. Screen blending vanishes on cream, so here the
-   cones are plain translucent colour; they sit under the content and under the curtain. */
-.k3-spot--hero { z-index: 1; top: 0; height: 100%; mix-blend-mode: normal; opacity: 0.6; }
-.k3-spot--hero.k3-spot--red { left: 4%; width: 58%; }
-.k3-spot--hero.k3-spot--blue { right: 4%; width: 58%; }
-.k3-spot--hero {
-  /* fade out softly towards the floor and the sides: no hard box edges on the light stage */
-  -webkit-mask-image: radial-gradient(ellipse 75% 95% at 50% 0%, #000 55%, transparent 100%);
-  mask-image: radial-gradient(ellipse 75% 95% at 50% 0%, #000 55%, transparent 100%);
+
+/* ── hero on the dark-blue stage, lit like the extras (user 2026-10-06) ── */
+.k3-hero {
+  background:
+    radial-gradient(ellipse 60% 45% at 50% 100%, rgba(120, 90, 220, 0.25), transparent 70%),
+    linear-gradient(180deg, #1b1446 0%, #2a1d5e 55%, #1d1748 100%) !important;
+  color: #f6ecdc;
 }
-/* the lamps: a small dark can with a coloured glow at its mouth */
-.k3-spot--hero::before {
-  top: 1.35rem; width: 1.9rem; height: 1.5rem; border-radius: 0.5rem 0.5rem 45% 45%;
-  background: linear-gradient(180deg, #3a2c33, #1d1418);
+.k3-spot--stagehero {
+  z-index: 1; top: 0; height: 100%;
+  -webkit-mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, #000 60%, transparent 100%);
+  mask-image: radial-gradient(ellipse 80% 100% at 50% 0%, #000 60%, transparent 100%);
 }
-.k3-spot--hero.k3-spot--red::before { left: calc(10% - 0.95rem); box-shadow: 0 0.7rem 16px 4px rgba(255, 70, 90, 0.75); }
-.k3-spot--hero.k3-spot--blue::before { right: calc(10% - 0.95rem); box-shadow: 0 0.7rem 16px 4px rgba(80, 130, 255, 0.75); }
-:global(.motion-ok) .k3-spot--hero, .motion-ok .k3-spot--hero { animation-delay: 2.2s; }
-@media (max-width: 900px) {
-  .k3-spot--hero { opacity: 0.4; }
-}
+.k3-spot--stagehero.k3-spot--blue { background:
+    radial-gradient(ellipse 45% 30% at 38% 78%, rgba(130, 170, 255, 0.3), transparent 70%),
+    conic-gradient(from 196deg at 90% 0%, transparent 0deg, rgba(120, 165, 255, 0.2) 6deg, rgba(175, 205, 255, 0.4) 14deg, rgba(110, 160, 255, 0.6) 23deg, rgba(120, 165, 255, 0.2) 32deg, transparent 36deg); }
+.k3-spot--stagehero::before { top: 2.2rem; }
+.motion-ok .k3-spot--stagehero { animation-delay: 2.2s; }
+.k3-hero__title { color: #fff7ea; text-shadow: 0 2px 18px rgba(10, 5, 40, 0.55); }
+.k3-hero .k3-mark { color: #ff7a82; }
+.k3-hero .k3-quick a { background: rgba(255, 252, 245, 0.12); color: #fff3e2; box-shadow: inset 0 0 0 1px rgba(233, 200, 119, 0.7); }
+@media (hover: hover) and (pointer: fine) { .k3-hero .k3-quick a:hover { background: rgba(255, 252, 245, 0.22); } }
+[data-zone='kids']:has(.k3-hero) .k3-hero .btn--ghost { background: transparent; color: #fff3e2; box-shadow: inset 0 0 0 1.5px #e9c877; }
+[data-zone='kids']:has(.k3-hero) .k3-hero .btn--primary { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 10px 26px -8px rgba(255, 60, 80, 0.6); }
+.k3-hero__photo { box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), 0 0 70px -10px rgba(120, 150, 255, 0.55), 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
