@@ -118,7 +118,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Intro + playbill ──────────────────────────────────── -->
-  <section class="bz-intro">
+  <section class="bz-intro ce-smoke">
     <div class="container bz-intro__grid">
       <div>
         <p class="bz-intro__text" data-reveal>
@@ -133,7 +133,7 @@ const _pageGallery = [
           ))}
         </ul>
       </div>
-      <div class="bz-bill" data-reveal="deal" data-tilt>
+      <div class="bz-bill ce-sheet ce-sheet--red" data-reveal="deal" data-tilt>
         <span class="bz-bill__corner bz-bill__corner--tl" aria-hidden="true">♠</span>
         <span class="bz-bill__corner bz-bill__corner--br ce-red" aria-hidden="true">♥</span>
         <h3>📊 Eckdaten der Show</h3>
@@ -157,8 +157,9 @@ const _pageGallery = [
   </section>
 
   <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="ce-occasions" data-related-services>
+  <section class="ce-occasions ce-smoke" data-related-services>
     <div class="container ce-narrow">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">
         Für welche Anlässe kann man Zauberer LIAR sonst buchen?
       </h2>
@@ -180,7 +181,7 @@ const _pageGallery = [
   <Reviews />
 
   <!-- ── Was ist Bühnenzauberei? ───────────────────────────── -->
-  <section class="bz-what">
+  <section class="bz-what ce-smoke">
     <div class="container">
       <h2 class="ce-h2 ce-center">Was ist Bühnenzauberei?</h2>
       <p class="bz-what__sub ce-center">Zauberkunst für Ihr gesamtes Publikum</p>
@@ -195,7 +196,7 @@ const _pageGallery = [
           { title: 'Interaktiv & Einbindend', text: 'Ihr Publikum wird Teil der Show. Ausgewählte Gäste werden auf die Bühne geholt und erleben die Magie aus nächster Nähe.' },
           { title: 'Flexibel & Anpassbar', text: 'Elegant für Galas, humorvoll für Betriebsfeiern, zurückhaltend für feierliche Anlässe.' },
         ].map((item, i) => (
-          <div class="bz-what__card" data-reveal="deal" data-reveal-delay={i * 0.12} data-tilt>
+          <div class="bz-what__card ce-sheet" data-reveal="deal" data-reveal-delay={i * 0.12} data-tilt>
             <span class:list={['bz-what__suit', { 'ce-red': i === 1 }]} aria-hidden="true">{['♠', '♥', '♣'][i]}</span>
             <h4>{item.title}</h4>
             <p class="ce-soft" set:html={item.text} />
@@ -206,7 +207,8 @@ const _pageGallery = [
   </section>
 
   <!-- ── Galerie: a spread of framed photos on the stage ────── -->
-  <section class="bz-stageband bz-gallery">
+  <section class="bz-gallery ce-night ce-lit">
+    <StageLights soft />
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
       <p class="ce-center bz-gallery__text">Weitere Fotos und Videos finden Sie in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
@@ -228,8 +230,9 @@ const _pageGallery = [
   </section>
 
   <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="bz-why">
+  <section class="bz-why ce-smoke">
     <div class="container">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">Warum Bühnenzauberer LIAR?</h2>
       <div class="bz-why__grid">
         {features.map((f, i) => (
@@ -244,8 +247,9 @@ const _pageGallery = [
   </section>
 
   <!-- ── Einsatzgebiet + Kurz-FAQ ──────────────────────────── -->
-  <section class="bz-area">
+  <section class="bz-area ce-night">
     <div class="container">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
       <h3 class="bz-area__sub ce-center">Wo bin ich als Bühnenzauberer buchbar?</h3>
       <div class="bz-area__grid">
@@ -257,7 +261,7 @@ const _pageGallery = [
           <h4>🌍 Überregional & International</h4>
           <p class="ce-soft">Deutschland: Gesamtes Bundesgebiet<br />International: Frankreich, Belgien, Niederlande, Österreich, Schweiz</p>
         </div>
-        <div class="bz-qa" data-reveal data-reveal-delay="0.1">
+        <div class="bz-qa ce-sheet" data-reveal data-reveal-delay="0.1">
           <h4>FAQ</h4>
           {faqItems.slice(0, 3).map((item) => (
             <div class="bz-qa__item">
@@ -271,7 +275,8 @@ const _pageGallery = [
   </section>
 
   <!-- ── CTA: curtain call ─────────────────────────────────── -->
-  <section class="bz-stageband bz-cta">
+  <section class="bz-cta ce-velvet ce-lit">
+    <StageLights soft />
     <div class="container ce-narrow ce-center">
       <h2 class="ce-h2">🎪 Jetzt buchen – Lassen Sie sich verzaubern!</h2>
       <p class="bz-cta__text">Machen Sie Ihr Event zu einem unvergesslichen Erlebnis mit professioneller Bühnenzauberei. Über 400 zufriedene Kunden können nicht irren! Verschaffen Sie sich einen Eindruck in meiner <a href="/galerie/">Fotogalerie</a>.</p>
@@ -288,29 +293,17 @@ const _pageGallery = [
 </V2Layout>
 
 <style>
-  /* Stage palette: ink background, paper text. Red is lifted for contrast on black (#ec4a60: 4.9:1). */
-  .bz-stageband {
-    --stage-red: #ec4a60;
-    --stage-soft: #d9d1c2;
-    background: var(--ink); color: var(--bg);
-  }
-
   /* ── hero: ce-hero--stage + ce-spot (adult-kit.css) ── */
-  :global(.v2) .bz-btn { background: var(--accent); color: var(--accent-ink); }
-  @media (hover: hover) and (pointer: fine) {
-    :global(.v2) .bz-btn:hover { background: var(--accent-strong); }
-  }
+  /* the CTA button takes the house colours (adult-kit.css: cream on velvet) */
 
   /* ── intro + playbill ── */
   .bz-intro__grid { display: grid; grid-template-columns: 1.1fr 1fr; gap: var(--space-5); align-items: center; }
   .bz-intro__text { font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.55rem); line-height: 1.5; }
   .bz-ticks { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: 0.2rem; }
-  .bz-ticks li { display: flex; gap: 0.8rem; align-items: baseline; padding: 0.55rem 0; border-top: 1px solid rgba(20, 18, 16, 0.2); }
+  .bz-ticks li { display: flex; gap: 0.8rem; align-items: baseline; padding: 0.55rem 0; border-top: 1px solid var(--hair); }
   .bz-tick { color: var(--accent-strong); font-weight: 700; }
   .bz-bill {
-    position: relative; padding: var(--space-4) var(--space-4) var(--space-3);
-    background: var(--surface); border-radius: var(--radius);
-    box-shadow: inset 0 0 0 0.5rem var(--surface), inset 0 0 0 calc(0.5rem + 1px) rgba(20, 18, 16, 0.5), 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
+    position: relative; padding: var(--space-4) var(--space-4) calc(var(--space-4) + 0.5rem);
   }
   .bz-bill__corner { position: absolute; font-family: var(--font-display); font-size: 1.3rem; line-height: 1; }
   .bz-bill__corner--tl { top: 1rem; left: 1.1rem; }
@@ -324,13 +317,11 @@ const _pageGallery = [
   .bz-bill dd { order: 2; margin: 0; text-align: right; color: var(--ink-soft); }
 
   /* ── what ── */
-  .bz-what { background: var(--bg-alt); }
   .bz-what__sub { font-family: var(--font-display); font-style: italic; font-size: 1.35rem; margin-top: calc(var(--space-2) * -1) !important; }
   .bz-what__text { margin-top: var(--space-3) !important; }
   .bz-what__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); max-width: 62rem; margin: var(--space-4) auto 0; }
   .bz-what__card {
     position: relative; padding: var(--space-4) var(--space-3) var(--space-3);
-    background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16), var(--shadow);
   }
   .bz-what__suit { position: absolute; top: 0.8rem; left: 1rem; font-family: var(--font-display); font-size: 1.5rem; line-height: 1; }
   .bz-what__card h4 { font-size: 1.35rem; margin: 0.4rem 0 0.5rem; }
@@ -338,13 +329,7 @@ const _pageGallery = [
 
   /* ── gallery: five framed photos fanned under the spotlight ── */
   .bz-gallery { overflow: clip; }
-  .bz-gallery::before {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 55% 60% at 50% 0%, rgba(255, 246, 225, 0.14), transparent 70%);
-  }
-  :global(.v2) .bz-stageband .ce-h2 { color: var(--bg); }
-  .bz-stageband a:not(.btn) { color: var(--bg); text-decoration-color: var(--stage-red); text-underline-offset: 0.2em; }
-  .bz-gallery__text { color: var(--stage-soft); }
+  .bz-gallery__text { color: var(--ink-soft); }
   /* photos ~50 % larger (2026-10-06): one per row on small phones, two on larger ones, a 3 + 2 spread on wide screens.
      Image sizes: ≤600px 88vw · ≤900px 40vw · 270px */
   .bz-spread { position: relative; display: flex; justify-content: center; flex-wrap: wrap; gap: var(--space-3) var(--space-2); margin-top: var(--space-4); }
@@ -375,7 +360,7 @@ const _pageGallery = [
 
   /* ── why ── */
   .bz-why__grid { display: grid; gap: var(--space-2) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); margin-top: var(--space-4); }
-  .bz-why__item { padding: var(--space-3) 0 var(--space-2); border-top: 1px solid var(--ink); }
+  .bz-why__item { padding: var(--space-3) 0 var(--space-2); border-top: 1px solid var(--gold); }
   .bz-why__icon { font-size: 1.6rem; margin-bottom: 0.4rem !important; }
   .bz-why__item h3 { font-size: 1.3rem; margin: 0 0 0.4rem; }
   .bz-why__item .ce-soft { margin: 0; font-size: 0.95rem; }
@@ -385,7 +370,7 @@ const _pageGallery = [
   .bz-area__grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-5); align-items: start; }
   .bz-area h4 { font-size: 1.25rem; margin: 0 0 0.6rem; }
   .bz-area__cities { line-height: 1.9; }
-  .bz-qa { padding: var(--space-3); background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16); }
+  .bz-qa { padding: var(--space-3) var(--space-4) var(--space-4); }
   .bz-qa__item { margin-top: var(--space-2); }
   .bz-qa__item + .bz-qa__item { padding-top: var(--space-2); border-top: 1px solid rgba(20, 18, 16, 0.12); }
   .bz-qa__q::before { content: '\2660' / ''; margin-right: 0.45rem; color: var(--accent); }
@@ -393,12 +378,7 @@ const _pageGallery = [
   .bz-qa__a { font-size: 0.9rem; color: var(--ink-soft); margin: 0 !important; }
 
   /* ── cta ── */
-  .bz-cta::before {
-    content: ''; position: absolute; inset: 0; pointer-events: none;
-    background: radial-gradient(ellipse 40% 70% at 50% 0%, rgba(255, 246, 225, 0.12), transparent 70%);
-  }
-  .bz-cta > .container { position: relative; }
-  .bz-cta__text, .bz-cta__contact { color: var(--stage-soft); }
+  .bz-cta__text, .bz-cta__contact { color: var(--ink-soft); }
   .bz-cta__contact { margin: var(--space-3) 0; }
   .bz-cta__contact p { margin-bottom: 0.4rem !important; }
 

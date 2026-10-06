@@ -158,7 +158,7 @@ const whyUs = [
   </section>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
-  <section class="ce-intro">
+  <section class="ce-intro ce-smoke">
     <div class="container ce-narrow ce-center">
       <p class="ce-lead" data-reveal>
         Ob <a href="/kindergeburtstag/">Kindergeburtstag</a>, Hochzeit oder Firmenevent – als Clown Zauberer LIAR erleben Sie Magie, die begeistert und in Erinnerung bleibt. Als <a href="/kinderzauberer/">Kinderzauberer</a> bringe ich Kinderaugen zum Leuchten, als <a href="/zauberer/buehnen-zauberer/">Bühnenzauberer</a> fessle ich Ihr Publikum, und als <a href="/zauberer/tisch-zauberer/">Tischzauberer</a> verzaubere ich Ihre Gäste aus nächster Nähe.
@@ -175,8 +175,9 @@ const whyUs = [
   </section>
 
   <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="ce-occasions" data-related-services>
+  <section class="ce-occasions ce-smoke" data-related-services>
     <div class="container ce-narrow">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">
         Für welche Anlässe kann man Zauberer LIAR sonst buchen?
       </h2>
@@ -198,7 +199,8 @@ const whyUs = [
   <Reviews />
 
   <!-- ── Formate: dealt from the deck ─────────────────────── -->
-  <section class="ce-formats ce-formats--rows">
+  <section class="ce-formats ce-formats--rows ce-night ce-lit">
+    <StageLights soft />
     <div class="container">
       <h2 class="ce-eyebrow ce-center">ZAUBEREI-FORMATE</h2>
       <h3 class="ce-h2 ce-center">Welche Art von Zaubershow passt zu Ihrem Event?</h3>
@@ -230,8 +232,9 @@ const whyUs = [
   </section>
 
   <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="ce-why">
+  <section class="ce-why ce-smoke">
     <div class="container">
+      <SuitRule />
       <p class="ce-eyebrow ce-center">WARUM ZAUBERER LIAR?</p>
       <h2 class="ce-h2 ce-center">🎯 Das macht mich aus</h2>
       <div class="ce-why__grid">
@@ -247,7 +250,7 @@ const whyUs = [
   </section>
 
   <!-- ── Buchung: three cards turned over ─────────────────── -->
-  <section class="ce-steps">
+  <section class="ce-steps ce-velvet">
     <div class="container ce-narrow-wide">
       <p class="ce-eyebrow ce-center">SO FUNKTIONIERT DIE BUCHUNG</p>
       <h2 class="ce-h2 ce-center">In 3 einfachen Schritten zu Ihrer Zaubershow</h2>
@@ -275,8 +278,9 @@ const whyUs = [
   </section>
 
   <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
-  <section class="ce-area">
+  <section class="ce-area ce-night">
     <div class="container">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
       <div class="ce-area__grid">
         <div>
@@ -302,8 +306,9 @@ const whyUs = [
   </section>
 
   <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq">
+  <section class="ce-faq ce-smoke">
     <div class="container ce-narrow">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
       <div class="ce-faq__list">
         {faqSchema.mainEntity.map((item, i) => (
@@ -316,6 +321,8 @@ const whyUs = [
     </div>
   </section>
 
+  <div class="ce-finale ce-velvet">
+  <StageLights soft />
   <PickACard />
 
   <!-- ── Kontakt ───────────────────────────────────────────── -->
@@ -333,4 +340,5 @@ const whyUs = [
       </a>
     </div>
   </section>
+  </div>
 </V2Layout>

@@ -102,7 +102,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── Intro + "Auf einen Blick" as a menu card ─────────── -->
-  <section class="hz-intro">
+  <section class="hz-intro ce-smoke">
     <div class="container hz-intro__grid">
       <div>
         <p class="hz-intro__text" data-reveal>
@@ -117,7 +117,7 @@ const serviceSchema = {
           ))}
         </ul>
       </div>
-      <div class="hz-menu" data-reveal="tilt">
+      <div class="hz-menu ce-sheet ce-sheet--red" data-reveal="tilt">
         <h3 class="hz-menu__title">📊 Auf einen Blick</h3>
         <dl class="hz-menu__list">
           {[
@@ -141,7 +141,7 @@ const serviceSchema = {
   <Reviews />
 
   <!-- ── Ablauf: three place cards along the wedding day ──── -->
-  <section class="hz-day">
+  <section class="hz-day ce-smoke">
     <div class="container">
       <h2 class="ce-h2 ce-center">So passt die Zauberei in Ihren Hochzeitstag</h2>
       <p class="ce-center ce-soft">Unterhaltung genau dann, wenn sonst Leerlauf entsteht</p>
@@ -151,7 +151,7 @@ const serviceSchema = {
           { title: '📸 Fotopause', text: 'Während das Brautpaar für Fotos unterwegs ist, bleibt die Gesellschaft bestens unterhalten – keine Langeweile, keine Wartelücke.' },
           { title: '🎭 Abendprogramm', text: 'Als Übergang zum Abend eine kurze Bühnenshow – elegant, humorvoll und für alle Gäste gleichzeitig.' },
         ].map((item, i) => (
-          <div class="hz-place" data-reveal="deal" data-reveal-delay={i * 0.12} data-tilt>
+          <div class="hz-place ce-sheet" data-reveal="deal" data-reveal-delay={i * 0.12} data-tilt>
             <span class="hz-place__suit" aria-hidden="true">♥</span>
             <h4>{item.title}</h4>
             <p class="ce-soft">{item.text}</p>
@@ -162,7 +162,8 @@ const serviceSchema = {
   </section>
 
   <!-- ── Eindrücke ─────────────────────────────────────────── -->
-  <section class="hz-gallery">
+  <section class="hz-gallery ce-night ce-lit">
+    <StageLights soft />
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Eindrücke</h2>
       <p class="ce-center ce-soft">Weitere Fotos und Videos in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
@@ -187,8 +188,9 @@ const serviceSchema = {
   </section>
 
   <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="ce-why">
+  <section class="ce-why ce-smoke">
     <div class="container">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">Warum LIAR für Ihre Hochzeit?</h2>
       <div class="ce-why__grid">
         {features.map((f, i) => (
@@ -203,8 +205,9 @@ const serviceSchema = {
   </section>
 
   <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq">
+  <section class="ce-faq ce-night">
     <div class="container ce-narrow">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
       <div class="ce-faq__list">
         {faqItems.map((i, n) => (
@@ -222,9 +225,10 @@ const serviceSchema = {
   </section>
 
   <!-- ── CTA: an invitation card ──────────────────────────── -->
-  <section class="hz-invite">
+  <section class="hz-invite ce-velvet ce-lit">
+    <StageLights soft />
     <div class="container">
-      <div class="hz-invite__card" data-reveal>
+      <div class="hz-invite__card ce-sheet ce-sheet--red" data-reveal>
         <span class="hz-invite__index hz-invite__index--tl" aria-hidden="true">A<br />♥</span>
         <span class="hz-invite__index hz-invite__index--br" aria-hidden="true">A<br />♥</span>
         <h2 class="ce-h2">💍 Zauberei für Ihre Hochzeit anfragen</h2>
@@ -256,12 +260,6 @@ const serviceSchema = {
   /* menu card: card stock with an inset hairline frame, centred like a dinner menu */
   .hz-menu {
     position: relative; padding: var(--space-5) var(--space-4) var(--space-4); text-align: center;
-    background: var(--surface); border-radius: var(--radius);
-    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
-  }
-  .hz-menu::before {
-    content: ''; position: absolute; inset: 0.6rem; pointer-events: none;
-    border: 1px solid rgba(200, 16, 46, 0.45); border-radius: calc(var(--radius) - 0.35rem);
   }
   .hz-menu__title { font-size: 1.7rem; font-style: italic; font-weight: 500; margin-bottom: var(--space-3); }
   .hz-menu__list { margin: 0; display: grid; gap: var(--space-2); }
@@ -272,13 +270,11 @@ const serviceSchema = {
   .hz-menu__row dd { margin: 0; font-family: var(--font-display); font-size: 1.1rem; }
 
   /* ── wedding day: place cards ── */
-  .hz-day { background: var(--bg-alt); }
   .hz-places { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); max-width: 64rem; margin: var(--space-4) auto 0; }
   .hz-place {
     position: relative; padding: 3.6rem var(--space-3) var(--space-3); text-align: center;
-    background: var(--surface); border-radius: var(--radius-sm);
-    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16), var(--shadow);
   }
+  :global(.v2) main .hz-place { border-radius: var(--radius-sm); }
   /* the fold of a tent place card */
   .hz-place::before {
     content: ''; position: absolute; inset: 0 0 auto; height: 2.4rem; border-radius: var(--radius-sm) var(--radius-sm) 0 0;
@@ -313,12 +309,6 @@ const serviceSchema = {
   /* ── invitation ── */
   .hz-invite__card {
     position: relative; max-width: 44rem; margin-inline: auto; padding: var(--space-5) var(--space-4); text-align: center;
-    background: var(--surface); border-radius: var(--radius);
-    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
-  }
-  .hz-invite__card::before {
-    content: ''; position: absolute; inset: 0.7rem; pointer-events: none;
-    border: 1px solid rgba(20, 18, 16, 0.3); border-radius: calc(var(--radius) - 0.4rem);
   }
   .hz-invite__index { position: absolute; font-family: var(--font-display); font-weight: 700; font-size: 1.05rem; line-height: 1; text-align: center; color: var(--accent); }
   .hz-invite__index--tl { top: 1.3rem; left: 1.4rem; }

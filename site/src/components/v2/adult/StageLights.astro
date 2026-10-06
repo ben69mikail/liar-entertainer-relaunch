@@ -4,10 +4,14 @@
  * rigs above sweep slowly, each on its own rhythm, and drop soft pools of light on the floor; small
  * red/amber lamps glow along the dark back. Pure decoration (aria-hidden), CSS only — shapes and
  * timing live in adult-kit.css (.ce-lightshow / .ce-beam). Place it as the hero section's first child.
+ * `soft` (2026-10-07): the quieter house variant for body sections (fewer, fainter beams over the
+ * top of the section); the section needs the ce-lit class (own stacking context, clipped).
  */
+interface Props { soft?: boolean }
+const { soft = false } = Astro.props;
 ---
 
-<span class="ce-lightshow" aria-hidden="true">
+<span class:list={['ce-lightshow', { 'ce-lightshow--soft': soft }]} aria-hidden="true">
   <span class="ce-lightshow__lamps"></span>
   <span class="ce-beam ce-beam--1"></span>
   <span class="ce-beam ce-beam--2"></span>

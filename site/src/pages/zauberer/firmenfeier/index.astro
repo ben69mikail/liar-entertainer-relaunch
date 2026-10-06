@@ -102,7 +102,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── Intro + "Auf einen Blick" as a briefing sheet ────── -->
-  <section class="ff-intro">
+  <section class="ff-intro ce-smoke">
     <div class="container ff-intro__grid">
       <div>
         <p class="ff-intro__text" data-reveal>
@@ -141,7 +141,7 @@ const serviceSchema = {
   <Reviews />
 
   <!-- ── Formate: an evening agenda ───────────────────────── -->
-  <section class="ff-formats">
+  <section class="ff-formats ce-smoke">
     <div class="container">
       <h2 class="ce-h2 ce-center">Zwei Formate – ein unvergesslicher Abend</h2>
       <p class="ce-center ce-soft">Einzeln oder kombiniert, ganz nach Ablauf Ihrer Feier</p>
@@ -161,7 +161,8 @@ const serviceSchema = {
   </section>
 
   <!-- ── Eindrücke: framed photos dealt onto the ink table ─── -->
-  <section class="ff-table">
+  <section class="ff-table ce-night ce-lit">
+    <StageLights soft />
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Eindrücke</h2>
       <p class="ce-center ff-table__note">Weitere Fotos und Videos in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
@@ -186,8 +187,9 @@ const serviceSchema = {
   </section>
 
   <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="ce-why">
+  <section class="ce-why ce-smoke">
     <div class="container">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">Warum LIAR für Ihr Firmenevent?</h2>
       <div class="ce-why__grid">
         {features.map((f, i) => (
@@ -202,8 +204,9 @@ const serviceSchema = {
   </section>
 
   <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq">
+  <section class="ce-faq ce-night">
     <div class="container ce-narrow">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
       <div class="ce-faq__list">
         {faqItems.map((i, n) => (
@@ -221,13 +224,14 @@ const serviceSchema = {
   </section>
 
   <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="ff-cta">
+  <section class="ff-cta ce-velvet ce-lit">
+    <StageLights soft />
     <div class="container ff-cta__grid">
       <div data-reveal>
         <h2 class="ce-h2">🎉 Zauberei für Ihre Firmenfeier anfragen</h2>
         <p class="ce-soft">Gerade zur Weihnachtszeit sind Termine schnell vergeben – fragen Sie frühzeitig an. Schildern Sie mir kurz Ihr Event, ich erstelle Ihnen ein unverbindliches Angebot.</p>
       </div>
-      <div class="ff-cta__contact" data-reveal data-reveal-delay="0.1">
+      <div class="ff-cta__contact ce-sheet ce-sheet--red" data-reveal data-reveal-delay="0.1">
         <p>📞 Telefon: <a href="tel:+491721517578">0172 – 1517578</a></p>
         <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
         <p>📍 Standort: Gladbeck, NRW (mobil in ganz Deutschland)</p>
@@ -251,37 +255,33 @@ const serviceSchema = {
   .ff-checks__mark { color: var(--accent-strong); font-weight: 700; }
 
   /* briefing sheet: ink header rule, label/value rows on hairlines */
-  .ff-brief { border-top: 4px solid var(--ink); padding-top: var(--space-2); }
+  .ff-brief { border-top: 1px solid var(--gold); box-shadow: 0 -4px 0 -1px var(--gold); padding-top: var(--space-3); }
   .ff-brief__title { font-size: 1.6rem; font-weight: 600; margin-bottom: var(--space-2); }
   .ff-brief__list { margin: 0; }
-  .ff-brief__row { display: grid; grid-template-columns: 9.5rem 1fr; gap: var(--space-2); padding: 0.8rem 0; border-bottom: 1px solid rgba(20, 18, 16, 0.22); }
+  .ff-brief__row { display: grid; grid-template-columns: 9.5rem 1fr; gap: var(--space-2); padding: 0.8rem 0; border-bottom: 1px solid var(--hair); }
   .ff-brief__row dt { font-size: 0.72rem; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--accent-strong); padding-top: 0.2rem; }
   .ff-brief__row dd { margin: 0; }
 
   /* ── formats: agenda on a timeline ── */
-  .ff-formats { background: var(--bg-alt); }
   .ff-agenda {
     list-style: none; margin: var(--space-4) auto 0; padding: 0; max-width: 64rem; counter-reset: ff-step;
     display: grid; gap: var(--space-3); grid-template-columns: repeat(3, 1fr); position: relative;
   }
   /* the timeline rule runs through the markers */
-  .ff-agenda::before { content: ''; position: absolute; left: 0; right: 0; top: 1.4rem; height: 1px; background: var(--ink); opacity: 0.4; }
+  .ff-agenda::before { content: ''; position: absolute; left: 0; right: 0; top: 1.4rem; height: 1px; background: var(--gold); }
   .ff-agenda__item { position: relative; padding-top: 4rem; counter-increment: ff-step; }
   .ff-agenda__item::before {
     content: counter(ff-step, decimal-leading-zero); position: absolute; top: 0; left: 0;
     width: 2.8rem; height: 2.8rem; display: grid; place-items: center;
-    font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: var(--accent-ink);
-    background: var(--ink); border-radius: 50%; box-shadow: 0 0 0 0.4rem var(--bg-alt);
+    font-family: var(--font-display); font-style: italic; font-size: 1.1rem; color: #141210;
+    background: #fffdf7; border-radius: 50%; box-shadow: 0 0 0 0.4rem #221d1a;
   }
-  .ff-agenda__item:nth-child(2)::before { background: var(--accent-strong); }
+  .ff-agenda__item:nth-child(2)::before { background: #c8102e; color: #fffdf7; }
   .ff-agenda__item h4 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin: 0 0 0.5rem; }
   .ff-agenda__item p { margin: 0; }
 
   /* ── gallery on the ink table ── */
-  .ff-table { background: var(--ink); color: var(--bg); overflow: clip; }
-  .ff-table .ce-h2 { color: var(--bg); }
-  .ff-table__note { color: #d9d1c2; }
-  .ff-table__note a { color: #f4a7b2; } /* 9.6:1 on black */
+  .ff-table__note { color: var(--ink-soft); }
   /* photos ~50 % larger (2026-10-06): full width on phones, two per row on wide screens with the
      third centred below. Image sizes: ≤900px 92vw · 500px */
   .ff-table__hand { display: grid; gap: var(--space-4); max-width: 30rem; margin: var(--space-4) auto 0; align-items: end; }
@@ -303,9 +303,8 @@ const serviceSchema = {
   .ce-faq__item[open] .ff-faq__plus { rotate: 45deg; }
 
   /* ── cta ── */
-  .ff-cta { border-top: 4px solid var(--ink); }
   .ff-cta__grid { display: grid; grid-template-columns: 1.3fr 1fr; gap: var(--space-5); align-items: center; }
-  .ff-cta__contact { padding-left: var(--space-4); border-left: 1px solid rgba(20, 18, 16, 0.3); }
+  .ff-cta__contact { padding: var(--space-4); }
   .ff-cta__contact p { margin-bottom: 0.5rem; }
   .ff-cta__contact .btn { margin-top: var(--space-2); }
 
@@ -315,6 +314,6 @@ const serviceSchema = {
     .ff-agenda::before { left: 1.4rem; right: auto; top: 0; bottom: 0; width: 1px; height: auto; }
     .ff-agenda__item { padding: 0 0 0 4.4rem; }
     .ff-table__hand > div :global(.ff-table__card) { translate: none; }
-    .ff-cta__contact { padding-left: 0; border-left: 0; padding-top: var(--space-3); border-top: 1px solid rgba(20, 18, 16, 0.3); }
+    .ff-cta__contact { padding: var(--space-4) var(--space-3); }
   }
 </style>

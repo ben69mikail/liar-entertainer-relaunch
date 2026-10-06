@@ -124,7 +124,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Intro + facts laid out on an ink table ────────────── -->
-  <section class="tz-intro">
+  <section class="tz-intro ce-smoke">
     <div class="container tz-intro__grid">
       <div>
         <p class="tz-intro__text" data-reveal>
@@ -149,7 +149,7 @@ const _pageGallery = [
             ['Platzbedarf', 'Keiner! Ich komme zu den Gästen'],
             ['Techn. Aufwand', 'Keiner (keine Bühne, kein Mikrofon)'],
           ].map(([k, v], i) => (
-            <div class="tz-facts__card" data-reveal="deal" data-reveal-delay={i * 0.08}>
+            <div class="tz-facts__card ce-sheet" data-reveal="deal" data-reveal-delay={i * 0.08}>
               <dt>{k}:</dt>
               <dd>{v}</dd>
             </div>
@@ -160,8 +160,9 @@ const _pageGallery = [
   </section>
 
   <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="ce-occasions" data-related-services>
+  <section class="ce-occasions ce-smoke" data-related-services>
     <div class="container ce-narrow">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">
         Für welche Anlässe kann man Zauberer LIAR sonst buchen?
       </h2>
@@ -183,7 +184,7 @@ const _pageGallery = [
   <Reviews />
 
   <!-- ── Was ist Close-up: four cards turned face up ───────── -->
-  <section class="tz-what">
+  <section class="tz-what ce-night">
     <div class="container">
       <h2 class="ce-h2 ce-center">Was ist Close-up Zauberei?</h2>
       <div class="tz-what__grid">
@@ -193,7 +194,7 @@ const _pageGallery = [
           { icon: '🔄', title: 'Flexibel & Organisch', text: 'Keine feste Show zu fester Zeit. Ich bewege mich während Ihres Events zwischen den Gruppen und füge mich organisch in den Ablauf ein.' },
           { icon: '🇫🇷', title: 'Französischer Charme', text: 'Als gebürtiger Franzose bringe ich eine besondere Note – charmant, eloquent und mit einer Prise Pariser Flair.' },
         ].map((item, i) => (
-          <div class="tz-what__card" data-reveal="flip" data-reveal-delay={i * 0.14}>
+          <div class="tz-what__card ce-sheet" data-reveal="flip" data-reveal-delay={i * 0.14}>
             <span class="card-back" aria-hidden="true"></span>
             <span class:list={['tz-what__suit', { 'ce-red': i % 2 }]} aria-hidden="true">{['♠', '♥', '♣', '♦'][i]}</span>
             <p class="tz-what__icon">{item.icon}</p>
@@ -206,7 +207,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Ablauf: one round from table to table ─────────────── -->
-  <section class="tz-round">
+  <section class="tz-round ce-smoke">
     <div class="container ce-narrow-wide">
       <h2 class="ce-h2 ce-center">🎭 Typischer Ablauf</h2>
       <ol class="tz-round__list">
@@ -224,7 +225,8 @@ const _pageGallery = [
   </section>
 
   <!-- ── Galerie: photos scattered on the table ───────────── -->
-  <section class="tz-gallery">
+  <section class="tz-gallery ce-night ce-lit">
+    <StageLights soft />
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
       <p class="ce-center ce-soft">Noch mehr Eindrücke gibt es in der <a href="/galerie/">Foto- und Videogalerie</a>.</p>
@@ -247,11 +249,12 @@ const _pageGallery = [
   </section>
 
   <!-- ── Wann Close-up? Two cards to choose from ──────────── -->
-  <section class="tz-choose">
+  <section class="tz-choose ce-smoke">
     <div class="container ce-narrow-wide">
+      <SuitRule />
       <h2 class="ce-h2 ce-center">Wann Close-up wählen?</h2>
       <div class="tz-choose__grid">
-        <div class="tz-choice tz-choice--red" data-reveal="deal" data-tilt>
+        <div class="tz-choice tz-choice--red ce-sheet ce-sheet--red" data-reveal="deal" data-tilt>
           <span class="tz-choice__index tz-choice__index--tl" aria-hidden="true">A<br />♦</span>
           <span class="tz-choice__index tz-choice__index--br" aria-hidden="true">A<br />♦</span>
           <h3>✅ Perfekt für Close-up Zauberei:</h3>
@@ -261,7 +264,7 @@ const _pageGallery = [
             ))}
           </ul>
         </div>
-        <div class="tz-choice" data-reveal="deal" data-reveal-delay="0.14" data-tilt>
+        <div class="tz-choice ce-sheet" data-reveal="deal" data-reveal-delay="0.14" data-tilt>
           <span class="tz-choice__index tz-choice__index--tl" aria-hidden="true">A<br />♠</span>
           <span class="tz-choice__index tz-choice__index--br" aria-hidden="true">A<br />♠</span>
           <h3>✅ Perfekt für Bühnenshow:</h3>
@@ -277,7 +280,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── So buchen Sie: five cards turned over ─────────────── -->
-  <section class="ce-steps tz-book">
+  <section class="ce-steps tz-book ce-velvet">
     <div class="container">
       <h2 class="ce-h2 ce-center">So buchen Sie</h2>
       <div class="ce-steps__list tz-book__list">
@@ -300,7 +303,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Einsatzgebiet + direkt anfragen ───────────────────── -->
-  <section class="tz-area">
+  <section class="tz-area ce-night">
     <div class="container">
       <h2 class="ce-h2 ce-center">Wo bin ich als Tischzauberer buchbar?</h2>
       <div class="tz-area__grid">
@@ -312,7 +315,7 @@ const _pageGallery = [
           <h3>🌍 Überregional & International</h3>
           <p class="ce-soft">Deutschland: Gesamtes Bundesgebiet<br />International: Frankreich, Belgien, Niederlande, Österreich, Schweiz</p>
         </div>
-        <div class="tz-direct" data-reveal="deal" data-tilt>
+        <div class="tz-direct ce-sheet ce-sheet--red" data-reveal="deal" data-tilt>
           <span class="tz-direct__suit" aria-hidden="true">♦</span>
           <h3>📞 Direkt anfragen</h3>
           <div class="tz-direct__lines">
@@ -327,7 +330,8 @@ const _pageGallery = [
   </section>
 
   <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="tz-cta">
+  <section class="tz-cta ce-velvet ce-lit">
+    <StageLights soft />
     <div class="container ce-narrow ce-center">
       <h2 class="ce-h2">✨ Jetzt Tischzauberer buchen!</h2>
       <p class="tz-cta__text">Zauberei zum Greifen nah – für Ihre Hochzeit, Ihr Dinner-Event oder Ihren Empfang. Kombinieren Sie die Tischzauberei mit einer <a href="/zauberer/buehnen-zauberer/">Bühnenshow</a> für das perfekte Gesamtpaket. Weitere Eindrücke finden Sie in meiner <a href="/galerie/">Galerie</a>.</p>
@@ -338,7 +342,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq">
+  <section class="ce-faq ce-smoke">
     <div class="container ce-narrow">
       <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
       <div class="ce-faq__list">
@@ -364,27 +368,28 @@ const _pageGallery = [
   .tz-intro__grid { display: grid; grid-template-columns: 1fr 1.05fr; gap: var(--space-5); align-items: center; }
   .tz-intro__text { font-family: var(--font-display); font-size: clamp(1.2rem, 2.2vw, 1.55rem); line-height: 1.5; }
   .tz-ticks { list-style: none; margin: var(--space-3) 0 0; padding: 0; }
-  .tz-ticks li { padding: 0.55rem 0; border-top: 1px solid rgba(20, 18, 16, 0.2); }
+  .tz-ticks li { padding: 0.55rem 0; border-top: 1px solid var(--hair); }
   .tz-tick { color: var(--accent-strong); font-weight: 700; margin-right: 0.5rem; }
-  /* the facts as small cards laid out on an ink table */
-  .tz-table { padding: var(--space-4) var(--space-3) var(--space-3); background: var(--ink); color: var(--bg); border-radius: calc(var(--radius) * 1.6); box-shadow: var(--shadow); }
-  .tz-table h3 { color: var(--bg); font-size: 1.5rem; margin: 0 0 var(--space-3); text-align: center; }
+  /* the facts as small cards laid out on the black card table (a gold hairline marks its edge) */
+  .tz-table {
+    padding: var(--space-4) var(--space-3) var(--space-3); background: #0d0b0a; border-radius: calc(var(--radius) * 1.6);
+    box-shadow: inset 0 0 0 1px var(--gold), 0 30px 60px -30px rgb(0 0 0 / 0.9);
+  }
+  .tz-table h3 { font-size: 1.5rem; margin: 0 0 var(--space-3); text-align: center; }
   .tz-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
   .tz-facts__card {
-    padding: 0.9rem 1rem; background: var(--surface); color: var(--ink); border-radius: var(--radius-sm);
-    box-shadow: 0 10px 20px -12px rgba(0, 0, 0, 0.7);
+    padding: 0.9rem 1rem;
   }
+  :global(.v2) main .tz-facts__card { border-radius: var(--radius-sm); }
   .tz-facts__card:nth-child(odd) { rotate: -1deg; }
   .tz-facts__card:nth-child(even) { rotate: 1.2deg; }
   .tz-facts dt { font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: var(--accent-strong); }
   .tz-facts dd { margin: 0.25rem 0 0; font-family: var(--font-display); font-size: 1.05rem; line-height: 1.3; }
 
   /* ── what (flip) ── */
-  .tz-what { background: var(--bg-alt); }
   .tz-what__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); margin-top: var(--space-4); }
   .tz-what__card {
     position: relative; padding: var(--space-4) var(--space-3) var(--space-3);
-    background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16), var(--shadow);
   }
   .tz-what__card .card-back {
     border-radius: var(--radius);
@@ -403,20 +408,21 @@ const _pageGallery = [
   .tz-round__list { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 13rem), 1fr)); position: relative; }
   .tz-round__list::before {
     content: ''; position: absolute; left: 1.6rem; right: 1.6rem; top: 1.6rem;
-    border-top: 2px dotted rgba(20, 18, 16, 0.35);
+    border-top: 2px dotted var(--gold);
   }
   .tz-round__step { position: relative; display: grid; gap: var(--space-2); align-content: start; }
   .tz-chip {
     display: grid; place-items: center; width: 3.2rem; height: 3.2rem; border-radius: 50%;
-    background: var(--ink); color: var(--bg); font-family: var(--font-display); font-style: italic; font-size: 1.5rem;
-    box-shadow: inset 0 0 0 0.25rem var(--ink), inset 0 0 0 calc(0.25rem + 1.5px) rgba(255, 253, 247, 0.55);
+    /* a poker chip: cream with a dashed inner ring; every other one card red */
+    background: #fffdf7; color: #141210; font-family: var(--font-display); font-style: italic; font-size: 1.5rem;
+    box-shadow: inset 0 0 0 0.25rem #fffdf7, inset 0 0 0 calc(0.25rem + 1.5px) rgb(20 18 16 / 0.45), 0 10px 20px -10px rgb(0 0 0 / 0.9);
   }
-  .tz-round__step:nth-child(even) .tz-chip { background: var(--accent); box-shadow: inset 0 0 0 0.25rem var(--accent), inset 0 0 0 calc(0.25rem + 1.5px) rgba(255, 253, 247, 0.6); }
+  .tz-round__step:nth-child(even) .tz-chip { background: #c8102e; color: #fffdf7; box-shadow: inset 0 0 0 0.25rem #c8102e, inset 0 0 0 calc(0.25rem + 1.5px) rgb(255 253 247 / 0.65), 0 10px 20px -10px rgb(0 0 0 / 0.9); }
   .tz-round__step h3 { font-size: 1.35rem; margin: 0 0 0.4rem; }
   .tz-round__step .ce-soft { margin: 0; font-size: 0.95rem; }
 
   /* ── gallery scatter ── */
-  .tz-gallery { background: var(--bg-alt); overflow-x: clip; }
+  .tz-gallery { overflow-x: clip; }
   /* photos ~50 % larger (2026-10-06): one per row on small phones, two on larger ones, 3 + 2 on wide screens.
      Image sizes: ≤600px 88vw · ≤900px 40vw · 300px */
   .tz-scatter { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4) var(--space-2); margin-top: var(--space-4); }
@@ -445,7 +451,6 @@ const _pageGallery = [
   .tz-choose__grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); margin-top: var(--space-4); }
   .tz-choice {
     position: relative; padding: var(--space-5) var(--space-4) var(--space-4);
-    background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.18), var(--shadow);
   }
   .tz-choice__index { position: absolute; font-family: var(--font-display); font-weight: 700; font-size: 1.15rem; line-height: 1; text-align: center; }
   .tz-choice--red .tz-choice__index { color: var(--accent); }
@@ -467,21 +472,14 @@ const _pageGallery = [
   .tz-area h3 { font-size: 1.3rem; margin: 0 0 0.6rem; }
   .tz-area__cities { line-height: 1.9; }
   .tz-direct {
-    position: relative; padding: var(--space-4) var(--space-3) var(--space-3);
-    background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16), var(--shadow);
+    position: relative; padding: var(--space-4) var(--space-4) var(--space-3);
   }
   .tz-direct__suit { position: absolute; top: 0.8rem; right: 1rem; font-family: var(--font-display); font-size: 1.5rem; color: var(--accent); line-height: 1; }
   .tz-direct__lines p { margin-bottom: 0.5rem !important; }
 
   /* ── cta ── */
-  .tz-cta { background: var(--ink); color: var(--bg); }
-  :global(.v2) .tz-cta .ce-h2 { color: var(--bg); }
-  .tz-cta__text { color: #d9d1c2; }
-  .tz-cta__text a { color: var(--bg); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
-  :global(.v2) .tz-cta .tz-cta__btn { margin-top: var(--space-2); background: var(--accent); color: var(--accent-ink); }
-  @media (hover: hover) and (pointer: fine) {
-    :global(.v2) .tz-cta .tz-cta__btn:hover { background: var(--accent-strong); }
-  }
+  .tz-cta__text { color: var(--ink-soft); }
+  :global(.v2) .tz-cta .tz-cta__btn { margin-top: var(--space-2); }
 
   /* ── faq: legacy "+" kept as visible text, the kit's drawn "+" is switched off ── */
   :global(.v2) .tz-faq summary::after { content: none; }

@@ -228,17 +228,14 @@
 
   /* ── why ── */
   .v2 .ce-why__grid { display: grid; gap: var(--space-2); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-top: var(--space-4); }
-  .v2 .ce-why__item { position: relative; padding: var(--space-3) var(--space-3) var(--space-3) 3.6rem; border-top: 1px solid rgba(20, 18, 16, 0.25); }
+  .v2 .ce-why__item { position: relative; padding: var(--space-3) var(--space-3) var(--space-3) 3.6rem; border-top: 1px solid var(--hair, rgba(20, 18, 16, 0.25)); }
   .v2 .ce-why__suit { position: absolute; left: 0.6rem; top: var(--space-3); font-family: var(--font-display); font-size: 1.8rem; line-height: 1; transition: rotate 0.25s var(--ease-out); }
   @media (hover: hover) and (pointer: fine) { .ce-why__item:hover .ce-why__suit { rotate: 20deg; } }
   .v2 .ce-why__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin-bottom: 0.3rem; }
   .v2 .ce-why__item .ce-soft { margin: 0; }
 
   /* ── steps (flip) ── */
-  .v2 .ce-steps { background: var(--ink); color: var(--bg); }
-  .v2 .ce-steps .ce-h2 { color: var(--bg); }
-  .v2 .ce-steps .ce-eyebrow { color: #f4a7b2; } /* 9.6:1 on black */
-  .v2 .ce-steps .ce-soft { color: #d9d1c2; }
+  /* the band itself is a house section (ce-velvet etc., see "the house" below) */
   .v2 .ce-steps__list { list-style: none; margin: var(--space-4) 0 0; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
   .v2 .ce-step {
     position: relative; padding: var(--space-4) var(--space-3); text-align: center;
@@ -286,7 +283,6 @@
   .v2 .ce-faq__item p { color: var(--ink-soft); padding: 0 0 var(--space-3) 2rem; }
 
   /* ── contact ── */
-  .v2 .ce-contact { border-top: 1px solid rgba(20, 18, 16, 0.25); }
   .v2 .ce-contact__name { font-family: var(--font-display); font-size: 2.2rem; font-style: italic; }
   .v2 .ce-contact .btn { margin-top: var(--space-2); }
 
@@ -329,3 +325,110 @@
   .v2 .ce-hero--stage .ce-hero__copy { padding-inline: 0.25rem; }
   .v2 .ce-hero--stage .ce-hero__claim { font-size: 1.05rem; }
 }
+
+/* ══ the house: everything below the hero (user, 2026-10-07) ══════════════════════════════════
+   A night at the theatre instead of beige paper. Each section is a part of the house:
+   ce-night (the hero's black stage), ce-velvet (oxblood curtain velvet, soft folds) and
+   ce-smoke (warm charcoal of the stalls); the Reviews band is always velvet. Text and headings
+   sit directly on the dark in cream; grouped information lies on cream card-stock sheets
+   (.ce-sheet + the kit's own cards), which switch the tokens back to ink-on-paper.
+   Contrast (measured on the lightest point of each background, incl. the velvet's glow):
+   cream ≥ 11:1, --ink-soft #d4cbbb ≥ 8.5:1, rose accent #ff8f9c ≥ 6.3:1 (4.7:1 inside a beam). */
+.v2 main { background: #121010; }
+.v2 main > :not(.ce-hero) {
+  --bg: #121010; --bg-alt: #1b1714;
+  --ink: #f3ede1; --ink-soft: #d4cbbb; --line: #f3ede1;
+  --accent: #ff8f9c; --accent-strong: #ff8f9c; --accent-2: #f3ede1;
+  --link: #f3ede1; --star: #d9b46a;
+  --hair: rgb(243 237 225 / 0.2);
+  --gold: rgb(217 180 106 / 0.6);
+  --shadow: 0 1px 0 rgb(0 0 0 / 0.3), 0 26px 50px -24px rgb(0 0 0 / 0.95);
+  --shadow-hover: 0 1px 0 rgb(0 0 0 / 0.3), 0 36px 64px -26px rgb(0 0 0 / 1);
+  color: var(--ink);
+}
+/* links in running text: cream with a rose underline */
+.v2 main > :not(.ce-hero) a:not([class]) { text-decoration-color: rgb(255 143 156 / 0.75); }
+
+/* the three house tones (backgrounds are static gradients: no runtime cost) */
+.v2 main > .ce-night {
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgb(255 240 215 / 0.05), transparent 70%), #121010;
+}
+.v2 main > .ce-smoke {
+  background:
+    radial-gradient(ellipse 85% 70% at 50% 35%, rgb(255 236 210 / 0.04), transparent 75%),
+    linear-gradient(#25201c, #1f1a17);
+}
+.v2 main > .ce-velvet, .v2 main > .rv {
+  background:
+    radial-gradient(ellipse 80% 70% at 50% 45%, rgb(120 24 40 / 0.45), transparent 78%),
+    repeating-linear-gradient(90deg, rgb(0 0 0 / 0.24) 0, rgb(255 255 255 / 0.028) 3rem, rgb(0 0 0 / 0.24) 6rem),
+    #2c0a11;
+  /* the curtain hangs back a little: soft shade along its top and bottom */
+  box-shadow: inset 0 2rem 2.5rem -2rem rgb(0 0 0 / 0.75), inset 0 -2rem 2.5rem -2rem rgb(0 0 0 / 0.75);
+}
+.v2 main > .rv { border-block: 0; }
+
+/* section divider: the hero's SuitRule, opening a section */
+.v2 main > :not(.ce-hero) .sr { margin-bottom: var(--space-4); }
+
+/* buttons: card red on the dark, cream on velvet (where red would sink into the cloth) */
+.v2 main > :not(.ce-hero) .btn--primary { background: #c8102e; color: #fffdf7; }
+.v2 main > .ce-velvet .btn--primary { background: #fffdf7; color: #141210; }
+@media (hover: hover) and (pointer: fine) {
+  .v2 main > :not(.ce-hero) .btn--primary:hover { background: #a30c25; color: #fffdf7; }
+  .v2 main > .ce-velvet .btn--primary:hover { background: #c8102e; color: #fffdf7; }
+}
+
+/* ── sheets: cream card stock with a fine inner hairline, lifted off the dark ── */
+.v2 main .ce-sheet, .v2 main .ce-occasion, .v2 main .ce-format__body, .v2 main .ce-step,
+.v2 main .rv__card, .v2 main .ce-faq__list {
+  --bg: #f3ede1; --bg-alt: #e9e0cf;
+  --ink: #141210; --ink-soft: #46413a; --line: #141210;
+  --accent: #c8102e; --accent-strong: #a30c25; --accent-2: #141210;
+  --link: #a30c25; --star: #c8102e;
+  --hair: rgb(20 18 16 / 0.18);
+  color: var(--ink);
+  background: #fffdf7;
+  border: 0;
+  border-radius: var(--radius);
+  box-shadow:
+    inset 0 0 0 0.4rem #fffdf7, inset 0 0 0 calc(0.4rem + 1px) var(--sheet-line, rgb(20 18 16 / 0.22)),
+    0 1px 0 rgb(255 255 255 / 0.05), 0 28px 56px -26px rgb(0 0 0 / 0.95);
+}
+.v2 main .ce-sheet a:not([class]) { text-decoration-color: currentColor; }
+.v2 main .ce-sheet--red, .v2 main .ce-occasion:nth-child(odd), .v2 main .rv__card:nth-child(even) { --sheet-line: rgb(200 16 46 / 0.45); }
+
+/* ── kit sections on the dark ── */
+.v2 main .ce-chips span { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1px var(--gold); }
+.v2 main .ce-lead { color: var(--ink); }
+
+/* FAQ: one programme sheet; the questions run down it on hairlines */
+.v2 main .ce-faq__list { padding: var(--space-2) var(--space-4); }
+.v2 main .ce-faq__item { border-bottom: 1px solid var(--hair); }
+.v2 main .ce-faq__item:last-child { border-bottom: 0; }
+@media (max-width: 900px) { .v2 main .ce-faq__list { padding: var(--space-1) var(--space-3); } }
+
+/* booking steps: red card backs turn over into cream sheets */
+.v2 main .ce-step .card-back { box-shadow: inset 0 0 0 0.6rem #fffdf7, inset 0 0 0 calc(0.6rem + 1px) rgb(200 16 46 / 0.5); }
+
+/* contact: the name in italic, the lines in soft cream */
+.v2 main .ce-contact { padding-top: 0; }
+
+/* curtain call (/zauberer/): the card trick and the contact share one velvet finale */
+.v2 main > .ce-finale { position: relative; isolation: isolate; overflow: clip; padding-bottom: var(--space-5); }
+.v2 main > .ce-finale > section { padding-block: 0 var(--space-2); }
+.v2 main > .ce-finale .pac { padding-top: var(--space-6); }
+
+/* sections that carry a light show: their own stacking context, beams clipped at the edges */
+.v2 main > .ce-lit { isolation: isolate; overflow: clip; }
+
+/* a quieter light show for the house (StageLights soft): fewer, fainter beams over the top part
+   of the section, the rig lamps dimmed. Same transform/opacity-only animation as the hero. */
+.v2 .ce-lightshow--soft { inset: 0 0 auto 0; height: min(100%, 56rem); }
+.v2 .ce-lightshow--soft .ce-lightshow__lamps { opacity: 0.55; }
+.v2 .ce-lightshow--soft .ce-beam { --a: 0.085; }
+.v2 .ce-lightshow--soft .ce-beam--2, .v2 .ce-lightshow--soft .ce-beam--6 { display: none; }
+.v2 .ce-lightshow--soft .ce-beam--4 { --a: 0.11; }
+/* a sheet keeps the red button even on velvet */
+.v2 main .ce-sheet .btn--primary { background: #c8102e; color: #fffdf7; }
+@media (hover: hover) and (pointer: fine) { .v2 main .ce-sheet .btn--primary:hover { background: #a30c25; } }
