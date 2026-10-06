@@ -2,12 +2,13 @@
 import V2Layout from '../../../../layouts/V2Layout.astro';
 import Reviews from '../../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../../components/v2/ReviewBadge.astro';
-import Bunting from '../../../../components/v2/kids/Bunting.astro';
-import Squiggle from '../../../../components/v2/kids/Squiggle.astro';
-import SectionEdge from '../../../../components/v2/SectionEdge.astro';
+import Curtain from '../../../../components/v2/kids/Curtain.astro';
+import K3Hero from '../../../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../../../components/v2/kids/GoldDivider.astro';
 import YouTubeFacade from '../../../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../../../data/site';
-import '../../../../styles/kids-kit.css';
+import '../../../../styles/kids-v3.css';
 import { Image } from 'astro:assets';
 import heroImg from '../../../../assets/images/galerie/fotogalerie-clown-zauberer-3.jpg';
 import kitaEssenImg from '../../../../assets/images/clown/kinderzauberer-kindergarten-essen.jpg';
@@ -56,7 +57,6 @@ const _pageGallery = [
   { src: kindergartenGelsenkirchenImg, alt: 'Kinderzauberer Kindergarten Gelsenkirchen' },
 ];
 
-const cardColors = ['red', 'blue', 'yellow'];
 ---
 
 <V2Layout
@@ -66,60 +66,54 @@ const cardColors = ['red', 'blue', 'yellow'];
   keywords="Zaubershow Kindergarten, Zauberer Kita, Zaubershow Kita NRW, Kindergarten Programm, Sommerfest Kindergarten"
   canonical="https://liar-entertainer.com/zauberer/zaubershow/kindergarten-kita/"
 >
-  <!-- Hero: no reveal here (LCP) -->
-  <section class="kg-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <p class="kk-crumbs">
+  <!-- Hero: the big-top stage. No reveal here (LCP). -->
+  <K3Hero>
+        <p class="k3-crumbs">
           <a href="/">Clown</a> »
           <a href="/zauberer/">Zauberer</a> »
           <a href="/zauberer/zaubershow/">Zaubershow</a> »
           <span>Kindergarten – Kita</span>
         </p>
         <ReviewBadge />
-        <h1 class="kg-hero__title" data-letters>Zaubershow für <span class="kg-mark">Kindergarten &amp; Kita</span> in NRW</h1>
-        <h2 class="kk-hero__sub">
+        <h1 class="k3-hero__title" data-letters>Zaubershow für <span class="k3-mark">Kindergarten &amp; Kita</span> in NRW</h1>
+        <h2 class="k3-hero__sub">
           🎪 Wo Lernen auf Magie trifft –<br />zauberhafte Momente für Ihre Kita!
         </h2>
-        <p class="kk-hero__tag">Pädagogisch wertvoll. Altersgerecht. Unvergesslich.</p>
-        <div class="kg-hero__actions">
+        <p class="k3-hero__claim">Pädagogisch wertvoll. Altersgerecht. Unvergesslich.</p>
+        <div class="k3-hero__actions">
           <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
           <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
-      </div>
-      <figure class="kg-hero__photo">
-        <Image
-          src={heroImg}
-          alt="Zaubershow für Kindergarten & Kita NRW"
-          widths={[400, 700, 1000, 1400]}
-          sizes="(max-width: 900px) 92vw, 560px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 50% 30%"
-        />
-        <a class="kg-sticker" href="#details">
-          <span>Alter</span><strong>3–6</strong>
-        </a>
-      </figure>
-    </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={heroImg}
+        alt="Zaubershow für Kindergarten & Kita NRW"
+        widths={[400, 700, 1000]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <a class="k3-medal" href="#details">
+        <span>Alter</span><strong>3–6</strong>
+      </a>
+    </Fragment>
+  </K3Hero>
 
   <!-- Intro -->
-  <section class="kg-intro">
-    <div class="container kg-intro__grid">
-      <div class="kg-intro__text" data-reveal>
-        <p class="kg-lead">
+  <section class="k3-intro">
+    <div class="container k3-split kk-intro">
+      <div data-reveal>
+        <p class="k3-lead">
           Sie planen ein Sommerfest, eine Abschiedsfeier für die Vorschulkinder oder suchen ein besonderes Highlight für Ihre Kita? Als erfahrener Kinderzauberer bringe ich seit über 15 Jahren Magie in Kindergärten und Kitas in ganz NRW. Meine Shows sind nicht nur unterhaltsam – sie sind pädagogisch wertvoll, altersgerecht und perfekt auf die Bedürfnisse von Bildungseinrichtungen abgestimmt! ✨
         </p>
         <p>
           Das Beste? Für Sie als Erzieher bedeutet es minimalen Aufwand bei maximalem Erfolg. Ich bringe alles mit, benötige keine Vorbereitung und nur 2×2 Meter Platz. Ich biete auch spezielle Shows für <a href="/zauberer/zaubershow/schule/">Grundschulen</a> sowie auf <a href="/zauberer/zaubershow/strassen-sommer-fest/">Straßen- und Sommerfesten</a> an.
         </p>
       </div>
-      <aside class="kg-expect" data-reveal data-reveal-delay="0.1">
-        <h3 class="kg-expect__title">⭐ Das macht meine Show kindergartengerecht:</h3>
-        <ul class="kg-expect__list kk-list">
+      <aside class="k3-expect" data-reveal data-reveal-delay="0.1">
+        <h3 class="k3-expect__title">⭐ Das macht meine Show kindergartengerecht:</h3>
+        <ul class="k3-expect__list kk-list">
           <li><span>🎯</span> <span><strong>Altersgerecht für 3–6 Jahre:</strong> Einfache Tricks, kurze Geschichten, viel Bewegung</span></li>
           <li><span>👥</span> <span><strong>Große Gruppen kein Problem:</strong> Erfahrung mit 20–100 Kindern</span></li>
           <li><span>📚</span> <span><strong>Pädagogischer Mehrwert:</strong> Fördert Fantasie, Kreativität und Selbstbewusstsein</span></li>
@@ -135,11 +129,11 @@ const cardColors = ['red', 'blue', 'yellow'];
   <!-- Anlässe -->
   <section class="kk-occasions">
     <div class="container">
-      <Squiggle color="var(--brand-blue)" />
-      <h2 class="kg-h2 kg-center" data-reveal>🎉 Perfekt für diese Anlässe in Kindergarten & Kita</h2>
-      <div class="kg-cards kk-occasions__grid">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>🎉 Perfekt für diese Anlässe in Kindergarten & Kita</h2>
+      <div class="k3-cards kk-occasions__grid">
         {anlaesse.map((a, i) => (
-          <article class={`kg-card kg-card--${cardColors[i % 3]}`} data-reveal="pop" data-reveal-delay={String((i % 3) * 0.1)}>
+          <article class="k3-card" data-reveal data-reveal-delay={String((i % 3) * 0.08)}>
             <p class="kk-icon">{a.icon}</p>
             <h3>{a.title}</h3>
             <p class="kk-card__text">{a.text}</p>
@@ -149,37 +143,39 @@ const cardColors = ['red', 'blue', 'yellow'];
     </div>
   </section>
 
-  <!-- Zahlen (red band) -->
-  <section class="kg-band kk-stats">
-    <SectionEdge color="var(--brand-red)" side="top" />
-    <SectionEdge color="var(--brand-red)" side="bottom" />
-    <div class="container kk-stats__grid">
-      <div class="kk-stat" data-reveal="pop">
-        <div class="kk-stat__icon">🪄</div>
-        <div class="kk-stat__num" data-count>400</div>
-        <div class="kk-stat__label">Shows im Jahr</div>
-      </div>
-      <div class="kk-stat" data-reveal="pop" data-reveal-delay="0.08">
-        <div class="kk-stat__icon">😊</div>
-        <div class="kk-stat__num">110.000</div>
-        <div class="kk-stat__label">Lachende Kinder</div>
-      </div>
-      <div class="kk-stat" data-reveal="pop" data-reveal-delay="0.16">
-        <div class="kk-stat__icon">🪄</div>
-        <div class="kk-stat__num" data-count>15</div>
-        <div class="kk-stat__label">Jahre Erfahrung</div>
+  <!-- Zahlen: the ring, red velvet -->
+  <section class="k3-band k3-band--velvet">
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-stats">
+        <div class="k3-stat" data-reveal>
+          <div class="k3-stat__icon">🪄</div>
+          <div class="k3-stat__num" data-count>400</div>
+          <div class="k3-stat__label">Shows im Jahr</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.08">
+          <div class="k3-stat__icon">😊</div>
+          <div class="k3-stat__num">110.000</div>
+          <div class="k3-stat__label">Lachende Kinder</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.16">
+          <div class="k3-stat__icon">🪄</div>
+          <div class="k3-stat__num" data-count>15</div>
+          <div class="k3-stat__label">Jahre Erfahrung</div>
+        </div>
       </div>
     </div>
   </section>
 
-  <!-- Pädagogischer Mehrwert: soft crayon-coloured tiles -->
-  <section class="kk-learn">
+  <!-- Pädagogischer Mehrwert: paper slips with a fine gold edge -->
+  <section class="kk-learn k3-alt">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>🎯 Pädagogischer Mehrwert</h2>
-      <p class="kg-center kg-sub">Was Kinder bei der Zaubershow lernen:</p>
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>🎯 Pädagogischer Mehrwert</h2>
+      <p class="k3-center k3-sub">Was Kinder bei der Zaubershow lernen:</p>
       <div class="kk-learn__grid">
         {paedagogisch.map((p, i) => (
-          <div class={`kk-tile kk-tile--${cardColors[i % 3]}`} data-reveal="pop" data-reveal-delay={String((i % 3) * 0.08)}>
+          <div class="k3-panel kk-tile" data-reveal data-reveal-delay={String((i % 3) * 0.08)}>
             <p class="kk-icon">{p.icon}</p>
             <p class="kk-tile__title">{p.title}</p>
             <p class="kk-tile__text">{p.text}</p>
@@ -189,33 +185,36 @@ const cardColors = ['red', 'blue', 'yellow'];
     </div>
   </section>
 
-  <!-- Eindrücke: polaroids on a line -->
+  <!-- Eindrücke: every photo whole, in a programme frame -->
   <section class="kk-photos">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>📸 Eindrücke</h2>
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>📸 Eindrücke</h2>
       <div class="kk-photos__grid">
         {_pageGallery.map((s, i) => (
-          <figure class="kk-polaroid" data-reveal="tilt" data-reveal-delay={String(i * 0.08)}>
+          <ProgramFrame class="kk-photo" data-reveal data-reveal-delay={String(i * 0.08)}>
             <Image
               src={s.src}
               alt={s.alt}
-              data-scroll-tilt="3"
-              widths={[320, 640]}
-              sizes="(max-width: 640px) 80vw, 280px"
+              widths={[280, 560]}
+              quality={60}
+              sizes="(max-width: 900px) 80vw, 260px"
               loading="lazy"
+              fetchpriority="low"
             />
-          </figure>
+          </ProgramFrame>
         ))}
       </div>
     </div>
   </section>
 
   <!-- Praktische Details -->
-  <section class="kk-details" id="details">
+  <section class="kk-details k3-alt" id="details">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>📋 Praktische Details für Kitas</h2>
-      <div class="kg-extras__grid kk-details__grid">
-        <article class="kg-extra kk-detail kk-detail--red" data-reveal="tilt">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>📋 Praktische Details für Kitas</h2>
+      <div class="k3-grid k3-grid--3">
+        <article class="k3-card kk-detail" data-reveal>
           <h3 class="kk-detail__title">📐 Platzbedarf & Räume</h3>
           <p>Minimaler Platzbedarf: <strong>2×2 Meter</strong> (ideal 3×3 Meter)</p>
           <p class="kk-detail__label">Geeignete Räume:</p>
@@ -226,7 +225,7 @@ const cardColors = ['red', 'blue', 'yellow'];
             <li>✓ Außenbereich (überdacht)</li>
           </ul>
         </article>
-        <article class="kg-extra kk-detail kk-detail--blue" data-reveal="tilt" data-reveal-delay="0.1">
+        <article class="k3-card kk-detail" data-reveal data-reveal-delay="0.08">
           <h3 class="kk-detail__title">👶 Gruppengrößen</h3>
           <ul class="kk-plain kk-plain--spaced">
             <li><strong>Ideal: 20–60 Kinder</strong><br />Perfekte Größe für intensive Interaktion</li>
@@ -235,29 +234,31 @@ const cardColors = ['red', 'blue', 'yellow'];
             <li><strong>Kleine Gruppen: 10–20 Kinder</strong><br />Auch buchbar!</li>
           </ul>
         </article>
-        <article class="kg-extra kk-detail kk-detail--yellow" data-reveal="tilt" data-reveal-delay="0.2">
+        <article class="k3-card kk-detail" data-reveal data-reveal-delay="0.16">
           <h3 class="kk-detail__title">⏱️ Showdauer</h3>
           <ul class="kk-plain kk-plain--spaced">
             <li><strong>Kurze Show: 25–30 Min.</strong><br />Für jüngere Kinder (3–4 Jahre)</li>
             <li><strong>Standard-Show: 35–40 Min.</strong><br />Ideal für gemischte Altersgruppen</li>
             <li><strong>Lange Show: 45 Min.</strong><br />Für ältere Kinder oder besondere Anlässe</li>
           </ul>
-          <p class="kg-extra__dur kk-note">Technik: Fast keine! Kein Strom, kein Mikrofon (normal), keine Bühne nötig.</p>
+          <p class="k3-card__note kk-note">Technik: Fast keine! Kein Strom, kein Mikrofon (normal), keine Bühne nötig.</p>
         </article>
       </div>
     </div>
   </section>
 
-  <!-- Video (yellow band) -->
-  <section class="kg-band kg-band--yellow">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal="pop">
+  <!-- Video: Hollywood premiere, two searchlights from the floor crossing behind the video -->
+  <section class="k3-band k3-band--night k3-premiere">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
-      <h3 class="kg-h3">
+      <h3 class="k3-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
       <a href="/galerie/" class="btn btn--primary">
@@ -266,31 +267,30 @@ const cardColors = ['red', 'blue', 'yellow'];
     </div>
   </section>
 
-  <!-- Einsatzgebiet -->
-  <section class="kg-area" id="einsatzgebiet">
+  <!-- Einsatzgebiet (the map has no frame) -->
+  <section class="k3-area" id="einsatzgebiet">
     <div class="container">
-      <Squiggle />
-      <h2 class="kg-h2 kg-center">Zaubershow für Kindergärten in ganz NRW</h2>
-      <p class="kg-center kg-narrow">Als erfahrener Kinderzauberer bin ich in ganz Nordrhein-Westfalen für Kindergärten und Kitas buchbar.</p>
-      <div class="kg-area__grid">
-        <div class="kg-area__text">
-          <h3 class="kg-h3">Ruhrgebiet</h3>
-          <p class="kg-cities">Oberhausen, Essen, Duisburg, Mülheim, Gelsenkirchen, Bochum, Dortmund, Bottrop, Gladbeck, Herten, Herne, Marl, Recklinghausen, Castrop-Rauxel, Waltrop</p>
-          <h3 class="kg-h3">Rheinland</h3>
-          <p class="kg-cities">Düsseldorf, Krefeld, Moers, Neuss, Köln, Leverkusen, Mönchengladbach</p>
-          <h3 class="kg-h3">Münsterland</h3>
-          <p class="kg-cities">Münster, Haltern am See, Dorsten, Coesfeld, Dülmen</p>
-          <h3 class="kg-h3">Weitere Städte</h3>
-          <p class="kg-cities">Ahaus, Reken, Lünen, Hagen, Witten und viele mehr</p>
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">Zaubershow für Kindergärten in ganz NRW</h2>
+      <p class="k3-center k3-narrow">Als erfahrener Kinderzauberer bin ich in ganz Nordrhein-Westfalen für Kindergärten und Kitas buchbar.</p>
+      <div class="k3-area__grid">
+        <div>
+          <h3 class="k3-h3">Ruhrgebiet</h3>
+          <p class="k3-cities">Oberhausen, Essen, Duisburg, Mülheim, Gelsenkirchen, Bochum, Dortmund, Bottrop, Gladbeck, Herten, Herne, Marl, Recklinghausen, Castrop-Rauxel, Waltrop</p>
+          <h3 class="k3-h3">Rheinland</h3>
+          <p class="k3-cities">Düsseldorf, Krefeld, Moers, Neuss, Köln, Leverkusen, Mönchengladbach</p>
+          <h3 class="k3-h3">Münsterland</h3>
+          <p class="k3-cities">Münster, Haltern am See, Dorsten, Coesfeld, Dülmen</p>
+          <h3 class="k3-h3">Weitere Städte</h3>
+          <p class="k3-cities">Ahaus, Reken, Lünen, Hagen, Witten und viele mehr</p>
           <p>🌍 Auf Anfrage auch deutschlandweit sowie in Belgien, Niederlande, Frankreich, Österreich und der Schweiz buchbar!</p>
         </div>
-        <figure class="kg-area__map" data-reveal>
+        <figure class="k3-area__map" data-reveal>
           <Image
             src={karteImg}
             alt="Wohnort Clown Zauberer LIAR"
-            data-scroll-tilt="2"
             widths={[400, 800]}
-            sizes="(max-width: 900px) 100vw, 50vw"
+            sizes="(max-width: 900px) 86vw, 460px"
             loading="lazy"
           />
         </figure>
@@ -298,12 +298,11 @@ const cardColors = ['red', 'blue', 'yellow'];
     </div>
   </section>
 
-  <!-- CTA (blue band) -->
-  <section class="kg-band kg-band--blue kk-cta">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
-    <div class="container kg-narrow" data-reveal>
-      <h2 class="kg-h2">🎪 Jetzt anfragen für Ihren Kindergarten!</h2>
+  <!-- CTA: the ring, red velvet -->
+  <section class="k3-band k3-band--velvet kk-cta">
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">🎪 Jetzt anfragen für Ihren Kindergarten!</h2>
       <p>Ob Sommerfest, Abschiedsfeier oder Projektwoche – lassen Sie uns gemeinsam ein unvergessliches Erlebnis für Ihre Kinder schaffen! Ich trete auch bei <a href="/zauberer/zaubershow/schule/">Schulveranstaltungen</a> und <a href="/zauberer/zaubershow/strassen-sommer-fest/">Straßen- und Sommerfesten</a> auf.</p>
       <div class="kk-cta__lines">
         <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>
@@ -318,14 +317,15 @@ const cardColors = ['red', 'blue', 'yellow'];
   </section>
 
   <!-- FAQ: native <details>; the visible "+" stays real text (legacy content) -->
-  <section class="kg-faq kk-faq" id="faq">
-    <div class="container kg-narrow">
-      <h2 class="kg-h2 kg-center">Häufig gestellte Fragen</h2>
-      <div class="kg-faq__list">
+  <section class="k3-faq kk-faq" id="faq">
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">Häufig gestellte Fragen</h2>
+      <div class="k3-faq__list">
         {faqItems.map((i) => (
-          <details class="kg-faq__item" data-reveal="puff">
+          <details class="k3-faq__item" data-reveal>
             <summary><span>{i.q}</span><span class="kk-plus">+</span></summary>
-            <div class="kg-faq__answer">{i.a}</div>
+            <div class="k3-faq__answer">{i.a}</div>
           </details>
         ))}
       </div>
@@ -334,75 +334,51 @@ const cardColors = ['red', 'blue', 'yellow'];
 </V2Layout>
 
 <style>
-  /* hero */
-  .kk-crumbs { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2); }
-  .kk-crumbs a { color: var(--ink-soft); text-decoration: none; }
-  .kk-hero__sub { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 600; color: var(--brand-blue); margin: 0 0 var(--space-1); }
-  .kk-hero__tag { font-weight: 800; color: var(--ink-soft); margin-bottom: var(--space-3); }
-  @media (hover: hover) and (pointer: fine) { .kk-crumbs a:hover { color: var(--accent-strong); } }
-
   .kk-list li { display: flex; gap: 0.5rem; align-items: flex-start; }
   .kk-list li > span:first-child { flex: none; }
-  .kg-expect__title { margin-top: 0; }
 
   /* occasions */
-  .kk-occasions { background: var(--bg); }
-  .kk-occasions__grid { margin-top: var(--space-4); }
-  .kk-icon { font-size: 2rem; line-height: 1; margin-bottom: 0.6rem; }
-  .kk-card__text { color: var(--ink-soft); margin: 0; }
+  .kk-occasions__grid { margin-top: var(--space-4); align-items: stretch; }
+  .kk-icon { font-size: 2rem; line-height: 1; margin-bottom: 0.6rem !important; text-align: center; }
+  .kk-card__text { color: var(--ink-soft); margin: 0 !important; text-align: center; }
 
-  /* stats */
-  .kk-stats { background: var(--brand-red); color: #fff; }
-  .kk-stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-3); }
-  .kk-stat { padding: var(--space-3); border-radius: var(--radius); background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45); }
-  .kk-stat__icon { font-size: 2rem; line-height: 1; margin-bottom: 0.4rem; }
-  .kk-stat__num { font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; }
-  .kk-stat__label { font-weight: 800; margin-top: 0.3rem; }
+  /* learning slips */
+  .kk-learn__grid { display: grid; gap: var(--space-3); margin-top: var(--space-4); }
+  .kk-tile { text-align: center; padding: var(--space-3); }
+  .kk-tile__title { font-family: var(--font-display); font-weight: 600; font-size: 1.2rem; margin-bottom: 0.3rem !important; }
+  .kk-tile__text { color: var(--ink-soft); font-size: 0.95rem; margin: 0 !important; }
 
-  /* learning tiles: soft pastel washes of the logo colours */
-  .kk-learn { background: var(--surface); border-block: var(--border); }
-  .kk-learn__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); margin-top: var(--space-4); }
-  .kk-tile {
-    --c: var(--brand-red);
-    text-align: center; padding: var(--space-3); border-radius: var(--radius);
-    background: color-mix(in srgb, var(--c) 14%, var(--surface));
-    border: 2px dashed color-mix(in srgb, var(--c) 60%, var(--line));
-  }
-  .kk-tile--blue { --c: var(--brand-blue); }
-  .kk-tile--yellow { --c: var(--brand-yellow); }
-  .kk-tile__title { font-family: var(--font-display); font-weight: 650; font-size: 1.2rem; margin-bottom: 0.3rem; }
-  .kk-tile__text { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
-
-  /* polaroids */
-  .kk-photos__grid { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); margin-top: var(--space-4); }
-  .kk-polaroid { margin: 0; padding: 0.7rem 0.7rem 2.2rem; background: var(--surface); border: var(--border); border-radius: 0.4rem; box-shadow: var(--shadow); rotate: -2deg; }
-  .kk-polaroid:nth-child(even) { rotate: 2deg; }
-  .kk-polaroid :global(img) { display: block; width: 100%; height: auto; aspect-ratio: 1; object-fit: cover; border-radius: 0.2rem; }
+  /* photos: whole, never cropped; the frame sets only the width */
+  .kk-photos__grid { display: grid; gap: var(--space-4); margin-top: var(--space-4); justify-items: center; align-items: center; }
+  .kk-photos__grid :global(.kk-photo) { width: min(100%, 20rem); padding: 1rem; }
+  .kk-photos__grid :global(.kk-photo:nth-child(odd)) { rotate: -1.2deg; }
+  .kk-photos__grid :global(.kk-photo:nth-child(even)) { rotate: 1.2deg; }
 
   /* practical details */
-  .kk-details { background: var(--bg); }
-  .kk-detail { border-top-width: 0.6rem; border-top-color: var(--c); }
-  .kk-detail--red { --c: var(--brand-red); }
-  .kk-detail--blue { --c: var(--brand-blue); }
-  .kk-detail--yellow { --c: var(--brand-yellow); }
-  .kk-detail__title { font-size: 1.35rem; margin: 0 0 var(--space-2); }
-  .kk-detail__label { font-weight: 800; color: var(--ink); margin-bottom: 0.4rem; }
-  .kk-plain { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; color: var(--ink-soft); }
+  .kk-detail__title { font-size: 1.35rem !important; margin: 0 0 var(--space-2) !important; }
+  .kk-detail > p { color: var(--ink-soft); }
+  .kk-detail__label { font-weight: 800; color: var(--ink) !important; margin-bottom: 0.4rem !important; }
+  .kk-plain { list-style: none; margin: 0 0 var(--space-2); padding: 0; display: grid; gap: 0.35rem; color: var(--ink-soft); }
+  .kk-plain li { display: block; } /* .k3-card li is a flex row; these items carry a <br> */
+  .kk-plain strong { color: var(--ink); }
   .kk-plain--spaced { gap: 0.8rem; }
-  .kk-note { font-style: italic; font-size: 0.95rem; }
 
-  /* CTA */
+  /* CTA on velvet */
   .kk-cta__lines { margin: var(--space-3) 0; font-weight: 700; }
   .kk-cta__lines p { margin-bottom: 0.4rem; }
-  .kk-cta__tip { display: inline-block; margin-top: var(--space-1); padding: 0.45rem 1rem; border-radius: 999px; background: var(--brand-yellow); color: var(--ink); }
+  .kk-cta__tip { display: inline-block; margin-top: var(--space-1) !important; padding: 0.45rem 1rem; border-radius: 999px; background: rgba(255, 240, 220, 0.08); color: #ffe3a3; box-shadow: inset 0 0 0 1px rgba(233, 200, 119, 0.6); }
 
-  /* FAQ: real "+" badge replaces the kit's ::after */
-  .kk-faq .kg-faq__item summary::after { content: none; }
+  /* FAQ: the real "+" (legacy text) replaces the kit's ::after badge */
+  .kk-faq :global(.k3-faq__item summary::after) { content: none; }
   .kk-plus {
-    flex: none; display: grid; place-items: center; width: 2rem; height: 2rem;
-    border-radius: 50%; background: var(--brand-yellow); border: 2px solid var(--line);
-    font-family: var(--font-display); font-size: 1.3rem; line-height: 1;
-    transition: rotate 0.3s var(--ease-out-expo), background-color 0.2s;
+    flex: none; display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    font-family: var(--font-display); font-size: 1.2rem; line-height: 1; color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold);
+    transition: rotate 0.3s var(--ease-out), background-color 0.2s ease, color 0.2s ease;
   }
-  .kg-faq__item[open] .kk-plus { rotate: 45deg; background: var(--accent); color: #fff; }
+  .k3-faq__item[open] .kk-plus { rotate: 45deg; background: var(--velvet); color: #fff3dd; box-shadow: none; }
+
+  @media (min-width: 901px) {
+    .kk-learn__grid { grid-template-columns: repeat(3, 1fr); }
+    .kk-photos__grid { grid-template-columns: repeat(4, 1fr); }
+  }
 </style>

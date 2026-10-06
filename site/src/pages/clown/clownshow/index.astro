@@ -9,13 +9,14 @@ import clownZaubererGladbeckImg from '../../../assets/images/clown/clown-zaubere
 import fotogalerieClownZauberer3Img from '../../../assets/images/galerie/fotogalerie-clown-zauberer-3.jpg';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import SectionEdge from '../../../components/v2/SectionEdge.astro';
-import Bunting from '../../../components/v2/kids/Bunting.astro';
-import Squiggle from '../../../components/v2/kids/Squiggle.astro';
+import Curtain from '../../../components/v2/kids/Curtain.astro';
+import K3Hero from '../../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
 import BalloonDog from '../../../components/v2/kids/BalloonDog.astro';
 import YouTubeFacade from '../../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../../data/site';
-import '../../../styles/kids-kit.css';
+import '../../../styles/kids-v3.css';
 
 const seoTitle = 'Clown für Kindergeburtstag NRW buchen | Clown LIAR';
 const seoDescription = 'Clown für den Kindergeburtstag mieten: lustige Clownshow mit Comedy & Zauberei, Ballonfiguren für jedes Kind ✓ 370+ Top-Bewertungen im Ruhrgebiet & NRW!';
@@ -99,81 +100,73 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/clown/clownshow/' }, { name: 'Clownshow', url: '/clown/clownshow/' }]}
 >
-  <!-- ── Hero: Zirkus-Plakat. No reveal here (LCP). ───────────── -->
-  <section class="kg-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <p class="cs-crumbs">
+  <!-- ── Hero: the big-top stage (K3Hero). No reveal here (LCP). ── -->
+  <K3Hero>
+        <p class="k3-crumbs">
           <a href="/">Clown</a> »
           <a href="/">Clownshow</a>
         </p>
         <ReviewBadge />
-        <h1 class="kg-hero__title" data-letters><span class="kg-mark">Clownshow</span> in NRW – Clown für Kindergeburtstag buchen</h1>
-        <h2 class="cs-hero__sub">
+        <h1 class="k3-hero__title" data-letters><span class="k3-mark">Clownshow</span> in NRW – Clown für Kindergeburtstag buchen</h1>
+        <h2 class="k3-hero__sub">
           Clownshow in NRW – Lachen,<br />Spaß und lustige Unterhaltung für Kinder
         </h2>
-        <div class="kg-hero__actions">
+        <div class="k3-hero__actions">
           <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
           <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
-        <nav class="kg-quick" aria-label="Schnell zu den Infos">
+        <nav class="k3-quick" aria-label="Schnell zu den Infos">
           <a href="#programme">Programme</a>
           <a href="#faq">Fragen</a>
           <a href="#bewertungen">Bewertungen</a>
           <a href="#einsatzgebiet">Städte</a>
         </nav>
-      </div>
-      <figure class="kg-hero__photo">
-        <Image
-          src={heroImg}
-          alt="Clown Zauberer LIAR – Clownshow NRW mit Top-Bewertungen"
-          widths={[400, 700, 1000, 1400]}
-          sizes="(max-width: 900px) 92vw, 560px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 51% 70%"
-        />
-        <a class="kg-sticker" href="#faq">
-          <span>nur</span><strong>2×2&nbsp;m</strong>
-        </a>
-      </figure>
-    </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={heroImg}
+        alt="Clown Zauberer LIAR – Clownshow NRW mit Top-Bewertungen"
+        widths={[400, 700, 1000]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
-  <section class="kg-intro">
-    <div class="container kg-narrow" data-reveal>
-      <p class="kg-lead">
+  <section class="k3-intro">
+    <div class="container k3-narrow" data-reveal>
+      <p class="k3-lead">
         Clown LIAR (Michaël Prescler) ist ein professioneller Kinderclown aus Gladbeck und tritt in ganz NRW auf. Buchbar für Kindergeburtstage, Kita- und Schulfeste sowie Familienfeiern – eine lustige Clownshow mit Comedy, Gags und Zauberei für Kinder von 4 bis 12 Jahren, ab ca. 25–30 Minuten und für Kindergeburtstage zu transparenten Festpreisen.
       </p>
-      <p class="cs-soft">
+      <p class="k3-soft">
         Als professioneller Kinderclown und <a href="/kinderzauberer/">Kinderzauberer</a> bringe ich seit über 15 Jahren Lachen, Spaß und gute Laune zu Kindergeburtstagen, Kinderfesten und Familienveranstaltungen in ganz Nordrhein-Westfalen. Meine Clownshow ist eine bunte Mischung aus Comedy, Clown-Gags und <a href="/zauberer/zaubershow/">Zaubershow</a> – perfekt auf Kinder zwischen 4 und 12 Jahren abgestimmt!
       </p>
-      <p class="cs-note">
+      <p class="k3-panel cs-note">
         <strong>Das Besondere an meiner Clownshow:</strong> Der Clown findet den besten Draht zu den Kindern! Mit lustigen Missgeschicken, witzigen Gags und viel Interaktion sorge ich dafür, dass die Kinder ständig lachen, mitmachen und Teil der Show werden. Und wenn zwischendurch auch noch gezaubert wird, ist das Staunen groß!
       </p>
-      <p class="cs-soft">
+      <p class="k3-soft">
         Ob für Ihren <a href="/kindergeburtstag/">Kindergeburtstag</a> zu Hause, Kinderfest im Kindergarten, Schulfest oder Familienfeiern – ich komme zu Ihnen und verwandle jeden Anlass in ein fröhliches Spektakel. Mit minimalem Aufwand für Sie: Ich bringe alles mit, benötige nur 2×2 Meter Platz und keine technische Vorbereitung! Sie wünschen mehr Magie als Comedy? Dann ist der <a href="/kinderzauberer/">Zauberer für den Kindergeburtstag</a> die richtige Wahl.
       </p>
     </div>
   </section>
 
   <!-- ── Weitere Anlässe (SEO-Audit 06.08.2026, H6: internal links to /clown/karneval/ + /clown/walk-act/) ── -->
-  <section class="cs-related" data-related-services>
-    <div class="container kg-narrow">
-      <h2 class="kg-h2 kg-center" data-reveal>
+  <section class="k3-alt" data-related-services>
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>
         Für welche Anlässe kann man Clown LIAR sonst buchen?
       </h2>
-      <div class="cs-related__grid">
-        <a href="/clown/karneval/" class="cs-related__card" data-reveal="tilt">
-          <p class="cs-related__title">Clown für Karneval &amp; Kindersitzung</p>
-          <p class="cs-related__text">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
+      <div class="k3-links">
+        <a href="/clown/karneval/" class="k3-link-card" data-reveal>
+          <p class="k3-link-card__title">Clown für Karneval &amp; Kindersitzung</p>
+          <p class="k3-link-card__text">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
         </a>
-        <a href="/clown/walk-act/" class="cs-related__card" data-reveal="tilt" data-reveal-delay="0.1">
-          <p class="cs-related__title">Walk-Act für Straßen- und Stadtfest</p>
-          <p class="cs-related__text">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
+        <a href="/clown/walk-act/" class="k3-link-card" data-reveal data-reveal-delay="0.08">
+          <p class="k3-link-card__title">Walk-Act für Straßen- und Stadtfest</p>
+          <p class="k3-link-card__text">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
         </a>
       </div>
     </div>
@@ -182,26 +175,26 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <Reviews />
 
   <!-- ── Was ist eine Clownshow? ───────────────────────────── -->
-  <section class="kg-intro cs-what">
+  <section class="cs-what">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>Was ist eine Clownshow?</h2>
-      <div class="kg-intro__grid cs-what__grid">
-        <figure class="cs-photo cs-photo--tilt" data-reveal="pop">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Was ist eine Clownshow?</h2>
+      <div class="k3-split k3-split--flip">
+        <ProgramFrame class="k3-photo k3-photo--l" data-reveal>
           <Image
             src={clownBeiClownshowImg}
             alt="Clown LIAR unterhält Kinder bei einer Clownshow in NRW"
-            data-scroll-tilt="3"
             loading="lazy"
             widths={[350, 700]}
-            sizes="(max-width: 900px) 80vw, 350px"
+            sizes="(max-width: 900px) 80vw, 320px"
           />
-        </figure>
+        </ProgramFrame>
         <div data-reveal data-reveal-delay="0.1">
-          <h3 class="kg-h3 cs-what__h3">Clownshow – Mehr als nur Witze und rote Nasen</h3>
-          <p class="cs-soft">
+          <h3 class="k3-h3 cs-what__h3">Clownshow – Mehr als nur Witze und rote Nasen</h3>
+          <p class="k3-soft">
             Eine Clownshow ist pure Comedy für Kinder! Anders als bei einer reinen Zaubershow steht hier das Lachen im Vordergrund. Mit clownesken Gags, lustigen Missgeschicken (die natürlich geplant sind!), Slapstick und viel Bewegung bringe ich die Kinder zum Lachen und Mitmachen.
           </p>
-          <h3 class="kg-h3">Was macht eine gute Clownshow aus?</h3>
+          <h3 class="k3-h3">Was macht eine gute Clownshow aus?</h3>
           <div class="cs-traits">
             <p>
               <strong>Comedy &amp; Humor :</strong> für Kinder Keine Erwachsenen-Witze, sondern kindgerechter Humor: Dinge fallen runter, der Clown stolpert, Tricks gehen „schief" (und dann doch wieder gut) – all das lieben Kinder!
@@ -221,25 +214,26 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Zahlen (red band) ─────────────────────────────────── -->
-  <section class="kg-band cs-stats">
-    <SectionEdge color="var(--brand-red)" side="top" />
-    <SectionEdge color="var(--brand-red)" side="bottom" />
-    <div class="container cs-stats__grid">
-      <div class="cs-stat" data-reveal="pop">
-        <div class="cs-stat__icon">🪄</div>
-        <div class="cs-stat__num" data-count>400</div>
-        <div class="cs-stat__label">Shows im Jahr</div>
-      </div>
-      <div class="cs-stat" data-reveal="pop" data-reveal-delay="0.08">
-        <div class="cs-stat__icon">😊</div>
-        <div class="cs-stat__num">110.000</div>
-        <div class="cs-stat__label">Lachende Kinder</div>
-      </div>
-      <div class="cs-stat" data-reveal="pop" data-reveal-delay="0.16">
-        <div class="cs-stat__icon">🪄</div>
-        <div class="cs-stat__num" data-count>15</div>
-        <div class="cs-stat__label">Jahre Erfahrung</div>
+  <!-- ── Zahlen: the velvet ring ───────────────────────────── -->
+  <section class="k3-band k3-band--velvet">
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-stats">
+        <div class="k3-stat" data-reveal>
+          <div class="k3-stat__icon">🪄</div>
+          <div class="k3-stat__num" data-count>400</div>
+          <div class="k3-stat__label">Shows im Jahr</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.08">
+          <div class="k3-stat__icon">😊</div>
+          <div class="k3-stat__num">110.000</div>
+          <div class="k3-stat__label">Lachende Kinder</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.16">
+          <div class="k3-stat__icon">🪄</div>
+          <div class="k3-stat__num" data-count>15</div>
+          <div class="k3-stat__label">Jahre Erfahrung</div>
+        </div>
       </div>
     </div>
   </section>
@@ -247,13 +241,13 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <!-- ── Clownshow-Programme ───────────────────────────────── -->
   <section class="cs-programs" id="programme">
     <div class="container">
-      <Squiggle color="var(--brand-blue)" />
-      <h2 class="kg-h2 kg-center" data-reveal>Clownshow-Programme</h2>
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Clownshow-Programme</h2>
 
-      <article class="cs-prog">
-        <div class="cs-prog__text" data-reveal>
+      <article class="k3-split cs-prog">
+        <div class="k3-panel cs-prog__text" data-reveal>
           <BalloonDog />
-          <h3 class="kg-h3 cs-prog__h3--dog">Clownshow für Kindergeburtstag</h3>
+          <h3 class="k3-h3 cs-prog__h3--dog">Clownshow für Kindergeburtstag</h3>
           <p>
             Der absolute Klassiker! Der Clown kommt zu Ihnen nach Hause und sorgt für ausgelassene Stimmung bei der Geburtstagsfeier. Die Kinder erleben Comedy, Zauberei und bekommen am Ende Ballontiere – ein unvergesslicher Geburtstag!
           </p>
@@ -267,31 +261,29 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             Perfekt für: Kindergeburtstage zu Hause, auch bei begrenztem Platz
           </p>
         </div>
-        <figure class="cs-photo" data-reveal="pop" data-reveal-delay="0.1">
+        <ProgramFrame class="k3-photo" data-reveal data-reveal-delay="0.1">
           <Image
             src={zaubershowImg}
             alt="Clown verzaubert Kinder bei einer Clownshow auf dem Kindergeburtstag"
-            data-scroll-tilt="3"
             loading="lazy"
             widths={[320, 640]}
             sizes="(max-width: 900px) 80vw, 320px"
           />
-        </figure>
+        </ProgramFrame>
       </article>
 
-      <article class="cs-prog cs-prog--flip">
-        <figure class="cs-photo cs-photo--tilt" data-reveal="pop">
+      <article class="k3-split k3-split--flip cs-prog">
+        <ProgramFrame class="k3-photo k3-photo--l cs-photo--narrow" data-reveal>
           <Image
             src={kinderzaubererKindergartenImg}
             alt="Clown LIAR begeistert Kinder bei Clownshow im Kindergarten"
-            data-scroll-tilt="3"
             loading="lazy"
-            widths={[320, 640]}
-            sizes="(max-width: 900px) 80vw, 320px"
+            widths={[320]}
+            sizes="(max-width: 900px) 80vw, 280px"
           />
-        </figure>
-        <div class="cs-prog__text" data-reveal data-reveal-delay="0.1">
-          <h3 class="kg-h3">Clownshow für Kindergarten &amp; Kita</h3>
+        </ProgramFrame>
+        <div class="k3-panel cs-prog__text" data-reveal data-reveal-delay="0.1">
+          <h3 class="k3-h3">Clownshow für Kindergarten &amp; Kita</h3>
           <p>
             Für Sommerfeste, Abschiedsfeiern der Vorschulkinder, Karneval oder einfach als Überraschung – die Clownshow begeistert ganze Kindergartengruppen!
           </p>
@@ -307,9 +299,9 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         </div>
       </article>
 
-      <article class="cs-prog">
-        <div class="cs-prog__text" data-reveal>
-          <h3 class="kg-h3">Clownshow für Schule &amp; Schulfeste</h3>
+      <article class="k3-split cs-prog">
+        <div class="k3-panel cs-prog__text" data-reveal>
+          <h3 class="k3-h3">Clownshow für Schule &amp; Schulfeste</h3>
           <p>
             Auch für Grundschulkinder ist die Clownshow ein Hit! Bei Schulfesten, Einschulungen oder Projekttagen sorgt der Clown für Lacher bei Groß und Klein.
           </p>
@@ -323,27 +315,24 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             Perfekt für: Schulfeste, Einschulungsfeiern, Projekttage, Abschlussfeiern
           </p>
         </div>
-        <figure class="cs-photo" data-reveal="pop" data-reveal-delay="0.1">
+        <ProgramFrame class="k3-photo" data-reveal data-reveal-delay="0.1">
           <Image
             src={fotogalerieClownZauberer3Img}
             alt="Clown Zauberer LIAR bringt Schulkinder zum Lachen bei Clownshow"
-            data-scroll-tilt="3"
             loading="lazy"
             widths={[320, 640]}
             sizes="(max-width: 900px) 80vw, 320px"
-            style="object-position: 75% 30%"
           />
-        </figure>
+        </ProgramFrame>
       </article>
     </div>
   </section>
 
-  <!-- ── Witzigste Clownshow (blue band) ───────────────────── -->
-  <section class="kg-band kg-band--blue">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
-    <div class="container kg-narrow" data-reveal>
-      <h2 class="kg-h2">Die WITZIGSTE Clownshow NRW mit TOP BEWERTUNGEN!</h2>
+  <!-- ── Witzigste Clownshow ───────────────────────────────── -->
+  <section class="k3-alt">
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Die WITZIGSTE Clownshow NRW mit TOP BEWERTUNGEN!</h2>
       <p>
         <strong>Diese farbenfrohe, humorvolle und magische Show ist liebevoll auf das Alter der Kinder abgestimmt.</strong>
       </p>
@@ -356,26 +345,29 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Clown oder Zauberer? ──────────────────────────────── -->
-  <section class="cs-choice">
+  <!-- ── Clown oder Zauberer? Two offers under a red and a blue spotlight ── -->
+  <section class="k3-extras k3-band k3-band--spot cs-choice">
+    <span class="k3-spot k3-spot--red" aria-hidden="true"></span>
+    <span class="k3-spot k3-spot--blue" aria-hidden="true"></span>
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>Clown oder Zauberer?</h2>
-      <div class="kg-cards cs-choice__grid">
-        <article class="kg-card kg-card--red" data-reveal="pop">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Clown oder Zauberer?</h2>
+      <div class="k3-extras__grid cs-choice__grid">
+        <article class="k3-extra" data-reveal>
           <h3>Buchen Sie die Clownshow, wenn…</h3>
-          <p class="cs-choice__list">
+          <p>
             ✓ Die Kinder eher jünger sind (4-7 Jahre) ✓ Sie viel Lachen und Comedy wünschen ✓ Die Kinder Slapstick und lustige Gags lieben ✓ Sie Ballontiere als Erinnerung möchten ✓ Die Stimmung ausgelassen und fröhlich sein soll
           </p>
-          <p class="kg-card__note">
+          <p class="k3-extra__dur">
             Perfekt für: Kindergeburtstage mit jüngeren Kindern, Kita-Feste, Familienfeiern mit Kleinkindern
           </p>
         </article>
-        <article class="kg-card kg-card--blue" data-reveal="pop" data-reveal-delay="0.1">
+        <article class="k3-extra" data-reveal data-reveal-delay="0.08">
           <h3>Buchen Sie die Zaubershow, wenn…</h3>
-          <p class="cs-choice__list">
+          <p>
             ✓ Die Kinder eher älter sind (7-12 Jahre) ✓ Sie mehr Staunen und Magie wünschen ✓ Die Kinder komplexere Tricks sehen wollen ✓ Eine etwas „coolere", weniger clowneske Show gewünscht ist ✓ Auch Erwachsene begeistert werden sollen
           </p>
-          <p class="kg-card__note">
+          <p class="k3-extra__dur">
             Perfekt für: Kindergeburtstage mit älteren Kindern, Schulfeste, gemischte Veranstaltungen
           </p>
         </article>
@@ -383,16 +375,18 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Video (yellow band) ───────────────────────────────── -->
-  <section class="kg-band kg-band--yellow">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal="pop">
+  <!-- ── Video: Hollywood premiere searchlights, curtain with tie-backs ── -->
+  <section class="k3-band k3-band--night k3-premiere">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" label="Clownshow ansehen" />
       </div>
-      <h3 class="kg-h3">
+      <h3 class="k3-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
       <a href="/galerie/" class="btn btn--primary">
@@ -402,15 +396,16 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── FAQ: native <details>, works without JS ───────────── -->
-  <section class="kg-faq" id="faq">
-    <div class="container kg-narrow">
-      <p class="kg-kicker kg-center">Häufige Fragen zur Clownshow</p>
-      <h2 class="kg-h2 kg-center">Hier sind ein paar Antworten</h2>
-      <div class="kg-faq__list">
+  <section class="k3-faq" id="faq">
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <p class="k3-kicker k3-center">Häufige Fragen zur Clownshow</p>
+      <h2 class="k3-h2 k3-center">Hier sind ein paar Antworten</h2>
+      <div class="k3-faq__list">
         {faqItems.map((item) => (
-          <details class="kg-faq__item" data-reveal="puff">
+          <details class="k3-faq__item" data-reveal>
             <summary><span>{item.question}</span></summary>
-            <div class="kg-faq__answer">{item.answer}</div>
+            <div class="k3-faq__answer">{item.answer}</div>
           </details>
         ))}
       </div>
@@ -418,33 +413,32 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
-  <section class="kg-area cs-area" id="einsatzgebiet">
+  <section class="k3-area k3-alt" id="einsatzgebiet">
     <div class="container">
-      <Squiggle />
-      <h2 class="kg-h2 kg-center">Einsatzgebiete NRW</h2>
-      <h3 class="kg-h3 kg-center">Clownshow in ganz NRW – Ihre Regionen</h3>
-      <div class="kg-area__grid">
-        <div class="kg-area__text">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">Einsatzgebiete NRW</h2>
+      <h3 class="k3-h3 k3-center">Clownshow in ganz NRW – Ihre Regionen</h3>
+      <div class="k3-area__grid">
+        <div>
           <p>Als Kinderclown bin ich in ganz Nordrhein-Westfalen unterwegs. Ergänzend zur Clownshow biete ich auch <a href="/clown/ballonmodellage/">Ballonmodellage</a>, <a href="/clown/glitzer-tattoo/">Glitzer Tattoos</a> und <a href="/clown/walk-act/">Walk-Act</a> an. Überzeugen Sie sich in meiner <a href="/galerie/">Galerie</a>!</p>
-          <p class="kg-cities">
+          <p class="k3-cities">
             <strong>Ruhrgebiet:</strong> <a href="/clown/clownshow/clown-in-essen/">Essen</a>, <a href="/clown/clownshow/clown-in-duisburg/">Duisburg</a>, <a href="/clown/clownshow/clown-in-oberhausen/">Oberhausen</a>, <a href="/clown/clownshow/clown-in-gelsenkirchen/">Gelsenkirchen</a>, <a href="/clown/clownshow/clown-in-bochum/">Bochum</a>, <a href="/clown/clownshow/clown-in-dortmund/">Dortmund</a>, <a href="/clown/clownshow/clown-in-bottrop/">Bottrop</a>, <a href="/clown/clownshow/clown-in-muelheim/">Mülheim</a>, <a href="/clown/clownshow/clown-in-herne/">Herne</a>, <a href="/clown/clownshow/clown-in-herten/">Herten</a>, <a href="/clown/clownshow/clown-in-gladbeck/">Gladbeck</a>, <a href="/clown/clownshow/clown-in-marl/">Marl</a>, <a href="/clown/clownshow/clown-in-dorsten/">Dorsten</a>, <a href="/clown/clownshow/clown-in-recklinghausen/">Recklinghausen</a>, <a href="/clown/clownshow/clown-in-castrop-rauxel/">Castrop-Rauxel</a>, <a href="/clown/clownshow/clown-in-waltrop/">Waltrop</a>, <a href="/clown/clownshow/clown-in-datteln/">Datteln</a>, <a href="/clown/clownshow/clown-in-haltern/">Haltern</a>, <a href="/clown/clownshow/clown-in-dinslaken/">Dinslaken</a>
           </p>
-          <p class="kg-cities">
+          <p class="k3-cities">
             <strong>Rheinland:</strong> <a href="/clown/clownshow/clown-in-duesseldorf/">Düsseldorf</a>, <a href="/clown/clownshow/clown-in-moers/">Moers</a>, <a href="/clown/clownshow/clown-in-wesel/">Wesel</a>, <a href="/clown/clownshow/clown-in-xanten/">Xanten</a>, Köln, Krefeld, Mönchengladbach, Neuss, Leverkusen, Bonn
           </p>
-          <p class="kg-cities">
+          <p class="k3-cities">
             <strong>Münsterland &amp; Westfalen:</strong> Münster, Coesfeld, Borken, Ahaus, Reken, Lünen, Hamm
           </p>
           <p class="cs-area__more">Auch überregional buchbar für besondere Anlässe!</p>
         </div>
-        <figure class="kg-area__map" data-reveal>
+        <figure class="k3-area__map" data-reveal>
           <Image
             src={clownZaubererGladbeckImg}
             alt="Einsatzgebiet Clown Zauberer LIAR – Karte NRW"
-            data-scroll-tilt="2"
             loading="lazy"
             widths={[400, 800]}
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(max-width: 900px) 86vw, 460px"
           />
         </figure>
       </div>
@@ -452,11 +446,12 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Kontakt ───────────────────────────────────────────── -->
-  <section class="kg-contact cs-cta">
-    <div class="container kg-narrow kg-center" data-reveal>
-      <h2 class="kg-h2">Einfach Kontakt aufnehmen</h2>
-      <p class="kg-sub">Jetzt Clownshow buchen – Lachen garantiert!</p>
-      <p class="cs-soft">
+  <section class="cs-cta">
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Einfach Kontakt aufnehmen</h2>
+      <p class="k3-sub">Jetzt Clownshow buchen – Lachen garantiert!</p>
+      <p class="k3-soft">
         Machen Sie Ihren Kindergeburtstag, Ihr Kita-Fest oder Ihre Familienfeier zu einem fröhlichen Erlebnis! Mit meiner Clownshow sorge ich für Lachen, Spaß und strahlende Kinderaugen!
       </p>
       <p class="cs-cta__label">Jetzt unverbindlich anfragen:</p>
@@ -474,97 +469,38 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 </V2Layout>
 
 <style>
-  /* ── hero ── */
-  .cs-crumbs { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 var(--space-2); }
-  .cs-crumbs a { color: inherit; text-decoration: none; }
-  .cs-hero__sub { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 650; color: var(--ink-soft); margin: 0 0 var(--space-3); }
+  /* page-only touches; the v3 language lives in kids-v3.css */
+  .cs-note { margin-block: var(--space-3) !important; padding: var(--space-3); }
 
-  .cs-soft { color: var(--ink-soft); }
-  .cs-note {
-    padding: var(--space-2) var(--space-3); background: var(--bg); border: var(--border);
-    border-radius: var(--radius-sm); box-shadow: 4px 4px 0 var(--line); rotate: -0.6deg;
-  }
-
-  /* ── related services ── */
-  .cs-related__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-top: var(--space-3); }
-  .cs-related__card {
-    display: block; padding: var(--space-3); color: var(--ink); text-decoration: none;
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
-    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
-  }
-  .cs-related__card:nth-child(1) { rotate: -1deg; }
-  .cs-related__card:nth-child(2) { rotate: 1deg; }
-  .cs-related__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 650; margin-bottom: 0.3rem; }
-  .cs-related__text { color: var(--ink-soft); margin: 0; }
-  @media (hover: hover) and (pointer: fine) {
-    .cs-related__card:hover { transform: translate(-3px, -5px); box-shadow: var(--shadow-hover); }
-  }
-
-  /* ── photos: framed poster prints ── */
-  .cs-photo { margin: 0; justify-self: center; rotate: 2deg; }
-  .cs-photo--tilt { rotate: -2deg; }
-  .cs-photo :global(img) {
-    display: block; width: min(20rem, 80vw); height: auto; aspect-ratio: 1; object-fit: cover;
-    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
-  }
-
-  /* ── was ist eine clownshow ── */
-  .cs-what__grid { grid-template-columns: 1fr 1.5fr; align-items: center; margin-top: var(--space-3); }
+  /* was ist eine clownshow: the four traits as paper slips with a gold rule */
   .cs-what__h3 { margin-top: 0; }
   .cs-traits { display: grid; gap: 0.7rem; }
   .cs-traits p {
-    margin: 0; padding: 0.8rem 1rem; color: var(--ink-soft);
-    background: var(--bg); border-left: 6px solid var(--brand-red); border-radius: var(--radius-sm);
+    margin: 0; padding: 0.8rem 1rem; color: var(--ink-soft); background: var(--surface);
+    border-radius: var(--radius-sm); box-shadow: inset 3px 0 0 var(--gold), inset 0 0 0 1px rgba(184, 134, 47, 0.35);
   }
-  .cs-traits p:nth-child(2) { border-left-color: var(--brand-blue); }
-  .cs-traits p:nth-child(3) { border-left-color: var(--brand-yellow); }
-  .cs-traits p:nth-child(4) { border-left-color: var(--accent-2); }
   .cs-traits strong { color: var(--ink); }
 
-  /* ── stats (red band) ── */
-  .cs-stats { background: var(--brand-red); color: #fff; }
-  .cs-stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-3); }
-  .cs-stat {
-    text-align: center; padding: var(--space-3); border-radius: var(--radius);
-    background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45);
-  }
-  .cs-stat__icon { font-size: 2rem; line-height: 1; margin-bottom: 0.4rem; }
-  .cs-stat__num { font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; }
-  .cs-stat__label { font-weight: 800; margin-top: 0.3rem; }
-
-  /* ── programmes: alternating poster rows ── */
-  .cs-prog {
-    display: grid; grid-template-columns: 1.4fr 1fr; gap: var(--space-4); align-items: center;
-    margin-top: var(--space-5);
-  }
-  .cs-prog--flip { grid-template-columns: 1fr 1.4fr; }
-  .cs-prog__text {
-    position: relative; padding: var(--space-3); background: var(--surface);
-    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
-  }
+  /* programmes: alternating text sheet | photo rows */
+  .cs-prog { margin-top: var(--space-5); }
+  .cs-prog__text { position: relative; }
   .cs-prog__text p { color: var(--ink-soft); }
-  .cs-prog__text :global(.bd) { top: -1.6rem; right: 0.6rem; }
-  .cs-prog__h3--dog { padding-right: 7.5rem; }
-  .cs-prog__text .kg-h3 { margin-top: 0; }
+  .cs-prog__text .k3-h3 { margin-top: 0; }
+  .cs-prog__h3--dog { padding-right: 7.5rem; min-height: 3.6rem; }
   .cs-prog__text .cs-prog__facts {
     padding: 0.6rem 0.9rem; font-weight: 700; color: var(--ink);
-    background: color-mix(in srgb, var(--brand-yellow) 30%, transparent); border: 2px dashed var(--line); border-radius: var(--radius-sm);
+    background: rgba(233, 200, 119, 0.2); border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.45);
   }
-  .cs-prog__fit { font-weight: 700; margin: 0; }
+  .cs-prog__text .cs-prog__fit { font-weight: 700; color: var(--ink); }
+  .cs-photo--narrow { width: min(100%, 17rem); }
 
-  /* ── clown oder zauberer ── */
-  .cs-choice__grid { max-width: 56rem; margin: var(--space-4) auto 0; }
-  .cs-choice__list { color: var(--ink-soft); }
+  /* clown oder zauberer: card headings like the prototype's extras */
+  .cs-choice .k3-extra h3 { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; margin: 0 0 var(--space-2); }
+  .cs-choice__grid { max-width: 56rem; margin-inline: auto; }
 
-  /* ── area + contact ── */
+  /* area + contact */
   .cs-area__more { font-weight: 700; }
-  .cs-cta { padding-block: var(--space-5); }
   .cs-cta__label { font-weight: 700; margin-top: var(--space-3); }
   .cs-cta__lines p { margin-bottom: 0.3rem; font-weight: 700; }
-  .cs-cta__hint { font-weight: 800; margin: var(--space-3) 0; }
-
-  @media (max-width: 900px) {
-    .cs-what__grid, .cs-prog, .cs-prog--flip { grid-template-columns: 1fr; }
-    .cs-prog--flip .cs-photo { order: 2; }
-  }
+  .cs-cta__hint { font-weight: 800; margin: var(--space-3) 0 !important; }
 </style>

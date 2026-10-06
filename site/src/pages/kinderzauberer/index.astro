@@ -10,13 +10,14 @@ import zaubershowMitClownZaubererLiar from '../../assets/images/kinderzauberer/z
 import clownZaubererGladbeck from '../../assets/images/kinderzauberer/clown-zauberer-gladbeck.jpg';
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
-import SectionEdge from '../../components/v2/SectionEdge.astro';
-import Bunting from '../../components/v2/kids/Bunting.astro';
-import Squiggle from '../../components/v2/kids/Squiggle.astro';
+import Curtain from '../../components/v2/kids/Curtain.astro';
+import K3Hero from '../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import Glitter from '../../components/v2/kids/Glitter.astro';
 import YouTubeFacade from '../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../data/site';
-import '../../styles/kids-kit.css';
+import '../../styles/kids-v3.css';
 
 const seoTitle = 'Kinderzauberer NRW | Kinderzaubershow buchen | LIAR';
 const seoDescription = 'Kinderzauberer LIAR in NRW ✓ Lustige Kinderzaubershow für Kindergeburtstag, Kita & Schule ✓ 370+ Bewertungen ✓ Jetzt anfragen!';
@@ -107,59 +108,50 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kinderzauberer', url: '/kinderzauberer/' }]}
 >
-  <!-- ── Hero: Zirkus-Plakat. No reveal here (LCP). ───────────── -->
-  <section class="kg-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <p class="kz-crumbs">
+  <!-- ── Hero: the big-top stage (K3Hero). No reveal here (LCP). ── -->
+  <K3Hero>
+        <p class="k3-crumbs">
           <a href="/">Clown</a> »
           <a href="/">Clown Zauberer LIAR</a> »
         </p>
         <ReviewBadge />
-        <h1 class="kg-hero__title" data-letters>Kinderzauberer in NRW – Ihre <span class="kg-mark">Kinderzaubershow</span> zum Staunen</h1>
-        <h2 class="kz-hero__sub">
+        <h1 class="k3-hero__title" data-letters>Kinderzauberer in NRW – Ihre <span class="k3-mark">Kinderzaubershow</span> zum Staunen</h1>
+        <h2 class="k3-hero__sub">
           Kinderzauberer in NRW –<br />Zaubershow für unvergessliche Momente
         </h2>
-        <div class="kg-hero__actions">
+        <div class="k3-hero__actions">
           <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
           <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
-        <nav class="kg-quick" aria-label="Schnell zu den Infos">
+        <nav class="k3-quick" aria-label="Schnell zu den Infos">
           <a href="#ablauf">Ablauf der Show</a>
           <a href="#wissen">Fragen der Eltern</a>
           <a href="#bewertungen">Bewertungen</a>
           <a href="#einsatzgebiet">Städte</a>
         </nav>
-      </div>
-      <figure class="kg-hero__photo">
-        <Image
-          src={heroImg}
-          alt="Kinderzauberer NRW – Zaubershow für Kinder"
-          widths={[400, 700, 1000, 1400]}
-          sizes="(max-width: 900px) 92vw, 560px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 46% 70%"
-        />
-        <a class="kg-sticker" href="#wissen">
-          <span>Kinder</span><strong>4–12</strong>
-        </a>
-      </figure>
-    </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={heroImg}
+        alt="Kinderzauberer NRW – Zaubershow für Kinder"
+        widths={[400, 700, 1000]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
-  <section class="kg-intro">
-    <div class="container kg-narrow kg-center" data-reveal>
-      <p class="kg-lead">
+  <section class="k3-intro">
+    <div class="container k3-narrow k3-center" data-reveal>
+      <p class="k3-lead">
         Kinderzauberer LIAR (Michaël Prescler) ist ein professioneller Kinderzauberer aus Gladbeck und tritt in ganz NRW auf. Er gestaltet eine interaktive Kinderzaubershow für Kindergeburtstage, Schulfeste und Familienfeiern – für Kinder von 4 bis 12 Jahren, ab ca. 25–30 Minuten und für Kindergeburtstage zu transparenten Festpreisen buchbar.
       </p>
-      <p class="kz-soft">
+      <p class="k3-soft">
         Seit über 15 Jahren bringe ich Kinder und Familien bei Kindergeburtstagen, Schulfesten und Veranstaltungen in NRW zum Staunen – mit einer Mischung aus Clownerie, Zauberei und jeder Menge Mitmachmomenten.
       </p>
-      <p class="kz-soft">
+      <p class="k3-soft">
         Meine <a href="/zauberer/zaubershow/">Zaubershow</a> ist speziell für Kinder entwickelt: bunt, humorvoll und voller Mitmachmomente. Schauen Sie sich auch meine <a href="/galerie/">Galerie</a> an!
       </p>
       <p class="kz-perfect">
@@ -168,12 +160,14 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Video (yellow band) ───────────────────────────────── -->
-  <section class="kg-band kg-band--yellow">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container kg-narrow">
-      <div class="kg-video" data-reveal="pop">
+  <!-- ── Video: Hollywood premiere searchlights, curtain with tie-backs ── -->
+  <section class="k3-band k3-band--night k3-premiere">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" label="Zaubershow ansehen" />
       </div>
     </div>
@@ -181,15 +175,15 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <!-- ── So läuft die Show ab ──────────────────────────────── -->
   <section class="kz-show" id="ablauf">
-    <div class="container kg-intro__grid">
+    <div class="container k3-split">
       <div data-reveal>
-        <h2 class="kg-h2">So läuft meine Kinderzaubershow ab</h2>
-        <Squiggle color="var(--brand-blue)" />
-        <p class="kz-soft">
+        <GoldDivider class="kz-left" />
+        <h2 class="k3-h2">So läuft meine Kinderzaubershow ab</h2>
+        <p class="k3-soft">
           Meine Kinderzaubershow beginnt mit einer spannenden Geschichte, die die Kinder sofort in ihren Bann zieht. Schon nach wenigen Minuten wird aus der Geschichte eine rasante, witzige und zauberhafte Show, bei der die Grenzen zwischen Zauberer und Publikum verschwimmen.
         </p>
         <p class="kz-show__label">Die Kinder erleben:</p>
-        <ul class="kz-show__list">
+        <ul class="k3-ticks">
           <li>✅ Verblüffende Zaubertricks mit Alltagsgegenständen</li>
           <li>✅ Eigene Zaubermomente, wenn sie mir auf der „Bühne" assistieren</li>
           <li>✅ Lustiges Chaos, wenn Tricks scheinbar schiefgehen</li>
@@ -203,61 +197,66 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           Kindergeburtstag – Preise
         </a>
       </div>
-      <figure class="kz-show__photo" data-reveal="pop" data-reveal-delay="0.1">
+      <div class="kz-show__photo k3-photo" data-reveal data-reveal-delay="0.1">
         <Glitter />
-        <Image
-          src={kindergeburtstagMitKinderzauberer}
-          alt="Kinderzauberer auf einem Kindergeburtstag in Essen"
-          data-scroll-tilt="3"
-          loading="lazy"
-          widths={[320, 640]}
-          sizes="(max-width: 900px) 80vw, 340px"
-        />
-      </figure>
+        <ProgramFrame>
+          <Image
+            src={kindergeburtstagMitKinderzauberer}
+            alt="Kinderzauberer auf einem Kindergeburtstag in Essen"
+            loading="lazy"
+            widths={[320, 640]}
+            sizes="(max-width: 900px) 80vw, 320px"
+          />
+        </ProgramFrame>
+      </div>
     </div>
   </section>
 
   <!-- ── Drei Versprechen ──────────────────────────────────── -->
-  <section class="kg-extras kz-promises">
+  <section class="k3-alt kz-promises">
     <div class="container">
-      <div class="kg-cards">
-        <article class="kg-card kg-card--red kz-card" data-reveal="pop">
-          <Image
-            src={clownerieUndZauberei}
-            alt="Kinderzauberer LIAR verbindet Clownerie und Zauberei auf einem Kinderfest"
-            class="kz-card__img"
-            loading="lazy"
-            widths={[150, 300]}
-            sizes="150px"
-          />
+      <GoldDivider />
+      <div class="k3-cards">
+        <article class="k3-card" data-reveal>
+          <ProgramFrame>
+            <Image
+              src={clownerieUndZauberei}
+              alt="Kinderzauberer LIAR verbindet Clownerie und Zauberei auf einem Kinderfest"
+              loading="lazy"
+              widths={[160]}
+              sizes="160px"
+            />
+          </ProgramFrame>
           <h3>Einfach und unkompliziert</h3>
           <p>
             Mit wenig Aufwand und fast ohne Vorbereitungszeit komme ich vorbei… und lege mit meinem Programm los: lachende Kinder, ausgelassene Stimmung und entspannte Eltern!
           </p>
         </article>
-        <article class="kg-card kg-card--blue kz-card" data-reveal="pop" data-reveal-delay="0.1">
-          <Image
-            src={fotogalerieClownZauberer16}
-            alt="Kinderzauberer bringt Kinder zum Staunen bei Zaubershow in NRW"
-            class="kz-card__img"
-            loading="lazy"
-            widths={[150, 300]}
-            sizes="150px"
-          />
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
+          <ProgramFrame>
+            <Image
+              src={fotogalerieClownZauberer16}
+              alt="Kinderzauberer bringt Kinder zum Staunen bei Zaubershow in NRW"
+              loading="lazy"
+              widths={[240, 480]}
+              sizes="220px"
+            />
+          </ProgramFrame>
           <h3>Sehen und mit fiebern</h3>
           <p>
             Die Kinder werden immer wieder mit eingebunden und pendeln die ganze Zeit zwischen Lachen und Staunen… und mein bester Trick funktioniert immer: den Kindern ein Lächeln ins Gesicht zu zaubern.
           </p>
         </article>
-        <article class="kg-card kg-card--yellow kz-card" data-reveal="pop" data-reveal-delay="0.2">
-          <Image
-            src={zaubershowMitClownZaubererLiar}
-            alt="Kinderzauberer bei Zaubershow in einer Schule"
-            class="kz-card__img"
-            loading="lazy"
-            widths={[150, 300]}
-            sizes="150px"
-          />
+        <article class="k3-card" data-reveal data-reveal-delay="0.16">
+          <ProgramFrame>
+            <Image
+              src={zaubershowMitClownZaubererLiar}
+              alt="Kinderzauberer bei Zaubershow in einer Schule"
+              loading="lazy"
+              widths={[240, 480]}
+              sizes="220px"
+            />
+          </ProgramFrame>
           <h3>Witziger Kinderzauberer</h3>
           <p>
             Ob Schulfeier, Weihnachtsfeier, Hochzeit, Gartenfest, oder Kommunion sowie Kindergärten oder Schulen sorge ich mit meiner Kinderzaubershow für staunende und lachende Gesichter. Auch im Wohnzimmer für den Kindergeburtstag!
@@ -269,18 +268,19 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <!-- ── Weitere Anlässe (SEO-Audit 06.08.2026, H6: internal links to /clown/karneval/ + /clown/walk-act/) ── -->
   <section class="kz-related" data-related-services>
-    <div class="container kg-narrow">
-      <h2 class="kg-h2 kg-center" data-reveal>
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>
         Für welche Anlässe kann man Clown LIAR sonst buchen?
       </h2>
-      <div class="kz-related__grid">
-        <a href="/clown/karneval/" class="kz-related__card" data-reveal="tilt">
-          <p class="kz-related__title">Clown für Karneval &amp; Kindersitzung</p>
-          <p class="kz-related__text">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
+      <div class="k3-links">
+        <a href="/clown/karneval/" class="k3-link-card" data-reveal>
+          <p class="k3-link-card__title">Clown für Karneval &amp; Kindersitzung</p>
+          <p class="k3-link-card__text">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
         </a>
-        <a href="/clown/walk-act/" class="kz-related__card" data-reveal="tilt" data-reveal-delay="0.1">
-          <p class="kz-related__title">Walk-Act für Straßen- und Stadtfest</p>
-          <p class="kz-related__text">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
+        <a href="/clown/walk-act/" class="k3-link-card" data-reveal data-reveal-delay="0.08">
+          <p class="k3-link-card__title">Walk-Act für Straßen- und Stadtfest</p>
+          <p class="k3-link-card__text">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
         </a>
       </div>
     </div>
@@ -288,61 +288,63 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <Reviews />
 
-  <!-- ── Zahlen (red band) ─────────────────────────────────── -->
-  <section class="kg-band kz-stats">
-    <SectionEdge color="var(--brand-red)" side="top" />
-    <SectionEdge color="var(--brand-red)" side="bottom" />
-    <div class="container kz-stats__grid">
-      <div class="kz-stat" data-reveal="pop">
-        <div class="kz-stat__icon">🪄</div>
-        <div class="kz-stat__num" data-count>400</div>
-        <div class="kz-stat__label">Shows im Jahr</div>
-      </div>
-      <div class="kz-stat" data-reveal="pop" data-reveal-delay="0.08">
-        <div class="kz-stat__icon">😊</div>
-        <div class="kz-stat__num">110.000</div>
-        <div class="kz-stat__label">Lachende Kinder</div>
-      </div>
-      <div class="kz-stat" data-reveal="pop" data-reveal-delay="0.16">
-        <div class="kz-stat__icon">🪄</div>
-        <div class="kz-stat__num" data-count>15</div>
-        <div class="kz-stat__label">Jahre Erfahrung</div>
+  <!-- ── Zahlen: the velvet ring ───────────────────────────── -->
+  <section class="k3-band k3-band--velvet">
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-stats">
+        <div class="k3-stat" data-reveal>
+          <div class="k3-stat__icon">🪄</div>
+          <div class="k3-stat__num" data-count>400</div>
+          <div class="k3-stat__label">Shows im Jahr</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.08">
+          <div class="k3-stat__icon">😊</div>
+          <div class="k3-stat__num">110.000</div>
+          <div class="k3-stat__label">Lachende Kinder</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.16">
+          <div class="k3-stat__icon">🪄</div>
+          <div class="k3-stat__num" data-count>15</div>
+          <div class="k3-stat__label">Jahre Erfahrung</div>
+        </div>
       </div>
     </div>
   </section>
 
   <!-- ── FAQ / Wissenswertes: native <details>, works without JS ── -->
-  <section class="kg-faq kz-faq" id="wissen">
-    <div class="container kg-narrow">
-      <h2 class="kg-h2 kg-center">Was sollten Eltern über den Kinderzauberer wissen?</h2>
-      <div class="kg-faq__list">
-        <details class="kg-faq__item" data-reveal="puff">
+  <section class="k3-faq" id="wissen">
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">Was sollten Eltern über den Kinderzauberer wissen?</h2>
+      <div class="k3-faq__list">
+        <details class="k3-faq__item" data-reveal>
           <summary><h3>Was kostet ein Auftritt von Kinderzauberer LIAR?</h3></summary>
-          <p class="kg-faq__answer">
+          <p class="k3-faq__answer">
             Die Gage richtet sich nach Art und Umfang der Veranstaltung, Zuschauerzahl, Anfahrtsweg und Jahreszeit. Für Kindergeburtstage biete ich transparente Festpreise an. Kontaktieren Sie mich für ein unverbindliches Angebot – ich berate Sie gerne persönlich!
           </p>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><h3>Was kostet eine Kinderzaubershow?</h3></summary>
-          <p class="kg-faq__answer">
+          <p class="k3-faq__answer">
             Ich arbeite mit transparenten Festpreisen ohne versteckte Kosten. Die Gage hängt von Anlass, Dauer und Anfahrt ab – über die <a href="/kontakt/">Kontaktseite</a> erstelle ich Ihnen gerne ein individuelles Angebot für Ihre Kinderzaubershow.
           </p>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><h3>Wieviel Platz braucht man für die Zaubershow?</h3></summary>
-          <p class="kg-faq__answer">
+          <p class="k3-faq__answer">
             Ich benötige lediglich eine Fläche von etwa 2×2 Metern. Das bedeutet: Die Show ist möglich im Wohnzimmer, Kinderzimmer, Partykeller, auf der Terrasse, im Garten, in Turnhallen, Kindergärten, auf kleinen und großen Bühnen – praktisch überall!
           </p>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><h3>Wie lange dauert eine Vorführung mit dem Kinderzauberer?</h3></summary>
-          <p class="kg-faq__answer">
+          <p class="k3-faq__answer">
             Die Show ist ab 25-30 Minuten buchbar und lässt sich flexibel gestalten. Für größere Veranstaltungen oder wenn mehr Zeit zur Verfügung steht, biete ich auch Programme von 45-60 Minuten an. Die Dauer stimme ich individuell mit Ihnen ab.
           </p>
         </details>
-        <details class="kg-faq__item" data-reveal="puff">
+        <details class="k3-faq__item" data-reveal>
           <summary><h3>Für welches Alter ist die Zaubershow geeignet?</h3></summary>
-          <p class="kg-faq__answer">
+          <p class="k3-faq__answer">
             Meine Kinderzaubershow ist für Kinder von 4 bis 12 Jahren konzipiert. Ich passe das Programm altersgerecht an: Für Kindergartenkinder gestalte ich die Show etwas einfacher und kürzer, für Grundschulkinder darf es komplexer und länger sein.
           </p>
         </details>
@@ -350,32 +352,31 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Planung (blue band) ───────────────────────────────── -->
-  <section class="kg-band kg-band--blue kz-plan">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
+  <!-- ── Planung: programme cards on the night stage ───────── -->
+  <section class="k3-band k3-band--night">
     <div class="container">
-      <h2 class="kg-h2" data-reveal>Zauberer für den Kindergeburtstag – Ablauf, Kosten &amp; Planung</h2>
-      <div class="kz-plan__grid">
-        <article class="kz-plan__card" data-reveal="pop">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Zauberer für den Kindergeburtstag – Ablauf, Kosten &amp; Planung</h2>
+      <div class="k3-grid k3-grid--2 kz-plan">
+        <article class="k3-card" data-reveal>
           <h3>Was kostet ein Zauberer für den Kindergeburtstag?</h3>
           <p>
             Ein Zauberer für den Kindergeburtstag ist bei LIAR zu einem <strong>transparenten Festpreis</strong> buchbar – ohne versteckte Kosten. Der Festpreis gilt für die interaktive Kinderzaubershow ab ca. 25–30 Minuten. Alle Details finden Sie unter <a href="/kindergeburtstag/">Kindergeburtstag – Preise</a>.
           </p>
         </article>
-        <article class="kz-plan__card" data-reveal="pop" data-reveal-delay="0.08">
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
           <h3>Wie läuft die Zaubershow am Geburtstag ab?</h3>
           <p>
             Die Show braucht nur etwa 2×2 Meter Platz und funktioniert im Wohnzimmer genauso wie im Partykeller oder Garten. Das Geburtstagskind steht im Mittelpunkt: Es assistiert bei den Zaubertricks und erlebt seinen eigenen Zaubermoment vor allen Gästen. Auf Wunsch ergänze ich die Show um <a href="/clown/ballonmodellage/">Ballonfiguren</a> für alle Kinder.
           </p>
         </article>
-        <article class="kz-plan__card" data-reveal="pop" data-reveal-delay="0.16">
+        <article class="k3-card" data-reveal>
           <h3>Für welches Alter und wie viele Kinder?</h3>
           <p>
             Die Zaubershow ist für Kinder von 4 bis 12 Jahren konzipiert und wird altersgerecht angepasst – vom kleinen Kindergeburtstag bis zum Schulfest oder Kita-Fest. Auch bei größeren Gruppen kommt jedes Kind auf seine Kosten, denn Mitmachen ist das Herzstück der Show.
           </p>
         </article>
-        <article class="kz-plan__card" data-reveal="pop" data-reveal-delay="0.24">
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
           <h3>Wann sollte man den Zauberer buchen?</h3>
           <p>
             Beliebte Wochenend-Termine sind erfahrungsgemäß früh vergeben – eine rechtzeitige Anfrage lohnt sich. Kurzfristige Termine sind je nach Verfügbarkeit ebenfalls möglich. Tipp: Wer Zauberei und <a href="/clown/clownshow/">Clownshow</a> kombiniert, bekommt ein abwechslungsreiches Programm aus einer Hand.
@@ -387,12 +388,13 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <!-- ── Ablauf des Auftritts ──────────────────────────────── -->
   <section class="kz-story">
-    <div class="container kg-narrow" data-reveal>
-      <h2 class="kg-h2">Wie läuft der Auftritt des Kinderzauberers ab?</h2>
-      <p class="kz-soft">
+    <div class="container k3-narrow" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Wie läuft der Auftritt des Kinderzauberers ab?</h2>
+      <p class="k3-soft">
         Vom ersten Kontakt bis zum Applaus ist alles bewusst einfach gehalten. Nach Ihrer Anfrage stimmen wir Termin, Ort und Programmwunsch ab – meist antworte ich innerhalb von 24 Stunden. Am Veranstaltungstag komme ich rechtzeitig an und baue in wenigen Minuten auf; mehr als eine freie Fläche von 2×2 Metern brauche ich dafür nicht. Die Show selbst beginnt mit einer Geschichte, die die Kinder sofort in die Zauberwelt hineinzieht. Von da an sind sie mittendrin statt nur dabei: Sie assistieren bei den Tricks, sprechen Zaubersprüche und erleben, wie durch ihre Hilfe scheinbar Unmögliches gelingt. Zwischendurch sorgt die Clownerie dafür, dass auf jedes Staunen ein Lachen folgt. Zum Schluss steigert sich die Show zu einem Finale, das die Kinder noch Tage später nacherzählen. Danach baue ich genauso unkompliziert wieder ab – und Sie haben entspannte Gäste und strahlende Kinder.
       </p>
-      <ul class="kz-steps">
+      <ul class="k3-ticks kz-steps">
         <li><span>✓</span> Anfrage – Antwort meist innerhalb von 24 Stunden</li>
         <li><span>✓</span> Kurzer Aufbau, nur 2×2 Meter Platzbedarf</li>
         <li><span>✓</span> Interaktive Show ab 25–30 Minuten, flexibel erweiterbar</li>
@@ -401,53 +403,52 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Was unterscheidet LIAR ────────────────────────────── -->
-  <section class="kz-diff">
-    <div class="container kg-narrow">
-      <div class="kz-diff__card" data-reveal="tilt">
-        <h2 class="kg-h2">Was unterscheidet LIAR von anderen Kinderzauberern?</h2>
-        <p>
-          Der wichtigste Unterschied: Bei LIAR bekommen Sie Clown und Zauberer in einer Person. Während klassische Zauberer vor allem Tricks vorführen, verbinde ich Zauberei mit Clownerie – die Kinder pendeln ständig zwischen ehrfürchtigem Staunen und herzhaftem Lachen. Dahinter steckt Routine, die man nicht abkürzen kann: Seit 2009 stehe ich als professioneller Entertainer auf der Bühne, spiele rund 400 Shows im Jahr und habe in dieser Zeit über 110.000 Kinder zum Lachen gebracht. Diese Erfahrung merkt man in jeder Situation – ob ein schüchternes Kind behutsam ermutigt werden will oder ein wildes Energiebündel eine Aufgabe braucht. Dazu kommt ein praktischer Vorteil für internationale Familien: Ich bin zweisprachig und zaubere auf Deutsch und Französisch. Und weil die Show mit nur 2×2 Metern Platz auskommt, funktioniert sie im Wohnzimmer genauso wie in der Turnhalle – ohne Bühnentechnik, ohne Aufwand für Sie.
-        </p>
-      </div>
+  <!-- ── Was unterscheidet LIAR: the velvet ring ───────────── -->
+  <section class="k3-band k3-band--velvet">
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Was unterscheidet LIAR von anderen Kinderzauberern?</h2>
+      <p>
+        Der wichtigste Unterschied: Bei LIAR bekommen Sie Clown und Zauberer in einer Person. Während klassische Zauberer vor allem Tricks vorführen, verbinde ich Zauberei mit Clownerie – die Kinder pendeln ständig zwischen ehrfürchtigem Staunen und herzhaftem Lachen. Dahinter steckt Routine, die man nicht abkürzen kann: Seit 2009 stehe ich als professioneller Entertainer auf der Bühne, spiele rund 400 Shows im Jahr und habe in dieser Zeit über 110.000 Kinder zum Lachen gebracht. Diese Erfahrung merkt man in jeder Situation – ob ein schüchternes Kind behutsam ermutigt werden will oder ein wildes Energiebündel eine Aufgabe braucht. Dazu kommt ein praktischer Vorteil für internationale Familien: Ich bin zweisprachig und zaubere auf Deutsch und Französisch. Und weil die Show mit nur 2×2 Metern Platz auskommt, funktioniert sie im Wohnzimmer genauso wie in der Turnhalle – ohne Bühnentechnik, ohne Aufwand für Sie.
+      </p>
     </div>
   </section>
 
   <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="kz-story kz-occasions">
-    <div class="container kg-narrow" data-reveal>
-      <Squiggle />
-      <h2 class="kg-h2">Für welche Anlässe kann man den Kinderzauberer buchen?</h2>
-      <p class="kz-soft">
+  <section class="kz-story">
+    <div class="container k3-narrow" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Für welche Anlässe kann man den Kinderzauberer buchen?</h2>
+      <p class="k3-soft">
         Der Klassiker ist natürlich der <a href="/kindergeburtstag/">Kindergeburtstag</a>: Die Show passt ins Wohnzimmer, das Geburtstagskind steht im Mittelpunkt, und die Eltern haben 40 Minuten Ruhe – gefühlt zum ersten Mal an diesem Tag. Genauso häufig bin ich in <a href="/zauberer/zaubershow/kindergarten-kita/">Kindergärten und Kitas</a> unterwegs, etwa zum Abschlussfest, zu St. Martin oder einfach als Überraschung im Kita-Alltag – dort natürlich mit einem Programm, das auf die Jüngsten zugeschnitten ist. Für <a href="/zauberer/zaubershow/schule/">Schulen</a> eignet sich die Show bei Schulfesten, Einschulungsfeiern und Projektwochen, denn auch größere Gruppen bleiben durch die vielen Mitmachmomente bei der Sache. Und dazwischen liegen all die Familienanlässe, bei denen Kinder unter den Gästen sind: Kommunion, Konfirmation, Taufe, Hochzeit oder das Sommerfest im Verein. Überall dort gilt dasselbe Prinzip – wo Kinder beschäftigt und begeistert sind, feiern auch die Erwachsenen entspannter.
       </p>
     </div>
   </section>
 
   <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
-  <section class="kg-area" id="einsatzgebiet">
+  <section class="k3-area k3-alt" id="einsatzgebiet">
     <div class="container">
-      <h2 class="kg-h2 kg-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
-      <h3 class="kg-h3 kg-center">Kinderzauberer Einsatzgebiet</h3>
-      <div class="kg-area__grid">
-        <div class="kg-area__text">
-          <p class="kg-cities">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <h3 class="k3-h3 k3-center">Kinderzauberer Einsatzgebiet</h3>
+      <div class="k3-area__grid">
+        <div>
+          <p class="k3-cities">
             Ich trete regelmäßig in Städten wie: <a href="/kinderzauberer/kinderzauberer-in-oberhausen/">Oberhausen</a>, <a href="/kinderzauberer/kinderzauberer-in-gelsenkirchen/">Gelsenkirchen</a>, <a href="/kinderzauberer/kinderzauberer-in-essen/">Essen</a>, <a href="/kinderzauberer/kinderzauberer-in-duisburg/">Duisburg</a>, <a href="/kinderzauberer/kinderzauberer-in-dorsten/">Dorsten</a>, <a href="/kinderzauberer/kinderzauberer-in-herten/">Herten</a>, <a href="/kinderzauberer/kinderzauberer-in-herne/">Herne</a>, <a href="/kinderzauberer/kinderzauberer-in-marl/">Marl</a>, <a href="/kinderzauberer/kinderzauberer-in-gladbeck/">Gladbeck</a>, <a href="/kinderzauberer/kinderzauberer-in-castrop-rauxel/">Castrop-Rauxel</a>, <a href="/kinderzauberer/kinderzauberer-in-waltrop/">Waltrop</a>, <a href="/kinderzauberer/kinderzauberer-in-wesel/">Wesel</a>, <a href="/kinderzauberer/kinderzauberer-in-xanten/">Xanten</a>, <a href="/kinderzauberer/kinderzauberer-in-muelheim/">Mülheim</a>, <a href="/kinderzauberer/kinderzauberer-in-duesseldorf/">Düsseldorf</a>, <a href="/kinderzauberer/kinderzauberer-in-dortmund/">Dortmund</a>, <a href="/kinderzauberer/kinderzauberer-in-moers/">Moers</a>, <a href="/kinderzauberer/kinderzauberer-in-bochum/">Bochum</a>, <a href="/kinderzauberer/kinderzauberer-in-bottrop/">Bottrop</a>, <a href="/kinderzauberer/kinderzauberer-in-datteln/">Datteln</a>, <a href="/kinderzauberer/kinderzauberer-in-dinslaken/">Dinslaken</a>, <a href="/kinderzauberer/kinderzauberer-in-haltern/">Haltern</a>, <a href="/kinderzauberer/kinderzauberer-in-recklinghausen/">Recklinghausen</a> … Jedoch kann man mich auch überregional und international (Frankreich, Belgien, Österreich, Schweiz) buchen!
           </p>
-          <div class="kz-reach">
+          <div class="k3-panel kz-reach">
             <p class="kz-reach__title">Jetzt unverbindlich anfragen</p>
             <p>📧 <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
             <p>📞 <a href="tel:+491721517578">+49 172 1517578</a></p>
           </div>
         </div>
-        <figure class="kg-area__map" data-reveal>
+        <figure class="k3-area__map" data-reveal>
           <Image
             src={clownZaubererGladbeck}
             alt="Einsatzgebiet Kinderzauberer LIAR in NRW – Karte mit Standort Gladbeck"
-            data-scroll-tilt="2"
             loading="lazy"
             widths={[400, 800]}
-            sizes="(min-width: 1024px) 50vw, 100vw"
+            sizes="(max-width: 900px) 86vw, 460px"
           />
         </figure>
       </div>
@@ -455,10 +456,11 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Kontakt ───────────────────────────────────────────── -->
-  <section class="kg-contact kz-cta">
-    <div class="container kg-narrow kg-center" data-reveal>
-      <h2 class="kg-h2">Einfach Kontakt aufnehmen</h2>
-      <p class="kz-soft">
+  <section class="kz-cta">
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Einfach Kontakt aufnehmen</h2>
+      <p class="k3-soft">
         Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben. Ich helfe Ihnen gerne weiter.
       </p>
       <a href="/kontakt/" class="btn btn--primary" data-confetti>
@@ -469,103 +471,23 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 </V2Layout>
 
 <style>
-  /* ── hero ── */
-  .kz-crumbs { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 var(--space-2); }
-  .kz-crumbs a { color: inherit; text-decoration: none; }
-  .kz-hero__sub { font-size: clamp(1.15rem, 2.2vw, 1.5rem); font-weight: 650; color: var(--ink-soft); margin: 0 0 var(--space-3); }
-
-  /* ── shared text helpers ── */
-  .kz-soft { color: var(--ink-soft); }
-  .kz-perfect { font-family: var(--font-display); font-size: 1.3rem; font-weight: 650; margin-top: var(--space-3); }
-
-  /* ── so läuft die show ab ── */
-  .kz-show :global(.sq) { margin-inline: 0; max-width: 16rem; }
+  /* page-only touches; the v3 language lives in kids-v3.css */
+  .kz-perfect { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; margin-top: var(--space-3); }
+  .kz-show :global(.kz-left) { margin-inline: 0; }
   .kz-show__label { font-weight: 800; margin-top: var(--space-3); }
-  .kz-show__list { list-style: none; margin: 0 0 var(--space-3); padding: 0; display: grid; gap: 0.5rem; font-weight: 600; }
-  .kz-show__list li {
-    padding: 0.55rem 0.9rem; background: var(--surface); border: var(--border); border-radius: var(--radius-sm);
-    box-shadow: 3px 3px 0 var(--line);
-  }
-  .kz-show__list li:nth-child(even) { rotate: 0.6deg; }
-  .kz-show__list li:nth-child(odd) { rotate: -0.4deg; }
   .kz-show__trick { font-style: italic; color: var(--ink-soft); margin-bottom: var(--space-3); }
-  .kz-show__photo { position: relative; margin: 0; justify-self: center; rotate: 2deg; }
-  .kz-show__photo :global(img) {
-    display: block; width: min(21rem, 80vw); height: auto; aspect-ratio: 1; object-fit: cover; object-position: 20%;
-    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
-  }
+  .kz-show { overflow-x: clip; } /* the glitter sparkles may poke past the phone edge */
+  .kz-show__photo { position: relative; }
   .kz-show__photo :global(.gl) { z-index: 2; }
-
-  /* ── three promises ── */
-  .kz-promises { padding-top: var(--space-4); }
-  .kz-card { text-align: center; }
-  .kz-card :global(.kz-card__img) {
-    display: block; width: 9.5rem; height: 9.5rem; margin: 0 auto var(--space-2); object-fit: cover; object-position: 20%;
-    border: var(--border); border-radius: 50%; box-shadow: 4px 4px 0 var(--line);
-  }
-  .kz-card p { color: var(--ink-soft); margin: 0; }
-
-  /* ── related services ── */
-  .kz-related { background: var(--surface); border-block: var(--border); }
-  .kz-related__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 18rem), 1fr)); margin-top: var(--space-3); }
-  .kz-related__card {
-    display: block; padding: var(--space-3); color: var(--ink); text-decoration: none;
-    background: var(--bg); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
-    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
-  }
-  .kz-related__card:nth-child(1) { rotate: -1deg; }
-  .kz-related__card:nth-child(2) { rotate: 1deg; }
-  .kz-related__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 650; margin-bottom: 0.3rem; }
-  .kz-related__text { color: var(--ink-soft); margin: 0; }
-  @media (hover: hover) and (pointer: fine) {
-    .kz-related__card:hover { transform: translate(-3px, -5px); box-shadow: var(--shadow-hover); }
-  }
-
-  /* ── stats (red band) ── */
-  .kz-stats { background: var(--brand-red); color: #fff; }
-  .kz-stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-3); }
-  .kz-stat {
-    text-align: center; padding: var(--space-3); border-radius: var(--radius);
-    background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45);
-  }
-  .kz-stat__icon { font-size: 2rem; line-height: 1; margin-bottom: 0.4rem; }
-  .kz-stat__num { font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; }
-  .kz-stat__label { font-weight: 800; margin-top: 0.3rem; }
-
-  /* ── faq: the question stays an h3 inside <summary> ── */
-  .kz-faq summary h3 { margin: 0; font-family: var(--font-body); font-size: 1.05rem; font-weight: 800; line-height: 1.35; }
-
-  /* ── planning (blue band, white cards) ── */
-  .kz-plan__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 20rem), 1fr)); margin-top: var(--space-4); text-align: left; }
-  .kz-plan__card {
-    padding: var(--space-3); color: var(--ink); background: var(--surface);
-    border: var(--border); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line);
-  }
-  .kz-plan__card:nth-child(odd) { rotate: -0.8deg; }
-  .kz-plan__card:nth-child(even) { rotate: 0.8deg; }
-  .kz-plan__card h3 { font-size: 1.3rem; margin: 0 0 var(--space-2); }
-  .kz-plan__card p { color: var(--ink-soft); margin: 0; }
-  .kz-plan .kz-plan__card strong { color: var(--ink); }
-  .kz-plan .kz-plan__card a:not(.btn) { color: var(--accent-strong); text-decoration-color: currentColor; }
-
-  /* ── story sections ── */
-  .kz-story { background: var(--surface); border-block: var(--border); }
-  .kz-steps { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: 0.6rem; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); }
-  .kz-steps li {
-    display: flex; gap: 0.6rem; align-items: flex-start; padding: 0.8rem 1rem; font-weight: 700;
-    background: var(--bg); border: var(--border); border-radius: var(--radius-sm); box-shadow: 3px 3px 0 var(--line);
-  }
-  .kz-steps li span { color: var(--accent-strong); font-weight: 900; }
-  .kz-diff__card {
-    padding: var(--space-4) var(--space-3); background: var(--surface);
-    border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow); rotate: -0.6deg;
-  }
-  .kz-diff__card p { color: var(--ink-soft); margin: 0; }
-  .kz-occasions { border-top: 0; }
-
-  /* ── reach + contact ── */
-  .kz-reach { margin-top: var(--space-3); padding: var(--space-3); background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: 4px 4px 0 var(--line); rotate: -0.8deg; }
+  .kz-promises .k3-card h3 { margin-bottom: var(--space-2); }
+  .kz-plan .k3-card { text-align: left; }
+  .kz-plan .k3-card h3 { text-align: left; font-size: 1.3rem; margin-bottom: var(--space-2); }
+  .kz-plan .k3-card p { margin: 0; }
+  .kz-story + .kz-story { padding-top: 0; }
+  .kz-reach { margin-top: var(--space-3); }
   .kz-reach p { margin-bottom: 0.4rem; font-weight: 700; }
-  .kz-reach__title { font-family: var(--font-display); font-size: 1.3rem; }
-  .kz-cta { padding-block: var(--space-5); }
+  .kz-reach .kz-reach__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; }
+  @media (min-width: 901px) {
+    .kz-steps { grid-template-columns: 1fr 1fr; }
+  }
 </style>

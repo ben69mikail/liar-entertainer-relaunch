@@ -2,16 +2,17 @@
 import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import SectionEdge from '../../../components/v2/SectionEdge.astro';
-import Bunting from '../../../components/v2/kids/Bunting.astro';
-import Squiggle from '../../../components/v2/kids/Squiggle.astro';
+import Curtain from '../../../components/v2/kids/Curtain.astro';
+import K3Hero from '../../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
 import YouTubeFacade from '../../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../../data/site';
 import { Image } from 'astro:assets';
 import karnevalHero from '../../../assets/images/clown/karneval-hero-original.jpg';
 import zaubershowKarnevalBuehne from '../../../assets/images/clown/zaubershow-karneval-buehne.jpg';
 import clownZaubererGladbeck from '../../../assets/images/clown/clown-zauberer-gladbeck.jpg';
-import '../../../styles/kids-kit.css';
+import '../../../styles/kids-v3.css';
 
 const seoTitle = 'Kinderkarneval NRW | Clown & Zauberer | Jecke Show';
 const seoDescription = 'Kinderkarneval in NRW mit Clown Zauberer LIAR ✓ Jecke Zaubershow für Karnevalssitzung & Kinderkarneval ✓ 15 Jahre Erfahrung ✓ In Ihrer Nähe ✓ Jetzt buchen!';
@@ -92,90 +93,105 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/clown/clownshow/' }, { name: 'Karneval', url: '/clown/karneval/' }]}
 >
-  <!-- ── Hero: Zirkus-Plakat in Karnevalsfarben. No reveal here (LCP). ── -->
-  <section class="kg-hero kv-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <p class="kv-crumbs">
+  <!-- ── Hero: the big-top stage (K3Hero). No reveal here (LCP). ── -->
+  <K3Hero>
+        <p class="k3-crumbs">
           <a href="/">Clown Zauberer LIAR</a> »
           <a href="/clown/clownshow/">Clown</a> »
           <span>Karneval</span>
         </p>
         <ReviewBadge />
-        <h1 class="kg-hero__title kv-hero__title" data-letters>Karneval</h1>
-        <h2 class="kv-hero__sub">
+        <h1 class="k3-hero__title kv-hero__title" data-letters>Karneval</h1>
+        <h2 class="k3-hero__sub">
           🎊 Karneval Zauberer in NRW –<br />Jecke Zaubershow für die fünfte Jahreszeit!
         </h2>
-        <p class="kv-hero__cheer">Alaaf &amp; Helau! Magie trifft Karnevalsfreude</p>
-        <div class="kg-hero__actions">
+        <p class="k3-hero__claim">Alaaf &amp; Helau! Magie trifft Karnevalsfreude</p>
+        <div class="k3-hero__actions">
           <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
           <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
-        <nav class="kg-quick" aria-label="Schnell zu den Infos">
+        <nav class="k3-quick" aria-label="Schnell zu den Infos">
           <a href="#anlaesse">Anlässe</a>
           <a href="#bewertungen">Bewertungen</a>
           <a href="#einsatzgebiet">Städte</a>
         </nav>
-      </div>
-      <figure class="kg-hero__photo">
-        <Image
-          src={karnevalHero}
-          alt="Karneval Zauberer NRW – Jecke Zaubershow für die fünfte Jahreszeit"
-          widths={[400, 700, 1000, 1400]}
-          sizes="(max-width: 900px) 92vw, 560px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 51% 39%"
-        />
-        <a class="kg-sticker kv-sticker" href="#anlaesse">
-          <span>20–45</span><strong>Min.</strong>
-        </a>
-      </figure>
-    </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={karnevalHero}
+        alt="Karneval Zauberer NRW – Jecke Zaubershow für die fünfte Jahreszeit"
+        widths={[400, 700, 1000]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
-  <section class="kg-intro">
-    <div class="container kg-intro__grid">
-      <div class="kg-intro__text" data-reveal>
-        <p class="kg-lead">
+  <section class="k3-intro">
+    <div class="container k3-split">
+      <div data-reveal>
+        <p class="k3-lead">
           Eine Karnevals-Zaubershow mit Clown Zauberer LIAR ist ein jeckes Bühnen- und Mitmachprogramm für Kinderkarneval, Karnevalssitzungen und Vereinsfeiern in NRW – im echten Karnevalskostüm, 20 bis 45 Minuten lang, für Kinder ab 4 Jahren und gemischtes Publikum, buchbar im ganzen Rheinland und Ruhrgebiet. Seit 15 Jahren bringe ich Magie und Comedy in die fünfte Jahreszeit.
         </p>
-        <p>
+        <p class="k3-soft">
           Meine Karnevals-Zaubershow kombiniert verblüffende Illusionen mit jeckem Humor und Clownerie – perfekt auf die närrische Zeit abgestimmt. Alle Details zu meiner regulären <a href="/zauberer/zaubershow/">Zaubershow</a> finden Sie auf der entsprechenden Seite. Ob für Kinderkarnevalsfeiern in Kitas und Schulen, Vereinssitzungen oder Straßenkarneval: Ich sorge für staunende Gesichter und ausgelassene Stimmung!
         </p>
-        <div class="kv-tip">
+        <div class="k3-panel kv-tip">
           <p class="kv-tip__title">⚠️ TIPP: Buchen Sie früh!</p>
           <p class="kv-tip__text">Die Karnevalszeit (vor allem die „heißen Tage" von Weiberfastnacht bis Rosenmontag) ist sehr gefragt. Sichern Sie sich Ihren Wunschtermin idealerweise schon im Herbst!</p>
         </div>
       </div>
-      <figure class="kv-photo" data-reveal="pop" data-reveal-delay="0.1">
+      <ProgramFrame class="k3-photo" data-reveal data-reveal-delay="0.1">
         <Image
           src={zaubershowKarnevalBuehne}
           alt="Zaubershow auf einer Bühne für Karneval in Gladbeck"
-          data-scroll-tilt="3"
           widths={[400, 600, 800]}
-          sizes="(max-width: 900px) 92vw, 420px"
+          sizes="(max-width: 900px) 80vw, 320px"
           loading="lazy"
         />
-      </figure>
+      </ProgramFrame>
+    </div>
+  </section>
+
+  <!-- ── Zahlen: the velvet ring ───────────────────────────── -->
+  <section class="k3-band k3-band--velvet">
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-stats">
+        <div class="k3-stat" data-reveal>
+          <div class="k3-stat__icon">🪄</div>
+          <div class="k3-stat__num" data-count>400</div>
+          <div class="k3-stat__label">Shows im Jahr</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.08">
+          <div class="k3-stat__icon">😊</div>
+          <div class="k3-stat__num">110.000</div>
+          <div class="k3-stat__label">Lachende Kinder</div>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.16">
+          <div class="k3-stat__icon">🪄</div>
+          <div class="k3-stat__num" data-count>15</div>
+          <div class="k3-stat__label">Jahre Erfahrung</div>
+        </div>
+      </div>
     </div>
   </section>
 
   <Reviews />
 
-  <!-- ── Warum Zauberei & Karneval: confetti-strewn floor ──── -->
+  <!-- ── Warum Zauberei & Karneval ─────────────────────────── -->
   <section class="kv-why">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>🎪 Warum eine Zaubershow perfekt zu Karneval passt</h2>
-      <div class="kg-cards kv-why__grid">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>🎪 Warum eine Zaubershow perfekt zu Karneval passt</h2>
+      <div class="k3-cards kv-why__grid">
         {besonderheiten.map((b, i) => (
           <article
-            class:list={['kg-card', 'kv-why__card', ['kg-card--red', 'kg-card--blue', 'kg-card--yellow'][i % 3]]}
-            data-reveal="pop"
-            data-reveal-delay={i ? String(i / 10) : undefined}
+            class="k3-card kv-why__card"
+            data-reveal
+            data-reveal-delay={i ? String(i * 0.08) : undefined}
           >
             <p class="kv-icon">{b.icon}</p>
             <h3>{b.title}</h3>
@@ -183,7 +199,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           </article>
         ))}
       </div>
-      <div class="kv-why__note" data-reveal="tilt">
+      <div class="k3-panel kv-why__note" data-reveal>
         <p>
           Karneval ist die Zeit der Verwandlung, des Staunens und der ausgelassenen Freude – und genau das ist auch Zauberkunst! Meine Karnevals-<a href="/zauberer/zaubershow/">Zaubershow</a> bringt diese beiden Welten zusammen. Mit karnevalsgerechtem Kostüm, jeckem Humor und Tricks, die die närrische Stimmung aufgreifen, wird jede Karnevalsveranstaltung zum Highlight.
         </p>
@@ -191,41 +207,20 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Zahlen (red band) ─────────────────────────────────── -->
-  <section class="kg-band kv-stats">
-    <SectionEdge color="var(--brand-red)" side="top" />
-    <SectionEdge color="var(--brand-red)" side="bottom" />
-    <div class="container kv-stats__grid">
-      <div class="kv-stat" data-reveal="pop">
-        <div class="kv-stat__icon">🪄</div>
-        <div class="kv-stat__num" data-count>400</div>
-        <div class="kv-stat__label">Shows im Jahr</div>
-      </div>
-      <div class="kv-stat" data-reveal="pop" data-reveal-delay="0.08">
-        <div class="kv-stat__icon">😊</div>
-        <div class="kv-stat__num">110.000</div>
-        <div class="kv-stat__label">Lachende Kinder</div>
-      </div>
-      <div class="kv-stat" data-reveal="pop" data-reveal-delay="0.16">
-        <div class="kv-stat__icon">🪄</div>
-        <div class="kv-stat__num" data-count>15</div>
-        <div class="kv-stat__label">Jahre Erfahrung</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="kv-occasions" id="anlaesse">
+  <!-- ── Anlässe: the two formats under a red and a blue spotlight ── -->
+  <section class="k3-extras k3-band k3-band--spot kv-occasions" id="anlaesse">
+    <span class="k3-spot k3-spot--red" aria-hidden="true"></span>
+    <span class="k3-spot k3-spot--blue" aria-hidden="true"></span>
     <div class="container">
-      <Squiggle color="var(--brand-blue)" />
-      <h2 class="kg-h2 kg-center" data-reveal>🎭 Karnevals-Zaubershow für jeden Anlass</h2>
-      <div class="kv-occasions__grid">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>🎭 Karnevals-Zaubershow für jeden Anlass</h2>
+      <div class="k3-extras__grid kv-occasions__grid">
         {anlaesse.map((a, i) => (
-          <article class="kv-occasion" data-reveal="pop" data-reveal-delay={i ? '0.1' : undefined}>
+          <article class="k3-extra kv-occasion" data-reveal data-reveal-delay={i ? '0.08' : undefined}>
             <p class="kv-icon">{a.icon}</p>
             <h3>{a.title}</h3>
             <p class="kv-occasion__desc">{a.desc}</p>
-            <div class="kv-chips">
+            <div class="k3-chips kv-chips">
               {a.details.map(d => (
                 <p class="kv-chip">{d}</p>
               ))}
@@ -242,16 +237,18 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Video (yellow band) ───────────────────────────────── -->
-  <section class="kg-band kg-band--yellow">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal="pop">
+  <!-- ── Video: Hollywood premiere searchlights, curtain with tie-backs ── -->
+  <section class="k3-band k3-band--night k3-premiere">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" label="Zaubershow ansehen" />
       </div>
-      <h3 class="kg-h3">
+      <h3 class="k3-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
       <a href="/galerie/" class="btn btn--primary">
@@ -261,33 +258,33 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
-  <section class="kg-area" id="einsatzgebiet">
+  <section class="k3-area k3-alt" id="einsatzgebiet">
     <div class="container">
-      <div class="kg-area__grid">
-        <div class="kg-area__text" data-reveal>
-          <h2 class="kg-h2">📍 Einsatzgebiet Karneval</h2>
+      <GoldDivider />
+      <div class="k3-area__grid">
+        <div data-reveal>
+          <h2 class="k3-h2">📍 Einsatzgebiet Karneval</h2>
           <p>
             Für Karneval bin ich in folgenden Städten NRWs unterwegs:
           </p>
-          <p class="kg-cities">
+          <p class="k3-cities">
             Oberhausen • Gelsenkirchen • Essen • Duisburg • Dorsten • Herten • Herne • Marl • Gladbeck • Mülheim • Düsseldorf • Dortmund • Lünen • Hagen • Moers • Krefeld • Reken • Ahaus • Münster • Köln
           </p>
           <p>
             🌍 Für besondere Karnevalsveranstaltungen bin ich auch außerhalb NRWs buchbar – in ganz Deutschland und sogar international für Karnevalsfeiern!
           </p>
-          <div class="kv-reach">
+          <div class="k3-panel kv-reach">
             <p>📱 Telefon & WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>
             <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
             <p>📍 Standort: Beethovenstr. 15, 45966 Gladbeck</p>
           </div>
         </div>
-        <figure class="kg-area__map" data-reveal="pop">
+        <figure class="k3-area__map" data-reveal>
           <Image
             src={clownZaubererGladbeck}
             alt="Wohnort Clown Zauberer für Karneval"
-            data-scroll-tilt="2"
             widths={[400, 600, 800]}
-            sizes="(min-width: 768px) 50vw, 100vw"
+            sizes="(max-width: 900px) 86vw, 460px"
             loading="lazy"
           />
         </figure>
@@ -295,11 +292,11 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── CTA: a closing parade ─────────────────────────────── -->
+  <!-- ── CTA ───────────────────────────────────────────────── -->
   <section class="kv-cta">
-    <Bunting />
-    <div class="container kg-narrow kg-center" data-reveal>
-      <h2 class="kg-h2">Jetzt Karneval-Zauberer buchen!</h2>
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Jetzt Karneval-Zauberer buchen!</h2>
       <p class="kv-cta__lead">Ob Kinderkarneval, Vereinssitzung oder Karnevalsfeier – machen Sie Ihre Veranstaltung mit einer jecken Zaubershow unvergesslich!</p>
       <p class="kv-cta__text">
         Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten. Sie können auch einfach unter 0172-1517578 anrufen oder über WhatsApp schreiben. Ich helfe Ihnen gerne weiter.
@@ -313,94 +310,35 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 </V2Layout>
 
 <style>
-  /* Karneval confetti: three colour layers of small dots, purely CSS, behind the content */
-  .kv-why, .kv-cta {
-    --confetti:
-      radial-gradient(circle at 20% 30%, color-mix(in srgb, var(--brand-red) 45%, transparent) 0 0.3rem, transparent 0.34rem) 0 0 / 6rem 6rem,
-      radial-gradient(circle at 65% 55%, color-mix(in srgb, var(--brand-blue) 40%, transparent) 0 0.26rem, transparent 0.3rem) 0 0 / 7.5rem 7.5rem,
-      radial-gradient(circle at 40% 85%, color-mix(in srgb, var(--brand-yellow) 70%, transparent) 0 0.32rem, transparent 0.36rem) 0 0 / 5.5rem 5.5rem;
-  }
+  /* page-only touches; the v3 language lives in kids-v3.css */
+  .kv-hero__title { font-size: clamp(3.2rem, 9vw, 6rem); line-height: 0.95; }
 
-  /* ── hero ── */
-  .kv-crumbs { font-size: 0.85rem; font-weight: 700; color: var(--ink-soft); margin: 0 0 var(--space-2); }
-  .kv-crumbs a { color: inherit; text-decoration: none; }
-  .kv-hero__title { font-size: clamp(3.2rem, 9vw, 6.2rem); line-height: 0.95; color: var(--accent-strong); }
-  .kv-hero__sub { font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 650; margin: 0 0 var(--space-2); }
-  .kv-hero__cheer {
-    display: inline-block; padding: 0.3rem 0.9rem; margin-bottom: var(--space-3);
-    font-family: var(--font-display); font-weight: 650; font-size: 1.1rem;
-    background: var(--brand-yellow); color: var(--ink); border: 2.5px solid var(--line); border-radius: 0.6rem; rotate: -2deg;
-  }
-  .kv-sticker span { font-family: var(--font-display); font-size: 1.35rem; }
-  .kv-sticker strong { font-size: 1.15rem; font-family: var(--font-body); font-weight: 800; }
+  /* intro */
+  .kv-tip { margin-top: var(--space-3); padding: var(--space-3); box-shadow: inset 3px 0 0 var(--velvet), inset 0 0 0 1px rgba(184, 134, 47, 0.45), var(--shadow); }
+  .kv-tip .kv-tip__title { font-weight: 800; margin-bottom: 0.3rem; }
+  .kv-tip .kv-tip__text { font-size: 0.97rem; margin: 0; }
 
-  /* ── intro ── */
-  .kv-tip {
-    margin-top: var(--space-3); padding: var(--space-2) var(--space-3);
-    background: color-mix(in srgb, var(--brand-yellow) 35%, var(--surface));
-    border: var(--border); border-radius: var(--radius-sm); box-shadow: 4px 4px 0 var(--line); rotate: -1deg;
-  }
-  .kv-tip__title { font-weight: 800; margin-bottom: 0.3rem; }
-  .kg-intro__text .kv-tip__text { color: var(--ink); font-size: 0.97rem; margin: 0; }
-  .kv-photo { margin: 0; justify-self: center; rotate: 2deg; }
-  .kv-photo :global(img) {
-    display: block; width: min(26rem, 88vw); height: auto;
-    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
-  }
-
-  /* ── why ── */
-  .kv-why { background: var(--confetti), var(--bg); }
-  .kv-why__grid { margin-top: var(--space-4); }
+  /* why */
   .kv-why__card { text-align: center; }
-  .kv-icon { font-size: 2.2rem; line-height: 1; margin-bottom: var(--space-1); }
-  .kv-why__text { color: var(--ink-soft); margin: 0; font-size: 0.98rem; }
-  .kv-why__note {
-    max-width: 52rem; margin: var(--space-5) auto 0; padding: var(--space-3); text-align: center;
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
-  }
-  .kv-why__note p { margin: 0; color: var(--ink-soft); }
+  .kv-icon { font-size: 2.2rem; line-height: 1; margin-bottom: var(--space-1) !important; }
+  .kv-why__card h3 { margin-bottom: var(--space-2); }
+  .kv-why__card .kv-why__text { margin: 0; font-size: 0.98rem; }
+  .kv-why__note { max-width: 52rem; margin: var(--space-5) auto 0; text-align: center; }
+  .kv-why__note p { color: var(--ink-soft); }
 
-  /* ── stats (red band) ── */
-  .kv-stats { background: var(--brand-red); color: #fff; }
-  .kv-stats__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 14rem), 1fr)); gap: var(--space-3); }
-  .kv-stat {
-    text-align: center; padding: var(--space-3); border-radius: var(--radius);
-    background: rgba(255, 255, 255, 0.12); border: 2px dashed rgba(255, 255, 255, 0.45);
-  }
-  .kv-stat__icon { font-size: 2rem; line-height: 1; margin-bottom: 0.4rem; }
-  .kv-stat__num { font-family: var(--font-display); font-size: clamp(2.6rem, 6vw, 3.6rem); font-weight: 700; line-height: 1; }
-  .kv-stat__label { font-weight: 800; margin-top: 0.3rem; }
-
-  /* ── occasions ── */
-  .kv-occasions__grid { display: grid; gap: var(--space-4) var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); margin-top: var(--space-4); }
-  .kv-occasion {
-    padding: var(--space-3); background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
-    transition: transform 0.35s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
-  }
-  .kv-occasion:nth-child(1) { rotate: -1deg; }
-  .kv-occasion:nth-child(2) { rotate: 1deg; }
-  .kv-occasion h3 { font-size: 1.5rem; margin: 0 0 var(--space-2); }
-  .kv-occasion__desc { color: var(--ink-soft); }
-  .kv-chips { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: var(--space-2); }
-  .kv-chips .kv-chip {
-    margin: 0; padding: 0.25rem 0.75rem; font-size: 0.88rem; font-weight: 700;
-    background: var(--bg); border: 2px dashed var(--line); border-radius: 999px;
-  }
-  .kv-occasion__label { font-weight: 800; margin-bottom: 0.4rem; }
+  /* occasions: two light programme sheets under the spotlights */
+  .kv-occasion h3 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 600; margin: 0 0 var(--space-2); }
+  .kv-chips { justify-content: flex-start; margin: 0 0 var(--space-2); }
+  .kv-chips .kv-chip { font-size: 0.88rem; background: var(--bg); }
+  .kv-occasion .kv-occasion__label { font-weight: 800; color: var(--ink); margin-bottom: 0.4rem; }
   .kv-occasion__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.35rem; font-size: 0.97rem; }
   .kv-occasion__list li { display: flex; gap: 0.5rem; }
-  .kv-occasion__list li span { color: var(--accent-strong); font-weight: 900; }
-  @media (hover: hover) and (pointer: fine) {
-    .kv-occasion:hover { transform: translate(-3px, -6px) rotate(0.6deg); box-shadow: var(--shadow-hover); }
-  }
+  .kv-occasion__list li span { color: var(--gold); font-weight: 900; }
 
-  /* ── area ── */
-  .kv-reach { margin-top: var(--space-3); padding: var(--space-3); background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: 4px 4px 0 var(--line); rotate: -0.8deg; }
-  .kv-reach p { margin-bottom: 0.4rem; font-weight: 700; color: var(--ink); }
-
-  /* ── cta ── */
-  .kv-cta { background: var(--confetti), var(--surface); border-top: var(--border); padding-top: 0; }
-  .kv-cta__lead { font-family: var(--font-display); font-size: 1.25rem; font-weight: 650; }
+  /* area + cta */
+  .kv-reach { margin-top: var(--space-3); }
+  .kv-reach p { margin-bottom: 0.4rem; font-weight: 700; }
+  .kv-cta__lead { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; }
   .kv-cta__text { color: var(--ink-soft); font-size: 0.98rem; }
   .kv-cta__hint { color: var(--accent-strong); font-weight: 800; }
 </style>

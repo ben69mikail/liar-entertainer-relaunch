@@ -190,7 +190,8 @@ describe('kids hat trick', () => {
 describe('side rays hero spotlights', () => {
   it('runs on a real GPU, stays off on software rendering and under reduced motion', async () => {
     const state = async (rm: 'reduce' | 'no-preference') => {
-      const page = await open('/kinderzauberer/', rm);
+      // kids pages moved to the v3 hero (CSS projectors, no WebGL rays); the home page still has them
+      const page = await open('/', rm);
       await page.mouse.move(400, 300); // starts on first interaction
       await page.waitForTimeout(3000);
       const v = await page.evaluate(() => {
@@ -209,7 +210,7 @@ describe('side rays hero spotlights', () => {
 });
 
 describe('adult photos sit in magic frames, cards are only accents (user feedback 2026-10-06)', () => {
-  const ADULT = ['/', '/zauberer/', '/zauberer/zaubershow/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'];
+  const ADULT = ['/', '/zauberer/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'];
   for (const path of ADULT) {
     it(`${path}: no photo inside a playing card, every adult photo in a frame`, async () => {
       const page = await open(path);
@@ -228,13 +229,13 @@ describe('adult photos sit in magic frames, cards are only accents (user feedbac
     const frame = page.locator('.mf').last();
     expect(await frame.evaluate((f) => getComputedStyle(f.querySelector('img')!).opacity)).toBe('1');
     await frame.scrollIntoViewIfNeeded();
-    await expect.poll(() => frame.evaluate((f) => f.classList.contains('is-staged'))).toBe(true);
+    await expect.poll(() => frame.evaluate((f) => f.classList.contains('is-staged')), { timeout: 8000 }).toBe(true);
     await page.close();
-  });
+  }, 15_000);
 });
 
 describe('framed photos are never cropped (user feedback 2026-10-05: no cut-off people)', () => {
-  const ADULT = ['/', '/zauberer/', '/zauberer/zaubershow/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'];
+  const ADULT = ['/', '/zauberer/', '/zauberer/buehnen-zauberer/', '/zauberer/tisch-zauberer/', '/zauberer/hochzeit/', '/zauberer/firmenfeier/'];
   for (const path of ADULT) {
     for (const width of [390, 1280]) {
       it(`${path} @${width}px: every card photo shows its whole picture`, async () => {

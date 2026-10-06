@@ -2,10 +2,13 @@
 import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import MagicFrame from '../../../components/v2/adult/MagicFrame.astro';
-import SuitRule from '../../../components/v2/adult/SuitRule.astro';
+import K3Hero from '../../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
+import Curtain from '../../../components/v2/kids/Curtain.astro';
+import HatTrick from '../../../components/v2/kids/HatTrick.astro';
 import YouTubeFacade from '../../../components/YouTubeFacade.astro';
-import '../../../styles/adult-kit.css';
+import '../../../styles/kids-v3.css';
 import { Image } from 'astro:assets';
 import heroImg from '../../../assets/images/zauberer/zaubershow-hero.jpg';
 import staunendeKinderImg from '../../../assets/images/zauberer/zaubershow-staunende-kinder.jpg';
@@ -98,52 +101,42 @@ const whyUs = [
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Zauberer', url: '/zauberer/' }, { name: 'Zaubershow', url: '/zauberer/zaubershow/' }]}
 >
-  <!-- ── Hero: the show photo in its magic frame ── -->
-  <section class="ce-hero ce-hero--stage zs-hero">
-    <div class="container ce-hero__grid zs-hero__grid">
-      <div class="ce-hero__copy">
-        <p class="ce-crumbs">
-          <a href="/">Clown</a> »
-          <a href="/">Clown Zauberer LIAR</a> »
-          <a href="/zauberer/">Zauberer</a> »
-          <span>Zaubershow</span>
-        </p>
-        <h1 class="ce-hero__title"><em>Zaubershow</em> in NRW – für Kinder &amp; die ganze Familie</h1>
-        <SuitRule />
-        <h2 class="ce-hero__sub">
-          ✨ Die Zaubershow –<br />Wo Magie auf Lachen trifft! 🎭
-        </h2>
-        <p class="ce-hero__claim">Flexible. Professionell. Unvergesslich.</p>
-        <p class="ce-hero__claim ce-hero__claim--soft zs-hero__lead">
-          Eine Zaubershow für Kinder bei Clown Zauberer LIAR dauert ca. 40 Minuten und ist für Kinder ab 4 Jahren geeignet – interaktiv, lustig und in ganz NRW (Ruhrgebiet, Rheinland, Münsterland) für Kindergeburtstag, Kita, Schule und Stadtfest. 370+ Top-Bewertungen.
-        </p>
-        <div class="ce-hero__actions">
-          <a class="btn btn--primary" href="/kontakt/" data-magnetic>Unverbindlich anfragen</a>
-          <ReviewBadge />
-        </div>
-      </div>
-
-      <div class="ce-spot">
-        <span class="ce-spot__beam" aria-hidden="true"></span>
-        <div class="ce-hero__frame ce-spot__frame">
-          <MagicFrame corner="tr" rank="A" suit="♥" data-tilt>
-            <Image
-              src={heroImg}
-              alt="Zaubershow NRW – Interaktiv & Lustig für Kinder"
-              widths={[400, 600, 900, 1200]}
-              sizes="(max-width: 900px) 80vw, 500px"
-              loading="eager"
-              fetchpriority="high"
-            />
-          </MagicFrame>
-        </div>
-      </div>
+  <!-- ── Hero: the big top, kids v3. No reveal here (LCP). ── -->
+  <K3Hero>
+    <p class="k3-crumbs">
+      <a href="/">Clown</a> »
+      <a href="/">Clown Zauberer LIAR</a> »
+      <a href="/zauberer/">Zauberer</a> »
+      <span>Zaubershow</span>
+    </p>
+    <ReviewBadge />
+    <h1 class="k3-hero__title" data-letters><span class="k3-mark">Zaubershow</span> in NRW – für Kinder &amp; die ganze Familie</h1>
+    <h2 class="zs-hero__sub">
+      ✨ Die Zaubershow –<br />Wo Magie auf Lachen trifft! 🎭
+    </h2>
+    <p class="zs-hero__claim">Flexible. Professionell. Unvergesslich.</p>
+    <p class="zs-hero__lead">
+      Eine Zaubershow für Kinder bei Clown Zauberer LIAR dauert ca. 40 Minuten und ist für Kinder ab 4 Jahren geeignet – interaktiv, lustig und in ganz NRW (Ruhrgebiet, Rheinland, Münsterland) für Kindergeburtstag, Kita, Schule und Stadtfest. 370+ Top-Bewertungen.
+    </p>
+    <div class="k3-hero__actions">
+      <a class="btn btn--primary" href="/kontakt/" data-confetti>Unverbindlich anfragen</a>
     </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={heroImg}
+        alt="Zaubershow NRW – Interaktiv & Lustig für Kinder"
+        widths={[400, 700, 1000]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
-  <section class="ce-intro">
-    <div class="container ce-narrow ce-center">
+  <section>
+    <div class="container k3-narrow k3-center">
       <p class="zs-intro" data-reveal>
         Stellen Sie sich vor: Kinderaugen leuchten, kleine Münder stehen vor Staunen offen, plötzlich bricht schallendes Gelächter aus – und im nächsten Moment herrscht wieder ehrfürchtige Stille. Das ist meine Zaubershow! Eine perfekte Symbiose aus verblüffender Zauberei und herzerfrischender Clownerie, die Kinder (und Erwachsene!) gleichermaßen begeistert. Besonders beliebt ist die Show auf dem <a href="/kindergeburtstag/">Kindergeburtstag</a> – als erfahrener <a href="/kinderzauberer/">Kinderzauberer</a> weiß ich genau, wie man kleine Zuschauer begeistert. 🌟
       </p>
@@ -154,21 +147,20 @@ const whyUs = [
   </section>
 
   <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="ce-occasions" data-related-services>
-    <div class="container ce-narrow">
-      <h2 class="ce-h2 ce-center">
+  <section class="k3-alt" data-related-services>
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">
         Für welche Anlässe kann man Zauberer LIAR sonst buchen?
       </h2>
-      <div class="ce-occasions__grid">
-        <a href="/zauberer/hochzeit/" class="ce-occasion" data-reveal="deal" data-tilt>
-          <span class="ce-occasion__suit ce-red" aria-hidden="true">♥</span>
-          <p class="ce-occasion__title">Zauberer für die Hochzeit</p>
-          <p class="ce-occasion__text">Close-up-Zauberei am Tisch, beim Sektempfang und während der Fotosession.</p>
+      <div class="zs-occasions">
+        <a href="/zauberer/hochzeit/" class="k3-card zs-occasion" data-reveal>
+          <p class="zs-occasion__title">Zauberer für die Hochzeit</p>
+          <p class="zs-occasion__text">Close-up-Zauberei am Tisch, beim Sektempfang und während der Fotosession.</p>
         </a>
-        <a href="/zauberer/firmenfeier/" class="ce-occasion" data-reveal="deal" data-reveal-delay="0.12" data-tilt>
-          <span class="ce-occasion__suit" aria-hidden="true">♠</span>
-          <p class="ce-occasion__title">Zauberer für die Firmenfeier</p>
-          <p class="ce-occasion__text">Walk-Act zwischen den Tischen oder Bühnenshow für Betriebsfeier und Jubiläum.</p>
+        <a href="/zauberer/firmenfeier/" class="k3-card zs-occasion" data-reveal data-reveal-delay="0.08">
+          <p class="zs-occasion__title">Zauberer für die Firmenfeier</p>
+          <p class="zs-occasion__text">Walk-Act zwischen den Tischen oder Bühnenshow für Betriebsfeier und Jubiläum.</p>
         </a>
       </div>
     </div>
@@ -177,27 +169,26 @@ const whyUs = [
   <Reviews />
 
   <!-- ── Einzigartig ───────────────────────────────────────── -->
-  <section class="zs-unique">
+  <section>
     <div class="container">
-      <h2 class="ce-h2 ce-center">🎪 Was macht meine Zaubershow einzigartig?</h2>
-      <SuitRule />
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">🎪 Was macht meine Zaubershow einzigartig?</h2>
       <div class="zs-unique__grid">
-        <div class="zs-unique__photo" data-reveal="deal">
-          <MagicFrame corner="tl" rank="Q" suit="♦" class="zs-unique__card" data-scroll-tilt="2" style="--sheen-delay: 2.6s">
-            <Image
-              src={staunendeKinderImg}
-              alt="Staunende Kinder bei einer Zaubershow in NRW"
-              widths={[400, 700]}
-              sizes="(max-width: 900px) 80vw, 360px"
-              loading="lazy"
-            />
-          </MagicFrame>
-        </div>
+        <ProgramFrame class="zs-unique__photo" data-reveal>
+          <Image
+            src={staunendeKinderImg}
+            alt="Staunende Kinder bei einer Zaubershow in NRW"
+            widths={[400, 700]}
+            quality={60}
+            sizes="(max-width: 900px) 80vw, 360px"
+            loading="lazy"
+          />
+        </ProgramFrame>
         <div>
-          <p class="ce-soft" data-reveal>
+          <p class="zs-soft" data-reveal>
             In über 15 Jahren als Clown Zauberer und Kinderzauberer im Ruhrgebiet und ganz NRW habe ich eine Zaubershow entwickelt, die anders ist als klassische Zaubervorführungen. Hier geht es nicht um einen Zauberer auf der Bühne, der Tricks vorführt, während Kinder brav zuschauen. Nein – hier werden die Kinder selbst zu Zauberern! 🎩 Ob <a href="/kindergeburtstag/">Kindergeburtstag</a>, Kita-Fest oder Schulveranstaltung – die Zaubershow passt sich jedem Anlass an. Entdecken Sie auch meine speziellen Angebote für <a href="/zauberer/zaubershow/kindergarten-kita/">Kindergärten und Kitas</a>, <a href="/zauberer/zaubershow/schule/">Schulveranstaltungen</a> und <a href="/zauberer/zaubershow/strassen-sommer-fest/">Straßen- und Sommerfeste</a>.
           </p>
-          <h3 class="zs-h3">Perfekt für:</h3>
+          <h3 class="k3-h3">Perfekt für:</h3>
           <div class="zs-checks">
             {[
               'Stadtfeste & Straßenfeste',
@@ -224,17 +215,18 @@ const whyUs = [
     </div>
   </section>
 
-  <!-- ── 5 Säulen: the show's programme, dealt as five cards ── -->
-  <section class="zs-pillars">
+  <!-- ── 5 Säulen: the ring, red velvet, with the hat trick ── -->
+  <section class="k3-band k3-band--velvet">
     <div class="container">
-      <h2 class="ce-h2 ce-center">⭐ Die 5 Säulen meiner Zaubershow:</h2>
+      <HatTrick />
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">⭐ Die 5 Säulen meiner Zaubershow:</h2>
       <div class="zs-pillars__grid">
         {pillars.map((pillar, i) => (
-          <article class="zs-pillar" data-reveal="deal" data-reveal-delay={i * 0.1} data-tilt>
+          <article class:list={['k3-card', 'zs-pillar', { 'k3-card--star': i === 0 }]} data-reveal data-reveal-delay={(i % 3) * 0.08}>
             <span class="zs-pillar__num">{pillar.num}</span>
-            <span class:list={['zs-pillar__suit', { 'ce-red': i % 2 }]} aria-hidden="true">{['♠', '♥', '♣', '♦', '♠'][i]}</span>
             <h3>{pillar.title}</h3>
-            <p class="ce-soft">{pillar.text}</p>
+            <p class="zs-soft">{pillar.text}</p>
           </article>
         ))}
       </div>
@@ -242,12 +234,13 @@ const whyUs = [
   </section>
 
   <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="zs-why">
-    <div class="container ce-narrow">
-      <h2 class="ce-h2 ce-center">🎪 Warum LIAR als Ihr Zauber-Entertainer?</h2>
+  <section>
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">🎪 Warum LIAR als Ihr Zauber-Entertainer?</h2>
       <div class="zs-why__grid">
         {whyUs.map((reason, i) => (
-          <div class="zs-why__item" data-reveal="tilt" data-reveal-delay={(i % 2) * 0.07}>
+          <div class="zs-why__item" data-reveal data-reveal-delay={(i % 2) * 0.07}>
             <span class="zs-why__mark">✅</span>
             <p>{reason}</p>
           </div>
@@ -259,11 +252,12 @@ const whyUs = [
     </div>
   </section>
 
-  <!-- ── Bewertungen (inline, legacy wording) ──────────────── -->
-  <section class="zs-guest">
+  <!-- ── Bewertungen (inline, legacy wording), programme cards ── -->
+  <section class="k3-alt">
     <div class="container">
-      <div class="zs-guest__head ce-center">
-        <p class="zs-guest__label">AUSGEZEICHNET</p>
+      <GoldDivider />
+      <div class="k3-center">
+        <p class="k3-kicker">AUSGEZEICHNET</p>
         <p class="zs-stars" aria-hidden="true">★★★★★</p>
         <p class="zs-guest__count">Basierend auf 370+ Bewertungen</p>
       </div>
@@ -274,7 +268,7 @@ const whyUs = [
           { initials: 'TA', color: '#2196f3', name: 'Thorsten Andres', date: 'vor 2 Monaten', text: 'Was ein geiler Typ! Mit viel Witz, Charme und Humor im Herzen ❤️' },
           { initials: 'NK', color: '#ff9800', name: 'Nina Keller', date: 'vor 2 Monaten', text: 'Mit unglaublich viel Charme und Humor begeistert Michael die kleinen UND die großen Zuschauer. Ganz große Klasse 🤩' },
         ].map((review, i) => (
-          <figure class="zs-guest__card" data-reveal="deal" data-reveal-delay={i * 0.08}>
+          <figure class="k3-card zs-guest__card" data-reveal data-reveal-delay={i * 0.08}>
             <div class="zs-guest__who">
               <div class="zs-guest__avatar" style={`background-color: ${review.color};`}>
                 {review.initials}
@@ -285,98 +279,101 @@ const whyUs = [
               </div>
             </div>
             <p class="zs-stars zs-stars--small" aria-hidden="true">★★★★★</p>
-            <p class="ce-soft zs-guest__text">{review.text}</p>
+            <p class="zs-soft zs-guest__text">{review.text}</p>
           </figure>
         ))}
       </div>
     </div>
   </section>
 
-  <!-- ── Video ─────────────────────────────────────────────── -->
-  <section class="zs-video">
-    <div class="container ce-narrow">
-      <h2 class="ce-h2 ce-center">🎬 Die Zaubershow in Aktion</h2>
-      <div class="zs-video__frame" data-reveal>
+  <!-- ── Video: Hollywood premiere, curtain in front ───────── -->
+  <section class="k3-band k3-band--night k3-premiere">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">🎬 Die Zaubershow in Aktion</h2>
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" label="Zaubershow ansehen" />
       </div>
     </div>
   </section>
 
-  <!-- ── Einsatzgebiet ─────────────────────────────────────── -->
-  <section class="ce-area">
+  <!-- ── Einsatzgebiet (map without frame) ─────────────────── -->
+  <section class="k3-area">
     <div class="container">
-      <h2 class="ce-h2 ce-center">Zaubershow in ganz NRW – Ihre Regionen</h2>
-      <p class="ce-center ce-soft">Als professioneller Zauberer bin ich in ganz Nordrhein-Westfalen und darüber hinaus für Ihre Veranstaltung buchbar.</p>
-      <div class="ce-area__grid">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">Zaubershow in ganz NRW – Ihre Regionen</h2>
+      <p class="k3-center zs-soft">Als professioneller Zauberer bin ich in ganz Nordrhein-Westfalen und darüber hinaus für Ihre Veranstaltung buchbar.</p>
+      <div class="k3-area__grid">
         <div class="zs-regions">
-          <h3>Ruhrgebiet</h3>
-          <p class="ce-soft">Oberhausen, Essen, Duisburg, Mülheim, Gelsenkirchen, Bochum, Dortmund, Bottrop, Gladbeck, Herten, Herne, Marl, Recklinghausen, Castrop-Rauxel, Waltrop</p>
-          <h3>Rheinland</h3>
-          <p class="ce-soft">Düsseldorf, Krefeld, Moers, Neuss, Köln, Leverkusen, Mönchengladbach</p>
-          <h3>Münsterland</h3>
-          <p class="ce-soft">Münster, Haltern am See, Dorsten, Coesfeld, Dülmen</p>
-          <h3>Weitere Städte</h3>
-          <p class="ce-soft">Ahaus, Reken, Lünen, Hagen, Witten und viele mehr</p>
-          <p class="ce-soft">🌍 Auf Anfrage auch deutschlandweit sowie in Belgien, Niederlande, Frankreich, Österreich und der Schweiz buchbar!</p>
+          <h3 class="k3-h3">Ruhrgebiet</h3>
+          <p class="k3-cities">Oberhausen, Essen, Duisburg, Mülheim, Gelsenkirchen, Bochum, Dortmund, Bottrop, Gladbeck, Herten, Herne, Marl, Recklinghausen, Castrop-Rauxel, Waltrop</p>
+          <h3 class="k3-h3">Rheinland</h3>
+          <p class="k3-cities">Düsseldorf, Krefeld, Moers, Neuss, Köln, Leverkusen, Mönchengladbach</p>
+          <h3 class="k3-h3">Münsterland</h3>
+          <p class="k3-cities">Münster, Haltern am See, Dorsten, Coesfeld, Dülmen</p>
+          <h3 class="k3-h3">Weitere Städte</h3>
+          <p class="k3-cities">Ahaus, Reken, Lünen, Hagen, Witten und viele mehr</p>
+          <p class="zs-soft">🌍 Auf Anfrage auch deutschlandweit sowie in Belgien, Niederlande, Frankreich, Österreich und der Schweiz buchbar!</p>
         </div>
-        <div class="ce-area__map" data-reveal="deal">
-          <MagicFrame corner="br" rank="9" suit="♠" data-scroll-tilt="2" style="--sheen-delay: 3.4s">
-            <Image
-              src={karteImg}
-              alt="Einsatzgebiet Zaubershow in NRW – Karte mit Standort Gladbeck"
-              loading="lazy"
-              widths={[400, 800]}
-              sizes="(max-width: 768px) 90vw, 45vw"
-            />
-          </MagicFrame>
-        </div>
+        <figure class="k3-area__map">
+          <Image
+            src={karteImg}
+            alt="Einsatzgebiet Zaubershow in NRW – Karte mit Standort Gladbeck"
+            loading="lazy"
+            widths={[400, 800]}
+            sizes="(max-width: 900px) 86vw, 460px"
+          />
+        </figure>
       </div>
     </div>
   </section>
 
-  <!-- ── Buchen: ink band, three cards turned over ─────────── -->
-  <section class="ce-steps zs-book">
-    <div class="container ce-narrow-wide ce-center">
-      <h2 class="ce-h2">📞 Jetzt Zaubershow buchen!</h2>
-      <p class="zs-book__claim">✨ Bereit für magische Momente?</p>
-      <p class="ce-soft ce-narrow">
+  <!-- ── Buchen: dark stage, red + blue light, three programme cards ── -->
+  <section class="k3-band k3-band--spot">
+    <span class="k3-spot k3-spot--red" aria-hidden="true"></span>
+    <span class="k3-spot k3-spot--blue" aria-hidden="true"></span>
+    <div class="container k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">📞 Jetzt Zaubershow buchen!</h2>
+      <p class="k3-sub">✨ Bereit für magische Momente?</p>
+      <p class="k3-narrow">
         Ob <a href="/kindergeburtstag/">Kindergeburtstag</a>, Schulfest, Firmenevent oder private Feier – lassen Sie uns gemeinsam Ihr Event unvergesslich machen!
       </p>
-      <div class="zs-book__contact ce-soft">
+      <div class="zs-book__contact">
         <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>
         <p>✉️ E-Mail: <a href="mailto:info@liar-entertainer.com">info@liar-entertainer.com</a></p>
         <p>📍 Standort: Beethovenstr. 15, 45966 Gladbeck</p>
         <p>⚡ Reaktionszeit: Meist innerhalb 24 Stunden</p>
       </div>
-      <h3 class="zs-book__h3">✅ So einfach geht's:</h3>
-      <div class="ce-steps__list zs-book__steps">
-        <div class="ce-step" data-reveal="flip">
-          <span class="card-back" aria-hidden="true"></span>
-          <p class="zs-book__step">1️⃣ Anfrage stellen</p>
-          <p class="ce-soft">Anrufen oder E-Mail schreiben</p>
+      <h3 class="k3-h3">✅ So einfach geht's:</h3>
+      <div class="zs-book__steps">
+        <div class="k3-card zs-step" data-reveal>
+          <p class="zs-step__title">1️⃣ Anfrage stellen</p>
+          <p class="zs-soft">Anrufen oder E-Mail schreiben</p>
         </div>
-        <div class="ce-step" data-reveal="flip" data-reveal-delay="0.18">
-          <span class="card-back" aria-hidden="true"></span>
-          <p class="zs-book__step">2️⃣ Termin & Details</p>
-          <p class="ce-soft">Unverbindliches Angebot erhalten</p>
+        <div class="k3-card zs-step" data-reveal data-reveal-delay="0.08">
+          <p class="zs-step__title">2️⃣ Termin & Details</p>
+          <p class="zs-soft">Unverbindliches Angebot erhalten</p>
         </div>
-        <div class="ce-step" data-reveal="flip" data-reveal-delay="0.36">
-          <span class="card-back" aria-hidden="true"></span>
-          <p class="zs-book__step">3️⃣ Buchen & freuen!</p>
-          <p class="ce-soft">💡 Je früher Sie anfragen, desto größer die Chance auf Ihren Wunschtermin!</p>
+        <div class="k3-card zs-step" data-reveal data-reveal-delay="0.16">
+          <p class="zs-step__title">3️⃣ Buchen & freuen!</p>
+          <p class="zs-soft">💡 Je früher Sie anfragen, desto größer die Chance auf Ihren Wunschtermin!</p>
         </div>
       </div>
-      <a href="/kontakt/" class="btn btn--primary zs-book__btn" data-magnetic>
+      <a href="/kontakt/" class="btn btn--primary zs-book__btn" data-confetti>
         Jetzt unverbindlich anfragen
       </a>
     </div>
   </section>
 
-  <!-- ── Content-Tiefe: three editorial columns ───────────── -->
-  <section class="zs-depth">
-    <div class="container zs-depth__col">
-      <span class="zs-depth__suit" aria-hidden="true">♠</span>
-      <h2 class="ce-h2">Wie läuft die Zaubershow ab?</h2>
+  <!-- ── Content depth: reading columns with a drop cap ───── -->
+  <section>
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2">Wie läuft die Zaubershow ab?</h2>
       <p class="zs-depth__text" data-reveal>
         Der Start ist unkompliziert: Ich komme rechtzeitig vor Showbeginn an und brauche nur etwa 10 Minuten für den Aufbau – eine freie Fläche von 2×2 Metern genügt völlig. Sie müssen nichts vorbereiten, kein Podest aufstellen und keine Technik organisieren. Dann geht es los: Die Show beginnt mit einer Geschichte, die die Kinder sofort abholt, und entwickelt sich Schritt für Schritt zu einem Mitmach-Erlebnis. Die Kinder werden zu Zauberassistenten, halten magische Gegenstände, sprechen Zaubersprüche – und beim Kindergeburtstag steht selbstverständlich das Geburtstagskind im Mittelpunkt und erlebt seinen eigenen großen Zaubermoment vor allen Gästen. Zum Finale steigert sich die Dramaturgie noch einmal: Der verblüffendste Trick kommt zum Schluss, damit die Kinder mit großen Augen und einem Lachen im Gesicht aus der Show gehen. Nach rund 40 Minuten ist die Zaubershow vorbei – auf Wunsch geht es mit Ballonmodellage oder Glitzer-Tattoos weiter.
       </p>
@@ -389,39 +386,39 @@ const whyUs = [
     </div>
   </section>
 
-  <section class="zs-depth zs-depth--alt">
-    <div class="container zs-depth__col">
-      <span class="zs-depth__suit ce-red" aria-hidden="true">♥</span>
-      <h2 class="ce-h2">Für welches Alter ist die Zaubershow geeignet?</h2>
+  <section class="k3-alt">
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2">Für welches Alter ist die Zaubershow geeignet?</h2>
       <p class="zs-depth__text" data-reveal>
         Die Zaubershow ist ab 4 Jahren geeignet und wird konsequent an die Altersgruppe angepasst – denn ein Kita-Kind staunt anders als ein Viertklässler. Für die Jüngeren (4 bis 6 Jahre) setze ich auf einfache, klar erkennbare Zaubermomente mit viel Bewegung, Wiederholung und Clownerie: kurze Spannungsbögen, große Gesten, viel zum Mitrufen und Mitlachen. Kinder im Grundschulalter (7 bis 12 Jahre) wollen dagegen gefordert werden – sie bekommen anspruchsvollere Tricks, mehr Wortwitz und Momente, in denen sie miträtseln dürfen, wie das eben Gesehene möglich war. Und die Erwachsenen? Die sitzen erfahrungsgemäß nicht gelangweilt daneben, sondern schmunzeln auf ihrer eigenen Ebene mit: Der Humor funktioniert doppelbödig, sodass Eltern, Großeltern und Erzieher genauso auf ihre Kosten kommen wie die Kinder. Bei gemischten Gruppen – etwa auf Familienfeiern – balanciere ich das Programm so aus, dass vom Kindergartenkind bis zur Oma alle gemeinsam lachen.
       </p>
     </div>
   </section>
 
-  <section class="zs-depth">
-    <div class="container zs-depth__col">
-      <span class="zs-depth__suit" aria-hidden="true">♣</span>
-      <h2 class="ce-h2">Drinnen oder draußen – wo funktioniert die Zaubershow?</h2>
+  <section>
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2">Drinnen oder draußen – wo funktioniert die Zaubershow?</h2>
       <p class="zs-depth__text" data-reveal>
         Beides! Da ich nur eine Fläche von etwa 2×2 Metern benötige, funktioniert die Zaubershow praktisch überall: im Wohnzimmer, im Partykeller, im Gruppenraum der Kita, in der Turnhalle, im Gemeindesaal – oder unter freiem Himmel auf der Terrasse, im Garten und beim Sommerfest. Drinnen entsteht schnell eine gemütliche, konzentrierte Atmosphäre, in der schon ein Wohnzimmer zur Zauberbühne wird. Draußen lebt die Show von der lockeren Feststimmung – wichtig ist nur ein halbwegs ebener Platz und idealerweise etwas Schatten, damit die Kinder nicht in der prallen Sonne sitzen. Und wenn das Wetter beim Gartenfest nicht mitspielt? Kein Problem: Weil der Aufbau so kompakt ist, ziehen wir kurzfristig einfach nach drinnen um – ein Plan B ist mit dieser Show immer eingebaut. Besprechen Sie Ihre Räumlichkeiten gerne kurz mit mir bei der Anfrage, dann finden wir gemeinsam den besten Platz für die Vorstellung.
       </p>
     </div>
   </section>
 
-  <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq">
-    <div class="container ce-narrow">
-      <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
-      <div class="ce-faq__list">
-        {faqSchema.mainEntity.map((q, i) => (
-          <details class="ce-faq__item zs-faq" data-reveal data-reveal-delay={i * 0.05}>
+  <!-- ── FAQ (visible twin of the FAQPage schema; the legacy "+" stays as text) ── -->
+  <section class="k3-faq k3-alt">
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">Häufig gestellte Fragen</h2>
+      <div class="k3-faq__list">
+        {faqSchema.mainEntity.map((q) => (
+          <details class="k3-faq__item zs-faq" data-reveal>
             <summary>
-              <span class="ce-faq__suit" aria-hidden="true">{['♠', '♥', '♣', '♦'][i % 4]}</span>
               <span>{q.name}</span>
               <span class="zs-faq__plus">+</span>
             </summary>
-            <p>{q.acceptedAnswer.text}</p>
+            <p class="k3-faq__answer">{q.acceptedAnswer.text}</p>
           </details>
         ))}
       </div>
@@ -430,125 +427,104 @@ const whyUs = [
 </V2Layout>
 
 <style>
-  /* ── hero: the show photo in its magic frame (ce-hero__frame, adult-kit.css) ── */
-  @media (min-width: 901px) { .zs-hero__grid { grid-template-columns: 1fr 1.1fr; } }
-  .zs-hero__lead { max-width: 36rem; }
+  /* ── hero copy on the dark big-top stage ── */
+  .k3-crumbs { font-size: 0.85rem; color: rgba(246, 236, 220, 0.8); margin-bottom: 0.7rem !important; }
+  .k3-crumbs a { color: inherit; }
+  .zs-hero__sub { font-size: clamp(1.3rem, 2.4vw, 1.75rem); line-height: 1.25; margin: 0 0 var(--space-2); color: #ffe3a3; }
+  .zs-hero__claim { font-family: var(--font-display); font-size: 1.2rem; font-weight: 600; }
+  .zs-hero__lead { max-width: 36rem; color: rgba(246, 236, 220, 0.9); }
+
+  .zs-soft { color: var(--ink-soft); }
+  .k3-band .zs-soft { color: inherit; }
+  .k3-band .k3-card .zs-soft { color: var(--ink-soft); }
 
   /* ── intro ── */
   .zs-intro { font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.7; color: var(--ink-soft); }
-  .zs-intro__motto { font-family: var(--font-display); font-style: italic; font-size: 1.4rem; }
-  .zs-intro__motto strong { font-weight: 600; }
+  .zs-intro__motto { font-family: var(--font-display); font-size: 1.45rem; }
+  .zs-intro__motto strong { font-weight: 600; color: var(--accent-strong); }
+
+  /* ── occasions: two programme cards that are links ── */
+  .zs-occasions { display: grid; gap: var(--space-3); margin-top: var(--space-3); }
+  .zs-occasion { display: block; color: var(--ink); text-decoration: none; text-align: center; }
+  .zs-occasion__title { font-family: var(--font-display); font-size: 1.4rem; font-weight: 600; color: var(--accent-strong); }
+  .zs-occasion__text { color: var(--ink-soft); margin: 0 !important; }
 
   /* ── unique ── */
-  .zs-unique__grid { display: grid; grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--space-5); align-items: start; margin-top: var(--space-3); }
-  .zs-unique__photo { max-width: 22rem; width: 100%; justify-self: center; }
-  .zs-unique__photo :global(.zs-unique__card) { rotate: -3deg; }
-  .zs-h3 { font-size: 1.5rem; margin: var(--space-3) 0 var(--space-2); }
-  .zs-checks { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 0.5rem 1.5rem; font-size: 0.95rem; }
-  .zs-checks__item { display: flex; gap: 0.6rem; align-items: baseline; padding-bottom: 0.45rem; border-bottom: 1px solid rgba(20, 18, 16, 0.14); }
-  .zs-check { color: var(--accent-strong); font-weight: 700; }
+  .zs-unique__grid { display: grid; gap: var(--space-4); align-items: start; margin-top: var(--space-3); }
+  .zs-unique__grid :global(.zs-unique__photo) { max-width: 22rem; width: 100%; justify-self: center; rotate: -1.5deg; }
+  .zs-checks { display: grid; gap: 0.5rem; font-size: 0.97rem; }
+  .zs-checks__item { display: flex; gap: 0.6rem; align-items: baseline; padding: 0.5rem 0.85rem; background: var(--surface); border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.35); }
+  .zs-check { color: var(--gold); font-weight: 900; }
 
-  /* ── pillars: a programme of five cards, slightly askew like a dealt row ── */
-  .zs-pillars { background: var(--bg-alt); }
-  .zs-pillars__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); margin-top: var(--space-4); }
-  .zs-pillar {
-    position: relative; padding: var(--space-4) var(--space-3) var(--space-4);
-    background: var(--surface); border-radius: var(--radius);
-    box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.16), var(--shadow);
-    rotate: var(--askew, 0deg); transition: rotate 0.35s var(--ease-out), box-shadow 0.35s var(--ease-out);
-  }
-  .zs-pillar:nth-child(odd) { --askew: -1.2deg; }
-  .zs-pillar:nth-child(even) { --askew: 1deg; }
-  .zs-pillar__num { position: absolute; top: 0.8rem; left: 1rem; font-size: 1.6rem; line-height: 1; }
-  .zs-pillar__suit { position: absolute; bottom: 0.7rem; right: 1rem; font-family: var(--font-display); font-size: 1.6rem; line-height: 1; rotate: 180deg; }
-  .zs-pillar h3 { font-size: 1.45rem; margin: var(--space-2) 0 0.6rem; }
-  .zs-pillar .ce-soft { margin: 0; font-size: 0.95rem; }
-  @media (hover: hover) and (pointer: fine) {
-    .zs-pillar:hover { --askew: 0deg; box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.2), var(--shadow-hover); }
-  }
+  /* ── pillars: five programme cards on the velvet ── */
+  .zs-pillars__grid { display: grid; gap: var(--space-4); margin-top: var(--space-4); }
+  .zs-pillar { color: var(--ink); text-align: center; }
+  .zs-pillar__num { display: block; font-size: 1.8rem; line-height: 1; margin-bottom: 0.5rem; }
+  .zs-pillar h3 { margin-bottom: 0.6rem; }
+  .zs-pillar p { margin: 0 !important; font-size: 0.97rem; }
 
   /* ── why ── */
-  .zs-why__grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 19rem), 1fr)); gap: 0 var(--space-3); margin-top: var(--space-3); }
-  .zs-why__item { display: flex; gap: 0.8rem; align-items: baseline; padding: var(--space-2) 0; border-top: 1px solid rgba(20, 18, 16, 0.25); }
-  .zs-why__item p { margin: 0; color: var(--ink-soft); }
+  .zs-why__grid { display: grid; gap: 0.6rem var(--space-3); margin-top: var(--space-3); }
+  .zs-why__item { display: flex; gap: 0.8rem; align-items: baseline; padding: 0.7rem 1rem; background: var(--surface); border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.35); }
+  .zs-why__item p { margin: 0 !important; color: var(--ink-soft); }
   .zs-why__close { margin-top: var(--space-4) !important; font-family: var(--font-display); font-size: clamp(1.15rem, 2vw, 1.4rem); line-height: 1.55; text-align: center; }
 
-  /* ── inline reviews ── */
-  .zs-guest { background: var(--bg-alt); }
-  .zs-guest__label { font-size: 0.82rem; font-weight: 700; letter-spacing: 0.34em; }
-  .zs-stars { color: var(--star); font-size: 1.5rem; letter-spacing: 0.15em; margin: 0 0 0.3rem !important; }
+  /* ── inline reviews: programme cards like the review band ── */
+  .zs-stars { color: var(--star, #f5b301); font-size: 1.5rem; letter-spacing: 0.15em; margin: 0 0 0.3rem !important; }
   .zs-stars--small { font-size: 0.95rem; }
-  .zs-guest__count { font-family: var(--font-display); font-style: italic; font-size: 1.3rem; }
-  .zs-guest__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 15rem), 1fr)); margin: var(--space-4) 0 0; }
-  .zs-guest__card { margin: 0; padding: var(--space-3); background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px rgba(20, 18, 16, 0.14), var(--shadow); }
+  .zs-guest__count { font-family: var(--font-display); font-size: 1.3rem; }
+  .zs-guest__grid { display: grid; gap: var(--space-3); margin-top: var(--space-4); }
+  .zs-guest__card { margin: 0; padding: calc(var(--space-3) + 0.4rem) var(--space-3) var(--space-3); }
   .zs-guest__who { display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.6rem; }
   .zs-guest__who p { margin: 0 !important; }
-  .zs-guest__avatar { flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; color: #fff; font-weight: 700; font-size: 0.85rem; }
-  .zs-guest__name { font-weight: 600; font-size: 0.95rem; }
+  .zs-guest__avatar { flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%; color: #fff; font-weight: 800; font-size: 0.85rem; }
+  .zs-guest__name { font-weight: 800; font-size: 0.95rem; }
   .zs-guest__date { font-size: 0.8rem; color: var(--ink-soft); }
   .zs-guest__text { font-size: 0.95rem; margin: 0 !important; }
 
-  /* ── video: the facade restyled as an ink card back ── */
-  .zs-video__frame { margin-top: var(--space-3); }
-  .zs-video :global(.yt-frame) { max-width: 46rem; }
-  .zs-video :global(.yt-facade) {
-    border-radius: var(--radius);
-    background:
-      repeating-linear-gradient(45deg, rgba(255, 253, 247, 0.07) 0 2px, transparent 2px 9px),
-      repeating-linear-gradient(-45deg, rgba(255, 253, 247, 0.07) 0 2px, transparent 2px 9px),
-      var(--ink);
-    box-shadow: inset 0 0 0 0.6rem var(--surface), 0 0 0 1px rgba(20, 18, 16, 0.2), var(--shadow);
-  }
-  .zs-video :global(.yt-play) { color: var(--accent); background: var(--surface); }
-
   /* ── regions ── */
-  .zs-regions h3 { font-size: 1.35rem; margin: var(--space-2) 0 0.3rem; }
-  .zs-regions h3:first-child { margin-top: 0; }
+  .zs-regions .k3-h3:first-child { margin-top: 0; }
+  .zs-regions .k3-cities { line-height: 1.7; }
 
-  /* ── booking band ── */
-  .zs-book__claim { font-family: var(--font-display); font-style: italic; font-size: 1.5rem; }
-  .zs-book a { color: var(--bg); text-decoration-color: var(--accent); text-underline-offset: 0.2em; }
+  /* ── booking on the dark stage ── */
   .zs-book__contact { margin: var(--space-3) 0; }
   .zs-book__contact p { margin-bottom: 0.4rem !important; }
-  .zs-book__h3 { font-size: 1.5rem; color: var(--bg); margin: var(--space-4) 0 0; }
-  .zs-book__steps { margin-top: var(--space-3) !important; text-align: left; }
-  .zs-book .ce-step { padding: var(--space-3); text-align: left; }
-  .zs-book__step { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; }
-  :global(.v2) .zs-book .ce-step .ce-soft { margin: 0; }
-  :global(.v2) .zs-book .zs-book__btn { margin-top: var(--space-4); background: var(--accent); color: var(--accent-ink); }
-  @media (hover: hover) and (pointer: fine) {
-    :global(.v2) .zs-book .zs-book__btn:hover { background: var(--accent-strong); }
-  }
+  .zs-book__steps { display: grid; gap: var(--space-3); margin-top: var(--space-3); text-align: left; }
+  .zs-step { color: var(--ink); }
+  .zs-step__title { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; }
+  .zs-step p:last-child { margin: 0 !important; }
+  .zs-book__btn { margin-top: var(--space-4); }
 
-  /* ── content depth: editorial column, drop cap in card red ── */
-  .zs-depth { padding-block: var(--space-5) !important; }
-  .zs-depth--alt { background: var(--bg-alt); }
-  .zs-depth__col { max-width: 46rem; }
-  .zs-depth__suit { display: block; font-family: var(--font-display); font-size: 2rem; line-height: 1; margin-bottom: var(--space-2); }
+  /* ── content depth: reading column, drop cap in velvet red ── */
   .zs-depth__text { font-size: 1.07rem; line-height: 1.75; color: var(--ink-soft); }
   .zs-depth__text::first-letter {
-    float: left; font-family: var(--font-display); font-size: 3.6em; line-height: 0.85;
-    padding: 0.06em 0.12em 0 0; color: var(--accent);
+    float: left; font-family: var(--font-display); font-weight: 600; font-size: 3.6em; line-height: 0.85;
+    padding: 0.06em 0.12em 0 0; color: var(--velvet);
   }
   .zs-depth__list { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: grid; gap: 0.5rem; }
-  .zs-depth__list li { padding: 0.6rem 0; border-top: 1px solid rgba(20, 18, 16, 0.18); }
+  .zs-depth__list li { padding: 0.55rem 0.85rem; background: var(--surface); border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.35); }
 
-  /* ── faq: the legacy "+" stays as visible text, so the kit's drawn "+" is switched off ── */
+  /* ── FAQ: the legacy "+" is visible text, so the kit's drawn "+" is switched off ── */
   :global(.v2) .zs-faq summary::after { content: none; }
   .zs-faq__plus {
-    position: absolute; right: 0.25rem; top: 50%; translate: 0 -50%;
-    font-family: var(--font-body); font-weight: 300; font-size: 1.8rem; line-height: 1; color: var(--accent);
-    transition: rotate 0.25s var(--ease-out);
+    flex: none; display: grid; place-items: center; width: 1.9rem; height: 1.9rem; border-radius: 50%;
+    font-family: var(--font-display); color: var(--gold); box-shadow: inset 0 0 0 1px var(--gold);
+    transition: rotate 0.3s var(--ease-out), background-color 0.2s ease, color 0.2s ease;
   }
-  .zs-faq[open] .zs-faq__plus { rotate: 45deg; }
+  .zs-faq[open] .zs-faq__plus { rotate: 45deg; background: var(--velvet); color: #fff3dd; box-shadow: none; }
 
-  @media (max-width: 900px) {
-    .zs-unique__grid { grid-template-columns: 1fr; gap: var(--space-4); }
-  }
-  @media (max-width: 560px) {
-    .zs-checks { grid-template-columns: 1fr; }
+  @media (min-width: 901px) {
+    .zs-occasions { grid-template-columns: 1fr 1fr; }
+    .zs-unique__grid { grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr); gap: var(--space-5); }
+    .zs-checks { grid-template-columns: 1fr 1fr; }
+    .zs-why__grid { grid-template-columns: 1fr 1fr; }
+    .zs-book__steps { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    /* five cards: three over two, the short row centred */
+    .zs-pillars__grid { display: flex; flex-wrap: wrap; justify-content: center; }
+    .zs-pillar { flex: 0 1 calc((100% - 2 * var(--space-4)) / 3); }
+    .zs-guest__grid { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
   }
   @media (prefers-reduced-motion: reduce) {
-    .zs-pillar { transition: none; }
+    .zs-faq__plus { transition: none; }
   }
 </style>

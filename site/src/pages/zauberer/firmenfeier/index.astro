@@ -3,6 +3,7 @@ import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
 import MagicFrame from '../../../components/v2/adult/MagicFrame.astro';
+import StageLights from '../../../components/v2/adult/StageLights.astro';
 import SuitRule from '../../../components/v2/adult/SuitRule.astro';
 import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
@@ -63,6 +64,7 @@ const serviceSchema = {
 >
   <!-- ── Hero: a squared deck, one card dealt from it. The photo card (LCP) never hides. ── -->
   <section class="ce-hero ce-hero--stage">
+    <StageLights />
     <div class="container ce-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">
@@ -83,7 +85,6 @@ const serviceSchema = {
       </div>
 
       <div class="ce-spot">
-        <span class="ce-spot__beam" aria-hidden="true"></span>
         <div class="ce-hero__frame ce-spot__frame">
           <MagicFrame corner="tl" rank="A" suit="♠" data-tilt>
             <Image
@@ -91,8 +92,8 @@ const serviceSchema = {
               alt="Zauberer für die Firmenfeier – Unterhaltung für Ihr Team in NRW"
               loading="eager"
               fetchpriority="high"
-              widths={[400, 700, 1000]}
-              sizes="(max-width: 900px) 80vw, 500px"
+              widths={[450, 720, 1080, 1440]}
+              sizes="(max-width: 900px) 92vw, (max-width: 1340px) 52vw, 700px"
             />
           </MagicFrame>
         </div>
@@ -167,17 +168,17 @@ const serviceSchema = {
       <div class="ff-table__hand">
         <div data-reveal="deal">
           <MagicFrame corner="tl" rank="10" suit="♠" class="ff-table__card" data-tilt style="--sheen-delay: 2.2s">
-            <Image src={buehneImg} alt="Bühnenshow bei einer Firmenfeier in Essen" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+            <Image src={buehneImg} alt="Bühnenshow bei einer Firmenfeier in Essen" loading="lazy" widths={[400, 550, 800, 1100]} sizes="(max-width: 900px) 92vw, 500px" />
           </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.12">
           <MagicFrame corner="tr" rank="J" suit="♣" class="ff-table__card" data-tilt style="--sheen-delay: 3.1s">
-            <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Mülheim" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+            <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Mülheim" loading="lazy" widths={[400, 550, 800, 1100]} sizes="(max-width: 900px) 92vw, 500px" />
           </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.24">
           <MagicFrame corner="br" rank="Q" suit="♦" class="ff-table__card" data-tilt style="--sheen-delay: 4s">
-            <Image src={weihnachtImg} alt="Zaubervorführung auf einem Weihnachtsmarkt in Dortmund" loading="lazy" widths={[400,700]} sizes="(max-width: 900px) 80vw, 30vw" />
+            <Image src={weihnachtImg} alt="Zaubervorführung auf einem Weihnachtsmarkt in Dortmund" loading="lazy" widths={[400, 550, 800, 1100]} sizes="(max-width: 900px) 92vw, 500px" />
           </MagicFrame>
         </div>
       </div>
@@ -281,8 +282,13 @@ const serviceSchema = {
   .ff-table .ce-h2 { color: var(--bg); }
   .ff-table__note { color: #d9d1c2; }
   .ff-table__note a { color: #f4a7b2; } /* 9.6:1 on black */
-  .ff-table__hand { display: grid; gap: var(--space-3); max-width: 24rem; margin: var(--space-4) auto 0; align-items: end; }
-  @media (min-width: 901px) { .ff-table__hand { grid-template-columns: repeat(3, minmax(0, 1fr)); max-width: none; } }
+  /* photos ~50 % larger (2026-10-06): full width on phones, two per row on wide screens with the
+     third centred below. Image sizes: ≤900px 92vw · 500px */
+  .ff-table__hand { display: grid; gap: var(--space-4); max-width: 30rem; margin: var(--space-4) auto 0; align-items: end; }
+  @media (min-width: 901px) {
+    .ff-table__hand { grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 66rem; }
+    .ff-table__hand > div:nth-child(3) { grid-column: 1 / -1; justify-self: center; width: calc(50% - var(--space-4) / 2); }
+  }
   .ff-table__hand > div:nth-child(1) :global(.ff-table__card) { rotate: -4deg; translate: 0.6rem 0.6rem; }
   .ff-table__hand > div:nth-child(2) :global(.ff-table__card) { translate: 0 -1rem; }
   .ff-table__hand > div:nth-child(3) :global(.ff-table__card) { rotate: 4deg; translate: -0.6rem 0.6rem; }

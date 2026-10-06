@@ -3,6 +3,7 @@ import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
 import MagicFrame from '../../../components/v2/adult/MagicFrame.astro';
+import StageLights from '../../../components/v2/adult/StageLights.astro';
 import SuitRule from '../../../components/v2/adult/SuitRule.astro';
 import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
@@ -84,6 +85,7 @@ const _pageGallery = [
 >
   <!-- ── Hero: photo card beside a deck; the chosen card rises out of it (ambitious card) ── -->
   <section class="ce-hero ce-hero--stage">
+    <StageLights />
     <div class="container ce-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">
@@ -104,15 +106,14 @@ const _pageGallery = [
       </div>
 
       <div class="ce-spot">
-        <span class="ce-spot__beam" aria-hidden="true"></span>
         <div class="ce-hero__frame ce-spot__frame">
           <MagicFrame corner="tr" rank="Q" suit="♥" data-tilt>
             <Image
               src={heroImg}
               alt="Tischzauberer NRW – Close-up Zauberei für Hochzeiten & Events"
               title="Tischzauberer LIAR – Close-up Zauberei in NRW"
-              widths={[400, 700, 1000]}
-              sizes="(max-width: 900px) 80vw, 500px"
+              widths={[450, 720, 1080, 1440]}
+              sizes="(max-width: 900px) 92vw, (max-width: 1340px) 52vw, 700px"
               loading="eager"
               fetchpriority="high"
             />
@@ -237,7 +238,7 @@ const _pageGallery = [
               style={`--sheen-delay: ${2.4 + i * 0.7}s`}
               data-tilt
             >
-              <Image src={g.src} alt={g.alt} widths={[300, 600]} sizes="(max-width: 700px) 40vw, 14rem" loading="lazy" />
+              <Image src={g.src} alt={g.alt} widths={[300, 450, 600, 900]} sizes="(max-width: 600px) 88vw, (max-width: 900px) 40vw, 300px" loading="lazy" />
             </MagicFrame>
           </div>
         ))}
@@ -415,9 +416,25 @@ const _pageGallery = [
   .tz-round__step .ce-soft { margin: 0; font-size: 0.95rem; }
 
   /* ── gallery scatter ── */
-  .tz-gallery { background: var(--bg-alt); }
-  .tz-scatter { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4) var(--space-3); margin-top: var(--space-4); }
-  .tz-scatter__slot { width: clamp(9.5rem, 22vw, 15rem); }
+  .tz-gallery { background: var(--bg-alt); overflow-x: clip; }
+  /* photos ~50 % larger (2026-10-06): one per row on small phones, two on larger ones, 3 + 2 on wide screens.
+     Image sizes: ≤600px 88vw · ≤900px 40vw · 300px */
+  .tz-scatter { display: flex; flex-wrap: wrap; justify-content: center; gap: var(--space-4) var(--space-2); margin-top: var(--space-4); }
+  .tz-scatter__slot { width: min(calc(50% - var(--space-2) / 2), 15rem); }
+  @media (min-width: 901px) {
+    .tz-scatter { gap: var(--space-4) var(--space-3); }
+    .tz-scatter__slot { width: 22rem; }
+  }
+  @media (max-width: 900px) {
+    /* phones: two photos side by side — the frames give up most of their side margin */
+    .tz-scatter__slot :global(.mf.mf) { margin-inline: 0.3rem; }
+  }
+  @media (max-width: 600px) {
+    /* small phones: one photo per row, nearly full width */
+    .tz-scatter__slot { width: min(100%, 24rem); }
+    .tz-scatter__slot :global(.mf.mf--tr), .tz-scatter__slot :global(.mf.mf--br) { margin-inline: 0 1.5rem; }
+    .tz-scatter__slot :global(.mf.mf--tl), .tz-scatter__slot :global(.mf.mf--bl) { margin-inline: 1.5rem 0; }
+  }
   .tz-scatter__slot:nth-child(1) { rotate: -5deg; }
   .tz-scatter__slot:nth-child(2) { rotate: 3deg; translate: 0 1.2rem; }
   .tz-scatter__slot:nth-child(3) { rotate: -1.5deg; }

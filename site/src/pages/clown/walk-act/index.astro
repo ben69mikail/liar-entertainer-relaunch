@@ -2,12 +2,13 @@
 import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import SectionEdge from '../../../components/v2/SectionEdge.astro';
-import Bunting from '../../../components/v2/kids/Bunting.astro';
-import Squiggle from '../../../components/v2/kids/Squiggle.astro';
+import Curtain from '../../../components/v2/kids/Curtain.astro';
+import K3Hero from '../../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
 import YouTubeFacade from '../../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../../data/site';
-import '../../../styles/kids-kit.css';
+import '../../../styles/kids-v3.css';
 import { Image } from 'astro:assets';
 import walkActHeroImg from '../../../assets/images/clown/walk-act-hero.jpg';
 import walkActFestEssenImg from '../../../assets/images/clown/walk-act-fest-essen.jpg';
@@ -103,48 +104,42 @@ const ablauf = [
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/' }, { name: 'Walk Act', url: '/clown/walk-act/' }]}
 >
-  <!-- ── Hero. No reveal here (LCP). ── -->
-  <section class="kg-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <p class="wa-crumbs">
+  <!-- ── Hero: the big-top stage. No reveal here (LCP). ── -->
+  <K3Hero>
+        <p class="k3-crumbs">
           <a href="/">Clown</a> »
           <a href="/">Clown Zauberer LIAR</a> »
           <span>Walk Act</span>
         </p>
         <ReviewBadge />
-        <h1 class="kg-hero__title" data-letters>Walk <span class="kg-mark">Act</span></h1>
-        <h2 class="wa-hero__sub">
+        <h1 class="k3-hero__title" data-letters>Walk <span class="k3-mark">Act</span></h1>
+        <h2 class="k3-hero__sub">
           Walk Act in NRW –<br />Clown Zauberer LIAR – Pantomime
         </h2>
-        <p class="wa-hero__claim">Mobil. Interaktiv. Unvergesslich.</p>
-        <div class="kg-hero__actions">
+        <p class="k3-hero__claim">Mobil. Interaktiv. Unvergesslich.</p>
+        <div class="k3-hero__actions">
           <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
           <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
-      </div>
-      <figure class="kg-hero__photo">
-        <Image
-          src={walkActHeroImg}
-          alt="Walk Act NRW – Clown Zauberer LIAR – Pantomime"
-          widths={[400, 700, 1000, 1400]}
-          sizes="(max-width: 900px) 92vw, 560px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 55% 24%"
-        />
-        <span class="wa-steps-deco" aria-hidden="true"><span>👣</span><span>👣</span><span>👣</span></span>
-      </figure>
-    </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={walkActHeroImg}
+        alt="Walk Act NRW – Clown Zauberer LIAR – Pantomime"
+        widths={[400, 700, 1000]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+      <span class="wa-steps-deco" aria-hidden="true"><span>👣</span><span>👣</span><span>👣</span></span>
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Intro ── -->
-  <section class="kg-intro">
-    <div class="container kg-narrow" data-reveal>
-      <h2 class="kg-h2">Walk Act Zauberer in NRW – Clown Zauberer LIAR</h2>
-      <p class="kg-lead">
+  <section class="k3-intro">
+    <div class="container k3-narrow" data-reveal>
+      <h2 class="k3-h2">Walk Act Zauberer in NRW – Clown Zauberer LIAR</h2>
+      <p class="k3-lead">
         Ein Walk Act mit Clown Zauberer LIAR (Michaël Prescler) ist mobile, interaktive Walking-Unterhaltung, die sich frei unter die Gäste mischt – buchbar in ganz <strong>NRW</strong> (u. a. Köln, Düsseldorf, Essen, Dortmund) für Messen, Stadt- und Straßenfeste, Firmenevents und Empfänge. Ohne Bühne und Technik, je nach Anlass flexibel von rund 30 Minuten bis zu mehreren Stunden.
       </p>
       <p>
@@ -163,20 +158,21 @@ const ablauf = [
 
   <!-- ── Was ist ein Walk-Act? ── -->
   <section class="wa-split">
-    <div class="container wa-split__grid">
-      <figure class="wa-photo" data-reveal="pop">
+    <div class="container k3-split k3-split--flip">
+      <ProgramFrame class="k3-photo k3-photo--l" data-reveal>
         <Image
           src={walkActFestEssenImg}
           alt="Fest Essen Walk Act"
-          data-scroll-tilt="3"
-          widths={[340, 680]}
-          sizes="340px"
+          widths={[300, 600]}
+          quality={60}
+          sizes="(max-width: 900px) 80vw, 300px"
           loading="lazy"
+          fetchpriority="low"
         />
-      </figure>
+      </ProgramFrame>
       <div data-reveal>
-        <h2 class="kg-h2">Was ist ein Walk-Act?</h2>
-        <Squiggle />
+        <GoldDivider class="wa-divider" />
+        <h2 class="k3-h2">Was ist ein Walk-Act?</h2>
         <p>
           Ein Walk-Act ist eine <strong>bewegliche, interaktive Showform</strong>, bei der ich mich frei unter Ihre Gäste mische.
           Ob auf einer Messe, einem Straßenfest oder einer privaten Feier – ich zaubere direkt vor den Augen der Besucher, wechsle von Gruppe zu Gruppe und erschaffe dabei magische Begegnungen voller Lachen und Staunen.
@@ -189,14 +185,15 @@ const ablauf = [
   </section>
 
   <!-- ── WALK ACT Highlights ── -->
-  <section class="wa-split wa-split--alt">
-    <div class="container wa-split__grid wa-split__grid--flip">
+  <section class="wa-split k3-alt">
+    <div class="container k3-split">
       <div data-reveal>
-        <h2 class="kg-h2">WALK ACT Highlights</h2>
-        <p class="kg-sub wa-sub">Meine Walk-Act Highlights</p>
+        <GoldDivider class="wa-divider" />
+        <h2 class="k3-h2">WALK ACT Highlights</h2>
+        <p class="k3-sub wa-sub">Meine Walk-Act Highlights</p>
         <div class="wa-hl">
           {highlights.map((h, i) => (
-            <div class="wa-hl__item" data-reveal="tilt" data-reveal-delay={i * 0.08}>
+            <div class="wa-hl__item" data-reveal data-reveal-delay={i * 0.08}>
               <p class="wa-hl__title"><span class="wa-hl__icon">{h.icon}</span>{h.title}:</p>
               <p class="wa-hl__text">{h.text}</p>
             </div>
@@ -206,25 +203,27 @@ const ablauf = [
           Kontaktformular
         </a>
       </div>
-      <figure class="wa-photo wa-photo--tilt" data-reveal="pop" data-reveal-delay="0.1">
+      <ProgramFrame class="k3-photo" data-reveal data-reveal-delay="0.1">
         <Image
           src={ballonmodellage2Img}
           alt="Herzballon bei Ballonmodellage"
-          data-scroll-tilt="3"
-          widths={[340, 680]}
-          sizes="340px"
+          widths={[300, 600]}
+          quality={60}
+          sizes="(max-width: 900px) 80vw, 300px"
           loading="lazy"
+          fetchpriority="low"
         />
-      </figure>
+      </ProgramFrame>
     </div>
   </section>
 
-  <!-- ── Google-Bewertungen (legacy cards of this page) ── -->
+  <!-- ── Google-Bewertungen (legacy cards of this page), circus-programme style like the reviews ── -->
   <section class="wa-voices">
     <div class="container">
-      <p class="wa-voices__title kg-center">⭐⭐⭐⭐⭐ Google Bewertungen</p>
-      <div class="wa-voices__grid">
-        <figure class="wa-voice" data-reveal="pop">
+      <GoldDivider />
+      <p class="wa-voices__title k3-center">⭐⭐⭐⭐⭐ Google Bewertungen</p>
+      <div class="k3-grid k3-grid--3">
+        <figure class="k3-card wa-voice" data-reveal>
           <div class="wa-voice__who">
             <div class="wa-voice__avatar">SJ</div>
             <div>
@@ -235,7 +234,7 @@ const ablauf = [
           <div class="wa-voice__stars">★★★★★</div>
           <p class="wa-voice__text">In jeder Hinsicht wirklich empfehlenswert!</p>
         </figure>
-        <figure class="wa-voice wa-voice--blue" data-reveal="pop" data-reveal-delay="0.08">
+        <figure class="k3-card wa-voice wa-voice--blue" data-reveal data-reveal-delay="0.08">
           <div class="wa-voice__who">
             <div class="wa-voice__avatar">TA</div>
             <div>
@@ -246,7 +245,7 @@ const ablauf = [
           <div class="wa-voice__stars">★★★★★</div>
           <p class="wa-voice__text">Was ein geiler Typ! Witz, Charme und Humor im Herzen ❤️</p>
         </figure>
-        <figure class="wa-voice wa-voice--yellow" data-reveal="pop" data-reveal-delay="0.16">
+        <figure class="k3-card wa-voice wa-voice--gold" data-reveal data-reveal-delay="0.16">
           <div class="wa-voice__who">
             <div class="wa-voice__avatar">NK</div>
             <div>
@@ -262,20 +261,22 @@ const ablauf = [
   </section>
 
   <!-- ── Straßenfest, Stadtfest, Kinderfest ── -->
-  <section class="wa-split">
-    <div class="container wa-split__grid">
-      <figure class="wa-photo" data-reveal="pop">
+  <section class="wa-split k3-alt">
+    <div class="container k3-split k3-split--flip">
+      <ProgramFrame class="k3-photo k3-photo--l" data-reveal>
         <Image
           src={walkActStadtfestImg}
           alt="Walk Act Stadtfest"
-          data-scroll-tilt="3"
-          widths={[340, 680]}
-          sizes="340px"
+          widths={[300, 600]}
+          quality={60}
+          sizes="(max-width: 900px) 80vw, 300px"
           loading="lazy"
+          fetchpriority="low"
         />
-      </figure>
+      </ProgramFrame>
       <div data-reveal>
-        <h2 class="kg-h2 wa-fest__title">
+        <GoldDivider class="wa-divider" />
+        <h2 class="k3-h2 wa-fest__title">
           Straßenfest,<br />Stadtfest,<br />Kinderfest
         </h2>
         <p>
@@ -288,32 +289,35 @@ const ablauf = [
     </div>
   </section>
 
-  <!-- ── Ideal für + Vorteile (blue band) ── -->
-  <section class="kg-band kg-band--blue wa-ideal">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
-    <div class="container wa-ideal__grid">
-      <div class="wa-ideal__card" data-reveal="pop">
-        <h2 class="kg-h2">Ideal für</h2>
-        <ul class="wa-ideal__list">
-          {idealFuer.map((item) => (
-            <li>
-              <span class="wa-ideal__dot">●</span>
-              <p><strong>{item.bold}</strong>{item.rest}</p>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div class="wa-ideal__card wa-ideal__card--tilt" data-reveal="pop" data-reveal-delay="0.1">
-        <h2 class="kg-h2">Ihre Vorteile</h2>
-        <ol class="wa-ideal__list">
-          {['Keine Bühne oder Technik erforderlich ✅', 'Direkte Interaktion mit Gästen oder Kunden ✅', 'Flexibel einsetzbar, indoor & outdoor ✅', 'In ganz NRW buchbar (z. B. Köln, Düsseldorf, Essen, Dortmund) ✅', 'Professioneller Auftritt mit künstlerischer Qualität ✅'].map((v, i) => (
-            <li>
-              <span class="wa-ideal__num">{i + 1}.</span>
-              <p>{v}</p>
-            </li>
-          ))}
-        </ol>
+  <!-- ── Ideal für + Vorteile: dark stage, a red and a blue spotlight on the two cards ── -->
+  <section class="k3-band k3-band--spot wa-ideal">
+    <span class="k3-spot k3-spot--red" aria-hidden="true"></span>
+    <span class="k3-spot k3-spot--blue" aria-hidden="true"></span>
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-grid k3-grid--2 wa-ideal__grid">
+        <div class="k3-card wa-ideal__card" data-reveal>
+          <h2 class="k3-h2">Ideal für</h2>
+          <ul class="wa-ideal__list">
+            {idealFuer.map((item) => (
+              <li>
+                <span class="wa-ideal__dot">●</span>
+                <p><strong>{item.bold}</strong>{item.rest}</p>
+              </li>
+            ))}
+          </ul>
+        </div>
+        <div class="k3-card wa-ideal__card" data-reveal data-reveal-delay="0.1">
+          <h2 class="k3-h2">Ihre Vorteile</h2>
+          <ol class="wa-ideal__list">
+            {['Keine Bühne oder Technik erforderlich ✅', 'Direkte Interaktion mit Gästen oder Kunden ✅', 'Flexibel einsetzbar, indoor & outdoor ✅', 'In ganz NRW buchbar (z. B. Köln, Düsseldorf, Essen, Dortmund) ✅', 'Professioneller Auftritt mit künstlerischer Qualität ✅'].map((v, i) => (
+              <li>
+                <span class="wa-ideal__num">{i + 1}.</span>
+                <p>{v}</p>
+              </li>
+            ))}
+          </ol>
+        </div>
       </div>
     </div>
   </section>
@@ -321,14 +325,15 @@ const ablauf = [
   <!-- ── Ablauf: a walking route, stop by stop ── -->
   <section class="wa-route">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>Ablauf eines Walk Acts</h2>
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>Ablauf eines Walk Acts</h2>
       <div class="wa-route__track">
         <svg class="wa-route__line" viewBox="0 0 1000 24" preserveAspectRatio="none" aria-hidden="true" data-reveal="draw">
-          <path d="M20 12 C 180 -4, 320 28, 500 12 S 820 -4, 980 12" fill="none" stroke="var(--line)" stroke-width="3" stroke-dasharray="10 9" stroke-linecap="round" />
+          <path d="M20 12 C 180 -4, 320 28, 500 12 S 820 -4, 980 12" fill="none" stroke="#b8862f" stroke-width="1.5" stroke-dasharray="6 7" stroke-linecap="round" />
         </svg>
         <ol class="wa-route__steps">
           {ablauf.map((step, i) => (
-            <li class="wa-stop" data-reveal="tilt" data-reveal-delay={i * 0.12}>
+            <li class="wa-stop" data-reveal data-reveal-delay={i * 0.12}>
               <div class="wa-stop__num">{i + 1}</div>
               <div>
                 <p class="wa-stop__title">{step.title}</p>
@@ -341,16 +346,18 @@ const ablauf = [
     </div>
   </section>
 
-  <!-- ── Video (yellow band) ── -->
-  <section class="kg-band kg-band--yellow">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal="pop">
+  <!-- ── Video: Hollywood premiere, two searchlights from the floor crossing behind the video ── -->
+  <section class="k3-band k3-band--night k3-premiere">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
-      <h3 class="kg-h3">
+      <h3 class="k3-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
       <a href="/galerie/" class="btn btn--primary">Zur Foto- und Videogalerie</a>
@@ -359,8 +366,9 @@ const ablauf = [
 
   <!-- ── Kontakt ── -->
   <section class="wa-cta">
-    <div class="container kg-narrow kg-center" data-reveal>
-      <h2 class="kg-h2">Einfach Kontakt aufnehmen</h2>
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Einfach Kontakt aufnehmen</h2>
       <p>
         Sie können mir Ihre Anfrage unverbindlich senden. Ihre Angaben werden selbstverständlich absolut vertraulich behandelt und nicht weitergegeben. Je mehr Angaben ich von Ihnen bekomme, desto besser kann ich Sie beraten.
       </p>
@@ -377,120 +385,85 @@ const ablauf = [
 </V2Layout>
 
 <style>
-  /* ── hero ── */
-  .wa-crumbs { font-size: 0.88rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2); }
-  .wa-crumbs a { color: inherit; }
-  .wa-hero__sub { font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 650; color: var(--brand-blue); margin: 0 0 0.5rem; }
-  .wa-hero__claim { font-family: var(--font-display); font-size: 1.3rem; font-weight: 650; letter-spacing: 0.02em; margin-bottom: var(--space-3); }
-  /* footprints walk across the photo's lower edge, one step after another */
-  .wa-steps-deco { position: absolute; left: 1.2rem; bottom: -1.5rem; display: flex; gap: 0.5rem; font-size: 1.9rem; line-height: 1; }
-  .wa-steps-deco span { display: inline-block; rotate: 80deg; filter: drop-shadow(2px 2px 0 var(--line)); animation: wa-step 3.6s var(--ease-out) infinite; }
+  /* ── hero: footprints walk along the photo frame's lower edge, one step after another ── */
+  .wa-steps-deco { position: absolute; left: 1.4rem; bottom: -1.3rem; display: flex; gap: 0.5rem; font-size: 1.7rem; line-height: 1; pointer-events: none; }
+  .wa-steps-deco span { display: inline-block; rotate: 80deg; filter: drop-shadow(0 2px 4px rgba(10, 5, 40, 0.45)); animation: wa-step 3.6s var(--ease-out) infinite; }
   .wa-steps-deco span:nth-child(2) { animation-delay: 0.45s; translate: 0 -0.5rem; }
   .wa-steps-deco span:nth-child(3) { animation-delay: 0.9s; }
   @keyframes wa-step { 0%, 100% { opacity: 0.25; } 12%, 55% { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) { .wa-steps-deco span { animation: none; } }
 
   /* ── intro ── */
-  .wa-intro__punch { font-family: var(--font-display); font-size: 1.25rem; font-weight: 650; color: var(--accent-strong); }
+  .wa-intro__punch { font-family: var(--font-display); font-size: 1.3rem; font-weight: 600; color: var(--accent-strong); }
 
   /* ── split sections (photo + text) ── */
-  .wa-split { background: var(--bg); }
-  .wa-split--alt { background: var(--surface); border-block: var(--border); }
-  .wa-split__grid { display: grid; gap: var(--space-5); grid-template-columns: 1fr 1.4fr; align-items: center; }
-  .wa-split__grid--flip { grid-template-columns: 1.4fr 1fr; }
-  .wa-split__grid :global(.sq) { margin: 0 0 var(--space-3); max-width: 16rem; }
   .wa-split p { color: var(--ink-soft); }
   .wa-split strong { color: var(--ink); }
-  .wa-photo { margin: 0; justify-self: center; rotate: -2deg; }
-  .wa-photo--tilt { rotate: 2.5deg; }
-  .wa-photo :global(img) {
-    display: block; width: min(21.25rem, 80vw); height: auto; aspect-ratio: 1; object-fit: cover;
-    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
-  }
+  .wa-split :global(.wa-divider) { margin-inline: 0; }
   .wa-sub { margin-top: 0; }
   .wa-fest__title { text-transform: uppercase; line-height: 1.05; }
 
-  /* ── highlights ── */
+  /* ── highlights: paper slips with a fine gold edge ── */
   .wa-hl { display: grid; gap: var(--space-2); margin-bottom: var(--space-4); }
-  .wa-hl__item {
-    padding: var(--space-2) var(--space-3); background: var(--bg); border: 2px solid var(--line);
-    border-radius: var(--radius-sm); box-shadow: 3px 3px 0 var(--line); transition: rotate 0.25s var(--ease-out);
-  }
-  .wa-hl__item:nth-child(2) { rotate: 0.8deg; margin-left: var(--space-2); }
-  .wa-hl__item:nth-child(3) { rotate: -0.6deg; margin-left: var(--space-4); }
+  .wa-hl__item { padding: var(--space-2) var(--space-3); background: var(--surface); border-radius: var(--radius-sm); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.4); }
   .wa-split .wa-hl__title { font-weight: 800; color: var(--ink); margin-bottom: 0.2rem; }
   .wa-hl__icon { margin-right: 0.5rem; }
   .wa-split .wa-hl__text { margin: 0; font-size: 0.97rem; }
-  @media (hover: hover) and (pointer: fine) { .wa-hl__item:hover { rotate: -1.2deg; } }
 
   /* ── legacy review cards ── */
-  .wa-voices { background: var(--bg); }
-  .wa-voices__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 650; }
-  .wa-voices__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); margin-top: var(--space-3); }
-  .wa-voice {
-    --c: var(--brand-red);
-    margin: 0; padding: var(--space-3); background: var(--surface); border: var(--border);
-    border-top: 0.7rem solid var(--c); border-radius: var(--radius); box-shadow: var(--shadow); rotate: -1deg;
-  }
-  .wa-voice--blue { --c: var(--brand-blue); rotate: 0.8deg; }
-  .wa-voice--yellow { --c: var(--brand-yellow); rotate: -0.4deg; }
+  .wa-voices__title { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; }
+  .wa-voice { --c: var(--velvet); margin: 0; }
+  .wa-voice--blue { --c: #2c3a86; }
+  .wa-voice--gold { --c: var(--gold); }
   .wa-voice__who { display: flex; gap: 0.75rem; align-items: center; margin-bottom: 0.6rem; }
   .wa-voice__avatar {
     flex: none; display: grid; place-items: center; width: 2.6rem; height: 2.6rem; border-radius: 50%;
-    background: var(--c); color: #fff; font-weight: 800; font-size: 0.9rem; border: 2px solid var(--line);
+    background: var(--c); color: #fff; font-weight: 800; font-size: 0.9rem; box-shadow: 0 0 0 2px var(--surface), 0 0 0 3px rgba(184, 134, 47, 0.6);
   }
-  .wa-voice--yellow .wa-voice__avatar { color: var(--ink); }
   .wa-voice .wa-voice__name { font-weight: 800; margin: 0; font-size: 0.95rem; }
   .wa-voice .wa-voice__when { margin: 0; font-size: 0.82rem; color: var(--ink-soft); }
   .wa-voice__stars { color: var(--star); letter-spacing: 0.06em; margin-bottom: 0.4rem; }
   .wa-voice .wa-voice__text { margin: 0; color: var(--ink-soft); }
 
-  /* ── ideal für (blue band): two white cards ── */
-  .wa-ideal__grid { display: grid; gap: var(--space-4); grid-template-columns: 1fr 1fr; text-align: left; }
-  .wa-ideal__card {
-    padding: var(--space-4) var(--space-3) var(--space-3); color: var(--ink);
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line); rotate: -1deg;
-  }
-  .wa-ideal__card--tilt { rotate: 1deg; }
-  .wa-ideal__card .kg-h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); text-transform: uppercase; letter-spacing: 0.04em; }
+  /* ── ideal für (spotlight stage): two programme cards ── */
+  .wa-ideal__grid { margin-top: 0; }
+  .wa-ideal__card .k3-h2 { font-size: clamp(1.6rem, 3vw, 2.1rem); text-transform: uppercase; letter-spacing: 0.04em; color: var(--ink); }
   .wa-ideal__list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.7rem; }
   .wa-ideal__list li { display: flex; gap: 0.65rem; align-items: flex-start; }
   .wa-ideal__list p { margin: 0; color: var(--ink-soft); }
-  .kg-band--blue .wa-ideal__card strong { color: var(--ink); }
+  .wa-ideal__card strong { color: var(--ink); }
   .wa-ideal__dot { color: var(--accent-strong); flex: none; font-size: 0.8rem; margin-top: 0.3rem; }
   .wa-ideal__num { color: var(--accent-strong); font-weight: 900; flex: none; font-family: var(--font-display); }
 
-  /* ── ablauf: route with four stops ── */
+  /* ── ablauf: route with four stops, gold-ringed velvet medallions ── */
   .wa-route__track { position: relative; margin-top: var(--space-4); }
   .wa-route__line { position: absolute; left: 0; right: 0; top: 1.3rem; width: 100%; height: 1.5rem; }
-  .wa-route__steps { position: relative; list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); grid-template-columns: repeat(4, 1fr); text-align: center; }
-  .wa-stop { display: grid; justify-items: center; gap: var(--space-2); }
+  .wa-route__steps { position: relative; list-style: none; margin: 0; padding: 0; display: grid; gap: var(--space-3); text-align: left; }
+  .wa-stop { display: grid; grid-template-columns: auto 1fr; gap: var(--space-2); align-items: center; }
   .wa-stop__num {
     display: grid; place-items: center; width: 4rem; height: 4rem; border-radius: 50%;
-    font-family: var(--font-display); font-size: 1.7rem; font-weight: 700; color: #fff;
-    background: var(--brand-red); border: var(--border); box-shadow: 4px 4px 0 var(--line); rotate: -6deg;
-    transition: rotate 0.3s var(--ease-out-expo), translate 0.3s var(--ease-out-expo);
+    font-family: var(--font-display); font-size: 1.7rem; font-weight: 650; color: #ffe3a3;
+    background: radial-gradient(circle at 35% 30%, #c3283a, var(--velvet) 70%);
+    box-shadow: 0 0 0 3px var(--bg), 0 0 0 4px var(--gold), var(--shadow);
+    transition: translate 0.3s var(--ease-out);
   }
-  .wa-stop:nth-child(2) .wa-stop__num { background: var(--brand-blue); rotate: 5deg; }
-  .wa-stop:nth-child(3) .wa-stop__num { background: var(--brand-yellow); color: var(--ink); rotate: -3deg; }
-  .wa-stop:nth-child(4) .wa-stop__num { rotate: 7deg; }
+  .wa-stop:nth-child(2) .wa-stop__num { background: radial-gradient(circle at 35% 30%, #3f51b0, #1c2453 70%); }
   .wa-route .wa-stop__title { font-weight: 800; margin-bottom: 0.3rem; }
   .wa-route .wa-stop__text { margin: 0; color: var(--ink-soft); font-size: 0.97rem; }
   @media (hover: hover) and (pointer: fine) {
-    .wa-stop:hover .wa-stop__num { rotate: 0deg; translate: 0 -4px; }
+    .wa-stop:hover .wa-stop__num { translate: 0 -4px; }
+  }
+  @media (max-width: 900px) {
+    .wa-route__line { display: none; }
   }
 
   /* ── kontakt ── */
-  .wa-cta { background: var(--surface); border-top: var(--border); }
+  .wa-cta { background: var(--surface); border-top: 1px solid rgba(184, 134, 47, 0.35); }
   .wa-cta p { color: var(--ink-soft); }
   .wa-cta__contact { margin: var(--space-3) 0; font-weight: 700; }
 
-  @media (max-width: 900px) {
-    .wa-split__grid, .wa-split__grid--flip, .wa-ideal__grid { grid-template-columns: 1fr; }
-    .wa-split__grid--flip > figure { order: -1; }
-    .wa-hl__item:nth-child(n) { margin-left: 0; }
-    .wa-route__line { display: none; }
-    .wa-route__steps { grid-template-columns: 1fr; text-align: left; gap: var(--space-3); border-left: 3px dashed var(--line); margin-left: 2rem; padding-left: 0; }
-    .wa-stop { grid-template-columns: auto 1fr; justify-items: start; align-items: center; margin-left: -2rem; }
+  @media (min-width: 901px) {
+    .wa-route__steps { grid-template-columns: repeat(4, 1fr); text-align: center; }
+    .wa-stop { grid-template-columns: 1fr; justify-items: center; align-content: start; }
   }
 </style>

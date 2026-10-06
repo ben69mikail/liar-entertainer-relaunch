@@ -2,13 +2,14 @@
 import V2Layout from '../../../layouts/V2Layout.astro';
 import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
-import SectionEdge from '../../../components/v2/SectionEdge.astro';
-import Bunting from '../../../components/v2/kids/Bunting.astro';
+import Curtain from '../../../components/v2/kids/Curtain.astro';
+import K3Hero from '../../../components/v2/kids/K3Hero.astro';
+import ProgramFrame from '../../../components/v2/kids/ProgramFrame.astro';
+import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
 import BalloonDog from '../../../components/v2/kids/BalloonDog.astro';
-import Squiggle from '../../../components/v2/kids/Squiggle.astro';
 import YouTubeFacade from '../../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../../data/site';
-import '../../../styles/kids-kit.css';
+import '../../../styles/kids-v3.css';
 import { Image } from 'astro:assets';
 import ballonmodellage1Img from '../../../assets/images/clown/ballonmodellage-1.jpg';
 import ballonmodellage2Img from '../../../assets/images/clown/ballonmodellage-2.jpg';
@@ -110,90 +111,83 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   structuredData={structuredData}
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Clown', url: '/clown/clownshow/' }, { name: 'Ballonmodellage', url: '/clown/ballonmodellage/' }]}
 >
-  <!-- ── Hero. No reveal here (LCP). ── -->
-  <section class="kg-hero">
-    <canvas class="kg-rays" aria-hidden="true" data-side-rays='{"rayColor1":"#ffb546","rayColor2":"#ff8a3d","origin":"top-right","speed":1.6,"intensity":2,"spread":1.4,"saturation":1.5,"blend":0.4,"falloff":1.3,"opacity":0.9}'></canvas>
-    <Bunting />
-    <div class="container kg-hero__grid">
-      <div class="kg-hero__copy">
-        <p class="bm-crumbs">
+  <!-- ── Hero: the big-top stage (K3Hero). No reveal here (LCP). ── -->
+  <K3Hero>
+        <p class="k3-crumbs">
           <a href="/">Clown</a> »
           <a href="/">Clown Zauberer LIAR</a> »
           <span>Ballonmodellage</span>
         </p>
         <ReviewBadge />
-        <h1 class="kg-hero__title" data-letters>Ballonmodellage in NRW – <span class="kg-mark">Ballonkünstler</span> für Kinder</h1>
-        <h2 class="bm-hero__sub">
+        <h1 class="k3-hero__title" data-letters>Ballonmodellage in NRW – <span class="k3-mark">Ballonkünstler</span> für Kinder</h1>
+        <h2 class="k3-hero__sub">
           🎈 Bunte Ballonfiguren,<br />die Kinderaugen zum Leuchten bringen
         </h2>
-        <p class="bm-hero__claim">Individuelle Wunschfiguren für jedes Kind!</p>
-        <div class="kg-hero__actions">
+        <p class="k3-hero__claim">Individuelle Wunschfiguren für jedes Kind!</p>
+        <div class="k3-hero__actions">
           <a class="btn btn--primary" href="/kontakt/" data-confetti>Jetzt unverbindlich anfragen</a>
           <a class="btn btn--ghost" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer">Per WhatsApp fragen</a>
         </div>
-      </div>
-      <figure class="kg-hero__photo">
-        <Image
-          src={ballonmodellage1Img}
-          alt="Ballonmodellage NRW – Bunte Ballonfiguren für Kinder"
-          widths={[400, 700, 1000, 1400]}
-          sizes="(max-width: 900px) 92vw, 560px"
-          loading="eager"
-          fetchpriority="high"
-          style="object-position: 48% 51%"
-        />
-        <span class="bm-knot" aria-hidden="true">🎈</span>
-      </figure>
-    </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={ballonmodellage1Img}
+        alt="Ballonmodellage NRW – Bunte Ballonfiguren für Kinder"
+        widths={[400, 700, 980]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Intro ── -->
-  <section class="kg-intro">
-    <div class="container kg-intro__grid">
-      <div class="kg-intro__text" data-reveal>
-        <p class="kg-lead">
+  <section class="k3-intro">
+    <div class="container k3-split">
+      <div data-reveal>
+        <p class="k3-lead">
           Ballonmodellage bei Clown LIAR (Michaël Prescler) bedeutet: Aus langen Modellierballons entstehen in 2–5 Minuten individuelle Wunschfiguren – Hunde, Schwerter, Blumen, Kronen und mehr. Buchbar in ganz NRW für Kindergeburtstage, Kita- und Schulfeste, Straßenfeste und Firmenfeiern mit Kindern. Jedes Kind bekommt seine eigene Figur, die mehrere Tage hält.
         </p>
-        <p>
+        <p class="k3-soft">
           Als Ballonkünstler forme ich seit über 15 Jahren fantasievolle Ballonfiguren für Kindergeburtstage, Kinderfeste, Straßenfeste und Events in ganz Nordrhein-Westfalen. Ob Ballontiere, Schwerter, Blumen oder komplexe Kreationen – vor den Augen der Kinder entstehen in wenigen Minuten bunte Kunstwerke aus Luftballons!
         </p>
-        <p>
+        <p class="k3-soft">
           Das Besondere: Jedes Kind bekommt seine individuelle Wunschfigur! Ob der Junge ein Schwert zum Fechten möchte, das Mädchen eine Blume für Mama oder beide einen Hund, eine Giraffe oder einen Marienkäfer – ich erfülle Ballonwünsche und sorge für strahlende Gesichter.
         </p>
-        <p>
+        <p class="k3-soft">
           Ballonmodellage ist perfekt für Kindergeburtstage, Straßenfeste, Firmenfeiern mit Kindern, Kita-Feste, Schulveranstaltungen und alle Events, bei denen Kinder dabei sind. Kombinieren Sie die Ballonkunst mit meiner <a href="/clown/clownshow/">Clownshow</a> oder ergänzen Sie das Programm um <a href="/clown/glitzer-tattoo/">Glitzer Tattoos</a> für ein rundum gelungenes Kinderfest!
         </p>
         <a href="/kindergeburtstag/" class="btn btn--primary">
           🎂 Kindergeburtstag – Preise
         </a>
       </div>
-      <figure class="bm-portrait" data-reveal="pop" data-reveal-delay="0.1">
+      <ProgramFrame class="k3-photo bm-portrait" data-reveal data-reveal-delay="0.1">
         <Image
           src={ballonmodellage2Img}
           alt="Herzballon für ein Kind bei Ballonmodellage"
-          data-scroll-tilt="3"
-          widths={[340, 680]}
-          sizes="340px"
+          widths={[320, 640]}
+          sizes="(max-width: 900px) 80vw, 290px"
           loading="lazy"
         />
-      </figure>
+      </ProgramFrame>
     </div>
   </section>
 
   <!-- ── Weitere Anlässe (SEO-Audit 06.08.2026, H6: internal links to /clown/karneval/ + /clown/walk-act/) ── -->
-  <section class="bm-related" data-related-services>
-    <div class="container kg-narrow">
-      <h2 class="kg-h2 kg-center" data-reveal>
+  <section class="k3-alt" data-related-services>
+    <div class="container k3-narrow">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>
         Für welche Anlässe kann man Clown LIAR sonst buchen?
       </h2>
-      <div class="bm-related__grid">
-        <a href="/clown/karneval/" class="bm-related__card" data-reveal="pop">
-          <p class="bm-related__title">Clown für Karneval &amp; Kindersitzung</p>
-          <p class="bm-related__text">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
+      <div class="k3-links">
+        <a href="/clown/karneval/" class="k3-link-card" data-reveal>
+          <p class="k3-link-card__title">Clown für Karneval &amp; Kindersitzung</p>
+          <p class="k3-link-card__text">Jecke Zaubershow für Kindersitzung, Karnevalsfeier und Rosenmontagsparty in NRW.</p>
         </a>
-        <a href="/clown/walk-act/" class="bm-related__card" data-reveal="pop" data-reveal-delay="0.1">
-          <p class="bm-related__title">Walk-Act für Straßen- und Stadtfest</p>
-          <p class="bm-related__text">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
+        <a href="/clown/walk-act/" class="k3-link-card" data-reveal data-reveal-delay="0.08">
+          <p class="k3-link-card__title">Walk-Act für Straßen- und Stadtfest</p>
+          <p class="k3-link-card__text">Clown Zauberer LIAR mitten im Publikum – Ballonfiguren und Magie zum Anfassen.</p>
         </a>
       </div>
     </div>
@@ -201,21 +195,42 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <Reviews />
 
+  <!-- ── Zahlen: the velvet ring ── -->
+  <section class="k3-band k3-band--velvet">
+    <div class="container">
+      <GoldDivider />
+      <div class="k3-stats">
+        <div class="k3-stat" data-reveal>
+          <p class="k3-stat__num" data-count>400</p>
+          <p class="k3-stat__label">Shows im Jahr</p>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.08">
+          <p class="k3-stat__num">110.000</p>
+          <p class="k3-stat__label">Lachende Kinder</p>
+        </div>
+        <div class="k3-stat" data-reveal data-reveal-delay="0.16">
+          <p class="k3-stat__num" data-count>15</p>
+          <p class="k3-stat__label">Jahre Erfahrung</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <!-- ── Was ist Ballonmodellage? ── -->
   <section class="bm-what">
     <div class="container">
-      <Squiggle color="var(--brand-blue)" />
-      <h2 class="kg-h2 kg-center" data-reveal>🎈 Was ist Ballonmodellage?</h2>
-      <p class="kg-center kg-sub">Ballonmodellage – Die Kunst der Ballonfiguren</p>
-      <div class="kg-cards bm-what__cards">
-        <article class="kg-card kg-card--red" data-reveal="pop">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>🎈 Was ist Ballonmodellage?</h2>
+      <p class="k3-center k3-sub">Ballonmodellage – Die Kunst der Ballonfiguren</p>
+      <div class="k3-cards bm-what__cards">
+        <article class="k3-card" data-reveal>
           <h3>Wie funktioniert es?</h3>
           <p>
             Ballonmodellage (auch Ballonkunst oder Balloon Twisting genannt) ist die Kunst, aus langen Modellierballons fantasievolle Figuren zu formen. Mit gezielten Drehungen, Knicken und Kombinationen entstehen innerhalb von 2–5 Minuten beeindruckende Kreationen.
           </p>
-          <p class="kg-card__note">Ich verwende spezielle Modellierballons, die sich perfekt formen lassen.</p>
+          <p class="k3-card__note">Ich verwende spezielle Modellierballons, die sich perfekt formen lassen.</p>
         </article>
-        <article class="kg-card kg-card--blue" data-reveal="pop" data-reveal-delay="0.1">
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
           <h3>Die Technik erfordert:</h3>
           <ul>
             <li><span>✓</span> Geschick und Übung</li>
@@ -224,7 +239,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             <li><span>✓</span> Geduld mit den kleinen Künstlern</li>
           </ul>
         </article>
-        <article class="kg-card kg-card--yellow bm-what__good" data-reveal="pop" data-reveal-delay="0.2">
+        <article class="k3-card bm-what__good" data-reveal data-reveal-delay="0.16">
           <h3>Was macht gute Ballonmodellage aus?</h3>
           <ul>
             <li><strong>Schnelligkeit</strong> – Pro Figur nur 1–2 Min.</li>
@@ -236,10 +251,10 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       </div>
 
       <div class="bm-occasions">
-        <h3 class="kg-h3 kg-center" data-reveal>Für welche Anlässe eignet sich Ballonmodellage?</h3>
-        <ul class="bm-chips" data-reveal>
+        <h3 class="k3-h3 k3-center" data-reveal>Für welche Anlässe eignet sich Ballonmodellage?</h3>
+        <ul class="k3-chips" data-reveal>
           {anlaesse.map((a) => (
-            <li><span class="bm-chips__tick">✓</span><span>{a}</span></li>
+            <li><span class="bm-chips__tick">✓</span> <span>{a}</span></li>
           ))}
         </ul>
       </div>
@@ -247,13 +262,14 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Beliebte Ballonfiguren: the balloon dog inflates in the classics card ── -->
-  <section class="bm-figures">
+  <section class="k3-alt bm-figures">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>🐾 Beliebte Ballonfiguren</h2>
-      <p class="kg-center kg-sub">Das Ballonrepertoire – Von Hund bis Marienkäfer</p>
-      <div class="bm-figures__grid">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>🐾 Beliebte Ballonfiguren</h2>
+      <p class="k3-center k3-sub">Das Ballonrepertoire – Von Hund bis Marienkäfer</p>
+      <div class="k3-grid k3-grid--2">
         {figuren.map((cat, i) => (
-          <article class="bm-fig" data-reveal="tilt" data-reveal-delay={i * 0.08}>
+          <article class="k3-card bm-fig" data-reveal data-reveal-delay={i % 2 ? '0.08' : undefined}>
             {i === 0 && <BalloonDog />}
             <h3>{cat.title}</h3>
             <ul>
@@ -267,15 +283,16 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Kombinationsmöglichkeiten (blue band) ── -->
-  <section class="kg-band kg-band--blue bm-combo">
-    <SectionEdge color="var(--brand-blue)" side="top" />
-    <SectionEdge color="var(--brand-blue)" side="bottom" />
+  <!-- ── Kombinationsmöglichkeiten: two combos under a red and a blue spotlight ── -->
+  <section class="k3-extras k3-band k3-band--spot bm-combo">
+    <span class="k3-spot k3-spot--red" aria-hidden="true"></span>
+    <span class="k3-spot k3-spot--blue" aria-hidden="true"></span>
     <div class="container">
-      <h2 class="kg-h2">🎪 Kombinationsmöglichkeiten</h2>
-      <p class="bm-combo__sub">Ballonmodellage perfekt kombinieren</p>
-      <div class="bm-combo__grid">
-        <article class="bm-combo__card" data-reveal="pop">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center">🎪 Kombinationsmöglichkeiten</h2>
+      <p class="k3-center k3-sub">Ballonmodellage perfekt kombinieren</p>
+      <div class="k3-extras__grid">
+        <article class="k3-extra" data-reveal>
           <h3>🎩 Ballonmodellage + Show</h3>
           <p class="bm-combo__lead">Die perfekte Kombi für Kindergeburtstage!</p>
           <ul>
@@ -285,7 +302,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
             <li><span>✓</span> Tolle Erinnerung zum Mitnehmen</li>
           </ul>
         </article>
-        <article class="bm-combo__card" data-reveal="pop" data-reveal-delay="0.1">
+        <article class="k3-extra" data-reveal data-reveal-delay="0.08">
           <h3>🚶 Ballonmodellage + Walk-Act</h3>
           <p class="bm-combo__lead">Für große Feste ideal!</p>
           <ul>
@@ -299,65 +316,47 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Zahlen: three balloon stickers ── -->
-  <section class="bm-stats">
-    <div class="container bm-stats__grid">
-      <div class="bm-stat" data-reveal="pop">
-        <p class="bm-stat__num" data-count>400</p>
-        <p class="bm-stat__label">Shows im Jahr</p>
-      </div>
-      <div class="bm-stat bm-stat--blue" data-reveal="pop" data-reveal-delay="0.08">
-        <p class="bm-stat__num">110.000</p>
-        <p class="bm-stat__label">Lachende Kinder</p>
-      </div>
-      <div class="bm-stat bm-stat--yellow" data-reveal="pop" data-reveal-delay="0.16">
-        <p class="bm-stat__num" data-count>15</p>
-        <p class="bm-stat__label">Jahre Erfahrung</p>
-      </div>
-    </div>
-  </section>
-
   <!-- ── Fotos (static strip replaces the legacy slider) ── -->
   <section class="bm-gallery">
     <div class="container">
-      <h2 class="kg-h2 kg-center" data-reveal>📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <p class="kg-center kg-narrow bm-gallery__text">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <p class="k3-center k3-narrow k3-soft">
         Foto- und Videogalerie sind eine bereichernde und erfüllende Erfahrung: wir öffnen uns eine Welt der Emotionen! Sie regen uns an, unser Verständnis für die Welt und die Menschen um uns herum zu vertiefen. Fotos und Videos haben die Kraft, Emotionen in uns hervorzurufen und erzeugen eine emotionale Verbindung. Eine Galerie kann uns dazu bringen, uns mit den dargestellten Momenten und Geschichten zu verbinden…oder einfach spontane Eindrücke festzuhalten! Viel Spaß bei Stöbern!
       </p>
-      <div class="bm-gallery__grid">
+      <div class="k3-grid k3-grid--3 bm-gallery__grid">
         {_pageGallery.map((g, i) => (
-          <figure class="bm-gallery__item" data-reveal="pop" data-reveal-delay={i * 0.08}>
-            <Image src={g.src} alt={g.alt} widths={[360, 600, 900]} sizes="(max-width: 760px) 92vw, 33vw" loading="lazy" data-scroll-tilt="3" />
-          </figure>
+          <ProgramFrame class="bm-gallery__item" data-reveal data-reveal-delay={i ? String(i * 0.08) : undefined}>
+            <Image src={g.src} alt={g.alt} widths={[360, 600]} sizes="(max-width: 900px) 86vw, 340px" loading="lazy" />
+          </ProgramFrame>
         ))}
       </div>
     </div>
   </section>
 
   <!-- ── Einsatzgebiet ── -->
-  <section class="kg-area bm-area">
+  <section class="k3-area k3-alt">
     <div class="container">
-      <Squiggle />
-      <h2 class="kg-h2 kg-center bm-area__title">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
-      <h3 class="kg-h3 kg-center">Einsatzgebiet Ballonmodellage</h3>
-      <div class="kg-area__grid">
-        <div class="kg-area__text" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center bm-area__title">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
+      <h3 class="k3-h3 k3-center">Einsatzgebiet Ballonmodellage</h3>
+      <div class="k3-area__grid">
+        <div data-reveal>
           <p>Als Ballonkünstler bin ich in ganz Nordrhein-Westfalen unterwegs:</p>
           {einsatzgebiet.map((e) => (
             <div class="bm-region">
               <p class="bm-region__name">{e.region}</p>
-              <p class="kg-cities">{e.cities}</p>
+              <p class="k3-cities">{e.cities}</p>
             </div>
           ))}
           <p>🌍 Weitere Regionen: Auf Anfrage auch in ganz NRW und überregional!</p>
         </div>
-        <figure class="kg-area__map" data-reveal>
+        <figure class="k3-area__map" data-reveal>
           <Image
             src={clownZaubererGladbeckImg}
             alt="Ballonmodellage mit Clown LIAR – Einsatzgebiet"
-            data-scroll-tilt="2"
             widths={[400, 800]}
-            sizes="(min-width: 768px) 50vw, 100vw"
+            sizes="(max-width: 900px) 86vw, 460px"
             loading="lazy"
           />
         </figure>
@@ -365,16 +364,18 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     </div>
   </section>
 
-  <!-- ── Video (yellow band) ── -->
-  <section class="kg-band kg-band--yellow">
-    <SectionEdge color="var(--brand-yellow)" side="top" />
-    <SectionEdge color="var(--brand-yellow)" side="bottom" />
-    <div class="container kg-narrow kg-center">
-      <h2 class="kg-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
-      <div class="kg-video" data-reveal="pop">
+  <!-- ── Video: Hollywood premiere searchlights, curtain with tie-backs ── -->
+  <section class="k3-band k3-band--night k3-premiere">
+    <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
+    <span class="k3-uplight k3-uplight--r" aria-hidden="true"></span>
+    <div class="container k3-narrow k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
+      <div class="k3-video" data-reveal>
+        <Curtain trigger="stage" rest="clamp(2.2rem, 10vw, 4.6rem)" span="min(42rem, 100vw - 2rem)" tieback valance />
         <YouTubeFacade id="Cop0SqRIX4Y" title="Clown Zauberer für Geburtstag, Feier, Veranstaltung in NRW : die lustigste Zaubershow im Pott!" />
       </div>
-      <h3 class="kg-h3">
+      <h3 class="k3-h3">
         Mehr Fotos und Videos in der Galerie
       </h3>
       <a href="/galerie/" class="btn btn--primary">Zur Foto- und Videogalerie</a>
@@ -383,9 +384,10 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 
   <!-- ── CTA ── -->
   <section class="bm-cta">
-    <div class="container kg-narrow kg-center" data-reveal>
-      <h2 class="kg-h2">Jetzt Ballonmodellage buchen!</h2>
-      <p>
+    <div class="container k3-narrow k3-center" data-reveal>
+      <GoldDivider />
+      <h2 class="k3-h2">Jetzt Ballonmodellage buchen!</h2>
+      <p class="k3-soft">
         Machen Sie Ihr Event bunter! Mit professioneller Ballonmodellage sorge ich für strahlende Kinderaugen und fantasievolle Ballonfiguren, die noch tagelang Freude bereiten! Perfekt in Kombination mit meiner <a href="/clown/clownshow/">Clownshow</a> oder ergänzt durch <a href="/clown/glitzer-tattoo/">Glitzer Tattoos</a>.
       </p>
       <div class="bm-cta__contact">
@@ -400,130 +402,38 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 </V2Layout>
 
 <style>
-  /* ── hero ── */
-  .bm-crumbs { font-size: 0.88rem; font-weight: 700; color: var(--ink-soft); margin-bottom: var(--space-2); }
-  .bm-crumbs a { color: inherit; }
-  .bm-hero__sub { font-size: clamp(1.2rem, 2.4vw, 1.6rem); font-weight: 650; color: var(--brand-blue); margin: 0 0 0.5rem; }
-  .bm-hero__claim { font-weight: 800; margin-bottom: var(--space-3); }
-  /* a loose balloon tied to the photo corner, drifting gently */
-  .bm-knot {
-    position: absolute; top: -1.4rem; right: -0.8rem; font-size: 3.2rem; line-height: 1;
-    filter: drop-shadow(3px 3px 0 var(--line));
-    animation: bm-drift 5s ease-in-out infinite alternate;
-  }
-  @keyframes bm-drift { from { translate: 0 0; rotate: -6deg; } to { translate: 0 -0.6rem; rotate: 5deg; } }
-  @media (prefers-reduced-motion: reduce) { .bm-knot { animation: none; } }
+  /* page-only touches; the v3 language lives in kids-v3.css */
+  .bm-portrait { width: min(100%, 19rem); }
 
-  /* ── intro ── */
-  .bm-portrait { margin: 0; justify-self: center; rotate: 2deg; }
-  .bm-portrait :global(img) {
-    display: block; width: min(21.25rem, 80vw); height: auto; aspect-ratio: 1; object-fit: cover;
-    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 8px 8px 0 var(--line);
-  }
-
-  /* ── related ── */
-  .bm-related { background: var(--bg); }
-  .bm-related__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 17rem), 1fr)); }
-  .bm-related__card {
-    display: block; padding: var(--space-3); color: var(--ink); text-decoration: none;
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
-    transition: transform 0.3s var(--ease-out-expo), box-shadow 0.3s var(--ease-out);
-  }
-  .bm-related__card:nth-child(1) { rotate: -1deg; }
-  .bm-related__card:nth-child(2) { rotate: 1deg; }
-  .bm-related__card .bm-related__title { font-family: var(--font-display); font-weight: 650; font-size: 1.2rem; margin-bottom: 0.3rem; }
-  .bm-related__card .bm-related__text { color: var(--ink-soft); font-size: 0.95rem; margin: 0; }
-  @media (hover: hover) and (pointer: fine) {
-    .bm-related__card:hover { transform: translate(-3px, -5px); box-shadow: var(--shadow-hover); }
-  }
-
-  /* ── was ist ── */
-  .bm-what { background: var(--surface); border-block: var(--border); }
-  .bm-what__cards { margin-top: var(--space-4); }
-  .bm-what__cards p { color: var(--ink-soft); }
+  /* was ist: the "good balloon art" list reads as sentences, not tick rows */
+  .bm-what__cards .k3-card > p:not(.k3-card__note) { color: var(--ink-soft); }
   .bm-what__good li { display: block; }
   .bm-occasions { margin-top: var(--space-5); }
-  .bm-chips { list-style: none; margin: var(--space-3) 0 0; padding: 0; display: flex; flex-wrap: wrap; justify-content: center; gap: 0.6rem; }
-  .bm-chips li {
-    display: inline-flex; gap: 0.45rem; align-items: center; padding: 0.45rem 1rem;
-    font-weight: 700; background: var(--bg); border: 2px solid var(--line); border-radius: 999px;
-    box-shadow: 2px 2px 0 var(--line); transition: rotate 0.25s var(--ease-out), background-color 0.2s;
-  }
-  .bm-chips li:nth-child(3n + 1) { rotate: -1.5deg; }
-  .bm-chips li:nth-child(3n + 2) { rotate: 1deg; }
-  .bm-chips__tick { color: var(--accent-strong); font-weight: 900; }
-  @media (hover: hover) and (pointer: fine) {
-    .bm-chips li:hover { rotate: 0deg; background: color-mix(in srgb, var(--brand-yellow) 35%, var(--bg)); }
-  }
+  .bm-chips__tick { color: var(--gold); font-weight: 900; }
 
-  /* ── figuren ── */
-  .bm-figures__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 24rem), 1fr)); margin-top: var(--space-4); }
-  .bm-fig {
-    position: relative; padding: var(--space-3);
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: var(--shadow);
-    transition: rotate 0.25s var(--ease-out);
-  }
-  .bm-fig:nth-child(odd) { rotate: -0.8deg; }
-  .bm-fig:nth-child(even) { rotate: 0.8deg; }
-  .bm-fig h3 { font-size: 1.4rem; margin: 0 0 var(--space-2); }
+  /* figures: left-aligned lists, the balloon dog stands in the first card's corner */
+  .bm-fig h3 { text-align: left; margin-bottom: var(--space-2); }
   .bm-fig:has(:global(.bd)) h3 { padding-right: 7.5rem; min-height: 4.5rem; }
-  .bm-fig ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.45rem; color: var(--ink-soft); font-weight: 600; }
-  @media (hover: hover) and (pointer: fine) { .bm-fig:hover { rotate: 0deg; } }
+  .bm-fig ul { color: var(--ink-soft); font-weight: 600; }
+  .bm-fig li { display: block; }
 
-  /* ── kombi (blue band): white cards keep ink text ── */
-  .bm-combo__sub { font-family: var(--font-display); font-size: 1.25rem; }
-  .bm-combo__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr)); margin-top: var(--space-4); text-align: left; }
-  .bm-combo__card {
-    padding: var(--space-4) var(--space-3) var(--space-3); color: var(--ink);
-    background: var(--surface); border: var(--border); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line);
-  }
-  .bm-combo__card:nth-child(1) { rotate: -1deg; }
-  .bm-combo__card:nth-child(2) { rotate: 1deg; }
-  .bm-combo__card h3 { font-size: 1.45rem; margin: 0 0 0.4rem; }
-  .bm-combo__lead { font-weight: 800; color: var(--accent-strong); }
-  .bm-combo__card ul { list-style: none; margin: var(--space-2) 0 0; padding: 0; display: grid; gap: 0.5rem; color: var(--ink-soft); }
-  .bm-combo__card li span { color: var(--accent-strong); font-weight: 900; margin-right: 0.2rem; }
-  .kg-band--blue .bm-combo__card a:not(.btn) { color: var(--ink); text-decoration-color: var(--brand-blue); }
+  /* combos under the spotlights; the long compound heading must fit a 390 px phone */
+  @media (max-width: 480px) { .bm-combo .k3-h2 { font-size: 6.4vw; } }
+  .bm-combo .k3-extra h3 { font-family: var(--font-display); font-size: 1.45rem; font-weight: 600; margin: 0 0 0.4rem; }
+  .bm-combo .k3-extra .bm-combo__lead { font-weight: 800; color: var(--accent-strong); }
+  .bm-combo .k3-extra ul { list-style: none; margin: var(--space-2) 0 0; padding: 0; display: grid; gap: 0.5rem; color: var(--ink-soft); }
+  .bm-combo .k3-extra li span { color: var(--gold); font-weight: 900; margin-right: 0.2rem; }
+  .bm-combo .k3-extra a:not(.btn) { color: var(--accent-strong); }
 
-  /* ── stats: balloon stickers ── */
-  .bm-stats__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(3, 1fr); max-width: 52rem; }
-  .bm-stat {
-    --c: var(--brand-red);
-    display: grid; place-content: center; text-align: center; aspect-ratio: 1; max-width: 13rem; width: 100%; justify-self: center;
-    background: var(--c); color: #fff; border: var(--border); border-radius: 50% 50% 48% 52% / 55% 55% 45% 45%;
-    box-shadow: 6px 6px 0 var(--line); rotate: -4deg;
-  }
-  .bm-stat--blue { --c: var(--brand-blue); rotate: 3deg; }
-  .bm-stat--yellow { --c: var(--brand-yellow); color: var(--ink); rotate: -2deg; }
-  .bm-stat .bm-stat__num { font-family: var(--font-display); font-size: clamp(1.8rem, 4.5vw, 2.8rem); font-weight: 700; line-height: 1; margin: 0 0 0.3rem; }
-  .bm-stat .bm-stat__label { font-weight: 800; font-size: 0.95rem; margin: 0; padding-inline: 0.6rem; }
+  /* gallery: whole photos in programme frames, slightly tilted */
+  .bm-gallery__grid { align-items: center; }
+  .bm-gallery__grid > :nth-child(1) { rotate: -1.5deg; }
+  .bm-gallery__grid > :nth-child(2) { rotate: 1deg; }
+  .bm-gallery__grid > :nth-child(3) { rotate: -0.8deg; }
 
-  /* ── gallery ── */
-  .bm-gallery { background: var(--surface); border-block: var(--border); }
-  .bm-gallery__text { color: var(--ink-soft); }
-  .bm-gallery__grid { display: grid; gap: var(--space-3); grid-template-columns: repeat(3, 1fr); margin-top: var(--space-4); }
-  .bm-gallery__item { margin: 0; }
-  .bm-gallery__item:nth-child(1) { rotate: -2deg; }
-  .bm-gallery__item:nth-child(2) { rotate: 1.5deg; translate: 0 0.8rem; }
-  .bm-gallery__item:nth-child(3) { rotate: -1deg; }
-  .bm-gallery__item :global(img) {
-    display: block; width: 100%; height: auto; aspect-ratio: 4 / 3; object-fit: cover;
-    border: 5px solid var(--line); border-radius: var(--radius); box-shadow: 6px 6px 0 var(--line);
-  }
-
-  /* ── area ── */
+  /* area + cta */
   .bm-area__title { color: var(--accent-strong); }
   .bm-region { margin-bottom: var(--space-2); }
   .bm-region .bm-region__name { font-weight: 800; margin-bottom: 0.2rem; }
-
-  /* ── cta ── */
-  .bm-cta { background: var(--bg); }
-  .bm-cta p { color: var(--ink-soft); }
   .bm-cta__contact { margin: var(--space-3) 0; font-weight: 700; }
-
-  @media (max-width: 760px) {
-    .bm-stats__grid { grid-template-columns: 1fr; max-width: 14rem; }
-    .bm-gallery__grid { grid-template-columns: 1fr; }
-    .bm-gallery__item:nth-child(2) { translate: none; }
-  }
 </style>
