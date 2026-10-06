@@ -8,6 +8,7 @@ import karteImg from '../../assets/images/home/clown-zauberer-gladbeck-karte.jpg
 import Reviews from '../../components/v2/Reviews.astro';
 import ReviewBadge from '../../components/v2/ReviewBadge.astro';
 import Curtain from '../../components/v2/kids/Curtain.astro';
+import K3Hero from '../../components/v2/kids/K3Hero.astro';
 import ProgramFrame from '../../components/v2/kids/ProgramFrame.astro';
 import GoldDivider from '../../components/v2/kids/GoldDivider.astro';
 import HatTrick from '../../components/v2/kids/HatTrick.astro';
@@ -136,13 +137,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   breadcrumbs={[{ name: 'Startseite', url: '/' }, { name: 'Kindergeburtstag', url: '/kindergeburtstag/' }]}
 >
   <!-- ── Hero: the stage between red velvet curtains. No reveal here (LCP). ── -->
-  <section class="k3-hero">
-    <!-- red + blue spotlights, same light show as the extras (user 2026-10-06) -->
-    <span class="k3-spot k3-spot--red k3-spot--stagehero" aria-hidden="true"></span>
-    <span class="k3-spot k3-spot--blue k3-spot--stagehero" aria-hidden="true"></span>
-    <Curtain rest="var(--curtain)" tieback valance />
-    <div class="container k3-hero__grid">
-      <div class="k3-hero__copy">
+  <K3Hero>
         <ReviewBadge />
         <h1 class="k3-hero__title" data-letters>
           Zauberer für <span class="k3-mark">Kindergeburtstag</span> in NRW<br />mit Clown & Lachgarantie
@@ -157,20 +152,18 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
           <a href="#bewertungen">Bewertungen</a>
           <a href="#einsatzgebiet">Städte</a>
         </nav>
-      </div>
-      <ProgramFrame class="k3-hero__photo">
-        <Image
-          src={heroImg}
-          alt="Kindergeburtstag mit Clown Zauberer NRW"
-          widths={[400, 700, 1000]}
-          quality={70}
-          sizes="(max-width: 900px) 80vw, 500px"
-          loading="eager"
-          fetchpriority="high"
-        />
-      </ProgramFrame>
-    </div>
-  </section>
+    <Fragment slot="photo">
+      <Image
+        src={heroImg}
+        alt="Kindergeburtstag mit Clown Zauberer NRW"
+        widths={[400, 700, 1000]}
+        quality={70}
+        sizes="(max-width: 900px) 80vw, 500px"
+        loading="eager"
+        fetchpriority="high"
+      />
+    </Fragment>
+  </K3Hero>
 
   <!-- ── Intro ─────────────────────────────────────────────── -->
   <section class="k3-intro">

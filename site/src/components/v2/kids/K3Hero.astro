@@ -1,0 +1,25 @@
+---
+/**
+ * Kids v3 „Manege im Zelt“ hero, shared by every kids page (prototype: /kindergeburtstag/).
+ * Big-top stage background + red/blue projector light (kids-v3.css), red velvet curtain that
+ * opens with tie-backs and a valance, copy on the left, the photo in a programme frame on the
+ * right. Never put data-reveal on anything in here (LCP).
+ *
+ * Slots: default = the hero copy (badge, h1 with data-letters, actions, quick links …)
+ *        photo   = the <Image … loading="eager" fetchpriority="high" /> (optional)
+ * Pages import '../styles/kids-v3.css' themselves.
+ */
+import Curtain from './Curtain.astro';
+import ProgramFrame from './ProgramFrame.astro';
+const hasPhoto = Astro.slots.has('photo');
+---
+
+<section class="k3-hero">
+  <span class="k3-spot k3-spot--red k3-spot--stagehero" aria-hidden="true"></span>
+  <span class="k3-spot k3-spot--blue k3-spot--stagehero" aria-hidden="true"></span>
+  <Curtain rest="var(--curtain)" tieback valance />
+  <div class:list={['container', 'k3-hero__grid', { 'k3-hero__grid--solo': !hasPhoto }]}>
+    <div class="k3-hero__copy"><slot /></div>
+    {hasPhoto && <ProgramFrame class="k3-hero__photo"><slot name="photo" /></ProgramFrame>}
+  </div>
+</section>
