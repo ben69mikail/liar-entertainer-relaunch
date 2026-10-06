@@ -1,7 +1,6 @@
 ---
 // Preload the fonts the first screen of each zone renders with (latin subset only), so the
 // headline paints in its real face early. Same hashed files as the @font-face rules (Vite dedupes).
-import fredoka from '@fontsource-variable/fredoka/files/fredoka-latin-wght-normal.woff2?url';
 import nunito from '@fontsource-variable/nunito/files/nunito-latin-wght-normal.woff2?url';
 import bodoni from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-normal.woff2?url';
 import bodoniItalic from '@fontsource-variable/bodoni-moda/files/bodoni-moda-latin-wght-italic.woff2?url';
@@ -15,9 +14,9 @@ import { zoneFor } from '../../lib/site-map';
 // Adult also preloads the body face and the suit glyphs (♠♥♦♣ live in Bodoni's "symbols" subset):
 // discovered late, each swap re-shaped the whole page after first paint (≈400 ms TBT on 4× CPU).
 const path = Astro.url.pathname;
-// kids v3 „Manege im Zelt“ (Fraunces headings) on every kids page; neutral pages still Fredoka
+// kids v3 „Manege im Zelt“ (Fraunces headings) on kids + neutral pages
 const zone = zoneFor(path);
-const fonts = zone === 'adult' ? [bodoni, bodoniItalic, instrument, bodoniSuits] : zone === 'kids' ? [fraunces, nunito] : [fredoka, nunito];
+const fonts = zone === 'adult' ? [bodoni, bodoniItalic, instrument, bodoniSuits] : [fraunces, nunito];
 ---
 
 {fonts.map((href) => <link rel="preload" as="font" type="font/woff2" href={href} crossorigin />)}

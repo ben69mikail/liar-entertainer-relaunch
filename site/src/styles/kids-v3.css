@@ -8,8 +8,8 @@
  */
 @import '@fontsource-variable/fraunces/wght.css';
 
-/* ── tokens: only on pages that carry the v3 hero, so header/footer/reviews match there ── */
-[data-zone='kids']:has(.k3-hero) {
+/* ── tokens: kids + neutral zones, on every page that loads this file (header/footer/reviews match) ── */
+html:is([data-zone='kids'], [data-zone='neutral']) {
   --bg: #fdf6ea;
   --bg-alt: #f8ecd6;
   --surface: #fffcf5;
@@ -32,14 +32,14 @@
 }
 
 /* buttons: soft, rounded, no hard offset shadow; hover lifts (fine pointers only) */
-[data-zone='kids']:has(.k3-hero) .v2 .btn { border: 0; letter-spacing: 0.01em; }
-[data-zone='kids']:has(.k3-hero) .v2 .btn--primary {
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 .btn { border: 0; letter-spacing: 0.01em; }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 .btn--primary {
   background: linear-gradient(180deg, #d13a42, #a8192a);
   box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 10px 22px -10px rgba(142, 21, 32, 0.7);
 }
-[data-zone='kids']:has(.k3-hero) .v2 .btn--ghost { box-shadow: inset 0 0 0 1.5px var(--gold); background: rgba(255, 252, 245, 0.7); }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 .btn--ghost { box-shadow: inset 0 0 0 1.5px var(--gold); background: rgba(255, 252, 245, 0.7); }
 @media (hover: hover) and (pointer: fine) {
-  [data-zone='kids']:has(.k3-hero) .v2 .btn:hover { transform: translateY(-2px); }
+  html:is([data-zone='kids'], [data-zone='neutral']) .v2 .btn:hover { transform: translateY(-2px); }
 }
 
 /* ── rhythm + helpers ── */
@@ -214,8 +214,8 @@
 }
 
 /* ── reviews: same circus-programme cards as the prices (user, 2026-10-06) ── */
-[data-zone='kids']:has(.k3-hero) .rv { border-block: 0; }
-[data-zone='kids']:has(.k3-hero) .rv__card {
+html:is([data-zone='kids'], [data-zone='neutral']) .rv { border-block: 0; }
+html:is([data-zone='kids'], [data-zone='neutral']) .rv__card {
   rotate: none; border: 0;
   padding: calc(var(--space-3) + 0.4rem) var(--space-3) var(--space-3);
   background:
@@ -226,7 +226,7 @@
     var(--surface);
   box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), var(--shadow);
 }
-[data-zone='kids']:has(.k3-hero) .rv__title { font-weight: 600; }
+html:is([data-zone='kids'], [data-zone='neutral']) .rv__title { font-weight: 600; }
 
 /* intro: the show photo fills the free space under the text */
 .k3-intro__show { width: 80%; rotate: -1deg; } /* user: about 20 % smaller */
@@ -328,8 +328,8 @@
 .k3-hero .k3-mark { color: #ff7a82; }
 .k3-hero .k3-quick a { background: rgba(255, 252, 245, 0.12); color: #fff3e2; box-shadow: inset 0 0 0 1px rgba(233, 200, 119, 0.7); }
 @media (hover: hover) and (pointer: fine) { .k3-hero .k3-quick a:hover { background: rgba(255, 252, 245, 0.22); } }
-[data-zone='kids']:has(.k3-hero) .k3-hero .btn--ghost { background: transparent; color: #fff3e2; box-shadow: inset 0 0 0 1.5px #e9c877; }
-[data-zone='kids']:has(.k3-hero) .k3-hero .btn--primary { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 10px 26px -8px rgba(255, 60, 80, 0.6); }
+html:is([data-zone='kids'], [data-zone='neutral']) .k3-hero .btn--ghost { background: transparent; color: #fff3e2; box-shadow: inset 0 0 0 1.5px #e9c877; }
+html:is([data-zone='kids'], [data-zone='neutral']) .k3-hero .btn--primary { box-shadow: 0 1px 0 rgba(255, 255, 255, 0.25) inset, 0 10px 26px -8px rgba(255, 60, 80, 0.6); }
 .k3-hero__photo { box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.55), inset 0 0 0 5px var(--surface), inset 0 0 0 6px rgba(184, 134, 47, 0.25), 0 0 70px -10px rgba(120, 150, 255, 0.55), 0 30px 60px -20px rgba(0, 0, 0, 0.7); }
 
 /* ── video: Hollywood premiere searchlights from the floor (user 2026-10-06) ── */
