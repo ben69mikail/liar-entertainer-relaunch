@@ -23,7 +23,7 @@ Legende: 🤖 = Claude (lokal) · 👤 = du (Zugänge/Logins)
 
 ### Bauen (🤖, lokal, mit Tests)
 - [x] 🤖 E1 Netlify-Konfiguration: `netlify.toml` (Basis `site/`), `_redirects` aus der alten `.htaccess`, www→Apex, Header
-- [ ] 🤖 E2 Perf-Fix /zauberer/ (≥ 90)
+- [x] 🤖 E2 Perf-Gate: PageSpeed (Google) auf Netlify-Vorschau: / 97, /zauberer/ 96, /kindergeburtstag/ 99, /zauberer/hochzeit/ 100, Stadtseite 96
 - [x] 🤖 E3 Salon-Look auf 4 Adult-Seiten + Kartenränge D
 - [x] 🤖 E4 `/zauberer/close-up/`
 - [x] 🤖 E5 FR/EN-Kernseiten (20) + Prüfliste für dich
