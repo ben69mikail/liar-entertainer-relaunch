@@ -36,8 +36,8 @@ Legende: 🤖 = Claude (lokal) · 👤 = du (Zugänge/Logins)
 - [ ] 👤 O2 Netlify: einloggen, „Add new project → Import from GitHub“ → Repo wählen; Base directory `site`, Build `npm run build`, Publish `site/dist` (steht in netlify.toml). Forms aktivieren, Benachrichtigung an info@liar-entertainer.com
 - [ ] 🤖 Abnahme auf der Netlify-Vorschau (`*.netlify.app`): URL-Check aller DE-URLs, Redirects, Formular-Test, PageSpeed Insights
 - [x] 👤 O5 Netlify „Domain management“: `liar-entertainer.com` als Primary, `www` als Alias hinzufügen (Netlify-Ziele: A `@` → 75.2.60.5, CNAME `www` → liar-entertainer-relaunch.netlify.app)
-- [ ] 👤 O5 IONOS-DNS: `@` A → Netlify-Load-Balancer-IP (Wert aus Netlify ablesen), **`@` AAAA löschen**, `www` → CNAME `<projekt>.netlify.app` (vorher www-A/AAAA löschen). MX/TXT nicht anfassen!
-- [ ] 🤖 Propagation + HTTPS (Let's Encrypt) prüfen, Kern-URLs 200, www → Apex 301
+- [x] 👤 O5 IONOS-DNS: `@` A → Netlify-Load-Balancer-IP (Wert aus Netlify ablesen), **`@` AAAA löschen**, `www` → CNAME `<projekt>.netlify.app` (vorher www-A/AAAA löschen). MX/TXT nicht anfassen!
+- [x] 🤖 Propagation + HTTPS (Let's Encrypt) prüfen, Kern-URLs 200, www → Apex 301 (07.10.2026: 143/143 = 200, Zertifikat gültig)
 - [ ] 👤 O4 Search Console (liar-entertainer.com): Sitemap neu einreichen, Startseite + Kernseiten „Indexierung beantragen“
 
 ### Danach (gleicher Tag, wenn alles grün)

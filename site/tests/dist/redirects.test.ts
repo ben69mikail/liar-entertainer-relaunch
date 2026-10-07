@@ -202,6 +202,11 @@ describe('Netlify _redirects (parity with the old Apache .htaccess)', () => {
     expect(go('/', 'http://www.liar-entertainer.com')).toEqual([301, 'https://liar-entertainer.com/']);
   });
 
+  it('the Netlify preview host sends everyone to the main URL (no duplicate site)', () => {
+    expect(go('/zauberer/', 'https://liar-entertainer-relaunch.netlify.app')).toEqual([301, 'https://liar-entertainer.com/zauberer/']);
+    expect(go('/', 'http://liar-entertainer-relaunch.netlify.app')).toEqual([301, 'https://liar-entertainer.com/']);
+  });
+
   it('never touches a URL of the DE URL contract (with and without trailing slash)', () => {
     const contract = readFileSync(join(ROOT, '../docs/url-contract-de.txt'), 'utf8').split(/\r?\n/).filter(Boolean);
     expect(contract.length).toBe(143);

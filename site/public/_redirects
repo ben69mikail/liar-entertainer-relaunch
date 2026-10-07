@@ -42,6 +42,9 @@
 # ── Host: www -> apex (Apache l.14-15) ─────────────────────────
 https://www.liar-entertainer.com/*                                     https://liar-entertainer.com/:splat                301!
 http://www.liar-entertainer.com/*                                      https://liar-entertainer.com/:splat                301!
+# Netlify preview host -> main URL (Netlify does not redirect it on its own; 2026-10-07)
+https://liar-entertainer-relaunch.netlify.app/*                       https://liar-entertainer.com/:splat                301!
+http://liar-entertainer-relaunch.netlify.app/*                        https://liar-entertainer.com/:splat                301!
 
 # ── l.19 WordPress index.php ──
 /index.php                                                             /                                                  301
