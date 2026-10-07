@@ -1090,10 +1090,18 @@ function buildKeywords(): string {
   return '';
 }
 const pageKeywords = buildKeywords();
+// WordPress dates are local time without zone ("2025-12-15 10:50:55") -> ISO 8601 with the Berlin offset
+function wpIso(s: string): string {
+  const [d, t = '00:00:00'] = String(s).trim().split(' ');
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(d)) return s;
+  const at = new Date(`${d}T${t}Z`);
+  const off = (new Date(at.toLocaleString('en-US', { timeZone: 'Europe/Berlin' })).getTime() - new Date(at.toLocaleString('en-US', { timeZone: 'UTC' })).getTime()) / 3600000;
+  return `${d}T${t}+${String(off).padStart(2, '0')}:00`;
+}
 
 const schemas = [
   isCityPage && cityName ? { '@context': 'https://schema.org', '@type': 'Service', name: `Clown Zauberer in ${cityName}`, serviceType: 'Kinderunterhaltung', areaServed: { '@type': 'City', name: cityName }, provider: { "@id": "https://liar-entertainer.com/#business" } } : null,
-  isBlogPost ? { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: seoTitle, description: rawDesc, image: heroImg.startsWith('http') ? heroImg : `https://liar-entertainer.com${heroImg}`, author: { '@type': 'Person', '@id': 'https://liar-entertainer.com/#person', name: 'Michaël Prescler', url: 'https://liar-entertainer.com/ueber-mich/' }, publisher: { '@id': 'https://liar-entertainer.com/#business' }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl }, datePublished: page.date, dateModified: page.date } : null,
+  isBlogPost ? { '@context': 'https://schema.org', '@type': 'BlogPosting', headline: seoTitle, description: rawDesc, image: heroImg.startsWith('http') ? heroImg : `https://liar-entertainer.com${heroImg}`, author: { '@type': 'Person', '@id': 'https://liar-entertainer.com/#person', name: 'Michaël Prescler', url: 'https://liar-entertainer.com/ueber-mich/' }, publisher: { '@id': 'https://liar-entertainer.com/#business' }, mainEntityOfPage: { '@type': 'WebPage', '@id': canonicalUrl }, datePublished: wpIso(page.date), dateModified: wpIso(page.date) } : null,
 ].filter(Boolean);
 
 /**

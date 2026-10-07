@@ -76,7 +76,7 @@ export const MENU: NavItem[] = [
 
 export const FOOTER_MAIN = [
   { href: '/clown/clownshow/', label: 'Clownshow' },
-  { href: '/clown/clown-zauberer/', label: 'Clown & Zauberer NRW' },
+  { href: '/clown/clownshow/', label: 'Clown & Zauberer NRW' },
   { href: '/zauberer/', label: 'Zauberer' },
   { href: '/kinderzauberer/', label: 'Kinderzauberer' },
   { href: '/kindergeburtstag/', label: 'Kindergeburtstag' },

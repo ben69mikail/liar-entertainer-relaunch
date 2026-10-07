@@ -110,7 +110,7 @@ const structuredData = [
         <p class="ce-eyebrow ce-center">{city.local.eyebrow}</p>
         <h2 class="ce-h2 ce-center">{city.local.h2}</h2>
         {city.local.intro && <p class="ce-center ce-soft zc-local__intro">{city.local.intro}</p>}
-        <div class="zc-prose ce-soft" set:html={city.local.html} />
+        <div class="zc-prose ce-soft" set:html={city.local.html.replace(/src="assets\/img\/([^"]+)"/g, (m: string, f: string) => (photo(f) ? `src="${photo(f).src}"` : m))} />
       </div>
     </section>
   )}
