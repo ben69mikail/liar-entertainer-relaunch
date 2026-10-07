@@ -1,0 +1,43 @@
+# zauberer-liar.de -> liar-entertainer.com (generated from ops/redirects-zauberer-liar.csv, 2026-10-07)
+# Upload as .htaccess into the web root of zauberer-liar.de (IONOS), REPLACING the old one.
+# Page-by-page 301s (brief phase 6); everything else -> /zauberer/. robots.txt stays reachable
+# so crawlers can see the redirects. Works for http/https and with/without www.
+RewriteEngine On
+
+# robots.txt is served as it is (must allow crawling)
+RewriteRule ^robots\.txt$ - [L]
+
+RewriteRule ^$ https://liar-entertainer.com/zauberer/ [R=301,L]
+RewriteRule ^kinderzauberer\.html$ https://liar-entertainer.com/kinderzauberer/ [R=301,L]
+RewriteRule ^close-up-zauberer\.html$ https://liar-entertainer.com/zauberer/close-up/ [R=301,L]
+RewriteRule ^tisch-zauberer\.html$ https://liar-entertainer.com/zauberer/tisch-zauberer/ [R=301,L]
+RewriteRule ^walk-act-zauberer\.html$ https://liar-entertainer.com/clown/walk-act/ [R=301,L]
+RewriteRule ^buehnenshow\.html$ https://liar-entertainer.com/zauberer/buehnen-zauberer/ [R=301,L]
+RewriteRule ^zaubershow-erwachsene\.html$ https://liar-entertainer.com/zauberer/ [R=301,L]
+RewriteRule ^fotogalerie\.html$ https://liar-entertainer.com/galerie/ [R=301,L]
+RewriteRule ^videogalerie\.html$ https://liar-entertainer.com/galerie/ [R=301,L]
+RewriteRule ^referenzen\.html$ https://liar-entertainer.com/ueber-mich/ [R=301,L]
+RewriteRule ^kontakt\.html$ https://liar-entertainer.com/kontakt/ [R=301,L]
+RewriteRule ^zauberer-bottrop\.html$ https://liar-entertainer.com/zauberer/zauberer-in-bottrop/ [R=301,L]
+RewriteRule ^zauberer-dinslaken\.html$ https://liar-entertainer.com/zauberer/zauberer-in-dinslaken/ [R=301,L]
+RewriteRule ^zauberer-dorsten\.html$ https://liar-entertainer.com/zauberer/zauberer-in-dorsten/ [R=301,L]
+RewriteRule ^zauberer-duisburg\.html$ https://liar-entertainer.com/zauberer/zauberer-in-duisburg/ [R=301,L]
+RewriteRule ^zauberer-essen\.html$ https://liar-entertainer.com/zauberer/zauberer-in-essen/ [R=301,L]
+RewriteRule ^zauberer-gelsenkirchen\.html$ https://liar-entertainer.com/zauberer/zauberer-in-gelsenkirchen/ [R=301,L]
+RewriteRule ^zauberer-gladbeck\.html$ https://liar-entertainer.com/zauberer/zauberer-in-gladbeck/ [R=301,L]
+RewriteRule ^zauberer-haltern\.html$ https://liar-entertainer.com/zauberer/zauberer-in-haltern/ [R=301,L]
+RewriteRule ^zauberer-herne\.html$ https://liar-entertainer.com/zauberer/zauberer-in-herne/ [R=301,L]
+RewriteRule ^zauberer-herten\.html$ https://liar-entertainer.com/zauberer/zauberer-in-herten/ [R=301,L]
+RewriteRule ^zauberer-marl\.html$ https://liar-entertainer.com/zauberer/zauberer-in-marl/ [R=301,L]
+RewriteRule ^zauberer-oberhausen\.html$ https://liar-entertainer.com/zauberer/zauberer-in-oberhausen/ [R=301,L]
+RewriteRule ^zauberer-recklinghausen\.html$ https://liar-entertainer.com/zauberer/zauberer-in-recklinghausen/ [R=301,L]
+RewriteRule ^zauberer-wesel\.html$ https://liar-entertainer.com/zauberer/zauberer-in-wesel/ [R=301,L]
+RewriteRule ^impressum\.html$ https://liar-entertainer.com/impressum/ [R=301,L]
+RewriteRule ^datenschutz\.html$ https://liar-entertainer.com/datenschutzerklaerung-2/ [R=301,L]
+RewriteRule ^agb\.html$ https://liar-entertainer.com/agbs/ [R=301,L]
+
+# directory-style variants (/zauberer-essen, /zauberer-essen/) of the city pages
+RewriteRule ^zauberer-(bottrop|dinslaken|dorsten|duisburg|essen|gelsenkirchen|gladbeck|haltern|herne|herten|marl|oberhausen|recklinghausen|wesel)/?$ https://liar-entertainer.com/zauberer/zauberer-in-$1/ [R=301,L]
+
+# everything else (old assets, unknown pages, sitemap.xml) -> the magician section
+RewriteRule ^ https://liar-entertainer.com/zauberer/ [R=301,L]
