@@ -22,13 +22,13 @@ Legende: 🤖 = Claude (lokal) · 👤 = du (Zugänge/Logins)
 - [ ] 👤 **Werte notieren (Rollback):** aktuelle Einträge `@` A `217.160.0.180`, `@` AAAA `2001:8d8:100f:f000::2b1`, `www` (gleiche Werte). Screenshot der IONOS-DNS-Seite.
 
 ### Bauen (🤖, lokal, mit Tests)
-- [ ] 🤖 E1 Netlify-Konfiguration: `netlify.toml` (Basis `site/`), `_redirects` aus der alten `.htaccess`, www→Apex, Header
+- [x] 🤖 E1 Netlify-Konfiguration: `netlify.toml` (Basis `site/`), `_redirects` aus der alten `.htaccess`, www→Apex, Header
 - [ ] 🤖 E2 Perf-Fix /zauberer/ (≥ 90)
-- [ ] 🤖 E3 Salon-Look auf 4 Adult-Seiten + Kartenränge D
-- [ ] 🤖 E4 `/zauberer/close-up/`
-- [ ] 🤖 E5 FR/EN-Kernseiten (20) + Prüfliste für dich
-- [ ] 🤖 E6 `ops/blog-automation.md` (n8n-Umstellung), SEO-Autopilot pausieren
-- [ ] 🤖 E7 `.htaccess` für zauberer-liar.de vorbereiten (`ops/zauberer-liar.htaccess`)
+- [x] 🤖 E3 Salon-Look auf 4 Adult-Seiten + Kartenränge D
+- [x] 🤖 E4 `/zauberer/close-up/`
+- [x] 🤖 E5 FR/EN-Kernseiten (20) + Prüfliste für dich
+- [x] 🤖 E6 `ops/blog-automation.md` (n8n-Umstellung), SEO-Autopilot pausieren
+- [x] 🤖 E7 `.htaccess` für zauberer-liar.de vorbereiten (`ops/zauberer-liar.htaccess`)
 - [ ] 🤖 Gates §8 lokal: Parität, SEO 45/45, e2e, Lighthouse je Template
 
 ### Veröffentlichen (👤 mit Anleitung)
