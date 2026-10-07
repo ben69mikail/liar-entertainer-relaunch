@@ -1,0 +1,9 @@
+{
+  "_doc": "Documented deviations from the frozen zauberer-liar.de pages (used by scripts/extract-zauberer-cities.ts and tests/dist/zauberer-cities.test.ts). Text: 'über 400' → '370+' everywhere (L3, real Google count).",
+  "description": {
+    "gladbeck": {
+      "to": "Zauberer LIAR aus Gladbeck: Zaubershow, Close-up & Kinderzauberer vor Ort – ohne Anfahrtsweg. Für Firmenfeier, Hochzeit & Kindergeburtstag. 15 J. Erfahrung, 5★.",
+      "why": "Source description 167 characters; SEO rule M6.4 allows 165. 'direkt ' removed."
+    }
+  }
+}

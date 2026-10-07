@@ -8,6 +8,7 @@ import SuitRule from '../../components/v2/adult/SuitRule.astro';
 import PickACard from '../../components/v2/adult/PickACard.astro';
 import '../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
+import { ZAUBERER_CITIES, zaubererCityPath } from '../../data/zauberer-cities';
 import heroImg from '../../assets/images/zauberer/zauberer-nrw.png';
 import tischZaubererImg from '../../assets/images/zauberer/tisch-zauberer.jpg';
 import buehneFeuerImg from '../../assets/images/zauberer/tisch-zauberer-nrw-buehne.png';
@@ -309,6 +310,10 @@ const whyUs = [
           <p class="ce-soft ce-cities">Oberhausen | Gelsenkirchen | Essen | Duisburg | Dorsten | Herten | Herne | Marl | Gladbeck | Mülheim | Dinslaken | Dortmund | Bochum | Bottrop | Recklinghausen</p>
           <p class="ce-label">Weitere Städte in NRW:</p>
           <p class="ce-soft ce-cities">Düsseldorf | Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Moers | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn</p>
+          <p class="ce-label">Zauberer vor Ort:</p>
+          <ul class="ce-citylinks">
+            {ZAUBERER_CITIES.map((c) => <li><a href={zaubererCityPath(c.slug)}>Zauberer {c.name}</a></li>)}
+          </ul>
           <p class="ce-soft">🌍 <strong>Überregional &amp; International:</strong> Auf Anfrage auch außerhalb von NRW buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!</p>
         </div>
         <div class="ce-area__map" data-reveal>

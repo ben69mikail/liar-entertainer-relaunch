@@ -143,7 +143,7 @@ Die Seite soll sein: **schnell, angenehm, unterhaltsam — mit einigen Animation
   | `/videogalerie.html` | `/galerie/` |
   | `/referenzen.html` | `/ueber-mich/` |
   | `/kontakt.html` | `/kontakt/` |
-  | `/zauberer-{stadt}.html` (21x) | `/zauberer/` |
+  | `/zauberer-{stadt}.html` (14x) | `/zauberer/zauberer-in-{stadt}/` (Seite für Seite, Nutzer 07.10.2026; Tabelle: `ops/redirects-zauberer-liar.csv`) |
   | Rechtstexte | jeweiliges Pendant |
 
 - [ ] **6.3** 301 auf dem aktuellen zauberer-liar.de-Host umsetzen (IONOS/Apache → `.htaccess`). Domain bleibt als Weiterleitung aktiv. (Owner O3)

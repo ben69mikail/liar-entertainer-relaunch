@@ -1,0 +1,232 @@
+---
+/**
+ * /zauberer/zauberer-in-<stadt>/ — the city pages of zauberer-liar.de in the adult design
+ * (user, 2026-10-07). One template for all cities; texts and photos come 1:1 from the source pages
+ * (src/data/zauberer-cities/*.json). Not in the menu: reached from /zauberer/ (Einsatzgebiet), from
+ * the neighbouring cities and, later, through the page-by-page 301s from zauberer-liar.de.
+ */
+import type { ImageMetadata } from 'astro';
+import { Image } from 'astro:assets';
+import V2Layout from '../../layouts/V2Layout.astro';
+import MagicFrame from '../../components/v2/adult/MagicFrame.astro';
+import StageLights from '../../components/v2/adult/StageLights.astro';
+import SuitRule from '../../components/v2/adult/SuitRule.astro';
+import { ZAUBERER_CITIES, ZAUBERER_CITIES_LIVE, zaubererCityPath, kidsCityPath, type ZaubererCity } from '../../data/zauberer-cities';
+import { CONTACT } from '../../data/site';
+import '../../styles/adult-kit.css';
+
+export function getStaticPaths() {
+  return ZAUBERER_CITIES.map((city) => ({ params: { city: `zauberer-in-${city.slug}` }, props: { city } }));
+}
+
+const { city } = Astro.props as { city: ZaubererCity };
+const photos = import.meta.glob<ImageMetadata>('../../assets/images/zauberer-staedte/*.webp', { eager: true, import: 'default' });
+const photo = (file: string) => photos[`../../assets/images/zauberer-staedte/${file}`];
+const heroPhoto = photo(city.heroImg);
+const introPhoto = photo(city.intro.img.file);
+const path = zaubererCityPath(city.slug);
+const SUITS = ['♠', '♥', '♣', '♦'] as const;
+
+const structuredData = [
+  {
+    '@context': 'https://schema.org',
+    '@type': 'Service',
+    serviceType: 'Zauberer & Zaubershow',
+    name: `Zauberer ${city.name}`,
+    url: `https://liar-entertainer.com${path}`,
+    provider: { '@id': 'https://liar-entertainer.com/#business' },
+    areaServed: { '@type': 'City', name: city.name },
+  },
+  {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: city.faq.items.map((f) => ({ '@type': 'Question', name: f.q, acceptedAnswer: { '@type': 'Answer', text: f.a } })),
+  },
+];
+---
+
+<V2Layout
+  mainClass="ce-salon-page seam-fade"
+  title={city.title}
+  description={city.description}
+  canonical={`https://liar-entertainer.com${path}`}
+  noindex={!ZAUBERER_CITIES_LIVE}
+  ogImage={heroPhoto?.src}
+  breadcrumbs={[
+    { name: 'Startseite', url: '/' },
+    { name: 'Zauberer', url: '/zauberer/' },
+    { name: `Zauberer ${city.name}`, url: path },
+  ]}
+  structuredData={structuredData}
+>
+  <section class="ce-hero ce-hero--stage">
+    <StageLights />
+    <div class="container ce-hero__grid">
+      <div class="ce-hero__copy">
+        <p class="ce-crumbs">
+          <a href="/">Clown</a> » <a href="/zauberer/">Zauberer</a> » <span>{city.name}</span>
+        </p>
+        <h1 class="ce-hero__title" set:html={city.h1Html} />
+        {heroPhoto && (
+          <div class="ce-spot">
+            <div class="ce-hero__frame ce-spot__frame">
+              <MagicFrame corner="tr" rank="A" suit="♠">
+                <Image src={heroPhoto} alt={`Zauberer LIAR in ${city.name}`} widths={[450, 720, 1080]} sizes="(max-width: 900px) 88vw, 736px" loading="eager" fetchpriority="high" />
+              </MagicFrame>
+            </div>
+          </div>
+        )}
+        <SuitRule />
+        <p class="ce-hero__claim ce-hero__claim--soft zc-lead">{city.lead}</p>
+        <div class="ce-hero__actions">
+          <a class="btn btn--primary" href="/kontakt/" data-magnetic>Unverbindlich anfragen</a>
+          <a class="btn btn--ghost" href={CONTACT.phoneHref}>0172 – 151 75 78</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="ce-salon zc-intro">
+    <div class="container zc-split">
+      <div class="zc-prose">
+        <p class="ce-eyebrow">{city.intro.eyebrow}</p>
+        <h2 class="ce-h2">{city.intro.h2}</h2>
+        <div class="ce-soft" set:html={city.intro.html} />
+      </div>
+      {introPhoto && (
+        <div class="zc-photo" data-reveal>
+          <MagicFrame corner="br" rank="K" suit="♥">
+            <Image src={introPhoto} alt={city.intro.img.alt} widths={[400, 640]} sizes="(max-width: 900px) 88vw, 480px" loading="lazy" />
+          </MagicFrame>
+        </div>
+      )}
+    </div>
+  </section>
+
+  {city.local && (
+    <section class="ce-salon zc-local">
+      <div class="container ce-narrow">
+        <SuitRule />
+        <p class="ce-eyebrow ce-center">{city.local.eyebrow}</p>
+        <h2 class="ce-h2 ce-center">{city.local.h2}</h2>
+        {city.local.intro && <p class="ce-center ce-soft zc-local__intro">{city.local.intro}</p>}
+        <div class="zc-prose ce-soft" set:html={city.local.html} />
+      </div>
+    </section>
+  )}
+
+  <section class="ce-salon zc-formats">
+    <div class="container">
+      <SuitRule />
+      <p class="ce-eyebrow ce-center">{city.formats.eyebrow}</p>
+      <h2 class="ce-h2 ce-center">{city.formats.h2}</h2>
+      <div class="ce-spread">
+        {city.formats.items.map((f, i) => (
+          <div class:list={['ce-scard', 'zc-format', { 'ce-pcard--red': i % 2 }]} data-reveal="tilt" data-reveal-delay={i * 0.08}>
+            <span class:list={['ce-why__suit', { 'ce-red': i % 2 }]} aria-hidden="true">{SUITS[i % 4]}</span>
+            <h3 class="ce-why__title">{f.title}</h3>
+            <p class="ce-soft" set:html={f.html} />
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="ce-stage ce-lit zc-reviews">
+    <StageLights soft />
+    <section>
+      <div class="container ce-center">
+        <p class="ce-eyebrow">{city.reviews.eyebrow}</p>
+        <h2 class="ce-h2">{city.reviews.h2}</h2>
+        <p class="ce-narrow zc-reviews__intro">{city.reviews.intro}</p>
+        <div class="zc-reviews__grid">
+          {city.reviews.items.map((r, i) => (
+            <figure class="zc-review" data-reveal="deal" data-reveal-delay={i * 0.08}>
+              <p class="zc-review__stars" aria-label="5 von 5 Sternen">★★★★★</p>
+              <blockquote>{r.text}</blockquote>
+              <figcaption>{r.who}</figcaption>
+            </figure>
+          ))}
+        </div>
+        <p><a class="btn btn--ghost" href="/ueber-mich/">Alle Referenzen ansehen</a></p>
+      </div>
+    </section>
+  </div>
+
+  <section class="ce-salon zc-region">
+    <div class="container ce-narrow ce-center">
+      <SuitRule />
+      <p class="ce-eyebrow">{city.region.eyebrow}</p>
+      <h2 class="ce-h2">{city.region.h2}</h2>
+      <p class="ce-soft">{city.region.intro}</p>
+      <ul class="zc-cities">
+        {city.region.links.map((l) => (
+          <li>{l.href ? <a href={l.href}>{l.name}</a> : <span>{l.name}</span>}</li>
+        ))}
+      </ul>
+      <p class="ce-soft zc-kids">
+        Für Kinder: <a href={kidsCityPath(city.slug)}>Kinderzauberer in {city.name}</a>
+      </p>
+      <p><a class="btn btn--ghost" href="/zauberer/">Zur Startseite</a></p>
+    </div>
+  </section>
+
+  <section class="ce-faq ce-salon">
+    <div class="container ce-narrow">
+      <SuitRule />
+      <p class="ce-eyebrow ce-center">{city.faq.eyebrow}</p>
+      <h2 class="ce-h2 ce-center">{city.faq.h2}</h2>
+      <div class="ce-faq__list ce-deco">
+        {city.faq.items.map((item, i) => (
+          <details class="ce-faq__item" data-reveal data-reveal-delay={i * 0.05}>
+            <summary><span class="ce-faq__suit" aria-hidden="true">{SUITS[i % 4]}</span>{item.q}</summary>
+            <p>{item.a}</p>
+          </details>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <div class="ce-finale ce-stage ce-lit">
+    <StageLights soft />
+    <section class="ce-contact">
+      <div class="container ce-center">
+        <p class="ce-eyebrow">{city.cta.eyebrow}</p>
+        <h2 class="ce-h2 zc-cta" set:html={city.cta.h2Html} />
+        <p class="ce-soft ce-narrow">{city.cta.text}</p>
+        <div class="ce-hero__actions">
+          <a href="/kontakt/" class="btn btn--primary" data-magnetic>Anfrage senden</a>
+          <a href={CONTACT.phoneHref} class="btn btn--ghost">Direkt anrufen</a>
+        </div>
+        <p><a class="zc-phone" href={CONTACT.phoneHref}>0172 – 151 75 78</a></p>
+      </div>
+    </section>
+  </div>
+</V2Layout>
+
+<style>
+  .zc-lead { max-width: 40rem; margin-inline: auto; }
+  .zc-split { display: grid; gap: var(--space-4); align-items: center; }
+  @media (min-width: 901px) { .zc-split { grid-template-columns: 1.15fr 0.85fr; } }
+  .zc-prose :global(p) { margin-bottom: var(--space-2); }
+  .zc-prose :global(h3) { font-family: var(--font-display); font-size: 1.35rem; margin: var(--space-3) 0 var(--space-1); color: var(--ink); }
+  .zc-photo { width: min(100%, 30rem); justify-self: center; }
+  .zc-format h3 { margin-bottom: 0.4rem; }
+  .zc-format :global(a) { white-space: nowrap; }
+  .zc-reviews__intro { margin-inline: auto; margin-bottom: var(--space-4); opacity: 0.85; }
+  .zc-reviews__grid { display: grid; gap: var(--space-3); margin-bottom: var(--space-4); text-align: left; }
+  @media (min-width: 901px) { .zc-reviews__grid { grid-template-columns: repeat(3, 1fr); } }
+  .zc-review { background: #fffdf7; color: #141210; border-radius: 14px; padding: var(--space-3); box-shadow: 0 22px 40px -24px rgb(0 0 0 / 0.7); }
+  .zc-review__stars { color: #c8102e; letter-spacing: 0.1em; margin-bottom: 0.5rem; }
+  .zc-review blockquote { margin: 0 0 0.8rem; line-height: 1.6; }
+  .zc-review figcaption { font-size: 0.9rem; color: #46413a; }
+  .zc-cities { list-style: none; display: flex; flex-wrap: wrap; gap: 0.7rem; justify-content: center; padding: 0; margin: var(--space-3) 0; }
+  .zc-cities li > * { display: inline-block; padding: 0.45rem 1.1rem; border: 1px solid rgb(176 138 62 / 0.6); border-radius: 999px; }
+  .zc-cities span { opacity: 0.6; }
+  .zc-kids { margin-bottom: var(--space-3); }
+  .zc-cta :global(span) { color: #d9b46a; }
+  .zc-phone { font-family: var(--font-display); font-size: clamp(1.6rem, 4vw, 2.4rem); text-decoration: none; color: #d9b46a; }
+  /* ghost buttons on the dark stages (hero, finale): light ink */
+  .ce-hero .btn--ghost, .ce-finale .btn--ghost { color: #fbf8f1; border-color: rgb(251 248 241 / 0.65); background: transparent; }
+  .ce-finale .ce-hero__actions { justify-content: center; margin-bottom: var(--space-2); }
+</style>

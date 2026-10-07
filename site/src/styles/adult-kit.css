@@ -721,3 +721,8 @@ html[data-zone='adult'] .v2 main:not(.seam-fade) > .ce-salon:has(+ .ce-stage)::a
 }
 html[data-zone='adult'] .v2 main:not(.seam-fade) > :is(.ce-hero--stage, .ce-stage) + .ce-salon::before { top: 0; background: linear-gradient(in oklab to bottom, var(--haze-grad)); }
 html[data-zone='adult'] .v2 main:not(.seam-fade) > .ce-salon:has(+ .ce-stage)::after { bottom: 0; background: linear-gradient(in oklab to top, var(--haze-grad)); }
+
+/* /zauberer/ Einsatzgebiet: links to the city pages taken over from zauberer-liar.de (2026-10-07) */
+.v2 .ce-citylinks { list-style: none; display: flex; flex-wrap: wrap; gap: 0.45rem 0.6rem; padding: 0; margin: 0.4rem 0 var(--space-2); }
+.v2 .ce-citylinks a { display: inline-block; padding: 0.3rem 0.8rem; border: 1px solid rgb(176 138 62 / 0.55); border-radius: 999px; font-size: 0.92rem; text-decoration: none; }
+@media (hover: hover) and (pointer: fine) { .v2 .ce-citylinks a:hover { border-color: currentColor; } }
