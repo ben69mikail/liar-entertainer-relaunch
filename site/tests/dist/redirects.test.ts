@@ -154,6 +154,12 @@ const APACHE: [string, (number | string | null)[]][] = [
   ['/sample-page/', [301, '/']],
   ['/hello-world/', [301, '/blog/']],
   ['/clown/', [301, '/clown/clownshow/']],
+  // GSC 404 list 2026-10-07: one hop to the best match, foreign sections gone
+  ['/clown/zauberer/zauberer-nrw/', [301, '/zauberer/']],
+  ['/glitzer-tattoos-kinder/', [301, '/clown/glitzer-tattoo/']],
+  ['/5-gruende-warum-zauberei-zum-karneval-gehoert-%F0%9F%8E%AD%E2%9C%A8/', [301, '/blog/5-gruende-warum-zauberei-zum-karneval-gehoert/']],
+  ['/freizeit/san-hejmo-alle-informationen-zum-festival-in-weeze/', GONE],
+  ['/lokales/gladbeck/', GONE],
 ];
 
 // Documented deviations (no regex on Netlify) — pinned so a change is noticed. Apache value in the comment.
@@ -266,5 +272,18 @@ describe('zauberer-liar.de -> liar-entertainer.com (page by page, ops/redirects-
   it('the main site is not affected by the old-domain rules', () => {
     expect(go('/kontakt/')).toBeNull();
     expect(go('/zauberer/zauberer-in-essen/')).toBeNull();
+  });
+});
+
+describe('no redirect chains', () => {
+  // Google follows chains slowly and may drop signals: every redirect from a path on the main site
+  // must land on a page that is served (no second redirect).
+  it('every site-path target is served directly', () => {
+    const chains = rules
+      .filter((r) => r.from.startsWith('/') && r.to.startsWith('/') && !r.to.includes(':') && [301, 302].includes(r.status))
+      .map((r) => [r.from, r.to, go(r.to)] as const)
+      .filter(([, , next]) => next !== null)
+      .map(([from, to, next]) => `${from} -> ${to} -> ${JSON.stringify(next)}`);
+    expect(chains).toEqual([]);
   });
 });

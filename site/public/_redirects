@@ -221,6 +221,17 @@ http://www.zauberer-liar.de/agb.html                                  https://li
 http://www.zauberer-liar.de/*                                         https://liar-entertainer.com/zauberer/                                301!
 # <<< zauberer-liar.de
 
+# ── GSC 404 list 2026-10-07: one hop to the best match (before the generic rules below) ──
+/clown/zauberer/zauberer-nrw                                           /zauberer/                                         301
+/glitzer-tattoos-kinder                                                /clown/glitzer-tattoo/                             301
+/5-gruende-warum-zauberei-zum-karneval-gehoert-%F0%9F%8E%AD%E2%9C%A8   /blog/5-gruende-warum-zauberei-zum-karneval-gehoert/    301
+/5-gruende-warum-zauberei-zum-karneval-gehoert-🎭✨                     /blog/5-gruende-warum-zauberei-zum-karneval-gehoert/    301
+# foreign sections of a former WordPress install (like /sport/): gone
+/freizeit                                                              /404.html                                          410
+/freizeit/*                                                            /404.html                                          410
+/lokales                                                               /404.html                                          410
+/lokales/*                                                             /404.html                                          410
+
 # ── l.19 WordPress index.php ──
 /index.php                                                             /                                                  301
 /index.php/*                                                           /                                                  301
