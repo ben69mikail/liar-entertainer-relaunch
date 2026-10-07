@@ -98,6 +98,12 @@ const services = [
           netlify-honeypot="website"
           class="kt-form"
           id="kontakt-form"
+          data-msg-1="Bitte füllen Sie alle Pflichtfelder korrekt aus."
+          data-msg-2="Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an."
+          data-msg-captcha="Die Antwort auf die Mathe-Frage war leider falsch. Bitte versuchen Sie es erneut."
+          data-msg-timeout="Das Formular war zu lange offen. Bitte laden Sie die Seite neu und versuchen Sie es erneut."
+          data-msg-unknown="Ein unbekannter Fehler ist aufgetreten."
+          data-msg-question="Was ist {q}?"
         >
           <input type="hidden" name="form-name" value="kontakt" />
           <!-- Honeypot-Feld gegen Spam (versteckt) -->
@@ -232,17 +238,14 @@ const services = [
 <script>
   // Maths question (DSGVO-konform: kein externer Service, keine Cookies). There is no server to
   // verify a hash any more (Netlify Forms), so the answer is checked here before submitting.
-  const messages: Record<string, string> = {
-    '1': 'Bitte füllen Sie alle Pflichtfelder korrekt aus.',
-    '2': 'Beim Senden ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut oder rufen Sie uns direkt an.',
-    captcha: 'Die Antwort auf die Mathe-Frage war leider falsch. Bitte versuchen Sie es erneut.',
-    timeout: 'Das Formular war zu lange offen. Bitte laden Sie die Seite neu und versuchen Sie es erneut.',
-  };
+  // Messages live on the form (data-msg-*), so the FR/EN pages get them translated.
+  const form = document.getElementById('kontakt-form') as HTMLFormElement | null;
+  const msg = (key: string) => form?.getAttribute('data-msg-' + key) ?? '';
   const errorEl = document.getElementById('form-error');
   const textEl = document.getElementById('error-text');
   const showError = (key: string) => {
     if (!errorEl || !textEl) return;
-    textEl.textContent = messages[key] || 'Ein unbekannter Fehler ist aufgetreten.';
+    textEl.textContent = msg(key) || msg('unknown');
     errorEl.hidden = false;
   };
 
@@ -256,9 +259,8 @@ const services = [
   const num2 = minus ? Math.min(a, b) : b;
   const answer = minus ? num1 - num2 : num1 + num2;
   const qEl = document.getElementById('captcha-question');
-  if (qEl) qEl.textContent = 'Was ist ' + num1 + ' ' + (minus ? '-' : '+') + ' ' + num2 + '?';
+  if (qEl) qEl.textContent = msg('question').replace('{q}', num1 + ' ' + (minus ? '-' : '+') + ' ' + num2);
 
-  const form = document.getElementById('kontakt-form') as HTMLFormElement | null;
   const input = document.getElementById('captcha') as HTMLInputElement | null;
   form?.addEventListener('submit', (e) => {
     if (!input) return;

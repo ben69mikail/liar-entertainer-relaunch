@@ -3,7 +3,7 @@
 // BaseLayout (legacy look) or V2Layout (relaunch look), so each page only ships its own CSS.
 import CookieConsent from '../components/CookieConsent.astro';
 import '../styles/motion.css';
-import { zoneFor, alternatesFor } from '../lib/site-map';
+import { zoneFor, alternatesFor, isPublishedPath, localeOf } from '../lib/site-map';
 
 export interface BreadcrumbItem {
   name: string;
@@ -33,11 +33,17 @@ const {
   ogImage = 'https://liar-entertainer.com/images/og-startseite.jpg',
   ogType = 'website',
   structuredData,
-  noindex = false,
+  noindex: noindexProp = false,
   breadcrumbs,
   heroPreload,
   bodyClass,
 } = Astro.props;
+
+// FR/EN stay out of the index until their locale is published (owner review, site-map.ts)
+const pagePath = Astro.url.pathname;
+const pageLocale = localeOf(pagePath);
+const noindex = noindexProp || !isPublishedPath(pagePath);
+const OG_LOCALE = { de: 'de_DE', fr: 'fr_FR', en: 'en_GB' } as const;
 
 const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
   "@context": "https://schema.org",
@@ -185,7 +191,7 @@ const webPageSchema = {
   "@id": `${canonicalUrl}#webpage`,
   "url": canonicalUrl,
   "name": title,
-  "inLanguage": "de",
+  "inLanguage": pageLocale,
   "isPartOf": { "@id": "https://liar-entertainer.com/#website" },
   "about": { "@id": "https://liar-entertainer.com/#business" },
   "speakable": {
@@ -217,7 +223,7 @@ const webPageSchema = {
 
     <!-- OpenGraph -->
     <meta property="og:type" content={ogType} />
-    <meta property="og:locale" content="de_DE" />
+    <meta property="og:locale" content={OG_LOCALE[pageLocale]} />
     <meta property="og:url" content={canonicalUrl} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />

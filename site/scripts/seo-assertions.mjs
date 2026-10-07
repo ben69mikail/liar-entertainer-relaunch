@@ -76,8 +76,10 @@ const CATEGORIES = [...pages.keys()].filter((r) => /^\/blog\/kategorie\//.test(r
 const PRICE_ALLOWED = (r, h) =>
   r === '/preise' ||
   r.startsWith('/kindergeburtstag') ||
+  // FR/EN twins of /kindergeburtstag/ (translated slugs, same birthday context)
+  r.startsWith('/fr/anniversaire-enfant') || r.startsWith('/en/kids-birthday-party') ||
   r === '/blog' || r.startsWith('/blog/kategorie/') ||
-  /Kindergeburtstag|Geburtstag/i.test(titleOf(h) + ' ' + descOf(h));
+  /Kindergeburtstag|Geburtstag|anniversaire|birthday/i.test(titleOf(h) + ' ' + descOf(h));
 
 // ---------- Sanity ----------
 check('S0', 'Build vorhanden, mindestens 150 HTML-Seiten', () =>

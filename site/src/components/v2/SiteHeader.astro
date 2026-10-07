@@ -4,7 +4,7 @@ import { Image } from 'astro:assets';
 import clownLogo from '../../assets/images/general/logo-clown-nrw.png';
 import goldLogo from '../../assets/images/brand/logo-liar-gold.webp';
 import { MENU, CONTACT } from '../../data/site';
-import { zoneFor } from '../../lib/site-map';
+import { zoneFor, basePath, languageLinks } from '../../lib/site-map';
 
 // L6: logos are fixed assets; each zone shows its own.
 const path = Astro.url.pathname;
@@ -13,7 +13,11 @@ const logo =
   isAdult
     ? { src: goldLogo, alt: 'Zauberer LIAR – Zauberei & Comedy', width: 150 }
     : { src: clownLogo, alt: 'LOGO Clown Zauberer LIAR', width: 104 };
-const isCurrent = (href: string) => path === href || (href !== '/' && path.startsWith(href));
+// FR/EN twins highlight the same menu item as their German page (links are localised later)
+const current = basePath(path);
+const isCurrent = (href: string) => current === href || (href !== '/' && current.startsWith(href));
+// DE · FR · EN, core pages only, and only towards published languages (or on a review page)
+const languages = languageLinks(path);
 ---
 
 <header class="sh">
@@ -44,6 +48,17 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
         ))}
       </ul>
     </nav>
+
+    {languages.length > 0 && (
+      <nav class="sh__lang" aria-label="Sprache / Langue / Language" data-i18n="keep">
+        {languages.map((l, i) => (
+          <>
+            {i > 0 && <span aria-hidden="true">·</span>}
+            <a href={l.href} hreflang={l.locale} lang={l.locale} aria-current={l.current ? 'page' : undefined}>{l.locale.toUpperCase()}</a>
+          </>
+        ))}
+      </nav>
+    )}
 
     <a class="btn btn--primary sh__cta" href="/kontakt/">Anfragen</a>
 
@@ -99,6 +114,10 @@ const isCurrent = (href: string) => path === href || (href !== '/' && path.start
   @media (hover: hover) and (pointer: fine) { .sh__logo--card:hover { rotate: 2deg; } }
   .sh__logo--card img { height: 2.6rem; }
   .sh__nav { margin-left: auto; }
+  .sh__lang { flex: none; display: flex; align-items: center; gap: 0.3rem; font-size: 0.8rem; font-weight: 700; letter-spacing: 0.04em; }
+  .sh__lang a { color: var(--ink-soft); text-decoration: none; padding: 0.2rem 0.15rem; }
+  .sh__lang a:hover, .sh__lang a[aria-current='page'] { color: var(--accent-strong); }
+  .sh__lang a[aria-current='page'] { text-decoration: underline; text-underline-offset: 0.25em; }
   .sh__menu { display: flex; gap: 0.15rem; list-style: none; margin: 0; padding: 0; }
   .sh__item { position: relative; }
   .sh__item > a {

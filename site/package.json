@@ -18,7 +18,8 @@
     "test:seo": "node scripts/seo-assertions.mjs",
     "snapshot:content": "tsx scripts/snapshot-content.ts",
     "test:perf": "node scripts/lighthouse-gate.mjs",
-    "snapshot:meta": "tsx scripts/snapshot-meta.ts"
+    "snapshot:meta": "tsx scripts/snapshot-meta.ts",
+    "i18n:review": "node --import tsx scripts/i18n-review.mjs"
   },
   "dependencies": {
     "@fontsource-variable/bodoni-moda": "^5.3.0",
