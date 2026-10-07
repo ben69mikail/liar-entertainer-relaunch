@@ -4,6 +4,7 @@ import pagesData from '../data/pages.json';
 import postsData from '../data/posts.json';
 import { getAllCategories } from '../utils/allPosts';
 import { ZAUBERER_CITIES_LIVE } from '../data/zauberer-cities';
+import { translatedSitemapPaths } from '../lib/site-map';
 
 type WPItem = {
   link: string;
@@ -78,6 +79,11 @@ export const GET: APIRoute = async () => {
   for (const p of staticPages) {
     const path = p.loc.replace(SITE, '');
     urls.push({ loc: p.loc, lastmod: p.lastmod, priority: p.priority, changefreq: p.changefreq, images: pageImages[path] });
+  }
+
+  // FR/EN core pages: only once their locale is published (PUBLISHED_LOCALES in site-map.ts)
+  for (const path of translatedSitemapPaths()) {
+    urls.push({ loc: `${SITE}${path}`, lastmod: now, priority: '0.7', changefreq: 'monthly' });
   }
 
   const seenLocs = new Set(urls.map(u => u.loc));

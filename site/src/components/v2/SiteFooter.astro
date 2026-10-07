@@ -26,7 +26,8 @@ const external = (href: string) => (href.startsWith('http') ? { target: '_blank'
       </p>
       <p><a href={CONTACT.googleReviewHref} target="_blank" rel="noopener noreferrer">⭐ Bewertung auf Google schreiben</a></p>
     </div>
-    <div>
+    {/* German blog titles: left out on the FR/EN pages (src/i18n/translate-html.ts) */}
+    <div data-i18n="drop">
       <h2 class="sf__h">News Clown Zauberer</h2>
       <ul>{news.map((p) => <li><a href={p.href}>{p.title}</a></li>)}</ul>
     </div>
