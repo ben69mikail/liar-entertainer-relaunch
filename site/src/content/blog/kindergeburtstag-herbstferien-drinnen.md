@@ -3,6 +3,9 @@ title: "Kindergeburtstag in den Herbstferien: Programm für drinnen, das ohne We
 seoTitle: "Kindergeburtstag Herbstferien drinnen: Ideen | LIAR"
 description: "Kindergeburtstag drinnen in den Herbstferien: Ablauf, 5 Ideen und ehrliche Tipps vom Kinderzauberer aus Gladbeck – auch bei Regen ein Erfolg."
 publishDate: 2026-09-21
+updatedDate: 2026-10-07
+heroImage: "https://liar-entertainer.com/blog-images/kindergeburtstag-herbstferien-drinnen/cover.jpg"
+heroImageAlt: "Kindergeburtstag drinnen: Clown Zauberer LIAR zaubert mit Kindern im Wohnzimmer"
 categories: ["Saisonal", "Ideen", "Kindergeburtstag"]
 tags: ["kindergeburtstag-herbst", "kindergeburtstag-drinnen", "herbstferien"]
 author: "Michaël Prescler"
@@ -18,6 +21,8 @@ Ich bin Michaël, seit 2009 als Clown Zauberer LIAR unterwegs, und der Oktober i
 Klingt erst einmal falsch, ist aber meine Erfahrung aus vielen hundert Feiern: Draußen verteilt sich die Gruppe. Drei Kinder klettern, zwei suchen Kastanien, eines weint, weil es kalt ist. Drinnen sitzen alle beisammen. Die Aufmerksamkeit ist da, die Gruppe ist eine Gruppe. Genau das braucht ein gutes Programm.
 
 Was drinnen fehlt, ist Platz zum Toben. Deshalb gilt: Nicht versuchen, das Toben nach drinnen zu holen, sondern das Programm auf Sitzen, Staunen und Mitmachen bauen. Ein Wohnzimmer mit 20 Quadratmetern reicht dafür völlig.
+
+![Bunte Luftballons als Deko für den Kindergeburtstag drinnen – Clown Zauberer LIAR](https://liar-entertainer.com/blog-images/kindergeburtstag-herbstferien-drinnen/inline-1.jpg)
 
 ## Der Ablauf, der bei 5- bis 9-Jährigen funktioniert
 
@@ -40,6 +45,8 @@ Zwei bis zweieinhalb Stunden sind für diese Altersgruppe ideal. Länger wird es
 3. **Laternen basteln.** Passt zur Jahreszeit, alle sitzen am Tisch, und die Kinder haben etwas für St. Martin.
 4. **Kinderdisco mit Stopp-Tanz.** Fünf Lieder, ein Bluetooth-Lautsprecher, fertig. Das ist der Bewegungsanteil, den drinnen alle brauchen.
 5. **Kino-Ecke zum Runterkommen.** Decke, Kissen, ein kurzer Film in den letzten 20 Minuten. Nicht als Programm, sondern als Landeplatz für die Abholzeit.
+
+![Zaubershow drinnen: Kinder schauen Clown Zauberer LIAR gebannt zu](https://liar-entertainer.com/blog-images/kindergeburtstag-herbstferien-drinnen/inline-2.jpg)
 
 ## Wann lohnt sich ein Zauberer oder Clown für den Geburtstag drinnen?
 

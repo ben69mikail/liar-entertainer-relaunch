@@ -3,6 +3,9 @@ title: "Luftballonmodellage beim Kindergeburtstag: Figuren, Dauer & Kosten"
 seoTitle: "Luftballonmodellage Kindergeburtstag: Kosten & Figuren"
 description: "Luftballonmodellage beim Kindergeburtstag: +20 € zur Zaubershow, 15 Minuten, 1 Figur pro Kind. Beliebte Figuren, Ablauf und Sicherheitshinweise vom Profi."
 publishDate: 2026-07-17
+updatedDate: 2026-10-07
+heroImage: "https://liar-entertainer.com/blog-images/luftballonmodellage-kindergeburtstag/cover.jpg"
+heroImageAlt: "Luftballonmodellage beim Kindergeburtstag: Clown LIAR formt ein Ballonherz für ein Mädchen"
 categories: ["Geburtstag", "Ratgeber"]
 tags: ["luftballonmodellage-kindergeburtstag"]
 author: "Michaël Prescler"
@@ -25,6 +28,8 @@ Nach über 15 Jahren und mehr als 110.000 Kindern kann ich eine ziemlich verläs
 
 Wichtig für die Fairness in der Gruppe: Bei mir bekommt **jedes Kind eine Figur** — niemand geht leer aus, und das Geburtstagskind darf sich zuerst wünschen.
 
+![Ballonmodellage: Ein Mädchen bekommt von Clown LIAR ein Herz aus Luftballons](https://liar-entertainer.com/blog-images/luftballonmodellage-kindergeburtstag/inline-1.jpg)
+
 ## So läuft die Ballonmodellage auf der Feier ab ⏱️
 
 Die Ballonmodellage ist bei mir kein loses „Nebenbei", sondern ein eigener Programmblock von etwa 15 Minuten, der direkt an die 40-minütige Zaubershow anschließt. Das hat dramaturgische Gründe: Nach der Show sind die Kinder aufgedreht und voller Eindrücke — die Ballonrunde fängt diese Energie auf und gibt jedem Kind noch einmal einen persönlichen Moment mit dem Künstler.
@@ -42,6 +47,8 @@ Ballons sind Spielzeug — aber eines, bei dem ein paar klare Regeln gelten. Als
 - **Platzen gehört dazu**: Auch die beste Ballonfigur ist irgendwann platt oder platzt — bei wildem Ritterspiel eher früher als später. Ich modelliere so stabil wie möglich, aber Ballons sind Verbrauchsmaterial, keine Dauerdeko. Die gute Nachricht: Ein lauter Knall ist nach kurzem Schreck meist der Lacher des Nachmittags.
 
 Mit diesen Regeln ist die Ballonmodellage ein sicherer, unkomplizierter Programmpunkt — und einer der wenigen, bei dem die Kinder ein handfestes Andenken mit nach Hause nehmen.
+
+![Clown Zauberer LIAR mit einem pinken Luftballon – Ballons bringen Farbe auf jede Feier](https://liar-entertainer.com/blog-images/luftballonmodellage-kindergeburtstag/inline-2.jpg)
 
 ## Warum Ballonmodellage und Zaubershow so gut zusammenpassen ✨
 

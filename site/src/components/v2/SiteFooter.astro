@@ -2,10 +2,13 @@
 import { Image } from 'astro:assets';
 import clownLogo from '../../assets/images/general/logo-clown-nrw.png';
 import goldLogo from '../../assets/images/brand/logo-liar-gold.webp';
-import { CONTACT, FOOTER_MAIN, FOOTER_NEWS, LEGAL_NAV } from '../../data/site';
+import { CONTACT, FOOTER_MAIN, LEGAL_NAV } from '../../data/site';
+import { getAllBlogPosts } from '../../utils/allPosts';
 import { zoneFor } from '../../lib/site-map';
 
 const adult = zoneFor(Astro.url.pathname) === 'adult';
+// always the 7 latest articles (legacy + n8n collection, drafts excluded), newest first
+const news = (await getAllBlogPosts()).slice(0, 7);
 const external = (href: string) => (href.startsWith('http') ? { target: '_blank', rel: 'noopener' } : {});
 ---
 
@@ -25,7 +28,7 @@ const external = (href: string) => (href.startsWith('http') ? { target: '_blank'
     </div>
     <div>
       <h2 class="sf__h">News Clown Zauberer</h2>
-      <ul>{FOOTER_NEWS.map((l) => <li><a href={l.href}>{l.label}</a></li>)}</ul>
+      <ul>{news.map((p) => <li><a href={p.href}>{p.title}</a></li>)}</ul>
     </div>
     <div>
       <h2 class="sf__h">Social Media</h2>

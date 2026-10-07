@@ -12,5 +12,12 @@
       "to": "370+ Familien und Veranstalter haben mich mit der Bestnote bewertet. Lesen Sie echte Stimmen in meinen Google-Bewertungen.",
       "why": "L3: real Google count is 370+ (user, 2026-10-04), same correction as /zauberer/. See docs/CHANGES-METAS.md."
     }
+  ],
+  "/blog/kidzival-2024/": [
+    {
+      "from": "Und das Wetter? Ist uns in diesem Jahr, egal! Wir machen die Gladbecker-Kids-Party des Jahres einfach Indoor!",
+      "to": "Und das Wetter? Ist uns in diesem Jahr, egal! Wir machen die Gladbecker-Kids-Party des Jahres einfach Indoor! 😉🥳",
+      "why": "Original WordPress text had the emoji as twemoji images (1f609/1f973), which were stripped with the dead uploads; restored as characters (user, 2026-10-07: blog pictures). See docs/CHANGES-METAS.md."
+    }
   ]
 }

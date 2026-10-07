@@ -1,0 +1,19 @@
+{
+  "_doc": "Pictures for the Markdown articles that had none (user, 2026-10-07: photos from Neu Homepage/Clown Zauberer). Same file convention as the n8n automation: cover.jpg + inline-N.jpg. Run: node scripts/import-blog-images.mjs src/data/new-blog-images.json",
+  "kindergeburtstag-herbstferien-drinnen": { "images": [
+    { "from": "CZ/Kindergeburtstag.JPG", "file": "cover.jpg" },
+    { "from": "CZ/20240212_085444.jpg", "file": "inline-1.jpg" },
+    { "from": "CZ/Clown Zauberer (5).JPG", "file": "inline-2.jpg" } ] },
+  "clown-oder-zauberer-kindergeburtstag": { "images": [
+    { "from": "CZ/Clown Zauberer (2).jpg", "file": "cover.jpg" },
+    { "from": "CZ/Clown Zauberer (3).jpg", "file": "inline-1.jpg" },
+    { "from": "CZ/FB_IMG_1693086160747.jpg", "file": "inline-2.jpg" } ] },
+  "luftballonmodellage-kindergeburtstag": { "images": [
+    { "from": "CZ/Ballonmodellage.jpg", "file": "cover.jpg" },
+    { "from": "CZ/IMG_20170505_061742_132.jpg", "file": "inline-1.jpg" },
+    { "from": "CZ/20240206_104817.jpg", "file": "inline-2.jpg" } ] },
+  "was-kostet-zauberer-kindergeburtstag": { "images": [
+    { "from": "CZ/Clown Zauberer (4).JPG", "file": "cover.jpg" },
+    { "from": "CZ/IMG-20260927-WA0010.jpg", "file": "inline-1.jpg" },
+    { "from": "CZ/Clown Zauberer (7).jpg", "file": "inline-2.jpg" } ] }
+}

@@ -7,6 +7,7 @@ import { getCollection } from 'astro:content';
 import fs from 'node:fs';
 import path from 'node:path';
 import postsData from '../data/posts.json';
+import { legacyCover } from './legacyImages';
 
 export interface BlogPostSummary {
   slug: string;
@@ -91,7 +92,7 @@ export async function getAllBlogPosts(): Promise<BlogPostSummary[]> {
       title: p.title,
       date: new Date(p.date),
       excerpt: htmlExcerpt(p.excerpt || p.content || ''),
-      image: getFirstImage(p.content || '', cats),
+      image: legacyCover(p.link)?.src ?? getFirstImage(p.content || '', cats),
       categories: cats.length ? cats : ['Allgemein'],
       source: 'legacy',
     };

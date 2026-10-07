@@ -74,16 +74,6 @@ export const MENU: NavItem[] = [
   { label: 'Kontakt', href: '/kontakt/' },
 ];
 
-export const FOOTER_NEWS = [
-  { href: '/blog/kindergeburtstag-park-tipps/', label: 'Kindergeburtstag im Park: Was muss man beachten? 🎂 🏕️' },
-  { href: '/blog/open-air-zauberei-im-freien/', label: 'Open-Air-Zauberei: Wie funktioniert eine Zaubershow im Freien? 🧙 🌿' },
-  { href: '/blog/sommerfest-kita-programm-clown-zauberer/', label: 'Sommerfest in der Kita planen: Programm-Ideen mit Clown und Zauberer 🎪 🌞' },
-  { href: '/blog/kindergeburtstag-hitze-outdoor-programm/', label: 'Kindergeburtstag bei Hitze: Outdoor-Programme die wirklich funktionieren ☀️ 🎈' },
-  { href: '/blog/kindergeburtstag-mai-outdoor-ruhrgebiet/', label: 'Kindergeburtstag im Mai ☀️ Outdoor-Ideen im Ruhrgebiet 🎈' },
-  { href: '/blog/muttertag-familiengeburtstag-kombinieren/', label: 'Muttertag & Familiengeburtstag kombinieren – was zusammen funktioniert 🌸 🎂' },
-  { href: '/blog/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/', label: '🌸 Frühlings- und Sommerfeste im Kindergarten: Ideen für unvergessliche Events' },
-];
-
 export const FOOTER_MAIN = [
   { href: '/clown/clownshow/', label: 'Clownshow' },
   { href: '/clown/clown-zauberer/', label: 'Clown & Zauberer NRW' },

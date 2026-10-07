@@ -3,6 +3,9 @@ title: "Was kostet ein Zauberer zum Kindergeburtstag? Ehrlicher Preis-Überblick
 seoTitle: "Was kostet ein Zauberer zum Kindergeburtstag? | LIAR"
 description: "Zauberer Kindergeburtstag Kosten 2026: 150 € Festpreis bei LIAR, marktübliche Spannen in NRW, versteckte Kosten und was im Preis enthalten sein sollte."
 publishDate: 2026-07-17
+updatedDate: 2026-10-07
+heroImage: "https://liar-entertainer.com/blog-images/was-kostet-zauberer-kindergeburtstag/cover.jpg"
+heroImageAlt: "Was kostet ein Zauberer zum Kindergeburtstag? Clown Zauberer LIAR auf der Bühne mit Zauberkoffer"
 categories: ["Geburtstag", "Preise", "Ratgeber"]
 tags: ["zauberer-kindergeburtstag-kosten"]
 author: "Michaël Prescler"
@@ -32,6 +35,8 @@ Die meisten Künstler berechnen Fahrtkosten, entweder pauschal oder pro Kilomete
 ### Art der Veranstaltung
 
 Ein privater Kindergeburtstag mit 10 Kindern im Wohnzimmer ist eine andere Nummer als ein Kita-Sommerfest mit 80 Kindern oder eine Karnevalsveranstaltung. Für größere Events wie Kitas, Schulen und Karneval liegt mein Preis bei 300 €, weil Programm, Lautstärke und Technik auf die große Gruppe angepasst werden. Ein Walk-Act für Straßenfeste (3 Stunden laufender Auftritt) kostet 800 €. Wenn Ihnen ein Anbieter für 20 Kinder denselben Preis nennt wie für 200, sollten Sie nachfragen, wie das kalkuliert ist.
+
+![Clown Zauberer LIAR zeigt bei einer Zaubershow einen Trick](https://liar-entertainer.com/blog-images/was-kostet-zauberer-kindergeburtstag/inline-1.jpg)
 
 ## Meine Preise 2026 im Überblick 📋
 
@@ -77,6 +82,8 @@ Ich habe mich vor Jahren bewusst für ein Festpreis-Modell entschieden, und zwar
 Das Festpreis-Modell hat noch einen zweiten Effekt: Es zwingt mich, effizient und professionell zu arbeiten. Ich muss nicht künstlich Stunden schinden oder Extras aufschwatzen. Ob die Feier in einer Etagenwohnung in Gelsenkirchen oder einem Garten in Dorsten stattfindet — ich brauche nur etwa 2×2 Meter Platz, und die Show funktioniert drinnen wie draußen. Dass dieses Modell ankommt, zeigen mir 370+ Google-Bewertungen mit 5,0 Sternen — und die vielen Familien, die mich Jahr für Jahr wieder buchen, wenn das nächste Geschwisterkind Geburtstag hat.
 
 Übrigens: Alle Details zu den Paketen finden Sie gesammelt auf meiner [Preisseite](/preise/) — und wenn Sie wissen möchten, wie so eine Show abläuft, schauen Sie auf die [Kindergeburtstags-Seite](/kindergeburtstag/).
+
+![Kinder verfolgen gebannt die Zaubershow von Clown Zauberer LIAR](https://liar-entertainer.com/blog-images/was-kostet-zauberer-kindergeburtstag/inline-2.jpg)
 
 ## Was bekommen Sie für 150 €? 🎈
 

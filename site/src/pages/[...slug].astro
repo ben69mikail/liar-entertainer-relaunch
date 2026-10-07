@@ -1,4 +1,5 @@
 ---
+import { legacyCover, restoreLegacyImages } from '../utils/legacyImages';
 import V2Layout from '../layouts/V2Layout.astro';
 import Reviews from '../components/v2/Reviews.astro';
 import { CONTACT } from '../data/site';
@@ -617,6 +618,9 @@ let scrapedContent: string | null = _processedScraped && _isCitySlug
 // .htaccess bewusst 410 Gone zurueckgeben - also 16 kaputte Bilder auf zwei Seiten.
 // stripLegacyPostHeader bleibt bewusst auf 'post' beschraenkt (Blog-spezifisch).
 if (scrapedContent) {
+  // legacy articles get their pictures back (original file or a fitting own photo) before the
+  // remaining dead upload tags are stripped
+  if (page.type === 'post') scrapedContent = restoreLegacyImages(scrapedContent, page.link);
   scrapedContent = stripWpImages(scrapedContent);
   if (page.type === 'post') {
     scrapedContent = stripLegacyPostHeader(scrapedContent);
@@ -892,7 +896,7 @@ if (scrapedContent) {
 const _fixedRaw: string | null = page.content ? fixVideoEmbeds(fixBrokenLinks(page.content)) : null;
 const fixedPageContent: string | null =
   // K1 (11.08.2026): gilt fuer 'post' UND 'page' - siehe Kommentar oben.
-  _fixedRaw ? stripWpImages(_fixedRaw) : _fixedRaw;
+  _fixedRaw ? stripWpImages(page.type === 'post' ? restoreLegacyImages(_fixedRaw, page.link) : _fixedRaw) : _fixedRaw;
 
 // === Title-Normalisierung (SEO-Audit 06.08.2026, Massnahme M6) ===
 // Legacy-Titles aus WordPress: Emojis (werden von Google aus dem SERP entfernt und
@@ -942,6 +946,7 @@ const rawDesc = (
   .replace(/der französischer/g, 'der französische')
   .replace(/der niveauvoller/g, 'der niveauvolle');
 const heroImg =
+  (page.type === 'post' ? legacyCover(page.link)?.src : undefined) ??
   SVC[pageSlug] ??
   getFirstImg(page.content) ??
   (page.type === 'post' ? postCategoryImg(page.categories) : null) ??
@@ -1117,7 +1122,7 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
   reading layout of the blog (styles/article.css). The old city branches and their inline
   "design-system" script are gone: city URLs have their own routes since wave 3, so they never ran.
 */}
-<V2Layout title={seoTitle || page.title} description={rawDesc} keywords={pageKeywords || undefined} canonical={canonicalUrl} ogImage={heroImg} heroPreload={heroImg} structuredData={schemas.length > 0 ? schemas : undefined}>
+<V2Layout title={seoTitle || page.title} description={rawDesc} keywords={pageKeywords || undefined} canonical={canonicalUrl} ogImage={heroImg} heroPreload={page.type === 'post' ? undefined : heroImg} structuredData={schemas.length > 0 ? schemas : undefined}>
 
 {scrapedContent ? (
   <>
