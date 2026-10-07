@@ -1,0 +1,616 @@
+# Netlify _redirects — converted from ops/legacy-apache/.htaccess (IONOS Apache, live until 2026-10-07)
+#
+# Order = Apache's effective order: in .htaccess context mod_rewrite (RewriteRule) runs BEFORE
+# mod_alias (Redirect/RedirectMatch), so all RewriteRule-derived lines come first, then the
+# RedirectMatch-derived lines. Netlify: first match wins; rules without "!" only apply when no
+# file exists (pages are never shadowed); trailing slashes are ignored when matching.
+# Verified by tests/dist/redirects.test.ts (sample table per Apache rule, DE URL contract, targets exist).
+#
+# NOT 1:1 EXPRESSIBLE ON NETLIFY (no regex) — what was done instead:
+#  - RewriteRule ^(.+)$ /$1/ (trailing slash, l.25-29), HTTPS (l.10-11), non-www (l.14-15):
+#      dropped. Netlify pretty URLs add the slash; HTTPS is automatic; www -> apex is the first rule below.
+#  - RewriteRule ^index\.html/?$ / (l.397): dropped (dist/index.html exists; a forced self-rule risks a loop).
+#  - Query rules ^s=(.*)$, ^p=[0-9]+$, ^page_id=[0-9]+$ on / and ^replytocom= / ^share= on any path:
+#      Netlify only checks that the parameter is PRESENT (not its position or that it is numeric).
+#  - RewriteRule ^(.+)/attachment/[^/]+/?$ (410): expanded to 1–3 leading segments (deeper -> 404).
+#  - RewriteRule ^.*-attachment/.*$ [G] (410): substring match inside a segment impossible -> 404.
+#  - RewriteRule ^5-gruende-warum-zauberei-zum-karneval-gehoert (prefix, emoji-suffixed old slug):
+#      only the exact slug (+ sub-paths); emoji variants fall through to the root catch-all -> /blog/.
+#  - ...kinderzauberer-in-(.*) / clown-in-(.*) / clown-in-(.+) / kinderzauberer-in-([^/]+):
+#      enumerated for the 23 city pages that exist in dist/; other slugs fall to the next rule of
+#      the group (Apache would have sent them to a non-existing city URL = 404).
+#  - RewriteRule ^clown/([a-z0-9-]{20,})/?$ /blog/ (l.409) vs ^clown/[a-z][a-z0-9-]+/?$ 410 (l.435):
+#      length cannot be checked -> every unknown single-segment /clown/<x>/ gets 410 (known old blog
+#      slugs under /clown/ are mapped individually to their article above, l.407).
+#  - RewriteRule ^([a-z0-9-]{20,})/?$ /blog/ with !-f !-d and excluded prefixes (l.414-417):
+#      becomes "/:slug /blog/ 301" (non-forced = !-f/!-d). Length >= 20, the character class and the
+#      prefix exclusion (blog|kindergeburtstag|...) cannot be checked, so ANY unknown single-segment
+#      path now goes to /blog/ instead of 404. Single-segment RedirectMatch sources with another
+#      target (wp-*.php, /clown, /author, /sample-page, sitemaps …) are placed before it.
+#  - RedirectMatch prefix patterns ^/wp-admin(.*)$, ^/category/clown(.*)$ … : expanded to the exact
+#      path + "/*"; same-segment prefixes (e.g. /category/clowns-x, /wp-adminx) fall to the next rule.
+#  - RedirectMatch ^/(.*)/feed|comments|page/[0-9]+ : expanded to 1–3 leading segments; page number not checked.
+#  - Dead Apache rules (shadowed by an earlier rule, never fired) are omitted: l.302 (same result via
+#      l.162), l.306-310 (caught by ^content/(.+)$ -> /blog/), l.348-354 (caught by ^clown-zauberer/(.+)$),
+#      RedirectMatch l.105 karneval/l.75 zaubershow overlap kept once.
+#  - <Files reviews-cache.json|config.php> deny, MIME, gzip, expires, ETag: not needed / handled by Netlify;
+#      Cache-Control + security headers -> netlify.toml.
+#
+# Pages that EXIST in dist/ but Apache redirected unconditionally -> forced with "!" (live parity):
+#   /clown/clown-zauberer/ (l.357) and /zauberer/zaubershow/karneval/ (l.105, canonical already /clown/karneval/).
+
+# ── Host: www -> apex (Apache l.14-15) ─────────────────────────
+https://www.liar-entertainer.com/*                                     https://liar-entertainer.com/:splat                301!
+http://www.liar-entertainer.com/*                                      https://liar-entertainer.com/:splat                301!
+
+# ── l.19 WordPress index.php ──
+/index.php                                                             /                                                  301
+/index.php/*                                                           /                                                  301
+
+# ── l.48/52 410 Gone: wp-content, fremde /sport/-Sektion ──
+/wp-content                                                            /404.html                                          410
+/wp-content/*                                                          /404.html                                          410
+/sport                                                                 /404.html                                          410
+/sport/*                                                               /404.html                                          410
+
+# ── l.82-92 WordPress-Suche / ?p= / ?page_id= auf der Startseite (forced: / existiert) ──
+/  s=:s                                                                /                                                  301!
+/  p=:p                                                                /                                                  301!
+/  page_id=:id                                                         /                                                  301!
+
+# ── l.97/98/102 Attachment-Seiten -> 410 ──
+/attachment                                                            /404.html                                          410
+/attachment/*                                                          /404.html                                          410
+/:a/attachment/:x                                                      /404.html                                          410
+/:a/:b/attachment/:x                                                   /404.html                                          410
+/:a/:b/:c/attachment/:x                                                /404.html                                          410
+
+# ── l.123 walk-act ──
+/walk-act                                                              /clown/walk-act/                                   301
+
+# ── l.126-135 MUSTER 1: /content/... ──
+/content                                                               /                                                  301
+/content/kinderzauberer                                                /kinderzauberer/                                   301
+/content/zauberer/tisch-zauberer                                       /zauberer/tisch-zauberer/                          301
+/content/zauberer/kinderzauberer                                       /kinderzauberer/                                   301
+/content/zauberer/kinderzauberer/kinderzauberer-in-bochum              /kinderzauberer/kinderzauberer-in-bochum/          301
+/content/zauberer/kinderzauberer/kinderzauberer-in-bottrop             /kinderzauberer/kinderzauberer-in-bottrop/         301
+/content/zauberer/kinderzauberer/kinderzauberer-in-castrop-rauxel      /kinderzauberer/kinderzauberer-in-castrop-rauxel/  301
+/content/zauberer/kinderzauberer/kinderzauberer-in-datteln             /kinderzauberer/kinderzauberer-in-datteln/         301
+/content/zauberer/kinderzauberer/kinderzauberer-in-dinslaken           /kinderzauberer/kinderzauberer-in-dinslaken/       301
+/content/zauberer/kinderzauberer/kinderzauberer-in-dorsten             /kinderzauberer/kinderzauberer-in-dorsten/         301
+/content/zauberer/kinderzauberer/kinderzauberer-in-dortmund            /kinderzauberer/kinderzauberer-in-dortmund/        301
+/content/zauberer/kinderzauberer/kinderzauberer-in-duesseldorf         /kinderzauberer/kinderzauberer-in-duesseldorf/     301
+/content/zauberer/kinderzauberer/kinderzauberer-in-duisburg            /kinderzauberer/kinderzauberer-in-duisburg/        301
+/content/zauberer/kinderzauberer/kinderzauberer-in-essen               /kinderzauberer/kinderzauberer-in-essen/           301
+/content/zauberer/kinderzauberer/kinderzauberer-in-gelsenkirchen       /kinderzauberer/kinderzauberer-in-gelsenkirchen/   301
+/content/zauberer/kinderzauberer/kinderzauberer-in-gladbeck            /kinderzauberer/kinderzauberer-in-gladbeck/        301
+/content/zauberer/kinderzauberer/kinderzauberer-in-haltern             /kinderzauberer/kinderzauberer-in-haltern/         301
+/content/zauberer/kinderzauberer/kinderzauberer-in-herne               /kinderzauberer/kinderzauberer-in-herne/           301
+/content/zauberer/kinderzauberer/kinderzauberer-in-herten              /kinderzauberer/kinderzauberer-in-herten/          301
+/content/zauberer/kinderzauberer/kinderzauberer-in-marl                /kinderzauberer/kinderzauberer-in-marl/            301
+/content/zauberer/kinderzauberer/kinderzauberer-in-moers               /kinderzauberer/kinderzauberer-in-moers/           301
+/content/zauberer/kinderzauberer/kinderzauberer-in-muelheim            /kinderzauberer/kinderzauberer-in-muelheim/        301
+/content/zauberer/kinderzauberer/kinderzauberer-in-oberhausen          /kinderzauberer/kinderzauberer-in-oberhausen/      301
+/content/zauberer/kinderzauberer/kinderzauberer-in-recklinghausen      /kinderzauberer/kinderzauberer-in-recklinghausen/  301
+/content/zauberer/kinderzauberer/kinderzauberer-in-waltrop             /kinderzauberer/kinderzauberer-in-waltrop/         301
+/content/zauberer/kinderzauberer/kinderzauberer-in-wesel               /kinderzauberer/kinderzauberer-in-wesel/           301
+/content/zauberer/kinderzauberer/kinderzauberer-in-xanten              /kinderzauberer/kinderzauberer-in-xanten/          301
+/content/clown/clown-in-bochum                                         /clown/clownshow/clown-in-bochum/                  301
+/content/clown/clown-in-bottrop                                        /clown/clownshow/clown-in-bottrop/                 301
+/content/clown/clown-in-castrop-rauxel                                 /clown/clownshow/clown-in-castrop-rauxel/          301
+/content/clown/clown-in-datteln                                        /clown/clownshow/clown-in-datteln/                 301
+/content/clown/clown-in-dinslaken                                      /clown/clownshow/clown-in-dinslaken/               301
+/content/clown/clown-in-dorsten                                        /clown/clownshow/clown-in-dorsten/                 301
+/content/clown/clown-in-dortmund                                       /clown/clownshow/clown-in-dortmund/                301
+/content/clown/clown-in-duesseldorf                                    /clown/clownshow/clown-in-duesseldorf/             301
+/content/clown/clown-in-duisburg                                       /clown/clownshow/clown-in-duisburg/                301
+/content/clown/clown-in-essen                                          /clown/clownshow/clown-in-essen/                   301
+/content/clown/clown-in-gelsenkirchen                                  /clown/clownshow/clown-in-gelsenkirchen/           301
+/content/clown/clown-in-gladbeck                                       /clown/clownshow/clown-in-gladbeck/                301
+/content/clown/clown-in-haltern                                        /clown/clownshow/clown-in-haltern/                 301
+/content/clown/clown-in-herne                                          /clown/clownshow/clown-in-herne/                   301
+/content/clown/clown-in-herten                                         /clown/clownshow/clown-in-herten/                  301
+/content/clown/clown-in-marl                                           /clown/clownshow/clown-in-marl/                    301
+/content/clown/clown-in-moers                                          /clown/clownshow/clown-in-moers/                   301
+/content/clown/clown-in-muelheim                                       /clown/clownshow/clown-in-muelheim/                301
+/content/clown/clown-in-oberhausen                                     /clown/clownshow/clown-in-oberhausen/              301
+/content/clown/clown-in-recklinghausen                                 /clown/clownshow/clown-in-recklinghausen/          301
+/content/clown/clown-in-waltrop                                        /clown/clownshow/clown-in-waltrop/                 301
+/content/clown/clown-in-wesel                                          /clown/clownshow/clown-in-wesel/                   301
+/content/clown/clown-in-xanten                                         /clown/clownshow/clown-in-xanten/                  301
+/content/glitzer-tattoos                                               /clown/glitzer-tattoo/                             301
+/content/preise-fuer-clown-oder-kinderzauberer                         /preise/                                           301
+/content/index.php                                                     /                                                  301
+/content/*                                                             /blog/                                             301
+
+# ── l.138-148 was-kostet, zauberer-nrw, Karneval-Slug, abgeschnittener Link ──
+/clown/kindergeburtstag/was-kostet-ein-clown-fuer-ein-kindergeburtstag /blog/was-kostet-ein-clown-fuer-ein-kindergeburtstag/ 301
+/kindergeburtstag/was-kostet-ein-clown-fuer-ein-kindergeburtstag       /blog/was-kostet-ein-clown-fuer-ein-kindergeburtstag/ 301
+/zauberer-nrw                                                          /zauberer/                                         301
+/zauberer/zauberer-nrw                                                 /zauberer/                                         301
+/5-gruende-warum-zauberei-zum-karneval-gehoert                         /blog/5-gruende-warum-zauberei-zum-karneval-gehoert/ 301
+/5-gruende-warum-zauberei-zum-karneval-gehoert/*                       /blog/5-gruende-warum-zauberei-zum-karneval-gehoert/ 301
+/blog/was-kostet-ein-                                                  /blog/was-kostet-ein-clown-fuer-ein-kindergeburtstag/ 301
+
+# ── l.151-156 MUSTER 2/3: /clown/kindergeburtstag|geburtstag/ -> /kindergeburtstag/ ──
+/clown/kindergeburtstag                                                /kindergeburtstag/                                 301
+/clown/kindergeburtstag/*                                              /kindergeburtstag/:splat                           301
+/clown/geburtstag                                                      /kindergeburtstag/                                 301
+/clown/geburtstag/*                                                    /kindergeburtstag/:splat                           301
+
+# ── l.159-162 MUSTER 4: /clown/zauberer/... ──
+/clown/zauberer/kinderzauberer                                         /kinderzauberer/                                   301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-bochum                /kinderzauberer/kinderzauberer-in-bochum/          301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-bochum/*              /kinderzauberer/kinderzauberer-in-bochum/          301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-bottrop               /kinderzauberer/kinderzauberer-in-bottrop/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-bottrop/*             /kinderzauberer/kinderzauberer-in-bottrop/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-castrop-rauxel        /kinderzauberer/kinderzauberer-in-castrop-rauxel/  301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-castrop-rauxel/*      /kinderzauberer/kinderzauberer-in-castrop-rauxel/  301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-datteln               /kinderzauberer/kinderzauberer-in-datteln/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-datteln/*             /kinderzauberer/kinderzauberer-in-datteln/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-dinslaken             /kinderzauberer/kinderzauberer-in-dinslaken/       301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-dinslaken/*           /kinderzauberer/kinderzauberer-in-dinslaken/       301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-dorsten               /kinderzauberer/kinderzauberer-in-dorsten/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-dorsten/*             /kinderzauberer/kinderzauberer-in-dorsten/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-dortmund              /kinderzauberer/kinderzauberer-in-dortmund/        301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-dortmund/*            /kinderzauberer/kinderzauberer-in-dortmund/        301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-duesseldorf           /kinderzauberer/kinderzauberer-in-duesseldorf/     301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-duesseldorf/*         /kinderzauberer/kinderzauberer-in-duesseldorf/     301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-duisburg              /kinderzauberer/kinderzauberer-in-duisburg/        301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-duisburg/*            /kinderzauberer/kinderzauberer-in-duisburg/        301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-essen                 /kinderzauberer/kinderzauberer-in-essen/           301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-essen/*               /kinderzauberer/kinderzauberer-in-essen/           301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-gelsenkirchen         /kinderzauberer/kinderzauberer-in-gelsenkirchen/   301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-gelsenkirchen/*       /kinderzauberer/kinderzauberer-in-gelsenkirchen/   301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-gladbeck              /kinderzauberer/kinderzauberer-in-gladbeck/        301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-gladbeck/*            /kinderzauberer/kinderzauberer-in-gladbeck/        301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-haltern               /kinderzauberer/kinderzauberer-in-haltern/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-haltern/*             /kinderzauberer/kinderzauberer-in-haltern/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-herne                 /kinderzauberer/kinderzauberer-in-herne/           301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-herne/*               /kinderzauberer/kinderzauberer-in-herne/           301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-herten                /kinderzauberer/kinderzauberer-in-herten/          301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-herten/*              /kinderzauberer/kinderzauberer-in-herten/          301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-marl                  /kinderzauberer/kinderzauberer-in-marl/            301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-marl/*                /kinderzauberer/kinderzauberer-in-marl/            301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-moers                 /kinderzauberer/kinderzauberer-in-moers/           301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-moers/*               /kinderzauberer/kinderzauberer-in-moers/           301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-muelheim              /kinderzauberer/kinderzauberer-in-muelheim/        301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-muelheim/*            /kinderzauberer/kinderzauberer-in-muelheim/        301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-oberhausen            /kinderzauberer/kinderzauberer-in-oberhausen/      301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-oberhausen/*          /kinderzauberer/kinderzauberer-in-oberhausen/      301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-recklinghausen        /kinderzauberer/kinderzauberer-in-recklinghausen/  301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-recklinghausen/*      /kinderzauberer/kinderzauberer-in-recklinghausen/  301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-waltrop               /kinderzauberer/kinderzauberer-in-waltrop/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-waltrop/*             /kinderzauberer/kinderzauberer-in-waltrop/         301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-wesel                 /kinderzauberer/kinderzauberer-in-wesel/           301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-wesel/*               /kinderzauberer/kinderzauberer-in-wesel/           301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-xanten                /kinderzauberer/kinderzauberer-in-xanten/          301
+/clown/zauberer/kinderzauberer/kinderzauberer-in-xanten/*              /kinderzauberer/kinderzauberer-in-xanten/          301
+/clown/zauberer/*                                                      /zauberer/:splat                                   301
+
+# ── l.165-168 MUSTER 5: /clown-zauberer/... ──
+/clown-zauberer/clown/glitzer-tattoos                                  /clown/glitzer-tattoo/                             301
+/clown-zauberer/clown/geburtstag/*                                     /kindergeburtstag/:splat                           301
+/clown-zauberer                                                        /clown/clownshow/                                  301
+/clown-zauberer/*                                                      /clown/clownshow/                                  301
+
+# ── l.171-174 MUSTER 6: /clown-nrw/... ──
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-bochum      /clown/clownshow/clown-in-bochum/                  301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-bottrop     /clown/clownshow/clown-in-bottrop/                 301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-castrop-rauxel /clown/clownshow/clown-in-castrop-rauxel/          301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-datteln     /clown/clownshow/clown-in-datteln/                 301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-dinslaken   /clown/clownshow/clown-in-dinslaken/               301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-dorsten     /clown/clownshow/clown-in-dorsten/                 301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-dortmund    /clown/clownshow/clown-in-dortmund/                301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-duesseldorf /clown/clownshow/clown-in-duesseldorf/             301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-duisburg    /clown/clownshow/clown-in-duisburg/                301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-essen       /clown/clownshow/clown-in-essen/                   301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-gelsenkirchen /clown/clownshow/clown-in-gelsenkirchen/           301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-gladbeck    /clown/clownshow/clown-in-gladbeck/                301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-haltern     /clown/clownshow/clown-in-haltern/                 301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-herne       /clown/clownshow/clown-in-herne/                   301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-herten      /clown/clownshow/clown-in-herten/                  301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-marl        /clown/clownshow/clown-in-marl/                    301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-moers       /clown/clownshow/clown-in-moers/                   301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-muelheim    /clown/clownshow/clown-in-muelheim/                301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-oberhausen  /clown/clownshow/clown-in-oberhausen/              301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-recklinghausen /clown/clownshow/clown-in-recklinghausen/          301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-waltrop     /clown/clownshow/clown-in-waltrop/                 301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-wesel       /clown/clownshow/clown-in-wesel/                   301
+/clown-nrw/clown-mieten-und-buchen-in-ihrer-stadt/clown-in-xanten      /clown/clownshow/clown-in-xanten/                  301
+/clown-nrw/clown-kinderzauberer-kindergeburtstag                       /kindergeburtstag/                                 301
+/clown-nrw                                                             /clown/clownshow/                                  301
+/clown-nrw/*                                                           /clown/clownshow/                                  301
+
+# ── l.177-180 MUSTER 7: Glitzer-Tattoo ──
+/clown/glitzer-tattoos                                                 /clown/glitzer-tattoo/                             301
+/clown-kindergeburtstag-extras/glitzer-tattoos                         /clown/glitzer-tattoo/                             301
+/glitzer-tattoos                                                       /clown/glitzer-tattoo/                             301
+/glitzer-tattoos-den-kindergeburtstag                                  /clown/glitzer-tattoo/                             301
+
+# ── l.183-298 MUSTER 8: alte Blog-Posts auf Root-Ebene ──
+/kindernachmittag-in-der-schnittbar-mit-liar                           /blog/                                             301
+/ab-nach-witten                                                        /blog/                                             301
+/halloween-spektakel-fur-kinder                                        /blog/                                             301
+/workshop-in-der-abenteuerkiste-in-greven                              /blog/                                             301
+/4-harwicker-fruehjahrsfest-mit-kinderzauberer                         /blog/                                             301
+/zauberer-liar-in-der-stadtteilbibliothek-luetgendortmund              /blog/                                             301
+/karnevalsaison-startet-am-sonntag                                     /blog/                                             301
+/clown-im-theater-don-kidschote                                        /blog/                                             301
+/hoffest-hof-wulhorst-mit-clown-liar                                   /blog/                                             301
+/karneval-in-gevelsberg                                                /blog/                                             301
+/sommerfest-im-gartenverein-in-dortmund-mengede                        /blog/                                             301
+/stickerfreunde-kick-off-party-in-herdecke-mit-zauberer-liar           /blog/                                             301
+/clown-liar-in-dortmund                                                /blog/                                             301
+/clown-zauberer-liar-beim-1-harwicker-fruhjahrsfest-auf-brinkmanns-hof-in-gescher /blog/                                             301
+/toller-artikel-aus-nottuln-fuer-clown-und-zauberer                    /blog/                                             301
+/nikolaus-markt-in-bottrop-empfaengt-clown-zauberer-liar               /blog/                                             301
+/bauernmarkt-in-waltrop-am-sonntag                                     /blog/                                             301
+/luis-das-bistro-zauberer-liar-bei-eroffnungsfeier-in-gladbeck         /blog/                                             301
+/100-jahre-volksgarten-kray                                            /blog/                                             301
+/automeile-in-beckum                                                   /blog/                                             301
+/weihnachtsmarkt-hagen-clown-zauberer                                  /blog/                                             301
+/clown-liar-in-essen-kray                                              /blog/                                             301
+/geburtstagsangebot-clown-liar                                         /blog/                                             301
+/zufallig-gefunden-clown-auch-auch-beim-spielplatzeroffnung            /blog/                                             301
+/spielfest-zum-weltkindertag                                           /blog/                                             301
+/drehorgel-rolf                                                        /blog/                                             301
+/nochn-clown                                                           /blog/                                             301
+/kindersitzung-xanten-januar-2018                                      /blog/                                             301
+/clown-zauberer-liar-in-sauerland-am-sonntag-19-mai-2012               /blog/                                             301
+/sport-meets-karneval                                                  /blog/                                             301
+/sommerfest-kgv-eilperfeld-in-hagen                                    /blog/                                             301
+/clown-liar-im-autohaus-zumbuelt-fuer-die-automeile-2016               /blog/                                             301
+/tolles-plakat-fuer-bottroper-spendenlauf                              /blog/                                             301
+/kinderzauberer-gelobt                                                 /blog/                                             301
+/preise-fuer-clown-oder-kinderzauberer                                 /preise/                                           301
+/kinderzauberer-unterwegs-bei-dem-bildungswerk-essen                   /blog/                                             301
+/rhenania-bottrops-u8-junioren-laden-ein                               /blog/                                             301
+/5-sternen-clown-und-kinderzauberer-im-kindergarten                    /blog/                                             301
+/bewertung-und-fotos-vom-clown                                         /galerie/                                          301
+/hotel-eroffnung-in-ennepetal-mit-clown-zauberer-liar                  /blog/                                             301
+/neue-bewertungen-fuer-clown-liar-shows                                /blog/                                             301
+/drk-luedenscheid-feiert-150-geburtstag                                /blog/                                             301
+/riesenseifenblasen-macht-spass                                        /blog/                                             301
+/karneval-startet-in-oberhausen                                        /blog/                                             301
+/liar-im-regenbogenhaus-in-dortmund                                    /blog/                                             301
+/zauberworkshop-fur-kinder-in-essen-schonebeck                         /blog/                                             301
+/oktoberfest-fur-kinder-in-der-kinderwelt-recklinghausen               /blog/                                             301
+/tolle-veranstaltung-in-prerow-clown                                   /blog/                                             301
+/leuchtfeder-e-v-kunst-und-kultur                                      /blog/                                             301
+/dortmunder-weihnachtsmarkt-eroeffnung-mit-clown-zauberer-liar         /blog/                                             301
+/haltern-bittet-zu-tisch                                               /blog/                                             301
+/fruehlingsfet-in-kray                                                 /blog/                                             301
+/der-zauberer-muss-zum-arzt-nach-bottrop                               /blog/                                             301
+/der-tennis-clown-mansour-barami                                       /blog/                                             301
+/kinderkarneval-bei-den-wittringer-ritter-in-gladbeck                  /blog/                                             301
+/zauberworkshop-in-der-kinderwelt-recklinghausen                       /blog/                                             301
+/kinder-schmuecken-den-tannenbaum-auf-dem-robert-brauner-platz         /blog/                                             301
+/in-reken-fuer-karneval-fuer-die-kinder                                /blog/                                             301
+/tanzschule-achim-juergens-in-essen                                    /blog/                                             301
+/weihnachtsmarkt-bottrop-mit-kinderzauberer-liar                       /blog/                                             301
+/spendenlauf-in-bottrop-jeder-meter-zaehlt                             /blog/                                             301
+/kinderschuetzenfest-in-gahlen                                         /blog/                                             301
+/100-jahriger-im-volksgarten-kray                                      /blog/                                             301
+/plan-b-feiert-auftakt-mit-clown-liar                                  /blog/                                             301
+/auch-in-geldern-fuer-karneval                                         /blog/                                             301
+/clown-zauberer-liar-auf-hochzeit-und-taufe                            /blog/                                             301
+/dennis-treiblmair-und-michael-prescler-verzaubern-publikum            /blog/                                             301
+/was-kostet-einen-clown-oder-zauberer-in-nrw                           /blog/                                             301
+/warum-einen-clown-oder-zauberer-fur-den-geburtstag-buchen             /blog/                                             301
+/bottroper-weihnachtsmarkt-mit-clown-liar                              /blog/                                             301
+/adac-lenkt-autofahrer-zur-halde                                       /blog/                                             301
+/gartencenter-schellewald-in-gladbeck                                  /blog/                                             301
+/karneval-in-rommreskirchen-mit-clown-liar                             /blog/                                             301
+/ein-clown-im-seniorenzentrum-martineum-in-essen                       /blog/                                             301
+/zauberer-in-berlin-andre-kursch                                       /blog/                                             301
+/geburtstag-40-jahre-rathaus-essen-mit-clown-zauberer-liar             /blog/                                             301
+/sommerfest-mit-clown-liar-in-essen                                    /blog/                                             301
+/zaubershow-auf-dem-hoffest-in-waltrop                                 /blog/                                             301
+/rewe-neueroffnung-mit-clown-liar                                      /blog/                                             301
+/clown-liar-bei-marcellino-in-dormagen                                 /blog/                                             301
+/zauberer-liar-auf-dem-wetteraner-herbsfest                            /blog/                                             301
+/24-kinderfest-im-krayer-volksgarten                                   /blog/                                             301
+/175-jaehriges-sparkasse-muelheim-nit-zauberer-liar                    /blog/                                             301
+/benefiz-aktion-in-gladbeck                                            /blog/                                             301
+/benefiz-bottrop                                                       /blog/                                             301
+/zauberclown-liar-laedt-alle-kinder-in-drei-awo-kitas-ein              /blog/                                             301
+/topmodel-party-fur-den-geburtstag                                     /blog/                                             301
+/besuch-vom-zauberer-liar-auf-dem-weihnachtsmarkt-dortmund             /blog/                                             301
+/halloween-zauberhafte-momente-fur-kinder-im-kulturtempel-gladbeck     /blog/                                             301
+/kindergeburtstag-feiern-in-duesseldorf-bei-happy-kids                 /blog/                                             301
+/karnevalsaison-mit-clown-liar-fangt-an                                /blog/                                             301
+/zauberhafte-party-in-eisborn                                          /blog/                                             301
+/liar-als-schwarzer-magier-fuer-halloween                              /blog/                                             301
+/dorstener-weihnachtsmarkt-mit-clown-und-kinderzauberer                /blog/                                             301
+/nachwuchs-feiert-in-eisborn-karneval-mit-clown-liar                   /blog/                                             301
+/dorsten-weihnachtsmarkt-der-mr-trucker-kinderhilfe-zieht-besucher-an  /blog/                                             301
+/die-kinderwelt-recklinghausen-empfangt-erneut-clown-zauberer-liar     /blog/                                             301
+/die-mammutspiele-in-ahlen                                             /blog/                                             301
+/kirmes-und-brunnenfest-mit-kinderzaubershow                           /blog/                                             301
+/cafe-schlaflos-heute-in-der-buecherei-gladbeck                        /blog/                                             301
+/kinderzauberer-besucht-kita-in-gelsenkirchen                          /blog/                                             301
+/musik-und-entertainment-mit-michael-voelkel                           /blog/                                             301
+/clown-zauberer-liar-empfiehlt-fire-fantasies-aus-bochum               /blog/                                             301
+/dortmunder-weihnachtsmarkt-mit-liar                                   /blog/                                             301
+/lustiges-hochzeitsfoto-vom-zauberer                                   /blog/                                             301
+/fruehlingsfest-kray-mit-maedeltroedelmarkt                            /blog/                                             301
+/kinderparadies-im-westfalenpark                                       /blog/                                             301
+/murray-und-der-zauberer                                               /blog/                                             301
+/kinder-helfen-helden-zu-machen                                        /blog/                                             301
+/naturheilpraxis-schreiber-in-haltern-am-see                           /blog/                                             301
+/zirkus-aus-der-kiste-auf-dem-spielplatz-clown-zauberer-liar-in-dortmund /blog/                                             301
+/bottroper-super-samstag-am-4-7                                        /blog/                                             301
+/dpvkom-fordert-ein-herz-fuer-mitarbeiter-der-deutschen-post-dhl       /blog/                                             301
+/zimtsternfest-mit-zauberer-liar-in-gladbeck                           /blog/                                             301
+/clown-und-kinderzauberer-in-der-kinderwelt-recklinghausen             /blog/                                             301
+/familienfest-in-ramsdorf-mit-clown-liar                               /blog/                                             301
+
+# ── l.303 /clown/zauberer/ (l.302 identisch über /clown/zauberer/*) ──
+/clown/zauberer                                                        /zauberer/                                         301
+
+# ── l.313-318 ?replytocom= / ?share= entfernen (forced, jede Seite) ──
+/*  replytocom=:r                                                      /:splat                                            301!
+/*  share=:s                                                           /:splat                                            301!
+
+# ── l.321-345 weitere alte Blog-Posts ──
+/kinderzauberer-clown-bei-der-awo-in-waltrop                           /blog/                                             301
+/zauberer-in-herne-zaubershow-auf-dem-sommerfest                       /blog/                                             301
+/zauberer-auf-dem-stadtfest-in-marl                                    /blog/                                             301
+/clown-liar-auf-dem-fruehlingsfest-in-kray                             /blog/                                             301
+/clown-liar-auf-dem-roncalli-weihnachtsmarkt                           /blog/                                             301
+/kinderzauberer-auf-der-burg-vondern-in-oberhausen                     /blog/                                             301
+/halloween-party-fuer-kinder                                           /blog/                                             301
+/zauberer-und-clown-in-der-grundschule                                 /blog/                                             301
+/clown-liar-beim-sommerfest-in-gladbeck                                /blog/                                             301
+/kinderfest-im-westfalenpark-dortmund                                  /blog/                                             301
+/kindergeburtstag-mit-zauberer-in-essen                                /blog/                                             301
+/clown-fuer-hochzeit-in-nrw                                            /blog/                                             301
+/zauberworkshop-fuer-kinder-in-gelsenkirchen                           /blog/                                             301
+/clown-liar-beim-karnevalsumzug-in-gladbeck                            /blog/                                             301
+/sommerfest-in-der-kita-mit-zauberer                                   /blog/                                             301
+/kinderzauberer-in-der-grundschule-in-bottrop                          /blog/                                             301
+/zauberer-fuer-firmenevent-in-essen                                    /blog/                                             301
+/clown-liar-bei-lidl-in-gelsenkirchen                                  /blog/                                             301
+/weihnachtsfeier-mit-zauberer-in-bochum                                /blog/                                             301
+/kindergeburtstag-in-duisburg-mit-clown                                /blog/                                             301
+/kinderfest-auf-hof-wessels-in-haltern                                 /blog/                                             301
+/stadtfest-in-gladbeck-mit-clown-liar                                  /blog/                                             301
+/clown-zauberer-beim-fruehlingsfest                                    /blog/                                             301
+/karnevalsfeier-in-der-kita                                            /blog/                                             301
+/sommerfest-in-recklinghausen-mit-kinderzauberer                       /blog/                                             301
+
+# ── l.357-358 /clown/clown-zauberer/ (Seite existiert in dist, Apache leitete immer um -> forced) ──
+/clown/clown-zauberer                                                  /clown/clownshow/                                  301!
+/clown/clown-zauberer/*                                                /clown/clownshow/                                  301
+
+# ── l.361-385 MUSTER 10: /category/... ──
+/category/kinderzauberer                                               /kinderzauberer/                                   301
+/category/kinderzauberer-und-clown-aus-nrw-aktuell                     /blog/                                             301
+/category/kinderzauberer-und-clown-aus-nrw-aktuell/*                   /blog/                                             301
+/category/entertainer                                                  /blog/                                             301
+/category/entertainer/*                                                /blog/                                             301
+/category/kultur-nrw                                                   /blog/                                             301
+/category/kultur-nrw/*                                                 /blog/                                             301
+/category/zaubershow                                                   /zauberer/zaubershow/                              301
+/category/zaubershow/*                                                 /zauberer/zaubershow/                              301
+/category/zauberer-2                                                   /zauberer/                                         301
+/category/zauberer-2/*                                                 /zauberer/                                         301
+/category/clown-im-herzen                                              /blog/                                             301
+/category/clown-im-herzen/*                                            /blog/                                             301
+/category/besondere-clowns                                             /blog/                                             301
+/category/nette-locations                                              /blog/                                             301
+/category/nette-locations/*                                            /blog/                                             301
+/category/presse                                                       /blog/                                             301
+/category/marketing                                                    /blog/                                             301
+/category/tolle-selbstandige                                           /blog/                                             301
+/category/videos                                                       /galerie/                                          301
+/category/anleitung-fur-kinderspass                                    /blog/                                             301
+/category/anleitung-fur-kinderspass/*                                  /blog/                                             301
+/category/kinder-geburtstag-anleitung-fur-kinderspass                  /blog/                                             301
+# l.384 ^category/gelsenkirchen-.*$ -> /blog/: identical result via /category/* below
+/category/wetter                                                       /blog/                                             301
+
+# ── l.390-392 MUSTER 11: /zauberer/kinderzauberer... ──
+/zauberer/kinderzauberer                                               /kinderzauberer/                                   301
+/zauberer/kinderzauberer/kinderzauberer-in-bochum                      /kinderzauberer/kinderzauberer-in-bochum/          301
+/zauberer/kinderzauberer/kinderzauberer-in-bottrop                     /kinderzauberer/kinderzauberer-in-bottrop/         301
+/zauberer/kinderzauberer/kinderzauberer-in-castrop-rauxel              /kinderzauberer/kinderzauberer-in-castrop-rauxel/  301
+/zauberer/kinderzauberer/kinderzauberer-in-datteln                     /kinderzauberer/kinderzauberer-in-datteln/         301
+/zauberer/kinderzauberer/kinderzauberer-in-dinslaken                   /kinderzauberer/kinderzauberer-in-dinslaken/       301
+/zauberer/kinderzauberer/kinderzauberer-in-dorsten                     /kinderzauberer/kinderzauberer-in-dorsten/         301
+/zauberer/kinderzauberer/kinderzauberer-in-dortmund                    /kinderzauberer/kinderzauberer-in-dortmund/        301
+/zauberer/kinderzauberer/kinderzauberer-in-duesseldorf                 /kinderzauberer/kinderzauberer-in-duesseldorf/     301
+/zauberer/kinderzauberer/kinderzauberer-in-duisburg                    /kinderzauberer/kinderzauberer-in-duisburg/        301
+/zauberer/kinderzauberer/kinderzauberer-in-essen                       /kinderzauberer/kinderzauberer-in-essen/           301
+/zauberer/kinderzauberer/kinderzauberer-in-gelsenkirchen               /kinderzauberer/kinderzauberer-in-gelsenkirchen/   301
+/zauberer/kinderzauberer/kinderzauberer-in-gladbeck                    /kinderzauberer/kinderzauberer-in-gladbeck/        301
+/zauberer/kinderzauberer/kinderzauberer-in-haltern                     /kinderzauberer/kinderzauberer-in-haltern/         301
+/zauberer/kinderzauberer/kinderzauberer-in-herne                       /kinderzauberer/kinderzauberer-in-herne/           301
+/zauberer/kinderzauberer/kinderzauberer-in-herten                      /kinderzauberer/kinderzauberer-in-herten/          301
+/zauberer/kinderzauberer/kinderzauberer-in-marl                        /kinderzauberer/kinderzauberer-in-marl/            301
+/zauberer/kinderzauberer/kinderzauberer-in-moers                       /kinderzauberer/kinderzauberer-in-moers/           301
+/zauberer/kinderzauberer/kinderzauberer-in-muelheim                    /kinderzauberer/kinderzauberer-in-muelheim/        301
+/zauberer/kinderzauberer/kinderzauberer-in-oberhausen                  /kinderzauberer/kinderzauberer-in-oberhausen/      301
+/zauberer/kinderzauberer/kinderzauberer-in-recklinghausen              /kinderzauberer/kinderzauberer-in-recklinghausen/  301
+/zauberer/kinderzauberer/kinderzauberer-in-waltrop                     /kinderzauberer/kinderzauberer-in-waltrop/         301
+/zauberer/kinderzauberer/kinderzauberer-in-wesel                       /kinderzauberer/kinderzauberer-in-wesel/           301
+/zauberer/kinderzauberer/kinderzauberer-in-xanten                      /kinderzauberer/kinderzauberer-in-xanten/          301
+/zauberer/kinderzauberer/*                                             /kinderzauberer/                                   301
+
+# ── l.395-400 Einzelfälle (l.397 index.html: siehe Kopf) ──
+/kinderschminken                                                       /clown/glitzer-tattoo/                             301
+/ballonkuenstler                                                       /clown/ballonmodellage/                            301
+/clown-kindergeburtstag                                                /kindergeburtstag/                                 301
+/zauberer-kindergeburtstag                                             /kindergeburtstag/                                 301
+/clown/20230628_155823                                                 /galerie/                                          301
+
+# ── l.403-407 alte Root-/clown-Slugs -> EXISTIERENDER Blogartikel (nur wenn keine Datei: non-forced) ──
+/10-tipps-fuer-den-perfekten-kindergeburtstag                          /blog/10-tipps-fuer-den-perfekten-kindergeburtstag/ 301
+/clown/10-tipps-fuer-den-perfekten-kindergeburtstag                    /blog/10-tipps-fuer-den-perfekten-kindergeburtstag/ 301
+/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie /blog/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie/ 301
+/clown/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie /blog/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie/ 301
+/5-gruende-warum-zauberei-zum-karneval-gehoert                         /blog/5-gruende-warum-zauberei-zum-karneval-gehoert/ 301
+/clown/5-gruende-warum-zauberei-zum-karneval-gehoert                   /blog/5-gruende-warum-zauberei-zum-karneval-gehoert/ 301
+/adventsmarkt-in-rheinberg-mit-clown-zauberer                          /blog/adventsmarkt-in-rheinberg-mit-clown-zauberer/ 301
+/clown/adventsmarkt-in-rheinberg-mit-clown-zauberer                    /blog/adventsmarkt-in-rheinberg-mit-clown-zauberer/ 301
+/clown-oder-zauberer-kindergeburtstag                                  /blog/clown-oder-zauberer-kindergeburtstag/        301
+/clown/clown-oder-zauberer-kindergeburtstag                            /blog/clown-oder-zauberer-kindergeburtstag/        301
+/coesfeld-empfaengt-clown-zauberer-liar                                /blog/coesfeld-empfaengt-clown-zauberer-liar/      301
+/clown/coesfeld-empfaengt-clown-zauberer-liar                          /blog/coesfeld-empfaengt-clown-zauberer-liar/      301
+/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck /blog/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck/ 301
+/clown/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck /blog/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck/ 301
+/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events /blog/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/ 301
+/clown/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events /blog/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/ 301
+/gescher-clown-zauberer                                                /blog/gescher-clown-zauberer/                      301
+/clown/gescher-clown-zauberer                                          /blog/gescher-clown-zauberer/                      301
+/haltern-clown-in-freiheit                                             /blog/haltern-clown-in-freiheit/                   301
+/clown/haltern-clown-in-freiheit                                       /blog/haltern-clown-in-freiheit/                   301
+/ikea-duisburg-midsommar-mit-clown-zauberer                            /blog/ikea-duisburg-midsommar-mit-clown-zauberer/  301
+/clown/ikea-duisburg-midsommar-mit-clown-zauberer                      /blog/ikea-duisburg-midsommar-mit-clown-zauberer/  301
+/kidzival-2024                                                         /blog/kidzival-2024/                               301
+/clown/kidzival-2024                                                   /blog/kidzival-2024/                               301
+/kindergeburtstag-hitze-outdoor-programm                               /blog/kindergeburtstag-hitze-outdoor-programm/     301
+/clown/kindergeburtstag-hitze-outdoor-programm                         /blog/kindergeburtstag-hitze-outdoor-programm/     301
+/kindergeburtstag-mai-outdoor-ruhrgebiet                               /blog/kindergeburtstag-mai-outdoor-ruhrgebiet/     301
+/clown/kindergeburtstag-mai-outdoor-ruhrgebiet                         /blog/kindergeburtstag-mai-outdoor-ruhrgebiet/     301
+/kindergeburtstag-park-tipps                                           /blog/kindergeburtstag-park-tipps/                 301
+/clown/kindergeburtstag-park-tipps                                     /blog/kindergeburtstag-park-tipps/                 301
+/kinderkarneval-mit-clown-zauberer                                     /blog/kinderkarneval-mit-clown-zauberer/           301
+/clown/kinderkarneval-mit-clown-zauberer                               /blog/kinderkarneval-mit-clown-zauberer/           301
+/kindersitzung-in-rheinberg                                            /blog/kindersitzung-in-rheinberg/                  301
+/clown/kindersitzung-in-rheinberg                                      /blog/kindersitzung-in-rheinberg/                  301
+/kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen /blog/kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen/ 301
+/clown/kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen /blog/kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen/ 301
+/lollipop-festival-das-familienevent                                   /blog/lollipop-festival-das-familienevent/         301
+/clown/lollipop-festival-das-familienevent                             /blog/lollipop-festival-das-familienevent/         301
+/luftballonmodellage-kindergeburtstag                                  /blog/luftballonmodellage-kindergeburtstag/        301
+/clown/luftballonmodellage-kindergeburtstag                            /blog/luftballonmodellage-kindergeburtstag/        301
+/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie /blog/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie/ 301
+/clown/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie /blog/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie/ 301
+/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt /blog/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/ 301
+/clown/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt /blog/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/ 301
+/muttertag-familiengeburtstag-kombinieren                              /blog/muttertag-familiengeburtstag-kombinieren/    301
+/clown/muttertag-familiengeburtstag-kombinieren                        /blog/muttertag-familiengeburtstag-kombinieren/    301
+/nussknacker-weihnachtsmarkt-gladbeck                                  /blog/nussknacker-weihnachtsmarkt-gladbeck/        301
+/clown/nussknacker-weihnachtsmarkt-gladbeck                            /blog/nussknacker-weihnachtsmarkt-gladbeck/        301
+/open-air-zauberei-im-freien                                           /blog/open-air-zauberei-im-freien/                 301
+/clown/open-air-zauberei-im-freien                                     /blog/open-air-zauberei-im-freien/                 301
+/pantomime-auf-dem-appeltatenfest                                      /blog/pantomime-auf-dem-appeltatenfest/            301
+/clown/pantomime-auf-dem-appeltatenfest                                /blog/pantomime-auf-dem-appeltatenfest/            301
+/pantomime-bei-extraschicht                                            /blog/pantomime-bei-extraschicht/                  301
+/clown/pantomime-bei-extraschicht                                      /blog/pantomime-bei-extraschicht/                  301
+/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen         /blog/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen/ 301
+/clown/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen   /blog/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen/ 301
+/sommerfest-kita-programm-clown-zauberer                               /blog/sommerfest-kita-programm-clown-zauberer/     301
+/clown/sommerfest-kita-programm-clown-zauberer                         /blog/sommerfest-kita-programm-clown-zauberer/     301
+/tierparkfest-recklinghausen                                           /blog/tierparkfest-recklinghausen/                 301
+/clown/tierparkfest-recklinghausen                                     /blog/tierparkfest-recklinghausen/                 301
+/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist /blog/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/ 301
+/clown/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist /blog/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/ 301
+/was-ist-ein-clown                                                     /blog/was-ist-ein-clown/                           301
+/clown/was-ist-ein-clown                                               /blog/was-ist-ein-clown/                           301
+/was-kostet-ein-clown-fuer-ein-kindergeburtstag                        /blog/was-kostet-ein-clown-fuer-ein-kindergeburtstag/ 301
+/clown/was-kostet-ein-clown-fuer-ein-kindergeburtstag                  /blog/was-kostet-ein-clown-fuer-ein-kindergeburtstag/ 301
+/was-kostet-zauberer-kindergeburtstag                                  /blog/was-kostet-zauberer-kindergeburtstag/        301
+/clown/was-kostet-zauberer-kindergeburtstag                            /blog/was-kostet-zauberer-kindergeburtstag/        301
+/zaubershow-auf-dem-castroper-weihnachtsdorf                           /blog/zaubershow-auf-dem-castroper-weihnachtsdorf/ 301
+/clown/zaubershow-auf-dem-castroper-weihnachtsdorf                     /blog/zaubershow-auf-dem-castroper-weihnachtsdorf/ 301
+/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight           /blog/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/ 301
+/clown/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight     /blog/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/ 301
+/zaubershow-in-dortmund                                                /blog/zaubershow-in-dortmund/                      301
+/clown/zaubershow-in-dortmund                                          /blog/zaubershow-in-dortmund/                      301
+/zaubershow-in-duisburg-midsommarfest                                  /blog/zaubershow-in-duisburg-midsommarfest/        301
+/clown/zaubershow-in-duisburg-midsommarfest                            /blog/zaubershow-in-duisburg-midsommarfest/        301
+/zaubershow-sommer-2025                                                /blog/zaubershow-sommer-2025/                      301
+/clown/zaubershow-sommer-2025                                          /blog/zaubershow-sommer-2025/                      301
+
+# ── RedirectMatch-Quellen mit EINEM Segment (Apache: nach allen RewriteRules; hier vor den
+#    Sammelregeln /clown/:slug und /:slug, die diese Pfade in Apache nie trafen: Punkt im Namen,
+#    < 20 Zeichen oder ausgeschlossenes Präfix) ──
+/wp-admin                                                              /                                                  301
+/wp-admin/*                                                            /                                                  301
+/wp-json                                                               /                                                  301
+/wp-json/*                                                             /                                                  301
+/wp-includes                                                           /                                                  301
+/wp-includes/*                                                         /                                                  301
+/wp-login.php                                                          /                                                  301
+/wp-login.php/*                                                        /                                                  301
+/wp-signup.php                                                         /                                                  301
+/wp-signup.php/*                                                       /                                                  301
+/wp-register.php                                                       /                                                  301
+/wp-register.php/*                                                     /                                                  301
+/wp-cron.php                                                           /                                                  301
+/wp-cron.php/*                                                         /                                                  301
+/xmlrpc.php                                                            /                                                  301
+/xmlrpc.php/*                                                          /                                                  301
+/wp-trackback.php                                                      /                                                  301
+/wp-trackback.php/*                                                    /                                                  301
+/wp-comments-post.php                                                  /                                                  301
+/wp-comments-post.php/*                                                /                                                  301
+/feed                                                                  /blog/                                             301
+/rss                                                                   /blog/                                             301
+/atom                                                                  /blog/                                             301
+/sitemap_index.xml                                                     /sitemap.xml                                       301
+/post-sitemap.xml                                                      /sitemap.xml                                       301
+/page-sitemap.xml                                                      /sitemap.xml                                       301
+/category-sitemap.xml                                                  /sitemap.xml                                       301
+/author-sitemap.xml                                                    /sitemap.xml                                       301
+/author                                                                /                                                  301
+/sample-page                                                           /                                                  301
+/hello-world                                                           /blog/                                             301
+/clown                                                                 /clown/clownshow/                                  301
+
+# ── l.409 + l.431-435 einsegmentige /clown/<x>/ und /zauberer/<x>/ -> 410 (echte Seiten existieren = nicht betroffen) ──
+/clown/:slug                                                           /404.html                                          410
+/zauberer/:slug                                                        /404.html                                          410
+
+# Häufige Browser-/Crawler-Abfragen fehlender Dateien: echtes 404 statt Catch-all -> /blog/ (Apache: 404)
+/apple-touch-icon-precomposed.png                                      /404.html                                          404
+/apple-touch-icon-120x120.png                                          /404.html                                          404
+/apple-touch-icon-120x120-precomposed.png                              /404.html                                          404
+/apple-touch-icon-152x152.png                                          /404.html                                          404
+/apple-touch-icon-152x152-precomposed.png                              /404.html                                          404
+/ads.txt                                                               /404.html                                          404
+/app-ads.txt                                                           /404.html                                          404
+/favicon.svg                                                           /404.html                                          404
+
+# ── l.414-417 Catch-all alte WordPress-Blog-Slugs auf Root-Ebene (non-forced = !-f !-d) ──
+/:slug                                                                 /blog/                                             301
+
+# ════ RedirectMatch-Block (Apache mod_alias, l.35-113) ════
+# l.35-44 WordPress-Backend: einsegmentig schon oben
+
+# l.56-61 Feeds
+/comments/feed                                                         /blog/                                             301
+/:a/feed                                                               /:a/                                               301
+/:a/:b/feed                                                            /:a/:b/                                            301
+/:a/:b/:c/feed                                                         /:a/:b/:c/                                         301
+/:a/comments                                                           /:a/                                               301
+/:a/:b/comments                                                        /:a/:b/                                            301
+/:a/:b/:c/comments                                                     /:a/:b/:c/                                         301
+
+# l.71 Autoren
+/author/*                                                              /                                                  301
+
+# l.74-79 Kategorie/Tag
+/category/kindergeburtstag                                             /kindergeburtstag/                                 301
+/category/kindergeburtstag/*                                           /kindergeburtstag/                                 301
+/category/zaubershow/*                                                 /zauberer/zaubershow/                              301
+/category/clown                                                        /clown/clownshow/                                  301
+/category/clown/*                                                      /clown/clownshow/                                  301
+/category                                                              /blog/                                             301
+/category/*                                                            /blog/                                             301
+/tag                                                                   /blog/                                             301
+/tag/*                                                                 /blog/                                             301
+/schlagwort                                                            /blog/                                             301
+/schlagwort/*                                                          /blog/                                             301
+
+# l.86 Pagination /x/page/N/ -> /x/
+/:a/page/:n                                                            /:a/                                               301
+/:a/:b/page/:n                                                         /:a/:b/                                            301
+/:a/:b/:c/page/:n                                                      /:a/:b/:c/                                         301
+
+# l.105 Karneval-Doppel-URL (Seite existiert in dist, canonical /clown/karneval/ -> forced)
+/zauberer/zaubershow/karneval                                          /clown/karneval/                                   301!
