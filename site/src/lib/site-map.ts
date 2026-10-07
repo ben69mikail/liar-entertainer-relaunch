@@ -96,7 +96,7 @@ export function localizePath(href: string, locale: Locale): string {
 // Header switcher: every core page offers DE · FR · EN (user, 2026-10-07) — unpublished
 // FR/EN pages stay noindex and out of the sitemap, so linking them is safe.
 export function languageLinks(path: string): Array<{ locale: Locale; href: string; current: boolean }> {
-  const entry = coreEntry(path);
+  const entry = translatedEntry(path);
   if (!entry) return [];
   const own = localeOf(path);
   return LOCALES.map((l) => ({ locale: l, href: entry[l], current: l === own }));

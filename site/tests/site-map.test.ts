@@ -190,6 +190,13 @@ describe('languageLinks (header switcher)', () => {
 
   it('shows nothing on pages without translations', () => {
     expect(languageLinks('/preise/')).toEqual([]);
-    expect(languageLinks('/fr/contact/merci/')).toEqual([]);
+  });
+
+  it('covers every translated page, not only the core pages (thank-you page)', () => {
+    expect(languageLinks('/fr/contact/merci/')).toEqual([
+      { locale: 'de', href: '/kontakt/danke/', current: false },
+      { locale: 'fr', href: '/fr/contact/merci/', current: true },
+      { locale: 'en', href: '/en/contact/thank-you/', current: false },
+    ]);
   });
 });

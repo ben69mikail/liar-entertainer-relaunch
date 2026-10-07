@@ -90,8 +90,8 @@ describe('unpublished locales (owner review before go-live)', () => {
     }
   });
 
-  it('German core pages offer the switcher to FR and EN (user, 2026-10-07)', () => {
-    for (const entry of CORE_PAGES) {
+  it('every translated page offers DE · FR · EN (user, 2026-10-07)', () => {
+    for (const entry of TRANSLATED_PAGES) {
       const $ = page(entry.de);
       expect($('.sh__lang a').map((_, a) => $(a).attr('href')).get()).toEqual([entry.de, entry.fr, entry.en]);
     }
