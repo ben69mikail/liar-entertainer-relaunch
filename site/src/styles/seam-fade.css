@@ -91,34 +91,41 @@ html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-
 html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-contact, .bp-body, .wa-cta) { --tint: var(--surface); }
 html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book, .k3-contact, .bp-body, .wa-cta) {
   --tint-fade: 6rem;
+  --tt: var(--tint-fade); --tb: var(--tint-fade);
   border-block: 0;
   background: linear-gradient(to bottom,
-    transparent calc(var(--tint-fade) * 0),
-    color-mix(in oklab, var(--tint) 5%, transparent) calc(var(--tint-fade) * 0.08),
-    color-mix(in oklab, var(--tint) 12%, transparent) calc(var(--tint-fade) * 0.14),
-    color-mix(in oklab, var(--tint) 21%, transparent) calc(var(--tint-fade) * 0.2),
-    color-mix(in oklab, var(--tint) 33%, transparent) calc(var(--tint-fade) * 0.27),
-    color-mix(in oklab, var(--tint) 46%, transparent) calc(var(--tint-fade) * 0.35),
-    color-mix(in oklab, var(--tint) 60%, transparent) calc(var(--tint-fade) * 0.44),
-    color-mix(in oklab, var(--tint) 74%, transparent) calc(var(--tint-fade) * 0.53),
-    color-mix(in oklab, var(--tint) 87%, transparent) calc(var(--tint-fade) * 0.66),
-    color-mix(in oklab, var(--tint) 95%, transparent) calc(var(--tint-fade) * 0.81),
-    var(--tint) calc(var(--tint-fade) * 1),
-    var(--tint) calc(100% - var(--tint-fade) * 1),
-    color-mix(in oklab, var(--tint) 95%, transparent) calc(100% - var(--tint-fade) * 0.81),
-    color-mix(in oklab, var(--tint) 87%, transparent) calc(100% - var(--tint-fade) * 0.66),
-    color-mix(in oklab, var(--tint) 74%, transparent) calc(100% - var(--tint-fade) * 0.53),
-    color-mix(in oklab, var(--tint) 60%, transparent) calc(100% - var(--tint-fade) * 0.44),
-    color-mix(in oklab, var(--tint) 46%, transparent) calc(100% - var(--tint-fade) * 0.35),
-    color-mix(in oklab, var(--tint) 33%, transparent) calc(100% - var(--tint-fade) * 0.27),
-    color-mix(in oklab, var(--tint) 21%, transparent) calc(100% - var(--tint-fade) * 0.2),
-    color-mix(in oklab, var(--tint) 12%, transparent) calc(100% - var(--tint-fade) * 0.14),
-    color-mix(in oklab, var(--tint) 5%, transparent) calc(100% - var(--tint-fade) * 0.08),
-    transparent calc(100% - var(--tint-fade) * 0));
+    transparent calc(var(--tt) * 0),
+    color-mix(in oklab, var(--tint) 5%, transparent) calc(var(--tt) * 0.08),
+    color-mix(in oklab, var(--tint) 12%, transparent) calc(var(--tt) * 0.14),
+    color-mix(in oklab, var(--tint) 21%, transparent) calc(var(--tt) * 0.2),
+    color-mix(in oklab, var(--tint) 33%, transparent) calc(var(--tt) * 0.27),
+    color-mix(in oklab, var(--tint) 46%, transparent) calc(var(--tt) * 0.35),
+    color-mix(in oklab, var(--tint) 60%, transparent) calc(var(--tt) * 0.44),
+    color-mix(in oklab, var(--tint) 74%, transparent) calc(var(--tt) * 0.53),
+    color-mix(in oklab, var(--tint) 87%, transparent) calc(var(--tt) * 0.66),
+    color-mix(in oklab, var(--tint) 95%, transparent) calc(var(--tt) * 0.81),
+    var(--tint) calc(var(--tt) * 1),
+    var(--tint) calc(100% - var(--tb) * 1),
+    color-mix(in oklab, var(--tint) 95%, transparent) calc(100% - var(--tb) * 0.81),
+    color-mix(in oklab, var(--tint) 87%, transparent) calc(100% - var(--tb) * 0.66),
+    color-mix(in oklab, var(--tint) 74%, transparent) calc(100% - var(--tb) * 0.53),
+    color-mix(in oklab, var(--tint) 60%, transparent) calc(100% - var(--tb) * 0.44),
+    color-mix(in oklab, var(--tint) 46%, transparent) calc(100% - var(--tb) * 0.35),
+    color-mix(in oklab, var(--tint) 33%, transparent) calc(100% - var(--tb) * 0.27),
+    color-mix(in oklab, var(--tint) 21%, transparent) calc(100% - var(--tb) * 0.2),
+    color-mix(in oklab, var(--tint) 12%, transparent) calc(100% - var(--tb) * 0.14),
+    color-mix(in oklab, var(--tint) 5%, transparent) calc(100% - var(--tb) * 0.08),
+    transparent calc(100% - var(--tb) * 0));
 }
 @media (max-width: 900px) {
   html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book, .k3-contact, .bp-body, .wa-cta) { --tint-fade: 4rem; }
 }
+/* two neighbours of the same colour (e.g. "Anlässe" programme | reviews): the colour runs straight
+   through, no fade at their shared edge; the GoldDivider alone marks the new section */
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book) + :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book),
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-contact, .bp-body, .wa-cta) + :is(.k3-contact, .bp-body, .wa-cta) { --tt: 0px; }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book):has(+ :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book)),
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-contact, .bp-body, .wa-cta):has(+ :is(.k3-contact, .bp-body, .wa-cta)) { --tb: 0px; }
 
 /* kids / neutral footer: the dark foot rises out of the page the same way (the last light section
    already sinks back to the page colour, so nothing needs to overlap) */

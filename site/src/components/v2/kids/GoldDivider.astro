@@ -17,11 +17,12 @@ const { class: cls } = Astro.props;
 </div>
 
 <style>
-  .gd { display: flex; align-items: center; gap: 0.7rem; width: min(100%, 22rem); margin: 0 auto var(--space-3); }
-  .gd__line { flex: 1; height: 1px; background: linear-gradient(90deg, transparent, var(--gd-mid, #b8862f) 40%, var(--gd-end, #e2bd6a)); }
+  /* larger and clearer since 2026-10-07 (user): it is the divider between sections of one colour */
+  .gd { display: flex; align-items: center; gap: 0.9rem; width: min(100%, 30rem); margin: 0 auto var(--space-3); }
+  .gd__line { flex: 1; height: 2px; border-radius: 1px; background: linear-gradient(90deg, transparent, var(--gd-mid, #b8862f) 40%, var(--gd-end, #e2bd6a)); }
   .gd__line--l { transform-origin: 100% 50%; }
   .gd__line--r { transform-origin: 0 50%; background: linear-gradient(90deg, var(--gd-end, #e2bd6a), var(--gd-mid, #b8862f) 60%, transparent); }
-  .gd__star { width: 1.05rem; height: 1.05rem; fill: var(--gd-star, #c9962f); }
+  .gd__star { width: 1.6rem; height: 1.6rem; flex: none; fill: var(--gd-star, #c9962f); filter: drop-shadow(0 1px 0 rgb(120 80 20 / 0.25)); }
 
   .gd__line { transition: transform 0.9s cubic-bezier(0.77, 0, 0.175, 1); }
   .gd__star { transition: opacity 0.4s ease 0.55s, scale 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.55s, rotate 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.55s; }
