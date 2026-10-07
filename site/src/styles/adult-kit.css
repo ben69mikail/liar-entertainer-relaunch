@@ -712,12 +712,12 @@ html[data-zone='adult'] .v2 main > .ce-salon + .ce-stage { --edge-t: var(--haze)
 html[data-zone='adult'] .v2 main > :is(.ce-hero--stage, .ce-stage):has(+ .ce-salon) { --edge-b: var(--haze); }
 
 /* the light side: from the haze through warm foyer light into ivory */
-html[data-zone='adult'] .v2 main > :is(.ce-hero--stage, .ce-stage) + .ce-salon,
-html[data-zone='adult'] .v2 main > .ce-salon:has(+ .ce-stage) { isolation: isolate; }
-html[data-zone='adult'] .v2 main > :is(.ce-hero--stage, .ce-stage) + .ce-salon::before,
-html[data-zone='adult'] .v2 main > .ce-salon:has(+ .ce-stage)::after {
+html[data-zone='adult'] .v2 main:not(.seam-fade) > :is(.ce-hero--stage, .ce-stage) + .ce-salon,
+html[data-zone='adult'] .v2 main:not(.seam-fade) > .ce-salon:has(+ .ce-stage) { isolation: isolate; }
+html[data-zone='adult'] .v2 main:not(.seam-fade) > :is(.ce-hero--stage, .ce-stage) + .ce-salon::before,
+html[data-zone='adult'] .v2 main:not(.seam-fade) > .ce-salon:has(+ .ce-stage)::after {
   content: ''; position: absolute; left: 0; right: 0; z-index: -1; height: var(--haze-l); pointer-events: none;
   --haze-grad: var(--haze) 0%, var(--haze-glow) 52%, color-mix(in oklab, var(--haze-glow) 55%, transparent) 74%, color-mix(in oklab, var(--haze-glow) 18%, transparent) 90%, transparent 100%;
 }
-html[data-zone='adult'] .v2 main > :is(.ce-hero--stage, .ce-stage) + .ce-salon::before { top: 0; background: linear-gradient(in oklab to bottom, var(--haze-grad)); }
-html[data-zone='adult'] .v2 main > .ce-salon:has(+ .ce-stage)::after { bottom: 0; background: linear-gradient(in oklab to top, var(--haze-grad)); }
+html[data-zone='adult'] .v2 main:not(.seam-fade) > :is(.ce-hero--stage, .ce-stage) + .ce-salon::before { top: 0; background: linear-gradient(in oklab to bottom, var(--haze-grad)); }
+html[data-zone='adult'] .v2 main:not(.seam-fade) > .ce-salon:has(+ .ce-stage)::after { bottom: 0; background: linear-gradient(in oklab to top, var(--haze-grad)); }

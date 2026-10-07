@@ -601,33 +601,33 @@ html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(.k3-hero, .k3-
 }
 
 /* light side: from the stage's haze through a peach glow into the paper */
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) { --hz-t: var(--hz-tent); }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > .k3-band--velvet + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) { --hz-t: var(--hz-velvet); }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead)) { --hz-b: var(--hz-tent); }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ .k3-band--velvet) { --hz-b: var(--hz-velvet); }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child { --hz-b: var(--hz-foot); }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) { --hz-t: var(--hz-tent); }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > .k3-band--velvet + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) { --hz-t: var(--hz-velvet); }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead)) { --hz-b: var(--hz-tent); }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ .k3-band--velvet) { --hz-b: var(--hz-velvet); }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child { --hz-b: var(--hz-foot); }
 
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead),
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead)),
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child { position: relative; isolation: isolate; }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead),
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead)),
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child { position: relative; isolation: isolate; }
 
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead)::before,
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead))::after,
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child::after {
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead)::before,
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead))::after,
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child::after {
   content: ''; position: absolute; left: 0; right: 0; z-index: -1; height: var(--haze-l); pointer-events: none;
   --haze-grad: var(--hz) 0%, var(--hz-glow) 52%, color-mix(in oklab, var(--hz-glow) 55%, transparent) 74%, color-mix(in oklab, var(--hz-glow) 18%, transparent) 90%, transparent 100%;
 }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead)::before {
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead)::before {
   --hz: var(--hz-t); top: 0; background: linear-gradient(in oklab to bottom, var(--haze-grad));
 }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead))::after,
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child::after {
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead))::after,
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child::after {
   --hz: var(--hz-b); bottom: 0; background: linear-gradient(in oklab to top, var(--haze-grad));
 }
 
 /* the GoldDivider that opens a section at a dark | light seam sits on the seam, in light gold */
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(:is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead), :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :is(.k3-band, .bp-head, .k3-stagehead)) > .container > .gd:first-child,
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(:is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead), :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :is(.k3-band, .bp-head, .k3-stagehead)) > .container > :first-child > .gd:first-child {
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(:is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead), :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :is(.k3-band, .bp-head, .k3-stagehead)) > .container > .gd:first-child,
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(:is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead), :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :is(.k3-band, .bp-head, .k3-stagehead)) > .container > :first-child > .gd:first-child {
   --gd-mid: #e9c877; --gd-end: #f6dc98; --gd-star: #f6dc98;
   translate: 0 calc(-1 * var(--seam-pt) + 0.5rem);
   margin-bottom: -0.5rem; /* the heading follows 2 rem closer, still clear of the haze */

@@ -1,0 +1,83 @@
+/* ══ seam fade v2: dark stages dissolve into the light page (2026-10-07) ══════════════════════════
+   Replaces the colour-band seams ("seams" blocks in kids-v3.css / adult-kit.css) on pages whose
+   <main> carries .seam-fade (V2Layout mainClass). Prototype: /zauberer/, /kindergeburtstag/.
+
+   Instead of painting an intermediate colour (mauve / brown) between dark and light, the dark
+   section itself is masked out at the edge where light follows: background, curtains, projector
+   cones all thin out together and the light page underneath (main / body background) shows
+   through. The mask follows an eased "scrim" curve (no linear band, no visible start or end).
+   The fade's outer half overlaps the light neighbour's top / bottom padding, so it dissolves into
+   whatever lies there (cream, a tinted FAQ band, the salon pattern) and no edge is left anywhere.
+   Only the edge towards a light neighbour fades; dark | dark and the footer stay as they are.
+   Masks are composited: no layout, no JS. */
+
+main.seam-fade > * { --ft: 0px; --fb: 0px; --fade-gap: var(--space-4); }
+/* the review stage brings its own padding (.rv) */
+main.seam-fade > .ce-stage { --fade-gap: 0px; }
+/* heroes: the first fifth of the scrim is still solid, a small gap is enough (keeps the fold) */
+main.seam-fade > :is(.k3-hero, .ce-hero--stage) { --fade-gap: var(--space-2); }
+
+main.seam-fade {
+  --fade: 10rem;
+}
+@media (max-width: 900px) { main.seam-fade { --fade: 6.5rem; } }
+
+/* which sections are dark stages */
+main.seam-fade > :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage) {
+  position: relative; z-index: 1;
+  -webkit-mask-image: var(--fade-mask);
+  mask-image: var(--fade-mask);
+}
+/* edge towards a light section above / below */
+main.seam-fade > :not(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage) + :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage) {
+  --ft: var(--fade);
+  padding-top: calc(var(--fade-gap) + var(--fade)) !important;
+  margin-top: calc(var(--fade) * -0.5);
+}
+main.seam-fade > :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage):has(+ :not(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage)) {
+  --fb: var(--fade);
+  padding-bottom: calc(var(--fade-gap) + var(--fade)) !important;
+  margin-bottom: calc(var(--fade) * -0.5);
+}
+
+main.seam-fade > * {
+  --fade-mask: linear-gradient(to bottom,
+    rgb(0 0 0 / 0) 0px,
+    rgb(0 0 0 / 0.05) calc(var(--ft) * 0.08),
+    rgb(0 0 0 / 0.12) calc(var(--ft) * 0.14),
+    rgb(0 0 0 / 0.21) calc(var(--ft) * 0.2),
+    rgb(0 0 0 / 0.33) calc(var(--ft) * 0.27),
+    rgb(0 0 0 / 0.46) calc(var(--ft) * 0.35),
+    rgb(0 0 0 / 0.6) calc(var(--ft) * 0.44),
+    rgb(0 0 0 / 0.74) calc(var(--ft) * 0.53),
+    rgb(0 0 0 / 0.87) calc(var(--ft) * 0.66),
+    rgb(0 0 0 / 0.95) calc(var(--ft) * 0.81),
+    rgb(0 0 0 / 1) var(--ft),
+    rgb(0 0 0 / 1) calc(100% - var(--fb)),
+    rgb(0 0 0 / 0.95) calc(100% - var(--fb) * 0.81),
+    rgb(0 0 0 / 0.87) calc(100% - var(--fb) * 0.66),
+    rgb(0 0 0 / 0.74) calc(100% - var(--fb) * 0.53),
+    rgb(0 0 0 / 0.6) calc(100% - var(--fb) * 0.44),
+    rgb(0 0 0 / 0.46) calc(100% - var(--fb) * 0.35),
+    rgb(0 0 0 / 0.33) calc(100% - var(--fb) * 0.27),
+    rgb(0 0 0 / 0.21) calc(100% - var(--fb) * 0.2),
+    rgb(0 0 0 / 0.12) calc(100% - var(--fb) * 0.14),
+    rgb(0 0 0 / 0.05) calc(100% - var(--fb) * 0.08),
+    rgb(0 0 0 / 0) 100%);
+}
+
+/* adult salon: the ivory diamond pattern lies on <main>, so the stages dissolve straight into it
+   and the salon sections join without an edge (each keeps only its soft centre glow) */
+main.seam-fade.ce-salon-page {
+  background:
+    repeating-linear-gradient(60deg, transparent 0 17px, rgb(176 138 62 / 0.085) 17px 18px),
+    repeating-linear-gradient(-60deg, transparent 0 17px, rgb(176 138 62 / 0.085) 17px 18px),
+    #fbf8f1;
+}
+.v2 main.seam-fade > .ce-salon {
+  background: radial-gradient(ellipse 70% 55% at 50% 40%, rgb(255 255 255 / 0.55), transparent 75%);
+}
+
+/* the old colour-band edges stay off where the stage now fades (dark | dark and the footer keep theirs) */
+html .v2 main.seam-fade > :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage):has(+ :not(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage))::after,
+html .v2 main.seam-fade > :not(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage) + :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage)::before { content: none; }
