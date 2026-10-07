@@ -196,7 +196,7 @@ html:is([data-zone='kids'], [data-zone='neutral']) .v2 .btn--ghost { box-shadow:
 .k3-area__map img { display: block; width: 100%; height: auto; border-radius: var(--radius-sm); }
 
 /* ── contact ── */
-.k3-contact { padding-block: var(--space-4) !important; border-top: 1px solid rgba(184, 134, 47, 0.35); background: var(--surface); }
+.k3-contact { padding-block: var(--space-4) !important; background: var(--surface); }
 .k3-contact__name { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; }
 
 /* ── desktop columns ── */
@@ -553,13 +553,9 @@ html:is([data-zone='kids'], [data-zone='neutral']) {
    · Paint only (no extra DOM, no layout change): ::before paints a section's top edge, ::after its
      bottom edge, behind all content (z-index -2/-1 inside the isolated section). The hero's
      curtain (z 5) and the lights stay in front: the transition runs under them.
-   · dark | light: the stage warms over --haze-d into a haze (mauve under the violet tent, warm red
-     under velvet, cocoa under the footer) that still carries cream text at >= 6:1; the light side
-     goes on from that haze through a peach glow into the cream paper over --haze-l, inside the
-     section's padding. Both run in oklab, so the brightness climbs evenly across the seam.
-   · dark | dark: both sides run out into one deep violet (--hz-night), no line.
-   · A GoldDivider that opens a section at such a seam moves up onto the seam (translate: paint
-     only) and turns light gold there. */
+   · dark | light (and the footer's top): replaced by the eased mask fade in seam-fade.css
+     (2026-10-07 v2); the pseudo-element edges below are switched off there and remain for dark | dark.
+   · dark | dark: both sides run out into one deep violet (--hz-night), no line. */
 html:is([data-zone='kids'], [data-zone='neutral']) .v2 {
   --hz-tent: #80496a;   /* cream 6.2:1 */
   --hz-velvet: #9a4236; /* cream 6.0:1 */
@@ -600,38 +596,6 @@ html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(.k3-hero, .k3-
   --edge: var(--edge-b); bottom: 0; background: linear-gradient(in oklab to top, var(--edge-grad));
 }
 
-/* light side: from the stage's haze through a peach glow into the paper */
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) { --hz-t: var(--hz-tent); }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > .k3-band--velvet + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) { --hz-t: var(--hz-velvet); }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead)) { --hz-b: var(--hz-tent); }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ .k3-band--velvet) { --hz-b: var(--hz-velvet); }
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child { --hz-b: var(--hz-foot); }
-
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead),
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead)),
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child { position: relative; isolation: isolate; }
-
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead)::before,
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead))::after,
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child::after {
-  content: ''; position: absolute; left: 0; right: 0; z-index: -1; height: var(--haze-l); pointer-events: none;
-  --haze-grad: var(--hz) 0%, var(--hz-glow) 52%, color-mix(in oklab, var(--hz-glow) 55%, transparent) 74%, color-mix(in oklab, var(--hz-glow) 18%, transparent) 90%, transparent 100%;
-}
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead)::before {
-  --hz: var(--hz-t); top: 0; background: linear-gradient(in oklab to bottom, var(--haze-grad));
-}
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):has(+ :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead))::after,
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead):last-child::after {
-  --hz: var(--hz-b); bottom: 0; background: linear-gradient(in oklab to top, var(--haze-grad));
-}
-
-/* the GoldDivider that opens a section at a dark | light seam sits on the seam, in light gold */
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(:is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead), :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :is(.k3-band, .bp-head, .k3-stagehead)) > .container > .gd:first-child,
-html:is([data-zone='kids'], [data-zone='neutral']) .v2 main:not(.seam-fade) > :is(:is(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead), :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead) + :is(.k3-band, .bp-head, .k3-stagehead)) > .container > :first-child > .gd:first-child {
-  --gd-mid: #e9c877; --gd-end: #f6dc98; --gd-star: #f6dc98;
-  translate: 0 calc(-1 * var(--seam-pt) + 0.5rem);
-  margin-bottom: -0.5rem; /* the heading follows 2 rem closer, still clear of the haze */
-}
 /* stages with moving lights (spot band, premiere, hero): the edges lie OVER the lights (still under
    the content, z 2/3), so cones and floor lamps run out into the edge colour instead of being cut */
 html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > * + :is(.k3-hero, .k3-band--spot, .k3-premiere)::before { z-index: 2; }

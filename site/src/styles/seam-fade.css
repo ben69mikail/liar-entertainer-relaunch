@@ -1,6 +1,6 @@
 /* ══ seam fade v2: dark stages dissolve into the light page (2026-10-07) ══════════════════════════
    Replaces the colour-band seams ("seams" blocks in kids-v3.css / adult-kit.css) on pages whose
-   <main> carries .seam-fade (V2Layout mainClass). Prototype: /zauberer/, /kindergeburtstag/.
+   <main> carries .seam-fade (V2Layout mainClass). All kids / neutral pages (V2Layout sets it by zone); adult: /zauberer/ (mainClass).
 
    Instead of painting an intermediate colour (mauve / brown) between dark and light, the dark
    section itself is masked out at the edge where light follows: background, curtains, projector
@@ -15,32 +15,33 @@ main.seam-fade > * { --ft: 0px; --fb: 0px; --fade-gap: var(--space-4); }
 /* the review stage brings its own padding (.rv) */
 main.seam-fade > .ce-stage { --fade-gap: 0px; }
 /* heroes: the first fifth of the scrim is still solid, a small gap is enough (keeps the fold) */
-main.seam-fade > :is(.k3-hero, .ce-hero--stage) { --fade-gap: var(--space-2); }
+main.seam-fade > :is(.k3-hero, .bp-head, .k3-stagehead, .ce-hero--stage) { --fade-gap: var(--space-2); }
 
-main.seam-fade {
+main.seam-fade, .v2 > .sf {
   --fade: 10rem;
 }
-@media (max-width: 900px) { main.seam-fade { --fade: 6.5rem; } }
+@media (max-width: 900px) { main.seam-fade, .v2 > .sf { --fade: 6.5rem; } }
 
 /* which sections are dark stages */
-main.seam-fade > :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage) {
+main.seam-fade > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage) {
   position: relative; z-index: 1;
   -webkit-mask-image: var(--fade-mask);
   mask-image: var(--fade-mask);
 }
 /* edge towards a light section above / below */
-main.seam-fade > :not(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage) + :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage) {
+main.seam-fade > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage) + :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage) {
   --ft: var(--fade);
   padding-top: calc(var(--fade-gap) + var(--fade)) !important;
   margin-top: calc(var(--fade) * -0.5);
 }
-main.seam-fade > :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage):has(+ :not(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage)) {
+main.seam-fade > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage):has(+ :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage)) {
   --fb: var(--fade);
   padding-bottom: calc(var(--fade-gap) + var(--fade)) !important;
   margin-bottom: calc(var(--fade) * -0.5);
 }
 
-main.seam-fade > * {
+main.seam-fade > *,
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 > .sf {
   --fade-mask: linear-gradient(to bottom,
     rgb(0 0 0 / 0) 0px,
     rgb(0 0 0 / 0.05) calc(var(--ft) * 0.08),
@@ -79,5 +80,52 @@ main.seam-fade.ce-salon-page {
 }
 
 /* the old colour-band edges stay off where the stage now fades (dark | dark and the footer keep theirs) */
-html .v2 main.seam-fade > :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage):has(+ :not(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage))::after,
-html .v2 main.seam-fade > :not(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage) + :is(.k3-hero, .k3-band, .ce-hero--stage, .ce-stage)::before { content: none; }
+html .v2 main.seam-fade > :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage):has(+ :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage))::after,
+html .v2 main.seam-fade > :not(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage) + :is(.k3-hero, .k3-band, .bp-head, .k3-stagehead, .ce-hero--stage, .ce-stage)::before { content: none; }
+
+/* ══ light | light: tinted sections breathe in and out of the page ═════════════════════════════
+   A tinted band (programme cream, the article sheet) used to start and stop as a flat block. Its
+   tint now rises from the page colour and sinks back into it on the same eased curve, so light
+   sections flow into each other; the gold star line (GoldDivider) marks where a new one begins. */
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book) { --tint: var(--bg-alt); }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-contact, .bp-body, .wa-cta) { --tint: var(--surface); }
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book, .k3-contact, .bp-body, .wa-cta) {
+  --tint-fade: 6rem;
+  border-block: 0;
+  background: linear-gradient(to bottom,
+    transparent calc(var(--tint-fade) * 0),
+    color-mix(in oklab, var(--tint) 5%, transparent) calc(var(--tint-fade) * 0.08),
+    color-mix(in oklab, var(--tint) 12%, transparent) calc(var(--tint-fade) * 0.14),
+    color-mix(in oklab, var(--tint) 21%, transparent) calc(var(--tint-fade) * 0.2),
+    color-mix(in oklab, var(--tint) 33%, transparent) calc(var(--tint-fade) * 0.27),
+    color-mix(in oklab, var(--tint) 46%, transparent) calc(var(--tint-fade) * 0.35),
+    color-mix(in oklab, var(--tint) 60%, transparent) calc(var(--tint-fade) * 0.44),
+    color-mix(in oklab, var(--tint) 74%, transparent) calc(var(--tint-fade) * 0.53),
+    color-mix(in oklab, var(--tint) 87%, transparent) calc(var(--tint-fade) * 0.66),
+    color-mix(in oklab, var(--tint) 95%, transparent) calc(var(--tint-fade) * 0.81),
+    var(--tint) calc(var(--tint-fade) * 1),
+    var(--tint) calc(100% - var(--tint-fade) * 1),
+    color-mix(in oklab, var(--tint) 95%, transparent) calc(100% - var(--tint-fade) * 0.81),
+    color-mix(in oklab, var(--tint) 87%, transparent) calc(100% - var(--tint-fade) * 0.66),
+    color-mix(in oklab, var(--tint) 74%, transparent) calc(100% - var(--tint-fade) * 0.53),
+    color-mix(in oklab, var(--tint) 60%, transparent) calc(100% - var(--tint-fade) * 0.44),
+    color-mix(in oklab, var(--tint) 46%, transparent) calc(100% - var(--tint-fade) * 0.35),
+    color-mix(in oklab, var(--tint) 33%, transparent) calc(100% - var(--tint-fade) * 0.27),
+    color-mix(in oklab, var(--tint) 21%, transparent) calc(100% - var(--tint-fade) * 0.2),
+    color-mix(in oklab, var(--tint) 12%, transparent) calc(100% - var(--tint-fade) * 0.14),
+    color-mix(in oklab, var(--tint) 5%, transparent) calc(100% - var(--tint-fade) * 0.08),
+    transparent calc(100% - var(--tint-fade) * 0));
+}
+@media (max-width: 900px) {
+  html:is([data-zone='kids'], [data-zone='neutral']) .v2 main.seam-fade > :is(.k3-alt, .rv, .bp-cta, .bf-related, .bf-book, .k3-contact, .bp-body, .wa-cta) { --tint-fade: 4rem; }
+}
+
+/* kids / neutral footer: the dark foot rises out of the page the same way (the last light section
+   already sinks back to the page colour, so nothing needs to overlap) */
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 > .sf {
+  --ft: var(--fade); --fb: 0px;
+  padding-top: calc(var(--space-4) + var(--fade));
+  -webkit-mask-image: var(--fade-mask);
+  mask-image: var(--fade-mask);
+}
+html:is([data-zone='kids'], [data-zone='neutral']) .v2 > .sf::before { content: none; }

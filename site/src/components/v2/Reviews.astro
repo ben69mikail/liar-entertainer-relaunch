@@ -2,9 +2,11 @@
 import { CONTACT, REVIEWS } from '../../data/site';
 import { colorFor, featuredReviews, initialsOf } from '../../lib/reviews';
 import { zoneFor } from '../../lib/site-map';
+import GoldDivider from './kids/GoldDivider.astro';
 // Cards are dealt like playing cards only in the adult zone; elsewhere they simply rise in
 // (the deal reveal measures layout at start-up, which cost the kids pages a long task).
-const reveal = zoneFor(Astro.url.pathname) === 'adult' ? 'deal' : 'up';
+const adult = zoneFor(Astro.url.pathname) === 'adult';
+const reveal = adult ? 'deal' : 'up';
 // Same wording as the legacy GoogleReviews block (L1), redesigned. Server-rendered only.
 const SUITS = ['♠', '♥', '♣', '♦'];
 ---
@@ -12,6 +14,7 @@ const SUITS = ['♠', '♥', '♣', '♦'];
 <section class="rv" id="bewertungen" aria-labelledby="rv-title">
   <div class="container">
     <header class="rv__head">
+      {!adult && <GoldDivider />}
       <p class="rv__eyebrow">Bewertungen</p>
       <p class="rv__title" id="rv-title">{REVIEWS.label}</p>
       <div class="rv__stars" aria-hidden="true"><span>★★★★★</span></div>

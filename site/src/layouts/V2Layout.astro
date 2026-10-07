@@ -6,15 +6,19 @@ import SiteHeader from '../components/v2/SiteHeader.astro';
 import SiteFooter from '../components/v2/SiteFooter.astro';
 import StickyCta from '../components/v2/StickyCta.astro';
 import FontPreloads from '../components/v2/FontPreloads.astro';
+import { zoneFor } from '../lib/site-map';
+import '../styles/seam-fade.css';
 
 export type Props = Omit<DocumentProps, 'bodyClass'> & { mainClass?: string };
 const { mainClass, ...docProps } = Astro.props;
+// kids / neutral: every dark stage fades into the page (seam-fade.css); adult opts in per page
+const seam = zoneFor(Astro.url.pathname) !== 'adult';
 ---
 
 <Document {...docProps} bodyClass="v2">
   <FontPreloads slot="head" />
   <SiteHeader />
-  <main class={mainClass}>
+  <main class:list={[mainClass, { 'seam-fade': seam }]}>
     <slot />
   </main>
   <SiteFooter />

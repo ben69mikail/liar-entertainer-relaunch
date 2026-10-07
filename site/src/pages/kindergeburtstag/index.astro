@@ -17,7 +17,6 @@ import Glitter from '../../components/v2/kids/Glitter.astro';
 import YouTubeFacade from '../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../data/site';
 import '../../styles/kids-v3.css';
-import '../../styles/seam-fade.css';
 
 const seoTitle = 'Zauberer Kindergeburtstag NRW | Ab 150€ | Clown LIAR';
 const seoDescription = 'Zauberer für Kindergeburtstag in NRW buchen ✓ Clown Zauberer LIAR ✓ Zaubershow ab 150€ ✓ Ballonmodellage ✓ Glitzer-Tattoos ✓ 370+ Top-Bewertungen ✓ Jetzt buchen!';
@@ -130,7 +129,6 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
 ---
 
 <V2Layout
-  mainClass="seam-fade"
   title={seoTitle}
   description={seoDescription}
   keywords="Kindergeburtstag NRW, Kindergeburtstag Clown, Kindergeburtstag Zauberer, Clown Kindergeburtstag buchen, Zauberer für Kindergeburtstag, Kinderparty NRW, Kindergeburtstag Unterhaltung"
@@ -476,6 +474,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   <!-- ── Kontakt ───────────────────────────────────────────── -->
   <section class="k3-contact">
     <div class="container k3-center">
+      <GoldDivider />
       <p class="k3-contact__name">Clown Zauberer LIAR</p>
       <p>Anschrift : Beethovenstr. 15, 45966 Gladbeck</p>
       <p>
