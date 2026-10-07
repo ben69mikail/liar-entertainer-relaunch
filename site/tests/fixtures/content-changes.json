@@ -19,5 +19,26 @@
       "to": "Und das Wetter? Ist uns in diesem Jahr, egal! Wir machen die Gladbecker-Kids-Party des Jahres einfach Indoor! 😉🥳",
       "why": "Original WordPress text had the emoji as twemoji images (1f609/1f973), which were stripped with the dead uploads; restored as characters (user, 2026-10-07: blog pictures). See docs/CHANGES-METAS.md."
     }
+  ],
+  "/zauberer/buehnen-zauberer/": [
+    {
+      "from": "Über 400 zufriedene Kunden haben mich mit 5.0 von 5 Sternen bewertet. Zuverlässigkeit und Qualität sind garantiert.",
+      "to": "370+ zufriedene Kunden haben mich mit 5.0 von 5 Sternen bewertet. Zuverlässigkeit und Qualität sind garantiert.",
+      "why": "L3: review count 370+ like /zauberer/ and /ueber-mich/ (user, 2026-10-07 go-live). See docs/CHANGES-METAS.md."
+    }
+  ],
+  "/zauberer/firmenfeier/": [
+    {
+      "from": "Über 400 zufriedene Kunden, bewertet mit 5,0 von 5 Sternen. Verlässlichkeit und Qualität für Ihr Firmenevent.",
+      "to": "370+ zufriedene Kunden, bewertet mit 5,0 von 5 Sternen. Verlässlichkeit und Qualität für Ihr Firmenevent.",
+      "why": "L3: review count 370+ like /zauberer/ and /ueber-mich/ (user, 2026-10-07 go-live). See docs/CHANGES-METAS.md."
+    }
+  ],
+  "/zauberer/hochzeit/": [
+    {
+      "from": "Über 400 Kundinnen und Kunden haben mich mit 5,0 von 5 Sternen bewertet. Verlässlichkeit an Ihrem wichtigsten Tag.",
+      "to": "370+ Kundinnen und Kunden haben mich mit 5,0 von 5 Sternen bewertet. Verlässlichkeit an Ihrem wichtigsten Tag.",
+      "why": "L3: review count 370+ like /zauberer/ and /ueber-mich/ (user, 2026-10-07 go-live). See docs/CHANGES-METAS.md."
+    }
   ]
 }

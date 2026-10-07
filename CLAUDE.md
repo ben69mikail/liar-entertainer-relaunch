@@ -95,3 +95,4 @@ Verbindlicher Auftrag: siehe **docs/CLAUDE-CODE-BUILD-BRIEF.md**. Vor jeder Arbe
 ## Go-live (Grill 07.10.2026) — Drehbuch `docs/GO-LIVE.md`
 - Alles laut Brief heute; DNS bleibt bei IONOS (A @ + CNAME www → Netlify, MX unberührt, AAAA löschen); Apex `https://liar-entertainer.com` bleibt kanonisch, www → 301.
 - n8n auf neues Repo (Pfad-Präfix `site/`), SEO-Autopilot pausiert bis umgestellt. FR/EN: Nutzer prüft, erst dann freischalten. Close-up 1:1 von zauberer-liar.de. 301 zauberer-liar.de direkt nach Go-live-Prüfung. Perf-Gate hart (/zauberer/ ≥ 90). Salon-Look auf alle 5 Adult-Seiten. Kartenränge deutsch (A, K, D, B).
+- Salon-Look (07.10.2026) auf allen 5 Adult-Seiten: Inhaltsabschnitte `.ce-salon`, nur Bewertungen + Schluss-CTA `.ce-stage`; Galerie-/FAQ-Sektionen hell. Kartenränge überall A/K/D/B.

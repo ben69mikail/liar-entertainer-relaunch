@@ -20,7 +20,7 @@ const features = [
   { icon: '🇫🇷', title: 'Deutsch & Französisch', text: 'Als gebürtiger Franzose unterhalte ich Ihre Gäste auf Deutsch und Französisch – ideal für zweisprachige Hochzeiten und internationale Gäste.' },
   { icon: '💫', title: 'Persönlich & nah', text: 'Zauberei zum Anfassen: Karten, Ringe und Alltagsgegenstände verwandeln sich direkt in den Händen Ihrer Gäste. Persönlicher geht Unterhaltung nicht.' },
   { icon: '🎭', title: 'Show als Highlight', text: 'Auf Wunsch runde ich den Abend mit einer eleganten Bühnenshow ab – als gemeinsamer Programmpunkt für alle Gäste.' },
-  { icon: '⭐', title: '370+ Top-Bewertungen', text: 'Über 400 Kundinnen und Kunden haben mich mit 5,0 von 5 Sternen bewertet. Verlässlichkeit an Ihrem wichtigsten Tag.' },
+  { icon: '⭐', title: '370+ Top-Bewertungen', text: '370+ Kundinnen und Kunden haben mich mit 5,0 von 5 Sternen bewertet. Verlässlichkeit an Ihrem wichtigsten Tag.' },
   { icon: '⚡', title: 'Unkompliziert & flexibel', text: 'Kein Bühnenaufbau nötig, kein Programm von der Stange – ich füge mich organisch in Ihren Ablauf ein und stimme alles vorab mit Ihnen ab.' },
 ];
 
@@ -55,6 +55,7 @@ const serviceSchema = {
 ---
 
 <V2Layout
+  mainClass="ce-salon-page seam-fade"
   title={seoTitle}
   description={seoDescription}
   keywords="Zauberer Hochzeit, Hochzeitszauberer NRW, Tischzauberer Hochzeit, Zauberer Sektempfang, Close-up Hochzeit"
@@ -102,7 +103,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── Intro + "Auf einen Blick" as a menu card ─────────── -->
-  <section class="hz-intro ce-smoke">
+  <section class="hz-intro ce-salon">
     <div class="container hz-intro__grid">
       <div>
         <p class="hz-intro__text" data-reveal>
@@ -138,10 +139,13 @@ const serviceSchema = {
     </div>
   </section>
 
-  <Reviews />
+  <div class="ce-stage ce-lit">
+    <StageLights soft />
+    <Reviews />
+  </div>
 
   <!-- ── Ablauf: three place cards along the wedding day ──── -->
-  <section class="hz-day ce-smoke">
+  <section class="hz-day ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">So passt die Zauberei in Ihren Hochzeitstag</h2>
       <p class="ce-center ce-soft">Unterhaltung genau dann, wenn sonst Leerlauf entsteht</p>
@@ -162,8 +166,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── Eindrücke ─────────────────────────────────────────── -->
-  <section class="hz-gallery ce-night ce-lit">
-    <StageLights soft />
+  <section class="hz-gallery ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Eindrücke</h2>
       <p class="ce-center ce-soft">Weitere Fotos und Videos in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
@@ -179,7 +182,7 @@ const serviceSchema = {
           </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.24">
-          <MagicFrame corner="br" rank="Q" suit="♥" class="hz-gallery__card" data-tilt style="--sheen-delay: 4s">
+          <MagicFrame corner="br" rank="D" suit="♥" class="hz-gallery__card" data-tilt style="--sheen-delay: 4s">
             <Image src={buehneImg} alt="Elegante Bühnenshow von Zauberer LIAR" loading="lazy" widths={[400, 550, 800, 1100]} sizes="(max-width: 900px) 92vw, 500px" />
           </MagicFrame>
         </div>
@@ -188,7 +191,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="ce-why ce-smoke">
+  <section class="ce-why ce-salon">
     <div class="container">
       <SuitRule />
       <h2 class="ce-h2 ce-center">Warum LIAR für Ihre Hochzeit?</h2>
@@ -205,7 +208,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq ce-night">
+  <section class="ce-faq ce-salon">
     <div class="container ce-narrow">
       <SuitRule />
       <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
@@ -225,7 +228,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── CTA: an invitation card ──────────────────────────── -->
-  <section class="hz-invite ce-velvet ce-lit">
+  <section class="hz-invite ce-stage ce-lit">
     <StageLights soft />
     <div class="container">
       <div class="hz-invite__card ce-sheet ce-sheet--red" data-reveal>

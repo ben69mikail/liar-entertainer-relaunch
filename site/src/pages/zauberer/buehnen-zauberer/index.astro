@@ -20,7 +20,7 @@ const seoDescription = 'Bühnenzauberer NRW ✓ Professionelle Stand-up Comedy-Z
 const features = [
   { icon: '✨', title: 'Einzigartige Comedy-Zauberei', text: 'Ich zaubere nicht nur – ich unterhalte. Die Kombination aus verblüffenden Tricks und französischem Humor macht jede Show zu einem besonderen Erlebnis.' },
   { icon: '🇫🇷', title: 'Französischer Charme', text: 'Als gebürtiger Franzose bringe ich Pariser Flair und Eleganz in meine Shows. Perfekt für internationale Events oder als besonderes Highlight.' },
-  { icon: '⭐', title: '370+ TOP-Bewertungen', text: 'Über 400 zufriedene Kunden haben mich mit 5.0 von 5 Sternen bewertet. Zuverlässigkeit und Qualität sind garantiert.' },
+  { icon: '⭐', title: '370+ TOP-Bewertungen', text: '370+ zufriedene Kunden haben mich mit 5.0 von 5 Sternen bewertet. Zuverlässigkeit und Qualität sind garantiert.' },
   { icon: '🎭', title: 'Professionelle Ausbildung', text: 'Umfassende Ausbildung als Entertainer und Animateur mit Spezialisierung in Schauspiel, Comedy und Zauberei. Seit 2009 professionell im Entertainment-Bereich.' },
   { icon: '💼', title: 'Erfahrung mit allen Event-Typen', text: 'Von intimen 10-Personen-Dinners bis zu 150-Personen-Galas – ich habe Erfahrung mit jedem Event-Format und passe mich perfekt an.' },
   { icon: '🌍', title: 'Mehrsprachig', text: 'Shows auf Deutsch und Französisch möglich. Ideal für internationale Gäste oder zweisprachige Events.' },
@@ -70,6 +70,7 @@ const _pageGallery = [
 ---
 
 <V2Layout
+  mainClass="ce-salon-page seam-fade"
   title={seoTitle}
   description={seoDescription}
   keywords="Bühnenzauberer NRW, Stand-up Zauberer, Bühnenzauberei buchen, Gala Zauberer, Bühnenzauberer Firmenfeier"
@@ -118,7 +119,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Intro + playbill ──────────────────────────────────── -->
-  <section class="bz-intro ce-smoke">
+  <section class="bz-intro ce-salon">
     <div class="container bz-intro__grid">
       <div>
         <p class="bz-intro__text" data-reveal>
@@ -157,7 +158,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="ce-occasions ce-smoke" data-related-services>
+  <section class="ce-occasions ce-salon" data-related-services>
     <div class="container ce-narrow">
       <SuitRule />
       <h2 class="ce-h2 ce-center">
@@ -178,10 +179,13 @@ const _pageGallery = [
     </div>
   </section>
 
-  <Reviews />
+  <div class="ce-stage ce-lit">
+    <StageLights soft />
+    <Reviews />
+  </div>
 
   <!-- ── Was ist Bühnenzauberei? ───────────────────────────── -->
-  <section class="bz-what ce-smoke">
+  <section class="bz-what ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">Was ist Bühnenzauberei?</h2>
       <p class="bz-what__sub ce-center">Zauberkunst für Ihr gesamtes Publikum</p>
@@ -207,8 +211,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Galerie: a spread of framed photos on the stage ────── -->
-  <section class="bz-gallery ce-night ce-lit">
-    <StageLights soft />
+  <section class="bz-gallery ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
       <p class="ce-center bz-gallery__text">Weitere Fotos und Videos finden Sie in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
@@ -217,7 +220,7 @@ const _pageGallery = [
           <div class="bz-spread__slot" style={`--i: ${i - 2}; --lift: ${Math.abs(i - 2)}`} data-reveal="deal" data-reveal-delay={i * 0.1}>
             <MagicFrame
               corner={(['tl', 'tr', 'br', 'bl', 'tr'] as const)[i]}
-              rank={['A', 'K', 'Q', 'J', '10'][i]}
+              rank={['A', 'K', 'D', 'B', '10'][i]}
               suit={(['♠', '♥', '♣', '♦', '♠'] as const)[i]}
               style={`--sheen-delay: ${2 + i * 0.8}s`}
             >
@@ -230,7 +233,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="bz-why ce-smoke">
+  <section class="bz-why ce-salon">
     <div class="container">
       <SuitRule />
       <h2 class="ce-h2 ce-center">Warum Bühnenzauberer LIAR?</h2>
@@ -247,7 +250,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Einsatzgebiet + Kurz-FAQ ──────────────────────────── -->
-  <section class="bz-area ce-night">
+  <section class="bz-area ce-salon">
     <div class="container">
       <SuitRule />
       <h2 class="ce-h2 ce-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
@@ -275,7 +278,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── CTA: curtain call ─────────────────────────────────── -->
-  <section class="bz-cta ce-velvet ce-lit">
+  <section class="bz-cta ce-stage ce-lit">
     <StageLights soft />
     <div class="container ce-narrow ce-center">
       <h2 class="ce-h2">🎪 Jetzt buchen – Lassen Sie sich verzaubern!</h2>

@@ -20,7 +20,7 @@ const features = [
   { icon: '🍸', title: 'Close-up am Empfang', text: 'Beim Sektempfang oder zwischen den Gängen zaubere ich direkt an den Tischen und bringe die Kolleginnen und Kollegen ins Gespräch.' },
   { icon: '🎄', title: 'Perfekt zur Weihnachtsfeier', text: 'Zur Weihnachtsfeier sorgt die Zauberei für den besonderen Moment, an den sich Ihr Team noch lange erinnert.' },
   { icon: '🇫🇷', title: 'Deutsch & Französisch', text: 'Als gebürtiger Franzose unterhalte ich auch internationale Teams und Gäste – zweisprachig auf Deutsch und Französisch.' },
-  { icon: '⭐', title: '370+ Top-Bewertungen', text: 'Über 400 zufriedene Kunden, bewertet mit 5,0 von 5 Sternen. Verlässlichkeit und Qualität für Ihr Firmenevent.' },
+  { icon: '⭐', title: '370+ Top-Bewertungen', text: '370+ zufriedene Kunden, bewertet mit 5,0 von 5 Sternen. Verlässlichkeit und Qualität für Ihr Firmenevent.' },
   { icon: '⚡', title: 'Minimaler Aufwand', text: 'Kurze Aufbauzeit, geringe technische Anforderungen, flexible Anpassung an Ihr Programm – ich mache es Ihrem Orga-Team leicht.' },
 ];
 
@@ -55,6 +55,7 @@ const serviceSchema = {
 ---
 
 <V2Layout
+  mainClass="ce-salon-page seam-fade"
   title={seoTitle}
   description={seoDescription}
   keywords="Zauberer Firmenfeier, Zauberer Weihnachtsfeier NRW, Firmenevent Zauberer, Betriebsfeier Zauberer, Gala Zauberer NRW"
@@ -102,7 +103,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── Intro + "Auf einen Blick" as a briefing sheet ────── -->
-  <section class="ff-intro ce-smoke">
+  <section class="ff-intro ce-salon">
     <div class="container ff-intro__grid">
       <div>
         <p class="ff-intro__text" data-reveal>
@@ -138,10 +139,13 @@ const serviceSchema = {
     </div>
   </section>
 
-  <Reviews />
+  <div class="ce-stage ce-lit">
+    <StageLights soft />
+    <Reviews />
+  </div>
 
   <!-- ── Formate: an evening agenda ───────────────────────── -->
-  <section class="ff-formats ce-smoke">
+  <section class="ff-formats ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">Zwei Formate – ein unvergesslicher Abend</h2>
       <p class="ce-center ce-soft">Einzeln oder kombiniert, ganz nach Ablauf Ihrer Feier</p>
@@ -161,8 +165,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── Eindrücke: framed photos dealt onto the ink table ─── -->
-  <section class="ff-table ce-night ce-lit">
-    <StageLights soft />
+  <section class="ff-table ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Eindrücke</h2>
       <p class="ce-center ff-table__note">Weitere Fotos und Videos in meiner <a href="/galerie/">Foto- und Videogalerie</a>.</p>
@@ -173,12 +176,12 @@ const serviceSchema = {
           </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.12">
-          <MagicFrame corner="tr" rank="J" suit="♣" class="ff-table__card" data-tilt style="--sheen-delay: 3.1s">
+          <MagicFrame corner="tr" rank="B" suit="♣" class="ff-table__card" data-tilt style="--sheen-delay: 3.1s">
             <Image src={closeupImg} alt="Close-up-Zauberei an einem Tisch in Mülheim" loading="lazy" widths={[400, 550, 800, 1100]} sizes="(max-width: 900px) 92vw, 500px" />
           </MagicFrame>
         </div>
         <div data-reveal="deal" data-reveal-delay="0.24">
-          <MagicFrame corner="br" rank="Q" suit="♦" class="ff-table__card" data-tilt style="--sheen-delay: 4s">
+          <MagicFrame corner="br" rank="D" suit="♦" class="ff-table__card" data-tilt style="--sheen-delay: 4s">
             <Image src={weihnachtImg} alt="Zaubervorführung auf einem Weihnachtsmarkt in Dortmund" loading="lazy" widths={[400, 550, 800, 1100]} sizes="(max-width: 900px) 92vw, 500px" />
           </MagicFrame>
         </div>
@@ -187,7 +190,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── Warum ─────────────────────────────────────────────── -->
-  <section class="ce-why ce-smoke">
+  <section class="ce-why ce-salon">
     <div class="container">
       <SuitRule />
       <h2 class="ce-h2 ce-center">Warum LIAR für Ihr Firmenevent?</h2>
@@ -204,7 +207,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq ce-night">
+  <section class="ce-faq ce-salon">
     <div class="container ce-narrow">
       <SuitRule />
       <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
@@ -224,7 +227,7 @@ const serviceSchema = {
   </section>
 
   <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="ff-cta ce-velvet ce-lit">
+  <section class="ff-cta ce-stage ce-lit">
     <StageLights soft />
     <div class="container ff-cta__grid">
       <div data-reveal>

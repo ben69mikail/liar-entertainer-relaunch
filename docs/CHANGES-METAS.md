@@ -15,3 +15,6 @@ Jede bewusste Abweichung steht hier UND in `site/tests/fixtures/content-changes.
 - **Kidzival 2024:** die WordPress-Emoji-Bilder (😉🥳) sind wieder als Zeichen im Text (`content-changes.json`).
 - **4 neueste Artikel** (Herbstferien drinnen, Clown oder Zauberer, Luftballonmodellage, Was kostet ein Zauberer): Titelbild + 2 Fotos im Text aus „Neu Homepage/Clown Zauberer“, `heroImageAlt` + `updatedDate: 2026-10-07`.
 - **Footer „News Clown Zauberer“:** automatisch die 7 neuesten Artikel (vorher feste Liste).
+
+## Go-live (07.10.2026)
+- `/zauberer/hochzeit/`, `/zauberer/firmenfeier/`, `/zauberer/buehnen-zauberer/`: „Über 400 … bewertet mit 5,0 von 5 Sternen“ → „370+ …“ (L3, gleiche Korrektur wie /zauberer/ und /ueber-mich/; Nutzerentscheidung). „Über 400 Shows im Jahr“ / „über 400 erfolgreiche Auftritte“ bleiben (Auftritte, keine Bewertungen).

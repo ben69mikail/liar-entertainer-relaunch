@@ -76,6 +76,7 @@ const _pageGallery = [
 ---
 
 <V2Layout
+  mainClass="ce-salon-page seam-fade"
   title={seoTitle}
   description={seoDescription}
   keywords="Tischzauberer NRW, Close-up Zauberer, Tischzauberei Hochzeit, Close-up Zauberei buchen, Tischzauberer Event"
@@ -96,7 +97,7 @@ const _pageGallery = [
         <h1 class="ce-hero__title">Tischzauberer NRW – <em>Close-up Magie</em> für Hochzeit &amp; Event</h1>
         <div class="ce-spot">
           <div class="ce-hero__frame ce-spot__frame">
-            <MagicFrame corner="tr" rank="Q" suit="♥" data-tilt>
+            <MagicFrame corner="tr" rank="D" suit="♥" data-tilt>
               <Image
                 src={heroImg}
                 alt="Tischzauberer NRW – Close-up Zauberei für Hochzeiten & Events"
@@ -124,7 +125,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Intro + facts laid out on an ink table ────────────── -->
-  <section class="tz-intro ce-smoke">
+  <section class="tz-intro ce-salon">
     <div class="container tz-intro__grid">
       <div>
         <p class="tz-intro__text" data-reveal>
@@ -160,7 +161,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Anlässe ───────────────────────────────────────────── -->
-  <section class="ce-occasions ce-smoke" data-related-services>
+  <section class="ce-occasions ce-salon" data-related-services>
     <div class="container ce-narrow">
       <SuitRule />
       <h2 class="ce-h2 ce-center">
@@ -181,10 +182,13 @@ const _pageGallery = [
     </div>
   </section>
 
-  <Reviews />
+  <div class="ce-stage ce-lit">
+    <StageLights soft />
+    <Reviews />
+  </div>
 
   <!-- ── Was ist Close-up: four cards turned face up ───────── -->
-  <section class="tz-what ce-night">
+  <section class="tz-what ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">Was ist Close-up Zauberei?</h2>
       <div class="tz-what__grid">
@@ -208,7 +212,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Ablauf: one round from table to table ─────────────── -->
-  <section class="tz-round ce-smoke">
+  <section class="tz-round ce-salon">
     <div class="container ce-narrow-wide">
       <h2 class="ce-h2 ce-center">🎭 Typischer Ablauf</h2>
       <ol class="tz-round__list">
@@ -226,8 +230,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Galerie: photos scattered on the table ───────────── -->
-  <section class="tz-gallery ce-night ce-lit">
-    <StageLights soft />
+  <section class="tz-gallery ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">📸 Wie sieht eine Show von Clown Zauberer LIAR aus?</h2>
       <p class="ce-center ce-soft">Noch mehr Eindrücke gibt es in der <a href="/galerie/">Foto- und Videogalerie</a>.</p>
@@ -236,7 +239,7 @@ const _pageGallery = [
           <div class="tz-scatter__slot" data-reveal="deal" data-reveal-delay={i * 0.1}>
             <MagicFrame
               corner={(['tr', 'bl', 'tl', 'br', 'tr'] as const)[i]}
-              rank={['A', '8', 'K', '3', 'J'][i]}
+              rank={['A', '8', 'K', '3', 'B'][i]}
               suit={(['♦', '♣', '♥', '♠', '♦'] as const)[i]}
               style={`--sheen-delay: ${2.4 + i * 0.7}s`}
               data-tilt
@@ -250,7 +253,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Wann Close-up? Two cards to choose from ──────────── -->
-  <section class="tz-choose ce-smoke">
+  <section class="tz-choose ce-salon">
     <div class="container ce-narrow-wide">
       <SuitRule />
       <h2 class="ce-h2 ce-center">Wann Close-up wählen?</h2>
@@ -281,7 +284,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── So buchen Sie: five cards turned over ─────────────── -->
-  <section class="ce-steps tz-book ce-velvet">
+  <section class="ce-steps tz-book ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">So buchen Sie</h2>
       <div class="ce-steps__list tz-book__list">
@@ -304,7 +307,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── Einsatzgebiet + direkt anfragen ───────────────────── -->
-  <section class="tz-area ce-night">
+  <section class="tz-area ce-salon">
     <div class="container">
       <h2 class="ce-h2 ce-center">Wo bin ich als Tischzauberer buchbar?</h2>
       <div class="tz-area__grid">
@@ -331,7 +334,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── CTA ───────────────────────────────────────────────── -->
-  <section class="tz-cta ce-velvet ce-lit">
+  <section class="tz-cta ce-stage ce-lit">
     <StageLights soft />
     <div class="container ce-narrow ce-center">
       <h2 class="ce-h2">✨ Jetzt Tischzauberer buchen!</h2>
@@ -343,7 +346,7 @@ const _pageGallery = [
   </section>
 
   <!-- ── FAQ (visible twin of the FAQPage schema) ──────────── -->
-  <section class="ce-faq ce-smoke">
+  <section class="ce-faq ce-salon">
     <div class="container ce-narrow">
       <h2 class="ce-h2 ce-center">Häufig gestellte Fragen</h2>
       <div class="ce-faq__list">
@@ -376,7 +379,8 @@ const _pageGallery = [
     padding: var(--space-4) var(--space-3) var(--space-3); background: #0d0b0a; border-radius: calc(var(--radius) * 1.6);
     box-shadow: inset 0 0 0 1px var(--gold), 0 30px 60px -30px rgb(0 0 0 / 0.9);
   }
-  .tz-table h3 { font-size: 1.5rem; margin: 0 0 var(--space-3); text-align: center; }
+  /* the table is a dark felt even in the ivory salon: its heading stays cream */
+  .tz-table h3 { font-size: 1.5rem; margin: 0 0 var(--space-3); text-align: center; color: #f3ede1; }
   .tz-facts { margin: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: var(--space-2); }
   .tz-facts__card {
     padding: 0.9rem 1rem;

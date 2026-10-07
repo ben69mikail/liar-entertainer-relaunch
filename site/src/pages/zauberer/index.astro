@@ -224,7 +224,7 @@ const whyUs = [
             <span class="ce-pcard__idx" aria-hidden="true">{['A', 'K', 'D'][i]}<br />{['♠', '♥', '♣'][i]}</span>
             <span class="ce-pcard__idx ce-pcard__idx--end" aria-hidden="true">{['A', 'K', 'D'][i]}<br />{['♠', '♥', '♣'][i]}</span>
             <div class="ce-hcard__photo">
-              <MagicFrame corner="tr" rank={['A', 'K', 'Q'][i]} suit={(['♠', '♥', '♣'] as const)[i]} style={`--sheen-delay: ${2.2 + i * 0.9}s`}>
+              <MagicFrame corner="tr" rank={['A', 'K', 'D'][i]} suit={(['♠', '♥', '♣'] as const)[i]} style={`--sheen-delay: ${2.2 + i * 0.9}s`}>
                 <Image src={format.img} alt={format.imgAlt} loading="lazy" widths={[400, 600, 900]} sizes="(max-width: 900px) 84vw, 340px" />
               </MagicFrame>
             </div>
