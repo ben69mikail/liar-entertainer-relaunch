@@ -3,6 +3,7 @@ import { getCollection } from 'astro:content';
 import pagesData from '../data/pages.json';
 import postsData from '../data/posts.json';
 import { getAllCategories } from '../utils/allPosts';
+import { ZAUBERER_CITIES_LIVE } from '../data/zauberer-cities';
 
 type WPItem = {
   link: string;
@@ -55,6 +56,8 @@ export const GET: APIRoute = async () => {
     { loc: `${SITE}/zauberer/zaubershow/`, priority: '0.9', changefreq: 'weekly', lastmod: '2026-07-17' },
     { loc: `${SITE}/zauberer/buehnen-zauberer/`, priority: '0.8', changefreq: 'monthly', lastmod: '2026-07-17' },
     { loc: `${SITE}/zauberer/tisch-zauberer/`, priority: '0.8', changefreq: 'monthly', lastmod: '2026-07-17' },
+    // taken over from zauberer-liar.de (2026-10-07); indexed together with the 301s (ZAUBERER_CITIES_LIVE)
+    ...(ZAUBERER_CITIES_LIVE ? [{ loc: `${SITE}/zauberer/close-up/`, priority: '0.8', changefreq: 'monthly', lastmod: '2026-10-07' }] : []),
     { loc: `${SITE}/zauberer/hochzeit/`, priority: '0.8', changefreq: 'monthly', lastmod: '2026-07-17' },
     { loc: `${SITE}/zauberer/firmenfeier/`, priority: '0.8', changefreq: 'monthly', lastmod: '2026-07-17' },
     { loc: `${SITE}/zauberer/zaubershow/kindergarten-kita/`, priority: '0.8', changefreq: 'monthly', lastmod: '2026-07-17' },

@@ -1,0 +1,109 @@
+{
+  "title": "Close-up Zauberer NRW: Französische Zauberkunst hautnah | LIAR",
+  "description": "Close-up Zauberer LIAR für Firmenfeiern, Hochzeiten & Galas in NRW. Verblüffende Magie direkt vor Ihren Augen – Tischzauberei & Walk-Act. Jetzt anfragen!",
+  "h1Html": "Close-up <em>Zauberer</em> NRW – Magie hautnah",
+  "lead": "Verblüffende Zauberkunst direkt vor Ihren Augen – ohne Bühne, ohne Distanz. Französische Eleganz für Firmenfeiern, Hochzeiten und Galas.",
+  "heroImg": "galadiner-in-essen-mit-zauberer-liar-1.webp",
+  "intro": {
+    "eyebrow": "Was ist Close-up?",
+    "h2": "Magie aus nächster Nähe",
+    "html": "<p>Close-up bedeutet „nah dran“ – und genau das macht diese Zauberkunst so faszinierend. Im Gegensatz zur Bühnenmagie findet sie <strong>direkt bei den Zuschauern</strong> statt, ohne große Bühne oder aufwendige Technik.</p><p>Ich arbeite mit kleinen Gruppen von 4–15 Personen. Ihre Gäste sind nicht nur Zuschauer, sondern <strong>aktive Teilnehmer</strong>: Sie mischen Karten, untersuchen Münzen, berühren Gegenstände – und erleben dann das Unmögliche.</p><p>Als <strong>Close-up Zauberer</strong> und Spezialist für <strong>Tischzauberei</strong> bin ich in ganz NRW im Einsatz – von Düsseldorf über Essen und Dortmund bis Mülheim. Ob als stimmungsvolle Tischzauberei beim Galadinner oder als mobiler Walk-Act mitten unter den Gästen: Diese Form der Zauberkunst sorgt für echte Gänsehaut-Momente direkt vor den Augen Ihrer Gäste.</p>",
+    "img": {
+      "file": "close-up-zauberei-duesseldorf.webp",
+      "alt": "Close-up Zauberei Düsseldorf – Zauberer LIAR in NRW"
+    }
+  },
+  "props": {
+    "eyebrow": "Typische Requisiten",
+    "h2": "Womit die Magie geschieht",
+    "items": [
+      {
+        "title": "Spielkarten",
+        "html": "Klassische und moderne Kartenkunst auf höchstem Niveau."
+      },
+      {
+        "title": "Münzen",
+        "html": "Münzen verschwinden, wandern und vermehren sich vor Ihren Augen."
+      },
+      {
+        "title": "Alltagsgegenstände",
+        "html": "Gläser, Servietten und Löffel werden zu magischen Objekten."
+      },
+      {
+        "title": "Mentalmagie",
+        "html": "Gedankenlesen und verblüffende Vorhersagen."
+      }
+    ]
+  },
+  "formats": {
+    "eyebrow": "Formate",
+    "h2": "Close-up in zwei Formaten",
+    "items": [
+      {
+        "title": "Tisch-Zauberer",
+        "html": "Persönliche Mini-Show direkt am Tisch – zwischen den Gängen, beim Buffet oder Sektempfang.",
+        "href": "/zauberer/tisch-zauberer/",
+        "more": "Mehr erfahren →",
+        "img": {
+          "file": "tisch-zauberei-nrw.webp",
+          "alt": "Tisch Zauberei NRW – Zauberer LIAR"
+        }
+      },
+      {
+        "title": "Walk-Act",
+        "html": "Mobile Magie mitten unter den Gästen – für Straßenfeste, Messen und Firmenfeiern.",
+        "href": "/clown/walk-act/",
+        "more": "Mehr erfahren →",
+        "img": {
+          "file": "close-up-zauberei-dortmund.webp",
+          "alt": "Close-up Zauberei Dortmund – Zauberer LIAR in NRW"
+        }
+      }
+    ]
+  },
+  "gallery": {
+    "eyebrow": "",
+    "h2": "Eindrücke",
+    "items": [
+      {
+        "file": "close-up-zauberei-dortmund.webp",
+        "alt": "Close-up Zauberei Dortmund – Zauberer LIAR in NRW",
+        "cap": "Zauberer LIAR"
+      },
+      {
+        "file": "close-up-zauberei-duesseldorf.webp",
+        "alt": "Close-up Zauberei Düsseldorf – Zauberer LIAR in NRW",
+        "cap": "Zauberer LIAR"
+      },
+      {
+        "file": "close-up-zauberei-muelheim.webp",
+        "alt": "Close-up Zauberei Mülheim – Zauberer LIAR in NRW",
+        "cap": "Zauberer LIAR"
+      },
+      {
+        "file": "tisch-zauberei-nrw.webp",
+        "alt": "Tisch Zauberei NRW – Zauberer LIAR",
+        "cap": "Zauberer LIAR"
+      },
+      {
+        "file": "tisch-zauberer-muelheim.webp",
+        "alt": "Tisch Zauberer Mülheim – Zauberer LIAR in NRW",
+        "cap": "Zauberer LIAR"
+      },
+      {
+        "file": "tisch-zauberer-nrw-2.webp",
+        "alt": "Tisch Zauberer NRW – Zauberer LIAR",
+        "cap": "Zauberer LIAR"
+      }
+    ],
+    "more": {
+      "label": "Ganze Fotogalerie",
+      "href": "/galerie/"
+    }
+  },
+  "cta": {
+    "eyebrow": "In 2 Minuten zur Anfrage",
+    "h2Html": "Machen wir Ihr Event<br>zu etwas <span>Magischem.</span>",
+    "text": "Rufen Sie direkt an oder schreiben Sie mir – ich melde mich schnell mit einem unverbindlichen Angebot."
+  }
+}

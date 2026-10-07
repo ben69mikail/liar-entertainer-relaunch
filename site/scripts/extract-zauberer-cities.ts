@@ -20,7 +20,7 @@ const OUT = 'src/data/zauberer-cities';
 const LINKS: Record<string, string> = {
   'index.html': '/zauberer/',
   'kinderzauberer.html': '/kinderzauberer/',
-  'close-up-zauberer.html': '/zauberer/tisch-zauberer/',
+  'close-up-zauberer.html': '/zauberer/close-up/',
   'tisch-zauberer.html': '/zauberer/tisch-zauberer/',
   'walk-act-zauberer.html': '/clown/walk-act/',
   'buehnenshow.html': '/zauberer/buehnen-zauberer/',

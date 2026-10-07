@@ -1,0 +1,11 @@
+{
+  "_doc": "Documented deviations from the frozen zauberer-liar.de pages in this folder (used by scripts/extract-zauberer-closeup.ts and tests/dist/zauberer-closeup.test.ts). Text: 'über 400' → '370+' everywhere (L3, real Google count; close-up-zauberer.html has none).",
+  "title": {
+    "close-up-zauberer": {
+      "from": "Close-up Zauberer NRW – Französische Zauberkunst hautnah | LIAR",
+      "to": "Close-up Zauberer NRW: Französische Zauberkunst hautnah | LIAR",
+      "why": "Source title 63 characters; SEO rule M6.1 allows 62. ' – ' replaced by ': ', words unchanged."
+    }
+  },
+  "description": {}
+}
