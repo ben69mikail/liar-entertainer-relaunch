@@ -93,16 +93,13 @@ export function localizePath(href: string, locale: Locale): string {
  * Header language switcher. Core pages only. A published page offers the published languages;
  * an unpublished (review) page offers all, so the owner can compare. Fewer than two → none.
  */
-export function languageLinks(
-  path: string,
-  locales: readonly Locale[] = PUBLISHED_LOCALES,
-): Array<{ locale: Locale; href: string; current: boolean }> {
+// Header switcher: every core page offers DE · FR · EN (user, 2026-10-07) — unpublished
+// FR/EN pages stay noindex and out of the sitemap, so linking them is safe.
+export function languageLinks(path: string): Array<{ locale: Locale; href: string; current: boolean }> {
   const entry = coreEntry(path);
   if (!entry) return [];
   const own = localeOf(path);
-  const shown = isPublishedPath(path, locales) ? LOCALES.filter((l) => locales.includes(l)) : LOCALES;
-  if (shown.length < 2) return [];
-  return shown.map((l) => ({ locale: l, href: entry[l], current: l === own }));
+  return LOCALES.map((l) => ({ locale: l, href: entry[l], current: l === own }));
 }
 
 /** Resolve any page path (DE or translated page) to its German original. */

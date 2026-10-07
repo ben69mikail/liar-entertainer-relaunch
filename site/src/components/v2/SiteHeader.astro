@@ -189,6 +189,19 @@ const languages = languageLinks(path);
     .sh__cta { margin-left: auto; }
     .sh__mobile { margin-left: 0; }
   }
+  /* full desktop menu: DE · FR · EN sits in a slim row above it (user, 2026-10-07: switcher on
+     German pages too), so logo, menu and button keep the whole width */
+  @media (min-width: 1181px) {
+    .sh__bar.container { width: min(100% - 2rem, 84rem); flex-wrap: wrap; row-gap: 0; }
+    .sh__lang { order: -1; flex-basis: 100%; justify-content: flex-end; font-size: 0.72rem; padding-top: 0.3rem; margin-bottom: -0.55rem; }
+    .sh__item > a { padding-inline: 0.42rem; }
+  }
+  /* French menu labels are longer: burger menu until there is room */
+  @media (min-width: 1181px) and (max-width: 1320px) {
+    :global(html[lang='fr']) .sh__nav { display: none; }
+    :global(html[lang='fr']) .sh__mobile { display: block; margin-left: 0; }
+    :global(html[lang='fr']) .sh__cta { margin-left: auto; }
+  }
   @media (max-width: 480px) {
     .sh__cta { display: none; }
     .sh__mobile { margin-left: auto; }

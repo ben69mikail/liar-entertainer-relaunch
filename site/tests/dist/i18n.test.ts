@@ -90,9 +90,11 @@ describe('unpublished locales (owner review before go-live)', () => {
     }
   });
 
-  it('shows no language switcher on German pages while FR and EN are unpublished', () => {
-    if (PUBLISHED_LOCALES.length > 1) return;
-    for (const entry of CORE_PAGES) expect(page(entry.de)('.sh__lang').length).toBe(0);
+  it('German core pages offer the switcher to FR and EN (user, 2026-10-07)', () => {
+    for (const entry of CORE_PAGES) {
+      const $ = page(entry.de);
+      expect($('.sh__lang a').map((_, a) => $(a).attr('href')).get()).toEqual([entry.de, entry.fr, entry.en]);
+    }
   });
 
   it('leaves unpublished pages out of the sitemap', () => {

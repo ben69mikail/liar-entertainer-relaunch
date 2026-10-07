@@ -170,27 +170,26 @@ describe('localizePath', () => {
 });
 
 describe('languageLinks (header switcher)', () => {
-  it('hides the switcher on German pages while nothing else is published', () => {
-    expect(languageLinks('/zauberer/', ['de'])).toEqual([]);
+  // user 2026-10-07: German pages offer DE · FR · EN too (FR/EN stay noindex until published)
+  it('shows every language on a German core page, published or not', () => {
+    expect(languageLinks('/zauberer/')).toEqual([
+      { locale: 'de', href: '/zauberer/', current: true },
+      { locale: 'fr', href: '/fr/magicien/', current: false },
+      { locale: 'en', href: '/en/magician/', current: false },
+    ]);
   });
 
   it('lists every language on an unpublished review page', () => {
-    expect(languageLinks('/fr/magicien/', ['de'])).toEqual([
+    expect(languageLinks('/fr/magicien/')).toEqual([
       { locale: 'de', href: '/zauberer/', current: false },
       { locale: 'fr', href: '/fr/magicien/', current: true },
       { locale: 'en', href: '/en/magician/', current: false },
     ]);
   });
 
-  it('lists only published languages on a published page', () => {
-    expect(languageLinks('/zauberer/', ['de', 'fr'])).toEqual([
-      { locale: 'de', href: '/zauberer/', current: true },
-      { locale: 'fr', href: '/fr/magicien/', current: false },
-    ]);
-  });
 
   it('shows nothing on pages without translations', () => {
-    expect(languageLinks('/preise/', ['de', 'fr', 'en'])).toEqual([]);
-    expect(languageLinks('/fr/contact/merci/', ['de'])).toEqual([]);
+    expect(languageLinks('/preise/')).toEqual([]);
+    expect(languageLinks('/fr/contact/merci/')).toEqual([]);
   });
 });
