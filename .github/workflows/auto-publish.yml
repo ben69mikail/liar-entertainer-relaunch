@@ -1,0 +1,74 @@
+name: Auto-Publish Blog
+
+# Ported from the old repo (ben69mikail/Liar-Entertainer) on 2026-10-07. The Astro site lives in site/.
+# n8n writes drafts (draft: true, freigabe: nein) into site/src/content/blog/. When the owner sets
+# freigabe: ja, this job flips the draft, runs the gates and pushes; Netlify builds the push.
+
+on:
+  schedule:
+    - cron: '30 5 * * *'   # 07:30 MESZ
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: blog-publish
+  cancel-in-progress: false
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    defaults:
+      run:
+        working-directory: site
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: main
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: 'npm'
+          cache-dependency-path: site/package-lock.json
+
+      - name: Freigegebene Entwürfe veröffentlichen
+        id: pub
+        run: |
+          out=$(node scripts/auto-publish.mjs)
+          echo "$out"
+          echo "result=$out" >> "$GITHUB_OUTPUT"
+          echo "$out" | grep -q '^PUBLISHED=' || exit 0
+          echo "changed=yes" >> "$GITHUB_OUTPUT"
+
+      - name: Poppins-Font (für Blog-Hero-Rendering)
+        if: steps.pub.outputs.changed == 'yes'
+        run: |
+          sudo apt-get update -qq && sudo apt-get install -y --no-install-recommends fontconfig
+          sudo mkdir -p /usr/share/fonts/truetype/poppins
+          for w in Regular Medium SemiBold Bold ExtraBold; do
+            sudo curl -fsSL "https://raw.githubusercontent.com/google/fonts/main/ofl/poppins/Poppins-${w}.ttf" -o "/usr/share/fonts/truetype/poppins/Poppins-${w}.ttf"
+          done
+          sudo fc-cache -f
+
+      - name: Build + Tests als Gate
+        if: steps.pub.outputs.changed == 'yes'
+        run: |
+          npm ci
+          npm run build
+          npm run test:seo
+          n=$(find dist -name index.html | wc -l); echo "pages=$n"; test "$n" -ge 160
+
+      - name: Committen (löst Netlify-Deploy aus)
+        if: steps.pub.outputs.changed == 'yes'
+        run: |
+          slug=$(echo "${{ steps.pub.outputs.result }}" | sed 's/^PUBLISHED=//')
+          git config user.name "auto-publish-bot"
+          git config user.email "auto-publish-bot@users.noreply.github.com"
+          git add src/content/blog/ public/hero-generated public/story-generated 2>/dev/null || git add src/content/blog/
+          git commit -m "blog: veröffentliche $slug"
+          git pull --rebase origin main
+          git push origin HEAD:main
+          echo "Veröffentlicht: $slug" >> "$GITHUB_STEP_SUMMARY"
