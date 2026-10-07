@@ -4,7 +4,6 @@ import Document from './Document.astro';
 import type { Props as DocumentProps } from './Document.astro';
 import SiteHeader from '../components/v2/SiteHeader.astro';
 import SiteFooter from '../components/v2/SiteFooter.astro';
-import StickyCta from '../components/v2/StickyCta.astro';
 import FontPreloads from '../components/v2/FontPreloads.astro';
 import { zoneFor } from '../lib/site-map';
 import '../styles/seam-fade.css';
@@ -22,5 +21,4 @@ const seam = zoneFor(Astro.url.pathname) !== 'adult';
     <slot />
   </main>
   <SiteFooter />
-  <StickyCta />
 </Document>

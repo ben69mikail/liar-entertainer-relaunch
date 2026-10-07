@@ -202,7 +202,6 @@ html body.v2 .cc-actions { width: 100%; }
 html body.v2 .cc-btn { flex: 1; border-radius: 999px; font-family: inherit; }
 html body.v2 .cc-btn-accept { background: var(--accent-strong); color: var(--accent-ink); }
 [data-zone='adult'] body.v2 .cc-btn { border-radius: var(--radius-sm); }
-@media (max-width: 767.98px), (hover: none) and (pointer: coarse) { html body.v2 .cc-banner { bottom: calc(4.4rem + env(safe-area-inset-bottom)); } }
 
 
 /* Desktop: consent card sits bottom-right above the contact dock, so it never covers the hero's

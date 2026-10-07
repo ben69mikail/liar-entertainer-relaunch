@@ -19,11 +19,11 @@ describe('parents reach key info fast (brief UX goals)', () => {
   for (const path of [KIDS, ADULT]) {
     const $ = page(path);
 
-    it(`${path}: sticky contact offers call, WhatsApp and enquiry`, () => {
-      const hrefs = $('[data-sticky-cta] a').map((_, a) => $(a).attr('href')).get();
+    it(`${path}: quick contact in the header offers call, WhatsApp and e-mail`, () => {
+      const hrefs = $('header.sh [data-quick-contact] a').map((_, a) => $(a).attr('href')).get();
       expect(hrefs).toContain('tel:+491721517578');
       expect(hrefs.some((h) => h.startsWith('https://wa.me/'))).toBe(true);
-      expect(hrefs).toContain('/kontakt/');
+      expect(hrefs.some((h) => h.startsWith('mailto:'))).toBe(true);
     });
 
     it(`${path}: shows the real review count in the hero (above the fold)`, () => {

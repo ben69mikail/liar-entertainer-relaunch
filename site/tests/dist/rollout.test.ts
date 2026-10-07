@@ -32,11 +32,11 @@ describe('v2 rollout', () => {
     describe(path, () => {
       const $ = path.endsWith('.html') ? cheerio.load(readFileSync(join(DIST, path), 'utf8')) : page(path);
 
-      it('uses the relaunch layout (header, footer, sticky contact)', () => {
+      it('uses the relaunch layout (header with quick contact, footer)', () => {
         expect($('body').hasClass('v2')).toBe(true);
         expect($('header.sh').length).toBe(1);
         expect($('footer.sf').length).toBe(1);
-        expect($('[data-sticky-cta]').length).toBe(1);
+        expect($('header.sh [data-quick-contact]').length).toBe(1);
       });
 
       it('ships none of the legacy CSS (Tailwind + inline Poppins)', () => {

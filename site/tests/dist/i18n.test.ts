@@ -29,7 +29,7 @@ describe('FR/EN core pages (brief E2, 4.1/4.2)', () => {
     const GERMAN = /\b(Anfragen|Startseite|Jetzt anfragen|Anrufen|Hauptseiten|Alle Rechte vorbehalten|Cookie-Einstellungen|Bewertungen)\b/;
     for (const t of twins) {
       const $ = page(t.path);
-      const chrome = ['header.sh', 'footer.sf', '[data-sticky-cta]', '#cookie-consent'].map((s) => $(s).text()).join(' ');
+      const chrome = ['header.sh', 'footer.sf', '#cookie-consent'].map((s) => $(s).text()).join(' ');
       expect([t.path, chrome.match(GERMAN)?.[0]]).toEqual([t.path, undefined]);
     }
   });

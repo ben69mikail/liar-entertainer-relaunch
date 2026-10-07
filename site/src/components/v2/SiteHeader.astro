@@ -62,6 +62,13 @@ const languages = languageLinks(path);
 
     <a class="btn btn--primary sh__cta" href="/kontakt/">Anfragen</a>
 
+    <!-- quick contact on mobile devices (user, 2026-10-07): icons between logo and menu, replaces the bottom bar -->
+    <nav class="sh__quick" aria-label="Schnellkontakt" data-quick-contact>
+      <a href={CONTACT.phoneHref} aria-label="Anrufen"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6.6 10.8a15 15 0 0 0 6.6 6.6l2.2-2.2a1 1 0 0 1 1-.2 11.4 11.4 0 0 0 3.6.6 1 1 0 0 1 1 1V20a1 1 0 0 1-1 1A17 17 0 0 1 3 4a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.2.2 2.4.6 3.6a1 1 0 0 1-.3 1z" /></svg></a>
+      <a class="sh__quick--wa" href={CONTACT.whatsappHref} target="_blank" rel="noopener noreferrer" aria-label="WhatsApp"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.1c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.3-.8-2.8-1.1-4.5-3.9-4.7-4.1-.1-.2-1.1-1.5-1.1-2.9s.7-2 1-2.3c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.9 2.1c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.3 2.4 1.5.3.1.5.1.6-.1l.9-1.1c.2-.3.4-.2.6-.1l2 1c.3.1.5.2.5.3.1.1.1.7-.1 1.3z" /></svg></a>
+      <a href={`mailto:${CONTACT.email}`} aria-label="E-Mail schreiben"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5h18a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V6a1 1 0 0 1 1-1zm1.6 2L12 12l7.4-5H4.6zM20 8.3l-7.4 5a1 1 0 0 1-1.2 0L4 8.3V17h16V8.3z" /></svg></a>
+    </nav>
+
     <details class="sh__mobile">
       <summary aria-label="Menü öffnen">
         <span class="sh__burger" aria-hidden="true"></span>
@@ -185,6 +192,30 @@ const languages = languageLinks(path);
   @media (max-width: 480px) {
     .sh__cta { display: none; }
     .sh__mobile { margin-left: auto; }
+  }
+
+  /* quick contact: phones and touch tablets only, never on a desktop with a mouse */
+  .sh__quick { display: none; align-items: center; gap: 0.35rem; }
+  .sh__quick a {
+    display: grid; place-items: center; width: 2.5rem; height: 2.5rem; border-radius: 50%;
+    color: var(--ink); background: var(--surface); border: var(--border); text-decoration: none;
+  }
+  .sh__quick svg { width: 1.15rem; height: 1.15rem; fill: currentColor; }
+  .sh__quick .sh__quick--wa { color: #0f7a35; }
+  @media (max-width: 767.98px), (hover: none) and (pointer: coarse) {
+    .sh__quick { display: flex; }
+  }
+  @media (max-width: 480px) {
+    .sh__bar { gap: var(--space-2); flex-wrap: wrap; }
+    .sh__quick { margin-left: auto; }
+    .sh__mobile { margin-left: 0; }
+    /* FR/EN: the language switcher gets its own slim row under logo, icons and menu */
+    .sh__lang { order: 10; flex-basis: 100%; justify-content: center; margin-top: -0.6rem; padding-bottom: 0.35rem; }
+  }
+  /* narrow phones: the menu button keeps its three lines, the word "Menü" goes */
+  @media (max-width: 400px) {
+    .sh__mobile summary > span:not(.sh__burger) { display: none; }
+    .sh__quick a { width: 2.3rem; height: 2.3rem; }
   }
 
   :global([data-zone='adult']) .sh__item > a,
