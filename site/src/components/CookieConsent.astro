@@ -25,6 +25,8 @@ const DATENSCHUTZ_URL = '/datenschutzerklaerung-2/';
 
 <style>
   .cc-banner{position:fixed;left:0;right:0;bottom:0;z-index:9999;padding:16px;display:flex;justify-content:center;pointer-events:none}
+  /* display:flex above beats the UA rule for [hidden]: without this the banner never went away (2026-10-07) */
+  .cc-banner[hidden]{display:none !important}
   .cc-inner{pointer-events:auto;max-width:960px;width:100%;background:#fff;border:1px solid #f0c4c4;border-radius:18px;box-shadow:0 12px 40px rgba(0,0,0,.18);padding:20px 22px;display:flex;flex-direction:column;gap:14px}
   @media(min-width:768px){.cc-inner{flex-direction:row;align-items:center;gap:24px}}
   .cc-title{margin:0 0 4px;font-weight:800;color:#1f2025;font-size:1rem}

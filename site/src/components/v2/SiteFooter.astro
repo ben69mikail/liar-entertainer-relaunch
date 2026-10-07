@@ -53,7 +53,6 @@ const external = (href: string) => (href.startsWith('http') ? { target: '_blank'
 <style>
   .sf { background: var(--ink); color: var(--bg); padding-block: var(--space-5) var(--space-4); font-size: 0.95rem; }
   /* keep legal links clear of the desktop contact dock */
-  @media (min-width: 768px) { .sf { padding-bottom: 6.5rem; } }
   :global([data-zone='adult']) .sf { background: var(--ink); color: var(--bg); }
   .sf__grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fit, minmax(min(100%, 16rem), 1fr)); }
   .sf__h { font-family: var(--font-display); font-size: 1.25rem; margin: 0 0 0.75rem; color: inherit; }

@@ -18,10 +18,11 @@ import { CONTACT } from '../../data/site';
 </nav>
 
 <style>
+  /* mobile devices only (user, 2026-10-07): phones + touch tablets; never on a desktop with a mouse */
   .sc {
     position: fixed;
     z-index: 60;
-    display: grid;
+    display: none;
     grid-template-columns: 1fr 1fr 1.4fr;
     inset: auto 0 0 0;
     padding: 0.5rem 0.5rem calc(0.5rem + env(safe-area-inset-bottom));
@@ -48,19 +49,8 @@ import { CONTACT } from '../../data/site';
   .sc__btn--wa { color: #0f7a35; }
   .sc__btn--main { background: var(--accent-strong); color: var(--accent-ink); }
 
-  /* Desktop: compact dock bottom-right */
-  @media (min-width: 768px) {
-    .sc {
-      inset: auto 1.25rem 1.25rem auto;
-      grid-template-columns: auto auto auto;
-      padding: 0.4rem;
-      border: var(--border);
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-    }
-    .sc__btn { padding-inline: 1rem; }
-  }
-  @media (max-width: 767.98px) {
+  @media (max-width: 767.98px), (hover: none) and (pointer: coarse) {
+    .sc { display: grid; }
     :global(body.v2) { padding-bottom: calc(4.2rem + env(safe-area-inset-bottom)); }
   }
 

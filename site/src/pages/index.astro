@@ -714,5 +714,11 @@ const videoSchema = {
     .hm-worlds { grid-template-columns: 1fr 1fr; }
     .hm-world--kids { rotate: -1deg; }
     .hm-world--adult { rotate: 1deg; }
+    /* both doors the same size (user, 2026-10-07): equal height, photo row takes the slack; the
+       adult panorama (never cropped) uses the full card width so it is not narrower than the kids photo */
+    .hm-worlds { align-items: stretch; }
+    .hm-world { grid-template-rows: auto 1fr auto auto; align-items: center; }
+    .hm-world--adult { padding-inline: var(--space-2); }
+    .hm-world__card { width: 100%; }
   }
 </style>
