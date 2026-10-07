@@ -25,9 +25,6 @@ const APACHE: [string, (number | string | null)[]][] = [
   ['/sport/', GONE],
   ['/sport/lokalsport/fussball-bottrop/', GONE],
   // l.82-92 query on /
-  ['/?s=zauberer', [301, '/']],
-  ['/?p=1234', [301, '/']],
-  ['/?page_id=45', [301, '/']],
   // l.97 / l.98 attachments
   ['/attachment/clown-bild-1/', GONE],
   ['/kindergeburtstag/attachment/foto-3/', GONE],
@@ -85,9 +82,6 @@ const APACHE: [string, (number | string | null)[]][] = [
   ['/preise-fuer-clown-oder-kinderzauberer/', [301, '/preise/']],
   ['/bewertung-und-fotos-vom-clown/', [301, '/galerie/']],
   ['/familienfest-in-ramsdorf-mit-clown-liar/', [301, '/blog/']],
-  // l.313-318 query cleanup (also on existing pages)
-  ['/blog/?replytocom=12', [301, '/blog/']],
-  ['/kontakt/?share=facebook', [301, '/kontakt/']],
   // l.321-345
   ['/halloween-party-fuer-kinder/', [301, '/blog/']],
   ['/sommerfest-in-recklinghausen-mit-kinderzauberer/', [301, '/blog/']],
@@ -165,6 +159,12 @@ const APACHE: [string, (number | string | null)[]][] = [
 // Documented deviations (no regex on Netlify) — pinned so a change is noticed. Apache value in the comment.
 const DEVIATIONS: [string, (number | string | null)[] | null][] = [
   ['/clown/ein-sehr-langer-alter-blog-slug/', GONE], // Apache l.409: 301 /blog/ (length >= 20)
+  // query rules not ported (Netlify keeps the query -> self-redirect loop); pages answer 200 with a clean canonical
+  ['/?s=zauberer', null], // Apache l.82-92: 301 /
+  ['/?p=1234', null],
+  ['/?page_id=45', null],
+  ['/blog/?replytocom=12', null], // Apache l.313-318: 301 /blog/
+  ['/kontakt/?share=facebook', null],
   ['/foo/', [301, '/blog/']], // Apache: 404 (catch-all needed >= 20 chars)
   ['/category/clowns-und-mehr/', [301, '/blog/']], // Apache l.76 prefix: 301 /clown/clownshow/
   ['/bild-attachment/foto/', null], // Apache l.102: 410
@@ -227,5 +227,15 @@ describe('Netlify _redirects (parity with the old Apache .htaccess)', () => {
       .map(([, e]) => e[1] as string)
       .filter((t) => !fileExists(DIST, t));
     expect(missing).toEqual([]);
+  });
+});
+
+describe('no redirect loops', () => {
+  // Netlify passes the query string on to the target: a rule with a query condition whose target
+  // is its own path (e.g. "/ p=:p / 301!", "/* share=:s /:splat 301!") redirects to itself forever.
+  const rules = parseRedirects(readFileSync(join(DIST, '_redirects'), 'utf8'));
+  it('no query rule points back to its own path', () => {
+    const loops = rules.filter((r) => Object.keys(r.query).length > 0 && (r.to === r.from || (r.from.endsWith('/*') && r.to.endsWith('/:splat') && r.from.slice(0, -1) === r.to.slice(0, -6))));
+    expect(loops.map((r) => r.from + ' ' + JSON.stringify(r.query))).toEqual([]);
   });
 });

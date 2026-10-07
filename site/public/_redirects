@@ -53,10 +53,10 @@ http://www.liar-entertainer.com/*                                      https://l
 /sport                                                                 /404.html                                          410
 /sport/*                                                               /404.html                                          410
 
-# ── l.82-92 WordPress-Suche / ?p= / ?page_id= auf der Startseite (forced: / existiert) ──
-/  s=:s                                                                /                                                  301!
-/  p=:p                                                                /                                                  301!
-/  page_id=:id                                                         /                                                  301!
+# ── l.82-92 ?s= / ?p= / ?page_id= on / and l.313-318 ?replytocom= / ?share=: NOT ported.
+#    Netlify passes the query string on to the target, so "/ p=:p / 301!" redirects to itself
+#    (endless loop, found on the Netlify preview 2026-10-07). The pages answer 200 instead;
+#    their canonical (without query) tells Google the real URL.
 
 # ── l.97/98/102 Attachment-Seiten -> 410 ──
 /attachment                                                            /404.html                                          410
@@ -350,9 +350,6 @@ http://www.liar-entertainer.com/*                                      https://l
 # ── l.303 /clown/zauberer/ (l.302 identisch über /clown/zauberer/*) ──
 /clown/zauberer                                                        /zauberer/                                         301
 
-# ── l.313-318 ?replytocom= / ?share= entfernen (forced, jede Seite) ──
-/*  replytocom=:r                                                      /:splat                                            301!
-/*  share=:s                                                           /:splat                                            301!
 
 # ── l.321-345 weitere alte Blog-Posts ──
 /kinderzauberer-clown-bei-der-awo-in-waltrop                           /blog/                                             301
@@ -563,7 +560,7 @@ http://www.liar-entertainer.com/*                                      https://l
 /clown                                                                 /clown/clownshow/                                  301
 
 # ── l.409 + l.431-435 einsegmentige /clown/<x>/ und /zauberer/<x>/ -> 410 (echte Seiten existieren = nicht betroffen) ──
-/clown/:slug                                                           /404.html                                          410
+/clown/:slug                                                           /404.html                                       410
 /zauberer/:slug                                                        /404.html                                          410
 
 # Häufige Browser-/Crawler-Abfragen fehlender Dateien: echtes 404 statt Catch-all -> /blog/ (Apache: 404)

@@ -9,7 +9,7 @@
  * - `:name` matches exactly one path segment, a final `*` matches one or more remaining segments
  *   (`:splat`); we deliberately do NOT let `/foo/*` match `/foo` (conservative — the rules list
  *   the bare path explicitly where it matters)
- * - query conditions require every listed parameter to be present; such rules drop the query
+ * - query conditions require every listed parameter to be present (real Netlify passes the query on to the target; see the loop guard test)
  * - absolute `from` URLs (host rules) only match when a host is given
  */
 import { existsSync, statSync } from 'node:fs';
