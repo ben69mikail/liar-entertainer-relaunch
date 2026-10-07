@@ -7,7 +7,7 @@
  * the index (noindex, not in the sitemap) so Google never sees duplicate content. Flip to true in
  * the same release that switches the 301s on.
  */
-export const ZAUBERER_CITIES_LIVE = false;
+export const ZAUBERER_CITIES_LIVE = true; // 2026-10-07: zauberer-liar.de redirects page by page (public/_redirects)
 
 export interface ZaubererCity {
   slug: string;

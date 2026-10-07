@@ -50,7 +50,10 @@ for (const path of CONTRACT) {
 try {
   const sm = await (await fetch(`${MAIN}/sitemap.xml`)).text();
   const locs = [...sm.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1]);
-  ok(locs.length === CONTRACT.length, `sitemap has ${locs.length} URLs (expected ${CONTRACT.length})`);
+  // the DE contract + the 15 pages taken over from zauberer-liar.de (2026-10-07)
+  const missing = CONTRACT.filter((p) => !locs.includes(MAIN + p));
+  ok(missing.length === 0, `sitemap misses ${missing.length} contract URLs`);
+  ok(locs.length === CONTRACT.length + 15, `sitemap has ${locs.length} URLs (expected ${CONTRACT.length + 15})`);
   ok(locs.every((u) => u.startsWith(`${MAIN}/`)), 'sitemap host');
   const robots = await (await fetch(`${MAIN}/robots.txt`)).text();
   ok(/^Sitemap: https:\/\/liar-entertainer\.com\/sitemap\.xml$/m.test(robots), 'robots.txt Sitemap line');

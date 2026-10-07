@@ -8,7 +8,24 @@ import { join } from 'node:path';
 // switched on) — then extend ALLOWED_ADDITIONS in the same commit.
 const DIST = join(import.meta.dirname, '../../dist');
 const FIX = join(import.meta.dirname, '../fixtures');
-const ALLOWED_ADDITIONS: string[] = [];
+// 2026-10-07: pages taken over from zauberer-liar.de, released with its page-by-page 301s
+const ALLOWED_ADDITIONS: string[] = [
+  'https://liar-entertainer.com/zauberer/close-up/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-bottrop/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-dinslaken/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-dorsten/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-duisburg/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-essen/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-gelsenkirchen/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-gladbeck/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-haltern/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-herne/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-herten/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-marl/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-oberhausen/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-recklinghausen/',
+  'https://liar-entertainer.com/zauberer/zauberer-in-wesel/',
+];
 
 const locs = (xml: string) => [...xml.matchAll(/<loc>([^<]+)<\/loc>/g)].map((m) => m[1].trim());
 const live = locs(readFileSync(join(FIX, 'sitemap-live-2026-10-07.xml'), 'utf8'));

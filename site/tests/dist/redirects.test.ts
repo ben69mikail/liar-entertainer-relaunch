@@ -244,3 +244,27 @@ describe('no redirect loops', () => {
     expect(loops.map((r) => r.from + ' ' + JSON.stringify(r.query))).toEqual([]);
   });
 });
+
+describe('zauberer-liar.de -> liar-entertainer.com (page by page, ops/redirects-zauberer-liar.csv)', () => {
+  // The old domain is served by this Netlify project as a domain alias (2026-10-07); every old URL
+  // goes in ONE 301 to its matching new page, everything else to /zauberer/. http/https, www/apex.
+  const map = readFileSync(join(ROOT, '../ops/redirects-zauberer-liar.csv'), 'utf8')
+    .split(/\r?\n/).slice(1).filter(Boolean).map((l) => l.split(','));
+  for (const host of ['https://zauberer-liar.de', 'https://www.zauberer-liar.de', 'http://zauberer-liar.de', 'http://www.zauberer-liar.de']) {
+    it(`${host}: every old page -> its new page in one 301`, () => {
+      const wrong = map
+        .map(([from, to]) => [from, go(from, host), [301, `https://liar-entertainer.com${to}`]] as const)
+        .filter(([, got, want]) => JSON.stringify(got) !== JSON.stringify(want))
+        .map(([from, got]) => `${from} -> ${JSON.stringify(got)}`);
+      expect(wrong).toEqual([]);
+    });
+  }
+  it('unknown old URLs and assets -> /zauberer/', () => {
+    expect(go('/assets/img/logo-liar.webp', 'https://zauberer-liar.de')).toEqual([301, 'https://liar-entertainer.com/zauberer/']);
+    expect(go('/irgendwas.html', 'https://www.zauberer-liar.de')).toEqual([301, 'https://liar-entertainer.com/zauberer/']);
+  });
+  it('the main site is not affected by the old-domain rules', () => {
+    expect(go('/kontakt/')).toBeNull();
+    expect(go('/zauberer/zauberer-in-essen/')).toBeNull();
+  });
+});

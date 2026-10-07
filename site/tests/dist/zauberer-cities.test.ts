@@ -53,7 +53,7 @@ describe('zauberer-liar.de city pages on the new site', () => {
   }
 });
 
-describe('zauberer city pages: findable, but not in the menu and not indexed before the 301s', () => {
+describe('zauberer city pages: findable, indexed, not in the menu', () => {
   const sitemap = readFileSync(join(DIST, 'sitemap.xml'), 'utf8');
   const zauberer = page('/zauberer/');
   for (const city of CITIES) {
@@ -61,11 +61,11 @@ describe('zauberer city pages: findable, but not in the menu and not indexed bef
       expect(zauberer(`main a[href="${pathOf(city)}"]`).length).toBeGreaterThan(0);
       expect(zauberer(`header a[href="${pathOf(city)}"]`).length).toBe(0);
     });
-    // ZAUBERER_CITIES_LIVE = false (src/data/zauberer-cities.ts): the texts are still online on
-    // zauberer-liar.de, so the copies stay out of the index until the page-by-page 301s go live
-    it(`${pathOf(city)}: noindex and not in the sitemap while zauberer-liar.de is still online`, () => {
-      expect(page(pathOf(city))('meta[name="robots"]').attr('content')).toContain('noindex');
-      expect(sitemap).not.toContain(pathOf(city));
+    // live since 2026-10-07: zauberer-liar.de redirects page by page (public/_redirects), so the
+    // taken-over pages are indexable and listed (ZAUBERER_CITIES_LIVE = true)
+    it(`${pathOf(city)}: indexable and in the sitemap`, () => {
+      expect(page(pathOf(city))('meta[name="robots"]').attr('content')).not.toContain('noindex');
+      expect(sitemap).toContain(`https://liar-entertainer.com${pathOf(city)}`);
     });
   }
 });
