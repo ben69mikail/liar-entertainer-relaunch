@@ -1,204 +1,579 @@
 {
   "_doc": "Pictures of the WordPress-era blog articles (user, 2026-10-07). The original uploads (wp-content) answer 410 and the WordPress backup holds no 2023+ media, so every picture is either the original file found locally (\"exact\") or a fitting own photo. Key = URL slug. 'slots' replace the article's original <img> tags in order of their file name stem ('orig'); 'cover' is the card + og:image. Files are made by scripts/import-blog-images.mjs into public/blog-images/<slug>/. Source roots: CZ/VB/PA = OneDrive Desktop/Neu Homepage (Clown Zauberer, …/Verarbeitet mit Übershcrift für Blog, Pantomime), HP = Travail Stand März 2023/Marketing/Fotos/Homepage 2023 (the 2023 WordPress uploads), TR = Travail …/Marketing/Fotos, DL = Downloads, CZN = CZ/Zeitungsartikel.",
   "nussknacker-weihnachtsmarkt-gladbeck": {
-    "cover": { "from": "PA/Nussknacker.jpg", "file": "nussknacker-pantomime-weihnachtsmarkt-gladbeck.jpg", "alt": "LIAR als Nussknacker mit dem Weihnachtsmann – Walking Act auf dem Weihnachtsmarkt" },
+    "cover": {
+      "from": "PA/Nussknacker.jpg",
+      "file": "nussknacker-pantomime-weihnachtsmarkt-gladbeck.jpg",
+      "alt": "LIAR als Nussknacker mit dem Weihnachtsmann – Walking Act auf dem Weihnachtsmarkt"
+    },
     "slots": [
-      { "orig": "Nussknacker", "from": "PA/Nussknacker.jpg", "file": "nussknacker-pantomime-weihnachtsmarkt-gladbeck.jpg", "alt": "LIAR als Nussknacker mit dem Weihnachtsmann – Walking Act auf dem Weihnachtsmarkt" },
-      { "orig": "Weihnachtsmarkt-Gladbeck", "from": "PA/Nussknacker (1).jpg", "file": "nussknacker-walking-act-kostuem.jpg", "alt": "Walking Act Nussknacker: LIAR im roten Nussknacker-Kostüm" }
+      {
+        "orig": "Nussknacker",
+        "from": "PA/Nussknacker.jpg",
+        "file": "nussknacker-pantomime-weihnachtsmarkt-gladbeck.jpg",
+        "alt": "LIAR als Nussknacker mit dem Weihnachtsmann – Walking Act auf dem Weihnachtsmarkt"
+      },
+      {
+        "orig": "Weihnachtsmarkt-Gladbeck",
+        "from": "PA/Nussknacker (1).jpg",
+        "file": "nussknacker-walking-act-kostuem.jpg",
+        "alt": "Walking Act Nussknacker: LIAR im roten Nussknacker-Kostüm"
+      }
     ]
   },
   "adventsmarkt-in-rheinberg-mit-clown-zauberer": {
-    "cover": { "from": "HP/Zaubervorführung auf dem Weihnachtsmarkt Dortmund.jpg", "file": "clown-zauberer-zaubershow-weihnachtsmarkt.jpg", "alt": "Clown Zauberer LIAR bei einer Zaubervorführung für Kinder auf einem Weihnachtsmarkt in NRW" },
+    "cover": {
+      "from": "HP/Zaubervorführung auf dem Weihnachtsmarkt Dortmund.jpg",
+      "file": "clown-zauberer-zaubershow-weihnachtsmarkt.jpg",
+      "alt": "Clown Zauberer LIAR bei einer Zaubervorführung für Kinder auf einem Weihnachtsmarkt in NRW"
+    },
     "slots": [
-      { "orig": "Weihnachtsmarkt-Rheinberg", "from": "HP/Zaubervorführung auf dem Weihnachtsmarkt Dortmund.jpg", "file": "clown-zauberer-zaubershow-weihnachtsmarkt.jpg", "alt": "Clown Zauberer LIAR bei einer Zaubervorführung für Kinder auf einem Weihnachtsmarkt in NRW" },
-      { "orig": "Spektakelmarkt-Rheinberg-Programm", "from": "TR/Weihnachtsmarkt Dorsten.jpg", "file": "clown-liar-weihnachtsmarkt-besucher.jpg", "alt": "Clown LIAR mit Besuchern auf einem Weihnachtsmarkt" }
+      {
+        "orig": "Weihnachtsmarkt-Rheinberg",
+        "from": "HP/Zaubervorführung auf dem Weihnachtsmarkt Dortmund.jpg",
+        "file": "clown-zauberer-zaubershow-weihnachtsmarkt.jpg",
+        "alt": "Clown Zauberer LIAR bei einer Zaubervorführung für Kinder auf einem Weihnachtsmarkt in NRW"
+      },
+      {
+        "orig": "Spektakelmarkt-Rheinberg-Programm",
+        "from": "HP/Walk Act Stadtfest.jpg",
+        "file": "clown-zauberer-weihnachtsmarkt-publikum.jpg",
+        "alt": "Clown Zauberer LIAR mitten im Publikum auf dem Weihnachtsmarkt"
+      }
     ]
   },
   "kindersitzung-in-rheinberg": {
-    "cover": { "from": "CZ/Karneval Bühne.jpg", "file": "clown-zauberer-kindersitzung-karneval-buehne.jpg", "alt": "Clown Zauberer LIAR auf der Bühne einer Kindersitzung im Karneval" },
+    "cover": {
+      "from": "CZ/Karneval Bühne.jpg",
+      "file": "clown-zauberer-kindersitzung-karneval-buehne.jpg",
+      "alt": "Clown Zauberer LIAR auf der Bühne einer Kindersitzung im Karneval"
+    },
     "slots": [
-      { "orig": "Kindersitzung-in-Rheinberg", "from": "CZ/Karneval Bühne.jpg", "file": "clown-zauberer-kindersitzung-karneval-buehne.jpg", "alt": "Clown Zauberer LIAR auf der Bühne einer Kindersitzung im Karneval" }
+      {
+        "orig": "Kindersitzung-in-Rheinberg",
+        "from": "CZ/Karneval Bühne.jpg",
+        "file": "clown-zauberer-kindersitzung-karneval-buehne.jpg",
+        "alt": "Clown Zauberer LIAR auf der Bühne einer Kindersitzung im Karneval"
+      }
     ]
   },
   "kinderkarneval-mit-clown-zauberer": {
-    "cover": { "from": "HP/Karneval.JPG", "file": "kinderkarneval-clown-zauberer-kostueme.jpg", "alt": "Kinderkarneval mit Clown Zauberer LIAR: verkleidete Kinder machen beim Zaubertrick mit" },
+    "cover": {
+      "from": "HP/Karneval.JPG",
+      "file": "kinderkarneval-clown-zauberer-kostueme.jpg",
+      "alt": "Kinderkarneval mit Clown Zauberer LIAR: verkleidete Kinder machen beim Zaubertrick mit"
+    },
     "slots": [
-      { "orig": "Buehne-Clown-Zauberer-Karneval-Koeln", "from": "HP/Karneval.JPG", "file": "kinderkarneval-clown-zauberer-kostueme.jpg", "alt": "Kinderkarneval mit Clown Zauberer LIAR: verkleidete Kinder machen beim Zaubertrick mit" },
-      { "orig": "Karneval-Koeln", "from": "CZ/20260210_095315.jpg", "file": "clown-zauberer-karneval-buehne-vorhang.jpg", "alt": "Clown Zauberer LIAR vor dem roten Bühnenvorhang beim Kinderkarneval" }
+      {
+        "orig": "Buehne-Clown-Zauberer-Karneval-Koeln",
+        "from": "HP/Karneval.JPG",
+        "file": "kinderkarneval-clown-zauberer-kostueme.jpg",
+        "alt": "Kinderkarneval mit Clown Zauberer LIAR: verkleidete Kinder machen beim Zaubertrick mit"
+      },
+      {
+        "orig": "Karneval-Koeln",
+        "from": "CZ/20260210_095315.jpg",
+        "file": "clown-zauberer-karneval-buehne-vorhang.jpg",
+        "alt": "Clown Zauberer LIAR vor dem roten Bühnenvorhang beim Kinderkarneval"
+      }
     ]
   },
   "lollipop-festival-das-familienevent": {
-    "cover": { "from": "CZ/FB_IMG_1693086096819.jpg", "file": "clown-zauberer-familienfest-buehne.jpg", "alt": "Clown Zauberer LIAR auf der Bühne eines Familienfestes" },
+    "cover": {
+      "from": "CZ/FB_IMG_1693086096819.jpg",
+      "file": "clown-zauberer-familienfest-buehne.jpg",
+      "alt": "Clown Zauberer LIAR auf der Bühne eines Familienfestes"
+    },
     "slots": [
-      { "orig": "Clown-ZAuberer-Rappelkiste-Grevenbroich", "from": "CZ/FB_IMG_1693086096819.jpg", "file": "clown-zauberer-familienfest-buehne.jpg", "alt": "Clown Zauberer LIAR auf der Bühne eines Familienfestes" }
+      {
+        "orig": "Clown-ZAuberer-Rappelkiste-Grevenbroich",
+        "from": "CZ/FB_IMG_1693086096819.jpg",
+        "file": "clown-zauberer-familienfest-buehne.jpg",
+        "alt": "Clown Zauberer LIAR auf der Bühne eines Familienfestes"
+      }
     ]
   },
   "kidzival-2024": {
-    "cover": { "from": "CZ/FB_IMG_1693086307356.jpg", "file": "clown-zauberer-kinderfestival-rockbuehne.jpg", "alt": "Clown Zauberer LIAR auf der Rockbühne eines Kinderfestivals" },
+    "cover": {
+      "from": "CZ/FB_IMG_1693086307356.jpg",
+      "file": "clown-zauberer-kinderfestival-rockbuehne.jpg",
+      "alt": "Clown Zauberer LIAR auf der Rockbühne eines Kinderfestivals"
+    },
     "slots": [
-      { "orig": "Kidzival-2024", "from": "CZ/FB_IMG_1693086307356.jpg", "file": "clown-zauberer-kinderfestival-rockbuehne.jpg", "alt": "Clown Zauberer LIAR auf der Rockbühne eines Kinderfestivals" },
-      { "orig": "Foerderverein-Rockmusik-Gladbeck", "from": "CZ/FB_IMG_1693086169356.jpg", "file": "kinderfestival-zaubershow-junge-jubelt.jpg", "alt": "Ein Junge jubelt mit Clown Zauberer LIAR auf der Festivalbühne" }
+      {
+        "orig": "Kidzival-2024",
+        "from": "CZ/FB_IMG_1693086307356.jpg",
+        "file": "clown-zauberer-kinderfestival-rockbuehne.jpg",
+        "alt": "Clown Zauberer LIAR auf der Rockbühne eines Kinderfestivals"
+      },
+      {
+        "orig": "Foerderverein-Rockmusik-Gladbeck",
+        "from": "CZ/FB_IMG_1693086169356.jpg",
+        "file": "kinderfestival-zaubershow-junge-jubelt.jpg",
+        "alt": "Ein Junge jubelt mit Clown Zauberer LIAR auf der Festivalbühne"
+      }
     ]
   },
   "sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen": {
-    "cover": { "from": "CZ/Clown Zauberer (6).jpg", "file": "sommerfest-gelsenkirchen-clown-zauberer.jpg", "alt": "Sommerfest mit Clown Zauberer LIAR: Zaubershow mit Kindern im Freien" },
+    "cover": {
+      "from": "HP/Strassenfest Essen.jpg",
+      "file": "sommerfest-gelsenkirchen-clown-zauberer-kinder.jpg",
+      "alt": "Sommerfest mit Clown Zauberer LIAR: Kinder sitzen auf der Treppe und schauen zu"
+    },
     "slots": [
-      { "orig": "Sommerfest-in-Gelsenkirchen-mit-Clown-Zauberer-LIAR", "from": "CZ/Clown Zauberer (6).jpg", "file": "sommerfest-gelsenkirchen-clown-zauberer.jpg", "alt": "Sommerfest mit Clown Zauberer LIAR: Zaubershow mit Kindern im Freien" },
-      { "orig": "Sommerfest-in-Gelsenkirchen", "from": "TR/2023/Karneval Geslenkirchen.jpeg", "file": "kc-astoria-gelsenkirchen-plakat.jpg", "alt": "Plakat des KC Astoria Gelsenkirchen" }
+      {
+        "orig": "Sommerfest-in-Gelsenkirchen-mit-Clown-Zauberer-LIAR",
+        "from": "HP/Strassenfest Essen.jpg",
+        "file": "sommerfest-gelsenkirchen-clown-zauberer-kinder.jpg",
+        "alt": "Sommerfest mit Clown Zauberer LIAR: Kinder sitzen auf der Treppe und schauen zu"
+      },
+      {
+        "orig": "Sommerfest-in-Gelsenkirchen",
+        "from": "TR/2023/Karneval Geslenkirchen.jpeg",
+        "file": "kc-astoria-gelsenkirchen-plakat.jpg",
+        "alt": "Plakat des KC Astoria Gelsenkirchen"
+      }
     ]
   },
   "gescher-clown-zauberer": {
-    "cover": { "from": "CZ/Clown Zauberer (5).JPG", "file": "clown-zauberer-kindertheater-zaubershow.jpg", "alt": "Clown Zauberer LIAR zaubert für Kinder auf einer Theaterbühne" },
+    "cover": {
+      "from": "CZ/Clown Zauberer (5).JPG",
+      "file": "clown-zauberer-kindertheater-zaubershow.jpg",
+      "alt": "Clown Zauberer LIAR zaubert für Kinder auf einer Theaterbühne"
+    },
     "slots": [
-      { "orig": "Programm-Gescher-Ferienkoffer-Sommer", "from": "CZ/Clown Zauberer (5).JPG", "file": "clown-zauberer-kindertheater-zaubershow.jpg", "alt": "Clown Zauberer LIAR zaubert für Kinder auf einer Theaterbühne" }
+      {
+        "orig": "Programm-Gescher-Ferienkoffer-Sommer",
+        "from": "CZ/Clown Zauberer (5).JPG",
+        "file": "clown-zauberer-kindertheater-zaubershow.jpg",
+        "alt": "Clown Zauberer LIAR zaubert für Kinder auf einer Theaterbühne"
+      }
     ]
   },
   "pantomime-bei-extraschicht": {
-    "cover": { "from": "PA/20240601_182114.jpg", "file": "pantomime-liar-walking-act-2024.jpg", "alt": "LIAR als Pantomime im Ringelshirt beim Walking Act 2024" },
+    "cover": {
+      "from": "PA/20240601_182114.jpg",
+      "file": "pantomime-liar-walking-act-2024.jpg",
+      "alt": "LIAR als Pantomime im Ringelshirt beim Walking Act 2024"
+    },
     "slots": [
-      { "orig": "Pantomime-bei-Extraschicht", "from": "PA/20240601_182114.jpg", "file": "pantomime-liar-walking-act-2024.jpg", "alt": "LIAR als Pantomime im Ringelshirt beim Walking Act 2024" }
+      {
+        "orig": "Pantomime-bei-Extraschicht",
+        "from": "PA/20240601_182114.jpg",
+        "file": "pantomime-liar-walking-act-2024.jpg",
+        "alt": "LIAR als Pantomime im Ringelshirt beim Walking Act 2024"
+      }
     ]
   },
   "ikea-duisburg-midsommar-mit-clown-zauberer": {
-    "cover": { "from": "CZ/FB_IMG_1693086145085.jpg", "file": "ikea-duisburg-midsommar-clown-zauberer.jpg", "alt": "Clown Zauberer LIAR zaubert mit einem Mädchen vor großem Publikum" },
+    "cover": {
+      "from": "CZ/FB_IMG_1693086145085.jpg",
+      "file": "ikea-duisburg-midsommar-clown-zauberer.jpg",
+      "alt": "Clown Zauberer LIAR zaubert mit einem Mädchen vor großem Publikum"
+    },
     "slots": [
-      { "orig": "FB_IMG_1693086145085", "from": "CZ/FB_IMG_1693086145085.jpg", "file": "ikea-duisburg-midsommar-clown-zauberer.jpg", "alt": "Clown Zauberer LIAR zaubert mit einem Mädchen vor großem Publikum" }
+      {
+        "orig": "FB_IMG_1693086145085",
+        "from": "CZ/FB_IMG_1693086145085.jpg",
+        "file": "ikea-duisburg-midsommar-clown-zauberer.jpg",
+        "alt": "Clown Zauberer LIAR zaubert mit einem Mädchen vor großem Publikum"
+      }
     ]
   },
   "coesfeld-empfaengt-clown-zauberer-liar": {
-    "cover": { "from": "HP/Frühlingsfest Ballonmodellage.jpg", "file": "clown-liar-ballonmodellage-stadtfest.jpg", "alt": "Clown LIAR formt Ballonfiguren beim Stadtfest" },
+    "cover": {
+      "from": "HP/Frühlingsfest Ballonmodellage.jpg",
+      "file": "clown-liar-ballonmodellage-stadtfest.jpg",
+      "alt": "Clown LIAR formt Ballonfiguren beim Stadtfest"
+    },
     "slots": [
-      { "orig": "Luftballonmodellage___Happu_Krenz__", "from": "HP/Frühlingsfest Ballonmodellage.jpg", "file": "clown-liar-ballonmodellage-stadtfest.jpg", "alt": "Clown LIAR formt Ballonfiguren beim Stadtfest" }
+      {
+        "orig": "Luftballonmodellage___Happu_Krenz__",
+        "from": "HP/Frühlingsfest Ballonmodellage.jpg",
+        "file": "clown-liar-ballonmodellage-stadtfest.jpg",
+        "alt": "Clown LIAR formt Ballonfiguren beim Stadtfest"
+      }
     ]
   },
   "pantomime-auf-dem-appeltatenfest": {
-    "cover": { "from": "PA/Pantomime.jpg", "file": "pantomime-appeltatenfest-gladbeck-apfelparadies.jpg", "alt": "LIAR als Pantomime mit dem Schild „Apfelparadies“ beim Apfelfest" },
+    "cover": {
+      "from": "PA/Pantomime.jpg",
+      "file": "pantomime-appeltatenfest-gladbeck-apfelparadies.jpg",
+      "alt": "LIAR als Pantomime mit dem Schild „Apfelparadies“ beim Apfelfest"
+    },
     "slots": [
-      { "orig": "appeltatenfest-gladbeck-2024", "from": "PA/Pantomime.jpg", "file": "pantomime-appeltatenfest-gladbeck-apfelparadies.jpg", "alt": "LIAR als Pantomime mit dem Schild „Apfelparadies“ beim Apfelfest" }
+      {
+        "orig": "appeltatenfest-gladbeck-2024",
+        "from": "PA/Pantomime.jpg",
+        "file": "pantomime-appeltatenfest-gladbeck-apfelparadies.jpg",
+        "alt": "LIAR als Pantomime mit dem Schild „Apfelparadies“ beim Apfelfest"
+      }
     ]
   },
   "haltern-clown-in-freiheit": {
-    "cover": { "from": "CZ/Diakonies Werk Recklinghausen Clown LIAR.jpg", "file": "clown-liar-haus-in-der-freiheit-haltern.jpg", "alt": "Clown LIAR zaubert mit einem Bewohner im Haus in der Freiheit" },
+    "cover": {
+      "from": "CZ/Diakonies Werk Recklinghausen Clown LIAR.jpg",
+      "file": "clown-liar-haus-in-der-freiheit-haltern.jpg",
+      "alt": "Clown LIAR zaubert mit einem Bewohner im Haus in der Freiheit"
+    },
     "slots": [
-      { "orig": "Diakonies-Werk-Recklinghausen-Clown-LIAR", "from": "CZ/Diakonies Werk Recklinghausen Clown LIAR.jpg", "file": "clown-liar-haus-in-der-freiheit-haltern.jpg", "alt": "Clown LIAR zaubert mit einem Bewohner im Haus in der Freiheit" },
-      { "orig": "Diakonies-Werk-Recklinghausen-Zauberer-LIAR", "from": "TR/Neu Homepage/Diakonies Werk Recklinghausen Zauberer LIAR.jpg", "file": "zauberer-liar-ballontier-haltern.jpg", "alt": "Bewohner mit einem Ballontier von Zauberer LIAR" },
-      { "orig": "Halterner-Zeitung-Magische-Clown-in-Freiheit", "from": "CZN/Halterner Zeitung Magische Clown in Freiheit.jpg", "file": "halterner-zeitung-magischer-clown-in-freiheit.jpg", "alt": "Artikel der Halterner Zeitung: Magischer Clown in der Freiheit" }
+      {
+        "orig": "Diakonies-Werk-Recklinghausen-Clown-LIAR",
+        "from": "CZ/Diakonies Werk Recklinghausen Clown LIAR.jpg",
+        "file": "clown-liar-haus-in-der-freiheit-haltern.jpg",
+        "alt": "Clown LIAR zaubert mit einem Bewohner im Haus in der Freiheit"
+      },
+      {
+        "orig": "Diakonies-Werk-Recklinghausen-Zauberer-LIAR",
+        "from": "TR/Neu Homepage/Diakonies Werk Recklinghausen Zauberer LIAR.jpg",
+        "file": "zauberer-liar-ballontier-haltern.jpg",
+        "alt": "Bewohner mit einem Ballontier von Zauberer LIAR"
+      },
+      {
+        "orig": "Halterner-Zeitung-Magische-Clown-in-Freiheit",
+        "from": "CZN/Halterner Zeitung Magische Clown in Freiheit.jpg",
+        "file": "halterner-zeitung-magischer-clown-in-freiheit.jpg",
+        "alt": "Artikel der Halterner Zeitung: Magischer Clown in der Freiheit"
+      }
     ]
   },
   "zaubershow-auf-dem-castroper-weihnachtsdorf": {
-    "cover": { "from": "CZ/Zaubershow Dortmund.jpg", "file": "zaubershow-weihnachtsdorf-kinder.jpg", "alt": "Zaubershow auf dem Weihnachtsmarkt: Kinder strecken die Hände zu Clown Zauberer LIAR" },
+    "cover": {
+      "from": "TR/Weihnachtsmarkt Dorsten.jpg",
+      "file": "clown-liar-weihnachtsmarkt-besucher.jpg",
+      "alt": "Clown LIAR mit Besuchern auf einem Weihnachtsmarkt"
+    },
     "slots": [
-      { "orig": "Castroper-Weihnachtsdorf-2024", "from": "CZ/Zaubershow Dortmund.jpg", "file": "zaubershow-weihnachtsdorf-kinder.jpg", "alt": "Zaubershow auf dem Weihnachtsmarkt: Kinder strecken die Hände zu Clown Zauberer LIAR" },
-      { "orig": "Castroper-Weihnachtsdorf", "from": "HP/Walk Act Stadtfest.jpg", "file": "clown-zauberer-weihnachtsmarkt-publikum.jpg", "alt": "Clown Zauberer LIAR mitten im Publikum auf dem Weihnachtsmarkt" }
+      {
+        "orig": "Castroper-Weihnachtsdorf-2024",
+        "from": "TR/Weihnachtsmarkt Dorsten.jpg",
+        "file": "clown-liar-weihnachtsmarkt-besucher.jpg",
+        "alt": "Clown LIAR mit Besuchern auf einem Weihnachtsmarkt"
+      },
+      {
+        "orig": "Castroper-Weihnachtsdorf",
+        "from": "CZ/Zaubershow Dortmund.jpg",
+        "file": "zaubershow-weihnachtsdorf-kinder.jpg",
+        "alt": "Zaubershow auf dem Weihnachtsmarkt: Kinder strecken die Hände zu Clown Zauberer LIAR"
+      }
     ]
   },
   "ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck": {
-    "cover": { "from": "HP/Zaubershow (2).jpg", "file": "kinderkarneval-gladbeck-zaubershow.jpg", "alt": "Kinderkarneval: verkleidete Kinder bei der Zaubershow von Clown Zauberer LIAR" },
+    "cover": {
+      "from": "HP/Zaubershow (2).jpg",
+      "file": "kinderkarneval-gladbeck-zaubershow.jpg",
+      "alt": "Kinderkarneval: verkleidete Kinder bei der Zaubershow von Clown Zauberer LIAR"
+    },
     "slots": [
-      { "orig": "zauberhafter-kinderkarneval", "from": "HP/Zaubershow (2).jpg", "file": "kinderkarneval-gladbeck-zaubershow.jpg", "alt": "Kinderkarneval: verkleidete Kinder bei der Zaubershow von Clown Zauberer LIAR" }
+      {
+        "orig": "zauberhafter-kinderkarneval",
+        "from": "HP/Zaubershow (2).jpg",
+        "file": "kinderkarneval-gladbeck-zaubershow.jpg",
+        "alt": "Kinderkarneval: verkleidete Kinder bei der Zaubershow von Clown Zauberer LIAR"
+      }
     ]
   },
   "zaubershow-sommer-2025": {
-    "cover": { "from": "CZ/Clown Zauberer (1).JPG", "file": "zaubershow-sommer-open-air-publikum.jpg", "alt": "Öffentliche Zaubershow im Sommer: Clown Zauberer LIAR vor vielen Kindern im Park" },
+    "cover": {
+      "from": "CZ/Clown Zauberer (1).JPG",
+      "file": "zaubershow-sommer-open-air-publikum.jpg",
+      "alt": "Öffentliche Zaubershow im Sommer: Clown Zauberer LIAR vor vielen Kindern im Park"
+    },
     "slots": [
-      { "orig": "zauber-termine-2025", "from": "CZ/Clown Zauberer (1).JPG", "file": "zaubershow-sommer-open-air-publikum.jpg", "alt": "Öffentliche Zaubershow im Sommer: Clown Zauberer LIAR vor vielen Kindern im Park" }
+      {
+        "orig": "zauber-termine-2025",
+        "from": "CZ/Clown Zauberer (1).JPG",
+        "file": "zaubershow-sommer-open-air-publikum.jpg",
+        "alt": "Öffentliche Zaubershow im Sommer: Clown Zauberer LIAR vor vielen Kindern im Park"
+      }
     ]
   },
   "kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen": {
-    "cover": { "from": "CZ/Clown Zauberer (3).jpg", "file": "kinderfest-gelsenkirchen-clown-liar.jpg", "alt": "Clown LIAR beim Kinderfest unter dem Pavillon" },
+    "cover": {
+      "from": "CZ/Clown Zauberer (3).jpg",
+      "file": "kinderfest-gelsenkirchen-clown-liar.jpg",
+      "alt": "Clown LIAR beim Kinderfest unter dem Pavillon"
+    },
     "slots": [
-      { "orig": "Clown-Zauberer-in-Gelsenkrichen", "from": "CZ/Clown Zauberer (3).jpg", "file": "kinderfest-gelsenkirchen-clown-liar.jpg", "alt": "Clown LIAR beim Kinderfest unter dem Pavillon" }
+      {
+        "orig": "Clown-Zauberer-in-Gelsenkrichen",
+        "from": "CZ/Clown Zauberer (3).jpg",
+        "file": "kinderfest-gelsenkirchen-clown-liar.jpg",
+        "alt": "Clown LIAR beim Kinderfest unter dem Pavillon"
+      }
     ]
   },
   "zaubershow-in-dortmund": {
-    "cover": { "from": "CZ/20230430_152552.jpg", "file": "clown-zauberer-regenbogenhaus-westfalenpark-dortmund.jpg", "alt": "Clown Zauberer LIAR vor dem Regenbogenhaus im Westfalenpark Dortmund" },
+    "cover": {
+      "from": "CZ/20230430_152552.jpg",
+      "file": "clown-zauberer-regenbogenhaus-westfalenpark-dortmund.jpg",
+      "alt": "Clown Zauberer LIAR vor dem Regenbogenhaus im Westfalenpark Dortmund"
+    },
     "slots": [
-      { "orig": "f9da9931-8c07-43c1-a2e9-90af7876143e", "from": "CZ/20230430_152552.jpg", "file": "clown-zauberer-regenbogenhaus-westfalenpark-dortmund.jpg", "alt": "Clown Zauberer LIAR vor dem Regenbogenhaus im Westfalenpark Dortmund" },
-      { "orig": "6d929d1e-fdaf-4b50-a326-d6b79e85837c", "from": "CZ/Clown Zauberer (9).JPG", "file": "zaubershow-dortmund-kinder-park.jpg", "alt": "Kinder sitzen im Park und schauen der Zaubershow zu" }
+      {
+        "orig": "f9da9931-8c07-43c1-a2e9-90af7876143e",
+        "from": "CZ/20230430_152552.jpg",
+        "file": "clown-zauberer-regenbogenhaus-westfalenpark-dortmund.jpg",
+        "alt": "Clown Zauberer LIAR vor dem Regenbogenhaus im Westfalenpark Dortmund"
+      },
+      {
+        "orig": "6d929d1e-fdaf-4b50-a326-d6b79e85837c",
+        "from": "CZ/Clown Zauberer (9).JPG",
+        "file": "zaubershow-dortmund-kinder-park.jpg",
+        "alt": "Kinder sitzen im Park und schauen der Zaubershow zu"
+      }
     ]
   },
   "100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie": {
-    "cover": { "from": "PA/Reiterhof Gelsenkirchen.png", "file": "pantomime-reiterhof-gelsenkirchen-pferde.jpg", "alt": "LIAR als Pantomime mit zwei Pferden auf dem Reiterhof in Gelsenkirchen" },
+    "cover": {
+      "from": "PA/Reiterhof Gelsenkirchen.png",
+      "file": "pantomime-reiterhof-gelsenkirchen-pferde.jpg",
+      "alt": "LIAR als Pantomime mit zwei Pferden auf dem Reiterhof in Gelsenkirchen"
+    },
     "slots": [
-      { "orig": "Auftritt-Clown-Zauberer-in-Geslenkirchen", "from": "PA/Reiterhof Gelsenkirchen.png", "file": "pantomime-reiterhof-gelsenkirchen-pferde.jpg", "alt": "LIAR als Pantomime mit zwei Pferden auf dem Reiterhof in Gelsenkirchen" },
-      { "orig": "IMG_20190628_104106_127", "from": "TR/2023/IMG_20190628_104106_127.jpg", "file": "pantomime-liar-ringelshirt-gelsenkirchen.jpg", "alt": "LIAR als Pantomime im Ringelshirt" }
+      {
+        "orig": "Auftritt-Clown-Zauberer-in-Geslenkirchen",
+        "from": "PA/Reiterhof Gelsenkirchen.png",
+        "file": "pantomime-reiterhof-gelsenkirchen-pferde.jpg",
+        "alt": "LIAR als Pantomime mit zwei Pferden auf dem Reiterhof in Gelsenkirchen"
+      },
+      {
+        "orig": "IMG_20190628_104106_127",
+        "from": "TR/2023/IMG_20190628_104106_127.jpg",
+        "file": "pantomime-liar-ringelshirt-gelsenkirchen.jpg",
+        "alt": "LIAR als Pantomime im Ringelshirt"
+      }
     ]
   },
   "zaubershow-in-duisburg-midsommarfest": {
-    "cover": { "from": "VB/ZAubershow Duisburg.png", "file": "zaubershow-duisburg-ikea-midsommar.jpg", "alt": "Zaubershow in Duisburg: Clown Zauberer LIAR zeigt den Daumen hoch" },
+    "cover": {
+      "from": "VB/ZAubershow Duisburg.png",
+      "file": "zaubershow-duisburg-ikea-midsommar.jpg",
+      "alt": "Zaubershow in Duisburg: Clown Zauberer LIAR zeigt den Daumen hoch"
+    },
     "slots": [
-      { "orig": "ZAubershow-Duisburg-1", "from": "VB/ZAubershow Duisburg.png", "file": "zaubershow-duisburg-ikea-midsommar.jpg", "alt": "Zaubershow in Duisburg: Clown Zauberer LIAR zeigt den Daumen hoch" },
-      { "orig": "ZAubershow-in-Duisburg", "from": "CZ/Zaubershow Duisburg (1).jpg", "file": "clown-zauberer-duisburg-windmuehle.jpg", "alt": "Clown Zauberer LIAR beim Fest in Duisburg vor der Windmühle" }
+      {
+        "orig": "ZAubershow-Duisburg-1",
+        "from": "VB/ZAubershow Duisburg.png",
+        "file": "zaubershow-duisburg-ikea-midsommar.jpg",
+        "alt": "Zaubershow in Duisburg: Clown Zauberer LIAR zeigt den Daumen hoch"
+      },
+      {
+        "orig": "ZAubershow-in-Duisburg",
+        "from": "CZ/Zaubershow Duisburg (1).jpg",
+        "file": "clown-zauberer-duisburg-windmuehle.jpg",
+        "alt": "Clown Zauberer LIAR beim Fest in Duisburg vor der Windmühle"
+      }
     ]
   },
   "magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie": {
-    "cover": { "from": "CZ/IMG_20230725_094531_322.jpg", "file": "clown-zauberer-freilichtbuehne-prerow.jpg", "alt": "Clown Zauberer LIAR vor der Freilichtbühne" },
+    "cover": {
+      "from": "CZ/IMG_20230725_094531_322.jpg",
+      "file": "clown-zauberer-freilichtbuehne-prerow.jpg",
+      "alt": "Clown Zauberer LIAR vor der Freilichtbühne"
+    },
     "slots": [
-      { "orig": "Zaubershow-mit-Clown-Zauberer", "from": "HP/Zaubershow mit Clown Zauberer.jpg", "file": "zaubershow-mit-clown-zauberer-liar.jpg", "alt": "Zaubershow mit Clown Zauberer LIAR: Kinder sitzen vor der Bühne" }
+      {
+        "orig": "Zaubershow-mit-Clown-Zauberer",
+        "from": "HP/Zaubershow mit Clown Zauberer.jpg",
+        "file": "zaubershow-mit-clown-zauberer-liar.jpg",
+        "alt": "Zaubershow mit Clown Zauberer LIAR: Kinder sitzen vor der Bühne"
+      }
     ]
   },
   "tierparkfest-recklinghausen": {
-    "cover": { "from": "CZ/Clown Zauberer (8).JPG", "file": "familienfest-park-zaubershow-clown-liar.jpg", "alt": "Familienfest im Grünen: Zaubershow mit Clown Zauberer LIAR" },
+    "cover": {
+      "from": "CZ/Clown Zauberer (8).JPG",
+      "file": "familienfest-park-zaubershow-clown-liar.jpg",
+      "alt": "Familienfest im Grünen: Zaubershow mit Clown Zauberer LIAR"
+    },
     "slots": [
-      { "orig": "1000036050", "from": "CZ/Clown Zauberer (8).JPG", "file": "familienfest-park-zaubershow-clown-liar.jpg", "alt": "Familienfest im Grünen: Zaubershow mit Clown Zauberer LIAR" },
-      { "orig": "1000036048", "from": "CZ/Clown Zauberer (7).jpg", "file": "zaubershow-kinder-publikum-familienfest.jpg", "alt": "Kinder im Publikum der Zaubershow beim Familienfest" }
+      {
+        "orig": "1000036050",
+        "from": "CZ/Clown Zauberer (8).JPG",
+        "file": "familienfest-park-zaubershow-clown-liar.jpg",
+        "alt": "Familienfest im Grünen: Zaubershow mit Clown Zauberer LIAR"
+      },
+      {
+        "orig": "1000036048",
+        "from": "CZ/Clown Zauberer (7).jpg",
+        "file": "zaubershow-kinder-publikum-familienfest.jpg",
+        "alt": "Kinder im Publikum der Zaubershow beim Familienfest"
+      }
     ]
   },
   "magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt": {
-    "cover": { "from": "CZ/Clown Zauberer in Hagen.jpg", "file": "clown-zauberer-liar-weihnachtsmarkt-hagen.jpg", "alt": "Clown Zauberer LIAR auf dem Weihnachtsmarkt in Hagen" },
+    "cover": {
+      "from": "CZ/Clown Zauberer in Hagen.jpg",
+      "file": "clown-zauberer-liar-weihnachtsmarkt-hagen.jpg",
+      "alt": "Clown Zauberer LIAR auf dem Weihnachtsmarkt in Hagen"
+    },
     "slots": [
-      { "orig": "hagen_weihnachtsmarkt_clown_zauberer_liar", "from": "DL/hagen_weihnachtsmarkt_clown_zauberer_liar.jpg", "file": "hagener-weihnachtsmarkt-abend.jpg", "alt": "Der Hagener Weihnachtsmarkt am Abend" },
-      { "orig": "hagen_weihnachtsmarkt", "from": "DL/hagen_weihnachtsmarkt.jpg", "file": "hagener-weihnachtsmarkt-riesenrad.jpg", "alt": "Riesenrad auf dem Hagener Weihnachtsmarkt" }
+      {
+        "orig": "hagen_weihnachtsmarkt_clown_zauberer_liar",
+        "from": "DL/hagen_weihnachtsmarkt_clown_zauberer_liar.jpg",
+        "file": "hagener-weihnachtsmarkt-abend.jpg",
+        "alt": "Der Hagener Weihnachtsmarkt am Abend"
+      },
+      {
+        "orig": "hagen_weihnachtsmarkt",
+        "from": "DL/hagen_weihnachtsmarkt.jpg",
+        "file": "hagener-weihnachtsmarkt-riesenrad.jpg",
+        "alt": "Riesenrad auf dem Hagener Weihnachtsmarkt"
+      }
     ]
   },
   "was-kostet-ein-clown-fuer-ein-kindergeburtstag": {
-    "cover": { "from": "HP/Clown Zauberer mit Zaubershow.jpg", "file": "clown-zauberer-mit-zaubershow.jpg", "alt": "Clown Zauberer LIAR mit Zaubershow für Kinder" },
+    "cover": {
+      "from": "HP/Clown Zauberer mit Zaubershow.jpg",
+      "file": "clown-zauberer-mit-zaubershow.jpg",
+      "alt": "Clown Zauberer LIAR mit Zaubershow für Kinder"
+    },
     "slots": [
-      { "orig": "Clown-Zauberer-mit-Zaubershow", "from": "HP/Clown Zauberer mit Zaubershow.jpg", "file": "clown-zauberer-mit-zaubershow.jpg", "alt": "Clown Zauberer LIAR mit Zaubershow für Kinder" },
-      { "orig": "Clown-Zauberer-GLADBECK-1", "from": "HP/Clown Zauberer GLADBECK.jpg", "file": "clown-zauberer-gladbeck-einsatzgebiet-karte.jpg", "alt": "Karte: Clown Zauberer LIAR aus Gladbeck und sein Einsatzgebiet" }
+      {
+        "orig": "Clown-Zauberer-mit-Zaubershow",
+        "from": "HP/Clown Zauberer mit Zaubershow.jpg",
+        "file": "clown-zauberer-mit-zaubershow.jpg",
+        "alt": "Clown Zauberer LIAR mit Zaubershow für Kinder"
+      },
+      {
+        "orig": "Clown-Zauberer-GLADBECK-1",
+        "from": "HP/Clown Zauberer GLADBECK.jpg",
+        "file": "clown-zauberer-gladbeck-einsatzgebiet-karte.jpg",
+        "alt": "Karte: Clown Zauberer LIAR aus Gladbeck und sein Einsatzgebiet"
+      }
     ]
   },
   "was-ist-ein-clown": {
-    "cover": { "from": "HP/Clown bei Clownshow.jpg", "file": "clown-bei-clownshow.jpg", "alt": "Clown LIAR bei der Clownshow" },
+    "cover": {
+      "from": "HP/Clown bei Clownshow.jpg",
+      "file": "clown-bei-clownshow.jpg",
+      "alt": "Clown LIAR bei der Clownshow"
+    },
     "slots": [
-      { "orig": "Clown-bei-Clownshow", "from": "HP/Clown bei Clownshow.jpg", "file": "clown-bei-clownshow.jpg", "alt": "Clown LIAR bei der Clownshow" },
-      { "orig": "Halterner-Zeitung-Magische-Clown-in-Freiheit", "from": "CZN/Halterner Zeitung Magische Clown in Freiheit.jpg", "file": "halterner-zeitung-magischer-clown.jpg", "alt": "Artikel der Halterner Zeitung über Clown LIAR" }
+      {
+        "orig": "Clown-bei-Clownshow",
+        "from": "HP/Clown bei Clownshow.jpg",
+        "file": "clown-bei-clownshow.jpg",
+        "alt": "Clown LIAR bei der Clownshow"
+      },
+      {
+        "orig": "Halterner-Zeitung-Magische-Clown-in-Freiheit",
+        "from": "CZN/Halterner Zeitung Magische Clown in Freiheit.jpg",
+        "file": "halterner-zeitung-magischer-clown.jpg",
+        "alt": "Artikel der Halterner Zeitung über Clown LIAR"
+      }
     ]
   },
   "10-tipps-fuer-den-perfekten-kindergeburtstag": {
-    "cover": { "from": "VB/10 Tipps für den perfekten Kindergeburtstag.png", "file": "10-tipps-perfekter-kindergeburtstag.jpg", "alt": "10 Tipps für den perfekten Kindergeburtstag – Clown Zauberer LIAR" },
+    "cover": {
+      "from": "VB/10 Tipps für den perfekten Kindergeburtstag.png",
+      "file": "10-tipps-perfekter-kindergeburtstag.jpg",
+      "alt": "10 Tipps für den perfekten Kindergeburtstag – Clown Zauberer LIAR"
+    },
     "slots": [
-      { "orig": "10-Tipps-fuer-den-perfekten-Kindergeburtstag", "from": "VB/10 Tipps für den perfekten Kindergeburtstag.png", "file": "10-tipps-perfekter-kindergeburtstag.jpg", "alt": "10 Tipps für den perfekten Kindergeburtstag – Clown Zauberer LIAR" }
+      {
+        "orig": "10-Tipps-fuer-den-perfekten-Kindergeburtstag",
+        "from": "VB/10 Tipps für den perfekten Kindergeburtstag.png",
+        "file": "10-tipps-perfekter-kindergeburtstag.jpg",
+        "alt": "10 Tipps für den perfekten Kindergeburtstag – Clown Zauberer LIAR"
+      }
     ]
   },
   "warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist": {
-    "cover": { "from": "VB/karnevalfeier.jpeg", "file": "clown-zauberer-karnevalfeier.jpg", "alt": "Warum ein Clown Zauberer der perfekte Entertainer für Ihre Karnevalsfeier ist" },
+    "cover": {
+      "from": "VB/karnevalfeier.jpeg",
+      "file": "clown-zauberer-karnevalfeier.jpg",
+      "alt": "Warum ein Clown Zauberer der perfekte Entertainer für Ihre Karnevalsfeier ist"
+    },
     "slots": [
-      { "orig": "Clown-Zauberer-Karnevalfeier", "from": "VB/karnevalfeier.jpeg", "file": "clown-zauberer-karnevalfeier.jpg", "alt": "Warum ein Clown Zauberer der perfekte Entertainer für Ihre Karnevalsfeier ist" },
-      { "orig": "Karneval", "from": "HP/Karneval.jpeg", "file": "karneval-zaubershow-kinder.jpg", "alt": "Karneval: Kinder schauen der Zaubershow von Clown Zauberer LIAR zu" },
-      { "orig": "Karnevalfeier-mit-Clown-Zauberer", "from": "CZ/Screenshot_20180220-143801.jpg", "file": "karnevalfeier-kind-als-zauberer-verkleidet.jpg", "alt": "Karnevalsfeier: ein als Zauberer verkleidetes Kind mit Clown Zauberer LIAR" }
+      {
+        "orig": "Clown-Zauberer-Karnevalfeier",
+        "from": "VB/karnevalfeier.jpeg",
+        "file": "clown-zauberer-karnevalfeier.jpg",
+        "alt": "Warum ein Clown Zauberer der perfekte Entertainer für Ihre Karnevalsfeier ist"
+      },
+      {
+        "orig": "Karneval",
+        "from": "HP/Karneval.jpeg",
+        "file": "karneval-zaubershow-kinder.jpg",
+        "alt": "Karneval: Kinder schauen der Zaubershow von Clown Zauberer LIAR zu"
+      },
+      {
+        "orig": "Karnevalfeier-mit-Clown-Zauberer",
+        "from": "CZ/Screenshot_20180220-143801.jpg",
+        "file": "karnevalfeier-kind-als-zauberer-verkleidet.jpg",
+        "alt": "Karnevalsfeier: ein als Zauberer verkleidetes Kind mit Clown Zauberer LIAR"
+      }
     ]
   },
   "zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight": {
-    "cover": { "from": "VB/Zaubershow im Kindergarten.png", "file": "zaubershow-im-kindergarten.jpg", "alt": "Zaubershow im Kindergarten: So wird der Besuch zum Highlight" },
+    "cover": {
+      "from": "VB/Zaubershow im Kindergarten.png",
+      "file": "zaubershow-im-kindergarten.jpg",
+      "alt": "Zaubershow im Kindergarten: So wird der Besuch zum Highlight"
+    },
     "slots": [
-      { "orig": "Kinderzauberer-Kindergarten-Essen", "from": "HP/Zaubershow NRW.jpg", "file": "kinderzauberer-kindergarten-staunende-kinder.jpg", "alt": "Staunende Kinder bei der Zaubershow des Kinderzauberers im Kindergarten" },
-      { "orig": "ZAubershow-mit-Clown-Zauberer-LIAR", "from": "HP/ZAubershow mit Clown Zauberer LIAR.jpg", "file": "zaubershow-mit-clown-zauberer-liar-kinder.jpg", "alt": "Zaubershow mit Clown Zauberer LIAR: Kinder sitzen im Halbkreis" }
+      {
+        "orig": "Kinderzauberer-Kindergarten-Essen",
+        "from": "HP/Zaubershow NRW.jpg",
+        "file": "kinderzauberer-kindergarten-staunende-kinder.jpg",
+        "alt": "Staunende Kinder bei der Zaubershow des Kinderzauberers im Kindergarten"
+      },
+      {
+        "orig": "ZAubershow-mit-Clown-Zauberer-LIAR",
+        "from": "HP/ZAubershow mit Clown Zauberer LIAR.jpg",
+        "file": "zaubershow-mit-clown-zauberer-liar-kinder.jpg",
+        "alt": "Zaubershow mit Clown Zauberer LIAR: Kinder sitzen im Halbkreis"
+      }
     ]
   },
   "5-gruende-warum-zauberei-zum-karneval-gehoert": {
-    "cover": { "from": "VB/Zauberei für Karneval.png", "file": "5-gruende-zauberei-karneval.jpg", "alt": "5 Gründe, warum Zauberei zum Karneval gehört" },
+    "cover": {
+      "from": "VB/Zauberei für Karneval.png",
+      "file": "5-gruende-zauberei-karneval.jpg",
+      "alt": "5 Gründe, warum Zauberei zum Karneval gehört"
+    },
     "slots": [
-      { "orig": "Karnevalfeier-mit-Clown-Zauberer", "from": "VB/Zauberei für Karneval.png", "file": "5-gruende-zauberei-karneval.jpg", "alt": "5 Gründe, warum Zauberei zum Karneval gehört" },
-      { "orig": "Karneval", "from": "HP/Karneval.jpeg", "file": "karneval-zaubershow-kinder.jpg", "alt": "Karneval: Kinder schauen der Zaubershow von Clown Zauberer LIAR zu" },
-      { "orig": "Tisch-Zauberer-NRW-1", "from": "HP/Tisch Zauberer NRW.JPG", "file": "tisch-zauberer-nrw.jpg", "alt": "Tischzauberei aus nächster Nähe" }
+      {
+        "orig": "Karnevalfeier-mit-Clown-Zauberer",
+        "from": "VB/Zauberei für Karneval.png",
+        "file": "5-gruende-zauberei-karneval.jpg",
+        "alt": "5 Gründe, warum Zauberei zum Karneval gehört"
+      },
+      {
+        "orig": "Karneval",
+        "from": "HP/Karneval.jpeg",
+        "file": "karneval-zaubershow-kinder.jpg",
+        "alt": "Karneval: Kinder schauen der Zaubershow von Clown Zauberer LIAR zu"
+      },
+      {
+        "orig": "Tisch-Zauberer-NRW-1",
+        "from": "HP/Tisch Zauberer NRW.JPG",
+        "file": "tisch-zauberer-nrw.jpg",
+        "alt": "Tischzauberei aus nächster Nähe"
+      }
     ]
   },
   "fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events": {
-    "cover": { "from": "VB/Frühling ud Sommerfeste.png", "file": "fruehlings-sommerfest-kindergarten.jpg", "alt": "Frühlings- und Sommerfeste im Kindergarten: Ideen für unvergessliche Events" },
+    "cover": {
+      "from": "VB/Frühling ud Sommerfeste.png",
+      "file": "fruehlings-sommerfest-kindergarten.jpg",
+      "alt": "Frühlings- und Sommerfeste im Kindergarten: Ideen für unvergessliche Events"
+    },
     "slots": [
-      { "orig": "Fruehlingsfest-im-Kindergarten", "from": "VB/Frühling ud Sommerfeste.png", "file": "fruehlings-sommerfest-kindergarten.jpg", "alt": "Frühlings- und Sommerfeste im Kindergarten: Ideen für unvergessliche Events" },
-      { "orig": "Pantomime-im-Kindergarten", "from": "HP/Fest.jpg", "file": "kinderfest-kindergarten-clown-liar.jpg", "alt": "Kindergartenfest: Kinder und Erzieherinnen feiern mit Clown LIAR" }
+      {
+        "orig": "Fruehlingsfest-im-Kindergarten",
+        "from": "VB/Frühling ud Sommerfeste.png",
+        "file": "fruehlings-sommerfest-kindergarten.jpg",
+        "alt": "Frühlings- und Sommerfeste im Kindergarten: Ideen für unvergessliche Events"
+      },
+      {
+        "orig": "Pantomime-im-Kindergarten",
+        "from": "HP/Fest.jpg",
+        "file": "kinderfest-kindergarten-clown-liar.jpg",
+        "alt": "Kindergartenfest: Kinder und Erzieherinnen feiern mit Clown LIAR"
+      }
     ]
   }
 }
