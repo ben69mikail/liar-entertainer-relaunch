@@ -76,7 +76,7 @@ describe('alternatesFor (hreflang)', () => {
   it('gives DE-only pages no alternates', () => {
     expect(alternatesFor('/kinderzauberer/kinderzauberer-in-gladbeck/')).toEqual([]);
     expect(alternatesFor('/blog/some-post/')).toEqual([]);
-    expect(alternatesFor('/preise/')).toEqual([]);
+    expect(alternatesFor('/blog/')).toEqual([]);
   });
 
   it('emits nothing while only German is published', () => {
@@ -162,7 +162,7 @@ describe('localizePath', () => {
   });
 
   it('falls back to the German page when there is no translation', () => {
-    expect(localizePath('/preise/', 'fr')).toBe('/preise/');
+    expect(localizePath('/blog/', 'fr')).toBe('/blog/');
     expect(localizePath('/kinderzauberer/kinderzauberer-in-essen/', 'en')).toBe('/kinderzauberer/kinderzauberer-in-essen/');
     expect(localizePath('#bewertungen', 'fr')).toBe('#bewertungen');
     expect(localizePath('https://wa.me/491721517578', 'fr')).toBe('https://wa.me/491721517578');
@@ -189,7 +189,7 @@ describe('languageLinks (header switcher)', () => {
 
 
   it('shows nothing on pages without translations', () => {
-    expect(languageLinks('/preise/')).toEqual([]);
+    expect(languageLinks('/blog/')).toEqual([]);
   });
 
   it('covers every translated page, not only the core pages (thank-you page)', () => {

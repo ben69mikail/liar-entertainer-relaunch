@@ -3,12 +3,21 @@ import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { page } from './helpers';
 import { CORE_PAGES, TRANSLATED_PAGES, PUBLISHED_LOCALES, SITE, isPublishedPath } from '../../src/lib/site-map';
+import { MENU } from '../../src/data/site';
 
 const DIST = join(import.meta.dirname, '../../dist');
 const TARGETS = ['fr', 'en'] as const;
 const twins = TRANSLATED_PAGES.flatMap((entry) => TARGETS.map((l) => ({ l, path: entry[l], de: entry.de })));
 
 describe('FR/EN core pages (brief E2, 4.1/4.2)', () => {
+  // user 2026-10-08: every page in the main menu exists in DE · FR · EN. The blog stays German
+  // (brief: blog DE only; new n8n posts would otherwise break the build until translated).
+  it('translates every internal page of the main menu (blog excepted)', () => {
+    const menu = MENU.flatMap((m) => [m.href, ...(m.children ?? []).map((c) => c.href)]).filter((h) => h.startsWith('/') && h !== '/blog/');
+    const have = new Set(TRANSLATED_PAGES.map((e) => e.de));
+    expect([...new Set(menu)].filter((h) => !have.has(h))).toEqual([]);
+  });
+
   it('builds every translated page', () => {
     expect(twins.filter((t) => !existsSync(join(DIST, t.path, 'index.html'))).map((t) => t.path)).toEqual([]);
   });

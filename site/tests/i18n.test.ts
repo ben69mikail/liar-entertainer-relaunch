@@ -17,7 +17,7 @@ const html = `<!doctype html><html lang="de"><head><title>Seite | LIAR</title>
 <meta property="og:locale" content="de_DE"><link rel="canonical" href="https://liar-entertainer.com/kontakt/">
 <script type="application/ld+json">{"@type":"Service","name":"Dienst","url":"https://liar-entertainer.com/kontakt/","provider":{"@id":"https://liar-entertainer.com/#business"}}</script>
 </head><body><p class="x"> Hallo <strong data-astro-cid-abc123="">Welt</strong> </p>
-<a href="/kontakt/#anfrage">Kontakt</a><a href="/preise/">Kontakt</a>
+<a href="/kontakt/#anfrage">Kontakt</a><a href="/blog/">Kontakt</a>
 <img src="a.jpg" alt="Ein Foto"><p data-review-text>Super Show!</p>
 <div data-i18n="drop"><p>Blogartikel</p></div>
 <nav data-i18n="keep"><a href="/kontakt/">DE</a></nav>
@@ -47,7 +47,7 @@ describe('translateHtml', () => {
 
   it('points links at the twin page, or keeps the German page when there is none', () => {
     expect($('body > a').eq(0).attr('href')).toBe('/fr/contact/#anfrage');
-    expect($('body > a').eq(1).attr('href')).toBe('/preise/');
+    expect($('body > a').eq(1).attr('href')).toBe('/blog/');
     expect($('nav a').attr('href')).toBe('/kontakt/');
   });
 

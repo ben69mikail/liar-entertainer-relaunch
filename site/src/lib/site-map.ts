@@ -26,6 +26,19 @@ export const CORE_PAGES: Array<Record<Locale, string>> = [
   { de: '/clown/clownshow/', fr: '/fr/clown/spectacle-de-clown/', en: '/en/clown/clown-show/' },
   { de: '/ueber-mich/', fr: '/fr/a-propos/', en: '/en/about/' },
   { de: '/kontakt/', fr: '/fr/contact/', en: '/en/contact/' },
+  // every page of the main menu (user, 2026-10-08)
+  { de: '/clown/walk-act/', fr: '/fr/clown/walk-act/', en: '/en/clown/walk-act/' },
+  { de: '/clown/ballonmodellage/', fr: '/fr/clown/sculpture-de-ballons/', en: '/en/clown/balloon-modelling/' },
+  { de: '/clown/glitzer-tattoo/', fr: '/fr/clown/tatouages-paillettes/', en: '/en/clown/glitter-tattoos/' },
+  { de: '/clown/karneval/', fr: '/fr/clown/carnaval/', en: '/en/clown/carnival/' },
+  { de: '/zauberer/buehnen-zauberer/', fr: '/fr/magicien/magicien-de-scene/', en: '/en/magician/stage-magician/' },
+  { de: '/zauberer/hochzeit/', fr: '/fr/magicien/mariage/', en: '/en/magician/wedding/' },
+  { de: '/zauberer/firmenfeier/', fr: '/fr/magicien/evenement-entreprise/', en: '/en/magician/corporate-event/' },
+  { de: '/zauberer/zaubershow/kindergarten-kita/', fr: '/fr/magicien/spectacle-de-magie/maternelle-creche/', en: '/en/magician/magic-show/kindergarten/' },
+  { de: '/zauberer/zaubershow/schule/', fr: '/fr/magicien/spectacle-de-magie/ecole/', en: '/en/magician/magic-show/school/' },
+  { de: '/zauberer/zaubershow/strassen-sommer-fest/', fr: '/fr/magicien/spectacle-de-magie/fete-de-rue/', en: '/en/magician/magic-show/street-festival/' },
+  { de: '/preise/', fr: '/fr/tarifs/', en: '/en/prices/' },
+  { de: '/galerie/', fr: '/fr/galerie/', en: '/en/gallery/' },
 ];
 
 // Order matters: specific kids pages under /zauberer/ win over the adult section.
