@@ -27,4 +27,4 @@ Neu (Netlify): A @ → 75.2.60.5 · CNAME www → liar-entertainer-relaunch.netl
 | TXT | @ | google-site-verification=2oJAV6mJ5IWTIOlrI8FT4o76kMiRkQRzK7iLW92j_xo — NICHT löschen (GSC) |
 | TXT | @ | v=spf1 include:_spf-eu.ionos.com ~all |
 
-Neu: A @ und A www → 75.2.60.5 (Netlify), AAAA @/www gelöscht. Rollback = alte Werte wieder eintragen.
+Umgestellt am 08.10.2026: A @ und A www → 75.2.60.5 (Netlify, TTL 5 Min), AAAA @/www und TXT _dep_ws_mutex von IONOS deaktiviert. Rollback = alte Werte wieder eintragen.
