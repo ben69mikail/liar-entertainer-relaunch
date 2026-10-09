@@ -30,6 +30,9 @@ async function probe(path: string, width = 1280, reducedMotion: 'reduce' | 'no-p
       fits: document.documentElement.scrollWidth <= innerWidth,
       right: sign ? sign.getBoundingClientRect().right : 0,
       vw: innerWidth,
+      count: document.querySelectorAll('[data-language-sign]').length,
+      sections: document.querySelectorAll('main section').length,
+      secondLeansRight: document.querySelectorAll('[data-language-sign]')[1]?.classList.contains('ls--r') ?? null,
     };
   });
   await ctx.close();
@@ -41,7 +44,7 @@ describe('language sign', () => {
     it(`${path}: small sign with six blinking arrows between two sections`, async () => {
       const r = await probe(path);
       expect(r.present).toBe(true);
-      expect(r.text).toContain('Französisch · Englisch · Spanisch');
+      expect(r.text).toContain('Ich spreche auch Französisch · Englisch · Spanisch');
       expect(r.inHero).toBe(false);
       expect(r.betweenSections).toBe(true);
       expect(r.arrows).toBe(6);
@@ -50,9 +53,15 @@ describe('language sign', () => {
     });
   }
 
+  it('comes back on long pages, the second copy leaning right', async () => {
+    const r = await probe('/kindergeburtstag/');
+    expect(r.count).toBeGreaterThanOrEqual(2);
+    expect(r.secondLeansRight).toBe(true);
+  });
+
   it('is translated on the FR twin', async () => {
     const r = await probe('/fr/tarifs/');
-    expect(r.text).toContain('français · anglais · espagnol');
+    expect(r.text).toContain('Je parle aussi français · anglais · espagnol');
   });
 
   it('fits a 360 px phone', async () => {
