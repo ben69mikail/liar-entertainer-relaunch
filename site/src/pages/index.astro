@@ -6,7 +6,8 @@ import ProgramFrame from '../components/v2/kids/ProgramFrame.astro';
 import GoldDivider from '../components/v2/kids/GoldDivider.astro';
 import Curtain from '../components/v2/kids/Curtain.astro';
 import MagicFrame from '../components/v2/adult/MagicFrame.astro';
-import adultWorldImg from '../assets/images/zauberer/zauberer-nrw.png';
+// 4:3 crop of the same stage photo (user 2026-10-09: same size as the kids photo; body uncut)
+import adultWorldImg from '../assets/images/zauberer/zauberer-tuer-startseite.jpg';
 import '../styles/kids-v3.css';
 import YouTubeFacade from '../components/YouTubeFacade.astro';
 import { Image } from 'astro:assets';
@@ -226,7 +227,7 @@ const videoSchema = {
         <span class="hm-world__label">Für Erwachsene</span>
         <div class="hm-world__card">
           <MagicFrame corner="tr" rank="A" suit="♠" class="hm-world__pc">
-            <Image src={adultWorldImg} alt="Zauberer LIAR wirft Spielkarten auf der Bühne" widths={[400, 700]} sizes="(max-width: 900px) 74vw, 400px" loading="lazy" />
+            <Image src={adultWorldImg} alt="Zauberer LIAR wirft Spielkarten auf der Bühne" widths={[400, 600, 889]} sizes="(max-width: 900px) 62vw, 384px" loading="lazy" />
           </MagicFrame>
         </div>
         <span class="hm-world__links" aria-hidden="true">Close-up · Bühnenshow · Hochzeit · Firmenfeier</span>
@@ -720,11 +721,12 @@ const videoSchema = {
     .hm-worlds { grid-template-columns: 1fr 1fr; }
     .hm-world--kids { rotate: -1deg; }
     .hm-world--adult { rotate: 1deg; }
-    /* both doors the same size (user, 2026-10-07): equal height, photo row takes the slack; the
-       adult panorama (never cropped) uses the full card width so it is not narrower than the kids photo */
+    /* both doors the same size (user, 2026-10-07): equal height, photo row takes the slack. Both photos
+       are 4:3 (2026-10-09 crop) and equally wide: kids frame 24rem − 2×1.1rem padding, adult card
+       24rem + the difference of the two passe-partouts */
     .hm-worlds { align-items: stretch; }
     .hm-world { grid-template-rows: auto 1fr auto auto; align-items: center; }
     .hm-world--adult { padding-inline: var(--space-2); }
-    .hm-world__card { width: 100%; }
+    .hm-world__card { width: min(100%, 25.1rem); }
   }
 </style>

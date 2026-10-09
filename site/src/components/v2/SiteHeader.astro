@@ -49,6 +49,7 @@ const languages = languageLinks(path);
       </ul>
     </nav>
 
+    <div class="sh__end">
     {languages.length > 0 && (
       <nav class="sh__lang" aria-label="Sprache / Langue / Language" data-i18n="keep">
         {languages.map((l, i) => (
@@ -61,6 +62,7 @@ const languages = languageLinks(path);
     )}
 
     <a class="btn btn--primary sh__cta" href="/kontakt/">Anfragen</a>
+    </div>
 
     <!-- quick contact on mobile devices (user, 2026-10-07): icons between logo and menu, replaces the bottom bar -->
     <nav class="sh__quick" aria-label="Schnellkontakt" data-quick-contact>
@@ -108,7 +110,17 @@ const languages = languageLinks(path);
   }
   .sh__logo { flex: none; }
   .sh__cta { flex: none; }
+  /* desktop: languages over the button; elsewhere the wrapper dissolves and nothing moves */
+  .sh__end { display: contents; }
+  @media (prefers-reduced-motion: no-preference) {
+    /* a short double blink now and then, so visitors notice the other languages */
+    .sh__lang { animation: sh-lang-blink 7s ease-in-out 2s infinite; }
+  }
+  @keyframes sh-lang-blink { 0%, 86%, 100% { opacity: 1; } 89% { opacity: 0.2; } 92% { opacity: 1; } 95% { opacity: 0.2; } }
   .sh__logo img { display: block; height: 3.6rem; width: auto; }
+  /* the colourful logo has a white box: multiply lets the white melt into the cream header, the
+     logo itself stays untouched (L6, user 2026-10-09: nicer transition to the background) */
+  .sh__logo:not(.sh__logo--card) img { mix-blend-mode: multiply; }
   /* adult: gold logo (unchanged, L6) on a black playing-card back for contrast on paper */
   .sh__logo--card {
     display: block; padding: 0.35rem 0.6rem; border-radius: 0.55rem; rotate: -3deg;
@@ -193,7 +205,9 @@ const languages = languageLinks(path);
      German pages too), so logo, menu and button keep the whole width */
   @media (min-width: 1181px) {
     .sh__bar.container { width: min(100% - 2rem, 84rem); flex-wrap: wrap; row-gap: 0; }
-    .sh__lang { order: -1; flex-basis: 100%; justify-content: flex-end; font-size: 0.72rem; padding-top: 0.3rem; margin-bottom: -0.55rem; }
+    /* DE · FR · EN centred right above the enquiry button (user, 2026-10-09) */
+    .sh__end { display: flex; flex-direction: column; align-items: center; gap: 0.2rem; }
+    .sh__lang { font-size: 0.72rem; }
     .sh__item > a { padding-inline: 0.42rem; }
   }
   /* French menu labels are longer: burger menu until there is room */
@@ -201,6 +215,7 @@ const languages = languageLinks(path);
     :global(html[lang='fr']) .sh__nav { display: none; }
     :global(html[lang='fr']) .sh__mobile { display: block; margin-left: 0; }
     :global(html[lang='fr']) .sh__cta { margin-left: auto; }
+    :global(html[lang='fr']) .sh__end { margin-left: auto; }
   }
   @media (max-width: 480px) {
     .sh__cta { display: none; }

@@ -32,6 +32,8 @@
   --space-4: 2.5rem;
   --space-5: 4rem;
   --space-6: 6rem;
+  /* vertical rhythm between sections (user 2026-10-09: gaps were too big) */
+  --section-pad: 4.5rem;
   --measure: 68ch;
   --container: 72rem;
 

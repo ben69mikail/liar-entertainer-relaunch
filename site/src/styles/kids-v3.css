@@ -43,7 +43,7 @@ html:is([data-zone='kids'], [data-zone='neutral']) .v2 .btn--ghost { box-shadow:
 }
 
 /* ── rhythm + helpers ── */
-.v2 main > section { padding-block: var(--space-6); position: relative; }
+.v2 main > section { padding-block: var(--section-pad); position: relative; }
 .v2 main .container { position: relative; z-index: 1; }
 .v2 main p { margin: 0 0 var(--space-2); }
 .k3-center { text-align: center; }
@@ -210,7 +210,8 @@ html:is([data-zone='kids'], [data-zone='neutral']) .v2 .btn--ghost { box-shadow:
 @media (max-width: 900px) {
   .k3-hero { --curtain: 1.6rem; }
   .k3-hero .container { width: min(100% - 2 * (max(var(--curtain), 7.4vw) + 0.6rem), 66rem); }
-  .v2 main > section { padding-block: var(--space-5); }
+  .v2 main > section { padding-block: var(--section-pad); }
+  .v2 { --section-pad: 3.25rem; }
 }
 
 /* ── reviews: same circus-programme cards as the prices (user, 2026-10-06) ── */
@@ -638,3 +639,10 @@ html[data-zone='kids'] .k3-hero__photo {
   margin: var(--space-2) auto var(--space-4);
 }
 html[data-zone='kids'] .k3-hero :is(.k3-hero__actions, .k3-quick, .k3-chipnav) { justify-content: center; }
+
+/* ── hero buttons centred everywhere (user, 2026-10-09). Neutral pages keep text | photo, so their
+   copy column is centred as a whole (text + buttons + quick links) ── */
+.k3-hero :is(.k3-hero__actions, .k3-quick, .k3-chipnav) { justify-content: center; }
+.k3-hero .hm-services { margin-inline: auto; }
+html[data-zone='neutral'] .k3-hero__copy { text-align: center; }
+html[data-zone='neutral'] .k3-hero__copy > :is(p, h1, h2) { margin-inline: auto; }

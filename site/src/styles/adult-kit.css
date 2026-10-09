@@ -4,7 +4,7 @@
  * Sections: ce-hero (+ ce-hero__frame photo; ce-hero--stage + ce-spot = dark stage; ce-lightshow + ce-beam = its light show, see StageLights.astro), ce-intro, ce-occasions, ce-formats, ce-why, ce-steps (flip),
  * ce-area, ce-faq, ce-contact; helpers ce-h2/ce-eyebrow/ce-label/ce-center/ce-narrow/ce-soft/ce-red/ce-ink-link.
  */
-.v2 main > section { padding-block: var(--space-6); position: relative; }
+.v2 main > section { padding-block: var(--section-pad); position: relative; }
   .v2 .ce-center { text-align: center; }
   .v2 .ce-narrow { max-width: 50rem; margin-inline: auto; }
   .v2 .ce-narrow-wide { max-width: 66rem; }
@@ -301,7 +301,8 @@
     .v2 .ce-spot .ce-hero__frame { width: calc(100% + 0.75rem); }
     .v2 .ce-spot .ce-hero__frame:has(.mf--tr) { margin-inline: -0.75rem 0; }
     .v2 .ce-spot .ce-hero__frame:has(.mf--tl) { margin-inline: 0 -0.75rem; }
-    .v2 main > section { padding-block: var(--space-5); }
+    .v2 main > section { padding-block: var(--section-pad); }
+    .v2 { --section-pad: 3.25rem; }
   }
   @media (prefers-reduced-motion: reduce) {
     .v2 .ce-hero__sub, .v2 .ce-hero__claim, .v2 .ce-hero__actions { animation: none !important; }
@@ -422,7 +423,7 @@
 /* curtain call (/zauberer/): the card trick and the contact share one velvet finale */
 .v2 main > .ce-finale { position: relative; isolation: isolate; overflow: clip; padding-bottom: var(--space-5); }
 .v2 main > .ce-finale > section { padding-block: 0 var(--space-2); }
-.v2 main > .ce-finale .pac { padding-top: var(--space-6); }
+.v2 main > .ce-finale .pac { padding-top: var(--section-pad); }
 
 /* sections that carry a light show: their own stacking context, beams clipped at the edges */
 .v2 main > .ce-lit { isolation: isolate; overflow: clip; }
