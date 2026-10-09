@@ -46,3 +46,20 @@ describe('facts are consistent (GSC analysis 2026-10-09)', () => {
     expect(llms).toMatch(/über 400 (Shows|Auftritte) pro Jahr/);
   });
 });
+
+// user, 2026-10-09: prices only in the kids'-birthday context — prices page, /kindergeburtstag/,
+// birthday city pages and blog posts (guides quote market prices). Everywhere else: no price.
+describe('prices only for kids birthdays', () => {
+  const PRICE = /\b\d{2,4}(?:[.,]\d{2})?\s?(?:€|Euro)|€\s?\d/;
+  const allowed = (p: string) => p === '/preise/' || p.startsWith('/kindergeburtstag/') || p.startsWith('/blog/');
+  it('no other German page states a price', () => {
+    const cities = readdirSync(join(DIST, 'zauberer')).filter((d) => d.startsWith('zauberer-in-')).map((d) => `/zauberer/${d}/`);
+    const bad = [...Object.keys(baseline), ...cities]
+      .filter((p) => !allowed(p) && existsSync(join(DIST, p, 'index.html')))
+      .filter((p) => {
+        const html = readFileSync(join(DIST, p, 'index.html'), 'utf8').replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '');
+        return PRICE.test(html.replace(/<[^>]+>/g, ' ')) || PRICE.test(html.match(/<title>([^<]*)/)?.[1] ?? '');
+      });
+    expect(bad).toEqual([]);
+  });
+});

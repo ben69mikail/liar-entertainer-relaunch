@@ -225,16 +225,17 @@ check('M1.1', 'Startseite: keine doppelten FAQ-Fragen im Schema', () => {
   const dupes = norm.filter((n, i) => norm.indexOf(n) !== i);
   return dupes.length === 0 || `Duplikat(e): ${dupes.join(', ')}`;
 });
-check('M1.2', 'Startseite: Preisfrage antwortet mit konkreten Zahlen (Variante A)', () => {
+// User 2026-10-09: prices only in the kids-birthday context (prices page, /kindergeburtstag/, birthday
+// city pages). The home FAQ answers the price question without numbers and points to /preise/.
+check('M1.2', 'Startseite: Preisfrage nennt keine Zahlen, verweist auf die Preisseite', () => {
   const faq = flatLd(get('/')).find((n) => n['@type'] === 'FAQPage');
   if (!faq) return 'Kein FAQPage-Schema';
   const priceQ = (faq.mainEntity || []).filter((q) => /kostet/i.test(q.name));
   if (priceQ.length !== 1) return `${priceQ.length} Preisfragen statt genau einer`;
   const a = priceQ[0].acceptedAnswer?.text || '';
-  const needs = [['Grundpreis 150 EUR', /150\s*€/], ['Komplettpaket 210 EUR', /210\s*€/],
-                 ['Dauer 40 Minuten', /40[\s-]?min/i], ['Fahrtkosten 0,40/km', /0,40\s*€/]];
-  const missing = needs.filter(([, re]) => !re.test(a)).map(([label]) => label);
-  return missing.length === 0 || `Antwort nennt nicht: ${missing.join(', ')}`;
+  if (/\d\s*€/.test(a)) return 'Antwort nennt einen Preis';
+  if (!/40[\s-]?min/i.test(a)) return 'Antwort nennt die Dauer (40 Minuten) nicht';
+  return /Preisseite/.test(a) || 'Antwort verweist nicht auf die Preisseite';
 });
 
 // ---------- M2: Tabelle auf /kindergeburtstag/ ----------

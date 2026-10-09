@@ -30,3 +30,9 @@ Quelle: `docs/seo-audit-2026-10-09/GSC-ANALYSE.md`. Tests: `site/tests/dist/cont
 - **Neue Inhalte**: Antwort-zuerst-Absätze (/zauberer/, /zauberer/zaubershow/, Kita) · Über mich: Ausbildung, Sprachen (DE; FR/EN/ES auf Wunsch), Technik (Tonanlage ab ca. 50 Kindern) · Preise: „Warum nur 150 €?“ + Leistung „Tonanlage auf Anfrage“ · FAQs Tonanlage/Sprache (Kindergeburtstag, Kita) · Ballon: Kommunion/Taufe · Startseite: Link-Leiste „Beliebte Leistungen“ · alle 69 Kinder-Stadtseiten: Abschnitt „Mehr Zauberei in <Stadt>“ (Schwesterseiten, Erwachsenen-Seite bzw. Hinweis für Bochum/Dortmund/Düsseldorf/Mülheim) · Blog: Kasten „Passende Leistung“.
 - **Schema**: Person `knowsLanguage` de/fr/en/es, Beschreibung mit pädagogischer Ausbildung; FAQPage um 2 Fragen ergänzt.
 - **Design**: Kinder-Hero einspaltig wie Erwachsene (Titel → Foto → Rest), nur Zone kids.
+
+## 2026-10-09 (b) – Preise nur im Kindergeburtstag-Kontext, Sprach-Schild
+
+- **Preise** (Nutzer): erlaubt nur auf /preise/, /kindergeburtstag/, Geburtstags-Stadtseiten und Geburtstags-Blogartikeln (Ratgeber-Marktpreise bleiben). Entfernt: Startseiten-FAQ (jetzt „Festpreis … Preisseite“), Glitzer-Tattoo-Title („Ab 40€“), Zaubershow-Absatz, „ab 150 €“ in den 14 Erwachsenen-Stadtseiten (`PRICE_RULES_ADULT`), Kita/Schule 300 € und Walk-Act 800 € aus llms.txt/llms-full.txt und der Cowork-Anleitung. Wächter: `content-parity.test.ts` „prices only for kids birthdays“, SEO-Regel M1.2 umgestellt.
+- **Sprach-Schild** `components/v2/LanguageSign.astro`: „Show auch auf Französisch · Englisch · Spanisch“ mit blinkenden Cartoon-Pfeilen im Hero von Startseite + allen Menüseiten (FR/EN übersetzt), nicht auf Stadtseiten/Blog. e2e `language-sign.test.ts`.
+- **Pantomime**: Es gibt keinen Link auf die alte Subdomain; alle Pantomime-Links zeigen auf https://www.pantomime-la-france.eu/.

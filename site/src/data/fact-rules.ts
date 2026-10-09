@@ -40,5 +40,9 @@ export const FACT_RULES_EN: Rule[] = [
   [/some 400 shows/g, 'over 400 shows'],
 ];
 
+// Prices only in the kids'-birthday context (user, 2026-10-09): the adult city pages taken over from
+// zauberer-liar.de lose their "ab 150 €".
+export const PRICE_RULES_ADULT: Rule[] = [[/zum Festpreis ab 150 €/g, 'zum Festpreis']];
+
 export const applyRules = (s: string, rules: Rule[]): string => rules.reduce((t, [re, to]) => t.replace(re, to), s);
 export const applyFacts = (s: string): string => applyRules(s, FACT_RULES_DE);

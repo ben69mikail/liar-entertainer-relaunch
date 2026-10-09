@@ -1,3 +1,4 @@
+import { applyRules, PRICE_RULES_ADULT } from './fact-rules';
 /**
  * City pages taken over from zauberer-liar.de (2026-10-07): /zauberer/zauberer-in-<stadt>/.
  * Data per city is extracted from the frozen source pages (scripts/extract-zauberer-cities.ts).
@@ -27,7 +28,9 @@ export interface ZaubererCity {
 }
 
 const files = import.meta.glob<ZaubererCity>('./zauberer-cities/*.json', { eager: true, import: 'default' });
-export const ZAUBERER_CITIES: ZaubererCity[] = Object.values(files).sort((a, b) => a.name.localeCompare(b.name, 'de'));
+export const ZAUBERER_CITIES: ZaubererCity[] = Object.values(files)
+  .map((c) => JSON.parse(applyRules(JSON.stringify(c), PRICE_RULES_ADULT)) as ZaubererCity)
+  .sort((a, b) => a.name.localeCompare(b.name, 'de'));
 
 export const zaubererCityPath = (slug: string) => `/zauberer/zauberer-in-${slug}/`;
 /** the children's magician page of the same city (exists for every city taken over) */

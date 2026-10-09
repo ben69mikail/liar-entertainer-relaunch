@@ -1,0 +1,94 @@
+---
+/**
+ * Circus sign "Show auch auf Französisch · Englisch · Spanisch" with two cartoon arrows that blink
+ * in turn and nudge towards it (user, 2026-10-09). Home + every main-menu page (also their FR/EN
+ * twins); renders nothing elsewhere, so heroes can include it unconditionally.
+ * Kids/neutral: programme-sheet ivory with a gold double rule, Fraunces, circus-red arrows.
+ * Adult: the same board in the salon voice (Bodoni, gold arrows).
+ * Motion: opacity/transform only, paused for prefers-reduced-motion (arrows stay visible).
+ */
+import { MENU } from '../../data/site';
+import { basePath } from '../../lib/site-map';
+
+const MENU_PATHS = new Set(['/', ...MENU.flatMap((m) => [m.href, ...(m.children ?? []).map((c) => c.href)]).filter((h) => h.startsWith('/'))]);
+const show = MENU_PATHS.has(basePath(Astro.url.pathname));
+const arrow = 'M4 30c10-2 22-3 34-2l-1-9 23 15-24 13 2-9c-11-1-22 0-33 2z';
+---
+
+{show && (
+  <div class="ls" data-language-sign>
+    <svg class="ls__arrow ls__arrow--l" viewBox="0 0 64 56" aria-hidden="true"><path d={arrow} /></svg>
+    <div class="ls__board">
+      <span class="ls__bulbs" aria-hidden="true"><i></i><i></i><i></i><i></i><i></i></span>
+      <p class="ls__text"><span class="ls__kicker">Show auch auf</span> <span class="ls__langs">Französisch · Englisch · Spanisch</span></p>
+      <span class="ls__flags" aria-hidden="true">
+        <svg viewBox="0 0 30 20"><rect width="10" height="20" fill="#0055a4" /><rect x="10" width="10" height="20" fill="#fff" /><rect x="20" width="10" height="20" fill="#ef4135" /></svg>
+        <svg viewBox="0 0 60 40"><rect width="60" height="40" fill="#012169" /><path d="M0 0l60 40M60 0L0 40" stroke="#fff" stroke-width="8" /><path d="M0 0l60 40M60 0L0 40" stroke="#c8102e" stroke-width="3" /><path d="M30 0v40M0 20h60" stroke="#fff" stroke-width="12" /><path d="M30 0v40M0 20h60" stroke="#c8102e" stroke-width="7" /></svg>
+        <svg viewBox="0 0 30 20"><rect width="30" height="20" fill="#aa151b" /><rect y="5" width="30" height="10" fill="#f1bf00" /></svg>
+      </span>
+    </div>
+    <svg class="ls__arrow ls__arrow--r" viewBox="0 0 64 56" aria-hidden="true"><path d={arrow} /></svg>
+  </div>
+)}
+
+<style>
+  .ls {
+    --ls-red: #c8102e;
+    --ls-ink: #3b0c14;
+    --ls-gold: #b8862f;
+    display: flex; align-items: center; justify-content: center; gap: clamp(0.4rem, 2vw, 1rem);
+    margin: var(--space-3) auto 0; width: fit-content; max-width: 100%;
+  }
+  .ls__board {
+    position: relative; rotate: -2deg; text-align: center;
+    padding: 0.85rem clamp(1rem, 3vw, 1.6rem) 0.7rem;
+    background: #fffaf0; color: var(--ls-ink); border-radius: 0.9rem;
+    box-shadow:
+      inset 0 0 0 2px var(--ls-gold), inset 0 0 0 5px #fffaf0, inset 0 0 0 6px rgba(184, 134, 47, 0.55),
+      0 14px 28px -14px rgba(0, 0, 0, 0.55);
+  }
+  .ls__text { margin: 0 !important; line-height: 1.15; font-family: var(--font-display); text-wrap: balance; }
+  .ls__kicker { display: block; font-size: clamp(0.95rem, 1.8vw, 1.1rem); font-weight: 700; letter-spacing: 0.02em; color: var(--ls-red); }
+  .ls__langs { display: block; font-size: clamp(1.15rem, 2.8vw, 1.6rem); font-weight: 650; }
+  .ls__flags { display: flex; justify-content: center; gap: 0.4rem; margin-top: 0.45rem; }
+  .ls__flags svg { width: 1.8rem; height: auto; border-radius: 3px; box-shadow: 0 0 0 1px rgba(59, 12, 20, 0.25); }
+
+  /* little marquee bulbs on the top edge */
+  .ls__bulbs { position: absolute; inset: -0.45rem 1.2rem auto; display: flex; justify-content: space-between; }
+  .ls__bulbs i {
+    width: 0.6rem; height: 0.6rem; border-radius: 50%;
+    background: radial-gradient(circle at 35% 35%, #fff8d6, #ffd36b 45%, #d99a1e);
+    box-shadow: 0 0 6px 1px rgba(255, 205, 90, 0.85);
+  }
+
+  .ls__arrow { flex: none; width: clamp(2.8rem, 8vw, 4.8rem); height: auto; overflow: visible; filter: drop-shadow(0 0 6px rgba(255, 214, 120, 0.75)); }
+  .ls__arrow path { fill: #e8243f; stroke: #fff3e2; stroke-width: 4; stroke-linejoin: round; paint-order: stroke; }
+  .ls__arrow--r { scale: -1 1; }
+
+  /* adult salon voice */
+  :global(html[data-zone='adult']) .ls__text { font-family: 'Bodoni Moda', var(--font-display), serif; }
+  :global(html[data-zone='adult']) .ls__kicker { font-family: var(--font-body); font-size: 0.8rem; letter-spacing: 0.14em; text-transform: uppercase; color: #8a0f22; }
+  :global(html[data-zone='adult']) .ls__arrow path { fill: #e2bd68; stroke: #fff6e3; }
+  :global(html[data-zone='adult']) .ls__board { rotate: 0deg; }
+
+  @media (prefers-reduced-motion: no-preference) {
+    /* whole element only (transform/opacity on the composited layer, no SVG repaint per frame) */
+    .ls__arrow { animation: ls-arrow 1.2s infinite; will-change: transform, opacity; }
+    .ls__arrow--r { --ls-dir: -1; animation-delay: 0.6s; }
+    .ls__bulbs i { animation: ls-bulb 1.6s ease-in-out infinite; }
+    .ls__bulbs i:nth-child(2n) { animation-delay: 0.8s; }
+  }
+  @keyframes ls-arrow {
+    0% { opacity: 1; translate: 0 0; animation-timing-function: cubic-bezier(0.23, 1, 0.32, 1); }
+    18% { opacity: 1; translate: calc(var(--ls-dir, 1) * 6px) 0; }
+    45% { opacity: 1; translate: 0 0; }
+    50%, 95% { opacity: 0.25; }
+    100% { opacity: 1; }
+  }
+  @keyframes ls-bulb { 0%, 100% { opacity: 1; } 50% { opacity: 0.45; } }
+
+  @media (max-width: 420px) {
+    .ls__arrow { width: 2.3rem; }
+    .ls__board { padding-inline: 0.8rem; }
+  }
+</style>

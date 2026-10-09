@@ -500,5 +500,17 @@
       "to": "Zauberer für Sommerfest & Straßenfest in NRW",
       "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): descriptive H1 (5.1)"
     }
+  ],
+  "/": [
+    {
+      "from": "Die 40-minütige Zaubershow von Clown Zauberer LIAR kostet 150 € Festpreis für bis zu 12 Kinder ab 4 Jahren, inklusive Material. Ballonmodellage kostet 20 € zusätzlich, Glitzer-Tattoos 40 €. Das Komplett-Paket mit allen drei Bausteinen liegt bei 210 € für rund 90 Minuten. Hinzu kommen 0,40 € pro Kilometer Fahrtkosten ab Gladbeck. Alle Pakete im Detail: Kindergeburtstag.",
+      "to": "Die 40-minütige Zaubershow von Clown Zauberer LIAR gibt es zum Festpreis für bis zu 12 Kinder ab 4 Jahren, inklusive Material – auf Wunsch mit Ballonmodellage und Glitzer-Tattoos. Alle Pakete und Fahrtkosten stehen transparent auf der Preisseite.",
+      "why": "User 2026-10-09: prices only in the kids-birthday context (prices page, /kindergeburtstag/, birthday city pages); docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "150 € Festpreis",
+      "to": "Festpreis",
+      "why": "User 2026-10-09: prices only in the kids-birthday context (prices page, /kindergeburtstag/, birthday city pages); docs/CHANGES-METAS.md."
+    }
   ]
 }

@@ -41,7 +41,7 @@ Diese Datei ist der Arbeitsauftrag für **Claude Cowork**. Sie enthält alles, w
 | Mitgliedschaften | keine – nichts dergleichen behaupten |
 | Presse | WAZ-Bericht „Magic Dinner“ (Galerie) und Artikel auf der Website – nur verlinken, nichts hinzudichten |
 
-**Preise** (identisch zu https://liar-entertainer.com/preise/ – vor Verwendung dort gegenprüfen):
+**Preise** (identisch zu https://liar-entertainer.com/preise/ – vor Verwendung dort gegenprüfen). **Preise nur im Zusammenhang Kindergeburtstag nennen** (Inhaber, 09.10.2026); für alle anderen Leistungen nie einen Preis angeben, nur „auf Anfrage“:
 
 | Leistung | Preis |
 |---|---|
@@ -49,8 +49,7 @@ Diese Datei ist der Arbeitsauftrag für **Claude Cowork**. Sie enthält alles, w
 | + Ballonmodellage | +20 € |
 | + Glitzer-Tattoos | +40 € |
 | Komplett-Paket | 210 € |
-| Kita/Schule/Karneval/große Gruppen | 300 € |
-| Walk-Act 3 Std. | 800 € |
+| Kita, Schule, Karneval, Stadtfest, Walk-Act | auf Anfrage |
 | Fahrtkosten | 0,40 €/km Hin- und Rückfahrt ab Gladbeck |
 | Erwachsene (Hochzeit, Firmenfeier, Gala) | auf Anfrage |
 
@@ -89,7 +88,7 @@ Zugang: https://business.google.com (Inhaber-Login im Chrome).
 1. **Kategorien:**
    - Primär: „Zauberer“. Falls nicht verfügbar: „Unterhaltungskünstler“.
    - Zusätzlich, soweit verfügbar: „Clown“, „Kinderunterhaltung“ bzw. „Partyservice für Kinder“, „Ballonkünstler“, „Unterhaltungsdienstleister“.
-2. **Leistungen** einzeln anlegen, mit Preis „ab“ aus Abschnitt 1:
+2. **Leistungen** einzeln anlegen. Einen Preis „ab“ bekommen nur die Kindergeburtstag-Leistungen; alle anderen ohne Preis:
    - Zaubershow Kindergeburtstag
    - Komplett-Paket Kindergeburtstag
    - Ballonmodellage
