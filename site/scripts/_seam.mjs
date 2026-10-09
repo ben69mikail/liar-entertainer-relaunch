@@ -1,0 +1,11 @@
+import { chromium } from 'playwright';
+const [out, path, sel, w = '1280'] = process.argv.slice(2);
+const b = await chromium.launch({ channel: 'chrome' });
+const page = await b.newPage({ viewport: { width: +w, height: 900 } });
+await page.goto('http://localhost:4322' + path);
+await page.evaluate(() => document.querySelector('#cookie-consent')?.remove());
+const y = await page.evaluate((s) => { const el = document.querySelector(s); return el.getBoundingClientRect().bottom + scrollY; }, sel);
+await page.evaluate((y) => window.scrollTo(0, y - 450), y);
+await page.waitForTimeout(2500);
+await page.screenshot({ path: out });
+await b.close();

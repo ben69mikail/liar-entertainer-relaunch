@@ -616,3 +616,25 @@ html:is([data-zone='kids'], [data-zone='neutral']) .v2 main > :is(.k3-band--spot
   mask-image: radial-gradient(ellipse 90% 100% at 50% 100%, #000 55%, transparent 100%), linear-gradient(to right, transparent, #000 28%);
   -webkit-mask-composite: source-in; mask-composite: intersect;
 }
+
+/* ── kids hero like the adult one (user, 2026-10-09): one centred column — crumbs/badge,
+   title, the photo, then subline, claims, buttons and quick links. Kids zone only; neutral pages
+   (prices, contact …) keep text | photo. The copy box dissolves (display: contents) so the photo
+   can sit between the title and the rest without touching 21 templates. ── */
+html[data-zone='kids'] .k3-hero__grid {
+  grid-template-columns: minmax(0, 46rem);
+  justify-content: center;
+  justify-items: center;
+  text-align: center;
+  row-gap: 0;
+}
+html[data-zone='kids'] .k3-hero__copy { display: contents; }
+html[data-zone='kids'] .k3-hero__copy > * { order: 3; max-width: 46rem; }
+html[data-zone='kids'] .k3-hero__copy > :has(~ h1),
+html[data-zone='kids'] .k3-hero__copy > h1 { order: 1; }
+html[data-zone='kids'] .k3-hero__photo {
+  order: 2;
+  width: min(100%, 34rem);
+  margin: var(--space-2) auto var(--space-4);
+}
+html[data-zone='kids'] .k3-hero :is(.k3-hero__actions, .k3-quick, .k3-chipnav) { justify-content: center; }

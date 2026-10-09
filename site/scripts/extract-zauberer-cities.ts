@@ -11,6 +11,7 @@
 import { readFileSync, readdirSync, writeFileSync, mkdirSync } from 'node:fs';
 import { join } from 'node:path';
 import * as cheerio from 'cheerio';
+import { applyFacts } from '../src/data/fact-rules';
 
 const SRC = 'tests/fixtures/zauberer-liar';
 const CHANGES = JSON.parse(readFileSync(join(SRC, 'changes.json'), 'utf8')) as { description: Record<string, { to: string }> };
@@ -36,7 +37,7 @@ function target(href: string): string {
   return LINKS[href] ?? href;
 }
 
-const fix = (s: string) => s.replace(/über 400/g, '370+');
+const fix = (s: string) => applyFacts(s.replace(/über 400/g, '370+'));
 const clean = (s: string) => fix(s.replace(/\s+/g, ' ').trim());
 
 function html($: cheerio.CheerioAPI, el: cheerio.Cheerio<any>): string {

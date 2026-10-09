@@ -4,6 +4,7 @@ import V2Layout from '../layouts/V2Layout.astro';
 import Reviews from '../components/v2/Reviews.astro';
 import { CONTACT } from '../data/site';
 import GoldDivider from '../components/v2/kids/GoldDivider.astro';
+import RelatedService from '../components/v2/RelatedService.astro';
 import '../styles/kids-v3.css';
 import '../styles/article.css';
 import pagesData from '../data/pages.json';
@@ -1164,6 +1165,8 @@ if (scrapedContent) scrapedContent = netlifyWpForms(scrapedContent);
         <div class="bp-prose wp-scraped">
           <Fragment set:html={scrapedContent} />
         </div>
+
+        {isBlogPost && <RelatedService title={seoTitle || page.title} />}
 
         {isBlogPost && (
           <nav class="bp-services" aria-labelledby="bp-services-title">

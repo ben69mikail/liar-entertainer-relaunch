@@ -14,7 +14,7 @@ draft: false
 
 Die ehrliche Antwort auf die Frage **Clown oder Zauberer für den Kindergeburtstag** lautet bei mir: Sie müssen sich nicht entscheiden. Als Clown Zauberer LIAR verbinde ich in einer einzigen 40-Minuten-Show beides — die Situationskomik und Tollpatschigkeit des Clowns mit dem Staunen und den Wow-Momenten der Zauberei. Die Kinder lachen UND staunen, und Sie buchen einen Künstler statt zwei. Der Festpreis dafür: 150 €, für bis zu ca. 12 Kinder ab 4 Jahren, inklusive Material.
 
-Trotzdem ist die Frage berechtigt, denn Clown und Zauberer sind im Kern zwei unterschiedliche Kunstformen mit unterschiedlichen Stärken. Ich bin Michaël Prescler, stehe seit 2009 als Profi-Entertainer auf Kindergeburtstagen in NRW und habe in über 15 Jahren und mehr als 110.000 begeisterten Kindern beide Rollen tausendfach gespielt — oft in derselben Show. In diesem Artikel bekommen Sie den ehrlichen Vergleich: Was kann ein Clown besser, was ein Zauberer, für welches Alter passt was, und wann ist die Kombination die klügste Wahl?
+Trotzdem ist die Frage berechtigt, denn Clown und Zauberer sind im Kern zwei unterschiedliche Kunstformen mit unterschiedlichen Stärken. Ich bin Michaël Prescler, stehe seit 2009 als Profi-Entertainer auf Kindergeburtstagen in NRW und habe in über 17 Jahren und mehr als 110.000 begeisterten Kindern beide Rollen tausendfach gespielt — oft in derselben Show. In diesem Artikel bekommen Sie den ehrlichen Vergleich: Was kann ein Clown besser, was ein Zauberer, für welches Alter passt was, und wann ist die Kombination die klügste Wahl?
 
 ## Clown und Zauberer im direkten Vergleich 🆚
 
@@ -54,7 +54,7 @@ Die Grenze der reinen Zauberei: Für 3- bis 5-Jährige darf eine Show nicht zu �
 
 ## Die Kombi-Lösung: Clown UND Zauberer in einer Show ✨
 
-Nach über 15 Jahren und rund 400 Shows pro Jahr bin ich überzeugt: Die stärkste Kindershow ist die Mischung. Und zwar aus einem einfachen dramaturgischen Grund — Lachen und Staunen verstärken sich gegenseitig.
+Nach über 17 Jahren und über 400 Shows pro Jahr bin ich überzeugt: Die stärkste Kindershow ist die Mischung. Und zwar aus einem einfachen dramaturgischen Grund — Lachen und Staunen verstärken sich gegenseitig.
 
 In meiner Show wechseln sich beide Ebenen ständig ab: Der Clown scheitert an einem Zaubertrick, die Kinder lachen und rufen Tipps — und genau dann gelingt das eigentliche Wunder, und aus dem Lachen wird ein kollektives „Ohhh!". Die Clownerie holt die Jüngeren und die Zappeligen ab, die Zauberei fesselt die Älteren und die Skeptiker. So funktioniert eine Show für die typische Geburtstagsrunde, in der eben nicht alle Kinder gleich alt sind, sondern die kleine Schwester (4) neben dem großen Cousin (11) sitzt.
 
@@ -70,7 +70,7 @@ Falls Sie trotz Kombi-Option lieber eine klare Richtung festlegen möchten, helf
 
 **Frage 3: Was gab es letztes Jahr?** Kinder vergleichen. War im Vorjahr bereits ein reiner Clown da, wirkt ein Zauberer als Steigerung — und umgekehrt. Die Kombi-Show hat auch hier einen Vorteil: Sie fühlt sich in beiden Fällen neu an, weil die Gewichtung jedes Mal anders liegt.
 
-Und wenn Sie nach diesen drei Fragen immer noch schwanken: Genau dafür gibt es die Mischform. Sagen Sie mir bei der Anfrage einfach Alter, Anzahl und Temperament der Kinder — die passende Gewichtung ist dann meine Aufgabe, nicht Ihre. Nach rund 400 Shows pro Jahr lese ich eine Kindergruppe in den ersten fünf Minuten und justiere live nach. Das ist der eigentliche Unterschied zwischen einem festen Programm von der Stange und einem Profi, der seine Show an Ihre Feier anpasst.
+Und wenn Sie nach diesen drei Fragen immer noch schwanken: Genau dafür gibt es die Mischform. Sagen Sie mir bei der Anfrage einfach Alter, Anzahl und Temperament der Kinder — die passende Gewichtung ist dann meine Aufgabe, nicht Ihre. Nach über 400 Shows pro Jahr lese ich eine Kindergruppe in den ersten fünf Minuten und justiere live nach. Das ist der eigentliche Unterschied zwischen einem festen Programm von der Stange und einem Profi, der seine Show an Ihre Feier anpasst.
 
 ## Häufige Fragen
 
@@ -80,7 +80,7 @@ Als Faustregel: Clownerie zündet ab etwa 3 Jahren, Zauberei ab etwa 4 Jahren �
 
 ## Was ist, wenn ein Kind Angst vor Clowns hat?
 
-Das kommt vor und ist kein Drama. Meine Clownfigur arbeitet ohne gruselige Maske und ohne aufdringliches Anspielen einzelner Kinder — ängstliche Kinder dürfen erst mal aus der zweiten Reihe zuschauen. Sagen Sie mir vor der Show Bescheid, dann starte ich bewusst mit Zauberei und lasse die Clownerie langsam wachsen. In 15 Jahren habe ich es fast immer erlebt, dass genau diese Kinder nach zehn Minuten mittendrin sind.
+Das kommt vor und ist kein Drama. Meine Clownfigur arbeitet ohne gruselige Maske und ohne aufdringliches Anspielen einzelner Kinder — ängstliche Kinder dürfen erst mal aus der zweiten Reihe zuschauen. Sagen Sie mir vor der Show Bescheid, dann starte ich bewusst mit Zauberei und lasse die Clownerie langsam wachsen. In 17 Jahren habe ich es fast immer erlebt, dass genau diese Kinder nach zehn Minuten mittendrin sind.
 
 ## Kosten Clown und Zauberer unterschiedlich viel?
 

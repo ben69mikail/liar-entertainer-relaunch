@@ -14,11 +14,11 @@ draft: false
 
 Die kurze Antwort vorweg: Bei mir gibt es die **Luftballonmodellage beim Kindergeburtstag** als Zusatzbaustein zur Zaubershow für +20 €. In etwa 15 Minuten bekommt jedes Kind eine eigene Ballonfigur — Hund, Schwert, Blume oder eine andere Wunschfigur — die es mit nach Hause nehmen darf. Die Basis-Zaubershow kostet 150 € Festpreis (40 Minuten, bis ca. 12 Kinder, ab 4 Jahre, inkl. Material); mit Ballonmodellage sind Sie also bei 170 €, zzgl. 0,40 €/km Fahrtkosten ab 45966 Gladbeck.
 
-Ich bin Michaël Prescler, alias Clown Zauberer LIAR, und modelliere seit 2009 auf Kindergeburtstagen, Stadtfesten und Kita-Feiern in NRW Ballonfiguren — bei rund 400 Shows im Jahr kommen da einige tausend Ballontiere zusammen. In diesem Artikel erfahren Sie, welche Figuren bei Kindern wirklich ankommen, wie der Programmpunkt abläuft, was Sie beim Thema Sicherheit wissen sollten und warum die Kombination mit der Zaubershow so gut funktioniert.
+Ich bin Michaël Prescler, alias Clown Zauberer LIAR, und modelliere seit 2009 auf Kindergeburtstagen, Stadtfesten und Kita-Feiern in NRW Ballonfiguren — bei über 400 Shows im Jahr kommen da einige tausend Ballontiere zusammen. In diesem Artikel erfahren Sie, welche Figuren bei Kindern wirklich ankommen, wie der Programmpunkt abläuft, was Sie beim Thema Sicherheit wissen sollten und warum die Kombination mit der Zaubershow so gut funktioniert.
 
 ## Welche Ballonfiguren sind bei Kindern am beliebtesten? 🐶⚔️🌸
 
-Nach über 15 Jahren und mehr als 110.000 Kindern kann ich eine ziemlich verlässliche Hitliste aufstellen:
+Nach über 17 Jahren und mehr als 110.000 Kindern kann ich eine ziemlich verlässliche Hitliste aufstellen:
 
 - **Der Hund** — der unangefochtene Klassiker. Schnell erkennbar, robust, und jedes Kind kann ihn tragen wie ein Haustier. Für viele Kinder ist der Ballonhund die erste „eigene" Ballonfigur ihres Lebens.
 - **Das Schwert** — der Dauerbrenner, besonders bei 4- bis 8-Jährigen. Ehrlicher Hinweis aus der Praxis: Sobald das erste Schwert verteilt ist, wollen alle eins, und im Garten beginnt ein Ritterturnier. Planen Sie das ein.

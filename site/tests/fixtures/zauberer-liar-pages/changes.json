@@ -3,9 +3,21 @@
   "title": {
     "close-up-zauberer": {
       "from": "Close-up Zauberer NRW – Französische Zauberkunst hautnah | LIAR",
-      "to": "Close-up Zauberer NRW: Französische Zauberkunst hautnah | LIAR",
-      "why": "Source title 63 characters; SEO rule M6.1 allows 62. ' – ' replaced by ': ', words unchanged."
+      "to": "Close-up Zauberer NRW für Firmenevent, Messe & Empfang | LIAR",
+      "why": "GSC analysis 2026-10-09 (user decision B): close-up = Firmenevent/Messe/Empfang, Tischzauberer = Hochzeit/Dinner, so the two pages stop competing."
     }
   },
-  "description": {}
+  "description": {
+    "close-up-zauberer": {
+      "to": "Close-up Zauberer LIAR für Firmenevent, Messe, Empfang & Gala in NRW ✓ Verblüffende Magie direkt vor Ihren Augen ✓ Deutsch & Französisch ✓ Jetzt anfragen!",
+      "why": "GSC analysis 2026-10-09 (user decision B): close-up = Firmenevent/Messe/Empfang, Tischzauberer = Hochzeit/Dinner, so the two pages stop competing."
+    }
+  },
+  "h1": {
+    "close-up-zauberer": {
+      "from": "Close-up Zauberer NRW – Magie hautnah",
+      "to": "Close-up Zauberer für Firmenevent, Messe & Empfang",
+      "why": "GSC analysis 2026-10-09 (user decision B): close-up = Firmenevent/Messe/Empfang, Tischzauberer = Hochzeit/Dinner, so the two pages stop competing."
+    }
+  }
 }

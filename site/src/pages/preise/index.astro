@@ -137,6 +137,7 @@ const included = [
   { icon: '⏱️', title: 'Auf- und Abbau inklusive', text: 'Pünktliches Erscheinen, Aufbau und Abbau – Sie müssen nichts vorbereiten' },
   { icon: '🎂', title: 'Geburtstagskind im Mittelpunkt', text: 'Das Geburtstagskind wird zum Star der Show – ein unvergesslicher Moment' },
   { icon: '💰', title: 'Keine versteckten Kosten', text: 'Der vereinbarte Preis gilt – es kommen nur die transparenten Fahrtkosten hinzu' },
+  { icon: '🔊', title: 'Tonanlage auf Anfrage', text: 'Für große Gruppen bringe ich eine eigene Tonanlage mit – ab ca. 50 Kindern ist sie nötig' },
 ];
 
 // Same questions and answers as faqSchema (one source for the visible FAQ and the schema).
@@ -328,6 +329,7 @@ const faq = faqSchema.mainEntity.map((q) => ({ q: q.name, a: q.acceptedAnswer.te
       <GoldDivider />
       <h2 class="k3-h2">Was ist im Preis enthalten?</h2>
       <p class="k3-narrow pr-included__lead">Bei Clown Zauberer LIAR ist alles dabei, was Sie für ein unvergessliches Event brauchen. Sie müssen sich um nichts kümmern – nur für gute Laune sorgen!</p>
+      <p class="k3-narrow pr-included__lead pr-why"><strong>Warum nur 150 €?</strong> Die Zaubershow ist keine Einsteiger-Show: Ich bin seit 2009 hauptberuflich Clown und Zauberer, pädagogisch ausgebildet und spiele über 400 Shows pro Jahr – ohne Agentur. Deshalb liegt mein Festpreis bewusst am unteren Ende der üblichen Spanne, ohne Abstriche bei Requisiten, Ablauf und Erfahrung.</p>
       <ul class="pr-inc">
         {included.map((it, i) => (
           <li class="pr-inc__item" data-reveal data-reveal-delay={String((i % 2) / 10)}>

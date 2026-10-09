@@ -18,3 +18,15 @@ Jede bewusste Abweichung steht hier UND in `site/tests/fixtures/content-changes.
 
 ## Go-live (07.10.2026)
 - `/zauberer/hochzeit/`, `/zauberer/firmenfeier/`, `/zauberer/buehnen-zauberer/`: „Über 400 … bewertet mit 5,0 von 5 Sternen“ → „370+ …“ (L3, gleiche Korrektur wie /zauberer/ und /ueber-mich/; Nutzerentscheidung). „Über 400 Shows im Jahr“ / „über 400 erfolgreiche Auftritte“ bleiben (Auftritte, keine Bewertungen).
+
+## 2026-10-09 – GSC-Analyse umgesetzt (Nutzerfreigabe im Grill)
+
+Quelle: `docs/seo-audit-2026-10-09/GSC-ANALYSE.md`. Tests: `site/tests/dist/content-parity.test.ts`, `meta-parity.test.ts`, Fixtures `content-changes.json` / `meta-changes.json`.
+
+- **Fakten** (zentral `site/src/data/fact-rules.ts`, angewendet per `scripts/apply-fact-rules.ts`; Parität wendet dieselben Regeln auf die Baseline an): „seit über 15 Jahren“ → „seit 2009“, „15 Jahre“ → „17 Jahre“, „rund 400 Shows“ → „über 400 Shows“, „Über 400 zufriedene Kunden“ → „370+ Google-Bewertungen“, Alter (49) entfernt. Datierte News-Posts (`posts.json`) bleiben historisch.
+- **Titles**: Startseite „Clown Zauberer für Kindergeburtstag & Zaubershow NRW | LIAR“ · /zauberer/ „Zauberer NRW buchen – Bühnen- & Tischzauberer | LIAR“ · /kinderzauberer/ „Kinderzauberer NRW buchen – 370+ Bewertungen | LIAR“ · /zauberer/zaubershow/ „Zaubershow NRW für Kinder & Familien | LIAR“ · Schule „Zauberer für Schule & Schulfest in NRW | LIAR“ · Tischzauberer „Tischzauberer NRW für Hochzeit, Dinner & Feier | LIAR“ · Close-up „Close-up Zauberer NRW für Firmenevent, Messe & Empfang | LIAR“.
+- **H1**: Schule „Zaubershow für Schulen in NRW“ · Sommerfest „Zauberer für Sommerfest & Straßenfest in NRW“ · Tischzauberer „… Tischzauberei für Hochzeit, Dinner & Feier“ · Close-up „Close-up Zauberer für Firmenevent, Messe & Empfang“.
+- **Descriptions**: /zauberer/, Firmenfeier (+ Betriebsfeier), Ballonmodellage (+ Kommunion), Tischzauberer, Close-up, Über mich („Profi seit 2009“).
+- **Neue Inhalte**: Antwort-zuerst-Absätze (/zauberer/, /zauberer/zaubershow/, Kita) · Über mich: Ausbildung, Sprachen (DE; FR/EN/ES auf Wunsch), Technik (Tonanlage ab ca. 50 Kindern) · Preise: „Warum nur 150 €?“ + Leistung „Tonanlage auf Anfrage“ · FAQs Tonanlage/Sprache (Kindergeburtstag, Kita) · Ballon: Kommunion/Taufe · Startseite: Link-Leiste „Beliebte Leistungen“ · alle 69 Kinder-Stadtseiten: Abschnitt „Mehr Zauberei in <Stadt>“ (Schwesterseiten, Erwachsenen-Seite bzw. Hinweis für Bochum/Dortmund/Düsseldorf/Mülheim) · Blog: Kasten „Passende Leistung“.
+- **Schema**: Person `knowsLanguage` de/fr/en/es, Beschreibung mit pädagogischer Ausbildung; FAQPage um 2 Fragen ergänzt.
+- **Design**: Kinder-Hero einspaltig wie Erwachsene (Titel → Foto → Rest), nur Zone kids.

@@ -14,7 +14,7 @@ draft: false
 
 Die kurze, ehrliche Antwort vorweg: Bei mir kostet eine **Zaubershow zum Kindergeburtstag 150 € Festpreis** — dafür bekommen Sie 40 Minuten Zauberei und Clownerie für bis zu ca. 12 Kinder (ab 4 Jahren), inklusive Material. Dazu kommen lediglich Fahrtkosten von 0,40 € pro Kilometer ab 45966 Gladbeck. Wer mag, bucht Ballonmodellage für +20 € oder Glitzer-Tattoos für +40 € dazu — das Komplettpaket mit allen drei Bausteinen dauert rund 90 Minuten und kostet 210 €. Keine Pauschalen nach Bauchgefühl, keine Überraschungen auf der Rechnung.
 
-Ich bin Michaël Prescler, alias Clown Zauberer LIAR, und stehe seit 2009 als Profi-Entertainer auf Kindergeburtstagen in NRW — rund 400 Shows im Jahr. Die Frage **„Was kostet ein Zauberer?"** höre ich am Telefon fast täglich, und ich verstehe sie gut: Der Markt ist unübersichtlich, die Preisspannen sind groß, und kaum ein Anbieter schreibt seine Preise offen auf die Website. Genau deshalb bekommen Sie in diesem Artikel einen ehrlichen Überblick — mit meinen echten Preisen, den marktüblichen Spannen in NRW und den versteckten Kosten, auf die Sie achten sollten.
+Ich bin Michaël Prescler, alias Clown Zauberer LIAR, und stehe seit 2009 als Profi-Entertainer auf Kindergeburtstagen in NRW — über 400 Shows im Jahr. Die Frage **„Was kostet ein Zauberer?"** höre ich am Telefon fast täglich, und ich verstehe sie gut: Der Markt ist unübersichtlich, die Preisspannen sind groß, und kaum ein Anbieter schreibt seine Preise offen auf die Website. Genau deshalb bekommen Sie in diesem Artikel einen ehrlichen Überblick — mit meinen echten Preisen, den marktüblichen Spannen in NRW und den versteckten Kosten, auf die Sie achten sollten.
 
 ## Welche Faktoren bestimmen den Preis eines Zauberers? 🧮
 
@@ -26,7 +26,7 @@ Der offensichtlichste Faktor: Wie lange dauert die Show, und was ist enthalten? 
 
 ### Erfahrung und Professionalität
 
-Ein Hobby-Zauberer, der am Wochenende gelegentlich auftritt, kalkuliert anders als ein Vollprofi, der von seiner Kunst lebt. Profis investieren laufend in Requisiten, Versicherung, Fahrzeug und vor allem in ihr Programm. Ich stehe seit über 15 Jahren auf der Bühne, spiele rund 400 Shows pro Jahr und habe in dieser Zeit über 110.000 Kinder zum Lachen gebracht. Diese Routine merkt man einer Show an — vor allem dann, wenn etwas Unvorhergesehenes passiert, was auf Kindergeburtstagen ständig der Fall ist.
+Ein Hobby-Zauberer, der am Wochenende gelegentlich auftritt, kalkuliert anders als ein Vollprofi, der von seiner Kunst lebt. Profis investieren laufend in Requisiten, Versicherung, Fahrzeug und vor allem in ihr Programm. Ich stehe seit 2009 auf der Bühne, spiele über 400 Shows pro Jahr und habe in dieser Zeit über 110.000 Kinder zum Lachen gebracht. Diese Routine merkt man einer Show an — vor allem dann, wenn etwas Unvorhergesehenes passiert, was auf Kindergeburtstagen ständig der Fall ist.
 
 ### Anfahrt und Region
 
@@ -60,7 +60,7 @@ Damit Sie meine Preise einordnen können: Für eine professionelle Kinderzaubers
 
 Unterhalb von etwa 120 € wird es erfahrungsgemäß schwierig, einen erfahrenen Künstler mit eigenem Programm, ordentlichen Requisiten und Verlässlichkeit zu finden. Das können Studierende oder Hobby-Zauberer sein — das kann gut gehen, muss aber nicht. Oberhalb von 350 € bezahlen Sie häufig für große Namen, aufwendige Bühnentechnik oder Agentur-Provisionen, die bei einem Wohnzimmer-Geburtstag schlicht nicht nötig sind.
 
-Mein Basispreis von 150 € liegt bewusst am unteren Ende dieser Spanne — nicht, weil ich an der Qualität spare, sondern weil ich durch rund 400 Shows im Jahr ohne Agentur und ohne Zwischenhändler kalkulieren kann. Sie buchen direkt beim Künstler.
+Mein Basispreis von 150 € liegt bewusst am unteren Ende dieser Spanne — nicht, weil ich an der Qualität spare, sondern weil ich durch über 400 Shows im Jahr ohne Agentur und ohne Zwischenhändler kalkulieren kann. Sie buchen direkt beim Künstler.
 
 ## Versteckte Kosten: Darauf sollten Sie achten ⚠️
 

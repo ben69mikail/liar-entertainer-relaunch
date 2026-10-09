@@ -13,6 +13,7 @@ import { join, basename } from 'node:path';
 import * as cheerio from 'cheerio';
 import type { Cheerio, CheerioAPI } from 'cheerio';
 import type { AnyNode, Element } from 'domhandler';
+import { applyFacts } from '../src/data/fact-rules';
 
 const ROOT = join(import.meta.dirname, '..');
 const LEGACY = process.env.LEGACY_DIST;
@@ -187,6 +188,6 @@ for (const [family, { dir, prefix }] of Object.entries(FAMILIES)) {
     if (!existsSync(file)) continue;
     cities[slug] = extract(readFileSync(file, 'utf8'));
   }
-  writeFileSync(join(ROOT, 'src/data/cities', `${family}.json`), JSON.stringify(cities, null, 1) + '\n');
+  writeFileSync(join(ROOT, 'src/data/cities', `${family}.json`), applyFacts(JSON.stringify(cities, null, 1)) + '\n'); // fact corrections 2026-10-09
   console.log(family, Object.keys(cities).length, 'cities');
 }

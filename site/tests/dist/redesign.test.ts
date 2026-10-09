@@ -42,7 +42,7 @@ describe('parents reach key info fast (brief UX goals)', () => {
 
   it('kids FAQ answers are readable without JavaScript', () => {
     const $ = page(KIDS);
-    expect($('#faq details summary').length).toBe(8);
+    expect($('#faq details summary').length).toBe(10); // +2 FAQs (sound system, language), GSC analysis 2026-10-09
     expect($('#faq details .k3-faq__answer').first().text()).toContain('pflegeleicht');
   });
 });

@@ -11,6 +11,21 @@
       "from": "Über 400 Familien und Veranstalter haben mich mit der Bestnote bewertet. Lesen Sie echte Stimmen in meinen Google-Bewertungen.",
       "to": "370+ Familien und Veranstalter haben mich mit der Bestnote bewertet. Lesen Sie echte Stimmen in meinen Google-Bewertungen.",
       "why": "L3: real Google count is 370+ (user, 2026-10-04), same correction as /zauberer/. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Alter: 49 / Geburtsland: Frankreich",
+      "to": "Geburtsland: Frankreich",
+      "why": "User 2026-10-09: age removed (ages every year; not relevant for booking). See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Alter:",
+      "to": "Geburtsland:",
+      "why": "User 2026-10-09: age removed (ages every year; not relevant for booking). See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Sprachen Deutsch und Französisch",
+      "to": "Sprachen Shows auf Deutsch, auf Wunsch auch auf Französisch, Englisch oder Spanisch",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): languages per owner"
     }
   ],
   "/blog/kidzival-2024/": [
@@ -39,6 +54,451 @@
       "from": "Über 400 Kundinnen und Kunden haben mich mit 5,0 von 5 Sternen bewertet. Verlässlichkeit an Ihrem wichtigsten Tag.",
       "to": "370+ Kundinnen und Kunden haben mich mit 5,0 von 5 Sternen bewertet. Verlässlichkeit an Ihrem wichtigsten Tag.",
       "why": "L3: review count 370+ like /zauberer/ and /ueber-mich/ (user, 2026-10-07 go-live). See docs/CHANGES-METAS.md."
+    }
+  ],
+  "/clown/clownshow/clown-in-bochum/": [
+    {
+      "add": "h2 Mehr Zauberei in Bochum",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-bottrop/": [
+    {
+      "add": "h2 Mehr Zauberei in Bottrop",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-castrop-rauxel/": [
+    {
+      "add": "h2 Mehr Zauberei in Castrop-Rauxel",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-datteln/": [
+    {
+      "add": "h2 Mehr Zauberei in Datteln",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-dinslaken/": [
+    {
+      "add": "h2 Mehr Zauberei in Dinslaken",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-dorsten/": [
+    {
+      "add": "h2 Mehr Zauberei in Dorsten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-dortmund/": [
+    {
+      "add": "h2 Mehr Zauberei in Dortmund",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-duesseldorf/": [
+    {
+      "add": "h2 Mehr Zauberei in Düsseldorf",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-duisburg/": [
+    {
+      "add": "h2 Mehr Zauberei in Duisburg",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-essen/": [
+    {
+      "add": "h2 Mehr Zauberei in Essen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-gelsenkirchen/": [
+    {
+      "add": "h2 Mehr Zauberei in Gelsenkirchen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-gladbeck/": [
+    {
+      "add": "h2 Mehr Zauberei in Gladbeck",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-haltern/": [
+    {
+      "add": "h2 Mehr Zauberei in Haltern am See",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-herne/": [
+    {
+      "add": "h2 Mehr Zauberei in Herne",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-herten/": [
+    {
+      "add": "h2 Mehr Zauberei in Herten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-marl/": [
+    {
+      "add": "h2 Mehr Zauberei in Marl",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-moers/": [
+    {
+      "add": "h2 Mehr Zauberei in Moers",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-muelheim/": [
+    {
+      "add": "h2 Mehr Zauberei in Mülheim an der Ruhr",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-oberhausen/": [
+    {
+      "add": "h2 Mehr Zauberei in Oberhausen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-recklinghausen/": [
+    {
+      "add": "h2 Mehr Zauberei in Recklinghausen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-waltrop/": [
+    {
+      "add": "h2 Mehr Zauberei in Waltrop",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-wesel/": [
+    {
+      "add": "h2 Mehr Zauberei in Wesel",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/clown/clownshow/clown-in-xanten/": [
+    {
+      "add": "h2 Mehr Zauberei in Xanten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-bochum/": [
+    {
+      "add": "h2 Mehr Zauberei in Bochum",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-bottrop/": [
+    {
+      "add": "h2 Mehr Zauberei in Bottrop",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-castrop-rauxel/": [
+    {
+      "add": "h2 Mehr Zauberei in Castrop-Rauxel",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-datteln/": [
+    {
+      "add": "h2 Mehr Zauberei in Datteln",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-dinslaken/": [
+    {
+      "add": "h2 Mehr Zauberei in Dinslaken",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-dorsten/": [
+    {
+      "add": "h2 Mehr Zauberei in Dorsten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-dortmund/": [
+    {
+      "add": "h2 Mehr Zauberei in Dortmund",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-duesseldorf/": [
+    {
+      "add": "h2 Mehr Zauberei in Düsseldorf",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-duisburg/": [
+    {
+      "add": "h2 Mehr Zauberei in Duisburg",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-essen/": [
+    {
+      "add": "h2 Mehr Zauberei in Essen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-gelsenkirchen/": [
+    {
+      "add": "h2 Mehr Zauberei in Gelsenkirchen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-gladbeck/": [
+    {
+      "add": "h2 Mehr Zauberei in Gladbeck",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-haltern-am-see/": [
+    {
+      "add": "h2 Mehr Zauberei in Haltern am See",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-herne/": [
+    {
+      "add": "h2 Mehr Zauberei in Herne",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-herten/": [
+    {
+      "add": "h2 Mehr Zauberei in Herten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-marl/": [
+    {
+      "add": "h2 Mehr Zauberei in Marl",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-moers/": [
+    {
+      "add": "h2 Mehr Zauberei in Moers",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-muelheim/": [
+    {
+      "add": "h2 Mehr Zauberei in Mülheim an der Ruhr",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-oberhausen/": [
+    {
+      "add": "h2 Mehr Zauberei in Oberhausen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-recklinghausen/": [
+    {
+      "add": "h2 Mehr Zauberei in Recklinghausen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-waltrop/": [
+    {
+      "add": "h2 Mehr Zauberei in Waltrop",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-wesel/": [
+    {
+      "add": "h2 Mehr Zauberei in Wesel",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kindergeburtstag/geburtstag-in-xanten/": [
+    {
+      "add": "h2 Mehr Zauberei in Xanten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-bochum/": [
+    {
+      "add": "h2 Mehr Zauberei in Bochum",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-bottrop/": [
+    {
+      "add": "h2 Mehr Zauberei in Bottrop",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-castrop-rauxel/": [
+    {
+      "add": "h2 Mehr Zauberei in Castrop-Rauxel",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-datteln/": [
+    {
+      "add": "h2 Mehr Zauberei in Datteln",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-dinslaken/": [
+    {
+      "add": "h2 Mehr Zauberei in Dinslaken",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-dorsten/": [
+    {
+      "add": "h2 Mehr Zauberei in Dorsten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-dortmund/": [
+    {
+      "add": "h2 Mehr Zauberei in Dortmund",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-duesseldorf/": [
+    {
+      "add": "h2 Mehr Zauberei in Düsseldorf",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-duisburg/": [
+    {
+      "add": "h2 Mehr Zauberei in Duisburg",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-essen/": [
+    {
+      "add": "h2 Mehr Zauberei in Essen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-gelsenkirchen/": [
+    {
+      "add": "h2 Mehr Zauberei in Gelsenkirchen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-gladbeck/": [
+    {
+      "add": "h2 Mehr Zauberei in Gladbeck",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-haltern/": [
+    {
+      "add": "h2 Mehr Zauberei in Haltern am See",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-herne/": [
+    {
+      "add": "h2 Mehr Zauberei in Herne",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-herten/": [
+    {
+      "add": "h2 Mehr Zauberei in Herten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-marl/": [
+    {
+      "add": "h2 Mehr Zauberei in Marl",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-moers/": [
+    {
+      "add": "h2 Mehr Zauberei in Moers",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-muelheim/": [
+    {
+      "add": "h2 Mehr Zauberei in Mülheim an der Ruhr",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-oberhausen/": [
+    {
+      "add": "h2 Mehr Zauberei in Oberhausen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-recklinghausen/": [
+    {
+      "add": "h2 Mehr Zauberei in Recklinghausen",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-waltrop/": [
+    {
+      "add": "h2 Mehr Zauberei in Waltrop",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-wesel/": [
+    {
+      "add": "h2 Mehr Zauberei in Wesel",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/kinderzauberer/kinderzauberer-in-xanten/": [
+    {
+      "add": "h2 Mehr Zauberei in Xanten",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    }
+  ],
+  "/zauberer/tisch-zauberer/": [
+    {
+      "from": "h1 Tischzauberer NRW – Close-up Magie für Hochzeit & Event",
+      "to": "h1 Tischzauberer NRW – Tischzauberei für Hochzeit, Dinner & Feier",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): descriptive H1 (5.1)"
+    },
+    {
+      "from": "Tischzauberer NRW – Close-up Magie für Hochzeit & Event",
+      "to": "Tischzauberer NRW – Tischzauberei für Hochzeit, Dinner & Feier",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): tisch vs. close-up by occasion (decision B)"
+    }
+  ],
+  "/zauberer/zaubershow/schule/": [
+    {
+      "from": "h1 Schule",
+      "to": "h1 Zaubershow für Schulen in NRW",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): descriptive H1 (5.1)"
+    }
+  ],
+  "/zauberer/zaubershow/strassen-sommer-fest/": [
+    {
+      "from": "h1 Straßen- & Sommerfest",
+      "to": "h1 Zauberer für Sommerfest & Straßenfest in NRW",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): descriptive H1 (5.1)"
+    },
+    {
+      "from": "Straßen- & Sommerfest",
+      "to": "Zauberer für Sommerfest & Straßenfest in NRW",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): descriptive H1 (5.1)"
     }
   ]
 }

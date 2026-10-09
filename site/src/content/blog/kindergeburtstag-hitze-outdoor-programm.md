@@ -11,7 +11,7 @@ author: "Michaël Prescler"
 draft: false
 ---
 
-Wenn das Thermometer in NRW im Juni oder Juli die 30-Grad-Marke knackt und der Kindergeburtstag schon seit Wochen geplant ist, geraten viele Eltern ins Schwitzen — im wahrsten Sinne des Wortes. **Kindergeburtstag bei Hitze** muss aber kein Drama werden. Im Gegenteil: Mit der richtigen Planung wird genau dieser heiße Sommertag zum Highlight, an das sich die Kinder noch Jahre später erinnern. Ich bin Michaël Prescler, alias Clown Zauberer LIAR, und habe in über 15 Jahren wirklich jede Wetterlage auf Geburtstagsfeiern in NRW erlebt — vom Hagelschauer im Mai bis zur 35-Grad-Sahara im Ruhrgebiet.
+Wenn das Thermometer in NRW im Juni oder Juli die 30-Grad-Marke knackt und der Kindergeburtstag schon seit Wochen geplant ist, geraten viele Eltern ins Schwitzen — im wahrsten Sinne des Wortes. **Kindergeburtstag bei Hitze** muss aber kein Drama werden. Im Gegenteil: Mit der richtigen Planung wird genau dieser heiße Sommertag zum Highlight, an das sich die Kinder noch Jahre später erinnern. Ich bin Michaël Prescler, alias Clown Zauberer LIAR, und habe in über 17 Jahren wirklich jede Wetterlage auf Geburtstagsfeiern in NRW erlebt — vom Hagelschauer im Mai bis zur 35-Grad-Sahara im Ruhrgebiet.
 
 In diesem Artikel zeige ich Ihnen, was bei Hitze tatsächlich funktioniert: welche Outdoor-Programme kindgerecht sind, wie Sie den Garten oder Park sommertauglich machen, welche Spiele bei den Kleinen auch bei drückender Schwüle ankommen und wann ein professionelles Programm wie eine Show oder Ballonmodellage sinnvoll ist. Praxisnah, getestet, ehrlich.
 

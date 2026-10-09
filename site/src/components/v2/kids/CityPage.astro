@@ -20,6 +20,10 @@ import GoldDivider from './GoldDivider.astro';
 import Curtain from './Curtain.astro';
 import YouTubeFacade from '../../YouTubeFacade.astro';
 import { CONTACT } from '../../../data/site';
+import { ZAUBERER_CITIES, zaubererCityPath } from '../../../data/zauberer-cities';
+import kinderzaubererCities from '../../../data/cities/kinderzauberer.json';
+import geburtstagCities from '../../../data/cities/kindergeburtstag.json';
+import clownCities from '../../../data/cities/clownshow.json';
 import '../../../styles/kids-v3.css';
 
 export interface CityData {
@@ -43,6 +47,23 @@ export interface CityData {
 }
 interface Props { city: CityData }
 const { city } = Astro.props;
+
+// "Mehr in <Stadt>" (GSC analysis 2026-10-09, 5.2-2 + B5): the city's sister pages of the other
+// families, the adult page where one exists, and for big cities without one a pointer to /zauberer/.
+const citySlug = new URL(city.seo.canonical).pathname.split('/').filter(Boolean).pop()!.replace(/^.*?-in-/, '').replace(/-am-see$/, '');
+const NAMES: Record<string, string> = { duesseldorf: 'Düsseldorf', muelheim: 'Mülheim an der Ruhr', 'castrop-rauxel': 'Castrop-Rauxel', haltern: 'Haltern am See' };
+const adult = ZAUBERER_CITIES.find((c) => c.slug === citySlug);
+const cityName = NAMES[citySlug] ?? adult?.name ?? citySlug.charAt(0).toUpperCase() + citySlug.slice(1);
+const ownPath = new URL(city.seo.canonical).pathname;
+const has = (data: object, key: string) => Object.prototype.hasOwnProperty.call(data, key);
+const geburtstagKey = has(geburtstagCities, `geburtstag-in-${citySlug}`) ? `geburtstag-in-${citySlug}` : `geburtstag-in-${citySlug}-am-see`;
+const sisters = [
+  has(kinderzaubererCities, `kinderzauberer-in-${citySlug}`) && { href: `/kinderzauberer/kinderzauberer-in-${citySlug}/`, label: `Kinderzauberer in ${cityName}` },
+  has(geburtstagCities, geburtstagKey) && { href: `/kindergeburtstag/${geburtstagKey}/`, label: `Kindergeburtstag in ${cityName}` },
+  has(clownCities, `clown-in-${citySlug}`) && { href: `/clown/clownshow/clown-in-${citySlug}/`, label: `Clown in ${cityName}` },
+  adult && { href: zaubererCityPath(adult.slug), label: `Zauberer für Erwachsene in ${cityName}` },
+].filter((l): l is { href: string; label: string } => Boolean(l) && (l as { href: string }).href !== ownPath);
+const BIG_WITHOUT_ADULT = ['bochum', 'dortmund', 'duesseldorf', 'muelheim'];
 
 const ASSETS = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpg,jpeg,png,webp}', { eager: true });
 const asset = (path: string) => {
@@ -194,6 +215,20 @@ const heroAlt = city.hero.imageAlt || `Clown Zauberer LIAR – ${city.hero.h1.re
       </section>
     );
   })}
+
+  <section class="k3-alt ct-more" data-city-links>
+    <div class="container k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2">Mehr Zauberei in {cityName}</h2>
+      {!adult && BIG_WITHOUT_ADULT.includes(citySlug) && (
+        <p class="k3-narrow">Auch für Erwachsene in {cityName}: Für Hochzeit, Firmenfeier oder Gala trete ich als Bühnen- und Tischzauberer auf – <a href="/zauberer/">Zauberer für Erwachsene in NRW</a>.</p>
+      )}
+      <nav class="k3-quick ct-more__links" aria-label={`Mehr in ${cityName}`}>
+        {sisters.map((l) => <a href={l.href}>{l.label}</a>)}
+        <a href="/kinderzauberer/">Kinderzauberer in NRW</a>
+      </nav>
+    </div>
+  </section>
 </V2Layout>
 
 <style>
@@ -204,6 +239,7 @@ const heroAlt = city.hero.imageAlt || `Clown Zauberer LIAR – ${city.hero.h1.re
     display: inline-block; margin: var(--space-2) 0 0 !important; padding: 0.3rem 0.95rem; border-radius: 999px;
     font-weight: 800; color: #fff3e2; background: rgba(255, 252, 245, 0.1); box-shadow: inset 0 0 0 1px rgba(233, 200, 119, 0.75);
   }
+  .ct-more__links { justify-content: center; }
   .ct-lead { font-size: 1.15rem; font-weight: 700; color: rgba(246, 236, 220, 0.92); }
 
   /* ── prose: translated legacy layout (c-*) in the v3 look ── */

@@ -13,7 +13,7 @@ draft: false
 
 Sobald die ersten warmen Tage kommen, klingelt bei mir das Telefon: "Herr Prescler, wir feiern dieses Jahr im Garten – funktioniert eine Zaubershow draußen überhaupt?" Die kurze Antwort: Ja, eine **Zaubershow im Freien** ist nicht nur möglich, sie ist oft der absolute Höhepunkt eines Sommerfestes oder Kindergeburtstags. Aber – und hier wird es spannend – Open-Air-Zauberei ist nicht einfach "Indoor-Show unter freiem Himmel". Sonne, Wind, Untergrund, Akustik, Ablenkung durch Nachbarskatzen und das Eis des Eiswagens nebenan: All das verändert die Show grundlegend.
 
-Ich bin Michaël Prescler, alias Clown Zauberer LIAR, und ich zaubere seit 2009 in ganz NRW – von Gladbeck über Münster bis ins Bergische Land. In den letzten 15 Jahren habe ich vermutlich jede denkbare Outdoor-Situation erlebt: Garten mit Hangneigung, Schützenfest mit Blasmusik nebenan, Kita-Hof mit Asphalt, Pferdekoppel, Hinterhof in Köln-Ehrenfeld. In diesem Artikel verrate ich Ihnen ganz konkret, worauf es bei einer **Zaubershow im Freien** ankommt, welche Tricks draußen besonders gut funktionieren, was bei Wind und Sonne passiert – und wie Sie als Eltern den perfekten Open-Air-Rahmen schaffen.
+Ich bin Michaël Prescler, alias Clown Zauberer LIAR, und ich zaubere seit 2009 in ganz NRW – von Gladbeck über Münster bis ins Bergische Land. In den letzten 17 Jahren habe ich vermutlich jede denkbare Outdoor-Situation erlebt: Garten mit Hangneigung, Schützenfest mit Blasmusik nebenan, Kita-Hof mit Asphalt, Pferdekoppel, Hinterhof in Köln-Ehrenfeld. In diesem Artikel verrate ich Ihnen ganz konkret, worauf es bei einer **Zaubershow im Freien** ankommt, welche Tricks draußen besonders gut funktionieren, was bei Wind und Sonne passiert – und wie Sie als Eltern den perfekten Open-Air-Rahmen schaffen.
 
 ![Clown Zauberer LIAR zaubert draußen im Garten für eine Gruppe Kinder im Halbkreis](https://liar-entertainer.com/blog-images/open-air-zauberei-im-freien/inline-1.jpg)
 
@@ -35,7 +35,7 @@ Wind ab Stärke 3 (also leichte Brise, die Blätter bewegt) macht aus jedem Seid
 
 ## Welche Zaubertricks funktionieren draußen besonders gut? ✨
 
-Nicht jeder Trick übersteht den Open-Air-Test. Aus 15 Jahren Praxis weiß ich, was draußen zuverlässig läuft – und was Sie sich (und mir) ersparen sollten.
+Nicht jeder Trick übersteht den Open-Air-Test. Aus 17 Jahren Praxis weiß ich, was draußen zuverlässig läuft – und was Sie sich (und mir) ersparen sollten.
 
 ### Großflächige visuelle Effekte
 

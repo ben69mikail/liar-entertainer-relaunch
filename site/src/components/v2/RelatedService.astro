@@ -1,0 +1,42 @@
+---
+/**
+ * "Passende Leistung" under every blog article (GSC analysis 2026-10-09: informational posts bring
+ * parents and educators, but 13 of 40 posts linked no service page). Picks the service from the
+ * article's own title/text; the children's magician hub is always offered as the second link.
+ */
+interface Props { title: string; text?: string }
+const { title, text = '' } = Astro.props;
+const hay = `${title} ${text}`.toLowerCase();
+const RULES: [RegExp, string, string][] = [
+  [/kita|kindergarten|vorschul/, '/zauberer/zaubershow/kindergarten-kita/', 'Zaubershow für Kindergarten & Kita'],
+  [/schul/, '/zauberer/zaubershow/schule/', 'Zaubershow für Schulen'],
+  [/karneval|kindersitzung|fasching/, '/clown/karneval/', 'Clown & Zauberer für Karneval'],
+  [/weihnachtsfeier|firmen|betriebs/, '/zauberer/firmenfeier/', 'Zauberer für Firmenfeier & Weihnachtsfeier'],
+  [/hochzeit/, '/zauberer/hochzeit/', 'Zauberer für die Hochzeit'],
+  [/ballon/, '/clown/ballonmodellage/', 'Ballonkünstler für Ihre Feier'],
+  [/kostet|preis|kosten/, '/preise/', 'Preise & Pakete'],
+  [/stadtfest|straßenfest|strassenfest|sommerfest|markt|festival/, '/zauberer/zaubershow/strassen-sommer-fest/', 'Zauberer für Sommerfest & Straßenfest'],
+  [/clown/, '/clown/clownshow/', 'Clown für den Kindergeburtstag'],
+];
+const hit = RULES.find(([re]) => re.test(hay));
+const primary = hit ? { href: hit[1], label: hit[2] } : { href: '/kindergeburtstag/', label: 'Zauberer für den Kindergeburtstag' };
+const second = primary.href === '/kinderzauberer/' ? { href: '/kindergeburtstag/', label: 'Zauberer für den Kindergeburtstag' } : { href: '/kinderzauberer/', label: 'Kinderzauberer in NRW' };
+---
+
+<aside class="rs" aria-label="Passende Leistung" data-related-service>
+  <p class="rs__title">Passende Leistung</p>
+  <div class="rs__links">
+    <a class="btn btn--primary" href={primary.href}>{primary.label}</a>
+    <a class="btn btn--ghost rs__second" href={second.href}>{second.label}</a>
+  </div>
+</aside>
+
+<style>
+  .rs {
+    margin: var(--space-4) 0 0; padding: var(--space-3); border-radius: var(--radius-md, 0.9rem); text-align: center;
+    background: var(--surface); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.45), 0 14px 30px -22px rgba(60, 30, 10, 0.45);
+  }
+  .rs__title { font-family: var(--font-display); font-size: 1.25rem; font-weight: 600; margin: 0 0 var(--space-2) !important; }
+  .rs__links { display: flex; flex-wrap: wrap; gap: 0.75rem; justify-content: center; }
+  .rs__second { color: var(--ink); }
+</style>

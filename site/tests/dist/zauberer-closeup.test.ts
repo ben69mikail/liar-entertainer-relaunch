@@ -16,7 +16,8 @@ const text = (s: string) => s.replace(/\s+/g, ' ').trim();
 const fix = (s: string) => s.replace(/über 400/g, '370+');
 const SLUG = 'close-up-zauberer';
 // documented deviations (SEO length rules M6.1/M6.4), shared with the extractor
-const CHANGES = JSON.parse(readFileSync(join(import.meta.dirname, '../fixtures/zauberer-liar-pages/changes.json'), 'utf8')) as Record<'title' | 'description', Record<string, { to: string }>>;
+const CHANGES = JSON.parse(readFileSync(join(import.meta.dirname, '../fixtures/zauberer-liar-pages/changes.json'), 'utf8')) as Record<'title' | 'description' | 'h1', Record<string, { from?: string; to: string }>>;
+const h1Fix = (s: string) => (CHANGES.h1?.[SLUG] && s === CHANGES.h1[SLUG].from ? CHANGES.h1[SLUG].to : s);
 const stem = (p: string) => p.split('/').pop()!.replace(/\.[a-z]+$/, '');
 
 const source = () => {
@@ -37,7 +38,7 @@ describe(`${PATH} (close-up page of zauberer-liar.de)`, () => {
     expect(desc).toBe(CHANGES.description[SLUG]?.to ?? fix($s('meta[name="description"]').attr('content')!));
     expect(title.length).toBeLessThanOrEqual(62); // SEO rule M6.1
     expect(desc.length).toBeLessThanOrEqual(165); // SEO rule M6.4
-    expect(text($('h1').text())).toBe(text($s('h1').text()));
+    expect(text($('h1').text())).toBe(h1Fix(text($s('h1').text())));
     expect($('link[rel="canonical"]').attr('href')).toBe(`https://liar-entertainer.com${PATH}`);
     expect($('html').attr('data-zone')).toBe('adult');
   });
@@ -45,7 +46,7 @@ describe(`${PATH} (close-up page of zauberer-liar.de)`, () => {
   it('keeps every heading, paragraph, card and caption of the source', () => {
     const $s = source();
     const blocks = $s('header.page-hero h1, header.page-hero .wrap > p:not(.breadcrumb), section h2, section h3, section p, section li, .eyebrow, .cap')
-      .map((_, el) => fix(text($s(el).text())))
+      .map((_, el) => h1Fix(fix(text($s(el).text()))))
       .get()
       .filter((b) => b.length > 2);
     expect(blocks.length).toBeGreaterThan(15);

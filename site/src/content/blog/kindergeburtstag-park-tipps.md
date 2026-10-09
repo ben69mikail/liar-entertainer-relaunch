@@ -1,7 +1,7 @@
 ---
 title: "Kindergeburtstag im Park: Was muss man beachten?"
 seoTitle: "Kindergeburtstag im Park: Profi-Tipps NRW | LIAR"
-description: "Kindergeburtstag im Park in NRW planen — praktische Tipps zu Location, Spielen, Verpflegung, Wetter und Programm vom Profi mit 15+ Jahren Erfahrung."
+description: "Kindergeburtstag im Park in NRW planen — praktische Tipps zu Location, Spielen, Verpflegung, Wetter und Programm vom Profi mit über 17 Jahren Erfahrung."
 publishDate: 2026-05-21
 heroImage: "https://liar-entertainer.com/blog-images/kindergeburtstag-park-tipps/cover.jpg"
 heroImageAlt: "Kindergeburtstag im Park in NRW mit Picknickdecke und Kindern"
@@ -77,7 +77,7 @@ Bei 4- bis 5-Jährigen reichen oft Seifenblasen, ein grosser bunter Fallschirm (
 
 ## Was ist mit dem Wetter? Brauche ich einen Plan B? ☀️🌧️
 
-Ja. Immer. NRW-Wetter ist im April, Mai und September wechselhaft, und nichts ist frustrierender als drei Stunden vor der Feier in den Regenwolken zu starren. Mein Rat aus 15+ Jahren Erfahrung: Planen Sie den Plan B von Anfang an mit ein, nicht erst, wenn die ersten Tropfen fallen — dann bleibt der Kopf am Festtag frei und die Feier gelingt bei jedem Wetter.
+Ja. Immer. NRW-Wetter ist im April, Mai und September wechselhaft, und nichts ist frustrierender als drei Stunden vor der Feier in den Regenwolken zu starren. Mein Rat aus über 17 Jahren Erfahrung: Planen Sie den Plan B von Anfang an mit ein, nicht erst, wenn die ersten Tropfen fallen — dann bleibt der Kopf am Festtag frei und die Feier gelingt bei jedem Wetter.
 
 ![Kindergeburtstag im Park: Kinder beim gemeinsamen Programm auf der Wiese](https://liar-entertainer.com/blog-images/kindergeburtstag-park-tipps/inline-2.jpg)
 

@@ -11,7 +11,7 @@ author: "Michaël Prescler"
 draft: false
 ---
 
-Mai in NRW, und im Kalender steht alles gleichzeitig: Muttertag, der Kindergeburtstag Ihres Sohnes, und die Oma hat sich nach zwei Jahren endlich wieder angekuendigt. Die naheliegende Frage: **Muttertag und Kindergeburtstag kombinieren** – geht das, ohne dass einer der Anlaesse zu kurz kommt? Die ehrliche Antwort aus 15+ Jahren Familienfeier-Erfahrung: Ja, sehr gut sogar. Aber es gibt ein paar Stolpersteine, die man kennen sollte.
+Mai in NRW, und im Kalender steht alles gleichzeitig: Muttertag, der Kindergeburtstag Ihres Sohnes, und die Oma hat sich nach zwei Jahren endlich wieder angekuendigt. Die naheliegende Frage: **Muttertag und Kindergeburtstag kombinieren** – geht das, ohne dass einer der Anlaesse zu kurz kommt? Die ehrliche Antwort aus über 17 Jahren Familienfeier-Erfahrung: Ja, sehr gut sogar. Aber es gibt ein paar Stolpersteine, die man kennen sollte.
 
 Ich bin Michaël (Clown Zauberer LIAR) und habe in NRW schon unzaehlige Doppelfeiern begleitet – von der ueberschaubaren Gartenrunde bis zum Familientreffen mit 35 Personen. In diesem Beitrag sortiere ich, was zusammen funktioniert, was man besser trennt und wie die Feier fuer Kinder UND fuer die Mutter/Oma ein schoener Tag wird.
 

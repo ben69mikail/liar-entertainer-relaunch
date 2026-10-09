@@ -81,6 +81,7 @@ const articleSchema = {
   dateModified: modifiedIso,
   mainEntityOfPage: { '@type': 'WebPage', '@id': canonical },
 };
+import RelatedService from '../../components/v2/RelatedService.astro';
 ---
 
 
@@ -138,6 +139,7 @@ const articleSchema = {
       <article class="bp-prose">
         <Content />
       </article>
+      <RelatedService title={entry.data.title} text={(entry.data.tags ?? []).join(" ")} />
 
       <!-- Autorbox: E-E-A-T signal, linked to the Person schema (#person) -->
       <aside class="bp-author">
@@ -146,7 +148,7 @@ const articleSchema = {
           <p class="bp-author__title">Über den Autor: {entry.data.author || 'Michaël Prescler'}</p>
           <p class="bp-author__text">
             Michaël Prescler alias <strong>Clown Zauberer LIAR</strong> ist seit 2009 professioneller
-            Clown, Zauberer und Kinderentertainer aus Gladbeck. Mit rund 400 Shows pro Jahr, über
+            Clown, Zauberer und Kinderentertainer aus Gladbeck. Mit über 400 Shows pro Jahr, über
             110.000 begeisterten Kindern und 370+ Google-Bewertungen (5,0 ★) gehört er zu den
             aktivsten Kinderzauberern in NRW. Er schreibt hier aus der Praxis – über das, was auf
             echten Kindergeburtstagen und Festen wirklich funktioniert.

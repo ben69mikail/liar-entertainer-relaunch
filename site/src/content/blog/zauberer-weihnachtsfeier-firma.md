@@ -1,7 +1,7 @@
 ---
 title: "Zauberer für die Weihnachtsfeier: Was ein Auftritt wirklich bringt – und wie Sie ihn richtig planen"
 seoTitle: "Zauberer für die Weihnachtsfeier buchen: Ablauf & Tipps | LIAR"
-description: "Zauberer für die Weihnachtsfeier in NRW: Welches Format zu welchem Abend passt, wann Sie buchen sollten, wie viel Platz und Technik nötig ist – aus der Praxis von über 15 Jahren Firmenfeiern."
+description: "Zauberer für die Weihnachtsfeier in NRW: Welches Format zu welchem Abend passt, wann Sie buchen sollten, wie viel Platz und Technik nötig ist – aus der Praxis von über 17 Jahren Firmenfeiern."
 publishDate: 2026-09-28
 categories: ["Feste", "Saisonal", "Zaubershow", "Leistung"]
 tags: ["zauberer-weihnachtsfeier", "firmenfeier", "betriebsfeier"]

@@ -1,4 +1,5 @@
 import { describe, it, expect } from 'vitest';
+import { applyFacts } from '../../src/data/fact-rules';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import * as cheerio from 'cheerio';
@@ -33,7 +34,7 @@ describe('zauberer-liar.de city pages on the new site', () => {
       it('keeps every heading, paragraph, review and FAQ of the source (L3 fix: 370+ instead of "über 400")', () => {
         const $s = source(city);
         const blocks = $s('header.page-hero h1, header.page-hero .wrap > p:not(.breadcrumb), section h2, section h3, section p, .eyebrow, .faq-q, .faq-a, .who')
-          .map((_, el) => { const c = $s(el).clone(); c.find('.pl').remove(); return text(c.text()).replace(/über 400/g, '370+'); })
+          .map((_, el) => { const c = $s(el).clone(); c.find('.pl').remove(); return applyFacts(text(c.text()).replace(/über 400/g, '370+')); })
           .get().filter((b) => b.length > 2);
         const body = text(page(pathOf(city))('main').text());
         expect(blocks.filter((b) => !body.includes(b))).toEqual([]);
