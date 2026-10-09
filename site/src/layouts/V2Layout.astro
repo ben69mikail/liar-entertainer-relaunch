@@ -5,6 +5,7 @@ import type { Props as DocumentProps } from './Document.astro';
 import SiteHeader from '../components/v2/SiteHeader.astro';
 import SiteFooter from '../components/v2/SiteFooter.astro';
 import FontPreloads from '../components/v2/FontPreloads.astro';
+import LanguageSign from '../components/v2/LanguageSign.astro';
 import { zoneFor } from '../lib/site-map';
 import '../styles/seam-fade.css';
 
@@ -19,6 +20,8 @@ const seam = zoneFor(Astro.url.pathname) !== 'adult';
   <SiteHeader />
   <main class:list={[mainClass, { 'seam-fade': seam }]}>
     <slot />
+    {/* placed between two sections by src/lib/place-sign.ts (middleware) */}
+    <LanguageSign />
   </main>
   <SiteFooter />
 </Document>

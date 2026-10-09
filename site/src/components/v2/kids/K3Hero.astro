@@ -11,7 +11,6 @@
  */
 import Curtain from './Curtain.astro';
 import ProgramFrame from './ProgramFrame.astro';
-import LanguageSign from '../LanguageSign.astro';
 const hasPhoto = Astro.slots.has('photo');
 ---
 
@@ -23,5 +22,4 @@ const hasPhoto = Astro.slots.has('photo');
     <div class="k3-hero__copy"><slot /></div>
     {hasPhoto && <ProgramFrame class="k3-hero__photo"><slot name="photo" /></ProgramFrame>}
   </div>
-  <div class="container k3-hero__sign"><LanguageSign /></div>
 </section>

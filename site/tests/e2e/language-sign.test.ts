@@ -2,8 +2,8 @@ import { describe, it, expect, beforeAll, afterAll } from 'vitest';
 import { chromium, type Browser } from 'playwright';
 
 // Runs against `astro preview` (default http://localhost:4322).
-// Circus sign "Show auch auf Französisch · Englisch · Spanisch" with blinking arrows (user,
-// 2026-10-09): home + every main-menu page, in the hero; not on city pages or blog posts.
+// Circus sign "Show auch auf Französisch · Englisch · Spanisch" (user, 2026-10-09, revised): small,
+// no flags, six blinking arrows around it; on EVERY page between two sections, never in the hero.
 const BASE = process.env.E2E_BASE ?? 'http://localhost:4322';
 let browser: Browser;
 beforeAll(async () => {
@@ -23,6 +23,8 @@ async function probe(path: string, width = 1280, reducedMotion: 'reduce' | 'no-p
       present: !!sign,
       text: sign?.textContent?.replace(/\s+/g, ' ').trim() ?? '',
       inHero: !!(sign && hero?.contains(sign)),
+      betweenSections: !!sign?.closest('main section') && !sign!.closest('main section')!.matches('.k3-hero, .ce-hero--stage') && sign!.closest('main section') !== document.querySelector('main section'),
+      flags: sign?.querySelectorAll('.ls__flags, image, rect').length ?? 0,
       arrows: sign?.querySelectorAll('.ls__arrow').length ?? 0,
       animated: arrow ? getComputedStyle(arrow).animationName : '',
       fits: document.documentElement.scrollWidth <= innerWidth,
@@ -35,13 +37,15 @@ async function probe(path: string, width = 1280, reducedMotion: 'reduce' | 'no-p
 }
 
 describe('language sign', () => {
-  for (const path of ['/', '/kindergeburtstag/', '/clown/clownshow/', '/zauberer/', '/zauberer/hochzeit/', '/preise/', '/galerie/', '/zauberer/zaubershow/schule/']) {
-    it(`${path}: sign with two blinking arrows in the hero`, async () => {
+  for (const path of ['/', '/kindergeburtstag/', '/clown/clownshow/', '/zauberer/', '/zauberer/hochzeit/', '/preise/', '/galerie/', '/zauberer/zaubershow/schule/', '/kindergeburtstag/geburtstag-in-essen/', '/zauberer/zauberer-in-essen/', '/blog/', '/kontakt/']) {
+    it(`${path}: small sign with six blinking arrows between two sections`, async () => {
       const r = await probe(path);
       expect(r.present).toBe(true);
       expect(r.text).toContain('Französisch · Englisch · Spanisch');
-      expect(r.inHero).toBe(true);
-      expect(r.arrows).toBe(2);
+      expect(r.inHero).toBe(false);
+      expect(r.betweenSections).toBe(true);
+      expect(r.arrows).toBe(6);
+      expect(r.flags).toBe(0);
       expect(r.animated).toBe('ls-arrow');
     });
   }
@@ -49,11 +53,6 @@ describe('language sign', () => {
   it('is translated on the FR twin', async () => {
     const r = await probe('/fr/tarifs/');
     expect(r.text).toContain('français · anglais · espagnol');
-  });
-
-  it('is not on city pages', async () => {
-    expect((await probe('/kindergeburtstag/geburtstag-in-essen/')).present).toBe(false);
-    expect((await probe('/zauberer/zauberer-in-essen/')).present).toBe(false);
   });
 
   it('fits a 360 px phone', async () => {

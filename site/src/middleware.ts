@@ -7,6 +7,7 @@ import { defineMiddleware } from 'astro:middleware';
 import { appendFileSync } from 'node:fs';
 import { localeOf } from './lib/site-map';
 import { buildDictionary, translateHtml, type Entry } from './i18n/translate-html';
+import { placeSign } from './lib/place-sign';
 
 const files = import.meta.glob<Entry[]>('./i18n/strings/*.json', { eager: true, import: 'default' });
 const dict = buildDictionary(Object.values(files).flat());
@@ -14,9 +15,12 @@ const dict = buildDictionary(Object.values(files).flat());
 export const onRequest = defineMiddleware(async (context, next) => {
   const response = await next();
   const locale = localeOf(context.url.pathname);
-  if (locale === 'de' || !(response.headers.get('content-type') ?? 'text/html').includes('text/html')) return response;
+  if (!(response.headers.get('content-type') ?? 'text/html').includes('text/html')) return response;
+  // language sign between two sections (user, 2026-10-09)
+  const placed = placeSign(await response.text());
+  if (locale === 'de') return new Response(placed, { status: response.status, headers: response.headers });
 
-  const { html, missing } = translateHtml(await response.text(), locale, dict);
+  const { html, missing } = translateHtml(placed, locale, dict);
   if (missing.length) {
     const collect = process.env.I18N_MISSING;
     if (!collect) {
