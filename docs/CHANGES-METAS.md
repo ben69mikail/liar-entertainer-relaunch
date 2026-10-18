@@ -36,3 +36,9 @@ Quelle: `docs/seo-audit-2026-10-09/GSC-ANALYSE.md`. Tests: `site/tests/dist/cont
 - **Preise** (Nutzer): erlaubt nur auf /preise/, /kindergeburtstag/, Geburtstags-Stadtseiten und Geburtstags-Blogartikeln (Ratgeber-Marktpreise bleiben). Entfernt: Startseiten-FAQ (jetzt „Festpreis … Preisseite“), Glitzer-Tattoo-Title („Ab 40€“), Zaubershow-Absatz, „ab 150 €“ in den 14 Erwachsenen-Stadtseiten (`PRICE_RULES_ADULT`), Kita/Schule 300 € und Walk-Act 800 € aus llms.txt/llms-full.txt und der Cowork-Anleitung. Wächter: `content-parity.test.ts` „prices only for kids birthdays“, SEO-Regel M1.2 umgestellt.
 - **Sprach-Schild** `components/v2/LanguageSign.astro`: „Show auch auf Französisch · Englisch · Spanisch“ mit blinkenden Cartoon-Pfeilen im Hero von Startseite + allen Menüseiten (FR/EN übersetzt), nicht auf Stadtseiten/Blog. e2e `language-sign.test.ts`.
 - **Pantomime**: Es gibt keinen Link auf die alte Subdomain; alle Pantomime-Links zeigen auf https://www.pantomime-la-france.eu/.
+
+## 2026-10-09 (c) – Buchungsregeln Glitzer Tattoos & Ballonmodellage (Nutzer)
+
+- **Glitzer Tattoos** nur als Zusatz zur Zaubershow für Kindergeburtstage und private Feiern; nicht einzeln, nicht für Großveranstaltungen (Stadt-/Straßenfest, Firmenevent, Kita-/Schulfest). Neuer Block „So buchen Sie Glitzer Tattoos“ (`components/v2/kids/BookingRules.astro`) direkt nach dem Intro; Sätze mit „Straßenfest/Events/Kita- und Schulfeste“ angepasst (Hero-Unterzeile, Intro, Text, CTA, Bild-Alt, Meta-Description, Service-Schema).
+- **Ballonmodellage** nur mit Zaubershow oder Walk-Act ab 3 Stunden; nie einzeln, auch nicht für eine Stunde. Block „So buchen Sie Ballonmodellage“; Kombinationsabschnitt: „Ballonmodellage gibt es nur in Kombination“, Walk-Act-Karte „ab 3 Stunden“.
+- llms.txt / llms-full.txt / Cowork-Faktenblatt um die Regeln ergänzt. FR/EN übersetzt (`src/i18n/strings/booking-2026-10-09.json`). Wächter: `tests/dist/booking-rules.test.ts`.

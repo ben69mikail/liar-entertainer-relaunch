@@ -6,6 +6,7 @@ import Curtain from '../../../components/v2/kids/Curtain.astro';
 import K3Hero from '../../../components/v2/kids/K3Hero.astro';
 import ProgramFrame from '../../../components/v2/kids/ProgramFrame.astro';
 import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
+import BookingRules from '../../../components/v2/kids/BookingRules.astro';
 import Glitter from '../../../components/v2/kids/Glitter.astro';
 import YouTubeFacade from '../../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../../data/site';
@@ -16,7 +17,7 @@ import glitzerTattoosImg from '../../../assets/images/clown/glitzer-tattoos.jpg'
 import fotogalerieClown10Img from '../../../assets/images/galerie/fotogalerie-clown-zauberer-10.jpg';
 
 const seoTitle = 'Glitzer Tattoos Kindergeburtstag NRW | Zur Zaubershow | LIAR';
-const seoDescription = 'Glitzer Tattoos NRW ✓ Hautverträglich & langanhaltend ✓ Über 100 Motive für Kindergeburtstage & Events ✓ 4-8 Tage Funkelspaß ✓ Jetzt anfragen!';
+const seoDescription = 'Glitzer Tattoos NRW ✓ Hautverträglich & langanhaltend ✓ Über 100 Motive ✓ Als Zusatz zur Zaubershow für Kindergeburtstag & private Feiern ✓ Jetzt anfragen!';
 
 const vorteile = [
   { title: 'Kein Schmieren', text: 'Im Gegensatz zu Kinderschminken bleibt alles sauber' },
@@ -46,7 +47,7 @@ const serviceSchema = {
   "@context": "https://schema.org",
   "@type": "Service",
   "name": "Glitzer Tattoos in NRW – Clown Zauberer LIAR",
-  "description": "Glitzer Tattoos mit Clown LIAR in NRW – hautverträgliche, funkelnde Klebe-Tattoos mit über 100 Motiven für Kindergeburtstage, Kita- und Schulfeste, Straßenfeste und Events. In 2 bis 3 Minuten aufgetragen, 4 bis 8 Tage wasser- und wischfest.",
+  "description": "Glitzer Tattoos mit Clown LIAR in NRW – hautverträgliche, funkelnde Klebe-Tattoos mit über 100 Motiven als Zusatz zur Zaubershow für Kindergeburtstage und private Feiern. In 2 bis 3 Minuten aufgetragen, 4 bis 8 Tage wasser- und wischfest.",
   "url": "https://liar-entertainer.com/clown/glitzer-tattoo/",
   "serviceType": ["Glitzer Tattoo", "Glitzer Tattoos Kindergeburtstag", "Kinderschminken Alternative"],
   "provider": { "@id": "https://liar-entertainer.com/#business" },
@@ -98,7 +99,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         <ReviewBadge />
         <h1 class="k3-hero__title" data-letters>Glitzer <span class="k3-mark">Tattoo</span></h1>
         <h2 class="k3-hero__sub">
-          ✨ Glitzer Tattoos für Kindergeburtstag<br />&amp; Events in NRW
+          ✨ Glitzer Tattoos für Kindergeburtstag<br />&amp; private Feiern in NRW
         </h2>
         <p class="k3-hero__claim">Der Klassiker für Kindergeburtstage – Hautverträglich &amp; Langanhaltend</p>
         <div class="k3-hero__actions">
@@ -108,7 +109,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     <Fragment slot="photo">
       <Image
         src={glitzerTattooHeroImg}
-        alt="Glitzer Tattoos für Kindergeburtstag & Events in NRW"
+        alt="Glitzer Tattoos für Kindergeburtstag & private Feiern in NRW"
         widths={[400, 700, 1000]}
         quality={70}
         sizes="(max-width: 900px) 80vw, 500px"
@@ -124,7 +125,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     <div class="container k3-split">
       <div data-reveal>
         <p class="k3-lead">
-          Glitzer Tattoos bei Clown LIAR (Michaël Prescler) sind funkelnde, hautverträgliche Klebe-Tattoos, die in 2–3 Minuten aufgetragen werden und 4–8 Tage wasser- und wischfest halten. Über 100 Motive – vom Einhorn bis zum Dino. Buchbar in ganz NRW für <a href="/kindergeburtstag/">Kindergeburtstage</a>, Kita- und Schulfeste, Straßenfeste und Events – ideal als Ergänzung zur <a href="/clown/clownshow/">Clownshow</a> oder <a href="/clown/ballonmodellage/">Ballonmodellage</a>.
+          Glitzer Tattoos bei Clown LIAR (Michaël Prescler) sind funkelnde, hautverträgliche Klebe-Tattoos, die in 2–3 Minuten aufgetragen werden und 4–8 Tage wasser- und wischfest halten. Über 100 Motive – vom Einhorn bis zum Dino. Buchbar in ganz NRW als Zusatz zur Zaubershow für <a href="/kindergeburtstag/">Kindergeburtstage</a> und private Feiern – nach der <a href="/clown/clownshow/">Clown-Zaubershow</a>, gern auch zusammen mit <a href="/clown/ballonmodellage/">Ballonmodellage</a>.
         </p>
         <ul class="k3-expect__list gt-highlights">
           <li><span class="gt-highlights__icon">✨</span><span>Hautverträglich &amp; dermatologisch getestet</span></li>
@@ -138,7 +139,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       <ProgramFrame class="k3-photo" data-reveal data-reveal-delay="0.1">
         <Image
           src={glitzerTattoosImg}
-          alt="Glitzer Tattoos für Kindergeburtstag & Events in NRW"
+          alt="Glitzer Tattoos für Kindergeburtstag & private Feiern in NRW"
           widths={[340, 680]}
           quality={60}
           sizes="(max-width: 900px) 80vw, 300px"
@@ -151,6 +152,24 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Weitere Anlässe (SEO-Audit 06.08.2026, H6: internal links to /clown/karneval/ + /clown/walk-act/) ── -->
+  <!-- booking conditions (user, 2026-10-09) -->
+  <BookingRules
+    id="buchung"
+    title="So buchen Sie Glitzer Tattoos"
+    lead="Glitzer Tattoos sind ein Extra für Ihre private Feier: Sie buchen sie <strong>zusätzlich zur Zaubershow</strong> – nach der Show bekommt jedes Kind sein Wunsch-Tattoo."
+    yes={[
+      'Als <strong>Zusatz zur Zaubershow</strong> für den Kindergeburtstag',
+      'Für <strong>private Feiern</strong> mit Zaubershow – z. B. Geburtstag, Kommunion oder Familienfest',
+      'Für Kinder von 3 bis 12 Jahren',
+    ]}
+    no={[
+      '<strong>Nicht einzeln</strong> – Glitzer Tattoos gibt es nur zusammen mit der Zaubershow',
+      'Nicht für <strong>Großveranstaltungen</strong> wie Stadt- und Straßenfeste, Firmenevents, Kita- oder Schulfeste',
+    ]}
+    note='Für größere Veranstaltungen passt die <a href="/clown/ballonmodellage/">Ballonmodellage</a> zusammen mit einem <a href="/clown/walk-act/">Walk-Act</a>.'
+    cta={{ href: '/kindergeburtstag/', label: 'Zaubershow für den Kindergeburtstag' }}
+  />
+
   <section class="gt-related k3-alt" data-related-services>
     <div class="container k3-narrow">
       <GoldDivider />
@@ -180,7 +199,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       <div class="k3-split gt-what__grid">
         <div data-reveal>
           <p class="gt-what__text">
-            Glitzer Tattoos sind temporäre Körperkunst, die mit hautfreundlichem Spezialkleber und funkelndem Glitzer aufgetragen werden. Sie sind der absolute Hit auf jedem Kindergeburtstag, Straßenfest oder Event! Besonders beliebt als Ergänzung zu meiner <a href="/clown/clownshow/">Clownshow</a> oder in Kombination mit <a href="/clown/ballonmodellage/">Ballonmodellage</a>.
+            Glitzer Tattoos sind temporäre Körperkunst, die mit hautfreundlichem Spezialkleber und funkelndem Glitzer aufgetragen werden. Sie sind der absolute Hit auf jedem Kindergeburtstag und jeder privaten Feier! Besonders beliebt als Ergänzung zu meiner <a href="/clown/clownshow/">Clownshow</a> oder in Kombination mit <a href="/clown/ballonmodellage/">Ballonmodellage</a>.
           </p>
           <h3 class="k3-h3">Warum Glitzer Tattoos so beliebt sind:</h3>
           <ul class="gt-pros">
@@ -291,7 +310,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       <GoldDivider />
       <h2 class="k3-h2">Jetzt Glitzer Tattoos buchen!</h2>
       <p>
-        Perfekt für Kindergeburtstag, Straßenfest oder Event – ab 3 Jahren funkeln Kinderaugen mit tollen Glitzer-Motiven! Kombinieren Sie Glitzer Tattoos mit meiner <a href="/clown/clownshow/">Clownshow</a> und <a href="/clown/ballonmodellage/">Ballonmodellage</a> zum kompletten Kinderpaket.
+        Perfekt für Kindergeburtstag und private Feiern – ab 3 Jahren funkeln Kinderaugen mit tollen Glitzer-Motiven! Kombinieren Sie Glitzer Tattoos mit meiner <a href="/clown/clownshow/">Clownshow</a> und <a href="/clown/ballonmodellage/">Ballonmodellage</a> zum kompletten Kinderpaket.
       </p>
       <div class="gt-cta__contact">
         <p>📱 Telefon &amp; WhatsApp: <a href="tel:+491721517578">0172-1517578</a></p>

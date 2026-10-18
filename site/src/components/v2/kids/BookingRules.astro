@@ -1,0 +1,78 @@
+---
+/**
+ * "So buchen Sie …" — booking conditions as a circus-programme sheet (user, 2026-10-09: glitter
+ * tattoos only as an add-on to the magic show for kids' birthdays / private parties; balloon
+ * modelling only with the magic show or a walk-act of at least 3 hours, never on its own).
+ * Two columns: what can be booked (gold tick) and what cannot (red cross), a closing note.
+ */
+import GoldDivider from './GoldDivider.astro';
+
+interface Props {
+  id?: string;
+  title: string;
+  lead: string;
+  yes: string[];
+  no: string[];
+  note?: string;
+  cta?: { href: string; label: string };
+}
+const { id, title, lead, yes, no, note, cta } = Astro.props;
+---
+
+<section class="br" id={id} data-booking-rules>
+  <div class="container">
+    <GoldDivider />
+    <div class="br__sheet" data-reveal>
+      <p class="br__ribbon" aria-hidden="true">Gut zu wissen</p>
+      <h2 class="k3-h2 br__title">{title}</h2>
+      <p class="br__lead" set:html={lead} />
+      <div class="br__cols">
+        <div class="br__col br__col--yes">
+          <p class="br__head">So buchbar</p>
+          <ul>{yes.map((y) => <li><span class="br__mark" aria-hidden="true">✓</span><span set:html={y} /></li>)}</ul>
+        </div>
+        <div class="br__col br__col--no">
+          <p class="br__head">Nicht buchbar</p>
+          <ul>{no.map((n) => <li><span class="br__mark" aria-hidden="true">✗</span><span set:html={n} /></li>)}</ul>
+        </div>
+      </div>
+      {note && <p class="br__note" set:html={note} />}
+      {cta && <a class="btn btn--primary br__cta" href={cta.href}>{cta.label}</a>}
+    </div>
+  </div>
+</section>
+
+<style>
+  .br__sheet {
+    position: relative; max-width: 54rem; margin: 0 auto; text-align: center;
+    padding: clamp(1.6rem, 4vw, 2.4rem) clamp(1.1rem, 4vw, 2.6rem) clamp(1.4rem, 3vw, 2rem);
+    background: var(--surface, #fffaf0); border-radius: 1rem;
+    box-shadow:
+      inset 0 0 0 1.5px rgba(184, 134, 47, 0.75), inset 0 0 0 6px var(--surface, #fffaf0), inset 0 0 0 7px rgba(184, 134, 47, 0.35),
+      0 24px 50px -30px rgba(60, 30, 10, 0.55);
+  }
+  /* red band across the top corner, like the highlight package */
+  .br__ribbon {
+    position: absolute; top: -0.85rem; left: 50%; translate: -50% 0; margin: 0 !important;
+    padding: 0.3rem 1.1rem; border-radius: 999px; white-space: nowrap;
+    font-weight: 800; font-size: 0.8rem; letter-spacing: 0.06em; text-transform: uppercase;
+    color: #fff3e2; background: linear-gradient(180deg, #d13a42, #a8192a);
+    box-shadow: 0 8px 18px -10px rgba(142, 21, 32, 0.8);
+  }
+  .br__title { margin: 0.4rem 0 var(--space-1) !important; text-wrap: balance; }
+  .br__lead { max-width: 40rem; margin: 0 auto var(--space-3) !important; font-weight: 700; text-wrap: pretty; }
+  .br__cols { display: grid; gap: var(--space-3); text-align: left; }
+  @media (min-width: 720px) { .br__cols { grid-template-columns: 1fr 1fr; } }
+  .br__col { padding: var(--space-2) var(--space-3); border-radius: 0.75rem; }
+  .br__col--yes { background: rgba(184, 134, 47, 0.09); box-shadow: inset 0 0 0 1px rgba(184, 134, 47, 0.35); }
+  .br__col--no { background: rgba(200, 16, 46, 0.05); box-shadow: inset 0 0 0 1px rgba(200, 16, 46, 0.25); }
+  .br__head { font-family: var(--font-display); font-weight: 650; font-size: 1.15rem; margin: 0 0 0.5rem !important; }
+  .br__col--no .br__head { color: #a30c25; }
+  .br__col ul { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.5rem; }
+  .br__col li { display: grid; grid-template-columns: 1.4rem 1fr; gap: 0.35rem; line-height: 1.45; }
+  .br__mark { font-weight: 900; font-size: 1.05rem; line-height: 1.35; }
+  .br__col--yes .br__mark { color: #8a6418; }
+  .br__col--no .br__mark { color: #c8102e; }
+  .br__note { margin: var(--space-3) auto 0 !important; max-width: 42rem; font-size: 0.98rem; color: var(--ink-soft); text-wrap: pretty; }
+  .br__cta { margin-top: var(--space-3); }
+</style>

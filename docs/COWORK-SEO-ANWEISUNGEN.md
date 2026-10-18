@@ -48,6 +48,7 @@ Diese Datei ist der Arbeitsauftrag für **Claude Cowork**. Sie enthält alles, w
 | Zaubershow Kindergeburtstag (40 Min., bis ca. 12 Kinder, ab 4 J.) | 150 € Festpreis |
 | + Ballonmodellage | +20 € |
 | + Glitzer-Tattoos | +40 € |
+| **Buchungsregel** | Glitzer-Tattoos nur als Zusatz zur Zaubershow (Kindergeburtstag, private Feiern), nicht einzeln, nicht für Großveranstaltungen. Ballonmodellage nur mit Zaubershow oder Walk-Act ab 3 Std., nie einzeln. In GBP-Leistungen, Beiträgen und Antworten genau so formulieren. |
 | Komplett-Paket | 210 € |
 | Kita, Schule, Karneval, Stadtfest, Walk-Act | auf Anfrage |
 | Fahrtkosten | 0,40 €/km Hin- und Rückfahrt ab Gladbeck |

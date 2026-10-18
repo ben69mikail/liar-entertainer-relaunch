@@ -512,5 +512,52 @@
       "to": "Festpreis",
       "why": "User 2026-10-09: prices only in the kids-birthday context (prices page, /kindergeburtstag/, birthday city pages); docs/CHANGES-METAS.md."
     }
+  ],
+  "/clown/glitzer-tattoo/": [
+    {
+      "add": "h2 So buchen Sie Glitzer Tattoos",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "h2 ✨ Glitzer Tattoos für Kindergeburtstag& Events in NRW",
+      "to": "h2 ✨ Glitzer Tattoos für Kindergeburtstag& private Feiern in NRW",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "✨ Glitzer Tattoos für Kindergeburtstag& Events in NRW",
+      "to": "✨ Glitzer Tattoos für Kindergeburtstag& private Feiern in NRW",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Glitzer Tattoos bei Clown LIAR (Michaël Prescler) sind funkelnde, hautverträgliche Klebe-Tattoos, die in 2–3 Minuten aufgetragen werden und 4–8 Tage wasser- und wischfest halten. Über 100 Motive – vom Einhorn bis zum Dino. Buchbar in ganz NRW für Kindergeburtstage, Kita- und Schulfeste, Straßenfeste und Events – ideal als Ergänzung zur Clownshow oder Ballonmodellage.",
+      "to": "Glitzer Tattoos bei Clown LIAR (Michaël Prescler) sind funkelnde, hautverträgliche Klebe-Tattoos, die in 2–3 Minuten aufgetragen werden und 4–8 Tage wasser- und wischfest halten. Über 100 Motive – vom Einhorn bis zum Dino. Buchbar in ganz NRW als Zusatz zur Zaubershow für Kindergeburtstage und private Feiern – nach der Clown-Zaubershow, gern auch zusammen mit Ballonmodellage.",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Glitzer Tattoos sind temporäre Körperkunst, die mit hautfreundlichem Spezialkleber und funkelndem Glitzer aufgetragen werden. Sie sind der absolute Hit auf jedem Kindergeburtstag, Straßenfest oder Event! Besonders beliebt als Ergänzung zu meiner Clownshow oder in Kombination mit Ballonmodellage.",
+      "to": "Glitzer Tattoos sind temporäre Körperkunst, die mit hautfreundlichem Spezialkleber und funkelndem Glitzer aufgetragen werden. Sie sind der absolute Hit auf jedem Kindergeburtstag und jeder privaten Feier! Besonders beliebt als Ergänzung zu meiner Clownshow oder in Kombination mit Ballonmodellage.",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Perfekt für Kindergeburtstag, Straßenfest oder Event – ab 3 Jahren funkeln Kinderaugen mit tollen Glitzer-Motiven! Kombinieren Sie Glitzer Tattoos mit meiner Clownshow und Ballonmodellage zum kompletten Kinderpaket.",
+      "to": "Perfekt für Kindergeburtstag und private Feiern – ab 3 Jahren funkeln Kinderaugen mit tollen Glitzer-Motiven! Kombinieren Sie Glitzer Tattoos mit meiner Clownshow und Ballonmodellage zum kompletten Kinderpaket.",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    }
+  ],
+  "/clown/ballonmodellage/": [
+    {
+      "add": "h2 So buchen Sie Ballonmodellage",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Ballonmodellage perfekt kombinieren",
+      "to": "Ballonmodellage gibt es nur in Kombination",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Für große Feste ideal!",
+      "to": "Für große Feste ideal – Walk-Act ab 3 Stunden!",
+      "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    }
   ]
 }

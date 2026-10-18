@@ -6,6 +6,7 @@ import Curtain from '../../../components/v2/kids/Curtain.astro';
 import K3Hero from '../../../components/v2/kids/K3Hero.astro';
 import ProgramFrame from '../../../components/v2/kids/ProgramFrame.astro';
 import GoldDivider from '../../../components/v2/kids/GoldDivider.astro';
+import BookingRules from '../../../components/v2/kids/BookingRules.astro';
 import BalloonDog from '../../../components/v2/kids/BalloonDog.astro';
 import YouTubeFacade from '../../../components/YouTubeFacade.astro';
 import { CONTACT } from '../../../data/site';
@@ -177,6 +178,23 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
   </section>
 
   <!-- ── Weitere Anlässe (SEO-Audit 06.08.2026, H6: internal links to /clown/karneval/ + /clown/walk-act/) ── -->
+  <!-- booking conditions (user, 2026-10-09) -->
+  <BookingRules
+    id="buchung"
+    title="So buchen Sie Ballonmodellage"
+    lead="Ballonmodellage gibt es <strong>nur in Kombination</strong>: zur Zaubershow oder zusammen mit einem Walk-Act von mindestens 3 Stunden."
+    yes={[
+      'Im Anschluss an die <strong>Zaubershow</strong> – z. B. beim Kindergeburtstag, in der Kita oder auf der Familienfeier',
+      'Zusammen mit einem <strong>Walk-Act ab 3 Stunden</strong> – ideal für Stadtfest, Straßenfest, Firmenfeier oder Eröffnung',
+    ]}
+    no={[
+      '<strong>Nicht einzeln</strong> – keine reine Ballonmodellage, auch nicht für eine Stunde',
+      'Kein Walk-Act unter 3 Stunden',
+    ]}
+    note='Beim Walk-Act bewege ich mich als Clown über Ihr Fest, zaubere zwischendurch und forme Ballonfiguren – so werden auch viele Kinder nacheinander versorgt.'
+    cta={{ href: '/clown/walk-act/', label: 'Mehr zum Walk-Act' }}
+  />
+
   <section class="k3-alt" data-related-services>
     <div class="container k3-narrow">
       <GoldDivider />
@@ -293,7 +311,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
     <div class="container">
       <GoldDivider />
       <h2 class="k3-h2 k3-center">🎪 Kombinationsmöglichkeiten</h2>
-      <p class="k3-center k3-sub">Ballonmodellage perfekt kombinieren</p>
+      <p class="k3-center k3-sub">Ballonmodellage gibt es nur in Kombination</p>
       <div class="k3-extras__grid">
         <article class="k3-extra" data-reveal>
           <h3>🎩 Ballonmodellage + Show</h3>
@@ -307,7 +325,7 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
         </article>
         <article class="k3-extra" data-reveal data-reveal-delay="0.08">
           <h3>🚶 Ballonmodellage + Walk-Act</h3>
-          <p class="bm-combo__lead">Für große Feste ideal!</p>
+          <p class="bm-combo__lead">Für große Feste ideal – Walk-Act ab 3 Stunden!</p>
           <ul>
             <li><span>✓</span> Ich bewege mich als Clown über das Fest</li>
             <li><span>✓</span> Spontane Gags und Zaubertricks</li>
