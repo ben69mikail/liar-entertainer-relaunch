@@ -79,7 +79,7 @@ export const siteConfig = {
   url: 'https://liar-entertainer.com',
   facebook: 'https://www.facebook.com/clownzaubererliar',
   instagram: 'https://www.instagram.com/clown_zauberer_liar',
-  googleReviewsCount: '370+',
+  googleReviewsCount: '390+',
   googleRating: '5.0',
   priceFrom: '150',
 };

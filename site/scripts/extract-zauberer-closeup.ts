@@ -10,6 +10,7 @@
  * has none) and links, which point to the matching page on liar-entertainer.com.
  */
 import { readFileSync, writeFileSync, mkdirSync, existsSync } from 'node:fs';
+import { applyFacts } from '../src/data/fact-rules';
 import { join } from 'node:path';
 import * as cheerio from 'cheerio';
 
@@ -41,7 +42,7 @@ function target(href: string): string {
   return LINKS[href.replace(/#.*$/, '')] ?? href;
 }
 
-const fix = (s: string) => s.replace(/über 400/g, '370+');
+const fix = (s: string) => applyFacts(s.replace(/über 400/g, '370+'));
 const clean = (s: string) => fix(s.replace(/\s+/g, ' ').trim());
 const file = (src: string) => src.replace(/^assets\/img\//, '');
 

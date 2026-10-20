@@ -79,7 +79,7 @@ Mein Tipp: Lassen Sie sich den Endpreis inklusive aller Nebenkosten schriftlich 
 
 Ich habe mich vor Jahren bewusst für ein Festpreis-Modell entschieden, und zwar aus einem einfachen Grund: Eltern, die einen Kindergeburtstag planen, haben genug um die Ohren. Kuchen, Einladungen, Deko, Wetter — da soll wenigstens der Programmpunkt planbar sein. 150 € für die Show, fertig. Sie wissen vor der Buchung auf den Euro genau, was auf Sie zukommt.
 
-Das Festpreis-Modell hat noch einen zweiten Effekt: Es zwingt mich, effizient und professionell zu arbeiten. Ich muss nicht künstlich Stunden schinden oder Extras aufschwatzen. Ob die Feier in einer Etagenwohnung in Gelsenkirchen oder einem Garten in Dorsten stattfindet — ich brauche nur etwa 2×2 Meter Platz, und die Show funktioniert drinnen wie draußen. Dass dieses Modell ankommt, zeigen mir 370+ Google-Bewertungen mit 5,0 Sternen — und die vielen Familien, die mich Jahr für Jahr wieder buchen, wenn das nächste Geschwisterkind Geburtstag hat.
+Das Festpreis-Modell hat noch einen zweiten Effekt: Es zwingt mich, effizient und professionell zu arbeiten. Ich muss nicht künstlich Stunden schinden oder Extras aufschwatzen. Ob die Feier in einer Etagenwohnung in Gelsenkirchen oder einem Garten in Dorsten stattfindet — ich brauche nur etwa 2×2 Meter Platz, und die Show funktioniert drinnen wie draußen. Dass dieses Modell ankommt, zeigen mir 390+ Google-Bewertungen mit 5,0 Sternen — und die vielen Familien, die mich Jahr für Jahr wieder buchen, wenn das nächste Geschwisterkind Geburtstag hat.
 
 Übrigens: Alle Details zu den Paketen finden Sie gesammelt auf meiner [Preisseite](/preise/) — und wenn Sie wissen möchten, wie so eine Show abläuft, schauen Sie auf die [Kindergeburtstags-Seite](/kindergeburtstag/).
 
@@ -99,7 +99,7 @@ Wenn Sie mehrere Zauberer anfragen, stellen Sie allen dieselben Fragen — nur d
 2. **Für wie viele Kinder gilt der Preis?** Und was kostet es, wenn es mehr werden?
 3. **Was ist im Preis enthalten?** Material, Anfahrt, Wochenende — alles schriftlich geben lassen.
 4. **Ist die Show für das Alter meiner Kinder gemacht?** Ein Programm für 4- bis 12-Jährige ist eine eigene Disziplin. Fragen Sie konkret, ob die Show für das Alter des Geburtstagskindes konzipiert ist.
-5. **Gibt es echte Bewertungen?** Google-Rezensionen mit konkreten Beschreibungen sagen mehr als jede Hochglanz-Website. Achten Sie auf Anzahl und Durchschnitt — bei mir sind es 370+ Bewertungen mit 5,0 Sternen.
+5. **Gibt es echte Bewertungen?** Google-Rezensionen mit konkreten Beschreibungen sagen mehr als jede Hochglanz-Website. Achten Sie auf Anzahl und Durchschnitt — bei mir sind es 390+ Bewertungen mit 5,0 Sternen.
 6. **Buche ich direkt oder über eine Agentur?** Direktbuchung spart in der Regel die Vermittlungsprovision.
 
 Wer diese sechs Punkte abfragt, erkennt schnell, welches Angebot solide kalkuliert ist — und welches nur auf den ersten Blick günstig wirkt.

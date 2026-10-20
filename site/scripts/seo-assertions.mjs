@@ -91,8 +91,8 @@ check('K2.1', 'Keine "400+"/"ueber 400"-Bewertungsbehauptung', () => {
     /(400\+|über 400|ueber 400)\s*(Top-?)?\s*(Bewertung|bewertung)/.test(decode(h)));
   return bad.length === 0 || `${bad.length} Seiten, z.B. ${bad.slice(0, 3).map((b) => b[0]).join(', ')}`;
 });
-check('K2.2', 'Startseite nennt die verbindliche Bewertungszahl 370+', () =>
-  /370\+/.test(decode(get('/'))) || 'Startseite enthaelt "370+" nicht');
+check('K2.2', 'Startseite nennt die verbindliche Bewertungszahl 390+', () =>
+  /390\+/.test(decode(get('/'))) || 'Startseite enthaelt "390+" nicht');
 
 // ---------- K5: robots.txt ----------
 check('K5.1', 'robots.txt blockiert /api/', () => {

@@ -4,6 +4,7 @@ import { join } from 'node:path';
 import * as cheerio from 'cheerio';
 import { page } from './helpers';
 import { ZAUBERER_CITIES_LIVE } from '../../src/data/zauberer-cities';
+import { applyFacts } from '../../src/data/fact-rules';
 
 // zauberer-liar.de/close-up-zauberer.html moves to /zauberer/close-up/ (user, 2026-10-07): same text,
 // photos and alt texts in the adult design. The source is frozen in
@@ -13,7 +14,7 @@ const SRC = join(import.meta.dirname, '../fixtures/zauberer-liar-pages/close-up-
 const DIST = join(import.meta.dirname, '../../dist');
 const PATH = '/zauberer/close-up/';
 const text = (s: string) => s.replace(/\s+/g, ' ').trim();
-const fix = (s: string) => s.replace(/über 400/g, '370+');
+const fix = (s: string) => applyFacts(s.replace(/über 400/g, '370+'));
 const SLUG = 'close-up-zauberer';
 // documented deviations (SEO length rules M6.1/M6.4), shared with the extractor
 const CHANGES = JSON.parse(readFileSync(join(import.meta.dirname, '../fixtures/zauberer-liar-pages/changes.json'), 'utf8')) as Record<'title' | 'description' | 'h1', Record<string, { from?: string; to: string }>>;

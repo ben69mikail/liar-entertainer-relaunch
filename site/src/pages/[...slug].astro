@@ -565,9 +565,9 @@ function fixLegacyCopy(html: string): string {
   return html
     // H7: Grammatikfehler, erscheint im FAQ-Schema und damit potenziell im SERP
     .replace(/Was kostet einen Auftritt/g, 'Was kostet ein Auftritt')
-    // K2: verbindliche Bewertungszahl ist 370+ (Vorgabe Michael 06.08.2026)
-    .replace(/400\+\s*(Top-)?Bewertungen/g, (_m, top) => `370+ ${top || ''}Bewertungen`)
-    .replace(/über 400\s*(Google-)?(Top-)?Bewertungen/g, (_m, g, top) => `370+ ${g || ''}${top || ''}Bewertungen`)
+    // K2: verbindliche Bewertungszahl ist 390+ (Vorgabe Michael 06.08.2026)
+    .replace(/400\+\s*(Top-)?Bewertungen/g, (_m, top) => `390+ ${top || ''}Bewertungen`)
+    .replace(/über 400\s*(Google-)?(Top-)?Bewertungen/g, (_m, g, top) => `390+ ${g || ''}${top || ''}Bewertungen`)
     // M3: nichtssagende Ueberschrift durch eine Frage ersetzen
     .replace(/Schnelle Eindrücke/gi, 'Wie sieht eine Show von Clown Zauberer LIAR aus?');
 }

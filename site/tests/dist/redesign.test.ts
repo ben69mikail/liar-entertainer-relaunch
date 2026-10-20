@@ -1,5 +1,6 @@
 import { describe, it, expect } from 'vitest';
 import { page } from './helpers';
+import { REVIEWS } from '../../src/data/site';
 
 // Prototypes for Gate 3: one page per zone.
 const KIDS = '/kindergeburtstag/';
@@ -27,7 +28,7 @@ describe('parents reach key info fast (brief UX goals)', () => {
     });
 
     it(`${path}: shows the real review count in the hero (above the fold)`, () => {
-      expect($('main > section').first().text()).toContain('370+ Bewertungen');
+      expect($('main > section').first().text()).toContain(`${REVIEWS.count} Bewertungen`);
     });
   }
 
@@ -51,7 +52,7 @@ describe('facts (L3: no unverified claims)', () => {
   it('/zauberer/ states the real Google review count, not "Über 400"', () => {
     const text = page(ADULT)('main').text();
     expect(text).not.toMatch(/Über 400/);
-    expect(text).toContain('370+');
+    expect(text).toContain(REVIEWS.count);
   });
 });
 

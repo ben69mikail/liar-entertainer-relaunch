@@ -148,7 +148,7 @@ const heroAlt = city.hero.imageAlt || `Clown Zauberer LIAR – ${city.hero.h1.re
               {b.items.map((s, j) => (
                 <div class="ct-stat" data-reveal data-reveal-delay={j * 0.08}>
                   <div class="ct-stat__icon">{s.icon}</div>
-                  <div class="ct-stat__num" data-count={/^\d{1,3}$/.test(s.num) ? '' : undefined}>{s.num}</div>
+                  <div class="ct-stat__num" data-count={/^\d{1,3}\+?$/.test(s.num) ? '' : undefined}>{s.num}</div>
                   <div class="ct-stat__label">{s.label}</div>
                 </div>
               ))}

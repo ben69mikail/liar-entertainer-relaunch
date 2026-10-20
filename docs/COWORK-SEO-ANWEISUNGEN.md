@@ -32,7 +32,7 @@ Diese Datei ist der Arbeitsauftrag für **Claude Cowork**. Sie enthält alles, w
 | Website | https://liar-entertainer.com (immer **ohne www**) |
 | Hauptberuflich | seit 2009 (2026 = 17 Jahre; jeden Januar +1, siehe 7.3) |
 | Auftritte | über 400 pro Jahr |
-| Bewertungen | 5,0 ★, 370+ Google-Bewertungen (aktuelle Zahl im Profil prüfen) |
+| Bewertungen | 5,0 ★, 390+ Google-Bewertungen (aktuelle Zahl im Profil prüfen) |
 | Ausbildung | pädagogische Ausbildung |
 | Sprachen | Shows auf Deutsch; auf Wunsch Französisch, Englisch, Spanisch |
 | Technik | eigene Tonanlage auf Anfrage, ab ca. 50 Kindern nötig |
@@ -105,7 +105,7 @@ Zugang: https://business.google.com (Inhaber-Login im Chrome).
    Jede Leistung bekommt einen Satz Beschreibung plus Link zur passenden URL.
 3. **Einsatzgebiet:** alle Städte aus Abschnitt 1. Es sind max. 20 Einträge möglich – Priorität: Gladbeck, Bottrop, Gelsenkirchen, Essen, Dorsten, Herten, Marl, Recklinghausen, Oberhausen, Dinslaken, Herne, Bochum, Mülheim, Duisburg, Dortmund, Düsseldorf, Wesel, Moers, Haltern am See, Castrop-Rauxel.
 4. **Beschreibung** (≤ 750 Zeichen), Entwurf:
-   > Clown Zauberer LIAR (Michaël Prescler) aus Gladbeck ist seit 2009 hauptberuflich Clown und Zauberer und spielt über 400 Shows pro Jahr in ganz NRW. Für Kindergeburtstage gibt es eine interaktive Mitmach-Zaubershow ab 4 Jahren (40 Minuten, 150 € Festpreis bis ca. 12 Kinder), auf Wunsch mit Ballonmodellage und Glitzer-Tattoos. Dazu Zaubershows für Kita, Schule, Karneval und Sommerfest sowie Bühnen- und Tischzauberei für Hochzeit, Firmenfeier und Gala. Pädagogisch ausgebildet; Shows auf Deutsch, auf Wunsch auf Französisch, Englisch oder Spanisch. 370+ Google-Bewertungen mit 5,0 Sternen.
+   > Clown Zauberer LIAR (Michaël Prescler) aus Gladbeck ist seit 2009 hauptberuflich Clown und Zauberer und spielt über 400 Shows pro Jahr in ganz NRW. Für Kindergeburtstage gibt es eine interaktive Mitmach-Zaubershow ab 4 Jahren (40 Minuten, 150 € Festpreis bis ca. 12 Kinder), auf Wunsch mit Ballonmodellage und Glitzer-Tattoos. Dazu Zaubershows für Kita, Schule, Karneval und Sommerfest sowie Bühnen- und Tischzauberei für Hochzeit, Firmenfeier und Gala. Pädagogisch ausgebildet; Shows auf Deutsch, auf Wunsch auf Französisch, Englisch oder Spanisch. 390+ Google-Bewertungen mit 5,0 Sternen.
 5. **Website-Link:** `https://liar-entertainer.com/?utm_source=gbp&utm_medium=organic&utm_campaign=profil`
 6. **Termin-/Buchungslink:** `https://liar-entertainer.com/kontakt/`
 7. **Fragen & Antworten:** diese Fragen selbst einstellen und beantworten, jeweils mit Link:

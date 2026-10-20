@@ -2,7 +2,7 @@ import { describe, it, expect } from 'vitest';
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
 import { contentOf, type PageContent } from '../support/content';
-import { applyFacts } from '../../src/data/fact-rules';
+import { applyFacts, applyCounterFacts } from '../../src/data/fact-rules';
 
 const DIST = join(import.meta.dirname, '../../dist');
 const fixture = (name: string) => JSON.parse(readFileSync(join(import.meta.dirname, '../fixtures', name), 'utf8'));
@@ -23,7 +23,7 @@ describe('content parity with the legacy site (brief L1)', () => {
       const added = new Set((changes[path] ?? []).map((c) => c.add).filter(Boolean));
       expect(after.headings.filter((h) => !added.has(h))).toEqual(before.headings.map((h) => swap(path, applyFacts(h))));
       const present = new Set(after.blocks);
-      const expected = before.blocks.map((b) => swap(path, applyFacts(b)));
+      const expected = applyCounterFacts(before.blocks).map((b) => swap(path, applyFacts(b)));
       expect(expected.filter((b) => !present.has(b))).toEqual([]);
     });
   }
@@ -37,6 +37,34 @@ describe('facts are consistent (GSC analysis 2026-10-09)', () => {
   const paths = [...Object.keys(baseline).filter((p) => !p.startsWith('/blog/')), ...cities, '/zauberer/close-up/'];
   it('no page states an outdated number', () => {
     const bad = paths.filter((p) => existsSync(join(DIST, p, 'index.html'))).filter((p) => STALE.test(readFileSync(join(DIST, p, 'index.html'), 'utf8')));
+    expect(bad).toEqual([]);
+  });
+  // user, 2026-10-20: counter boxes split number and label into two elements ("15" | "Jahre
+  // Erfahrung"), so the text rules above never saw them. Check the rendered text of EVERY page.
+  it('no page in any language shows an outdated counter or review count', () => {
+    const pages: string[] = [];
+    const walk = (dir: string) => {
+      for (const e of readdirSync(dir, { withFileTypes: true })) {
+        if (e.isDirectory()) walk(join(dir, e.name));
+        else if (e.name === 'index.html') pages.push(dir);
+      }
+    };
+    walk(DIST);
+    const OLD = [
+      /(?<![Üü]ber )\b15 Jahre/,
+      /\b15 (?:[Aa]ns|[Yy]ears)\b/,
+      /(?<![Üü]ber |[Pp]lus de |[Oo]ver |\+)\b400 (?:Shows im Jahr|[Ss]hows a year|[Ss]pectacles par an)/,
+      /\b370\+/,
+    ];
+    const bad = pages.flatMap((dir) => {
+      const html = readFileSync(join(dir, 'index.html'), 'utf8');
+      const text = (html.match(/<main[\s\S]*<\/main>/)?.[0] ?? '')
+        .replace(/<script[\s\S]*?<\/script>|<style[\s\S]*?<\/style>/g, '')
+        .replace(/<[^>]+>/g, ' ')
+        .replace(/\s+/g, ' ');
+      const hit = OLD.find((re) => re.test(text));
+      return hit ? [`${dir.slice(DIST.length).replace(/\\/g, '/') || '/'} ${hit.source}`] : [];
+    });
     expect(bad).toEqual([]);
   });
   it('llms.txt states the same facts', () => {

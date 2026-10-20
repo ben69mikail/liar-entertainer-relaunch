@@ -16,7 +16,7 @@ export const CONTACT = {
 };
 
 /** Real values only (brief L3). No AggregateRating schema (user decision 2026-10-02). */
-export const REVIEWS = { count: '370+', label: 'AUSGEZEICHNET', source: 'Google' };
+export const REVIEWS = { count: '390+', label: 'AUSGEZEICHNET', source: 'Google' };
 
 export interface NavItem {
   label: string;

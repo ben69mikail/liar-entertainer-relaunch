@@ -42,3 +42,9 @@ Quelle: `docs/seo-audit-2026-10-09/GSC-ANALYSE.md`. Tests: `site/tests/dist/cont
 - **Glitzer Tattoos** nur als Zusatz zur Zaubershow für Kindergeburtstage und private Feiern; nicht einzeln, nicht für Großveranstaltungen (Stadt-/Straßenfest, Firmenevent, Kita-/Schulfest). Neuer Block „So buchen Sie Glitzer Tattoos“ (`components/v2/kids/BookingRules.astro`) direkt nach dem Intro; Sätze mit „Straßenfest/Events/Kita- und Schulfeste“ angepasst (Hero-Unterzeile, Intro, Text, CTA, Bild-Alt, Meta-Description, Service-Schema).
 - **Ballonmodellage** nur mit Zaubershow oder Walk-Act ab 3 Stunden; nie einzeln, auch nicht für eine Stunde. Block „So buchen Sie Ballonmodellage“; Kombinationsabschnitt: „Ballonmodellage gibt es nur in Kombination“, Walk-Act-Karte „ab 3 Stunden“.
 - llms.txt / llms-full.txt / Cowork-Faktenblatt um die Regeln ergänzt. FR/EN übersetzt (`src/i18n/strings/booking-2026-10-09.json`). Wächter: `tests/dist/booking-rules.test.ts`.
+
+## 2026-10-20 – Zahlenkästen & Bewertungszahl (Nutzer)
+
+- Zahlenkästen („15“ | „Jahre Erfahrung“, „400“ | „Shows im Jahr“) standen auf ~80 Seiten noch alt, weil Zahl und Text getrennte Elemente sind und die Textregeln sie nicht sahen. Jetzt **17 Jahre Erfahrung** und **400+ Shows im Jahr** (Regeln `COUNTER_RULES` in `site/src/data/fact-rules.ts`, für Markup und Stadt-JSON; Parität über `applyCounterFacts`).
+- Google-Bewertungen laut Profil am 20.10.2026: **390** (5,0 ★) → überall **390+** statt 370+ (DE/FR/EN, Metas, llms.txt, Cowork-Faktenblatt, `REVIEWS.count`).
+- Wächter: `tests/dist/content-parity.test.ts` „no page in any language shows an outdated counter or review count“ prüft den sichtbaren Text JEDER gebauten Seite.

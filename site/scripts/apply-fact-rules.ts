@@ -21,14 +21,15 @@ for (const f of [...walk('src'), 'public/llms.txt', 'public/llms-full.txt']) {
   const raw = readFileSync(f, 'utf8');
   let out: string;
   if (/i18n[\\/]strings/.test(f)) {
+    // Swap changed string values in place, so each file keeps its own layout.
     const list = JSON.parse(raw) as { de: string; fr: string; en: string }[];
+    out = raw;
     for (const e of list) {
-      e.de = applyRules(e.de, FACT_RULES_DE);
-      e.fr = applyRules(e.fr, FACT_RULES_FR);
-      e.en = applyRules(e.en, FACT_RULES_EN);
+      for (const [k, rules] of [['de', FACT_RULES_DE], ['fr', FACT_RULES_FR], ['en', FACT_RULES_EN]] as const) {
+        const to = applyRules(e[k], rules);
+        if (to !== e[k]) out = out.split(JSON.stringify(e[k])).join(JSON.stringify(to));
+      }
     }
-    out = JSON.stringify(list, null, 1) + '\n';
-    if (JSON.stringify(JSON.parse(raw)) === JSON.stringify(list)) out = raw;
   } else {
     out = applyRules(raw, FACT_RULES_DE);
   }
