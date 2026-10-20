@@ -55,6 +55,7 @@ describe('facts are consistent (GSC analysis 2026-10-09)', () => {
       /\b15 (?:[Aa]ns|[Yy]ears)\b/,
       /(?<![Üü]ber |[Pp]lus de |[Oo]ver |\+)\b400 (?:Shows im Jahr|[Ss]hows a year|[Ss]pectacles par an)/,
       /\b370\+/,
+      /(?:[Mm]ehr als|[Üü]ber) 400 (?:Google-)?(?:Bewertungen|Rezensionen)/, // real count 390 (2026-10-20)
     ];
     const bad = pages.flatMap((dir) => {
       const html = readFileSync(join(dir, 'index.html'), 'utf8');

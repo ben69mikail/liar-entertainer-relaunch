@@ -408,6 +408,32 @@
     {
       "add": "h2 Mehr Zauberei in Düsseldorf",
       "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    },
+    {
+      "from": "h1 Zauberer für den Kindergeburtstag in Düsseldorf",
+      "to": "h1 Kinderzauberer in Düsseldorf für Kita, Schule & Feste",
+      "why": "Page focus (user, 2026-10-20): the birthday page owns the birthday search, this page takes Kita, school and festivals. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h2 Kinderzauberer in Düsseldorf für Kita, Schule & Feste",
+      "why": "Page focus (user, 2026-10-20): the birthday page owns the birthday search, this page takes Kita, school and festivals. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🏫 Kita",
+      "why": "Page focus (user, 2026-10-20): the birthday page owns the birthday search, this page takes Kita, school and festivals. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🎒 Schule & OGS",
+      "why": "Page focus (user, 2026-10-20): the birthday page owns the birthday search, this page takes Kita, school and festivals. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🎪 Feste",
+      "why": "Page focus (user, 2026-10-20): the birthday page owns the birthday search, this page takes Kita, school and festivals. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Zauberer für den Kindergeburtstag in Düsseldorf",
+      "to": "Kinderzauberer in Düsseldorf für Kita, Schule & Feste",
+      "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
     }
   ],
   "/kinderzauberer/kinderzauberer-in-duisburg/": [

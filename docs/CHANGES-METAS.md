@@ -57,3 +57,8 @@ Quelle: `docs/seo-audit-2026-10-09/GSC-ANALYSE.md`. Tests: `site/tests/dist/cont
 - `/kindergeburtstag/`: „Kindergeburtstag unter der Woche (Mo–Do)“ (ab 13 Uhr, kurzfristig bis Vortag, kein Rabatt) + FAQ. Alle Kinder-Stadtseiten (CityPage): Wochentag-Hinweis mit Link.
 - `/kindergeburtstag/geburtstag-in-duesseldorf/`: „Hier war ich in Düsseldorf schon zu Gast“ aus `site/src/data/city-local.ts` (nur echte Orte des Inhabers).
 - llms.txt / llms-full.txt / Cowork-Faktenblatt ergänzt. FR/EN: `site/src/i18n/strings/season-2026-10-20.json`. Wächter: `site/tests/dist/season-2026-10-20.test.ts`.
+
+## 2026-10-20 (c) – Kinderzauberer Düsseldorf: eigener Fokus (Nutzer)
+
+- `/kinderzauberer/kinderzauberer-in-duesseldorf/` konkurrierte mit `/kindergeburtstag/geburtstag-in-duesseldorf/` um „Zauberer Kindergeburtstag Düsseldorf“. Jetzt: Title „Kinderzauberer Düsseldorf | Kita, Schule & Feste | LIAR“, neue Description, H1 „Kinderzauberer in Düsseldorf für Kita, Schule & Feste“, Abschnitt „… für Kita, Schule & Feste“ (Kita ab 8 Uhr, Schule bis 200 Kinder, Feste/Walk-Act ab 3 Std.) mit Link zur Geburtstagsseite. Übriger Seiteninhalt unverändert (L1). Override-Daten `CITY_FOCUS` in `site/src/data/city-local.ts`; SEO-Assertion H1.1/H1.2 nimmt Fokus-Seiten aus.
+- Fakt: „Mehr als 400 Google-Bewertungen“ auf 5 Kinderzauberer-Stadtseiten → „390+ Google-Bewertungen“ (Regel in fact-rules.ts, Wächter erweitert).

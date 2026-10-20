@@ -80,3 +80,19 @@ describe('Düsseldorf', () => {
     expect(page('/clown/clownshow/clown-in-duesseldorf/')('[data-city-local]').length).toBe(0);
   });
 });
+
+describe('Düsseldorf: no two pages for the same search', () => {
+  it('the Kinderzauberer page is about Kita, school and festivals and hands birthdays to the birthday page', () => {
+    const $ = page('/kinderzauberer/kinderzauberer-in-duesseldorf/');
+    expect($('title').text()).toBe('Kinderzauberer Düsseldorf | Kita, Schule & Feste | LIAR');
+    expect($('h1').text()).toMatch(/Kita, Schule & Feste/);
+    expect($('h1').text()).not.toMatch(/Kindergeburtstag/);
+    const focus = $('[data-city-focus]');
+    expect(focus.find('a[href="/kindergeburtstag/geburtstag-in-duesseldorf/"]').length).toBe(1);
+    expect(focus.find('a[href="/zauberer/zaubershow/kindergarten-kita/"]').length).toBe(1);
+    expect(focus.find('a[href="/zauberer/zaubershow/schule/"]').length).toBe(1);
+  });
+  it('the birthday page keeps the birthday title', () => {
+    expect(page('/kindergeburtstag/geburtstag-in-duesseldorf/')('title').text()).toMatch(/Kindergeburtstag/);
+  });
+});

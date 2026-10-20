@@ -152,12 +152,14 @@ check('K1.2', 'Weiterhin KEIN aggregateRating/Review-Schema (Entscheidung 862f8a
 });
 
 // ---------- H1: Stadtseiten auf "Zauberer Kindergeburtstag [Stadt]" ----------
-check('H1.1', 'Kinderzauberer-Stadtseiten: Title enthaelt "Zauberer Kindergeburtstag"', () => {
-  const bad = CITIES_KZ.filter((r) => !/Zauberer Kindergeburtstag/i.test(decode(titleOf(get(r)))));
+// Pages that hand the birthday search to their birthday sister page (user, 2026-10-20, src/data/city-local.ts CITY_FOCUS)
+const KZ_FOCUS = ['/kinderzauberer/kinderzauberer-in-duesseldorf'];
+check('H1.1', 'Kinderzauberer-Stadtseiten: Title enthaelt "Zauberer Kindergeburtstag" (ausser Fokus-Seiten Kita/Schule/Feste)', () => {
+  const bad = CITIES_KZ.filter((r) => !KZ_FOCUS.includes(r)).filter((r) => !/Zauberer Kindergeburtstag/i.test(decode(titleOf(get(r)))));
   return bad.length === 0 || `${bad.length}/${CITIES_KZ.length}: ${bad.slice(0, 3).join(', ')}`;
 });
-check('H1.2', 'Kinderzauberer-Stadtseiten: H1 nennt Kindergeburtstag', () => {
-  const bad = CITIES_KZ.filter((r) => {
+check('H1.2', 'Kinderzauberer-Stadtseiten: H1 nennt Kindergeburtstag (ausser Fokus-Seiten)', () => {
+  const bad = CITIES_KZ.filter((r) => !KZ_FOCUS.includes(r)).filter((r) => {
     const h1 = (get(r).match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ''])[1];
     return !/Kindergeburtstag/i.test(decode(h1).replace(/<[^>]+>/g, ''));
   });

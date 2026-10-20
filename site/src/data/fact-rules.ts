@@ -29,6 +29,7 @@ export const FACT_RULES_DE: Rule[] = [
   [/\b15\s+Jahre(n?)\b/g, '17 Jahre$1'],
   [/rund\s+400\s+Shows/g, 'über 400 Shows'],
   [/Über 400 zufriedene Kunden können nicht irren!/g, '370+ Google-Bewertungen können nicht irren!'],
+  [/Mehr als 400 Google-Bewertungen/g, '390+ Google-Bewertungen'],
   ...COUNTER_RULES,
   ...REVIEW_RULES,
 ];
