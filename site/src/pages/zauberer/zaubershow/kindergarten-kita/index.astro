@@ -27,6 +27,8 @@ const faqItems = [
   { q: 'Wie viel Platz braucht LIAR in der Kita?', a: 'Es reicht ein freier Bereich von etwa 2×2 Metern, zum Beispiel im Gruppenraum, Bewegungsraum oder Turnraum. Aufwendige Technik ist nicht nötig.' },
   { q: 'Ist die Zaubershow pädagogisch wertvoll?', a: 'Ja. Die Show fördert Staunen, Konzentration und gemeinsames Erleben, bezieht die Kinder aktiv ein und stärkt spielerisch das Miteinander in der Gruppe.' },
   { q: 'Für welche Anlässe in der Kita eignet sich die Zaubershow?', a: 'Für Sommerfest, Abschlussfeier der Vorschulkinder, Laternenfest, Weihnachtsfeier oder einfach als besondere Überraschung im Kita-Alltag.' },
+  { q: 'Kommen Sie auch vormittags in die Kita?', a: 'Ja. Ich komme ab 8 Uhr in die Kita, auf Wunsch auch um 9 oder 10 Uhr – so passt die Zaubershow gut in den Vormittag.' },
+  { q: 'Gibt es eine Nikolaus- oder St.-Martins-Show?', a: 'Eine eigene Nikolaus- oder Martinsshow gibt es nicht. Ich spiele meine Kita-Zaubershow gern genau zu diesen Anlässen – zum Laternenfest, am Nikolausmorgen oder bei der Weihnachtsfeier.' },
 ];
 const faqSchema = {
   '@context': 'https://schema.org',
@@ -249,6 +251,29 @@ const _pageGallery = [
     </div>
   </section>
 
+  <!-- Season: November–February dates (user, 2026-10-20: normal Kita show, played on the occasion) -->
+  <section class="kk-season" id="termine">
+    <div class="container">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>📅 St. Martin, Nikolaus & Weihnachtsfeier in der Kita</h2>
+      <p class="k3-center kk-season__lead" data-reveal>Eine eigene Nikolaus- oder Martinsshow gibt es nicht – ich spiele meine bewährte Kita-Zaubershow gern genau zu Ihrem Anlass: zum Laternenfest im November, am Nikolausmorgen oder bei der Weihnachtsfeier.</p>
+      <div class="k3-grid k3-grid--3">
+        <article class="k3-card kk-detail" data-reveal>
+          <h3 class="kk-detail__title">☀️ Vormittags in der Kita</h3>
+          <p>Ich komme <strong>ab 8 Uhr</strong> – 9 oder 10 Uhr ist auch kein Problem. So passt die Show in Ihren Kita-Vormittag.</p>
+        </article>
+        <article class="k3-card kk-detail" data-reveal data-reveal-delay="0.08">
+          <h3 class="kk-detail__title">🎄 Dezember früh planen</h3>
+          <p>Termine rund um Nikolaus und Weihnachten sind beliebt – fragen Sie am besten frühzeitig an. Kurzfristig geht es, solange der Termin frei ist.</p>
+        </article>
+        <article class="k3-card kk-detail" data-reveal data-reveal-delay="0.16">
+          <h3 class="kk-detail__title">🎭 Danach: Karneval</h3>
+          <p>Auch für die Karnevalsfeier in der Kita buchbar – mehr zum <a href="/clown/karneval/">Kinderkarneval mit Clown LIAR</a>.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Video: Hollywood premiere, two searchlights from the floor crossing behind the video -->
   <section class="k3-band k3-band--night k3-premiere">
     <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
@@ -358,6 +383,7 @@ const _pageGallery = [
 
   /* practical details */
   .kk-detail__title { font-size: 1.35rem !important; margin: 0 0 var(--space-2) !important; }
+  .kk-season__lead { max-width: 44rem; margin: 0 auto var(--space-4) !important; text-wrap: pretty; }
   .kk-detail > p { color: var(--ink-soft); }
   .kk-detail__label { font-weight: 800; color: var(--ink) !important; margin-bottom: 0.4rem !important; }
   .kk-plain { list-style: none; margin: 0 0 var(--space-2); padding: 0; display: grid; gap: 0.35rem; color: var(--ink-soft); }

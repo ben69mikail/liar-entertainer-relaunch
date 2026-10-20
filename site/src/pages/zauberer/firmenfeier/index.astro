@@ -27,8 +27,10 @@ const features = [
 const faqItems = [
   { q: 'Welche Zauberei passt zu einer Firmenfeier?', a: 'Beides funktioniert hervorragend: eine Bühnenshow (Stand-up-Zauberei) als gemeinsames Highlight für das ganze Team sowie Close-up-Zauberei direkt an den Tischen beim Empfang oder zwischen den Gängen. Oft ist die Kombination die beste Lösung.' },
   { q: 'Eignet sich die Show auch für die Weihnachtsfeier?', a: 'Ja, die Weihnachtsfeier ist einer der beliebtesten Anlässe. Die Zauberei lässt sich stimmungsvoll in den Abend einbinden – als Bühnen-Highlight oder als Unterhaltung an den Tischen.' },
+  { q: 'Wie lange dauert die Zaubershow auf der Weihnachtsfeier?', a: 'Die Bühnenshow für Erwachsene dauert ca. 30 Minuten – genau richtig als Höhepunkt nach dem Essen. Close-up-Zauberei an den Tischen lässt sich flexibel über den Abend verteilen. Feiern Kinder mit, gibt es für sie eine eigene Zaubershow von ca. 40 Minuten.' },
+  { q: 'Wann sollte man den Zauberer für die Weihnachtsfeier buchen?', a: 'So früh wie möglich: Die Abende im Dezember sind schnell vergeben. Fragen Sie am besten an, sobald das Datum Ihrer Weihnachtsfeier feststeht.' },
   { q: 'Für wie viele Mitarbeitende ist die Show geeignet?', a: 'Für die Bühnenshow sind 10 bis 150 Personen optimal; bei größeren Gruppen besprechen wir das Setup. Close-up-Zauberei funktioniert für jede Gruppengröße, da ich von Tisch zu Tisch wechsle.' },
-  { q: 'Ist die Show auch auf Französisch oder für internationale Teams möglich?', a: 'Absolut. Als gebürtiger Franzose biete ich Shows auf Deutsch und Französisch an – ideal für internationale Firmen, zweisprachige Events oder Gäste aus dem Ausland.' },
+  { q: 'Ist die Show auch auf Französisch oder für internationale Teams möglich?', a: 'Absolut. Als gebürtiger Franzose biete ich die Bühnenshow auf Deutsch, Französisch oder Englisch an, die Tischzauberei zusätzlich auf Spanisch – ideal für internationale Firmen, mehrsprachige Events oder Gäste aus dem Ausland.' },
   { q: 'In welchen Städten sind Sie für Firmenfeiern buchbar?', a: 'In ganz NRW – u. a. Essen, Düsseldorf, Dortmund, Köln, Duisburg, Bochum, Gladbeck und im gesamten Ruhrgebiet. Auf Anfrage deutschlandweit sowie in Frankreich, Belgien, den Niederlanden, Österreich und der Schweiz.' },
 ];
 
@@ -125,7 +127,7 @@ const serviceSchema = {
             ['Format', 'Bühnenshow & / oder Close-up-Zauberei'],
             ['Anlässe', 'Firmenfeier, Betriebsfeier, Weihnachtsfeier, Jubiläum, Gala'],
             ['Publikum', 'Bühne 10–150 Personen · Close-up jede Größe'],
-            ['Sprachen', 'Deutsch, Französisch'],
+            ['Sprachen', 'Deutsch, Französisch, Englisch'],
             ['Techn. Aufwand', 'Minimal, kurze Aufbauzeit'],
             ['Gebiet', 'NRW, deutschlandweit & international'],
           ].map(([k, v]) => (
@@ -186,6 +188,32 @@ const serviceSchema = {
           </MagicFrame>
         </div>
       </div>
+    </div>
+  </section>
+
+  <!-- ── Weihnachtsfeier (user, 2026-10-20: season lever; facts from the owner) ── -->
+  <section class="ff-xmas ce-salon" id="weihnachtsfeier">
+    <div class="container">
+      <SuitRule />
+      <h2 class="ce-h2 ce-center">Zauberer für die Weihnachtsfeier: so läuft der Abend</h2>
+      <p class="ce-center ce-soft ff-xmas__lead" data-reveal>Die Abende im Dezember sind schnell vergeben – fragen Sie am besten an, sobald der Termin Ihrer Weihnachtsfeier steht.</p>
+      <ol class="ff-agenda">
+        {[
+          { title: '🍸 Beim Empfang', text: 'Close-up-Zauberei an den Stehtischen und beim Sektempfang: Die Gäste kommen ins Gespräch, noch bevor das Essen beginnt.' },
+          { title: '🎭 Nach dem Essen', text: 'Die Bühnenshow als Höhepunkt – ca. 30 Minuten humorvolle Zauberei zum Mitmachen, für alle Gäste gleichzeitig.' },
+          { title: '✨ Bis spät in den Abend', text: 'Auf Wunsch weiter mit Close-up an den Tischen – für alle, die die Tricks noch einmal ganz aus der Nähe sehen möchten.' },
+        ].map((item, i) => (
+          <li class="ff-agenda__item" data-reveal data-reveal-delay={i * 0.14}>
+            <h3 class="ff-xmas__step">{item.title}</h3>
+            <p class="ce-soft">{item.text}</p>
+          </li>
+        ))}
+      </ol>
+      <ul class="ff-xmas__facts" data-reveal>
+        <li><strong>Bühnenshow:</strong> ca. 30 Minuten, 10–150 Gäste, 2×2 Meter Fläche, 5 Minuten Aufbau, Mikrofon ab 50 Personen</li>
+        <li><strong>Sprachen:</strong> Bühnenshow auf Deutsch, Französisch oder Englisch – Tischzauberei zusätzlich auf Spanisch</li>
+        <li><strong>Mit Familien?</strong> Für die Kinder gibt es eine eigene <a href="/zauberer/zaubershow/">Zaubershow</a> von ca. 40 Minuten</li>
+      </ul>
     </div>
   </section>
 
@@ -282,6 +310,10 @@ const serviceSchema = {
   .ff-agenda__item:nth-child(2)::before { background: #c8102e; color: #fffdf7; }
   .ff-agenda__item h4 { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin: 0 0 0.5rem; }
   .ff-agenda__item p { margin: 0; }
+  .ff-xmas__lead { max-width: 40rem; margin-inline: auto; }
+  .ff-xmas__step { font-family: var(--font-display); font-size: 1.5rem; font-weight: 600; margin: 0 0 0.5rem; }
+  .ff-xmas__facts { list-style: none; max-width: 46rem; margin: var(--space-5, 2.5rem) auto 0; padding: 0; display: grid; gap: 0.6rem; text-align: center; }
+  .ff-xmas__facts a { color: inherit; }
 
   /* ── gallery on the ink table ── */
   .ff-table__note { color: var(--ink-soft); }

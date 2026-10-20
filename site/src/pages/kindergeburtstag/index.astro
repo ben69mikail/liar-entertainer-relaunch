@@ -59,6 +59,10 @@ const faqItems = [
     answer: 'Grundsätzlich auf Deutsch. Auf Wunsch spiele ich die Show auch auf Französisch, Englisch oder Spanisch – ideal für internationale Familien.',
   },
   {
+    question: 'Kann ich den Zauberer auch unter der Woche buchen?',
+    answer: 'Ja. Von Montag bis Donnerstag bin ich ab 13 Uhr für Kindergeburtstage buchbar, in der Kita auch schon vormittags. Kurzfristig geht es sogar bis zum Vortag, solange der Termin frei ist.',
+  },
+  {
     question: 'Ab wie vielen Kindern kann ich buchen?',
     answer: 'Es gibt keine Mindestzahl. Die Zaubershow funktioniert bereits ab wenigen Kindern und ist für bis zu ca. 12 Kinder konzipiert. Für größere Gruppen (Schulfeste, Kita-Feste) gibt es individuelle Angebote.',
   },
@@ -340,6 +344,30 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       <p class="k3-center k3-cta-row">
         <a href="/kontakt/" class="btn btn--primary" data-confetti>Jetzt unverbindlich anfragen</a>
       </p>
+    </div>
+  </section>
+
+  <!-- ── Unter der Woche (user, 2026-10-20: promote Mon–Thu birthdays, no discount) ── -->
+  <section class="kg-weekday" id="unter-der-woche">
+    <div class="container k3-center">
+      <GoldDivider />
+      <h2 class="k3-h2" data-reveal>📅 Kindergeburtstag unter der Woche (Mo–Do)</h2>
+      <p class="k3-narrow" data-reveal>Viele Kinder feiern am liebsten genau an ihrem Geburtstag – auch wenn der auf einen Dienstag fällt. Von Montag bis Donnerstag komme ich ab 13 Uhr: nach Kita oder Schule, zu Hause, im Garten oder in Ihrer Partylocation.</p>
+      <div class="k3-grid k3-grid--3">
+        <article class="k3-card" data-reveal>
+          <h3>🕐 Ab 13 Uhr</h3>
+          <p>Montag bis Donnerstag ab 13 Uhr – passend nach Kita oder Schule. In der Kita auch schon vormittags.</p>
+        </article>
+        <article class="k3-card" data-reveal data-reveal-delay="0.08">
+          <h3>⚡ Auch kurzfristig</h3>
+          <p>Buchbar bis zum Vortag, solange der Termin frei ist.</p>
+        </article>
+        <article class="k3-card" data-reveal data-reveal-delay="0.16">
+          <h3>🎂 Am echten Geburtstag</h3>
+          <p>Das Geburtstagskind feiert an seinem Tag – mit derselben Mitmach-Zaubershow wie am Wochenende.</p>
+        </article>
+      </div>
+      <p class="k3-cta-row"><a href="/kontakt/" class="btn btn--primary">Wunschtag unter der Woche anfragen</a></p>
     </div>
   </section>
 

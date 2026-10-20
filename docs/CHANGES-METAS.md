@@ -48,3 +48,12 @@ Quelle: `docs/seo-audit-2026-10-09/GSC-ANALYSE.md`. Tests: `site/tests/dist/cont
 - Zahlenkästen („15“ | „Jahre Erfahrung“, „400“ | „Shows im Jahr“) standen auf ~80 Seiten noch alt, weil Zahl und Text getrennte Elemente sind und die Textregeln sie nicht sahen. Jetzt **17 Jahre Erfahrung** und **400+ Shows im Jahr** (Regeln `COUNTER_RULES` in `site/src/data/fact-rules.ts`, für Markup und Stadt-JSON; Parität über `applyCounterFacts`).
 - Google-Bewertungen laut Profil am 20.10.2026: **390** (5,0 ★) → überall **390+** statt 370+ (DE/FR/EN, Metas, llms.txt, Cowork-Faktenblatt, `REVIEWS.count`).
 - Wächter: `tests/dist/content-parity.test.ts` „no page in any language shows an outdated counter or review count“ prüft den sichtbaren Text JEDER gebauten Seite.
+
+## 2026-10-20 (b) – Saison-Inhalte mit Inhaber-Fakten (SEO-Plan docs/seo-audit-2026-10-18/)
+
+- `/zauberer/firmenfeier/`: Abschnitt „Zauberer für die Weihnachtsfeier: so läuft der Abend“ (Empfang Close-up → Bühnenshow ca. 30 Min. → Close-up), Faktenzeile (2×2 m, 5 Min. Aufbau, Mikro ab 50), 2 FAQ (Dauer, Buchungszeitpunkt). Sprachen jetzt „Deutsch, Französisch, Englisch“ (Bühnenshow nicht Spanisch; Tischzauberei auch Spanisch).
+- `/zauberer/zaubershow/kindergarten-kita/`: „St. Martin, Nikolaus & Weihnachtsfeier in der Kita“ (ab 8 Uhr, normale Show zum Anlass, Karneval) + 2 FAQ.
+- `/zauberer/zaubershow/schule/`: „Vormittags, OGS & Weihnachtsfeier in der Schule“ (ab 8 Uhr, höhere Klassen + OGS, bis 200 Kinder, empfohlen 80–100) + 2 FAQ; Klassenstufen-FAQ um „höhere Klassen und OGS“ ergänzt.
+- `/kindergeburtstag/`: „Kindergeburtstag unter der Woche (Mo–Do)“ (ab 13 Uhr, kurzfristig bis Vortag, kein Rabatt) + FAQ. Alle Kinder-Stadtseiten (CityPage): Wochentag-Hinweis mit Link.
+- `/kindergeburtstag/geburtstag-in-duesseldorf/`: „Hier war ich in Düsseldorf schon zu Gast“ aus `site/src/data/city-local.ts` (nur echte Orte des Inhabers).
+- llms.txt / llms-full.txt / Cowork-Faktenblatt ergänzt. FR/EN: `site/src/i18n/strings/season-2026-10-20.json`. Wächter: `site/tests/dist/season-2026-10-20.test.ts`.

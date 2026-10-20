@@ -19,7 +19,9 @@ const seoTitle = 'Zauberer für Schule & Schulfest in NRW | LIAR';
 const seoDescription = 'Zaubershow für Ihre Schule in NRW ✓ Clown Zauberer LIAR bringt Kinder zum Lachen & Staunen ✓ 390+ Top-Bewertungen ✓ Für Schulfest & Projekttage ✓ Jetzt anfragen!';
 
 const faqItems = [
-  { q: 'Für welche Klassenstufen ist die Zaubershow geeignet?', a: 'Die Show ist auf Grundschulkinder der Klassen 1 bis 4 abgestimmt und wird altersgerecht angepasst – von der Einschulungsfeier bis zur Karnevalsfeier für die älteren Schüler.' },
+  { q: 'Für welche Klassenstufen ist die Zaubershow geeignet?', a: 'Die Show ist auf Grundschulkinder der Klassen 1 bis 4 abgestimmt und wird altersgerecht angepasst – von der Einschulungsfeier bis zur Karnevalsfeier für die älteren Schüler. Auf Anfrage spiele ich auch für höhere Klassen und für die OGS.' },
+  { q: 'Kommen Sie auch während der Unterrichtszeit?', a: 'Ja. Ich komme ab 8 Uhr morgens in die Schule, auf Wunsch auch um 9 oder 10 Uhr.' },
+  { q: 'Für wie viele Schüler gleichzeitig ist die Zaubershow geeignet?', a: 'In der Turnhalle sind bis zu 200 Kinder möglich. Empfehlenswert sind 80 bis 100 Kinder pro Show – bei mehr Kindern spiele ich gern zwei Shows hintereinander.' },
   { q: 'Wie viel Platz wird für die Zaubershow in der Schule benötigt?', a: 'Es genügt eine Fläche von etwa 2×2 Metern; für größere Veranstaltungen sind 4×4 Meter ideal. Die Show funktioniert im Klassenraum, in der Aula oder in der Turnhalle – bei Regen problemlos drinnen.' },
   { q: 'Wie lange dauert eine Zaubershow für die Schule?', a: 'Die Hauptshow dauert in der Regel rund 40 Minuten. Für Einschulungsfeiern ist auch eine kürzere Variante von etwa 35 Minuten möglich.' },
   { q: 'Für welche Schul-Anlässe eignet sich die Zaubershow?', a: 'Als zentrales Bühnenprogramm für Schulfeste, Sommerfeste, Einschulungen, Projekttage und Karnevalsfeiern – jeweils passend für die Klassen 1 bis 4.' },
@@ -307,6 +309,29 @@ const praktisch = [
     </div>
   </section>
 
+  <!-- Schedule & season (user, 2026-10-20: mornings from 8, higher classes + OGS, up to 200 children) -->
+  <section class="ks-season" id="termine">
+    <div class="container">
+      <GoldDivider />
+      <h2 class="k3-h2 k3-center" data-reveal>📅 Vormittags, OGS & Weihnachtsfeier in der Schule</h2>
+      <p class="k3-center ks-season__lead" data-reveal>Ob St. Martin, Nikolaus, Adventsfeier oder Einschulung – ich spiele meine Schul-Zaubershow genau zu Ihrem Termin. Eine eigene Nikolaus- oder Martinsshow gibt es nicht, die Show passt zu jedem dieser Anlässe.</p>
+      <div class="k3-grid k3-grid--3">
+        <article class="k3-card ks-season__card" data-reveal>
+          <h3>☀️ Ab 8 Uhr morgens</h3>
+          <p>Ich komme in der Unterrichtszeit, <strong>ab 8 Uhr</strong> – 9 oder 10 Uhr ist auch kein Problem.</p>
+        </article>
+        <article class="k3-card ks-season__card" data-reveal data-reveal-delay="0.08">
+          <h3>🎒 Auch höhere Klassen & OGS</h3>
+          <p>Nicht nur Klasse 1–4: Die Show gibt es auch für höhere Klassen und für die Offene Ganztagsschule (OGS).</p>
+        </article>
+        <article class="k3-card ks-season__card" data-reveal data-reveal-delay="0.16">
+          <h3>👥 Bis zu 200 Kinder</h3>
+          <p>In der Turnhalle sind bis zu 200 Kinder möglich. Am schönsten wird es mit <strong>80 bis 100 Kindern</strong> pro Show – gern spiele ich zweimal hintereinander.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- Video: Hollywood premiere, two searchlights from the floor crossing behind the video -->
   <section class="k3-band k3-band--night k3-premiere">
     <span class="k3-uplight k3-uplight--l" aria-hidden="true"></span>
@@ -446,4 +471,5 @@ const praktisch = [
   @media (max-width: 900px) {
     .ks-board { padding: var(--space-4) var(--space-3); }
   }
+  .ks-season__lead { max-width: 44rem; margin: 0 auto var(--space-4) !important; text-wrap: pretty; }
 </style>

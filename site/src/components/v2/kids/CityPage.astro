@@ -24,6 +24,7 @@ import { ZAUBERER_CITIES, zaubererCityPath } from '../../../data/zauberer-cities
 import kinderzaubererCities from '../../../data/cities/kinderzauberer.json';
 import geburtstagCities from '../../../data/cities/kindergeburtstag.json';
 import clownCities from '../../../data/cities/clownshow.json';
+import { CITY_LOCAL } from '../../../data/city-local';
 import '../../../styles/kids-v3.css';
 
 export interface CityData {
@@ -63,6 +64,8 @@ const sisters = [
   has(clownCities, `clown-in-${citySlug}`) && { href: `/clown/clownshow/clown-in-${citySlug}/`, label: `Clown in ${cityName}` },
   adult && { href: zaubererCityPath(adult.slug), label: `Zauberer für Erwachsene in ${cityName}` },
 ].filter((l): l is { href: string; label: string } => Boolean(l) && (l as { href: string }).href !== ownPath);
+// real places the owner has played; shown on the birthday page, the city's main kids page (2026-10-20)
+const local = ownPath.startsWith('/kindergeburtstag/') ? CITY_LOCAL[citySlug] : undefined;
 const BIG_WITHOUT_ADULT = ['bochum', 'dortmund', 'duesseldorf', 'muelheim'];
 
 const ASSETS = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpg,jpeg,png,webp}', { eager: true });
@@ -220,6 +223,13 @@ const heroAlt = city.hero.imageAlt || `Clown Zauberer LIAR – ${city.hero.h1.re
     <div class="container k3-center">
       <GoldDivider />
       <h2 class="k3-h2">Mehr Zauberei in {cityName}</h2>
+      {local && (
+        <>
+          <h3 class="ct-more__h3">Hier war ich in {cityName} schon zu Gast</h3>
+          <p class="k3-narrow" data-city-local>Auftritte unter anderem {local.venues.slice(0, -1).join(', ')} und {local.venues.at(-1)} – in Stadtteilen wie {local.districts.slice(0, -1).join(', ')} und {local.districts.at(-1)}.</p>
+        </>
+      )}
+      <p class="k3-narrow" data-weekday>Kindergeburtstag in {cityName} auch unter der Woche: Montag bis Donnerstag ab 13 Uhr, kurzfristig bis zum Vortag, solange der Termin frei ist – <a href="/kindergeburtstag/#unter-der-woche">mehr dazu</a>.</p>
       {!adult && BIG_WITHOUT_ADULT.includes(citySlug) && (
         <p class="k3-narrow">Auch für Erwachsene in {cityName}: Für Hochzeit, Firmenfeier oder Gala trete ich als Bühnen- und Tischzauberer auf – <a href="/zauberer/">Zauberer für Erwachsene in NRW</a>.</p>
       )}
@@ -240,6 +250,7 @@ const heroAlt = city.hero.imageAlt || `Clown Zauberer LIAR – ${city.hero.h1.re
     font-weight: 800; color: #fff3e2; background: rgba(255, 252, 245, 0.1); box-shadow: inset 0 0 0 1px rgba(233, 200, 119, 0.75);
   }
   .ct-more__links { justify-content: center; }
+  .ct-more__h3 { font-size: clamp(1.2rem, 2.2vw, 1.5rem); font-weight: 600; margin: var(--space-3) 0 var(--space-1); }
   .ct-lead { font-size: 1.15rem; font-weight: 700; color: rgba(246, 236, 220, 0.92); }
 
   /* ── prose: translated legacy layout (c-*) in the v3 look ── */

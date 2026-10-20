@@ -34,7 +34,13 @@ Diese Datei ist der Arbeitsauftrag für **Claude Cowork**. Sie enthält alles, w
 | Auftritte | über 400 pro Jahr |
 | Bewertungen | 5,0 ★, 390+ Google-Bewertungen (aktuelle Zahl im Profil prüfen) |
 | Ausbildung | pädagogische Ausbildung |
-| Sprachen | Shows auf Deutsch; auf Wunsch Französisch, Englisch, Spanisch |
+| Sprachen | Shows auf Deutsch; auf Wunsch Französisch, Englisch, Spanisch. Erwachsenen-Bühnenshow: Deutsch, Französisch, Englisch (**nicht Spanisch**); Tischzauberei auch Englisch + Spanisch |
+| Termine | Kindergeburtstag **Mo–Do ab 13 Uhr**; Kitas/Schulen **vormittags ab 8 Uhr** (auch 9/10 Uhr); kurzfristig bis zum Vortag, solange frei (Inhaber, 20.10.2026) |
+| Showdauer | Bühnenshow Erwachsene ca. 30 Min., Kinder ca. 40 Min. |
+| Kita/Schule | auch höhere Klassen und OGS; Turnhalle bis 200 Kinder, empfohlen 80–100 pro Show; St. Martin/Nikolaus/Weihnachten = normale Show zum Anlass (keine eigene Nikolaus-/Martinsshow) |
+| Weihnachtsfeier Firmen | Dezember-Termine schnell weg → früh anfragen; **keine Firmennamen** als Referenz nennen |
+| Düsseldorf (echte Auftritte) | Schloss Benrath, Brauerei Schumacher, Kirchengemeinde Urdenbach; Altstadt, Oberkassel, Gerresheim, Benrath, Urdenbach, Garath |
+| Wochentag-Werbung | Kindergeburtstage Mo–Do aktiv bewerben – **ohne Rabatt/Gratis-Zugabe** (Inhaber, 20.10.2026) |
 | Technik | eigene Tonanlage auf Anfrage, ab ca. 50 Kindern nötig |
 | Nachweise | erweitertes polizeiliches Führungszeugnis, Haftpflichtversicherung |
 | Herkunft | Frankreich; seit 2004 in Gladbeck |

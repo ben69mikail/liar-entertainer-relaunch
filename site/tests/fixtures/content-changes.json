@@ -3,14 +3,14 @@
     {
       "from": "Über 400 begeisterte 5-Sterne-Bewertungen auf Google",
       "to": "390+ begeisterte Bewertungen auf Google",
-      "why": "L3: real Google count is 390+ (user, 2026-10-04); 'all 5-star' not verifiable. See docs/CHANGES-METAS.md."
+      "why": "L3: real Google count (370+ on 2026-10-04, 390+ on 2026-10-20); 'all 5-star' not verifiable. See docs/CHANGES-METAS.md."
     }
   ],
   "/ueber-mich/": [
     {
       "from": "Über 400 Familien und Veranstalter haben mich mit der Bestnote bewertet. Lesen Sie echte Stimmen in meinen Google-Bewertungen.",
       "to": "390+ Familien und Veranstalter haben mich mit der Bestnote bewertet. Lesen Sie echte Stimmen in meinen Google-Bewertungen.",
-      "why": "L3: real Google count is 390+ (user, 2026-10-04), same correction as /zauberer/. See docs/CHANGES-METAS.md."
+      "why": "L3: real Google count (370+ on 2026-10-04, 390+ on 2026-10-20), same correction as /zauberer/. See docs/CHANGES-METAS.md."
     },
     {
       "from": "Alter: 49 / Geburtsland: Frankreich",
@@ -47,6 +47,32 @@
       "from": "Über 400 zufriedene Kunden, bewertet mit 5,0 von 5 Sternen. Verlässlichkeit und Qualität für Ihr Firmenevent.",
       "to": "390+ zufriedene Kunden, bewertet mit 5,0 von 5 Sternen. Verlässlichkeit und Qualität für Ihr Firmenevent.",
       "why": "L3: review count 390+ like /zauberer/ and /ueber-mich/ (user, 2026-10-07 go-live). See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h2 Zauberer für die Weihnachtsfeier: so läuft der Abend",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🍸 Beim Empfang",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🎭 Nach dem Essen",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 ✨ Bis spät in den Abend",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Deutsch, Französisch",
+      "to": "Deutsch, Französisch, Englisch",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Absolut. Als gebürtiger Franzose biete ich Shows auf Deutsch und Französisch an – ideal für internationale Firmen, zweisprachige Events oder Gäste aus dem Ausland.",
+      "to": "Absolut. Als gebürtiger Franzose biete ich die Bühnenshow auf Deutsch, Französisch oder Englisch an, die Tischzauberei zusätzlich auf Spanisch – ideal für internationale Firmen, mehrsprachige Events oder Gäste aus dem Ausland.",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
     }
   ],
   "/zauberer/hochzeit/": [
@@ -240,6 +266,10 @@
     {
       "add": "h2 Mehr Zauberei in Düsseldorf",
       "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): city cross-links (5.2-2)"
+    },
+    {
+      "add": "h3 Hier war ich in Düsseldorf schon zu Gast",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
     }
   ],
   "/kindergeburtstag/geburtstag-in-duisburg/": [
@@ -487,6 +517,27 @@
       "from": "h1 Schule",
       "to": "h1 Zaubershow für Schulen in NRW",
       "why": "GSC analysis 2026-10-09 (user-approved, docs/seo-audit-2026-10-09/GSC-ANALYSE.md): descriptive H1 (5.1)"
+    },
+    {
+      "add": "h2 📅 Vormittags, OGS & Weihnachtsfeier in der Schule",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 ☀️ Ab 8 Uhr morgens",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🎒 Auch höhere Klassen & OGS",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 👥 Bis zu 200 Kinder",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "from": "Die Show ist auf Grundschulkinder der Klassen 1 bis 4 abgestimmt und wird altersgerecht angepasst – von der Einschulungsfeier bis zur Karnevalsfeier für die älteren Schüler.",
+      "to": "Die Show ist auf Grundschulkinder der Klassen 1 bis 4 abgestimmt und wird altersgerecht angepasst – von der Einschulungsfeier bis zur Karnevalsfeier für die älteren Schüler. Auf Anfrage spiele ich auch für höhere Klassen und für die OGS.",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
     }
   ],
   "/zauberer/zaubershow/strassen-sommer-fest/": [
@@ -558,6 +609,42 @@
       "from": "Für große Feste ideal!",
       "to": "Für große Feste ideal – Walk-Act ab 3 Stunden!",
       "why": "User 2026-10-09: glitter tattoos only as an add-on to the magic show (kids birthday / private parties); balloon modelling only with the magic show or a walk-act of at least 3 hours. See docs/CHANGES-METAS.md."
+    }
+  ],
+  "/kindergeburtstag/": [
+    {
+      "add": "h2 📅 Kindergeburtstag unter der Woche (Mo–Do)",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🕐 Ab 13 Uhr",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 ⚡ Auch kurzfristig",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🎂 Am echten Geburtstag",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    }
+  ],
+  "/zauberer/zaubershow/kindergarten-kita/": [
+    {
+      "add": "h2 📅 St. Martin, Nikolaus & Weihnachtsfeier in der Kita",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 ☀️ Vormittags in der Kita",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🎄 Dezember früh planen",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
+    },
+    {
+      "add": "h3 🎭 Danach: Karneval",
+      "why": "Season content with owner facts (user, 2026-10-20): Weihnachtsfeier, Kita/school mornings, Mon–Thu birthdays, Düsseldorf references, adult show also in English. See docs/CHANGES-METAS.md."
     }
   ]
 }
