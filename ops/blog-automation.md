@@ -1,37 +1,25 @@
-# Blog-Automatik nach dem Umzug (07.10.2026)
+# Blog-Automatik (Stand 21.10.2026)
 
-## Heute (altes Repo `ben69mikail/Liar-Entertainer`)
-1. **n8n (NAS)** erzeugt Artikel + Bilder und committet per GitHub-API:
-   - `src/content/blog/<slug>.md` (Frontmatter mit `draft: true`, `freigabe: nein`)
-   - `public/blog-images/<slug>/cover.jpg`, `inline-1.jpg`, `inline-2.jpg` …
-2. Du setzt im Artikel `freigabe: ja`.
-3. **GitHub-Action `auto-publish.yml`** (täglich 07:30) setzt `draft: false`, prüft (Build + SEO-Tests) und pusht.
-4. **`deploy.yml`** baut und lädt per SFTP auf IONOS hoch.
+## Zwei Wege, ein Repo (`ben69mikail/liar-entertainer-relaunch`, Branch `main`)
 
-## Neu (Repo `ben69mikail/liar-entertainer-relaunch`, Netlify)
-- Schritt 3 ist portiert: `.github/workflows/auto-publish.yml` + `site/scripts/auto-publish.mjs` (gleiche Regeln).
-- Schritt 4 entfällt: Netlify baut jeden Push auf `main` selbst.
-
-### Was du in n8n änderst (je GitHub-Knoten, der eine Datei anlegt/ändert)
-| Feld | alt | neu |
+| | Plan-Artikel (SEO) | Spontan-Artikel (Auftritte) |
 |---|---|---|
-| Repository | `Liar-Entertainer` | `liar-entertainer-relaunch` |
-| Owner | `ben69mikail` | `ben69mikail` (gleich) |
-| File Path Artikel | `src/content/blog/{{slug}}.md` | `site/src/content/blog/{{slug}}.md` |
-| File Path Bilder | `public/blog-images/{{slug}}/…` | `site/public/blog-images/{{slug}}/…` |
-| Branch | `main` | `main` (gleich) |
-| Bild-URLs im Artikel (`https://liar-entertainer.com/blog-images/…`) | bleiben | bleiben |
+| Start | Claude-Task `liar-content-redaktion`, Mo 07:05 | Telegram an den Bot: Sprachnachricht/Text + 1–3 Fotos, dann „eigenes“ |
+| Schreiber | Claude (Faktenblatt, REGELN.md, themen.md) | n8n `LIAR-2026-08 Spontan-Artikel` (Claude Opus 5.5 via OpenRouter + Haiku-Faktencheck) |
+| Datei | `site/src/content/blog/<slug>.md` mit `draft: true`, `freigabe: nein` + Queue-Datei | `site/src/content/blog/<slug>.md` mit `draft: true`, `freigabe: ja` + Bilder in `site/public/blog-images/<slug>/` |
+| Freigabe | Inhaber setzt `freigabe: ja` im Artikel auf GitHub | Knopf ✅ in Telegram (oder Mail-Link) |
+| Online | GitHub-Action `auto-publish.yml` (täglich 07:30): `draft:false`, Build + `test:seo`, Commit → Netlify | n8n startet `auto-publish.yml` sofort (workflow_dispatch), prüft danach die Live-URL |
+| Social | Claude-Task `liar-content-verteilung` (Do 09:10) ruft n8n `LIAR-2026-07 Social-Post` auf; GBP per Chrome | n8n ruft `LIAR-2026-07 Social-Post` direkt nach Live-Check auf |
 
-Der GitHub-Token in n8n braucht Schreibrechte auf das neue Repo (bei einem Fine-grained-Token: Repo zur Liste hinzufügen, „Contents: Read and write“).
+Story-Repost (+8–12 h, FB/IG Story) = n8n `LIAR-2026-06 Story-Repost`, wird von Social-Post ausgelöst. Bilder dafür (`/hero-generated/<slug>.jpg`, `/story-generated/<slug>.jpg`) erzeugt der Astro-Prebuild (`scripts/generate-overlays.mjs`).
 
-### Prüfung nach der Umstellung
-- In n8n einen Entwurf erzeugen lassen → er erscheint als Commit im neuen Repo unter `site/src/content/blog/`.
-- Netlify baut; ein Entwurf (`draft: true`) erscheint **nicht** auf der Seite.
-- `freigabe: ja` setzen, in GitHub → Actions → „Auto-Publish Blog“ → „Run workflow“ → Artikel ist nach dem Netlify-Build online.
+## n8n-Workflows
+- `LIAR-2026-Topic-Master` (Telegram-Bot, aktiv): sammelt Inhalte, „eigenes“ startet Spontan-Artikel, leitet ✅/❌ weiter. „hilfe“/„artikel“ zeigt die Anleitung.
+- `LIAR-2026-08 Spontan-Artikel` (aktiv) – braucht Credential **GitHub LIAR (relaunch)** (Fine-grained Token, nur dieses Repo, Contents + Actions: Read and write).
+- `LIAR-2026-07 Social-Post` (aktiv, Webhook `/webhook/liar-social-post`, Body mit `secret`).
+- `LIAR-2026-06 Story-Repost` (aktiv).
+- `LIAR-2026-01 Blog Montag` = **abgeschaltet** (altes Repo, Token im Code). Nicht wieder aktivieren.
 
-### Altes System stilllegen (erst wenn das neue läuft)
-- Im alten Repo `deploy.yml` und `auto-publish.yml` deaktivieren (GitHub → Actions → Workflow → „Disable workflow“), damit die alte IONOS-Seite nicht mehr beschrieben wird.
-- Den lokalen Scheduled Task `liar-daily-seo-autopilot-v2` (06:00) pausieren, bis er auf das neue Repo umgestellt ist — er arbeitet im alten Repo.
-
-## Repo-Secrets
-Das neue Repo braucht für die Automatik **keine** Secrets (GITHUB_TOKEN reicht). IONOS-SFTP-Secrets entfallen.
+## Pflege
+- Fakten im Spontan-Prompt (Knoten „Prompt bauen“) bei Änderungen an `docs/COWORK-SEO-ANWEISUNGEN.md` §1 / `site/src/data/fact-rules.ts` mitziehen (z. B. Bewertungszahl, Jahre im Januar).
+- LinkedIn-Zugang in n8n läuft ca. alle 60 Tage ab → Credential „LinkedIn account“ neu verbinden (Social-Post meldet „LinkedIn-Zugang abgelaufen“).
