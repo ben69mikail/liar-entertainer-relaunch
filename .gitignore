@@ -9,3 +9,15 @@ node_modules/
 
 # review videos (large, regenerable via site/scripts/record-tour.mjs)
 *.webm
+
+# Content-Fotos nur lokal (Kinder ohne Einwilligung / Fremdrecht) – siehe docs/content/fotos.md
+docs/content/kontaktbogen/
+site/public/content-fotos/kids-clown-zauberer-6.jpg
+site/public/content-fotos/kids-img-20230814-090044-726.jpg
+site/public/content-fotos/kids-karneval-buhne.jpg
+site/public/content-fotos/kids-kindergeburtstag.jpg
+site/public/content-fotos/kids-zaubershow-dortmund.jpg
+site/public/content-fotos/kids-zaubershow.jpg
+site/public/content-fotos/blog-header-karnevalfeier.jpg
+site/public/content-fotos/zeitungsartikel-*
+_backup-vor-pull-*/
