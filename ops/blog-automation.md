@@ -10,7 +10,16 @@ Ein System, zwei Startwege, ein Repo (`ben69mikail/liar-entertainer-relaunch`, B
 | Schreiber | n8n `LIAR-2026-08 Artikel-Pipeline` (Claude Opus 5.5 via OpenRouter + Haiku-Faktencheck) | dieselbe Pipeline |
 | Freigabe | ✅/❌ in Telegram oder Mail-Link (3 Tage, danach verworfen) | dito |
 | Online | Pipeline committet Artikel (`draft: true`, `freigabe: ja`) + Bilder nach `site/public/blog-images/<slug>/`, startet `auto-publish.yml`, prüft Live-URL | dito |
-| Social | n8n `LIAR-2026-07 Social-Post` direkt nach Live-Check (FB, IG, LinkedIn; Story +8–12 h über `LIAR-2026-06 Story-Repost`) | dito |
+| Social | n8n `LIAR-2026-07 Social-Post` direkt nach Live-Check (FB, IG, LinkedIn, Google-Unternehmensprofil; Story +8–12 h über `LIAR-2026-06 Story-Repost`) | dito |
+
+## Artikel-Stil und Beitragsbild
+- Artikel im LIAR-Stil mit Emojis (Titel, jede H2, Emoji-Listen, „🎉 Fazit“); seoTitle/description/slug ohne Emojis (Knoten „Prompt bauen“/„Artikel aufbereiten“).
+- Beitragsbild = `site/public/hero-generated/<slug>.jpg`, beim Build erzeugt (`src/utils/heroOverlay.ts` + `overlayText.ts`): Titel in Fira Sans Extra Condensed als Pfade, erster Teil weiß, zweiter (nach „:“/„?“/„–“) gelb, rotes „CLOWN ZAUBERER LIAR“-Schild, Zuschnitt nach Motiv. Stiländerung: Dateien in `public/hero-generated/` löschen, Build erzeugt sie neu.
+
+## Google-Unternehmensprofil
+- Credential „Google Unternehmensprofil“ (Google-Cloud-Projekt `n8nKI`, API-Zugang von Google freigegeben). Standort `accounts/103330969593697494513/locations/9739402903237302654` im Knoten „GBP vorbereiten“ (Social-Post).
+- Beitrag: eigener Text (ohne Link/Telefonnummer), Beitragsbild, Button „Mehr erfahren“ → Artikel mit `utm_source=gbp`.
+- Zugänge prüfen: `POST https://n8n.srv860817.hstgr.cloud/webhook/liar-gbp-ids` (Workflow „LIAR Hilfe: Zugänge testen“: Drive, Sheets, Gmail, Google-Profil). Alle Google-Zugänge nutzen denselben OAuth-Client – wird dort ein Secret gelöscht, in allen vier Credentials das neue eintragen.
 
 ## Bildpool (Google Drive)
 - Ordner: https://drive.google.com/drive/folders/16Fsb35rRsLWIyS2xQ9clzEvs831IWGkV (Unterordner eine Ebene tief werden mitgelesen; `user_topics`/`archiv` ignoriert).
