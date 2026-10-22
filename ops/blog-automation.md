@@ -15,6 +15,8 @@ Ein System, zwei Startwege, ein Repo (`ben69mikail/liar-entertainer-relaunch`, B
 ## Artikel-Stil und Beitragsbild
 - Artikel im LIAR-Stil mit Emojis (Titel, jede H2, Emoji-Listen, „🎉 Fazit“); seoTitle/description/slug ohne Emojis (Knoten „Prompt bauen“/„Artikel aufbereiten“).
 - Beitragsbild = `site/public/hero-generated/<slug>.jpg`, beim Build erzeugt (`src/utils/heroOverlay.ts` + `overlayText.ts`): Titel in Fira Sans Extra Condensed als Pfade, erster Teil weiß, zweiter (nach „:“/„?“/„–“) gelb, rotes „CLOWN ZAUBERER LIAR“-Schild, Zuschnitt nach Motiv. Stiländerung: Dateien in `public/hero-generated/` löschen, Build erzeugt sie neu.
+- Story-Bild = `site/public/story-generated/<slug>.jpg` (1080×1920, `src/utils/storyOverlay.ts`): Schild + großer Titel (≥ 72 px) oben, Foto fast randbreit mit weißem Rahmen darunter, alles zwischen 250 px oben und 340 px unten (dort liegen Profilzeile/Antwortfeld von FB/IG). Wächter: `tests/overlays.test.ts`.
+- Stories: `LIAR-2026-06 Story-Repost` postet 8–12 h nach dem Artikel eine Facebook- und eine Instagram-Story und meldet das echte Ergebnis je Kanal per Telegram. LinkedIn bietet keine Stories (seit 2021 eingestellt, keine API).
 
 ## Google-Unternehmensprofil
 - Credential „Google Unternehmensprofil“ (Google-Cloud-Projekt `n8nKI`, API-Zugang von Google freigegeben). Standort `accounts/103330969593697494513/locations/9739402903237302654` im Knoten „GBP vorbereiten“ (Social-Post).
