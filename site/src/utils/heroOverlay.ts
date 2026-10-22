@@ -2,7 +2,7 @@
  * Hero-Image-Overlay-Generator (build-time, sharp-basiert).
  *
  * Nimmt das Cover-Bild eines Blog-Artikels, croppt auf 1200x630 (OG-Image-Standard),
- * und legt einen SVG-Title-Overlay drauf (weiß + gelber Akzent fuer 2. Teil).
+ * und legt einen Titel-Overlay drauf (Fira Sans Extra Condensed als Pfade, weiß + gelb).
  *
  * Output: public/hero-generated/<slug>.jpg
  * Cache: skip wenn File bereits existiert (Astro-Build-Cache friendly).
@@ -10,6 +10,7 @@
 import sharp from 'sharp';
 import { mkdir, writeFile, access, readFile } from 'node:fs/promises';
 import path from 'node:path';
+import { loadFont, fitTitle, pathData, measure } from './overlayText';
 
 const OUT_DIR = path.resolve('./public/hero-generated');
 const LOCAL_DOMAIN_PREFIX = 'https://liar-entertainer.com/';
@@ -35,93 +36,62 @@ async function loadCover(coverUrl: string): Promise<Buffer> {
   return Buffer.from(await res.arrayBuffer());
 }
 
-function svgEscape(s: string): string {
-  return s
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
+const FONT = () => loadFont(800);
+const BRAND = () => loadFont(700);
 
 /**
- * Splittet Title an : oder — fuer 2-farbiges Overlay (weiß + gelb).
+ * Overlay im Stil der Vorlage „Zaubershow im Kindergarten“: große, schmale
+ * fette Schrift, erster Titelteil weiß, zweiter gelb, weicher Schatten,
+ * dunkler Verlauf oben, kleines rotes LIAR-Schild unten links.
  */
-function splitTitle(title: string): { line1: string; line2: string } {
-  const m = title.match(/^(.+?)\s*([:—–\-])\s*(.+)$/);
-  if (m) {
-    const sep = m[2];
-    const left = m[1] + (sep === ':' ? ':' : '');
-    return { line1: left.trim(), line2: m[3].trim() };
+export function buildSvg(title: string): string {
+  const font = FONT();
+  const { size, lines } = fitTitle(font, title, {
+    maxWidth: W - 2 * PADDING_X,
+    maxLines: 4,
+    maxSize: 92,
+    minSize: 54,
+    colors: ['#ffffff', '#ffc93c'],
+  });
+  const lh = Math.round(size * 1.06);
+  let y = 34 + Math.round(size * 0.86);
+  const paths: string[] = [];
+  for (const l of lines) {
+    paths.push(`<path d="${pathData(font, l.text, PADDING_X, y, size)}" fill="${l.color}"/>`);
+    y += lh;
   }
-  return { line1: title, line2: '' };
-}
+  const textBottom = y - lh + Math.round(size * 0.25);
+  const shadeH = Math.min(H, textBottom + 150);
+  const glyphs = paths.join('');
+  const shadow = glyphs.replace(/fill="#[0-9a-f]+"/gi, 'fill="#000"');
 
-/**
- * Wrapped einen Text in 2-3 Zeilen für SVG-Rendering (max ~22 Zeichen/Zeile bei font-size 60).
- */
-function wrapText(text: string, maxCharsPerLine = 22): string[] {
-  const words = text.split(/\s+/);
-  const lines: string[] = [];
-  let current = '';
-  for (const w of words) {
-    if ((current + ' ' + w).trim().length > maxCharsPerLine && current) {
-      lines.push(current.trim());
-      current = w;
-    } else {
-      current = (current + ' ' + w).trim();
-    }
-  }
-  if (current) lines.push(current);
-  return lines;
-}
-
-function buildSvg(title: string): string {
-  const { line1, line2 } = splitTitle(title);
-
-  const FONT_TOP = 56;
-  const FONT_BOTTOM = 56;
-  const LINE_GAP_TOP = 64;
-  const LINE_GAP_BOTTOM = 64;
-  const COLOR_TOP = '#ffffff';
-  const COLOR_BOTTOM = '#ffb546';
-
-  const topLines = wrapText(line1, 26);
-  const bottomLines = line2 ? wrapText(line2, 26) : [];
-
-  let y = 80;
-  const topTSpans = topLines
-    .map((line, i) => {
-      const yi = y + i * LINE_GAP_TOP;
-      return `<text x="${PADDING_X}" y="${yi}" fill="${COLOR_TOP}" filter="url(#shadow)">${svgEscape(line)}</text>`;
-    })
-    .join('\n');
-  y += topLines.length * LINE_GAP_TOP + 8;
-  const bottomTSpans = bottomLines
-    .map((line, i) => {
-      const yi = y + i * LINE_GAP_BOTTOM;
-      return `<text x="${PADDING_X}" y="${yi}" fill="${COLOR_BOTTOM}" filter="url(#shadow)">${svgEscape(line)}</text>`;
-    })
-    .join('\n');
+  const brandText = 'CLOWN ZAUBERER LIAR';
+  const brandSize = 24;
+  const brand = BRAND();
+  const brandW = Math.round(measure(brand, brandText, brandSize)) + 36;
+  const brandY = H - 34 - 40;
 
   return `<?xml version="1.0" encoding="UTF-8"?>
 <svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">
   <defs>
-    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
-      <feDropShadow dx="0" dy="3" stdDeviation="8" flood-color="#000" flood-opacity="0.85"/>
-    </filter>
+    <filter id="soft" x="-10%" y="-30%" width="120%" height="160%"><feGaussianBlur stdDeviation="7"/></filter>
     <linearGradient id="darken" x1="0" y1="0" x2="0" y2="1">
-      <stop offset="0%" stop-color="#000" stop-opacity="0.65"/>
-      <stop offset="55%" stop-color="#000" stop-opacity="0.18"/>
+      <stop offset="0%" stop-color="#000" stop-opacity="0.72"/>
+      <stop offset="60%" stop-color="#000" stop-opacity="0.38"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0"/>
+    </linearGradient>
+    <linearGradient id="foot" x1="0" y1="1" x2="0" y2="0">
+      <stop offset="0%" stop-color="#000" stop-opacity="0.45"/>
       <stop offset="100%" stop-color="#000" stop-opacity="0"/>
     </linearGradient>
   </defs>
-  <rect x="0" y="0" width="${W}" height="${Math.round(H * 0.55)}" fill="url(#darken)"/>
-  <g font-family="Poppins, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="${FONT_TOP}" text-anchor="start">
-    ${topTSpans}
-  </g>
-  <g font-family="Poppins, 'Helvetica Neue', Arial, sans-serif" font-weight="800" font-size="${FONT_BOTTOM}" text-anchor="start">
-    ${bottomTSpans}
-  </g>
+  <rect x="0" y="0" width="${W}" height="${shadeH}" fill="url(#darken)"/>
+  <rect x="0" y="${H - 140}" width="${W}" height="140" fill="url(#foot)"/>
+  <g filter="url(#soft)" opacity="0.9" transform="translate(0 4)">${shadow}</g>
+  <g opacity="0.55" transform="translate(2 3)">${shadow}</g>
+  ${glyphs}
+  <rect x="${PADDING_X}" y="${brandY}" width="${brandW}" height="40" rx="20" fill="#d7393e"/>
+  <path d="${pathData(brand, brandText, PADDING_X + 18, brandY + 29, brandSize)}" fill="#ffffff"/>
 </svg>`;
 }
 
@@ -155,7 +125,7 @@ export async function generateHeroWithOverlay(
     const coverBuf = await loadCover(coverUrl);
 
     const resized = await sharp(coverBuf)
-      .resize(W, H, { fit: 'cover', position: 'center' })
+      .resize(W, H, { fit: 'cover', position: sharp.strategy.attention })
       .toBuffer();
 
     const svg = buildSvg(title);
