@@ -12,6 +12,12 @@ Ein System, zwei Startwege, ein Repo (`ben69mikail/liar-entertainer-relaunch`, B
 | Online | Pipeline committet Artikel (`draft: true`, `freigabe: ja`) + Bilder nach `site/public/blog-images/<slug>/`, startet `auto-publish.yml`, prüft Live-URL | dito |
 | Social | n8n `LIAR-2026-07 Social-Post` direkt nach Live-Check (FB, IG, LinkedIn, Google-Unternehmensprofil; Story +8–12 h über `LIAR-2026-06 Story-Repost`) | dito |
 
+## Web-Recherche (Spontan-Artikel)
+- Vor dem Schreiben sucht die Pipeline im Internet nach den in der Notiz genannten Orten/Veranstaltungen (Knoten „Recherche vorbereiten“ → „Web-Recherche (Internet)“: Claude Haiku + `openrouter:web_search` → „Recherche auswerten“). Ergebnis: Adresse, Parken/ÖPNV, Termin, max. 5 Fakten – nur mit Quell-URL; Notiz des Inhabers hat Vorrang.
+- Der Artikel bekommt daraus einen Anreise-Abschnitt mit „(Stand: MM/JJJJ, ohne Gewähr)“ und Quell-Link; Widersprüche zwischen Quellen erscheinen als Warnung in der Vorschau.
+- Bildfunde (og:image der Quellseiten, z. B. Plakat oder Foto der Location) stehen nur in der Vorschau (Telegram + Mail), **nie automatisch im Artikel** – Bildrechte liegen bei Dritten. Darfst du ein Bild nutzen (Erlaubnis des Veranstalters), schick es per Telegram mit.
+- Code: `ops/n8n/research-lib.cjs` (Tests `node --test ops/n8n/research.test.mjs`), Workflow-Quelle `ops/n8n/artikel-pipeline.sdk.js`.
+
 ## Artikel-Stil und Beitragsbild
 - Artikel im LIAR-Stil mit Emojis (Titel, jede H2, Emoji-Listen, „🎉 Fazit“); seoTitle/description/slug ohne Emojis (Knoten „Prompt bauen“/„Artikel aufbereiten“).
 - Beitragsbild = `site/public/hero-generated/<slug>.jpg`, beim Build erzeugt (`src/utils/heroOverlay.ts` + `overlayText.ts`): Titel in Fira Sans Extra Condensed als Pfade, erster Teil weiß, zweiter (nach „:“/„?“/„–“) gelb, rotes „CLOWN ZAUBERER LIAR“-Schild, Zuschnitt nach Motiv. Stiländerung: Dateien in `public/hero-generated/` löschen, Build erzeugt sie neu.

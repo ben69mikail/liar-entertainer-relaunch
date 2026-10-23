@@ -49,7 +49,7 @@ function extractImages(html, pageUrl) {
     if (!/^https?:/i.test(url)) continue;
     const path = url.split('?')[0].toLowerCase();
     if (!/\.(jpe?g|png|webp)$/.test(path)) continue;
-    if (/(logo|icon|favicon|sprite|placeholder|avatar)/.test(path)) continue;
+    if (/(logo|icon|favicon|sprite|placeholder|avatar|default|standard|fallback|vorschaubild|share-image|og-default)/.test(path)) continue;
     if (seen.has(url)) continue;
     seen.add(url);
     out.push({ url, seite: pageUrl });
