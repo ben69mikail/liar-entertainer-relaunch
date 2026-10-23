@@ -37,6 +37,21 @@ check('alle 3 Album-Fotos werden gesammelt', count(after, 'Foto') === 3, textOf(
 check('Text wird gesammelt', count(after, 'Text') === 1, textOf(after));
 
 await send(msg({ text: 'abbrechen' }));
+
+// Optional Ende-zu-Ende: echte Sprachnachricht (Telegram file_id) → Whisper → Artikel-Pipeline als TESTLAUF.
+// Kostet einen Claude-Aufruf und schickt eine Test-Vorschau (mit ❌ verwerfen).
+if (process.env.E2E_VOICE) {
+  await send(msg({ voice: { file_id: process.env.E2E_VOICE, duration: 30, mime_type: 'audio/ogg' } }));
+  const r = await fetch(URL, { method: 'POST', headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ secret: SECRET, is_test: true, update: msg({ text: 'eigenes' }) }) });
+  const started = await r.json().catch(() => ({}));
+  check('„eigenes“ startet die Pipeline', started.started === true, JSON.stringify(started).slice(0, 300));
+  check('Sprachnachricht wurde in Text umgewandelt', Number(started.text_chars) > 20, JSON.stringify(started).slice(0, 300));
+  const after2 = await send(msg({ text: 'Kontrolle' }));
+  check('Sammlung ist nach dem Start leer', count(after2, 'Sprachn') === 0, textOf(after2));
+  await send(msg({ text: 'abbrechen' }));
+}
+
 const failed = results.filter(r => !r.ok).length;
 console.log(failed ? `\n${failed} FAILED` : '\nALL GREEN');
 process.exit(failed ? 1 : 0);
