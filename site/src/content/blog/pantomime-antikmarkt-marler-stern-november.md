@@ -8,8 +8,7 @@ heroImageAlt: "Michaël Prescler, bekannt als Clown Zauberer LIAR"
 categories: ["Termine","Lokales"]
 tags: ["pantomime","marler-stern","antikmarkt","walk-act","marl"]
 author: "Michaël Prescler"
-draft: true
-freigabe: ja
+draft: false
 ---
 
 Am **Sonntag, 8. November 2026**, bin ich von **14 bis 18 Uhr** beim **Antikmarkt im Marler Stern** dabei. Diesmal komme ich nicht mit Zylinder und Zauberstab, sondern als **Pantomime**. Wer an diesem Sonntagnachmittag zwischen den Schätzen von früher stöbert, kann sich auf Unterhaltung ganz ohne Worte freuen. In diesem Artikel erkläre ich, was Pantomime eigentlich ist und warum sie mir so am Herzen liegt. Außerdem erfahrt ihr, warum ihr mich für solche Events buchen könnt.
