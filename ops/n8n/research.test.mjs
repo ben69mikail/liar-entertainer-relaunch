@@ -52,6 +52,11 @@ test('extractImages ignoriert Logos, Icons und Nicht-Bilder', () => {
   assert.deepEqual(extractImages(html, 'https://x.de/').map(i => i.url), ['https://x.de/foto.webp']);
 });
 
+test('extractImages ignoriert Standard-/Platzhalter-Vorschaubilder von Portalen', () => {
+  const html = `<meta property="og:image" content="https://p.de/uploads/fpe-vorschaubild-standard-1200x630-1.jpg"><meta property="og:image" content="https://p.de/uploads/default-share.jpg"><meta property="og:image" content="https://p.de/uploads/stadthalle-saal.jpg">`;
+  assert.deepEqual(extractImages(html, 'https://p.de/').map(i => i.url), ['https://p.de/uploads/stadthalle-saal.jpg']);
+});
+
 test('researchBlock enthält Adresse, Quelle, Widersprüche und Stand-Datum', () => {
   const b = researchBlock(parseResearch(MODEL_TEXT), '2026-10-23');
   assert.match(b, /Friedrichstraße 53, 45964 Gladbeck/);
