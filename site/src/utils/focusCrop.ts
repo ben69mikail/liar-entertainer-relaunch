@@ -61,7 +61,11 @@ const round = (r: Region): Region => ({
 });
 
 export function planHero(srcW: number, srcH: number, focus: Focus | null, title: string): HeroPlan {
-  if (!focus) return { mode: 'attention' };
+  if (!focus) {
+    // Ohne Fokus nie ein Hochkant-Foto blind auf Querformat schneiden: ganzes Foto zeigen.
+    if (srcH < srcW * 0.9) return { mode: 'attention' };
+    focus = { x: 50, top: 0, bottom: 100 };
+  }
   const cropW = Math.min(srcW, (srcH * HERO_W) / HERO_H);
   const cropH = (cropW * HERO_H) / HERO_W;
   const band = titleBandHeight(title) / HERO_H; // Anteil, den der Titel oben verdeckt
