@@ -1,6 +1,6 @@
 // n8n-Workflow „LIAR-2026-08 Artikel-Pipeline“ (Jic8HX0mrK14T6Zv) als Workflow-SDK-Quelle.
 // <SOCIAL_SECRET> vor dem Hochladen durch das Secret des Social-Post-Webhooks ersetzen (nicht ins Repo).
-// Code der Recherche-Knoten: ops/n8n/research-lib.cjs (Tests: node --test ops/n8n/research.test.mjs ops/n8n/github-commit.test.mjs; GitHub-Upload: ops/n8n/github-commit-lib.cjs).
+// Code-Knoten aus ops/n8n/*-lib.cjs (Recherche, GitHub-Commit, Titelbild-Fokus). Tests: node --test ops/n8n/research.test.mjs ops/n8n/github-commit.test.mjs ops/n8n/focus.test.mjs
 import { workflow, node, trigger, sticky, ifElse } from '@n8n/workflow-sdk';
 
 const TG = { telegramApi: { id: 'NLiyAfhaGJ1NrflC', name: 'Telegram account' } };
@@ -214,6 +214,26 @@ const buildFiles = node({
   config: { name: 'Commit-Dateien bauen', position: [3940, 200], parameters: { jsCode: "const a = $('Vorschau bauen').first().json;\nconst list = (() => { try { return $('Bilder-Liste').all().map(i => i.json); } catch (e) { return []; } })();\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const it = items[i];\n  if (!it.binary || !list[i] || !list[i].path) continue;\n  const key = Object.keys(it.binary)[0];\n  const buf = await this.helpers.getBinaryDataBuffer(i, key);\n  out.push({ json: { path: list[i].path, content: buf.toString('base64'), message: 'blog(n8n): Bild ' + list[i].path.split('/').pop() + ' für ' + a.slug + ' [skip netlify]' } });\n}\nout.push({ json: { path: a.md_path, content: Buffer.from(a.md_full, 'utf8').toString('base64'), message: 'blog(n8n): ' + a.slug + ' – freigegeben (' + (a.mode === 'plan' ? 'Montags-Plan' : 'Telegram') + ') [skip netlify]' } });\nreturn out;\n" } },
   output: [{ path: 'site/src/content/blog/s.md', content: 'YmFzZTY0', message: 'm' }]
 });
+const focusPrep = node({
+  type: 'n8n-nodes-base.code', version: 2,
+  config: { name: 'Fokus vorbereiten', position: [3990, 380], parameters: { jsCode: "// Titelbild an die Bild-KI: wo sind Kopf + Oberkörper? (Ergebnis → heroFocus im Frontmatter)\nconst items = $input.all();\nconst cover = items.find(i => /\\/cover\\.jpg$/.test(i.json.path || ''));\nconst PROMPT = \"Du bekommst das Titelbild eines Blogartikels (Clown/Zauberer/Pantomime bei Auftritten). Bestimme den Bereich, der beim Zuschneiden IMMER sichtbar bleiben muss: Kopf und Oberkörper der Hauptperson(en) – bzw. ohne Personen das zentrale Geschehen.\\nGib Prozentwerte relativ zum ganzen Bild zurück (0 = links/oben, 100 = rechts/unten):\\n- x: horizontale Mitte dieses Bereichs\\n- top: oberster Punkt des Kopfes (inkl. Hut/Mütze) der obersten Hauptperson\\n- bottom: Unterkante des Oberkörpers (Hüfte/Gürtel) der untersten Hauptperson\\nBei mehreren Hauptpersonen den gemeinsamen Bereich. Zuschauer am Rand ignorieren.\\nAntworte NUR mit JSON: {\\\"x\\\": 0-100, \\\"top\\\": 0-100, \\\"bottom\\\": 0-100, \\\"personen\\\": Anzahl, \\\"beschreibung\\\": \\\"kurz, was zu sehen ist\\\"}\";\nif (!cover) return [{ json: { has_cover: false, request: { model: 'anthropic/claude-haiku-5.5', max_tokens: 5, messages: [{ role: 'user', content: 'ok' }] } } }];\nreturn [{ json: { has_cover: true, request: { model: 'anthropic/claude-haiku-5.5', max_tokens: 600, messages: [{ role: 'user', content: [\n  { type: 'image_url', image_url: { url: 'data:image/jpeg;base64,' + cover.json.content } },\n  { type: 'text', text: PROMPT }\n] }] } } }];\n" } },
+  output: [{ has_cover: true, request: {} }]
+});
+const focusCall = node({
+  type: 'n8n-nodes-base.httpRequest', version: 4.2,
+  config: { name: 'Bild-KI: Kopf + Oberkörper', position: [4060, 380], credentials: OR, onError: 'continueRegularOutput',
+    parameters: { method: 'POST', url: 'https://openrouter.ai/api/v1/chat/completions',
+      authentication: 'predefinedCredentialType', nodeCredentialType: 'openRouterApi',
+      sendHeaders: true, headerParameters: { parameters: [{ name: 'HTTP-Referer', value: 'https://liar-entertainer.com' }, { name: 'X-Title', value: 'LIAR Bildfokus' }] },
+      sendBody: true, specifyBody: 'json', jsonBody: '={{ JSON.stringify($json.request) }}',
+      options: { timeout: 90000, response: { response: { fullResponse: true, neverError: true, responseFormat: 'json' } } } } },
+  output: [{ statusCode: 200, body: { choices: [{ message: { content: '{"x":50,"top":20,"bottom":60}' } }] } }]
+});
+const focusApply = node({
+  type: 'n8n-nodes-base.code', version: 2,
+  config: { name: 'Fokus eintragen', position: [4110, 200], parameters: { jsCode: "// Titelbild-Fokus: Bild-KI liefert Kopf + Oberkörper in % (x, top, bottom),\n// die Pipeline schreibt ihn als `heroFocus` ins Frontmatter (Site: src/utils/focusCrop.ts).\n// Wird von build.py in den n8n-Code-Knoten „Fokus eintragen“ eingefügt.\n\nfunction parseFocusReply(text) {\n  const raw = String(text || '');\n  const s = raw.indexOf('{');\n  const e = raw.lastIndexOf('}');\n  if (s < 0 || e <= s) return null;\n  let j;\n  try { j = JSON.parse(raw.slice(s, e + 1)); } catch (err) { return null; }\n  const f = { x: Math.round(Number(j.x)), top: Math.round(Number(j.top)), bottom: Math.round(Number(j.bottom)) };\n  const ok = [f.x, f.top, f.bottom].every(n => Number.isFinite(n) && n >= 0 && n <= 100) && f.bottom > f.top;\n  return ok ? f : null;\n}\n\nfunction injectFocus(md, focus) {\n  if (!focus) return md;\n  const line = 'heroFocus: { x: ' + focus.x + ', top: ' + focus.top + ', bottom: ' + focus.bottom + ' }';\n  const text = String(md);\n  if (/^heroFocus:.*$/m.test(text)) return text.replace(/^heroFocus:.*$/m, line);\n  if (/^heroImageAlt:.*$/m.test(text)) return text.replace(/^(heroImageAlt:.*)$/m, '$1\\n' + line);\n  return text.replace(/^(heroImage:.*)$/m, '$1\\n' + line);\n}\n\nif (typeof module !== 'undefined' && module.exports) {\n  module.exports = { parseFocusReply, injectFocus };\n}\n\n// --- n8n: Fokus ins Frontmatter schreiben (ohne Fokus: Site zeigt Hochkant-Fotos ganz) ---\nconst prep = $('Fokus vorbereiten').first().json;\nconst resp = $input.first().json;\nconst api = resp.body || resp;\nconst txt = (api && api.choices && api.choices[0] && api.choices[0].message && api.choices[0].message.content) || '';\nconst focus = prep.has_cover ? parseFocusReply(txt) : null;\nreturn $('Commit-Dateien bauen').all().map(i => {\n  const j = { ...i.json };\n  if (focus && /\\.md$/.test(j.path)) {\n    j.content = Buffer.from(injectFocus(Buffer.from(j.content, 'base64').toString('utf8'), focus), 'utf8').toString('base64');\n  }\n  return { json: j };\n});\n" } },
+  output: [{ path: 'p', content: 'c', message: 'm' }]
+});
 const ghBlobs = node({
   type: 'n8n-nodes-base.httpRequest', version: 4.2,
   config: { name: 'GitHub: Blobs anlegen', position: [4160, 200], credentials: GH,
@@ -381,6 +401,6 @@ export default workflow('liar-spontan-artikel', 'LIAR-2026-08 Artikel-Pipeline (
     .onFalse(tgRejected))
   .add(commitCheck).to(usage).to(updImg)
   .add(commitCheck).to(themeBook).to(updTheme)
-  .add(buildFiles).to(ghBlobs).to(ghRef).to(ghHeadCommit).to(ghTreeCode).to(ghTree).to(ghCommit).to(ghRefUpdate).to(commitCheck).to(ghDispatch).to(tgPublishing).to(waitDeploy).to(liveCheck)
+  .add(buildFiles).to(focusPrep).to(focusCall).to(focusApply).to(ghBlobs).to(ghRef).to(ghHeadCommit).to(ghTreeCode).to(ghTree).to(ghCommit).to(ghRefUpdate).to(commitCheck).to(ghDispatch).to(tgPublishing).to(waitDeploy).to(liveCheck)
   .to(ifLive.onTrue(tgLive.to(social)).onFalse(tgNotLive))
   .add(note);
