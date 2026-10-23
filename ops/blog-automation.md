@@ -38,7 +38,7 @@ Ein System, zwei Startwege, ein Repo (`ben69mikail/liar-entertainer-relaunch`, B
 - Test: `POST https://n8n.srv860817.hstgr.cloud/webhook/liar-plan-artikel` mit `{"test":true}` (Testlauf bucht nichts in den Tabellen; Vorschau mit ❌ verwerfen).
 
 ## n8n-Workflows
-- `LIAR-2026-Topic-Master` (Telegram-Bot): sammelt Inhalte, „eigenes“ startet die Pipeline, leitet ✅/❌ weiter.
+- `LIAR-2026-Topic-Master` (Telegram-Bot): sammelt Sprachnachrichten/Texte/Fotos in der Datentabelle `liar_inbox` (3 Std.; Alben werden vollständig gesammelt), Button „✍️ Artikel jetzt schreiben“ oder „eigenes“ startet die Pipeline, leitet ✅/❌ weiter. Sprache → Text über OpenRouter (`openai/whisper-1`); scheitert das, kommt eine Telegram-Meldung. Quelle: `ops/n8n/topic-master.sdk.js`. Test: `TM_SECRET=… node ops/n8n/test-topic-master-inbox.mjs` (mit `E2E_VOICE=<file_id>` zusätzlich Sprache→Pipeline als TESTLAUF).
 - `LIAR-2026-08 Artikel-Pipeline (Spontan + Montag)` – braucht Credential **GitHub LIAR (relaunch)** (Fine-grained Token, nur dieses Repo, Contents + Actions: Read and write) in den Knoten „GitHub: Datei anlegen“ und „GitHub: Auto-Publish starten“.
 - `LIAR-2026-09 Bildkatalog`, `LIAR-2026-10 Plan-Artikel (Montag)`.
 - `LIAR-2026-07 Social-Post` (Webhook `/webhook/liar-social-post`, Body mit `secret`), `LIAR-2026-06 Story-Repost`.
