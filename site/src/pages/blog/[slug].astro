@@ -45,7 +45,7 @@ const pageTitle = entry.data.seoTitle ?? `${entry.data.title} | Clown Zauberer L
 
 // Hero-Image mit Title-Overlay (build-time via sharp, OG-Image-Standard 1200x630)
 const heroDisplayUrl = entry.data.heroImage
-  ? await generateHeroWithOverlay(entry.data.heroImage, entry.data.title, slug)
+  ? await generateHeroWithOverlay(entry.data.heroImage, entry.data.title, slug, entry.data.heroFocus)
   : undefined;
 const heroAbsolute = heroDisplayUrl?.startsWith('/')
   ? `https://liar-entertainer.com${heroDisplayUrl}`
@@ -56,7 +56,7 @@ const ogImage = heroAbsolute ?? entry.data.heroImage ?? undefined;
 // Wird vom n8n Story-Repost-Workflow als story_image_url verwendet.
 // Awaited damit Datei beim Build sicher geschrieben ist (Side-Effect).
 if (entry.data.heroImage) {
-  await generateStoryImage(entry.data.heroImage, entry.data.title, slug);
+  await generateStoryImage(entry.data.heroImage, entry.data.title, slug, entry.data.heroFocus);
 }
 
 // BlogPosting schema.org structured data — Publisher referenziert das globale

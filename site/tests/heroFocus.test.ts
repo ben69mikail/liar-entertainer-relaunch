@@ -43,7 +43,7 @@ describe('planHero (Beitragsbild 1200×630)', () => {
   });
 
   it('Querformat: Zuschnitt enthält Kopf + Oberkörper komplett unterhalb des Titels', () => {
-    const f = { x: 50, top: 8, bottom: 42 };
+    const f = { x: 50, top: 40, bottom: 72 };
     const p = planHero(1600, 1200, f, 'Kurz: Titel');
     expect(p.mode).toBe('cover');
     if (p.mode !== 'cover') return;
@@ -52,6 +52,10 @@ describe('planHero (Beitragsbild 1200×630)', () => {
     expect(waistRel).toBeLessThanOrEqual(1);
     expect(p.region.top).toBeGreaterThanOrEqual(0);
     expect(p.region.top + p.region.height).toBeLessThanOrEqual(1200);
+  });
+
+  it('Querformat, Kopf ganz oben (würde unter dem Titel liegen) → split statt Gesicht verdecken', () => {
+    expect(planHero(1600, 1200, { x: 50, top: 8, bottom: 42 }, 'Kurz: Titel').mode).toBe('split');
   });
 
   it('Querformat, Person zu groß für den Bereich unter dem Titel → split statt Kopf abschneiden', () => {

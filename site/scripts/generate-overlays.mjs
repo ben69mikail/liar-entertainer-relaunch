@@ -58,7 +58,7 @@ async function main() {
       heroSkip++;
     } else {
       console.log(`[hero]  generating ${slug}`);
-      await generateHeroWithOverlay(cover, title, slug);
+      await generateHeroWithOverlay(cover, title, slug, data.heroFocus);
       heroGen++;
     }
 
@@ -67,7 +67,7 @@ async function main() {
       storySkip++;
     } else {
       console.log(`[story] generating ${slug}`);
-      await generateStoryImage(cover, title, slug);
+      await generateStoryImage(cover, title, slug, data.heroFocus);
       storyGen++;
     }
   }

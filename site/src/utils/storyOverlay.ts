@@ -13,6 +13,7 @@ import sharp from 'sharp';
 import { mkdir, writeFile, access, readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { loadFont, fitTitle, pathData, measure } from './overlayText';
+import { planBox, parseFocus } from './focusCrop';
 
 const OUT_DIR = path.resolve('./public/story-generated');
 const LOCAL_DOMAIN_PREFIX = 'https://liar-entertainer.com/';
@@ -118,6 +119,7 @@ export async function generateStoryImage(
   coverUrl: string,
   title: string,
   slug: string,
+  focusInput?: unknown,
 ): Promise<string> {
   if (!coverUrl) return coverUrl;
 
@@ -134,7 +136,8 @@ export async function generateStoryImage(
 
   try {
     await mkdir(OUT_DIR, { recursive: true });
-    const coverBuf = await loadCover(coverUrl);
+    const coverBuf = await sharp(await loadCover(coverUrl)).rotate().toBuffer();
+    const meta = await sharp(coverBuf).metadata();
 
     // Blurred + darkened background: cover-fit to full 1080x1920, then blur
     const background = await sharp(coverBuf)
@@ -147,7 +150,8 @@ export async function generateStoryImage(
     const layout = storyLayout(title);
     const { top, left, width, height } = layout.photo;
     const mask = Buffer.from(`<svg width="${width}" height="${height}"><rect width="${width}" height="${height}" rx="18" fill="#fff"/></svg>`);
-    const foreground = await sharp(coverBuf)
+    const region = planBox(meta.width ?? width, meta.height ?? height, width, height, parseFocus(focusInput));
+    const foreground = await (region ? sharp(coverBuf).extract(region) : sharp(coverBuf))
       .resize(width, height, { fit: 'cover', position: sharp.strategy.attention })
       .composite([{ input: mask, blend: 'dest-in' }])
       .png()

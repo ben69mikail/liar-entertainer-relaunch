@@ -10,7 +10,8 @@
 import sharp from 'sharp';
 import { mkdir, writeFile, access, readFile } from 'node:fs/promises';
 import path from 'node:path';
-import { loadFont, fitTitle, pathData, measure } from './overlayText';
+import { loadFont, pathData, measure } from './overlayText';
+import { planHero, parseFocus, titleMetrics, type Focus } from './focusCrop';
 
 const OUT_DIR = path.resolve('./public/hero-generated');
 const LOCAL_DOMAIN_PREFIX = 'https://liar-entertainer.com/';
@@ -44,17 +45,10 @@ const BRAND = () => loadFont(700);
  * fette Schrift, erster Titelteil weiß, zweiter gelb, weicher Schatten,
  * dunkler Verlauf oben, kleines rotes LIAR-Schild unten links.
  */
-export function buildSvg(title: string): string {
+export function buildSvg(title: string, opts: { maxWidth?: number; split?: { photoLeft: number } } = {}): string {
   const font = FONT();
-  const { size, lines } = fitTitle(font, title, {
-    maxWidth: W - 2 * PADDING_X,
-    maxLines: 4,
-    maxSize: 92,
-    minSize: 54,
-    colors: ['#ffffff', '#ffc93c'],
-  });
-  const lh = Math.round(size * 1.06);
-  let y = 34 + Math.round(size * 0.86);
+  const { size, lines, lh, firstBaseline } = titleMetrics(title, opts.maxWidth ?? W - 2 * PADDING_X);
+  let y = firstBaseline;
   const paths: string[] = [];
   for (const l of lines) {
     paths.push(`<path d="${pathData(font, l.text, PADDING_X, y, size)}" fill="${l.color}"/>`);
@@ -80,12 +74,18 @@ export function buildSvg(title: string): string {
       <stop offset="60%" stop-color="#000" stop-opacity="0.38"/>
       <stop offset="100%" stop-color="#000" stop-opacity="0"/>
     </linearGradient>
+    <linearGradient id="edge" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0%" stop-color="#000" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#000" stop-opacity="0.55"/>
+    </linearGradient>
     <linearGradient id="foot" x1="0" y1="1" x2="0" y2="0">
       <stop offset="0%" stop-color="#000" stop-opacity="0.45"/>
       <stop offset="100%" stop-color="#000" stop-opacity="0"/>
     </linearGradient>
   </defs>
-  <rect x="0" y="0" width="${W}" height="${shadeH}" fill="url(#darken)"/>
+  ${opts.split
+    ? `<rect x="${opts.split.photoLeft - 70}" y="0" width="70" height="${H}" fill="url(#edge)"/>`
+    : `<rect x="0" y="0" width="${W}" height="${shadeH}" fill="url(#darken)"/>`}
   <rect x="0" y="${H - 140}" width="${W}" height="140" fill="url(#foot)"/>
   <g filter="url(#soft)" opacity="0.9" transform="translate(0 4)">${shadow}</g>
   <g opacity="0.55" transform="translate(2 3)">${shadow}</g>
@@ -106,6 +106,7 @@ export async function generateHeroWithOverlay(
   coverUrl: string,
   title: string,
   slug: string,
+  focusInput?: unknown,
 ): Promise<string> {
   if (!coverUrl) return coverUrl;
 
@@ -123,21 +124,39 @@ export async function generateHeroWithOverlay(
   try {
     await mkdir(OUT_DIR, { recursive: true });
     const coverBuf = await loadCover(coverUrl);
-
-    const resized = await sharp(coverBuf)
-      .resize(W, H, { fit: 'cover', position: sharp.strategy.attention })
-      .toBuffer();
-
-    const svg = buildSvg(title);
-    const composed = await sharp(resized)
-      .composite([{ input: Buffer.from(svg), top: 0, left: 0 }])
-      .jpeg({ quality: 88, progressive: true, mozjpeg: true })
-      .toBuffer();
-
+    const composed = await composeHero(coverBuf, title, parseFocus(focusInput));
     await writeFile(outPath, composed);
     return publicUrl;
   } catch (e) {
     console.warn(`[heroOverlay] generation failed for ${slug}:`, e);
     return coverUrl;
   }
+}
+
+/**
+ * Bild + Titel zusammensetzen. Mit Fokus: Kopf + Oberkörper bleiben sichtbar
+ * (Zuschnitt unter dem Titel oder Foto ungeschnitten rechts, Titel links).
+ */
+export async function composeHero(coverBuf: Buffer, title: string, focus: Focus | null): Promise<Buffer> {
+  const oriented = await sharp(coverBuf).rotate().toBuffer();
+  const meta = await sharp(oriented).metadata();
+  const plan = planHero(meta.width ?? W, meta.height ?? H, focus, title);
+  let base: Buffer;
+  let svg: string;
+  if (plan.mode === 'split') {
+    const bg = await sharp(oriented).resize(W, H, { fit: 'cover', position: 'center' })
+      .blur(30).modulate({ brightness: 0.42, saturation: 0.8 }).toBuffer();
+    const photo = await sharp(oriented).extract(plan.region)
+      .resize(plan.photo.width, plan.photo.height, { fit: 'cover' }).toBuffer();
+    base = await sharp(bg).composite([{ input: photo, left: plan.photo.left, top: 0 }]).toBuffer();
+    svg = buildSvg(title, { maxWidth: plan.textWidth - 2 * PADDING_X, split: { photoLeft: plan.photo.left } });
+  } else {
+    const img = plan.mode === 'cover' ? sharp(oriented).extract(plan.region) : sharp(oriented);
+    base = await img.resize(W, H, { fit: 'cover', position: sharp.strategy.attention }).toBuffer();
+    svg = buildSvg(title);
+  }
+  return sharp(base)
+    .composite([{ input: Buffer.from(svg), top: 0, left: 0 }])
+    .jpeg({ quality: 88, progressive: true, mozjpeg: true })
+    .toBuffer();
 }

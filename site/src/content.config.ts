@@ -11,6 +11,8 @@ const blog = defineCollection({
     updatedDate: z.coerce.date().optional(),
     heroImage: z.string().optional(),
     heroImageAlt: z.string().optional(),
+    // Kopf + Oberkörper im Titelbild (% des Fotos), gesetzt von der n8n-Pipeline per Bild-KI
+    heroFocus: z.union([z.string(), z.object({ x: z.number(), top: z.number(), bottom: z.number() })]).optional(),
     categories: z.array(z.string()).default([]),
     tags: z.array(z.string()).default([]),
     author: z.string().default('Ben Mikail'),

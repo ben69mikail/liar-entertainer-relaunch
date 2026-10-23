@@ -5,6 +5,7 @@ description: "Am Sonntag, 8. November 2026, bin ich von 14 bis 18 Uhr als Pantom
 publishDate: 2026-10-23
 heroImage: "https://liar-entertainer.com/blog-images/pantomime-antikmarkt-marler-stern-november/cover.jpg"
 heroImageAlt: "Michaël Prescler, bekannt als Clown Zauberer LIAR"
+heroFocus: { x: 49, top: 23, bottom: 59 }
 categories: ["Termine","Lokales"]
 tags: ["pantomime","marler-stern","antikmarkt","walk-act","marl"]
 author: "Michaël Prescler"
