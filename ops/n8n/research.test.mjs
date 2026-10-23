@@ -1,5 +1,5 @@
 // Unit-Tests für die Web-Recherche der Artikel-Pipeline (Spontan-Artikel).
-// Aufruf: node --test ops/n8n/
+// Aufruf: node --test ops/n8n/research.test.mjs
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { createRequire } from 'node:module';
