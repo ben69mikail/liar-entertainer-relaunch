@@ -9,7 +9,7 @@ Ein System, zwei Startwege, ein Repo (`ben69mikail/liar-entertainer-relaunch`, B
 | Fotos | automatisch 1–3 aus dem Google-Drive-Bildpool | die per Telegram geschickten; ohne Fotos → Bildpool |
 | Schreiber | n8n `LIAR-2026-08 Artikel-Pipeline` (Claude Opus 5.5 via OpenRouter + Haiku-Faktencheck) | dieselbe Pipeline |
 | Freigabe | ✅/❌ in Telegram oder Mail-Link (3 Tage, danach verworfen) | dito |
-| Online | Pipeline committet Artikel (`draft: true`, `freigabe: ja`) + Bilder nach `site/public/blog-images/<slug>/`, startet `auto-publish.yml`, prüft Live-URL | dito |
+| Online | Pipeline committet Artikel (`draft: true`, `freigabe: ja`) + Bilder nach `site/public/blog-images/<slug>/` als **einen** Commit (Git Data API: Blobs → Baum → Commit → Branch; früher Einzel-PUTs → 409-Konflikt), startet `auto-publish.yml`, prüft Live-URL | dito |
 | Social | n8n `LIAR-2026-07 Social-Post` direkt nach Live-Check (FB, IG, LinkedIn, Google-Unternehmensprofil; Story +8–12 h über `LIAR-2026-06 Story-Repost`) | dito |
 
 ## Web-Recherche (Spontan-Artikel)

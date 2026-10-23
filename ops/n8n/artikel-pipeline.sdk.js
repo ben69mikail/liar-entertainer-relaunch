@@ -1,6 +1,6 @@
 // n8n-Workflow „LIAR-2026-08 Artikel-Pipeline“ (Jic8HX0mrK14T6Zv) als Workflow-SDK-Quelle.
 // <SOCIAL_SECRET> vor dem Hochladen durch das Secret des Social-Post-Webhooks ersetzen (nicht ins Repo).
-// Code der Recherche-Knoten: ops/n8n/research-lib.cjs (Tests: node --test ops/n8n/research.test.mjs).
+// Code der Recherche-Knoten: ops/n8n/research-lib.cjs (Tests: node --test ops/n8n/research.test.mjs ops/n8n/github-commit.test.mjs; GitHub-Upload: ops/n8n/github-commit-lib.cjs).
 import { workflow, node, trigger, sticky, ifElse } from '@n8n/workflow-sdk';
 
 const TG = { telegramApi: { id: 'NLiyAfhaGJ1NrflC', name: 'Telegram account' } };
@@ -214,20 +214,73 @@ const buildFiles = node({
   config: { name: 'Commit-Dateien bauen', position: [3940, 200], parameters: { jsCode: "const a = $('Vorschau bauen').first().json;\nconst list = (() => { try { return $('Bilder-Liste').all().map(i => i.json); } catch (e) { return []; } })();\nconst items = $input.all();\nconst out = [];\nfor (let i = 0; i < items.length; i++) {\n  const it = items[i];\n  if (!it.binary || !list[i] || !list[i].path) continue;\n  const key = Object.keys(it.binary)[0];\n  const buf = await this.helpers.getBinaryDataBuffer(i, key);\n  out.push({ json: { path: list[i].path, content: buf.toString('base64'), message: 'blog(n8n): Bild ' + list[i].path.split('/').pop() + ' für ' + a.slug + ' [skip netlify]' } });\n}\nout.push({ json: { path: a.md_path, content: Buffer.from(a.md_full, 'utf8').toString('base64'), message: 'blog(n8n): ' + a.slug + ' – freigegeben (' + (a.mode === 'plan' ? 'Montags-Plan' : 'Telegram') + ') [skip netlify]' } });\nreturn out;\n" } },
   output: [{ path: 'site/src/content/blog/s.md', content: 'YmFzZTY0', message: 'm' }]
 });
-const ghPut = node({
+const ghBlobs = node({
   type: 'n8n-nodes-base.httpRequest', version: 4.2,
-  config: { name: 'GitHub: Datei anlegen', position: [4160, 200], credentials: GH,
-    parameters: { method: 'PUT', url: "={{ '" + REPO + "/contents/' + $json.path }}",
+  config: { name: 'GitHub: Blobs anlegen', position: [4160, 200], credentials: GH,
+    parameters: { method: 'POST', url: REPO + '/git/blobs',
       authentication: 'predefinedCredentialType', nodeCredentialType: 'githubApi',
       sendHeaders: true, headerParameters: { parameters: [{ name: 'Accept', value: 'application/vnd.github+json' }, { name: 'X-GitHub-Api-Version', value: '2022-11-28' }] },
       sendBody: true, specifyBody: 'json',
-      jsonBody: "={{ JSON.stringify({ message: $json.message, content: $json.content, branch: 'main' }) }}",
-      options: { timeout: 60000, batching: { batch: { batchSize: 1, batchInterval: 1500 } }, response: { response: { fullResponse: true, neverError: true, responseFormat: 'json' } } } } },
-  output: [{ statusCode: 201, body: { content: { path: 'x' } } }]
+      jsonBody: "={{ JSON.stringify({ content: $json.content, encoding: 'base64' }) }}",
+      options: { timeout: 60000, batching: { batch: { batchSize: 1, batchInterval: 300 } }, response: { response: { fullResponse: true, neverError: true, responseFormat: 'json' } } } } },
+  output: [{ statusCode: 201, body: { sha: 'b1' } }]
+});
+const ghRef = node({
+  type: 'n8n-nodes-base.httpRequest', version: 4.2,
+  config: { name: 'GitHub: Stand holen', position: [4270, 200], credentials: GH, executeOnce: true,
+    parameters: { method: 'GET', url: REPO + '/git/ref/heads/main',
+      authentication: 'predefinedCredentialType', nodeCredentialType: 'githubApi',
+      sendHeaders: true, headerParameters: { parameters: [{ name: 'Accept', value: 'application/vnd.github+json' }] },
+      options: { timeout: 30000, response: { response: { fullResponse: true, neverError: true, responseFormat: 'json' } } } } },
+  output: [{ statusCode: 200, body: { object: { sha: 'h1' } } }]
+});
+const ghHeadCommit = node({
+  type: 'n8n-nodes-base.httpRequest', version: 4.2,
+  config: { name: 'GitHub: Basis-Commit holen', position: [4380, 200], credentials: GH,
+    parameters: { method: 'GET', url: "={{ '" + REPO + "/git/commits/' + (($json.body && $json.body.object && $json.body.object.sha) || 'fehlt') }}",
+      authentication: 'predefinedCredentialType', nodeCredentialType: 'githubApi',
+      sendHeaders: true, headerParameters: { parameters: [{ name: 'Accept', value: 'application/vnd.github+json' }] },
+      options: { timeout: 30000, response: { response: { fullResponse: true, neverError: true, responseFormat: 'json' } } } } },
+  output: [{ statusCode: 200, body: { tree: { sha: 't1' } } }]
+});
+const ghTreeCode = node({
+  type: 'n8n-nodes-base.code', version: 2,
+  config: { name: 'Baum bauen', position: [4490, 200], parameters: { jsCode: "// Alle Dateien eines Artikels als EIN Commit über die GitHub Git Data API (blobs → tree → commit → ref).\n// Wird von build.py in den n8n-Code-Knoten „Baum bauen“ / „Commit pruefen“ eingefügt.\n\nfunction checkStep(name, resp) {\n  const r = resp || {};\n  const code = Number(r.statusCode) || 0;\n  if (code >= 200 && code < 300) return r.body || {};\n  const msg = (r.body && (r.body.message || JSON.stringify(r.body))) || r.error || 'keine Antwort';\n  throw new Error('GitHub-Schritt „' + name + '“ fehlgeschlagen: ' + (code || '?') + ' ' + String(msg).slice(0, 200));\n}\n\nfunction buildTreeRequest(files, blobResponses, refBody, commitBody) {\n  if (files.length !== blobResponses.length) {\n    throw new Error('GitHub: ' + files.length + ' Dateien, ' + blobResponses.length + ' Blobs – Abbruch, nichts committet.');\n  }\n  const tree = files.map((f, i) => {\n    const b = blobResponses[i] || {};\n    const code = Number(b.statusCode) || 0;\n    if (!(code >= 200 && code < 300) || !b.body || !b.body.sha) {\n      const why = (b.body && b.body.message) || b.error || 'keine Antwort';\n      throw new Error('GitHub-Upload ' + f.path.split('/').pop() + ' fehlgeschlagen: ' + (code || '?') + ' ' + String(why).slice(0, 160) + ' – nichts committet.');\n    }\n    return { path: f.path, mode: '100644', type: 'blob', sha: b.body.sha };\n  });\n  const md = files.find(f => /\\.md$/.test(f.path));\n  return {\n    base_tree: commitBody.tree.sha,\n    parent: refBody.object.sha,\n    message: (md || files[files.length - 1]).message,\n    tree\n  };\n}\n\nif (typeof module !== 'undefined' && module.exports) {\n  module.exports = { checkStep, buildTreeRequest };\n}\n\n// --- n8n: Baum für EINEN Commit bauen ---\nconst files = $('Commit-Dateien bauen').all().map(i => i.json);\nconst blobs = $('GitHub: Blobs anlegen').all().map(i => i.json);\nconst ref = checkStep('Stand holen', $('GitHub: Stand holen').first().json);\nconst base = checkStep('Basis-Commit holen', $input.first().json);\nreturn [{ json: buildTreeRequest(files, blobs, ref, base) }];\n" } },
+  output: [{ base_tree: 't1', parent: 'h1', message: 'm', tree: [] }]
+});
+const ghTree = node({
+  type: 'n8n-nodes-base.httpRequest', version: 4.2,
+  config: { name: 'GitHub: Baum anlegen', position: [4600, 200], credentials: GH,
+    parameters: { method: 'POST', url: REPO + '/git/trees',
+      authentication: 'predefinedCredentialType', nodeCredentialType: 'githubApi',
+      sendHeaders: true, headerParameters: { parameters: [{ name: 'Accept', value: 'application/vnd.github+json' }] },
+      sendBody: true, specifyBody: 'json', jsonBody: "={{ JSON.stringify({ base_tree: $json.base_tree, tree: $json.tree }) }}",
+      options: { timeout: 60000, response: { response: { fullResponse: true, neverError: true, responseFormat: 'json' } } } } },
+  output: [{ statusCode: 201, body: { sha: 't2' } }]
+});
+const ghCommit = node({
+  type: 'n8n-nodes-base.httpRequest', version: 4.2,
+  config: { name: 'GitHub: Commit anlegen', position: [4710, 200], credentials: GH,
+    parameters: { method: 'POST', url: REPO + '/git/commits',
+      authentication: 'predefinedCredentialType', nodeCredentialType: 'githubApi',
+      sendHeaders: true, headerParameters: { parameters: [{ name: 'Accept', value: 'application/vnd.github+json' }] },
+      sendBody: true, specifyBody: 'json', jsonBody: "={{ JSON.stringify({ message: $('Baum bauen').first().json.message, tree: ($json.body && $json.body.sha) || 'fehlt', parents: [$('Baum bauen').first().json.parent] }) }}",
+      options: { timeout: 60000, response: { response: { fullResponse: true, neverError: true, responseFormat: 'json' } } } } },
+  output: [{ statusCode: 201, body: { sha: 'c2' } }]
+});
+const ghRefUpdate = node({
+  type: 'n8n-nodes-base.httpRequest', version: 4.2,
+  config: { name: 'GitHub: Branch setzen', position: [4820, 200], credentials: GH,
+    parameters: { method: 'PATCH', url: REPO + '/git/refs/heads/main',
+      authentication: 'predefinedCredentialType', nodeCredentialType: 'githubApi',
+      sendHeaders: true, headerParameters: { parameters: [{ name: 'Accept', value: 'application/vnd.github+json' }] },
+      sendBody: true, specifyBody: 'json', jsonBody: "={{ JSON.stringify({ sha: ($json.body && $json.body.sha) || 'fehlt', force: false }) }}",
+      options: { timeout: 60000, response: { response: { fullResponse: true, neverError: true, responseFormat: 'json' } } } } },
+  output: [{ statusCode: 200, body: { object: { sha: 'c2' } } }]
 });
 const commitCheck = node({
   type: 'n8n-nodes-base.code', version: 2,
-  config: { name: 'Commits pruefen', position: [4380, 200], parameters: { jsCode: "const bad = $input.all().map(i => i.json).filter(r => !(r.statusCode >= 200 && r.statusCode < 300));\nif (bad.length) {\n  const msg = bad.map(r => (r.statusCode || '?') + ' ' + JSON.stringify(r.body || r.error || r).slice(0, 160)).join(' | ');\n  throw new Error('GitHub-Commit fehlgeschlagen (Token/Rechte prüfen: Contents + Actions Read&Write auf liar-entertainer-relaunch): ' + msg);\n}\nconst a = $('Vorschau bauen').first().json;\nreturn [{ json: { committed: $input.all().length, slug: a.slug, live_url: a.live_url } }];\n" } },
+  config: { name: 'Commits pruefen', position: [4930, 200], parameters: { jsCode: "// Alle Dateien eines Artikels als EIN Commit über die GitHub Git Data API (blobs → tree → commit → ref).\n// Wird von build.py in den n8n-Code-Knoten „Baum bauen“ / „Commit pruefen“ eingefügt.\n\nfunction checkStep(name, resp) {\n  const r = resp || {};\n  const code = Number(r.statusCode) || 0;\n  if (code >= 200 && code < 300) return r.body || {};\n  const msg = (r.body && (r.body.message || JSON.stringify(r.body))) || r.error || 'keine Antwort';\n  throw new Error('GitHub-Schritt „' + name + '“ fehlgeschlagen: ' + (code || '?') + ' ' + String(msg).slice(0, 200));\n}\n\nfunction buildTreeRequest(files, blobResponses, refBody, commitBody) {\n  if (files.length !== blobResponses.length) {\n    throw new Error('GitHub: ' + files.length + ' Dateien, ' + blobResponses.length + ' Blobs – Abbruch, nichts committet.');\n  }\n  const tree = files.map((f, i) => {\n    const b = blobResponses[i] || {};\n    const code = Number(b.statusCode) || 0;\n    if (!(code >= 200 && code < 300) || !b.body || !b.body.sha) {\n      const why = (b.body && b.body.message) || b.error || 'keine Antwort';\n      throw new Error('GitHub-Upload ' + f.path.split('/').pop() + ' fehlgeschlagen: ' + (code || '?') + ' ' + String(why).slice(0, 160) + ' – nichts committet.');\n    }\n    return { path: f.path, mode: '100644', type: 'blob', sha: b.body.sha };\n  });\n  const md = files.find(f => /\\.md$/.test(f.path));\n  return {\n    base_tree: commitBody.tree.sha,\n    parent: refBody.object.sha,\n    message: (md || files[files.length - 1]).message,\n    tree\n  };\n}\n\nif (typeof module !== 'undefined' && module.exports) {\n  module.exports = { checkStep, buildTreeRequest };\n}\n\n// --- n8n: Ergebnis prüfen ---\ncheckStep('Baum anlegen', $('GitHub: Baum anlegen').first().json);\nconst commit = checkStep('Commit anlegen', $('GitHub: Commit anlegen').first().json);\ncheckStep('Branch setzen', $input.first().json);\nconst a = $('Vorschau bauen').first().json;\nreturn [{ json: { committed: $('Commit-Dateien bauen').all().length, commit: commit.sha, slug: a.slug, live_url: a.live_url } }];\n" } },
   output: [{ committed: 2, slug: 's', live_url: 'u' }]
 });
 const usage = node({
@@ -328,6 +381,6 @@ export default workflow('liar-spontan-artikel', 'LIAR-2026-08 Artikel-Pipeline (
     .onFalse(tgRejected))
   .add(commitCheck).to(usage).to(updImg)
   .add(commitCheck).to(themeBook).to(updTheme)
-  .add(buildFiles).to(ghPut).to(commitCheck).to(ghDispatch).to(tgPublishing).to(waitDeploy).to(liveCheck)
+  .add(buildFiles).to(ghBlobs).to(ghRef).to(ghHeadCommit).to(ghTreeCode).to(ghTree).to(ghCommit).to(ghRefUpdate).to(commitCheck).to(ghDispatch).to(tgPublishing).to(waitDeploy).to(liveCheck)
   .to(ifLive.onTrue(tgLive.to(social)).onFalse(tgNotLive))
   .add(note);
