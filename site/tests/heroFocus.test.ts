@@ -28,8 +28,12 @@ describe('parseFocus', () => {
 });
 
 describe('planHero (Beitragsbild 1200×630)', () => {
-  it('ohne Fokus: bisheriger Zuschnitt nach Bildinhalt', () => {
+  it('ohne Fokus, Querformat: bisheriger Zuschnitt nach Bildinhalt', () => {
     expect(planHero(1600, 1200, null, TITLE).mode).toBe('attention');
+  });
+
+  it('ohne Fokus, Hochkant-Foto: nie blind zuschneiden → Foto komplett rechts', () => {
+    expect(planHero(960, 1280, null, TITLE).mode).toBe('split');
   });
 
   it('Hochkant-Foto mit Person: Foto komplett rechts, Titel links (nichts abgeschnitten)', () => {
