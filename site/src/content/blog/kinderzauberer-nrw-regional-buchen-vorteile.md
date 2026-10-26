@@ -8,8 +8,7 @@ heroImageAlt: "Zauberer in blau-kariertem Hemd zeigt auf einer nassen Outdoor-B�
 categories: ["Lokales","Ratgeber"]
 tags: ["kinderzauberer-nrw","zauberer-ruhrgebiet","kindergeburtstag","gladbeck","fahrtkosten"]
 author: "Michaël Prescler"
-draft: true
-freigabe: ja
+draft: false
 ---
 
 Wer einen Kinderzauberer in NRW sucht, findet schnell Angebote aus dem ganzen Land. Für einen Kindergeburtstag, ein Kita-Fest oder eine Schulveranstaltung lohnt es sich aber, regional zu buchen: Kurze Anfahrt bedeutet niedrigere Fahrtkosten, mehr Verlässlichkeit beim Start und eine unkomplizierte persönliche Absprache vorab. Ich bin Michaël Prescler, als Clown Zauberer LIAR seit 2009 hauptberuflich unterwegs, mit Sitz in Gladbeck mitten im Ruhrgebiet. In diesem Artikel erkläre ich aus der Praxis, was regionale Nähe konkret bringt und worauf Sie bei der Buchung achten sollten.
