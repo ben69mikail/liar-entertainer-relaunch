@@ -57,3 +57,5 @@ Ein System, zwei Startwege, ein Repo (`ben69mikail/liar-entertainer-relaunch`, B
 - Fakten im Knoten „Prompt bauen“ bei Änderungen an `docs/COWORK-SEO-ANWEISUNGEN.md` §1 / `site/src/data/fact-rules.ts` mitziehen (Bewertungszahl, Jahre im Januar).
 - LinkedIn-Zugang in n8n läuft ca. alle 60 Tage ab → Credential „LinkedIn account“ neu verbinden.
 - Google-OAuth (Drive, Gmail) muss in der Google-Cloud-App auf „In Produktion“ stehen, sonst laufen die Zugänge nach 7 Tagen ab.
+
+- Zeitzone: Die n8n-Instanz rechnet Zeitauslöser in **Europe/Berlin** (nicht UTC). Ein Auslöser „07:00“ ist 07:00 Berliner Zeit, Sommer wie Winter. Der Plan-Artikel hatte bis 26.10.2026 zwei Auslöser 05/06 Uhr (falsche UTC-Annahme) – der 07-Uhr-Filter verwarf beide still, der erste Montag fiel aus. Jetzt ein Auslöser 07:00 (`ops/n8n/plan-artikel.sdk.js`, `plan-schedule-lib.cjs`, Tests `plan-schedule.test.mjs`). Neue Zeitpläne immer in Berliner Zeit angeben.

@@ -33,3 +33,10 @@ test('Filter: Zeitauslöser nur um 07 Uhr Berlin, Webhook immer', () => {
   assert.deepEqual(planGate({ body: { test: true } }, 15), { run: true, is_test: true });
   assert.deepEqual(planGate({ body: { start: true } }, 15), { run: true, is_test: false });
 });
+
+test('Workflow-Quelle nutzt genau diese Regel (kein zweiter Auslöser, 07 Uhr)', async () => {
+  const { readFileSync } = await import('node:fs');
+  const src = readFileSync(new URL('./plan-artikel.sdk.js', import.meta.url), 'utf8');
+  const hours = [...src.matchAll(/triggerAtHour:\s*(\d+)/g)].map(m => Number(m[1]));
+  assert.deepEqual(hours, [7]);
+});
