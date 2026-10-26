@@ -3,6 +3,10 @@
 // Schreibt nichts, wenn nichts freigegeben ist (Exit 0, "nothing to publish").
 // Läuft in .github/workflows/auto-publish.yml; committet die Änderung, der Deploy-Workflow baut+testet+deployt.
 import { readdirSync, readFileSync, writeFileSync } from 'node:fs';
+import { createRequire } from 'node:module';
+// Zielseiten-Pflicht: ohne Link auf eine Leistungsseite bleibt der Entwurf liegen (BLOCKED=… im Log)
+const { targetCheck } = createRequire(import.meta.url)('../../ops/n8n/target-lib.cjs');
+const blocked = [];
 
 const DIR = 'src/content/blog';
 const today = new Date().toISOString().slice(0, 10);
@@ -18,6 +22,8 @@ for (const f of readdirSync(DIR).filter(f => f.endsWith('.md'))) {
   const isDraft = /^draft:\s*true\s*$/m.test(fm);
   const approved = /^freigabe:\s*["']?ja["']?\s*$/im.test(fm);
   if (!isDraft || !approved) continue;
+  const tc = targetCheck(src.slice(m[0].length));
+  if (!tc.ok) { blocked.push(f.replace(/\.md$/, '') + ': ' + tc.reason); continue; }
 
   let newFm = fm
     .replace(/^draft:\s*true\s*$/m, 'draft: false')
@@ -38,6 +44,7 @@ for (const f of readdirSync(DIR).filter(f => f.endsWith('.md'))) {
   published.push(f.replace(/\.md$/, ''));
 }
 
+for (const b of blocked) console.log('BLOCKED=' + b);
 if (published.length === 0) {
   console.log('nothing to publish');
   process.exit(0);

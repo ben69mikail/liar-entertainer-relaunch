@@ -39,8 +39,11 @@ jobs:
         run: |
           out=$(node scripts/auto-publish.mjs)
           echo "$out"
-          echo "result=$out" >> "$GITHUB_OUTPUT"
-          echo "$out" | grep -q '^PUBLISHED=' || exit 0
+          # Zielseiten-Pflicht: blockierte Entwürfe bleiben liegen und stehen in der Zusammenfassung
+          echo "$out" | grep '^BLOCKED=' | sed 's/^BLOCKED=/⛔ Nicht veröffentlicht: /' >> "$GITHUB_STEP_SUMMARY" || true
+          pub=$(echo "$out" | grep '^PUBLISHED=' || true)
+          echo "result=$pub" >> "$GITHUB_OUTPUT"
+          [ -n "$pub" ] || exit 0
           echo "changed=yes" >> "$GITHUB_OUTPUT"
 
       - name: Poppins-Font (für Blog-Hero-Rendering)

@@ -1,5 +1,5 @@
 // n8n-Workflow „LIAR-2026-Topic-Master“ (VeMwaALrgLRQZG9m) als Workflow-SDK-Quelle.
-// <TM_SECRET> vor dem Hochladen durch das Test-Secret ersetzen (nicht ins Repo).
+// <TM_SECRET> (Test-Secret) wird beim Hochladen eingesetzt (nicht ins Repo).
 import { workflow, node, trigger, sticky, ifElse, switchCase } from '@n8n/workflow-sdk';
 
 const TG = { telegramApi: { id: 'NLiyAfhaGJ1NrflC', name: 'Telegram account' } };
@@ -9,7 +9,7 @@ const INBOX = { __rl: true, mode: 'id', value: 'ON36Hcy0zyBi4C1J' };
 
 const tgTrigger = trigger({
   type: 'n8n-nodes-base.telegramTrigger', version: 1.1,
-  config: { name: 'Telegram: Update', position: [0, 400], credentials: TG, webhookId: '072cbdb8-08b5-4ea4-940d-2c050b147143',
+  config: { name: 'Telegram: Update', position: [0, 400], credentials: TG, webhookId: '0bd34d8b-f289-4750-900e-c764e734a1f3',
     parameters: { updates: ['message', 'callback_query'], additionalFields: {} } },
   output: [{ message: { text: 'eigenes', chat: { id: 2106974057 }, from: { id: 2106974057 } } }]
 });
@@ -26,13 +26,13 @@ const testIn = node({
 });
 const classify = node({
   type: 'n8n-nodes-base.code', version: 2,
-  config: { name: 'Klassifizieren', position: [220, 400], parameters: { jsCode: "const update = $input.first().json;\nconst isTest = update.is_test === true;\nconst isCallback = !!update.callback_query;\nconst cq = update.callback_query;\nconst msg = isCallback ? cq.message : (update.message || update);\nconst fromId = isCallback ? (cq.from && cq.from.id) : (msg.from && msg.from.id);\nif (String(fromId) !== '2106974057') return [{ json: { action: 'ignore_unauthorized' } }];\nif (isCallback) {\n  if (cq.data === 'start:eigenes') return [{ json: { action: 'eigenes', is_test: isTest, callback_query_id: cq.id } }];\n  const m = String(cq.data || '').match(/^([a-z_]+):(.+)$/);\n  const ru = String((cq.message && cq.message.text) || '').match(/RU:(https?:\\/\\/\\S+)/);\n  if (!m || !ru) return [{ json: { action: 'ignore_callback' } }];\n  return [{ json: { action: 'callback', cb_action: m[1], resume_url: ru[1], callback_query_id: cq.id, chat_id: cq.message.chat.id, message_id: cq.message.message_id } }];\n}\nconst text = String(msg.text || msg.caption || '').trim();\nconst lower = text.toLowerCase();\nlet action;\nif (/^\\/?artikel\\b/.test(lower)) action = 'artikel';\nelse if (/^\\/?eigenes\\b/.test(lower)) action = 'eigenes';\nelse if (/^\\/?abbrechen\\b/.test(lower)) action = 'abbrechen';\nelse if (/^\\/?(start|hilfe|help)\\b/.test(lower)) action = 'artikel';\nelse if (msg.voice || msg.audio || (msg.photo && msg.photo.length) || msg.text) action = 'collect';\nelse action = 'ignore';\nlet entry = null;\nif (action === 'collect') {\n  entry = { ts: Date.now(), typ: 'text', file_id: '', caption: '', inhalt: '' };\n  if (msg.voice || msg.audio) { entry.typ = 'voice'; entry.file_id = (msg.voice || msg.audio).file_id; }\n  else if (msg.photo && msg.photo.length) { entry.typ = 'photo'; entry.file_id = msg.photo[msg.photo.length - 1].file_id; entry.caption = msg.caption || ''; }\n  else { entry.inhalt = msg.text; }\n}\nreturn [{ json: { action, is_test: isTest, entry, last_type: entry ? entry.typ : '' } }];\n" } },
+  config: { name: 'Klassifizieren', position: [220, 400], parameters: { jsCode: "const update = $input.first().json;\nconst isTest = update.is_test === true;\nconst isCallback = !!update.callback_query;\nconst cq = update.callback_query;\nconst msg = isCallback ? cq.message : (update.message || update);\nconst fromId = isCallback ? (cq.from && cq.from.id) : (msg.from && msg.from.id);\nif (String(fromId) !== '2106974057') return [{ json: { action: 'ignore_unauthorized' } }];\nif (isCallback) {\n  if (cq.data === 'start:eigenes') return [{ json: { action: 'eigenes', is_test: isTest, callback_query_id: cq.id } }];\n  const m = String(cq.data || '').match(/^([a-z_]+):(.+)$/);\n  // SEO-Entscheidungen (LIAR-2026-11 Woche / -13 Monat) → LIAR-2026-12, ohne Resume-URL\n  if (m && /^(seo|mon)_/.test(m[1])) return [{ json: { action: 'seo', cb_action: m[1], arg: m[2], callback_query_id: cq.id, chat_id: cq.message.chat.id, message_id: cq.message.message_id } }];\n  const ru = String((cq.message && cq.message.text) || '').match(/RU:(https?:\\/\\/\\S+)/);\n  if (!m || !ru) return [{ json: { action: 'ignore_callback' } }];\n  return [{ json: { action: 'callback', cb_action: m[1], resume_url: ru[1], callback_query_id: cq.id, chat_id: cq.message.chat.id, message_id: cq.message.message_id } }];\n}\nconst text = String(msg.text || msg.caption || '').trim();\nconst lower = text.toLowerCase();\nlet action;\nif (/^\\/?artikel\\b/.test(lower)) action = 'artikel';\nelse if (/^\\/?eigenes\\b/.test(lower)) action = 'eigenes';\nelse if (/^\\/?abbrechen\\b/.test(lower)) action = 'abbrechen';\nelse if (/^\\/?(start|hilfe|help)\\b/.test(lower)) action = 'artikel';\nelse if (msg.voice || msg.audio || (msg.photo && msg.photo.length) || msg.text) action = 'collect';\nelse action = 'ignore';\nlet entry = null;\nif (action === 'collect') {\n  entry = { ts: Date.now(), typ: 'text', file_id: '', caption: '', inhalt: '' };\n  if (msg.voice || msg.audio) { entry.typ = 'voice'; entry.file_id = (msg.voice || msg.audio).file_id; }\n  else if (msg.photo && msg.photo.length) { entry.typ = 'photo'; entry.file_id = msg.photo[msg.photo.length - 1].file_id; entry.caption = msg.caption || ''; }\n  else { entry.inhalt = msg.text; }\n}\nreturn [{ json: { action, is_test: isTest, entry, last_type: entry ? entry.typ : '' } }];\n" } },
   output: [{ action: 'collect', is_test: false, entry: { ts: 1, typ: 'text', file_id: '', caption: '', inhalt: 'x' }, last_type: 'text' }]
 });
 const route = switchCase({
   version: 3.2,
   config: { name: 'Aktion', position: [440, 400],
-    parameters: { rules: { values: [{ conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'artikel', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'hilfe' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'eigenes', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'eigenes' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'abbrechen', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'abbrechen' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'callback', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'freigabe' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'collect', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'gesammelt' }] }, options: {} } }
+    parameters: { rules: { values: [{ conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'artikel', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'hilfe' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'eigenes', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'eigenes' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'abbrechen', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'abbrechen' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'callback', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'freigabe' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'collect', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'gesammelt' }, { conditions: { options: { caseSensitive: true, leftValue: '', typeValidation: 'strict' }, conditions: [{ leftValue: '={{ $json.action }}', rightValue: 'seo', operator: { type: 'string', operation: 'equals' } }], combinator: 'and' }, renameOutput: true, outputKey: 'seo' }] }, options: {} } }
 });
 const tgHelp = node({
   type: 'n8n-nodes-base.telegram', version: 1.2,
@@ -227,7 +227,16 @@ const cbEdit = node({
   output: [{ ok: true }]
 });
 
-const note = sticky('## LIAR Topic-Master (Telegram-Bot)\nSammelt Sprachnachrichten, Texte und Fotos in der Datentabelle liar_inbox (3 Std., Alben sicher). Button „Artikel jetzt schreiben“ oder „eigenes“ startet LIAR-2026-08.\nSprache → Text über OpenRouter (openai/whisper-1).\nButtons ✅/❌ der Vorschau laufen hier durch (Callback → Resume-URL).\nTest-Webhook /webhook/liar-topic-test (Secret) für ops/n8n/test-topic-master-inbox.mjs.', [], { position: [0, 100], width: 600, height: 220 });
+// --- SEO-Entscheidungen (Buttons seo_*/mon_*) ---
+const seoDecide = node({
+  type: 'n8n-nodes-base.executeWorkflow', version: 1.2,
+  config: { name: 'SEO-Entscheidung starten', position: [700, 1150],
+    parameters: { source: 'database', workflowId: { __rl: true, mode: 'id', value: 'bduk9s2mEdjkLvRr' },
+      mode: 'once', options: { waitForSubWorkflow: false } } },
+  output: [{}]
+});
+
+const note = sticky('## LIAR Topic-Master (Telegram-Bot)\nSammelt Sprachnachrichten, Texte und Fotos in der Datentabelle liar_inbox (3 Std., Alben sicher). Button „Artikel jetzt schreiben“ oder „eigenes“ startet LIAR-2026-08.\nSprache → Text über OpenRouter (openai/whisper-1).\nButtons ✅/❌ der Vorschau laufen hier durch (Callback → Resume-URL). Buttons seo_*/mon_* (GSC-Woche, Monatsbericht) → LIAR-2026-12 SEO-Entscheidung.\nTest-Webhook /webhook/liar-topic-test (Secret) für ops/n8n/test-topic-master-inbox.mjs.', [], { position: [0, 100], width: 600, height: 220 });
 
 export default workflow('VeMwaALrgLRQZG9m', 'LIAR-2026-Topic-Master')
   .add(tgTrigger).to(classify).to(route
@@ -235,7 +244,8 @@ export default workflow('VeMwaALrgLRQZG9m', 'LIAR-2026-Topic-Master')
     .onCase(1, dtReadStart.to(readStart.to(cbStartAnswer.to(validate.to(tgAck.to(ifOk.onTrue(ifVoice.onTrue(voiceItems.to(voiceDl.to(audioPrep.to(transcribe.to(payload))))).onFalse(payload))))))))
     .onCase(2, dtClearCancel.to(tgCancel))
     .onCase(3, cbResume.to(cbAnswer.to(cbEdit)))
-    .onCase(4, entryOnly.to(dtInsert.to(dtReadCollect.to(countCollect.to(tgCollected))))))
+    .onCase(4, entryOnly.to(dtInsert.to(dtReadCollect.to(countCollect.to(tgCollected)))))
+    .onCase(5, seoDecide))
   .add(payload).to(ifText.onTrue(startPipeline.to(dtClearStart.to(startDone))).onFalse(tgVoiceErr))
   .add(testHook).to(testIn.to(classify))
   .add(note);
