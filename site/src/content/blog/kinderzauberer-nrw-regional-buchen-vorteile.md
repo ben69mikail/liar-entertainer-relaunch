@@ -30,7 +30,7 @@ Gerade für Eltern ist das beruhigend. Am Geburtstag selbst ist genug los – da
 
 ## 🚗 Fahrtkosten und Pünktlichkeit: Transparent statt Überraschung
 
-Ich halte es bei den Kosten so einfach wie möglich. Für den Kindergeburtstag gibt es einen Festpreis: Die Zaubershow dauert ca. 40 Minuten, eignet sich für Kinder ab 4 Jahren und kostet 150 € für bis zu ca. 12 Kinder. Dazu kommen die Fahrtkosten von 0,40 € pro Kilometer ab Gladbeck. Wer möchte, ergänzt Ballonmodellage für 20 € oder Glitzer-Tattoos für 40 €; das Komplett-Paket kostet 210 €. Alle Details finden Sie in meiner [Übersicht zu Preisen und Paketen](/preise/).
+Ich halte es bei den Kosten so einfach wie möglich. Für den Kindergeburtstag gibt es einen Festpreis: Die Zaubershow dauert ca. 40 Minuten und eignet sich für Kinder ab 4 Jahren. Dazu kommen die Fahrtkosten von 0,40 € pro Kilometer ab Gladbeck. Wer möchte, ergänzt Ballonmodellage oder Glitzer-Tattoos. Alle Preise und Pakete finden Sie in meiner [Übersicht zu Preisen und Paketen](/preise/).
 
 Der Vorteil der regionalen Buchung liegt auf der Hand: Der Festpreis bleibt gleich, nur die Fahrtkosten hängen von der Entfernung ab. Wer im Ruhrgebiet oder in den angrenzenden Regionen feiert, profitiert also direkt von der Nähe zu Gladbeck.
 
@@ -73,7 +73,7 @@ Ich bin in ganz NRW buchbar. Mein Sitz ist Gladbeck, die Fahrtkosten betragen 0,
 
 ### Was kostet ein Kinderzauberer für den Kindergeburtstag?
 
-Die Zaubershow kostet 150 € Festpreis (ca. 40 Minuten, bis ca. 12 Kinder, ab 4 Jahren). Ballonmodellage kostet 20 € extra, Glitzer-Tattoos 40 €, das Komplett-Paket 210 €, jeweils zuzüglich Fahrtkosten.
+Für den Kindergeburtstag gibt es einen Festpreis (ca. 40 Minuten, bis ca. 12 Kinder, ab 4 Jahren) zuzüglich Fahrtkosten. Die aktuellen Preise und Pakete stehen auf meiner [Preisseite](/preise/).
 
 ### Kommen Sie auch vormittags in Kitas und Schulen?
 
