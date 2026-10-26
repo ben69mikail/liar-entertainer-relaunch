@@ -25,6 +25,13 @@ test('stripPrices entfernt Sätze mit 150/170/210 € und verweist auf /preise/'
   assert.match(r.body, /Intro\./);
 });
 
+test('stripPrices trennt Sätze nicht bei Abkürzungen (ca., z. B., inkl.)', () => {
+  const body = 'Die Zaubershow dauert ca. 40 Minuten, eignet sich ab 4 Jahren und kostet 150 € für bis zu ca. 12 Kinder. Dazu kommen z. B. Fahrtkosten inkl. Anfahrt.';
+  const r = stripPrices(body);
+  assert.equal(r.removed, 1);
+  assert.equal(r.body, 'Dazu kommen z. B. Fahrtkosten inkl. Anfahrt. Die aktuellen Preise und Pakete stehen auf meiner [Preisseite](/preise/).');
+});
+
 test('stripPrices ändert nichts, wenn keine Preisbeträge vorkommen', () => {
   const body = 'Nur Text ohne Beträge. Fahrtkosten 0,40 € pro km.';
   assert.deepEqual(stripPrices(body), { body, removed: 0 });
