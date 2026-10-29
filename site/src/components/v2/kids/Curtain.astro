@@ -23,17 +23,19 @@ interface Props {
   tieback?: boolean;
   valance?: boolean;
   span?: string;
+  image?: ImageMetadata | string;
   class?: string;
 }
-const { trigger = 'load', rest = '0px', tieback = false, valance = false, span = '100vw', class: cls } = Astro.props;
+const { trigger = 'load', rest = '0px', tieback = false, valance = false, span = '100vw', image, class: cls } = Astro.props;
+const imgUrl = typeof image === 'string' ? image : image?.src;
 const SWAGS = 6;
 const PANELS = 7;
 const panels = Array.from({ length: PANELS }, (_, i) => i);
 ---
 
 <div
-  class:list={['cu', `cu--${trigger}`, { 'cu--tie': tieback }, cls]}
-  style={`--rest:${rest};--n:${PANELS};--span:${span}`}
+  class:list={['cu', `cu--${trigger}`, { 'cu--tie': tieback, 'cu--img': !!imgUrl }, cls]}
+  style={`--rest:${rest};--n:${PANELS};--span:${span}${imgUrl ? `;--img:url('${imgUrl}')` : ''}`}
   data-stage={trigger === 'stage' ? '' : undefined}
   aria-hidden="true"
 >
@@ -104,20 +106,43 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
     box-shadow: 8px 0 16px -8px rgba(40, 0, 6, 0.6);
   }
 
+  /* ── printed artwork across the whole closed curtain ──────────────────────────────
+     one image is laid across the full span; each panel carries its own slice (a band,
+     vertically centred so the photo keeps its aspect). The slice is blended into the
+     velvet (soft-light) with the fabric's fold shadows layered on top, so it reads as
+     printed on cloth — and because the slice rides on the panel, it tears + sways apart
+     with the panels as they open. */
+  .cu--img .cu__panel {
+    background-image:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.2), transparent 20%, transparent 72%, rgba(0, 0, 0, 0.3)),
+      var(--img),
+      linear-gradient(90deg, #66101a 0%, #96182a 20%, #c7323c 47%, #a51d2c 72%, #66101a 100%);
+    background-repeat: no-repeat;
+    background-size: auto, var(--span) auto, auto;
+    background-position: 0 0, var(--print-x, 0px) center, 0 0;
+    background-blend-mode: normal, soft-light, normal;
+  }
+  .cu--img .cu__half--l .cu__panel { --print-x: calc(-1 * var(--i) * var(--w)); }
+  .cu--img .cu__half--r .cu__panel { --print-x: calc((var(--i) + 1) * var(--w) - var(--span)); }
+
   /* closed → open: the panel at the middle leads, the outer ones follow a beat later; each one
      leans into the movement and settles back (skew), which reads as heavy fabric. */
   :global(.motion-ok) .cu--load .cu__panel {
     animation:
       cu-slide 1.9s var(--ease) calc(0.25s + (var(--n) - 1 - var(--i)) * 0.08s) backwards,
-      cu-sway 1.9s ease-in-out calc(0.25s + (var(--n) - 1 - var(--i)) * 0.08s);
+      cu-sway 1.9s ease-in-out calc(0.25s + (var(--n) - 1 - var(--i)) * 0.08s),
+      cu-idle 6.5s ease-in-out calc(2.5s + var(--i) * 0.12s) infinite alternate;
   }
   :global(.motion-ok) .cu--stage:not(.is-staged) .cu__panel { translate: 0 0; }
   :global(.motion-ok) .cu--stage.is-staged .cu__panel {
     animation:
       cu-slide 1.7s var(--ease) calc(0.1s + (var(--n) - 1 - var(--i)) * 0.07s) backwards,
-      cu-sway 1.7s ease-in-out calc(0.1s + (var(--n) - 1 - var(--i)) * 0.07s);
+      cu-sway 1.7s ease-in-out calc(0.1s + (var(--n) - 1 - var(--i)) * 0.07s),
+      cu-idle 6.5s ease-in-out calc(2.1s + var(--i) * 0.12s) infinite alternate;
   }
   @keyframes cu-slide { from { translate: 0 0; } }
+  /* once open, the gathered cloth keeps breathing: a faint residual sway that never stops */
+  @keyframes cu-idle { from { transform: skewX(calc(var(--sway) * 0.16)); } to { transform: skewX(calc(var(--sway) * -0.12)); } }
 
   /* ── tie-back: the gathered cloth is cinched at the waist and flares below (circus entrance).
      A mask with the drape silhouette (stretched to the gathered width) sweeps in from the stage
