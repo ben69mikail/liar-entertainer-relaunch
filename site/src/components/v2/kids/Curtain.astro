@@ -35,7 +35,7 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
 
 <div
   class:list={['cu', `cu--${trigger}`, { 'cu--tie': tieback, 'cu--img': !!imgUrl }, cls]}
-  style={`--rest:${rest};--n:${PANELS};--span:${span}${imgUrl ? `;--img:url('${imgUrl}')` : ''}`}
+  style={`--rest:${rest};--n:${PANELS};--span:${span}`}
   data-stage={trigger === 'stage' ? '' : undefined}
   aria-hidden="true"
 >
@@ -44,6 +44,9 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
       {panels.map((i) => <span class="cu__panel" style={`--i:${i}`}></span>)}
     </span>
   ))}
+  {imgUrl && (
+    <span class="cu__frame"><img class="cu__frame-img" src={imgUrl} alt="" decoding="async" /></span>
+  )}
   {tieback && ['l', 'r'].map((side) => <span class={`cu__cord cu__cord--${side}`}><span class="cu__tassel"></span></span>)}
   {valance && (
     <svg class="cu__valance" viewBox={`0 0 ${SWAGS * 100} 44`} preserveAspectRatio="none">
@@ -106,24 +109,36 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
     box-shadow: 8px 0 16px -8px rgba(40, 0, 6, 0.6);
   }
 
-  /* ── printed artwork across the whole closed curtain ──────────────────────────────
-     one image is laid across the full span; each panel carries its own slice (a band,
-     vertically centred so the photo keeps its aspect). The slice is blended into the
-     velvet (soft-light) with the fabric's fold shadows layered on top, so it reads as
-     printed on cloth — and because the slice rides on the panel, it tears + sways apart
-     with the panels as they open. */
-  .cu--img .cu__panel {
-    background-image:
-      linear-gradient(180deg, rgba(0, 0, 0, 0.2), transparent 20%, transparent 72%, rgba(0, 0, 0, 0.3)),
-      var(--img),
-      linear-gradient(90deg, #66101a 0%, #96182a 20%, #c7323c 47%, #a51d2c 72%, #66101a 100%);
-    background-repeat: no-repeat;
-    background-size: auto, var(--span) auto, auto;
-    background-position: 0 0, var(--print-x, 0px) center, 0 0;
-    background-blend-mode: normal, soft-light, normal;
+  /* ── framed photo hung ON the closed curtain ──────────────────────────────────────
+     a real picture with a white mount, sitting in front of the cloth (not part of it).
+     While closed it hangs from a pin above and swings a touch; as the curtain parts it
+     rides up and fades out behind the valance, so it "opens" together with the cloth. */
+  .cu__frame {
+    position: absolute; z-index: 15; left: 50%; top: clamp(1.75rem, 9vh, 5.5rem);
+    translate: -50% 0;
+    width: min(58vw, 27rem); padding: clamp(0.45rem, 1.3vw, 0.95rem);
+    background: #fcfbf7; border-radius: 5px;
+    box-shadow: 0 0.7rem 1.8rem rgba(20, 0, 4, 0.5), 0 0.18rem 0.5rem rgba(20, 0, 4, 0.4);
+    transform-origin: 50% -260%; /* swings from a pin well above the frame */
   }
-  .cu--img .cu__half--l .cu__panel { --print-x: calc(-1 * var(--i) * var(--w)); }
-  .cu--img .cu__half--r .cu__panel { --print-x: calc((var(--i) + 1) * var(--w) - var(--span)); }
+  .cu__frame-img { display: block; width: 100%; height: auto; border-radius: 2px; }
+  @media (max-width: 560px) { .cu__frame { width: min(72vw, 20rem); } }
+
+  /* closed: gentle pendulum (rotate, so it never fights the fly-away translate).
+     open: lift + fade, started a beat after the panels begin parting. */
+  :global(.motion-ok) .cu--load .cu__frame {
+    animation:
+      cu-swing 5s ease-in-out backwards,
+      cu-fly 1.1s var(--ease) 0.6s forwards;
+  }
+  :global(.motion-ok) .cu--stage:not(.is-staged) .cu__frame { animation: cu-swing 5s ease-in-out infinite alternate; }
+  :global(.motion-ok) .cu--stage.is-staged .cu__frame {
+    animation:
+      cu-swing 5s ease-in-out backwards,
+      cu-fly 1.1s var(--ease) 0.45s forwards;
+  }
+  @keyframes cu-swing { 0%, 100% { rotate: -1.5deg; } 50% { rotate: 1.5deg; } }
+  @keyframes cu-fly { from { translate: -50% 0; opacity: 1; } to { translate: -50% -150%; opacity: 0; } }
 
   /* closed → open: the panel at the middle leads, the outer ones follow a beat later; each one
      leans into the movement and settles back (skew), which reads as heavy fabric. */
@@ -207,5 +222,6 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
   @media (prefers-reduced-motion: reduce) {
     .cu__panel { animation: none !important; translate: var(--tx) !important; }
     .cu__half, .cu__cord, .cu__tassel, .cu__valance { animation: none !important; }
+    .cu__frame { display: none !important; } /* curtain rests open, so nothing hangs on it */
   }
 </style>
