@@ -10,6 +10,7 @@ import { Image } from 'astro:assets';
 import V2Layout from '../../layouts/V2Layout.astro';
 import MagicFrame from '../../components/v2/adult/MagicFrame.astro';
 import StageLights from '../../components/v2/adult/StageLights.astro';
+import Curtain from '../../components/v2/kids/Curtain.astro';
 import SuitRule from '../../components/v2/adult/SuitRule.astro';
 import { ZAUBERER_CITIES, ZAUBERER_CITIES_LIVE, zaubererCityPath, kidsCityPath, type ZaubererCity } from '../../data/zauberer-cities';
 import { CONTACT } from '../../data/site';
@@ -61,6 +62,7 @@ const structuredData = [
 >
   <section class="ce-hero ce-hero--stage">
     <StageLights />
+    <Curtain adult rest="clamp(2rem, 6vw, 5rem)" tieback valance />
     <div class="container ce-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">

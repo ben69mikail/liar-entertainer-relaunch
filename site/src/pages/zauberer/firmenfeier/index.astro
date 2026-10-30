@@ -4,6 +4,7 @@ import Reviews from '../../../components/v2/Reviews.astro';
 import ReviewBadge from '../../../components/v2/ReviewBadge.astro';
 import MagicFrame from '../../../components/v2/adult/MagicFrame.astro';
 import StageLights from '../../../components/v2/adult/StageLights.astro';
+import Curtain from '../../../components/v2/kids/Curtain.astro';
 import SuitRule from '../../../components/v2/adult/SuitRule.astro';
 import '../../../styles/adult-kit.css';
 import { Image } from 'astro:assets';
@@ -68,6 +69,7 @@ const serviceSchema = {
   <!-- ── Hero: a squared deck, one card dealt from it. The photo card (LCP) never hides. ── -->
   <section class="ce-hero ce-hero--stage">
     <StageLights />
+    <Curtain adult rest="clamp(2rem, 6vw, 5rem)" tieback valance />
     <div class="container ce-hero__grid">
       <div class="ce-hero__copy">
         <p class="ce-crumbs">

@@ -29,9 +29,11 @@ interface Props {
   tieback?: boolean;
   valance?: boolean;
   span?: string;
+  /** adult stage look: deep bordeaux/near-black velvet, gold sparkles, dark gold-edged photo mount */
+  adult?: boolean;
   class?: string;
 }
-const { trigger = 'load', rest = '0px', tieback = false, valance = false, span = '100vw', class: cls } = Astro.props;
+const { trigger = 'load', rest = '0px', tieback = false, valance = false, span = '100vw', adult = false, class: cls } = Astro.props;
 const SWAGS = 6;
 const PANELS = 7;
 const panels = Array.from({ length: PANELS }, (_, i) => i);
@@ -43,22 +45,27 @@ const hasSplash = trigger === 'load';
 const isZauberer = Astro.url.pathname.startsWith('/zauberer');
 const logo = hasSplash ? await getImage({ src: isZauberer ? logoGold : logoClown, width: 760, format: 'webp' }) : null;
 const photo = hasSplash ? await getImage({ src: isZauberer ? photoStage : photoKids, width: 1280, format: 'webp' }) : null;
-const STARS = [
-  { x: '-24vmin', y: '-26vmin', s: '2.2rem', c: '#ff3b3b', d: '.12s' },
-  { x: '22vmin', y: '-24vmin', s: '1.7rem', c: '#ffce33', d: '.20s' },
-  { x: '-32vmin', y: '-8vmin', s: '1.4rem', c: '#3aa0ff', d: '.28s' },
-  { x: '30vmin', y: '-10vmin', s: '2rem', c: '#ff7ac0', d: '.16s' },
-  { x: '-14vmin', y: '9vmin', s: '1.3rem', c: '#43c463', d: '.34s' },
-  { x: '16vmin', y: '11vmin', s: '1.8rem', c: '#ff8a3d', d: '.24s' },
-  { x: '-36vmin', y: '-18vmin', s: '1.1rem', c: '#ffce33', d: '.30s' },
-  { x: '34vmin', y: '4vmin', s: '1.2rem', c: '#3aa0ff', d: '.38s' },
-  { x: '2vmin', y: '-32vmin', s: '1.5rem', c: '#43c463', d: '.10s' },
-  { x: '-4vmin', y: '15vmin', s: '1.1rem', c: '#ff3b3b', d: '.40s' },
+const STAR_SPOTS = [
+  { x: '-24vmin', y: '-26vmin', s: '2.2rem', d: '.12s' },
+  { x: '22vmin', y: '-24vmin', s: '1.7rem', d: '.20s' },
+  { x: '-32vmin', y: '-8vmin', s: '1.4rem', d: '.28s' },
+  { x: '30vmin', y: '-10vmin', s: '2rem', d: '.16s' },
+  { x: '-14vmin', y: '9vmin', s: '1.3rem', d: '.34s' },
+  { x: '16vmin', y: '11vmin', s: '1.8rem', d: '.24s' },
+  { x: '-36vmin', y: '-18vmin', s: '1.1rem', d: '.30s' },
+  { x: '34vmin', y: '4vmin', s: '1.2rem', d: '.38s' },
+  { x: '2vmin', y: '-32vmin', s: '1.5rem', d: '.10s' },
+  { x: '-4vmin', y: '15vmin', s: '1.1rem', d: '.40s' },
 ];
+// kids: rainbow; adult: warm golds/champagne so the sparkle reads elegant on the dark stage
+const KID_COLORS = ['#ff3b3b', '#ffce33', '#3aa0ff', '#ff7ac0', '#43c463', '#ff8a3d', '#ffce33', '#3aa0ff', '#43c463', '#ff3b3b'];
+const GOLD_COLORS = ['#f3d27a', '#e9c25a', '#fff1c6', '#d9a441', '#f7dd8f', '#caa24a', '#ffe6a0', '#e9c25a', '#fff1c6', '#d9a441'];
+const starColors = adult ? GOLD_COLORS : KID_COLORS;
+const STARS = STAR_SPOTS.map((s, i) => ({ ...s, c: starColors[i % starColors.length] }));
 ---
 
 <div
-  class:list={['cu', `cu--${trigger}`, { 'cu--tie': tieback }, cls]}
+  class:list={['cu', `cu--${trigger}`, { 'cu--tie': tieback, 'cu--adult': adult }, cls]}
   style={`--rest:${rest};--n:${PANELS};--span:${span}`}
   data-stage={trigger === 'stage' ? '' : undefined}
   aria-hidden="true"
@@ -142,6 +149,23 @@ const STARS = [
     --sway: 3deg;
     box-shadow: 8px 0 16px -8px rgba(40, 0, 6, 0.6);
   }
+
+  /* ── adult stage look: deep bordeaux → near-black velvet (sits under the dark hero), the photo
+     mount becomes a dark card with a thin gold edge. Valance, cords and tassels are gold already. ── */
+  .cu--adult .cu__panel {
+    background:
+      linear-gradient(180deg, rgba(0, 0, 0, 0.45), transparent 22%, transparent 70%, rgba(0, 0, 0, 0.55)),
+      linear-gradient(90deg, #15060a 0%, #46101a 20%, #6d1826 47%, #3a0d15 72%, #12050a 100%);
+  }
+  .cu--adult .cu__half--l .cu__panel { box-shadow: -8px 0 18px -8px rgba(0, 0, 0, 0.75); }
+  .cu--adult .cu__half--r .cu__panel { box-shadow: 8px 0 18px -8px rgba(0, 0, 0, 0.75); }
+  .cu--adult .cu__intro-photo {
+    background: #140b0e; border: 1px solid rgba(221, 178, 92, 0.75);
+    box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 226, 160, 0.14);
+  }
+  /* adult hero sections are much taller than the viewport, so cap the curtain at one screen —
+     otherwise the splash would centre far below the fold. (The kids hero is ~one screen already.) */
+  .cu--adult { bottom: auto; height: 100svh; }
 
   /* ── intro splash (load hero only): the brand logo flies in from far away and spins, the
      framed photo pops in just beneath it, a few bright stars burst around them. Held over the

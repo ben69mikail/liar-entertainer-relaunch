@@ -69,6 +69,8 @@
       linear-gradient(180deg, #150b0d, var(--night, #170d10) 60%);
     color: var(--bg); isolation: isolate;
   }
+  /* the intro curtain (Curtain.astro, adult look) overlays the whole stage hero, then opens */
+  .v2 .ce-hero--stage > .cu { z-index: 7; }
   .v2 .ce-hero--stage .ce-crumbs, .v2 .ce-hero--stage .ce-crumbs a { color: var(--stage-soft); }
   .v2 .ce-hero--stage .ce-hero__title, .v2 .ce-hero--stage .ce-hero__sub { color: var(--bg); }
   .v2 .ce-hero--stage .ce-hero__title em { color: var(--stage-red); }
