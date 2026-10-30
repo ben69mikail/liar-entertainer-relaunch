@@ -1,4 +1,10 @@
 ---
+import { getImage } from 'astro:assets';
+import logoClown from '../../../assets/images/general/logo-clown-nrw.png';
+import logoGold from '../../../assets/images/brand/logo-liar-gold.webp';
+import photoKids from '../../../assets/images/home/clown-zauberer-hero.jpg';
+import photoStage from '../../../assets/images/galerie/stand-up-zauberei.jpg';
+
 /**
  * Red velvet stage curtain (kids v3, user 2026-10-06): starts closed, then opens from the middle
  * all the way to the sides like a real theatre curtain. Each half is made of soft fabric panels
@@ -23,18 +29,36 @@ interface Props {
   tieback?: boolean;
   valance?: boolean;
   span?: string;
-  image?: ImageMetadata | string;
   class?: string;
 }
-const { trigger = 'load', rest = '0px', tieback = false, valance = false, span = '100vw', image, class: cls } = Astro.props;
-const imgUrl = typeof image === 'string' ? image : image?.src;
+const { trigger = 'load', rest = '0px', tieback = false, valance = false, span = '100vw', class: cls } = Astro.props;
 const SWAGS = 6;
 const PANELS = 7;
 const panels = Array.from({ length: PANELS }, (_, i) => i);
+
+// Intro splash: only the page-opening (load) curtain shows the brand over the closed cloth.
+// Brand follows the section — /zauberer/* is the gold "Zauberei & Comedy" identity, everything
+// else the colourful clown identity.
+const hasSplash = trigger === 'load';
+const isZauberer = Astro.url.pathname.startsWith('/zauberer');
+const logo = hasSplash ? await getImage({ src: isZauberer ? logoGold : logoClown, width: 760, format: 'webp' }) : null;
+const photo = hasSplash ? await getImage({ src: isZauberer ? photoStage : photoKids, width: 1280, format: 'webp' }) : null;
+const STARS = [
+  { x: '-24vmin', y: '-26vmin', s: '2.2rem', c: '#ff3b3b', d: '.12s' },
+  { x: '22vmin', y: '-24vmin', s: '1.7rem', c: '#ffce33', d: '.20s' },
+  { x: '-32vmin', y: '-8vmin', s: '1.4rem', c: '#3aa0ff', d: '.28s' },
+  { x: '30vmin', y: '-10vmin', s: '2rem', c: '#ff7ac0', d: '.16s' },
+  { x: '-14vmin', y: '9vmin', s: '1.3rem', c: '#43c463', d: '.34s' },
+  { x: '16vmin', y: '11vmin', s: '1.8rem', c: '#ff8a3d', d: '.24s' },
+  { x: '-36vmin', y: '-18vmin', s: '1.1rem', c: '#ffce33', d: '.30s' },
+  { x: '34vmin', y: '4vmin', s: '1.2rem', c: '#3aa0ff', d: '.38s' },
+  { x: '2vmin', y: '-32vmin', s: '1.5rem', c: '#43c463', d: '.10s' },
+  { x: '-4vmin', y: '15vmin', s: '1.1rem', c: '#ff3b3b', d: '.40s' },
+];
 ---
 
 <div
-  class:list={['cu', `cu--${trigger}`, { 'cu--tie': tieback, 'cu--img': !!imgUrl }, cls]}
+  class:list={['cu', `cu--${trigger}`, { 'cu--tie': tieback }, cls]}
   style={`--rest:${rest};--n:${PANELS};--span:${span}`}
   data-stage={trigger === 'stage' ? '' : undefined}
   aria-hidden="true"
@@ -44,8 +68,16 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
       {panels.map((i) => <span class="cu__panel" style={`--i:${i}`}></span>)}
     </span>
   ))}
-  {imgUrl && (
-    <span class="cu__frame"><img class="cu__frame-img" src={imgUrl} alt="" decoding="async" /></span>
+  {hasSplash && logo && photo && (
+    <div class="cu__intro">
+      {STARS.map((s) => <span class="cu__spark" style={`--x:${s.x};--y:${s.y};--s:${s.s};--c:${s.c};--d:${s.d}`}></span>)}
+      {['l', 'r'].map((side) => (
+        <div class={`cu__introside cu__introside--${side}`}>
+          <img class="cu__intro-logo" src={logo.src} alt="" decoding="async" />
+          <span class="cu__intro-photo"><img src={photo.src} alt="" decoding="async" /></span>
+        </div>
+      ))}
+    </div>
   )}
   {tieback && ['l', 'r'].map((side) => <span class={`cu__cord cu__cord--${side}`}><span class="cu__tassel"></span></span>)}
   {valance && (
@@ -79,6 +111,8 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
     --gather: max(0px, calc(var(--rest) - var(--w)));
     --gw: max(var(--rest), var(--w)); /* width of the gathered curtain at each side */
     --ease: cubic-bezier(0.65, 0.02, 0.25, 1);
+    --d0: 2s; /* when the load hero starts opening: 2s on the first page (shows the splash),
+                 0.25s on later pages in the same visit (html.curtain-seen, splash skipped) */
   }
   .cu__half { position: absolute; top: 0; bottom: 0; width: 50%; }
   .cu__half--l { left: 0; }
@@ -99,54 +133,72 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
     left: calc(var(--i) * 100% / var(--n));
     /* translate % = the panel's own width: slide i panels outwards, then spread across --rest */
     --tx: calc(var(--i) * var(--gather) / (var(--n) - 1) - var(--i) * 100%);
-    --sway: -2.5deg;
+    --sway: -3deg;
     box-shadow: -8px 0 16px -8px rgba(40, 0, 6, 0.6);
   }
   .cu__half--r .cu__panel {
     right: calc(var(--i) * 100% / var(--n));
     --tx: calc(var(--i) * 100% - var(--i) * var(--gather) / (var(--n) - 1));
-    --sway: 2.5deg;
+    --sway: 3deg;
     box-shadow: 8px 0 16px -8px rgba(40, 0, 6, 0.6);
   }
 
-  /* ── framed photo hung ON the closed curtain ──────────────────────────────────────
-     a real picture with a white mount, sitting in front of the cloth (not part of it).
-     While closed it hangs from a pin above and swings a touch; as the curtain parts it
-     rides up and fades out behind the valance, so it "opens" together with the cloth. */
-  .cu__frame {
-    position: absolute; z-index: 15; left: 50%; top: clamp(1.75rem, 9vh, 5.5rem);
-    translate: -50% 0;
-    width: min(58vw, 27rem); padding: clamp(0.45rem, 1.3vw, 0.95rem);
+  /* ── intro splash (load hero only): the brand logo flies in from far away and spins, the
+     framed photo pops in just beneath it, a few bright stars burst around them. Held over the
+     closed cloth for ~2s. Then it is cut down the middle — the logo + photo are drawn twice,
+     each copy clipped to one half, and the halves are dragged out to the sides in step with
+     the parting cloth while fading (stars just fade in place). Base opacity 0 so nothing
+     sticks when motion is off. */
+  .cu__intro { position: absolute; inset: 0; z-index: 16; pointer-events: none; opacity: 0; }
+  .cu__introside {
+    position: absolute; inset: 0; display: grid; grid-auto-flow: row;
+    place-content: center; justify-items: center; gap: clamp(0.6rem, 2.2vh, 1.5rem); padding: 0 16px;
+  }
+  .cu__introside--l { clip-path: inset(0 calc(50% - 0.5px) 0 0); } /* left half of the stack */
+  .cu__introside--r { clip-path: inset(0 0 0 calc(50% - 0.5px)); } /* right half, 1px overlap */
+  .cu__intro-logo { width: clamp(11rem, 34vw, 20rem); height: auto; filter: drop-shadow(0 0.5rem 1rem rgba(20, 0, 4, 0.45)); }
+  .cu__intro-photo {
+    display: block; width: min(56vw, 25rem); padding: clamp(0.4rem, 1.1vw, 0.8rem);
     background: #fcfbf7; border-radius: 5px;
     box-shadow: 0 0.7rem 1.8rem rgba(20, 0, 4, 0.5), 0 0.18rem 0.5rem rgba(20, 0, 4, 0.4);
-    transform-origin: 50% -260%; /* swings from a pin well above the frame */
   }
-  .cu__frame-img { display: block; width: 100%; height: auto; border-radius: 2px; }
-  @media (max-width: 560px) { .cu__frame { width: min(72vw, 20rem); } }
-
-  /* closed: gentle pendulum (rotate, so it never fights the fly-away translate).
-     open: lift + fade, started a beat after the panels begin parting. */
-  :global(.motion-ok) .cu--load .cu__frame {
-    animation:
-      cu-swing 5s ease-in-out backwards,
-      cu-fly 1.1s var(--ease) 0.6s forwards;
+  .cu__intro-photo img { display: block; width: 100%; height: auto; border-radius: 2px; }
+  .cu__spark {
+    position: absolute; left: 50%; top: 50%; width: var(--s); height: var(--s); opacity: 0;
+    translate: calc(var(--x) - 50%) calc(var(--y) - 50%); background: var(--c);
+    clip-path: polygon(50% 0%, 61% 35%, 98% 35%, 68% 57%, 79% 91%, 50% 70%, 21% 91%, 32% 57%, 2% 35%, 39% 35%);
   }
-  :global(.motion-ok) .cu--stage:not(.is-staged) .cu__frame { animation: cu-swing 5s ease-in-out infinite alternate; }
-  :global(.motion-ok) .cu--stage.is-staged .cu__frame {
-    animation:
-      cu-swing 5s ease-in-out backwards,
-      cu-fly 1.1s var(--ease) 0.45s forwards;
+  :global(.motion-ok) .cu--load .cu__intro { opacity: 1; }
+  :global(.motion-ok) .cu--load .cu__introside--l { animation: cu-splitl 1.5s var(--ease) 2s both; }
+  :global(.motion-ok) .cu--load .cu__introside--r { animation: cu-splitr 1.5s var(--ease) 2s both; }
+  :global(.motion-ok) .cu--load .cu__intro-logo { animation: cu-logoin 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.1s backwards; }
+  :global(.motion-ok) .cu--load .cu__intro-photo { animation: cu-photoin 0.6s cubic-bezier(0.16, 1, 0.3, 1) 0.45s backwards; }
+  :global(.motion-ok) .cu--load .cu__spark { animation: cu-spark 0.7s cubic-bezier(0.16, 1, 0.3, 1) var(--d) both, cu-starout 0.6s ease 2s forwards; }
+  @keyframes cu-splitl { from { translate: 0 0; opacity: 1; } to { translate: -62vw 0; opacity: 0; } }
+  @keyframes cu-splitr { from { translate: 0 0; opacity: 1; } to { translate: 62vw 0; opacity: 0; } }
+  @keyframes cu-starout { from { opacity: 0.92; } to { opacity: 0; } }
+  @keyframes cu-logoin {
+    0% { opacity: 0; transform: scale(0.12) rotate(-45deg); }
+    70% { opacity: 1; transform: scale(1.08) rotate(6deg); }
+    100% { opacity: 1; transform: scale(1) rotate(0deg); }
   }
-  @keyframes cu-swing { 0%, 100% { rotate: -1.5deg; } 50% { rotate: 1.5deg; } }
-  @keyframes cu-fly { from { translate: -50% 0; opacity: 1; } to { translate: -50% -150%; opacity: 0; } }
+  @keyframes cu-photoin {
+    0% { opacity: 0; transform: scale(0.6) translateY(14px); }
+    100% { opacity: 1; transform: scale(1) translateY(0); }
+  }
+  @keyframes cu-spark {
+    0% { opacity: 0; transform: scale(0) rotate(-90deg); }
+    55% { opacity: 1; transform: scale(1.15) rotate(12deg); }
+    100% { opacity: 0.92; transform: scale(1) rotate(0deg); }
+  }
 
   /* closed → open: the panel at the middle leads, the outer ones follow a beat later; each one
      leans into the movement and settles back (skew), which reads as heavy fabric. */
   :global(.motion-ok) .cu--load .cu__panel {
     animation:
-      cu-slide 1.9s var(--ease) calc(0.25s + (var(--n) - 1 - var(--i)) * 0.08s) backwards,
-      cu-sway 1.9s ease-in-out calc(0.25s + (var(--n) - 1 - var(--i)) * 0.08s),
-      cu-idle 6.5s ease-in-out calc(2.5s + var(--i) * 0.12s) infinite alternate;
+      cu-slide 1.9s var(--ease) calc(var(--d0) + (var(--n) - 1 - var(--i)) * 0.08s) backwards,
+      cu-sway 1.9s ease-in-out calc(var(--d0) + (var(--n) - 1 - var(--i)) * 0.08s),
+      cu-idle 6.5s ease-in-out calc(var(--d0) + 2.3s + var(--i) * 0.12s) infinite alternate;
   }
   :global(.motion-ok) .cu--stage:not(.is-staged) .cu__panel { translate: 0 0; }
   :global(.motion-ok) .cu--stage.is-staged .cu__panel {
@@ -155,7 +207,12 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
       cu-sway 1.7s ease-in-out calc(0.1s + (var(--n) - 1 - var(--i)) * 0.07s),
       cu-idle 6.5s ease-in-out calc(2.1s + var(--i) * 0.12s) infinite alternate;
   }
-  @keyframes cu-slide { from { translate: 0 0; } }
+  /* the cloth races to the side, overshoots into the wall, then recoils back to rest */
+  @keyframes cu-slide {
+    0% { translate: 0 0; }
+    80% { translate: calc(var(--tx) * 1.07); }
+    100% { translate: var(--tx); }
+  }
   /* once open, the gathered cloth keeps breathing: a faint residual sway that never stops */
   @keyframes cu-idle { from { transform: skewX(calc(var(--sway) * 0.16)); } to { transform: skewX(calc(var(--sway) * -0.12)); } }
 
@@ -168,7 +225,7 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
   .cu--tie .cu__half--r {
     mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100' preserveAspectRatio='none'%3E%3Cpath d='M100 0H0C2 24 24 52 54 65C34 74 9 87 0 100H100Z'/%3E%3C/svg%3E") right top / var(--gw) 100% no-repeat;
   }
-  :global(.motion-ok) .cu--tie.cu--load .cu__half { animation: cu-cinch 1.2s cubic-bezier(0.16, 1, 0.3, 1) 2.15s backwards; }
+  :global(.motion-ok) .cu--tie.cu--load .cu__half { animation: cu-cinch 1.2s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d0) + 1.9s) backwards; }
   :global(.motion-ok) .cu--tie.cu--stage:not(.is-staged) .cu__half { mask-size: 600% 100%; }
   :global(.motion-ok) .cu--tie.cu--stage.is-staged .cu__half { animation: cu-cinch 1.2s cubic-bezier(0.16, 1, 0.3, 1) 1.8s backwards; }
   @keyframes cu-cinch { from { mask-size: 600% 100%; } }
@@ -195,12 +252,12 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
       linear-gradient(180deg, transparent 32%, #9c6c1c 32% 36%, transparent 36%),
       repeating-linear-gradient(90deg, #ecc35f 0 2px, #b07e22 2px 3px);
     box-shadow: 0 3px 5px rgba(40, 0, 6, 0.45);
-    transform-origin: 50% 0; animation: cu-tassel 5s ease-in-out 3.4s infinite alternate;
+    transform-origin: 50% 0; animation: cu-tassel 5s ease-in-out calc(var(--d0) + 3.1s) infinite alternate;
   }
   .cu__cord--l .cu__tassel { right: -0.45rem; }
   .cu__cord--r .cu__tassel { left: -0.45rem; }
   @keyframes cu-tassel { from { rotate: -3deg; } to { rotate: 3deg; } }
-  :global(.motion-ok) .cu--load .cu__cord { animation: cu-cord 0.7s ease-out 2.6s backwards; }
+  :global(.motion-ok) .cu--load .cu__cord { animation: cu-cord 0.7s ease-out calc(var(--d0) + 2.35s) backwards; }
   :global(.motion-ok) .cu--stage:not(.is-staged) .cu__cord { opacity: 0; }
   :global(.motion-ok) .cu--stage.is-staged .cu__cord { animation: cu-cord 0.7s ease-out 2.2s backwards; }
   @keyframes cu-cord { from { opacity: 0; scale: 0.4 1; } }
@@ -209,7 +266,7 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
   .cu__valance { position: absolute; z-index: 30; left: -1%; top: 0; width: 102%; height: clamp(1.3rem, 2.8vw, 2.4rem); overflow: visible; transform-origin: 50% 0; }
   /* composited: one transform on the whole valance (SVG group animations repaint every frame) */
   :global(.motion-ok) .cu--load .cu__valance {
-    animation: cu-drop 1s cubic-bezier(0.16, 1, 0.3, 1) 2s backwards, cu-wind 7s ease-in-out 3s infinite alternate;
+    animation: cu-drop 1s cubic-bezier(0.16, 1, 0.3, 1) calc(var(--d0) + 1.75s) backwards, cu-wind 7s ease-in-out calc(var(--d0) + 2.75s) infinite alternate;
   }
   @keyframes cu-wind { from { transform: skewX(-0.4deg) scaleY(0.97); } to { transform: skewX(0.4deg) scaleY(1.03); } }
   :global(.motion-ok) .cu--stage:not(.is-staged) .cu__valance { translate: 0 -110%; }
@@ -217,11 +274,22 @@ const panels = Array.from({ length: PANELS }, (_, i) => i);
     animation: cu-drop 1s cubic-bezier(0.16, 1, 0.3, 1) 1.6s backwards, cu-wind 7s ease-in-out 2.6s infinite alternate;
   }
   @keyframes cu-drop { from { translate: 0 -110%; } }
-  @keyframes cu-sway { 0%, 100% { transform: skewX(0deg); } 40% { transform: skewX(var(--sway)); } }
+  @keyframes cu-sway {
+    0% { transform: skewX(0deg); }
+    36% { transform: skewX(var(--sway)); }
+    72% { transform: skewX(calc(var(--sway) * -0.55)); } /* snap back past centre = recoil */
+    100% { transform: skewX(0deg); }
+  }
 
   @media (prefers-reduced-motion: reduce) {
     .cu__panel { animation: none !important; translate: var(--tx) !important; }
     .cu__half, .cu__cord, .cu__tassel, .cu__valance { animation: none !important; }
-    .cu__frame { display: none !important; } /* curtain rests open, so nothing hangs on it */
+    .cu__intro { display: none !important; } /* rests open, no splash */
   }
+
+  /* later pages in the same visit (sessionStorage flag → html.curtain-seen, set before first
+     paint): the curtain still opens, but fast (--d0 drops to 0.25s) and without the logo/photo/
+     stars splash — nobody sits through the intro twice. Scroll curtains (.cu--stage) unchanged. */
+  :global(html.curtain-seen) .cu--load { --d0: 0.25s; }
+  :global(html.curtain-seen) .cu--load .cu__intro { display: none !important; }
 </style>

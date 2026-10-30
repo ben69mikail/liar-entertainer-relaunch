@@ -209,6 +209,18 @@ const webPageSchema = {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="generator" content={Astro.generator} />
 
+    <!-- Vorhang-Intro (Hero) nur beim ERSTEN Seitenaufruf pro Besuch zeigen. Läuft vor dem
+         ersten Paint, damit auf Folgeseiten kein geschlossener Vorhang aufblitzt. -->
+    <script is:inline>
+      try {
+        if (sessionStorage.getItem('liarCurtainSeen')) {
+          document.documentElement.classList.add('curtain-seen');
+        } else {
+          sessionStorage.setItem('liarCurtainSeen', '1');
+        }
+      } catch (e) {}
+    </script>
+
     <!-- Google Search Console Verification -->
     <!-- Füge deinen echten Code hier ein: Google Search Console → Einstellungen → Inhaberschaft bestätigen → HTML-Tag -->
     <!-- <meta name="google-site-verification" content="DEIN_CODE_HIER" /> -->
