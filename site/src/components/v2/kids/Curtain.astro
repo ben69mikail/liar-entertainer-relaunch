@@ -163,9 +163,12 @@ const STARS = STAR_SPOTS.map((s, i) => ({ ...s, c: starColors[i % starColors.len
     background: #140b0e; border: 1px solid rgba(221, 178, 92, 0.75);
     box-shadow: 0 0.8rem 2rem rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 226, 160, 0.14);
   }
-  /* adult hero sections are much taller than the viewport, so cap the curtain at one screen —
-     otherwise the splash would centre far below the fold. (The kids hero is ~one screen already.) */
-  .cu--adult { bottom: auto; height: 100svh; }
+  /* Cap the opening (load) curtain at one screen. Hero sections — above all on narrow mobile,
+     where content stacks tall — can be far taller than the viewport; without this the splash
+     (logo + photo, centred inside the curtain) lands way below the fold and the visitor only
+     sees bare cloth. max-height anchors the box at the top, so heroes shorter than a screen are
+     left untouched. Scroll curtains (.cu--stage) size to their own box and are unaffected. */
+  .cu--load { max-height: 100svh; }
 
   /* ── intro splash (load hero only): the brand logo flies in from far away and spins, the
      framed photo pops in just beneath it, a few bright stars burst around them. Held over the
