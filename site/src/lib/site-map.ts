@@ -12,6 +12,15 @@ export type Locale = (typeof LOCALES)[number];
 export const PUBLISHED_LOCALES: readonly Locale[] = ['de'];
 
 /**
+ * Individual FR/EN pages that are indexed even though their locale is not fully published
+ * (user 2026-10-31): only the two translated homepages should rank — in French for the
+ * Düsseldorf/Köln axis and the Luxembourg/Belgium border, in English generally. Every other
+ * FR/EN page stays noindex, out of the sitemap and without hreflang. Each entry must be the
+ * fr/en side of a CORE_PAGES row.
+ */
+export const PUBLISHED_TRANSLATED_PATHS: ReadonlySet<string> = new Set(['/fr/', '/en/']);
+
+/**
  * Pages translated to fr/en (brief E2), with their translated paths.
  * Everything else is DE-only. Single source of truth for routing + hreflang.
  */
@@ -81,12 +90,14 @@ export function localeOf(path: string): Locale {
  * noindex, get no hreflang and stay out of the sitemap.
  */
 export function isPublishedPath(path: string, locales: readonly Locale[] = PUBLISHED_LOCALES): boolean {
-  return locales.includes(localeOf(path));
+  return locales.includes(localeOf(path)) || PUBLISHED_TRANSLATED_PATHS.has(path);
 }
 
-/** FR/EN core pages that belong in sitemap.xml (published locales only). */
+/** FR/EN core pages that belong in sitemap.xml: whole published locales + single published paths. */
 export function translatedSitemapPaths(locales: readonly Locale[] = PUBLISHED_LOCALES): string[] {
-  return locales.filter((l) => l !== 'de').flatMap((l) => CORE_PAGES.map((entry) => entry[l]));
+  return CORE_PAGES
+    .flatMap((entry) => LOCALES.filter((l) => l !== 'de').map((l) => entry[l]))
+    .filter((path) => isPublishedPath(path, locales));
 }
 
 /**
@@ -130,9 +141,13 @@ export function alternatesFor(
   locales: readonly Locale[] = PUBLISHED_LOCALES,
 ): Array<{ hreflang: string; href: string }> {
   const entry = coreEntry(path);
-  if (!entry || locales.length < 2 || !isPublishedPath(path, locales)) return [];
+  if (!entry || !isPublishedPath(path, locales)) return [];
+  // only the languages whose version of THIS page is itself published (so the FR/EN homes link
+  // de↔fr↔en, while a DE-only page that happens to have an unpublished FR/EN twin gets nothing).
+  const langs = LOCALES.filter((l) => isPublishedPath(entry[l], locales));
+  if (langs.length < 2) return [];
   return [
-    ...locales.map((l) => ({ hreflang: l, href: SITE + entry[l] })),
+    ...langs.map((l) => ({ hreflang: l, href: SITE + entry[l] })),
     { hreflang: 'x-default', href: SITE + entry.de },
   ];
 }
