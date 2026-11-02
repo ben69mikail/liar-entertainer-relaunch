@@ -9,8 +9,7 @@ heroFocus: { x: 61, top: 9, bottom: 55 }
 categories: ["Saisonal","Kita & Schule"]
 tags: ["martinsfest","laternenumzug","st-martin","kita-fest","zaubershow"]
 author: "Michaël Prescler"
-draft: true
-freigabe: ja
+draft: false
 ---
 
 Ein Martinsfest für Kinder lebt von Licht, Liedern und dem gemeinsamen Laternenumzug. Dazu gehört ein Programm, das die kleinen Gäste vor und nach dem Umzug gut abholt. Der Martinstag ist am 11. November, in diesem Jahr ein Mittwoch. In diesem Ratgeber zeige ich Kitas, Schulen und Veranstaltern in NRW, wie ein entspannter Ablauf aussehen kann und an welcher Stelle eine Zaubershow mit Clown gut ins St. Martin Programm passt.
