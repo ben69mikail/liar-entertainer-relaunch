@@ -74,10 +74,30 @@ const serviceSchema = {
   name: 'Kindergeburtstag mit Clown Zauberer',
   description: 'Professionelle Zaubershow, Ballonmodellage und Glitzer Tattoos für Kindergeburtstage in NRW',
   provider: { "@id": "https://liar-entertainer.com/#business" },
-  areaServed: {
-    '@type': 'State',
-    name: 'Nordrhein-Westfalen',
-  },
+  // Kindergeburtstag ist die lokalste Leistung: Dienst an den 20-km-Radius um Gladbeck binden
+  // (spiegelt die areaServed des LocalBusiness), damit das Service-Signal lokal und nicht nur
+  // NRW-weit ist. NRW bleibt als breiteres Gebiet erhalten. (seo-local 2026-11-04)
+  areaServed: [
+    {
+      '@type': 'GeoCircle',
+      geoMidpoint: { '@type': 'GeoCoordinates', latitude: 51.5658, longitude: 6.9857 },
+      geoRadius: '20000',
+    },
+    { '@type': 'City', name: 'Gladbeck' },
+    { '@type': 'City', name: 'Bottrop' },
+    { '@type': 'City', name: 'Gelsenkirchen' },
+    { '@type': 'City', name: 'Dorsten' },
+    { '@type': 'City', name: 'Herten' },
+    { '@type': 'City', name: 'Oberhausen' },
+    { '@type': 'City', name: 'Essen' },
+    { '@type': 'City', name: 'Marl' },
+    { '@type': 'City', name: 'Recklinghausen' },
+    { '@type': 'City', name: 'Dinslaken' },
+    { '@type': 'City', name: 'Herne' },
+    { '@type': 'City', name: 'Mülheim an der Ruhr' },
+    { '@type': 'City', name: 'Bochum' },
+    { '@type': 'State', name: 'Nordrhein-Westfalen' },
+  ],
   hasOfferCatalog: {
     '@type': 'OfferCatalog',
     name: 'Kindergeburtstag-Pakete',
@@ -482,13 +502,13 @@ const structuredData = [serviceSchema, faqSchema, videoSchema];
       <h2 class="k3-h2 k3-center">In welchen Städten ist Clown Zauberer LIAR buchbar?</h2>
       <div class="k3-area__grid">
         <div>
-          <h3 class="k3-h3">Haupteinsatzgebiet Kindergeburtstag</h3>
+          <h3 class="k3-h3">Kindergeburtstag im Umkreis von 20&nbsp;km um Gladbeck</h3>
           <p class="k3-cities">
-            <a href="/kindergeburtstag/geburtstag-in-gladbeck/">Gladbeck</a> | <a href="/kindergeburtstag/geburtstag-in-oberhausen/">Oberhausen</a> | <a href="/kindergeburtstag/geburtstag-in-gelsenkirchen/">Gelsenkirchen</a> | <a href="/kindergeburtstag/geburtstag-in-essen/">Essen</a> | <a href="/kindergeburtstag/geburtstag-in-duisburg/">Duisburg</a> | <a href="/kindergeburtstag/geburtstag-in-bottrop/">Bottrop</a> | <a href="/kindergeburtstag/geburtstag-in-bochum/">Bochum</a> | <a href="/kindergeburtstag/geburtstag-in-dinslaken/">Dinslaken</a> | <a href="/kindergeburtstag/geburtstag-in-wesel/">Wesel</a> | <a href="/kindergeburtstag/geburtstag-in-castrop-rauxel/">Castrop-Rauxel</a> | <a href="/kindergeburtstag/geburtstag-in-dorsten/">Dorsten</a> | <a href="/kindergeburtstag/geburtstag-in-herten/">Herten</a> | <a href="/kindergeburtstag/geburtstag-in-herne/">Herne</a> | <a href="/kindergeburtstag/geburtstag-in-marl/">Marl</a> | <a href="/kindergeburtstag/geburtstag-in-muelheim/">Mülheim</a> | <a href="/kindergeburtstag/geburtstag-in-recklinghausen/">Recklinghausen</a> | <a href="/kindergeburtstag/geburtstag-in-datteln/">Datteln</a> | <a href="/kindergeburtstag/geburtstag-in-haltern-am-see/">Haltern am See</a> | <a href="/kindergeburtstag/geburtstag-in-moers/">Moers</a> | <a href="/kindergeburtstag/geburtstag-in-waltrop/">Waltrop</a> | <a href="/kindergeburtstag/geburtstag-in-xanten/">Xanten</a>
+            Gladbeck | Oberhausen | Gelsenkirchen | Essen | Duisburg | Bottrop | Bochum | Dinslaken | Wesel | Castrop-Rauxel | Dorsten | Herten | Herne | Marl | Mülheim an der Ruhr | Recklinghausen | Datteln | Haltern am See | Moers | Waltrop | Xanten
           </p>
           <h3 class="k3-h3">Weitere NRW-Städte</h3>
           <p class="k3-cities">
-            <a href="/kindergeburtstag/geburtstag-in-duesseldorf/">Düsseldorf</a> | <a href="/kindergeburtstag/geburtstag-in-dortmund/">Dortmund</a> | Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Moers | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn | Borken
+            Düsseldorf | Dortmund | Köln | Münster | Bielefeld | Bonn | Aachen | Krefeld | Lünen | Hagen | Hamm | Solingen | Wuppertal | Leverkusen | Neuss | Paderborn | Borken
           </p>
           <p>
             Auf Anfrage bin ich auch außerhalb von NRW für Kindergeburtstage buchbar – inklusive Belgien, Frankreich, Österreich und Schweiz!
