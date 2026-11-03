@@ -14,6 +14,7 @@ import Curtain from '../../components/v2/kids/Curtain.astro';
 import SuitRule from '../../components/v2/adult/SuitRule.astro';
 import { ZAUBERER_CITIES, ZAUBERER_CITIES_LIVE, zaubererCityPath, kidsCityPath, type ZaubererCity } from '../../data/zauberer-cities';
 import { CONTACT } from '../../data/site';
+import { CITY_LOCAL_ADULT } from '../../data/city-local';
 import '../../styles/adult-kit.css';
 
 export function getStaticPaths() {
@@ -27,6 +28,9 @@ const heroPhoto = photo(city.heroImg);
 const introPhoto = photo(city.intro.img.file);
 const path = zaubererCityPath(city.slug);
 const SUITS = ['♠', '♥', '♣', '♦'] as const;
+// real venues the owner has played in this city (grown-up framing); shown in the Einsatzgebiet block
+const played = CITY_LOCAL_ADULT[city.slug];
+const listDe = (arr: string[]) => (arr.length <= 1 ? (arr[0] ?? '') : `${arr.slice(0, -1).join(', ')} und ${arr.at(-1)}`);
 
 const structuredData = [
   {
@@ -161,6 +165,9 @@ const structuredData = [
       <p class="ce-eyebrow">{city.region.eyebrow}</p>
       <h2 class="ce-h2">{city.region.h2}</h2>
       <p class="ce-soft">{city.region.intro}</p>
+      {played && (
+        <p class="ce-soft zc-played" data-city-local>Zu Gast war LIAR in {city.name} unter anderem {listDe(played.venues)} – in Stadtteilen wie {listDe(played.districts)}.</p>
+      )}
       <ul class="zc-cities">
         {city.region.links.map((l) => (
           <li>{l.href ? <a href={l.href}>{l.name}</a> : <span>{l.name}</span>}</li>

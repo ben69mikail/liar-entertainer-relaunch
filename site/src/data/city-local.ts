@@ -253,3 +253,64 @@ export const CITY_FOCUS: Record<string, CityFocus> = {
     birthdayPath: '/kindergeburtstag/',
   },
 };
+
+// Adult-flavoured real venues for the /zauberer/zauberer-in-* pages (same 20 years of gigs,
+// grown-up framing: corporate, civic, festival, castle). Rendered by src/pages/zauberer/[city].astro.
+export const CITY_LOCAL_ADULT: Record<string, CityLocal> = {
+  bottrop: {
+    venues: ['im Alpincenter', 'auf dem Weihnachtsmarkt', 'bei der Stadt Bottrop'],
+    districts: ['Kirchhellen', 'Batenbrock', 'Eigen', 'Boy'],
+  },
+  dinslaken: {
+    venues: ['im Grindhouse', 'bei der Karnevalsgemeinschaft Rot-Gold'],
+    districts: ['Hiesfeld', 'Lohberg', 'Averbruch', 'Eppinghoven'],
+  },
+  dorsten: {
+    venues: ['auf Schloss Lembeck', 'im LEO Dorsten'],
+    districts: ['Hervest', 'Holsterhausen', 'Wulfen', 'Lembeck'],
+  },
+  duisburg: {
+    venues: ['bei Vonovia', 'auf Firmen- und Stadtteil-Sommerfesten'],
+    districts: ['Hamborn', 'Rheinhausen', 'Homberg', 'Meiderich'],
+  },
+  essen: {
+    venues: ['bei der Einbürgerungsfeier im Essener Rathaus', 'im Grugapark', 'in der Uniklinik Essen'],
+    districts: ['Rüttenscheid', 'Werden', 'Borbeck', 'Steele'],
+  },
+  gelsenkirchen: {
+    venues: ['bei Schalke 04', 'bei der Sparkasse', 'in der ZOOM Erlebniswelt'],
+    districts: ['Buer', 'Horst', 'Erle', 'Ückendorf'],
+  },
+  gladbeck: {
+    venues: ['beim Appeltatenfest', 'bei Entdeckerweine', 'im Kulturamt'],
+    districts: ['Mitte', 'Butendorf', 'Zweckel', 'Rentfort'],
+  },
+  haltern: {
+    venues: ['im Freizeitpark Ketteler Hof'],
+    districts: ['Sythen', 'Lavesum', 'Flaesheim', 'Lippramsdorf'],
+  },
+  herne: {
+    venues: ['im Wasserschloss Strünkede', 'auf der Cranger Kirmes'],
+    districts: ['Wanne', 'Eickel', 'Baukau', 'Sodingen'],
+  },
+  herten: {
+    venues: ['auf Schloss Herten', 'auf Schloss Westerholt'],
+    districts: ['Westerholt', 'Disteln', 'Scherlebeck', 'Langenbochum'],
+  },
+  marl: {
+    venues: ['im Marler Stern', 'bei der Volksbank'],
+    districts: ['Hüls', 'Drewer', 'Brassert', 'Sinsen'],
+  },
+  oberhausen: {
+    venues: ['im CentrO', 'auf dem Oberhausener Weihnachtsmarkt'],
+    districts: ['Sterkrade', 'Osterfeld', 'Alt-Oberhausen'],
+  },
+  recklinghausen: {
+    venues: ['auf dem Weihnachtsmarkt', 'im Tierpark'],
+    districts: ['Suderwich', 'Hochlarmark', 'Hillerheide', 'König Ludwig'],
+  },
+  wesel: {
+    venues: ['beim Weseler Stadt-Sommerfest', 'im Restaurant Gusto'],
+    districts: ['Feldmark', 'Fusternberg', 'Lackhausen', 'Obrighoven'],
+  },
+};
