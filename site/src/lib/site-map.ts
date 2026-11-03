@@ -53,6 +53,26 @@ export const PUBLISHED_TRANSLATED_PATHS: ReadonlySet<string> = new Set(
   CORE_PAGES.flatMap((entry) => [entry.fr, entry.en]),
 );
 
+/**
+ * Kids city families removed from the index to end cannibalization (Council decision 2026-11-03).
+ * Three templated city families (kinderzauberer-in-/geburtstag-in-/clown-in-, 23 cities each)
+ * fought each other and the hubs/homepage for the same intent. GSC: the hubs + homepage already
+ * own "kindergeburtstag"/"clown"; only `kinderzauberer-in-*` has a proven city ranker (Düsseldorf,
+ * Kita/Schule focus) and matches the owner's city-level priority, so it stays the single indexed
+ * kids city family. The other two carry noindex,follow — pages stay live for users, drop out of
+ * the index and the sitemap. Anchored on the FULL family prefix (not a loose "in-" substring),
+ * so `kinderzauberer-in-*` is never matched. Reverse by emptying this list.
+ */
+export const NOINDEX_CITY_PREFIXES = [
+  '/kindergeburtstag/geburtstag-in-',
+  '/clown/clownshow/clown-in-',
+] as const;
+
+/** True for a kids city page that was de-indexed (see NOINDEX_CITY_PREFIXES). */
+export function isDeindexedCityPath(path: string): boolean {
+  return NOINDEX_CITY_PREFIXES.some((prefix) => path.startsWith(prefix));
+}
+
 // Order matters: specific kids pages under /zauberer/ win over the adult section.
 const ZONE_RULES: Array<[prefix: string, zone: Zone]> = [
   // the Zaubershow and everything below it is a children's show (user, 2026-10-06)

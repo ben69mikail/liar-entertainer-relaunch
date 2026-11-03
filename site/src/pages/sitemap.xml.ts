@@ -4,7 +4,7 @@ import pagesData from '../data/pages.json';
 import postsData from '../data/posts.json';
 import { getAllCategories } from '../utils/allPosts';
 import { ZAUBERER_CITIES, ZAUBERER_CITIES_LIVE, zaubererCityPath } from '../data/zauberer-cities';
-import { translatedSitemapPaths } from '../lib/site-map';
+import { translatedSitemapPaths, isDeindexedCityPath } from '../lib/site-map';
 
 type WPItem = {
   link: string;
@@ -71,11 +71,8 @@ export const GET: APIRoute = async () => {
     { loc: `${SITE}/kinderzauberer/kinderzauberer-in-waltrop/`, priority: '0.7', changefreq: 'weekly', lastmod: '2026-10-09' },
     { loc: `${SITE}/kinderzauberer/kinderzauberer-in-wesel/`, priority: '0.7', changefreq: 'weekly', lastmod: '2026-10-09' },
     { loc: `${SITE}/kinderzauberer/kinderzauberer-in-xanten/`, priority: '0.7', changefreq: 'weekly', lastmod: '2026-10-09' },
-    { loc: `${SITE}/clown/clownshow/clown-in-moers/`, priority: '0.7', changefreq: 'weekly', lastmod: '2026-10-09' },
-    { loc: `${SITE}/clown/clownshow/clown-in-castrop-rauxel/`, priority: '0.7', changefreq: 'weekly', lastmod: '2026-10-09' },
-    { loc: `${SITE}/clown/clownshow/clown-in-waltrop/`, priority: '0.7', changefreq: 'weekly', lastmod: '2026-10-09' },
-    { loc: `${SITE}/clown/clownshow/clown-in-wesel/`, priority: '0.7', changefreq: 'weekly', lastmod: '2026-10-09' },
-    { loc: `${SITE}/clown/clownshow/clown-in-xanten/`, priority: '0.7', changefreq: 'weekly', lastmod: '2026-10-09' },
+    // clown-in-* removed from the sitemap 2026-11-03: the clown + geburtstag city families are
+    // noindex,follow now (see NOINDEX_CITY_PREFIXES in site-map.ts). kinderzauberer-in-* stays.
   ];
   for (const p of staticPages) {
     const path = p.loc.replace(SITE, '');
@@ -95,6 +92,7 @@ export const GET: APIRoute = async () => {
       const path = url.pathname.endsWith('/') ? url.pathname : url.pathname + '/';
       if (path === '/') continue;
       if (REDIRECTING_PATHS.has(path)) continue; // 301-Weiterleitung: nicht in Sitemap
+      if (isDeindexedCityPath(path)) continue; // geburtstag-in-*/clown-in-* sind noindex (2026-11-03)
       const loc = `${SITE}${path}`;
       if (seenLocs.has(loc)) continue;
       seenLocs.add(loc);

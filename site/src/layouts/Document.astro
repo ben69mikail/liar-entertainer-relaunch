@@ -3,7 +3,7 @@
 // BaseLayout (legacy look) or V2Layout (relaunch look), so each page only ships its own CSS.
 import CookieConsent from '../components/CookieConsent.astro';
 import '../styles/motion.css';
-import { zoneFor, alternatesFor, isPublishedPath, localeOf } from '../lib/site-map';
+import { zoneFor, alternatesFor, isPublishedPath, isDeindexedCityPath, localeOf } from '../lib/site-map';
 
 export interface BreadcrumbItem {
   name: string;
@@ -42,7 +42,7 @@ const {
 // FR/EN stay out of the index until their locale is published (owner review, site-map.ts)
 const pagePath = Astro.url.pathname;
 const pageLocale = localeOf(pagePath);
-const noindex = noindexProp || !isPublishedPath(pagePath);
+const noindex = noindexProp || !isPublishedPath(pagePath) || isDeindexedCityPath(pagePath);
 const OG_LOCALE = { de: 'de_DE', fr: 'fr_FR', en: 'en_GB' } as const;
 
 const breadcrumbSchema = breadcrumbs && breadcrumbs.length > 0 ? {
