@@ -6,10 +6,98 @@ export interface CityLocal {
 }
 
 export const CITY_LOCAL: Record<string, CityLocal> = {
-  // owner, 2026-10-20
+  // real venues supplied by the owner 2026-11-04 (L3); districts added from public geography
   duesseldorf: {
     venues: ['im Schloss Benrath', 'in der Brauerei Schumacher', 'bei der Kirchengemeinde Urdenbach'],
     districts: ['Altstadt', 'Oberkassel', 'Gerresheim', 'Benrath', 'Urdenbach', 'Garath'],
+  },
+  gladbeck: {
+    venues: ['beim Appeltatenfest', 'beim Feierabendmarkt', 'beim Festival Umsonst & Draußen'],
+    districts: ['Mitte', 'Butendorf', 'Zweckel', 'Rentfort'],
+  },
+  gelsenkirchen: {
+    venues: ['in der ZOOM Erlebniswelt', 'an der Löchterschule', 'bei den Gelsenkirchener Karnevalsvereinen'],
+    districts: ['Buer', 'Horst', 'Erle', 'Ückendorf'],
+  },
+  bochum: {
+    venues: ['im Tierpark Bochum', 'in den Stadtbüchereien', 'bei der Postbank'],
+    districts: ['Wattenscheid', 'Langendreer', 'Weitmar', 'Querenburg'],
+  },
+  essen: {
+    venues: ['im Grugapark', 'beim VKJ', 'in der Uniklinik Essen'],
+    districts: ['Rüttenscheid', 'Werden', 'Borbeck', 'Steele'],
+  },
+  dortmund: {
+    venues: ['in der Stadt- und Landesbibliothek', 'im Westfalenpark', 'im Big Tippi'],
+    districts: ['Hörde', 'Aplerbeck', 'Hombruch', 'Brackel'],
+  },
+  muelheim: {
+    venues: ['bei der AWO Mülheim'],
+    districts: ['Broich', 'Saarn', 'Speldorf', 'Heißen'],
+  },
+  duisburg: {
+    venues: ['im Jugendzentrum Tempel', 'bei Vonovia', 'auf Stadtteil-Sommerfesten'],
+    districts: ['Hamborn', 'Rheinhausen', 'Homberg', 'Meiderich'],
+  },
+  oberhausen: {
+    venues: ['im CentrO', 'auf dem Oberhausener Weihnachtsmarkt'],
+    districts: ['Sterkrade', 'Osterfeld', 'Alt-Oberhausen'],
+  },
+  bottrop: {
+    venues: ['im Alpincenter', 'auf dem Weihnachtsmarkt', 'beim Spendenlauf'],
+    districts: ['Kirchhellen', 'Batenbrock', 'Eigen', 'Boy'],
+  },
+  recklinghausen: {
+    venues: ['in der Kinderwelt', 'im Tierpark', 'auf dem Weihnachtsmarkt'],
+    districts: ['Suderwich', 'Hochlarmark', 'Hillerheide', 'König Ludwig'],
+  },
+  herne: {
+    venues: ['im Wasserschloss Strünkede', 'in der Kita Regenbogenland', 'auf der Cranger Kirmes'],
+    districts: ['Wanne', 'Eickel', 'Baukau', 'Sodingen'],
+  },
+  marl: {
+    venues: ['im Marler Stern', 'bei der Volksbank'],
+    districts: ['Hüls', 'Drewer', 'Brassert', 'Sinsen'],
+  },
+  herten: {
+    venues: ['auf Schloss Herten', 'auf Schloss Westerholt'],
+    districts: ['Westerholt', 'Disteln', 'Scherlebeck', 'Langenbochum'],
+  },
+  dorsten: {
+    venues: ['im LEO Dorsten', 'bei Mr. Trucker', 'auf Schloss Lembeck'],
+    districts: ['Hervest', 'Holsterhausen', 'Wulfen', 'Lembeck'],
+  },
+  'castrop-rauxel': {
+    venues: ['auf dem Marktplatz Alt-Castrop', 'im Castroper Weihnachtsdorf'],
+    districts: ['Ickern', 'Habinghorst', 'Henrichenburg', 'Schwerin'],
+  },
+  datteln: {
+    venues: ['im Seniorenwohnpark', 'in der Bücherei Datteln'],
+    districts: ['Horneburg', 'Ahsen', 'Meckinghoven'],
+  },
+  waltrop: {
+    venues: ['am Schiffshebewerk Henrichenburg (LWL-Museum)', 'auf der Zeche Waltrop', 'auf dem Hof Wulhorst'],
+    districts: ['Oberwiese', 'Brockenscheidt', 'Leveringhausen'],
+  },
+  moers: {
+    venues: ['im Jugendzentrum Nord', 'im Hotel van der Valk'],
+    districts: ['Repelen', 'Kapellen', 'Rheinkamp', 'Scherpenberg'],
+  },
+  wesel: {
+    venues: ['beim Weseler Stadt-Sommerfest', 'im Restaurant Gusto', 'in der kath. Kita St. Nikolaus in Flüren'],
+    districts: ['Feldmark', 'Fusternberg', 'Lackhausen', 'Obrighoven'],
+  },
+  xanten: {
+    venues: ['im Freizeitzentrum Xanten', 'beim Xantener Carnevals-Verein'],
+    districts: ['Birten', 'Lüttingen', 'Marienbaum', 'Vynen'],
+  },
+  dinslaken: {
+    venues: ['im Grindhouse', 'bei der Karnevalsgemeinschaft Rot-Gold'],
+    districts: ['Hiesfeld', 'Lohberg', 'Averbruch', 'Eppinghoven'],
+  },
+  haltern: {
+    venues: ['im Freizeitpark Ketteler Hof', 'in der AWO-Kita Lohausstraße'],
+    districts: ['Sythen', 'Lavesum', 'Flaesheim', 'Lippramsdorf'],
   },
 };
 

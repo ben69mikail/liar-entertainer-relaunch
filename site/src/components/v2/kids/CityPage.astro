@@ -64,10 +64,14 @@ const sisters = [
   has(clownCities, `clown-in-${citySlug}`) && { href: `/clown/clownshow/clown-in-${citySlug}/`, label: `Clown in ${cityName}` },
   adult && { href: zaubererCityPath(adult.slug), label: `Zauberer für Erwachsene in ${cityName}` },
 ].filter((l): l is { href: string; label: string } => Boolean(l) && (l as { href: string }).href !== ownPath);
-// real places the owner has played; shown on the birthday page, the city's main kids page (2026-10-20)
-const local = ownPath.startsWith('/kindergeburtstag/') ? CITY_LOCAL[citySlug] : undefined;
+// real places the owner has played; shown on the indexed kinderzauberer-in-* page (the kept kids
+// city family since 2026-11-03 — the birthday/clown city pages are noindex now, so the Experience
+// signal belongs on the keeper). Only renders where real venues + districts exist (CITY_LOCAL).
+const local = ownPath.startsWith('/kinderzauberer/') ? CITY_LOCAL[citySlug] : undefined;
 // a page that hands the birthday search to its sister page and covers Kita, school and festivals
 const focus = CITY_FOCUS[ownPath];
+// "A, B und C" for any length; "A" for one, "A und B" for two (some cities have a single venue).
+const listDe = (arr: string[]) => (arr.length <= 1 ? (arr[0] ?? '') : `${arr.slice(0, -1).join(', ')} und ${arr.at(-1)}`);
 const BIG_WITHOUT_ADULT = ['bochum', 'dortmund', 'duesseldorf', 'muelheim'];
 
 const ASSETS = import.meta.glob<{ default: ImageMetadata }>('/src/assets/images/**/*.{jpg,jpeg,png,webp}', { eager: true });
@@ -252,7 +256,7 @@ const heroAlt = city.hero.imageAlt || `Clown Zauberer LIAR – ${city.hero.h1.re
       {local && (
         <>
           <h3 class="ct-more__h3">Hier war ich in {cityName} schon zu Gast</h3>
-          <p class="k3-narrow" data-city-local>Auftritte unter anderem {local.venues.slice(0, -1).join(', ')} und {local.venues.at(-1)} – in Stadtteilen wie {local.districts.slice(0, -1).join(', ')} und {local.districts.at(-1)}.</p>
+          <p class="k3-narrow" data-city-local>Auftritte unter anderem {listDe(local.venues)} – in Stadtteilen wie {listDe(local.districts)}.</p>
         </>
       )}
       <p class="k3-narrow" data-weekday>Kindergeburtstag in {cityName} auch unter der Woche: Montag bis Donnerstag ab 13 Uhr, kurzfristig bis zum Vortag, solange der Termin frei ist – <a href="/kindergeburtstag/#unter-der-woche">mehr dazu</a>.</p>
