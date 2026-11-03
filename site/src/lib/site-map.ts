@@ -12,15 +12,6 @@ export type Locale = (typeof LOCALES)[number];
 export const PUBLISHED_LOCALES: readonly Locale[] = ['de'];
 
 /**
- * Individual FR/EN pages that are indexed even though their locale is not fully published
- * (user 2026-10-31): only the two translated homepages should rank — in French for the
- * Düsseldorf/Köln axis and the Luxembourg/Belgium border, in English generally. Every other
- * FR/EN page stays noindex, out of the sitemap and without hreflang. Each entry must be the
- * fr/en side of a CORE_PAGES row.
- */
-export const PUBLISHED_TRANSLATED_PATHS: ReadonlySet<string> = new Set(['/fr/', '/en/']);
-
-/**
  * Pages translated to fr/en (brief E2), with their translated paths.
  * Everything else is DE-only. Single source of truth for routing + hreflang.
  */
@@ -49,6 +40,18 @@ export const CORE_PAGES: Array<Record<Locale, string>> = [
   { de: '/preise/', fr: '/fr/tarifs/', en: '/en/prices/' },
   { de: '/galerie/', fr: '/fr/galerie/', en: '/en/gallery/' },
 ];
+
+/**
+ * FR/EN pages that are indexed even though their locale is not fully published.
+ * User (2026-11-03): index every translated main-menu page, not just the two homepages — each
+ * core page carries its main keywords in FR/EN and should rank. Content and alt text are already
+ * fully translated (the build fails otherwise), so publishing only flips noindex→index, adds the
+ * sitemap entry and the hreflang cluster. City pages and form targets (EXTRA_PAGES, e.g. the
+ * thank-you page) are not core, so they stay noindex and out of the sitemap.
+ */
+export const PUBLISHED_TRANSLATED_PATHS: ReadonlySet<string> = new Set(
+  CORE_PAGES.flatMap((entry) => [entry.fr, entry.en]),
+);
 
 // Order matters: specific kids pages under /zauberer/ win over the adult section.
 const ZONE_RULES: Array<[prefix: string, zone: Zone]> = [
