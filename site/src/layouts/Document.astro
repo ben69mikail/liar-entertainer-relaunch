@@ -120,6 +120,7 @@ const localBusinessSchema = {
       "https://www.facebook.com/clownzaubererliar",
       "https://www.instagram.com/clown_zauberer_liar/",
       "https://www.linkedin.com/in/michael-prescler-b2308832/",
+      "https://www.youtube.com/@benmikail",
       "https://www.youtube.com/watch?v=Cop0SqRIX4Y"
     ]
   },
@@ -168,6 +169,7 @@ const localBusinessSchema = {
     "https://www.facebook.com/clownzaubererliar",
     "https://www.instagram.com/clown_zauberer_liar/",
     "https://www.linkedin.com/in/michael-prescler-b2308832/",
+    "https://www.youtube.com/@benmikail",
     "https://www.youtube.com/watch?v=Cop0SqRIX4Y",
     "https://www.google.com/maps/place/Clown+Zauberer+LIAR,+Beethovenstra%C3%9Fe+15,+45966+Gladbeck/data=!4m2!3m1!1s0x47b8eed84b67a41d:0x775f1c8f05280e76"
   ]
@@ -186,6 +188,9 @@ const websiteSchema = {
 
 // WebPage-Knoten pro Seite: korrekter Träger für speakable
 // (speakable ist nur auf WebPage/Article definiert, nicht auf LocalBusiness)
+// Content-Stand als Frische-Signal (GEO/AI): ein Konstante, bewusst NICHT das Build-Datum,
+// damit nicht jeder Deploy "heute geändert" vortäuscht. Bei echten Inhaltsänderungen hochsetzen.
+const CONTENT_UPDATED = '2026-11-04';
 const webPageSchema = {
   "@context": "https://schema.org",
   "@type": "WebPage",
@@ -195,6 +200,7 @@ const webPageSchema = {
   "inLanguage": pageLocale,
   "isPartOf": { "@id": "https://liar-entertainer.com/#website" },
   "about": { "@id": "https://liar-entertainer.com/#business" },
+  "dateModified": CONTENT_UPDATED,
   "speakable": {
     "@type": "SpeakableSpecification",
     "cssSelector": ["h1"]
