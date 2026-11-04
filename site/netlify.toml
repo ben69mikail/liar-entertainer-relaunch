@@ -4,7 +4,11 @@
 #   Base directory = site   (Netlify then reads this file; paths below are relative to site/)
 # Redirects: public/_redirects (converted from ops/legacy-apache/.htaccess, tested by
 # tests/dist/redirects.test.ts). www -> apex is the first rule there.
-# No Content-Security-Policy on purpose (YouTube facade, Netlify Forms) — add only after testing.
+# CSP: only the non-resource-restricting directives (frame-ancestors/object-src/base-uri/
+# upgrade-insecure-requests). A full default-src/script-src policy is deliberately NOT set — it
+# would break the YouTube facade, Netlify Forms and the inline scripts, and needs live testing
+# first. The directives below add clickjacking + base-uri + plugin hardening without blocking any
+# resource the pages load.
 
 [build]
   command = "npm run build"
@@ -13,7 +17,8 @@
 [build.environment]
   NODE_VERSION = "24"
 
-# Security headers (as on Apache, without HSTS includeSubDomains: Netlify sends its own HSTS)
+# Security headers. HSTS is set here (overrides Netlify's default) with includeSubDomains;
+# `preload` is deliberately omitted — it is a hard-to-reverse commitment for every subdomain.
 [[headers]]
   for = "/*"
   [headers.values]
@@ -21,6 +26,8 @@
     X-Frame-Options = "SAMEORIGIN"
     Referrer-Policy = "strict-origin-when-cross-origin"
     Permissions-Policy = "camera=(), microphone=(), geolocation=()"
+    Strict-Transport-Security = "max-age=31536000; includeSubDomains"
+    Content-Security-Policy = "frame-ancestors 'self'; object-src 'none'; base-uri 'self'; upgrade-insecure-requests"
 
 # Hashed build assets: cache forever
 [[headers]]
