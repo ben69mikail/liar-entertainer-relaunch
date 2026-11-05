@@ -79,8 +79,13 @@ describe('alternatesFor (hreflang)', () => {
     expect(alternatesFor('/blog/')).toEqual([]);
   });
 
-  it('emits nothing while only German is published', () => {
-    expect(alternatesForLocales('/zauberer/', ['de'])).toEqual([]);
+  it('emits the full mesh even when only German is in PUBLISHED_LOCALES (FR/EN core are force-published)', () => {
+    expect(alternatesForLocales('/zauberer/', ['de'])).toEqual([
+      { hreflang: 'de', href: 'https://liar-entertainer.com/zauberer/' },
+      { hreflang: 'fr', href: 'https://liar-entertainer.com/fr/magicien/' },
+      { hreflang: 'en', href: 'https://liar-entertainer.com/en/magician/' },
+      { hreflang: 'x-default', href: 'https://liar-entertainer.com/zauberer/' },
+    ]);
   });
 
   it('does not invent translations by prefixing German slugs', () => {
@@ -112,39 +117,50 @@ describe('zoneFor (translated twins)', () => {
   });
 });
 
-describe('unpublished locales (owner review first)', () => {
-  it('treats German pages as published and FR/EN as unpublished by default', () => {
+describe('published FR/EN core pages (indexed regardless of PUBLISHED_LOCALES)', () => {
+  it('treats German and FR/EN core pages as published by default, non-core twins as unpublished', () => {
     expect(isPublishedPath('/zauberer/')).toBe(true);
-    expect(isPublishedPath('/fr/magicien/')).toBe(false);
-    expect(isPublishedPath('/en/')).toBe(false);
+    expect(isPublishedPath('/fr/magicien/')).toBe(true);
+    expect(isPublishedPath('/en/')).toBe(true);
+    // non-core translated pages (EXTRA_PAGES, e.g. the thank-you page) stay unpublished
+    expect(isPublishedPath('/fr/contact/merci/')).toBe(false);
+    expect(isPublishedPath('/en/contact/thank-you/')).toBe(false);
   });
 
-  it('publishes a locale once it is listed', () => {
-    expect(isPublishedPath('/fr/magicien/', ['de', 'fr'])).toBe(true);
-    expect(isPublishedPath('/en/magician/', ['de', 'fr'])).toBe(false);
+  it('publishes a non-core translated page only once its locale is listed', () => {
+    expect(isPublishedPath('/fr/contact/merci/', ['de', 'fr'])).toBe(true);
+    expect(isPublishedPath('/en/contact/thank-you/', ['de', 'fr'])).toBe(false);
   });
 
-  it('emits no hreflang on an unpublished page, even when other locales are live', () => {
-    expect(alternatesForLocales('/en/magician/', ['de', 'fr'])).toEqual([]);
-    expect(alternatesForLocales('/fr/magicien/', ['de'])).toEqual([]);
+  it('emits no hreflang on a non-core translated page, even when its locale is live', () => {
+    expect(alternatesForLocales('/fr/contact/merci/', ['de', 'fr', 'en'])).toEqual([]);
+    expect(alternatesForLocales('/en/contact/thank-you/', ['de', 'fr', 'en'])).toEqual([]);
   });
 
-  it('links only published locales once some are live', () => {
-    expect(alternatesForLocales('/fr/magicien/', ['de', 'fr'])).toEqual([
+  it('links the full de/fr/en mesh from any core page, regardless of PUBLISHED_LOCALES', () => {
+    expect(alternatesForLocales('/fr/magicien/', ['de'])).toEqual([
       { hreflang: 'de', href: 'https://liar-entertainer.com/zauberer/' },
       { hreflang: 'fr', href: 'https://liar-entertainer.com/fr/magicien/' },
+      { hreflang: 'en', href: 'https://liar-entertainer.com/en/magician/' },
+      { hreflang: 'x-default', href: 'https://liar-entertainer.com/zauberer/' },
+    ]);
+    expect(alternatesForLocales('/en/magician/', ['de', 'fr'])).toEqual([
+      { hreflang: 'de', href: 'https://liar-entertainer.com/zauberer/' },
+      { hreflang: 'fr', href: 'https://liar-entertainer.com/fr/magicien/' },
+      { hreflang: 'en', href: 'https://liar-entertainer.com/en/magician/' },
       { hreflang: 'x-default', href: 'https://liar-entertainer.com/zauberer/' },
     ]);
   });
 
-  it('adds only published FR/EN core pages to the sitemap', () => {
-    expect(translatedSitemapPaths(['de'])).toEqual([]);
-    const all = translatedSitemapPaths(['de', 'fr', 'en']);
+  it('adds every FR/EN core page to the sitemap but no non-core twins, regardless of PUBLISHED_LOCALES', () => {
+    const all = translatedSitemapPaths(['de']);
     expect(all).toHaveLength(CORE_PAGES.length * 2);
     expect(all).toContain('/fr/contact/');
     expect(all).toContain('/en/kids-birthday-party/');
     expect(all).not.toContain('/fr/contact/merci/');
-    expect(translatedSitemapPaths(['de', 'en']).every((p) => p.startsWith('/en/'))).toBe(true);
+    // the locale list does not gate core FR/EN pages — same result for every locale set
+    expect(translatedSitemapPaths(['de', 'fr', 'en'])).toEqual(all);
+    expect(translatedSitemapPaths(['de', 'en'])).toEqual(all);
   });
 });
 
