@@ -14,7 +14,7 @@
     "test:dist": "npm run build && vitest run tests/dist",
     "test:e2e": "vitest run tests/e2e",
     "generate-overlays": "node --import tsx scripts/generate-overlays.mjs",
-    "prebuild": "npm run generate-overlays && node scripts/generate-card-thumbs.mjs && node --input-type=commonjs -e \"const fs=require('fs');const src='src/assets/images/home/clown-zauberer-hero.jpg';const dst='public/images/og-startseite.jpg';try{fs.unlinkSync(dst)}catch(e){}fs.copyFileSync(src,dst)\"",
+    "prebuild": "npm run generate-overlays && node scripts/generate-card-thumbs.mjs && node scripts/generate-blog-media.mjs && node --input-type=commonjs -e \"const fs=require('fs');const src='src/assets/images/home/clown-zauberer-hero.jpg';const dst='public/images/og-startseite.jpg';try{fs.unlinkSync(dst)}catch(e){}fs.copyFileSync(src,dst)\"",
     "test:seo": "node scripts/seo-assertions.mjs",
     "snapshot:content": "tsx scripts/snapshot-content.ts",
     "test:perf": "node scripts/lighthouse-gate.mjs",
@@ -22,6 +22,7 @@
     "i18n:review": "node --import tsx scripts/i18n-review.mjs"
   },
   "dependencies": {
+    "@astrojs/markdown-remark": "^7.3.5",
     "@fontsource-variable/bodoni-moda": "^5.3.0",
     "@fontsource-variable/fraunces": "^5.3.0",
     "@fontsource-variable/fredoka": "^5.3.0",

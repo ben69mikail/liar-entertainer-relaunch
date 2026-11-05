@@ -1,0 +1,830 @@
+{
+  "/blog-images/10-tipps-fuer-den-perfekten-kindergeburtstag/10-tipps-perfekter-kindergeburtstag.jpg": {
+    "width": 800,
+    "height": 1200,
+    "webp": "/blog-images/10-tipps-fuer-den-perfekten-kindergeburtstag/10-tipps-perfekter-kindergeburtstag.webp",
+    "avif": "/blog-images/10-tipps-fuer-den-perfekten-kindergeburtstag/10-tipps-perfekter-kindergeburtstag.avif"
+  },
+  "/blog-images/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie/pantomime-liar-ringelshirt-gelsenkirchen.jpg": {
+    "width": 970,
+    "height": 1200,
+    "webp": "/blog-images/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie/pantomime-liar-ringelshirt-gelsenkirchen.webp",
+    "avif": "/blog-images/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie/pantomime-liar-ringelshirt-gelsenkirchen.avif"
+  },
+  "/blog-images/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie/pantomime-reiterhof-gelsenkirchen-pferde.jpg": {
+    "width": 880,
+    "height": 1184,
+    "webp": "/blog-images/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie/pantomime-reiterhof-gelsenkirchen-pferde.webp",
+    "avif": "/blog-images/100-jahre-laendlicher-reit-und-fahrverein-gelsenkirchen-ein-fest-fuer-die-ganze-familie/pantomime-reiterhof-gelsenkirchen-pferde.avif"
+  },
+  "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/5-gruende-zauberei-karneval.jpg": {
+    "width": 1200,
+    "height": 800,
+    "webp": "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/5-gruende-zauberei-karneval.webp",
+    "avif": "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/5-gruende-zauberei-karneval.avif"
+  },
+  "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/karneval-zaubershow-kinder.jpg": {
+    "width": 586,
+    "height": 718,
+    "webp": "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/karneval-zaubershow-kinder.webp",
+    "avif": "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/karneval-zaubershow-kinder.avif"
+  },
+  "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/tisch-zauberer-nrw.jpg": {
+    "width": 519,
+    "height": 519,
+    "webp": "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/tisch-zauberer-nrw.webp",
+    "avif": "/blog-images/5-gruende-warum-zauberei-zum-karneval-gehoert/tisch-zauberer-nrw.avif"
+  },
+  "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/cover.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/cover.webp",
+    "avif": "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/cover.avif"
+  },
+  "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/inline-1.jpg": {
+    "width": 1180,
+    "height": 1572,
+    "webp": "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/inline-1.webp",
+    "avif": "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/inline-1.avif"
+  },
+  "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/inline-2.jpg": {
+    "width": 1180,
+    "height": 1572,
+    "webp": "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/inline-2.webp",
+    "avif": "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/inline-2.avif"
+  },
+  "/blog-images/adventsmarkt-in-rheinberg-mit-clown-zauberer/clown-zauberer-weihnachtsmarkt-publikum.jpg": {
+    "width": 600,
+    "height": 800,
+    "webp": "/blog-images/adventsmarkt-in-rheinberg-mit-clown-zauberer/clown-zauberer-weihnachtsmarkt-publikum.webp",
+    "avif": "/blog-images/adventsmarkt-in-rheinberg-mit-clown-zauberer/clown-zauberer-weihnachtsmarkt-publikum.avif"
+  },
+  "/blog-images/adventsmarkt-in-rheinberg-mit-clown-zauberer/clown-zauberer-zaubershow-weihnachtsmarkt.jpg": {
+    "width": 600,
+    "height": 600,
+    "webp": "/blog-images/adventsmarkt-in-rheinberg-mit-clown-zauberer/clown-zauberer-zaubershow-weihnachtsmarkt.webp",
+    "avif": "/blog-images/adventsmarkt-in-rheinberg-mit-clown-zauberer/clown-zauberer-zaubershow-weihnachtsmarkt.avif"
+  },
+  "/blog-images/clown-oder-zauberer-kindergeburtstag/cover.jpg": {
+    "width": 900,
+    "height": 1200,
+    "webp": "/blog-images/clown-oder-zauberer-kindergeburtstag/cover.webp",
+    "avif": "/blog-images/clown-oder-zauberer-kindergeburtstag/cover.avif"
+  },
+  "/blog-images/clown-oder-zauberer-kindergeburtstag/inline-1.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/clown-oder-zauberer-kindergeburtstag/inline-1.webp",
+    "avif": "/blog-images/clown-oder-zauberer-kindergeburtstag/inline-1.avif"
+  },
+  "/blog-images/clown-oder-zauberer-kindergeburtstag/inline-2.jpg": {
+    "width": 720,
+    "height": 1133,
+    "webp": "/blog-images/clown-oder-zauberer-kindergeburtstag/inline-2.webp",
+    "avif": "/blog-images/clown-oder-zauberer-kindergeburtstag/inline-2.avif"
+  },
+  "/blog-images/coesfeld-empfaengt-clown-zauberer-liar/clown-liar-ballonmodellage-stadtfest.jpg": {
+    "width": 338,
+    "height": 643,
+    "webp": "/blog-images/coesfeld-empfaengt-clown-zauberer-liar/clown-liar-ballonmodellage-stadtfest.webp",
+    "avif": "/blog-images/coesfeld-empfaengt-clown-zauberer-liar/clown-liar-ballonmodellage-stadtfest.avif"
+  },
+  "/blog-images/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck/kinderkarneval-gladbeck-zaubershow.jpg": {
+    "width": 450,
+    "height": 450,
+    "webp": "/blog-images/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck/kinderkarneval-gladbeck-zaubershow.webp",
+    "avif": "/blog-images/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck/kinderkarneval-gladbeck-zaubershow.avif"
+  },
+  "/blog-images/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/fruehlings-sommerfest-kindergarten.jpg": {
+    "width": 1200,
+    "height": 800,
+    "webp": "/blog-images/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/fruehlings-sommerfest-kindergarten.webp",
+    "avif": "/blog-images/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/fruehlings-sommerfest-kindergarten.avif"
+  },
+  "/blog-images/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/kinderfest-kindergarten-clown-liar.jpg": {
+    "width": 800,
+    "height": 533,
+    "webp": "/blog-images/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/kinderfest-kindergarten-clown-liar.webp",
+    "avif": "/blog-images/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/kinderfest-kindergarten-clown-liar.avif"
+  },
+  "/blog-images/gescher-clown-zauberer/clown-zauberer-kindertheater-zaubershow.jpg": {
+    "width": 1200,
+    "height": 800,
+    "webp": "/blog-images/gescher-clown-zauberer/clown-zauberer-kindertheater-zaubershow.webp",
+    "avif": "/blog-images/gescher-clown-zauberer/clown-zauberer-kindertheater-zaubershow.avif"
+  },
+  "/blog-images/haltern-clown-in-freiheit/clown-liar-haus-in-der-freiheit-haltern.jpg": {
+    "width": 464,
+    "height": 590,
+    "webp": "/blog-images/haltern-clown-in-freiheit/clown-liar-haus-in-der-freiheit-haltern.webp",
+    "avif": "/blog-images/haltern-clown-in-freiheit/clown-liar-haus-in-der-freiheit-haltern.avif"
+  },
+  "/blog-images/haltern-clown-in-freiheit/halterner-zeitung-magischer-clown-in-freiheit.jpg": {
+    "width": 680,
+    "height": 478,
+    "webp": "/blog-images/haltern-clown-in-freiheit/halterner-zeitung-magischer-clown-in-freiheit.webp",
+    "avif": "/blog-images/haltern-clown-in-freiheit/halterner-zeitung-magischer-clown-in-freiheit.avif"
+  },
+  "/blog-images/haltern-clown-in-freiheit/zauberer-liar-ballontier-haltern.jpg": {
+    "width": 853,
+    "height": 640,
+    "webp": "/blog-images/haltern-clown-in-freiheit/zauberer-liar-ballontier-haltern.webp",
+    "avif": "/blog-images/haltern-clown-in-freiheit/zauberer-liar-ballontier-haltern.avif"
+  },
+  "/blog-images/ikea-duisburg-midsommar-mit-clown-zauberer/ikea-duisburg-midsommar-clown-zauberer.jpg": {
+    "width": 720,
+    "height": 707,
+    "webp": "/blog-images/ikea-duisburg-midsommar-mit-clown-zauberer/ikea-duisburg-midsommar-clown-zauberer.webp",
+    "avif": "/blog-images/ikea-duisburg-midsommar-mit-clown-zauberer/ikea-duisburg-midsommar-clown-zauberer.avif"
+  },
+  "/blog-images/kidzival-2024/clown-zauberer-kinderfestival-rockbuehne.jpg": {
+    "width": 720,
+    "height": 604,
+    "webp": "/blog-images/kidzival-2024/clown-zauberer-kinderfestival-rockbuehne.webp",
+    "avif": "/blog-images/kidzival-2024/clown-zauberer-kinderfestival-rockbuehne.avif"
+  },
+  "/blog-images/kidzival-2024/kinderfestival-zaubershow-junge-jubelt.jpg": {
+    "width": 720,
+    "height": 931,
+    "webp": "/blog-images/kidzival-2024/kinderfestival-zaubershow-junge-jubelt.webp",
+    "avif": "/blog-images/kidzival-2024/kinderfestival-zaubershow-junge-jubelt.avif"
+  },
+  "/blog-images/kindergeburtstag-herbstferien-drinnen/cover.jpg": {
+    "width": 1151,
+    "height": 518,
+    "webp": "/blog-images/kindergeburtstag-herbstferien-drinnen/cover.webp",
+    "avif": "/blog-images/kindergeburtstag-herbstferien-drinnen/cover.avif"
+  },
+  "/blog-images/kindergeburtstag-herbstferien-drinnen/inline-1.jpg": {
+    "width": 1200,
+    "height": 675,
+    "webp": "/blog-images/kindergeburtstag-herbstferien-drinnen/inline-1.webp",
+    "avif": "/blog-images/kindergeburtstag-herbstferien-drinnen/inline-1.avif"
+  },
+  "/blog-images/kindergeburtstag-herbstferien-drinnen/inline-2.jpg": {
+    "width": 1200,
+    "height": 800,
+    "webp": "/blog-images/kindergeburtstag-herbstferien-drinnen/inline-2.webp",
+    "avif": "/blog-images/kindergeburtstag-herbstferien-drinnen/inline-2.avif"
+  },
+  "/blog-images/kindergeburtstag-hitze-outdoor-programm/cover.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/kindergeburtstag-hitze-outdoor-programm/cover.webp",
+    "avif": "/blog-images/kindergeburtstag-hitze-outdoor-programm/cover.avif"
+  },
+  "/blog-images/kindergeburtstag-hitze-outdoor-programm/inline-1.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/kindergeburtstag-hitze-outdoor-programm/inline-1.webp",
+    "avif": "/blog-images/kindergeburtstag-hitze-outdoor-programm/inline-1.avif"
+  },
+  "/blog-images/kindergeburtstag-hitze-outdoor-programm/inline-2.jpg": {
+    "width": 1180,
+    "height": 1572,
+    "webp": "/blog-images/kindergeburtstag-hitze-outdoor-programm/inline-2.webp",
+    "avif": "/blog-images/kindergeburtstag-hitze-outdoor-programm/inline-2.avif"
+  },
+  "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/cover.jpg": {
+    "width": 720,
+    "height": 827,
+    "webp": "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/cover.webp",
+    "avif": "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/cover.avif"
+  },
+  "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-1.jpg": {
+    "width": 1180,
+    "height": 1572,
+    "webp": "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-1.webp",
+    "avif": "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-1.avif"
+  },
+  "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-2.jpg": {
+    "width": 1180,
+    "height": 1572,
+    "webp": "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-2.webp",
+    "avif": "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-2.avif"
+  },
+  "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-3.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-3.webp",
+    "avif": "/blog-images/kindergeburtstag-mai-outdoor-ruhrgebiet/inline-3.avif"
+  },
+  "/blog-images/kindergeburtstag-park-tipps/cover.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/kindergeburtstag-park-tipps/cover.webp",
+    "avif": "/blog-images/kindergeburtstag-park-tipps/cover.avif"
+  },
+  "/blog-images/kindergeburtstag-park-tipps/inline-1.jpg": {
+    "width": 849,
+    "height": 1280,
+    "webp": "/blog-images/kindergeburtstag-park-tipps/inline-1.webp",
+    "avif": "/blog-images/kindergeburtstag-park-tipps/inline-1.avif"
+  },
+  "/blog-images/kindergeburtstag-park-tipps/inline-2.jpg": {
+    "width": 1200,
+    "height": 1800,
+    "webp": "/blog-images/kindergeburtstag-park-tipps/inline-2.webp",
+    "avif": "/blog-images/kindergeburtstag-park-tipps/inline-2.avif"
+  },
+  "/blog-images/kinderkarneval-mit-clown-zauberer/clown-zauberer-karneval-buehne-vorhang.jpg": {
+    "width": 900,
+    "height": 1200,
+    "webp": "/blog-images/kinderkarneval-mit-clown-zauberer/clown-zauberer-karneval-buehne-vorhang.webp",
+    "avif": "/blog-images/kinderkarneval-mit-clown-zauberer/clown-zauberer-karneval-buehne-vorhang.avif"
+  },
+  "/blog-images/kinderkarneval-mit-clown-zauberer/kinderkarneval-clown-zauberer-kostueme.jpg": {
+    "width": 1200,
+    "height": 482,
+    "webp": "/blog-images/kinderkarneval-mit-clown-zauberer/kinderkarneval-clown-zauberer-kostueme.webp",
+    "avif": "/blog-images/kinderkarneval-mit-clown-zauberer/kinderkarneval-clown-zauberer-kostueme.avif"
+  },
+  "/blog-images/kindersitzung-in-rheinberg/clown-zauberer-kindersitzung-karneval-buehne.jpg": {
+    "width": 1200,
+    "height": 892,
+    "webp": "/blog-images/kindersitzung-in-rheinberg/clown-zauberer-kindersitzung-karneval-buehne.webp",
+    "avif": "/blog-images/kindersitzung-in-rheinberg/clown-zauberer-kindersitzung-karneval-buehne.avif"
+  },
+  "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/cover.jpg": {
+    "width": 1440,
+    "height": 1440,
+    "webp": "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/cover.webp",
+    "avif": "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/cover.avif"
+  },
+  "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/inline-1.jpg": {
+    "width": 1440,
+    "height": 1440,
+    "webp": "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/inline-1.webp",
+    "avif": "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/inline-1.avif"
+  },
+  "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/inline-2.jpg": {
+    "width": 720,
+    "height": 1133,
+    "webp": "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/inline-2.webp",
+    "avif": "/blog-images/kinderzauberer-nrw-regional-buchen-vorteile/inline-2.avif"
+  },
+  "/blog-images/kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen/kinderfest-gelsenkirchen-clown-liar.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen/kinderfest-gelsenkirchen-clown-liar.webp",
+    "avif": "/blog-images/kultur-und-kinderfest-auf-dem-resse-markt-clown-zaubershow-in-gelsenkirchen/kinderfest-gelsenkirchen-clown-liar.avif"
+  },
+  "/blog-images/lollipop-festival-das-familienevent/clown-zauberer-familienfest-buehne.jpg": {
+    "width": 720,
+    "height": 827,
+    "webp": "/blog-images/lollipop-festival-das-familienevent/clown-zauberer-familienfest-buehne.webp",
+    "avif": "/blog-images/lollipop-festival-das-familienevent/clown-zauberer-familienfest-buehne.avif"
+  },
+  "/blog-images/luftballonmodellage-kindergeburtstag/cover.jpg": {
+    "width": 637,
+    "height": 960,
+    "webp": "/blog-images/luftballonmodellage-kindergeburtstag/cover.webp",
+    "avif": "/blog-images/luftballonmodellage-kindergeburtstag/cover.avif"
+  },
+  "/blog-images/luftballonmodellage-kindergeburtstag/inline-1.jpg": {
+    "width": 1200,
+    "height": 1200,
+    "webp": "/blog-images/luftballonmodellage-kindergeburtstag/inline-1.webp",
+    "avif": "/blog-images/luftballonmodellage-kindergeburtstag/inline-1.avif"
+  },
+  "/blog-images/luftballonmodellage-kindergeburtstag/inline-2.jpg": {
+    "width": 1200,
+    "height": 675,
+    "webp": "/blog-images/luftballonmodellage-kindergeburtstag/inline-2.webp",
+    "avif": "/blog-images/luftballonmodellage-kindergeburtstag/inline-2.avif"
+  },
+  "/blog-images/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie/clown-zauberer-freilichtbuehne-prerow.jpg": {
+    "width": 1200,
+    "height": 1001,
+    "webp": "/blog-images/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie/clown-zauberer-freilichtbuehne-prerow.webp",
+    "avif": "/blog-images/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie/clown-zauberer-freilichtbuehne-prerow.avif"
+  },
+  "/blog-images/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie/zaubershow-mit-clown-zauberer-liar.jpg": {
+    "width": 538,
+    "height": 538,
+    "webp": "/blog-images/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie/zaubershow-mit-clown-zauberer-liar.webp",
+    "avif": "/blog-images/magische-unterhaltung-und-zaubershow-in-prerow-ein-unvergesslicher-tag-fuer-die-ganze-familie/zaubershow-mit-clown-zauberer-liar.avif"
+  },
+  "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/clown-zauberer-liar-weihnachtsmarkt-hagen.jpg": {
+    "width": 1080,
+    "height": 980,
+    "webp": "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/clown-zauberer-liar-weihnachtsmarkt-hagen.webp",
+    "avif": "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/clown-zauberer-liar-weihnachtsmarkt-hagen.avif"
+  },
+  "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/hagener-weihnachtsmarkt-abend.jpg": {
+    "width": 1200,
+    "height": 799,
+    "webp": "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/hagener-weihnachtsmarkt-abend.webp",
+    "avif": "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/hagener-weihnachtsmarkt-abend.avif"
+  },
+  "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/hagener-weihnachtsmarkt-riesenrad.jpg": {
+    "width": 1200,
+    "height": 800,
+    "webp": "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/hagener-weihnachtsmarkt-riesenrad.webp",
+    "avif": "/blog-images/magische-weihnachtsfreude-mit-clown-zauberer-liar-am-hagener-weihnachtsmarkt/hagener-weihnachtsmarkt-riesenrad.avif"
+  },
+  "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/cover.jpg": {
+    "width": 1600,
+    "height": 1067,
+    "webp": "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/cover.webp",
+    "avif": "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/cover.avif"
+  },
+  "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/inline-1.jpg": {
+    "width": 1151,
+    "height": 1600,
+    "webp": "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/inline-1.webp",
+    "avif": "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/inline-1.avif"
+  },
+  "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/inline-2.jpg": {
+    "width": 1180,
+    "height": 1572,
+    "webp": "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/inline-2.webp",
+    "avif": "/blog-images/martinsfest-kinder-programm-laternenumzug-ablauf/inline-2.avif"
+  },
+  "/blog-images/muttertag-familiengeburtstag-kombinieren/cover.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/muttertag-familiengeburtstag-kombinieren/cover.webp",
+    "avif": "/blog-images/muttertag-familiengeburtstag-kombinieren/cover.avif"
+  },
+  "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-1.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-1.webp",
+    "avif": "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-1.avif"
+  },
+  "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-1.png": {
+    "width": 1200,
+    "height": 581,
+    "webp": "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-1.webp",
+    "avif": "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-1.avif"
+  },
+  "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-2.jpg": {
+    "width": 1178,
+    "height": 1678,
+    "webp": "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-2.webp",
+    "avif": "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-2.avif"
+  },
+  "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-3.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-3.webp",
+    "avif": "/blog-images/muttertag-familiengeburtstag-kombinieren/inline-3.avif"
+  },
+  "/blog-images/nussknacker-weihnachtsmarkt-gladbeck/nussknacker-pantomime-weihnachtsmarkt-gladbeck.jpg": {
+    "width": 1200,
+    "height": 675,
+    "webp": "/blog-images/nussknacker-weihnachtsmarkt-gladbeck/nussknacker-pantomime-weihnachtsmarkt-gladbeck.webp",
+    "avif": "/blog-images/nussknacker-weihnachtsmarkt-gladbeck/nussknacker-pantomime-weihnachtsmarkt-gladbeck.avif"
+  },
+  "/blog-images/nussknacker-weihnachtsmarkt-gladbeck/nussknacker-walking-act-kostuem.jpg": {
+    "width": 596,
+    "height": 1006,
+    "webp": "/blog-images/nussknacker-weihnachtsmarkt-gladbeck/nussknacker-walking-act-kostuem.webp",
+    "avif": "/blog-images/nussknacker-weihnachtsmarkt-gladbeck/nussknacker-walking-act-kostuem.avif"
+  },
+  "/blog-images/open-air-zauberei-im-freien/cover.jpg": {
+    "width": 1280,
+    "height": 960,
+    "webp": "/blog-images/open-air-zauberei-im-freien/cover.webp",
+    "avif": "/blog-images/open-air-zauberei-im-freien/cover.avif"
+  },
+  "/blog-images/open-air-zauberei-im-freien/inline-1.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/open-air-zauberei-im-freien/inline-1.webp",
+    "avif": "/blog-images/open-air-zauberei-im-freien/inline-1.avif"
+  },
+  "/blog-images/open-air-zauberei-im-freien/inline-2.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/open-air-zauberei-im-freien/inline-2.webp",
+    "avif": "/blog-images/open-air-zauberei-im-freien/inline-2.avif"
+  },
+  "/blog-images/pantomime-antikmarkt-marler-stern-november/cover.jpg": {
+    "width": 960,
+    "height": 1280,
+    "webp": "/blog-images/pantomime-antikmarkt-marler-stern-november/cover.webp",
+    "avif": "/blog-images/pantomime-antikmarkt-marler-stern-november/cover.avif"
+  },
+  "/blog-images/pantomime-antikmarkt-marler-stern-november/inline-1.jpg": {
+    "width": 1280,
+    "height": 960,
+    "webp": "/blog-images/pantomime-antikmarkt-marler-stern-november/inline-1.webp",
+    "avif": "/blog-images/pantomime-antikmarkt-marler-stern-november/inline-1.avif"
+  },
+  "/blog-images/pantomime-auf-dem-appeltatenfest/pantomime-appeltatenfest-gladbeck-apfelparadies.jpg": {
+    "width": 619,
+    "height": 467,
+    "webp": "/blog-images/pantomime-auf-dem-appeltatenfest/pantomime-appeltatenfest-gladbeck-apfelparadies.webp",
+    "avif": "/blog-images/pantomime-auf-dem-appeltatenfest/pantomime-appeltatenfest-gladbeck-apfelparadies.avif"
+  },
+  "/blog-images/pantomime-bei-extraschicht/pantomime-liar-walking-act-2024.jpg": {
+    "width": 900,
+    "height": 1200,
+    "webp": "/blog-images/pantomime-bei-extraschicht/pantomime-liar-walking-act-2024.webp",
+    "avif": "/blog-images/pantomime-bei-extraschicht/pantomime-liar-walking-act-2024.avif"
+  },
+  "/blog-images/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen/kc-astoria-gelsenkirchen-plakat.jpg": {
+    "width": 849,
+    "height": 1200,
+    "webp": "/blog-images/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen/kc-astoria-gelsenkirchen-plakat.webp",
+    "avif": "/blog-images/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen/kc-astoria-gelsenkirchen-plakat.avif"
+  },
+  "/blog-images/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen/sommerfest-gelsenkirchen-clown-zauberer-kinder.jpg": {
+    "width": 1024,
+    "height": 576,
+    "webp": "/blog-images/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen/sommerfest-gelsenkirchen-clown-zauberer-kinder.webp",
+    "avif": "/blog-images/sommerfest-kc-asoria-mit-clown-zauberer-liar-in-gelsenkirchen/sommerfest-gelsenkirchen-clown-zauberer-kinder.avif"
+  },
+  "/blog-images/sommerfest-kita-programm-clown-zauberer/cover.jpg": {
+    "width": 1200,
+    "height": 660,
+    "webp": "/blog-images/sommerfest-kita-programm-clown-zauberer/cover.webp",
+    "avif": "/blog-images/sommerfest-kita-programm-clown-zauberer/cover.avif"
+  },
+  "/blog-images/sommerfest-kita-programm-clown-zauberer/inline-1.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/sommerfest-kita-programm-clown-zauberer/inline-1.webp",
+    "avif": "/blog-images/sommerfest-kita-programm-clown-zauberer/inline-1.avif"
+  },
+  "/blog-images/sommerfest-kita-programm-clown-zauberer/inline-2.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/sommerfest-kita-programm-clown-zauberer/inline-2.webp",
+    "avif": "/blog-images/sommerfest-kita-programm-clown-zauberer/inline-2.avif"
+  },
+  "/blog-images/tierparkfest-recklinghausen/familienfest-park-zaubershow-clown-liar.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/tierparkfest-recklinghausen/familienfest-park-zaubershow-clown-liar.webp",
+    "avif": "/blog-images/tierparkfest-recklinghausen/familienfest-park-zaubershow-clown-liar.avif"
+  },
+  "/blog-images/tierparkfest-recklinghausen/zaubershow-kinder-publikum-familienfest.jpg": {
+    "width": 720,
+    "height": 369,
+    "webp": "/blog-images/tierparkfest-recklinghausen/zaubershow-kinder-publikum-familienfest.webp",
+    "avif": "/blog-images/tierparkfest-recklinghausen/zaubershow-kinder-publikum-familienfest.avif"
+  },
+  "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/clown-zauberer-karnevalfeier.jpg": {
+    "width": 1200,
+    "height": 800,
+    "webp": "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/clown-zauberer-karnevalfeier.webp",
+    "avif": "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/clown-zauberer-karnevalfeier.avif"
+  },
+  "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/karneval-zaubershow-kinder.jpg": {
+    "width": 586,
+    "height": 718,
+    "webp": "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/karneval-zaubershow-kinder.webp",
+    "avif": "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/karneval-zaubershow-kinder.avif"
+  },
+  "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/karnevalfeier-kind-als-zauberer-verkleidet.jpg": {
+    "width": 602,
+    "height": 638,
+    "webp": "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/karnevalfeier-kind-als-zauberer-verkleidet.webp",
+    "avif": "/blog-images/warum-ein-clown-zauberer-der-perfekte-entertainer-fuer-ihre-karnevalfeier-ist/karnevalfeier-kind-als-zauberer-verkleidet.avif"
+  },
+  "/blog-images/was-ist-ein-clown/clown-bei-clownshow.jpg": {
+    "width": 506,
+    "height": 640,
+    "webp": "/blog-images/was-ist-ein-clown/clown-bei-clownshow.webp",
+    "avif": "/blog-images/was-ist-ein-clown/clown-bei-clownshow.avif"
+  },
+  "/blog-images/was-ist-ein-clown/halterner-zeitung-magischer-clown.jpg": {
+    "width": 680,
+    "height": 478,
+    "webp": "/blog-images/was-ist-ein-clown/halterner-zeitung-magischer-clown.webp",
+    "avif": "/blog-images/was-ist-ein-clown/halterner-zeitung-magischer-clown.avif"
+  },
+  "/blog-images/was-kostet-ein-clown-fuer-ein-kindergeburtstag/clown-zauberer-gladbeck-einsatzgebiet-karte.jpg": {
+    "width": 749,
+    "height": 508,
+    "webp": "/blog-images/was-kostet-ein-clown-fuer-ein-kindergeburtstag/clown-zauberer-gladbeck-einsatzgebiet-karte.webp",
+    "avif": "/blog-images/was-kostet-ein-clown-fuer-ein-kindergeburtstag/clown-zauberer-gladbeck-einsatzgebiet-karte.avif"
+  },
+  "/blog-images/was-kostet-ein-clown-fuer-ein-kindergeburtstag/clown-zauberer-mit-zaubershow.jpg": {
+    "width": 1151,
+    "height": 525,
+    "webp": "/blog-images/was-kostet-ein-clown-fuer-ein-kindergeburtstag/clown-zauberer-mit-zaubershow.webp",
+    "avif": "/blog-images/was-kostet-ein-clown-fuer-ein-kindergeburtstag/clown-zauberer-mit-zaubershow.avif"
+  },
+  "/blog-images/was-kostet-zauberer-kindergeburtstag/cover.jpg": {
+    "width": 800,
+    "height": 1200,
+    "webp": "/blog-images/was-kostet-zauberer-kindergeburtstag/cover.webp",
+    "avif": "/blog-images/was-kostet-zauberer-kindergeburtstag/cover.avif"
+  },
+  "/blog-images/was-kostet-zauberer-kindergeburtstag/inline-1.jpg": {
+    "width": 900,
+    "height": 1200,
+    "webp": "/blog-images/was-kostet-zauberer-kindergeburtstag/inline-1.webp",
+    "avif": "/blog-images/was-kostet-zauberer-kindergeburtstag/inline-1.avif"
+  },
+  "/blog-images/was-kostet-zauberer-kindergeburtstag/inline-2.jpg": {
+    "width": 720,
+    "height": 369,
+    "webp": "/blog-images/was-kostet-zauberer-kindergeburtstag/inline-2.webp",
+    "avif": "/blog-images/was-kostet-zauberer-kindergeburtstag/inline-2.avif"
+  },
+  "/blog-images/zaubershow-auf-dem-castroper-weihnachtsdorf/clown-liar-weihnachtsmarkt-besucher.jpg": {
+    "width": 100,
+    "height": 100,
+    "webp": "/blog-images/zaubershow-auf-dem-castroper-weihnachtsdorf/clown-liar-weihnachtsmarkt-besucher.webp",
+    "avif": "/blog-images/zaubershow-auf-dem-castroper-weihnachtsdorf/clown-liar-weihnachtsmarkt-besucher.avif"
+  },
+  "/blog-images/zaubershow-auf-dem-castroper-weihnachtsdorf/zaubershow-weihnachtsdorf-kinder.jpg": {
+    "width": 900,
+    "height": 1200,
+    "webp": "/blog-images/zaubershow-auf-dem-castroper-weihnachtsdorf/zaubershow-weihnachtsdorf-kinder.webp",
+    "avif": "/blog-images/zaubershow-auf-dem-castroper-weihnachtsdorf/zaubershow-weihnachtsdorf-kinder.avif"
+  },
+  "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/kinderzauberer-kindergarten-staunende-kinder.jpg": {
+    "width": 600,
+    "height": 600,
+    "webp": "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/kinderzauberer-kindergarten-staunende-kinder.webp",
+    "avif": "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/kinderzauberer-kindergarten-staunende-kinder.avif"
+  },
+  "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/zaubershow-im-kindergarten.jpg": {
+    "width": 1200,
+    "height": 800,
+    "webp": "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/zaubershow-im-kindergarten.webp",
+    "avif": "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/zaubershow-im-kindergarten.avif"
+  },
+  "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/zaubershow-mit-clown-zauberer-liar-kinder.jpg": {
+    "width": 600,
+    "height": 450,
+    "webp": "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/zaubershow-mit-clown-zauberer-liar-kinder.webp",
+    "avif": "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/zaubershow-mit-clown-zauberer-liar-kinder.avif"
+  },
+  "/blog-images/zaubershow-in-dortmund/clown-zauberer-regenbogenhaus-westfalenpark-dortmund.jpg": {
+    "width": 900,
+    "height": 1200,
+    "webp": "/blog-images/zaubershow-in-dortmund/clown-zauberer-regenbogenhaus-westfalenpark-dortmund.webp",
+    "avif": "/blog-images/zaubershow-in-dortmund/clown-zauberer-regenbogenhaus-westfalenpark-dortmund.avif"
+  },
+  "/blog-images/zaubershow-in-dortmund/zaubershow-dortmund-kinder-park.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/zaubershow-in-dortmund/zaubershow-dortmund-kinder-park.webp",
+    "avif": "/blog-images/zaubershow-in-dortmund/zaubershow-dortmund-kinder-park.avif"
+  },
+  "/blog-images/zaubershow-in-duisburg-midsommarfest/clown-zauberer-duisburg-windmuehle.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/zaubershow-in-duisburg-midsommarfest/clown-zauberer-duisburg-windmuehle.webp",
+    "avif": "/blog-images/zaubershow-in-duisburg-midsommarfest/clown-zauberer-duisburg-windmuehle.avif"
+  },
+  "/blog-images/zaubershow-in-duisburg-midsommarfest/zaubershow-duisburg-ikea-midsommar.jpg": {
+    "width": 800,
+    "height": 1200,
+    "webp": "/blog-images/zaubershow-in-duisburg-midsommarfest/zaubershow-duisburg-ikea-midsommar.webp",
+    "avif": "/blog-images/zaubershow-in-duisburg-midsommarfest/zaubershow-duisburg-ikea-midsommar.avif"
+  },
+  "/blog-images/zaubershow-sommer-2025/zaubershow-sommer-open-air-publikum.jpg": {
+    "width": 1200,
+    "height": 900,
+    "webp": "/blog-images/zaubershow-sommer-2025/zaubershow-sommer-open-air-publikum.webp",
+    "avif": "/blog-images/zaubershow-sommer-2025/zaubershow-sommer-open-air-publikum.avif"
+  },
+  "/content-fotos/blog-header-10-tipps-fur-den-perfekten-kindergeburtstag.jpg": {
+    "width": 1024,
+    "height": 1536,
+    "webp": "/content-fotos/blog-header-10-tipps-fur-den-perfekten-kindergeburtstag.webp",
+    "avif": "/content-fotos/blog-header-10-tipps-fur-den-perfekten-kindergeburtstag.avif"
+  },
+  "/content-fotos/blog-header-fruhling-ud-sommerfeste.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "webp": "/content-fotos/blog-header-fruhling-ud-sommerfeste.webp",
+    "avif": "/content-fotos/blog-header-fruhling-ud-sommerfeste.avif"
+  },
+  "/content-fotos/blog-header-karnevalfeier.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "webp": "/content-fotos/blog-header-karnevalfeier.webp",
+    "avif": "/content-fotos/blog-header-karnevalfeier.avif"
+  },
+  "/content-fotos/blog-header-zauberei-fur-karneval.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "webp": "/content-fotos/blog-header-zauberei-fur-karneval.webp",
+    "avif": "/content-fotos/blog-header-zauberei-fur-karneval.avif"
+  },
+  "/content-fotos/blog-header-zaubershow-duisburg.jpg": {
+    "width": 1024,
+    "height": 1536,
+    "webp": "/content-fotos/blog-header-zaubershow-duisburg.webp",
+    "avif": "/content-fotos/blog-header-zaubershow-duisburg.avif"
+  },
+  "/content-fotos/blog-header-zaubershow-im-kindergarten.jpg": {
+    "width": 1536,
+    "height": 1024,
+    "webp": "/content-fotos/blog-header-zaubershow-im-kindergarten.webp",
+    "avif": "/content-fotos/blog-header-zaubershow-im-kindergarten.avif"
+  },
+  "/content-fotos/clown-zauberer-liar-logo-quadratisch.png": {
+    "width": 830,
+    "height": 830,
+    "webp": "/content-fotos/clown-zauberer-liar-logo-quadratisch.webp",
+    "avif": "/content-fotos/clown-zauberer-liar-logo-quadratisch.avif"
+  },
+  "/content-fotos/erwachsene-zaubershow.jpg": {
+    "width": 1568,
+    "height": 1176,
+    "webp": "/content-fotos/erwachsene-zaubershow.webp",
+    "avif": "/content-fotos/erwachsene-zaubershow.avif"
+  },
+  "/content-fotos/kids-clown-zauberer-1.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "webp": "/content-fotos/kids-clown-zauberer-1.webp",
+    "avif": "/content-fotos/kids-clown-zauberer-1.avif"
+  },
+  "/content-fotos/kids-clown-zauberer-4.jpg": {
+    "width": 1067,
+    "height": 1600,
+    "webp": "/content-fotos/kids-clown-zauberer-4.webp",
+    "avif": "/content-fotos/kids-clown-zauberer-4.avif"
+  },
+  "/content-fotos/kids-clown-zauberer-5.jpg": {
+    "width": 1600,
+    "height": 1067,
+    "webp": "/content-fotos/kids-clown-zauberer-5.webp",
+    "avif": "/content-fotos/kids-clown-zauberer-5.avif"
+  },
+  "/content-fotos/kids-clown-zauberer-6.jpg": {
+    "width": 720,
+    "height": 707,
+    "webp": "/content-fotos/kids-clown-zauberer-6.webp",
+    "avif": "/content-fotos/kids-clown-zauberer-6.avif"
+  },
+  "/content-fotos/kids-clown-zauberer-7.jpg": {
+    "width": 720,
+    "height": 369,
+    "webp": "/content-fotos/kids-clown-zauberer-7.webp",
+    "avif": "/content-fotos/kids-clown-zauberer-7.avif"
+  },
+  "/content-fotos/kids-clown-zauberer-8.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "webp": "/content-fotos/kids-clown-zauberer-8.webp",
+    "avif": "/content-fotos/kids-clown-zauberer-8.avif"
+  },
+  "/content-fotos/kids-img-20230814-090044-622.jpg": {
+    "width": 1440,
+    "height": 1440,
+    "webp": "/content-fotos/kids-img-20230814-090044-622.webp",
+    "avif": "/content-fotos/kids-img-20230814-090044-622.avif"
+  },
+  "/content-fotos/kids-img-20230814-090044-726.jpg": {
+    "width": 1440,
+    "height": 1440,
+    "webp": "/content-fotos/kids-img-20230814-090044-726.webp",
+    "avif": "/content-fotos/kids-img-20230814-090044-726.avif"
+  },
+  "/content-fotos/kids-karneval-buhne.jpg": {
+    "width": 1600,
+    "height": 1190,
+    "webp": "/content-fotos/kids-karneval-buhne.webp",
+    "avif": "/content-fotos/kids-karneval-buhne.avif"
+  },
+  "/content-fotos/kids-kindergeburtstag.jpg": {
+    "width": 1151,
+    "height": 518,
+    "webp": "/content-fotos/kids-kindergeburtstag.webp",
+    "avif": "/content-fotos/kids-kindergeburtstag.avif"
+  },
+  "/content-fotos/kids-zaubershow-dortmund.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/content-fotos/kids-zaubershow-dortmund.webp",
+    "avif": "/content-fotos/kids-zaubershow-dortmund.avif"
+  },
+  "/content-fotos/kids-zaubershow-duisburg-1.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "webp": "/content-fotos/kids-zaubershow-duisburg-1.webp",
+    "avif": "/content-fotos/kids-zaubershow-duisburg-1.avif"
+  },
+  "/content-fotos/kids-zaubershow-duisburg-2.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/content-fotos/kids-zaubershow-duisburg-2.webp",
+    "avif": "/content-fotos/kids-zaubershow-duisburg-2.avif"
+  },
+  "/content-fotos/kids-zaubershow-gladbeck.jpg": {
+    "width": 1600,
+    "height": 821,
+    "webp": "/content-fotos/kids-zaubershow-gladbeck.webp",
+    "avif": "/content-fotos/kids-zaubershow-gladbeck.avif"
+  },
+  "/content-fotos/kids-zaubershow.jpg": {
+    "width": 1440,
+    "height": 1440,
+    "webp": "/content-fotos/kids-zaubershow.webp",
+    "avif": "/content-fotos/kids-zaubershow.avif"
+  },
+  "/content-fotos/logo-clown-zauberer-nrw.png": {
+    "width": 830,
+    "height": 575,
+    "webp": "/content-fotos/logo-clown-zauberer-nrw.webp",
+    "avif": "/content-fotos/logo-clown-zauberer-nrw.avif"
+  },
+  "/content-fotos/zeitungsartikel-bucherei-dortmund.jpg": {
+    "width": 1059,
+    "height": 1392,
+    "webp": "/content-fotos/zeitungsartikel-bucherei-dortmund.webp",
+    "avif": "/content-fotos/zeitungsartikel-bucherei-dortmund.avif"
+  },
+  "/content-fotos/zeitungsartikel-flughafen-koln-bonn-pantomime.jpg": {
+    "width": 1600,
+    "height": 930,
+    "webp": "/content-fotos/zeitungsartikel-flughafen-koln-bonn-pantomime.webp",
+    "avif": "/content-fotos/zeitungsartikel-flughafen-koln-bonn-pantomime.avif"
+  },
+  "/content-fotos/zeitungsartikel-halterner-zeitung-magische-clown-in-freiheit.jpg": {
+    "width": 680,
+    "height": 478,
+    "webp": "/content-fotos/zeitungsartikel-halterner-zeitung-magische-clown-in-freiheit.webp",
+    "avif": "/content-fotos/zeitungsartikel-halterner-zeitung-magische-clown-in-freiheit.avif"
+  },
+  "/story-generated/clown-oder-zauberer-kindergeburtstag.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/clown-oder-zauberer-kindergeburtstag.webp",
+    "avif": "/story-generated/clown-oder-zauberer-kindergeburtstag.avif"
+  },
+  "/story-generated/kindergeburtstag-herbstferien-drinnen.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/kindergeburtstag-herbstferien-drinnen.webp",
+    "avif": "/story-generated/kindergeburtstag-herbstferien-drinnen.avif"
+  },
+  "/story-generated/kindergeburtstag-hitze-outdoor-programm.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/kindergeburtstag-hitze-outdoor-programm.webp",
+    "avif": "/story-generated/kindergeburtstag-hitze-outdoor-programm.avif"
+  },
+  "/story-generated/kindergeburtstag-mai-outdoor-ruhrgebiet.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/kindergeburtstag-mai-outdoor-ruhrgebiet.webp",
+    "avif": "/story-generated/kindergeburtstag-mai-outdoor-ruhrgebiet.avif"
+  },
+  "/story-generated/kindergeburtstag-park-tipps.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/kindergeburtstag-park-tipps.webp",
+    "avif": "/story-generated/kindergeburtstag-park-tipps.avif"
+  },
+  "/story-generated/kinderzauberer-nrw-regional-buchen-vorteile.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/kinderzauberer-nrw-regional-buchen-vorteile.webp",
+    "avif": "/story-generated/kinderzauberer-nrw-regional-buchen-vorteile.avif"
+  },
+  "/story-generated/luftballonmodellage-kindergeburtstag.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/luftballonmodellage-kindergeburtstag.webp",
+    "avif": "/story-generated/luftballonmodellage-kindergeburtstag.avif"
+  },
+  "/story-generated/martinsfest-kinder-programm-laternenumzug-ablauf.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/martinsfest-kinder-programm-laternenumzug-ablauf.webp",
+    "avif": "/story-generated/martinsfest-kinder-programm-laternenumzug-ablauf.avif"
+  },
+  "/story-generated/muttertag-familiengeburtstag-kombinieren.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/muttertag-familiengeburtstag-kombinieren.webp",
+    "avif": "/story-generated/muttertag-familiengeburtstag-kombinieren.avif"
+  },
+  "/story-generated/open-air-zauberei-im-freien.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/open-air-zauberei-im-freien.webp",
+    "avif": "/story-generated/open-air-zauberei-im-freien.avif"
+  },
+  "/story-generated/pantomime-antikmarkt-marler-stern-november.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/pantomime-antikmarkt-marler-stern-november.webp",
+    "avif": "/story-generated/pantomime-antikmarkt-marler-stern-november.avif"
+  },
+  "/story-generated/sommerfest-kita-programm-clown-zauberer.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/sommerfest-kita-programm-clown-zauberer.webp",
+    "avif": "/story-generated/sommerfest-kita-programm-clown-zauberer.avif"
+  },
+  "/story-generated/was-kostet-zauberer-kindergeburtstag.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/was-kostet-zauberer-kindergeburtstag.webp",
+    "avif": "/story-generated/was-kostet-zauberer-kindergeburtstag.avif"
+  }
+}
