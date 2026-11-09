@@ -70,8 +70,8 @@ jobs:
           slug=$(echo "${{ steps.pub.outputs.result }}" | sed 's/^PUBLISHED=//')
           git config user.name "auto-publish-bot"
           git config user.email "auto-publish-bot@users.noreply.github.com"
-          git add src/content/blog/ public/hero-generated public/story-generated 2>/dev/null || git add src/content/blog/
+          git add src/content/blog/ src/lib/blog-media-manifest.json public/hero-generated public/story-generated 2>/dev/null || git add src/content/blog/
           git commit -m "blog: veröffentliche $slug"
-          git pull --rebase origin main
+          git pull --rebase --autostash origin main
           git push origin HEAD:main
           echo "Veröffentlicht: $slug" >> "$GITHUB_STEP_SUMMARY"
