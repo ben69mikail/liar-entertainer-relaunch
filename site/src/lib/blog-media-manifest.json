@@ -95,6 +95,24 @@
     "webp": "/blog-images/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck/kinderkarneval-gladbeck-zaubershow.webp",
     "avif": "/blog-images/ein-zauberhafter-kinderkarneval-bei-den-wittringer-rittern-in-gladbeck/kinderkarneval-gladbeck-zaubershow.avif"
   },
+  "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/cover.jpg": {
+    "width": 1600,
+    "height": 1456,
+    "webp": "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/cover.webp",
+    "avif": "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/cover.avif"
+  },
+  "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/inline-1.jpg": {
+    "width": 1180,
+    "height": 1572,
+    "webp": "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/inline-1.webp",
+    "avif": "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/inline-1.avif"
+  },
+  "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/inline-2.jpg": {
+    "width": 1600,
+    "height": 1200,
+    "webp": "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/inline-2.webp",
+    "avif": "/blog-images/firmenweihnachtsfeier-mit-kindern-planen/inline-2.avif"
+  },
   "/blog-images/fruehlings-und-sommerfeste-im-kindergarten-ideen-fuer-unvergessliche-events/fruehlings-sommerfest-kindergarten.jpg": {
     "width": 1200,
     "height": 800,
@@ -599,12 +617,6 @@
     "webp": "/content-fotos/blog-header-fruhling-ud-sommerfeste.webp",
     "avif": "/content-fotos/blog-header-fruhling-ud-sommerfeste.avif"
   },
-  "/content-fotos/blog-header-karnevalfeier.jpg": {
-    "width": 1536,
-    "height": 1024,
-    "webp": "/content-fotos/blog-header-karnevalfeier.webp",
-    "avif": "/content-fotos/blog-header-karnevalfeier.avif"
-  },
   "/content-fotos/blog-header-zauberei-fur-karneval.jpg": {
     "width": 1536,
     "height": 1024,
@@ -653,12 +665,6 @@
     "webp": "/content-fotos/kids-clown-zauberer-5.webp",
     "avif": "/content-fotos/kids-clown-zauberer-5.avif"
   },
-  "/content-fotos/kids-clown-zauberer-6.jpg": {
-    "width": 720,
-    "height": 707,
-    "webp": "/content-fotos/kids-clown-zauberer-6.webp",
-    "avif": "/content-fotos/kids-clown-zauberer-6.avif"
-  },
   "/content-fotos/kids-clown-zauberer-7.jpg": {
     "width": 720,
     "height": 369,
@@ -676,30 +682,6 @@
     "height": 1440,
     "webp": "/content-fotos/kids-img-20230814-090044-622.webp",
     "avif": "/content-fotos/kids-img-20230814-090044-622.avif"
-  },
-  "/content-fotos/kids-img-20230814-090044-726.jpg": {
-    "width": 1440,
-    "height": 1440,
-    "webp": "/content-fotos/kids-img-20230814-090044-726.webp",
-    "avif": "/content-fotos/kids-img-20230814-090044-726.avif"
-  },
-  "/content-fotos/kids-karneval-buhne.jpg": {
-    "width": 1600,
-    "height": 1190,
-    "webp": "/content-fotos/kids-karneval-buhne.webp",
-    "avif": "/content-fotos/kids-karneval-buhne.avif"
-  },
-  "/content-fotos/kids-kindergeburtstag.jpg": {
-    "width": 1151,
-    "height": 518,
-    "webp": "/content-fotos/kids-kindergeburtstag.webp",
-    "avif": "/content-fotos/kids-kindergeburtstag.avif"
-  },
-  "/content-fotos/kids-zaubershow-dortmund.jpg": {
-    "width": 1200,
-    "height": 1600,
-    "webp": "/content-fotos/kids-zaubershow-dortmund.webp",
-    "avif": "/content-fotos/kids-zaubershow-dortmund.avif"
   },
   "/content-fotos/kids-zaubershow-duisburg-1.jpg": {
     "width": 1600,
@@ -719,41 +701,23 @@
     "webp": "/content-fotos/kids-zaubershow-gladbeck.webp",
     "avif": "/content-fotos/kids-zaubershow-gladbeck.avif"
   },
-  "/content-fotos/kids-zaubershow.jpg": {
-    "width": 1440,
-    "height": 1440,
-    "webp": "/content-fotos/kids-zaubershow.webp",
-    "avif": "/content-fotos/kids-zaubershow.avif"
-  },
   "/content-fotos/logo-clown-zauberer-nrw.png": {
     "width": 830,
     "height": 575,
     "webp": "/content-fotos/logo-clown-zauberer-nrw.webp",
     "avif": "/content-fotos/logo-clown-zauberer-nrw.avif"
   },
-  "/content-fotos/zeitungsartikel-bucherei-dortmund.jpg": {
-    "width": 1059,
-    "height": 1392,
-    "webp": "/content-fotos/zeitungsartikel-bucherei-dortmund.webp",
-    "avif": "/content-fotos/zeitungsartikel-bucherei-dortmund.avif"
-  },
-  "/content-fotos/zeitungsartikel-flughafen-koln-bonn-pantomime.jpg": {
-    "width": 1600,
-    "height": 930,
-    "webp": "/content-fotos/zeitungsartikel-flughafen-koln-bonn-pantomime.webp",
-    "avif": "/content-fotos/zeitungsartikel-flughafen-koln-bonn-pantomime.avif"
-  },
-  "/content-fotos/zeitungsartikel-halterner-zeitung-magische-clown-in-freiheit.jpg": {
-    "width": 680,
-    "height": 478,
-    "webp": "/content-fotos/zeitungsartikel-halterner-zeitung-magische-clown-in-freiheit.webp",
-    "avif": "/content-fotos/zeitungsartikel-halterner-zeitung-magische-clown-in-freiheit.avif"
-  },
   "/story-generated/clown-oder-zauberer-kindergeburtstag.jpg": {
     "width": 1080,
     "height": 1920,
     "webp": "/story-generated/clown-oder-zauberer-kindergeburtstag.webp",
     "avif": "/story-generated/clown-oder-zauberer-kindergeburtstag.avif"
+  },
+  "/story-generated/firmenweihnachtsfeier-mit-kindern-planen.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/firmenweihnachtsfeier-mit-kindern-planen.webp",
+    "avif": "/story-generated/firmenweihnachtsfeier-mit-kindern-planen.avif"
   },
   "/story-generated/kindergeburtstag-herbstferien-drinnen.jpg": {
     "width": 1080,

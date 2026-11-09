@@ -9,8 +9,7 @@ heroFocus: { x: 59, top: 12, bottom: 65 }
 categories: ["Firmen","Saisonal"]
 tags: ["firmenweihnachtsfeier","betriebsfeier-familie","kinderprogramm","zaubershow","weihnachtsfeier"]
 author: "Michaël Prescler"
-draft: true
-freigabe: ja
+draft: false
 ---
 
 Eine Firmenweihnachtsfeier mit Kindern ist für viele Unternehmen in NRW eine besonders herzliche Art, Danke zu sagen. Mitarbeitende bringen ihre Familien mit, und aus dem Jahresabschluss wird eine echte Betriebsfeier für die ganze Familie. Damit das entspannt klappt, braucht es vor allem eins: ein durchdachtes Kinderprogramm. Ich bin Michaël Prescler, als Clown Zauberer LIAR seit 2009 hauptberuflich unterwegs. In diesem Artikel erkläre ich, warum eine gute Kinderbetreuung über Erfolg oder Stress einer solchen Feier entscheidet und wie Sie das Programm sinnvoll planen.
