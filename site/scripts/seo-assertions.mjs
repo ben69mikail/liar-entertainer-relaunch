@@ -153,7 +153,10 @@ check('K1.2', 'Weiterhin KEIN aggregateRating/Review-Schema (Entscheidung 862f8a
 
 // ---------- H1: Stadtseiten auf "Zauberer Kindergeburtstag [Stadt]" ----------
 // Pages that hand the birthday search to their birthday sister page (user, 2026-10-20, src/data/city-local.ts CITY_FOCUS)
-const KZ_FOCUS = ['/kinderzauberer/kinderzauberer-in-duesseldorf'];
+// Since 2026-11-03 ALL kinderzauberer-in-* pages carry the Kita/Schule/Feste focus (commit bb10c82,
+// anti-cannibalization): the birthday intent belongs to / and /kindergeburtstag/. H1.1/H1.2 then only
+// guard pages outside the focus list; H1.5 checks that focus pages really name Kita/Schule.
+const KZ_FOCUS = CITIES_KZ;
 check('H1.1', 'Kinderzauberer-Stadtseiten: Title enthaelt "Zauberer Kindergeburtstag" (ausser Fokus-Seiten Kita/Schule/Feste)', () => {
   const bad = CITIES_KZ.filter((r) => !KZ_FOCUS.includes(r)).filter((r) => !/Zauberer Kindergeburtstag/i.test(decode(titleOf(get(r)))));
   return bad.length === 0 || `${bad.length}/${CITIES_KZ.length}: ${bad.slice(0, 3).join(', ')}`;
@@ -164,6 +167,13 @@ check('H1.2', 'Kinderzauberer-Stadtseiten: H1 nennt Kindergeburtstag (ausser Fok
     return !/Kindergeburtstag/i.test(decode(h1).replace(/<[^>]+>/g, ''));
   });
   return bad.length === 0 || `${bad.length}/${CITIES_KZ.length}: ${bad.slice(0, 3).join(', ')}`;
+});
+check('H1.5', 'Kinderzauberer-Stadtseiten (Fokus): Title und H1 nennen Kita oder Schule', () => {
+  const bad = KZ_FOCUS.filter((r) => {
+    const h1 = (get(r).match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [, ''])[1];
+    return !/Kita|Schule/.test(decode(titleOf(get(r)))) || !/Kita|Schule/.test(decode(h1).replace(/<[^>]+>/g, ''));
+  });
+  return bad.length === 0 || `${bad.length}/${KZ_FOCUS.length}: ${bad.slice(0, 3).join(', ')}`;
 });
 check('H1.3', 'Kinderzauberer-Stadtseiten: Begriff "Kinderzauberer" bleibt erhalten', () => {
   const bad = CITIES_KZ.filter((r) => !/Kinderzauberer/i.test(textOf(get(r))));

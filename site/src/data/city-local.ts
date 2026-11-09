@@ -128,7 +128,7 @@ export const CITY_FOCUS: Record<string, CityFocus> = {
   },
   '/kinderzauberer/kinderzauberer-in-castrop-rauxel/': {
     title: 'Kinderzauberer Castrop-Rauxel | Kita, Schule & Feste | LIAR',
-    description: 'Kinderzauberer LIAR in Castrop-Rauxel ✓ Zaubershow für Kita, Schule, Sommerfest & Kommunion ✓ Vormittags ab 8 Uhr ✓ Bis 200 Kinder ✓ 390+ Bewertungen ✓ Jetzt anfragen!',
+    description: 'Kinderzauberer in Castrop-Rauxel ✓ Zaubershow für Kita, Schule, Sommerfest & Kommunion ✓ Vormittags ab 8 Uhr ✓ Bis 200 Kinder ✓ 390+ Bewertungen ✓ Jetzt anfragen!',
     h1: 'Kinderzauberer in Castrop-Rauxel für Kita, Schule &amp; Feste',
     birthdayPath: '/kindergeburtstag/',
   },
@@ -176,7 +176,7 @@ export const CITY_FOCUS: Record<string, CityFocus> = {
   },
   '/kinderzauberer/kinderzauberer-in-gelsenkirchen/': {
     title: 'Kinderzauberer Gelsenkirchen | Kita, Schule & Feste | LIAR',
-    description: 'Kinderzauberer LIAR in Gelsenkirchen ✓ Zaubershow für Kita, Schule, Sommerfest & Kommunion ✓ Vormittags ab 8 Uhr ✓ Bis 200 Kinder ✓ 390+ Bewertungen ✓ Jetzt anfragen!',
+    description: 'Kinderzauberer in Gelsenkirchen ✓ Zaubershow für Kita, Schule, Sommerfest & Kommunion ✓ Vormittags ab 8 Uhr ✓ Bis 200 Kinder ✓ 390+ Bewertungen ✓ Jetzt anfragen!',
     h1: 'Kinderzauberer in Gelsenkirchen für Kita, Schule &amp; Feste',
     birthdayPath: '/kindergeburtstag/',
   },
@@ -230,7 +230,7 @@ export const CITY_FOCUS: Record<string, CityFocus> = {
   },
   '/kinderzauberer/kinderzauberer-in-recklinghausen/': {
     title: 'Kinderzauberer Recklinghausen | Kita, Schule & Feste | LIAR',
-    description: 'Kinderzauberer LIAR in Recklinghausen ✓ Zaubershow für Kita, Schule, Sommerfest & Kommunion ✓ Vormittags ab 8 Uhr ✓ Bis 200 Kinder ✓ 390+ Bewertungen ✓ Jetzt anfragen!',
+    description: 'Kinderzauberer in Recklinghausen ✓ Zaubershow für Kita, Schule, Sommerfest & Kommunion ✓ Vormittags ab 8 Uhr ✓ Bis 200 Kinder ✓ 390+ Bewertungen ✓ Jetzt anfragen!',
     h1: 'Kinderzauberer in Recklinghausen für Kita, Schule &amp; Feste',
     birthdayPath: '/kindergeburtstag/',
   },
