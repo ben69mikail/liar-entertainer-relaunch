@@ -416,7 +416,7 @@ const tgNotLive = node({
   output: [{ ok: true }]
 });
 
-const note = sticky('## LIAR Artikel-Pipeline\nStart A: Topic-Master (Telegram, „eigenes“) mit Notiz + Fotos. Start B: LIAR-2026-10 Plan-Artikel (Montag 07:00) mit Thema aus liar_themen.\nOhne Fotos wählt „Bilder auswählen“ 1–3 passende Fotos aus dem Drive-Bildpool (liar_bilder; nicht 2× pro Quartal, Zeitung nie, Kindergesichter nie als Titelbild).\nAblauf: Artikel (Opus) → Faktencheck (Haiku) → Vorschau Mail + Telegram → Freigabe → Repo (draft:true, freigabe:ja) → Auto-Publish → Netlify → Live-Check → Social. Nach Commit: Bild-Nutzung + Thema-Status in den Datentabellen.\nEinmalig: Credential „GitHub LIAR (relaunch)“ in den beiden GitHub-Knoten.', [], { position: [0, -160], width: 760, height: 260 });
+const note = sticky('## LIAR Artikel-Pipeline\nStart A: Topic-Master (Telegram, „eigenes“) mit Notiz + Fotos. Start B: LIAR-2026-10 Plan-Artikel (Montag 07:00) mit Thema aus liar_themen.\nOhne Fotos wählt „Bilder auswählen“ 1–3 passende Fotos aus dem Drive-Bildpool (liar_bilder; nicht 2× pro Quartal, Zeitung nie, Kindergesichter nie als Titelbild).\nAblauf: Artikel (Opus) → Faktencheck (Haiku) → Vorschau Mail + Telegram → Freigabe → Repo (draft:true, freigabe:ja) → Auto-Publish → Netlify → Live-Check (bis 40 Min) → Social. Nach Commit: Bild-Nutzung + Thema-Status in den Datentabellen.\nEinmalig: Credential „GitHub LIAR (relaunch)“ in den beiden GitHub-Knoten.', [], { position: [0, -160], width: 760, height: 260 });
 
 export default workflow('liar-spontan-artikel', 'LIAR-2026-08 Artikel-Pipeline (Spontan + Montag)')
   .add(fromTopicMaster).to(input)
