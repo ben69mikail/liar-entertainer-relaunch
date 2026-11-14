@@ -6,7 +6,7 @@
 
 const PRICE_RE = /\b(150|170|210)\s?(€|Euro|EUR)/;
 const PRICE_LINK = 'Die aktuellen Preise und Pakete stehen auf meiner [Preisseite](/preise/).';
-const LIVE_MAX_TRIES = 12;
+const LIVE_MAX_TRIES = 36;
 
 function priceAllowed(title, description) {
   return /Kindergeburtstag|Geburtstag|anniversaire|birthday/i.test(String(title || '') + ' ' + String(description || ''));
