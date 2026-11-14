@@ -152,3 +152,11 @@ test('Pipeline lädt genannte Seiten selbst und gibt sie an Recherche und Artike
   assert.match(prep, /buildResearchPrompt\(/);
   assert.match(node('Recherche auswerten'), /fullResearchBlock\(/);
 });
+
+test('Artikel-Prompt lässt Inhalte der genannten Seite in den Artikeltext einfließen (nicht nur Anreise)', async () => {
+  const { readFileSync } = await import('node:fs');
+  const sdk = readFileSync(new URL('./artikel-pipeline.sdk.js', import.meta.url), 'utf8');
+  const i = sdk.indexOf("name: 'Prompt bauen'");
+  const prompt = sdk.slice(i, sdk.indexOf('output:', i));
+  assert.match(prompt, /VOM INHABER GENANNTE SEITE[^']*(Termine|Öffnungszeiten)[^']*im Artikel/);
+});
