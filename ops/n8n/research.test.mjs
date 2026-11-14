@@ -77,3 +77,78 @@ test('researchSummary zählt Orte, Quellen und Bildfunde für die Vorschau', () 
   assert.match(s, /1 Quelle/);
   assert.match(s, /1 Bildfund/);
 });
+
+// --- Regression 14.11.2026: genannte Homepage (Castroper Weihnachtsdorf) wurde nie geöffnet ---
+// Die Websuche (openrouter:web_search) liefert nur Suchtreffer (Portale), öffnet aber keine URL aus der Notiz.
+// Deshalb lädt die Pipeline jede vom Inhaber genannte Seite selbst und gibt ihren Text als Hauptquelle weiter.
+const lib = require('./research-lib.cjs');
+
+test('extractUrls findet URLs und nackte Domains in der Notiz, ohne eigene Seiten und E-Mails', () => {
+  const note = 'Artikel übers Castroper Weihnachtsdorf, Infos auf www.weihnachtsdorf-castrop.de/programm. ' +
+    'Siehe auch https://www.castrop-rauxel.de/veranstaltungen/weihnachtsdorf). Kontakt info@weihnachtsdorf-castrop.de, ' +
+    'mehr bei https://liar-entertainer.com/kindergeburtstag/ und zauberer-liar.de';
+  assert.deepEqual(lib.extractUrls(note), [
+    'https://www.weihnachtsdorf-castrop.de/programm',
+    'https://www.castrop-rauxel.de/veranstaltungen/weihnachtsdorf'
+  ]);
+});
+
+test('extractUrls versteht diktierte Adressen („punkt de“) und begrenzt auf 3', () => {
+  assert.deepEqual(lib.extractUrls('schau auf weihnachtsdorf-castrop punkt de'), ['https://weihnachtsdorf-castrop.de/']);
+  assert.equal(lib.extractUrls('a.de b.de c.de d.de').length, 3);
+  assert.deepEqual(lib.extractUrls('z. B. um 15 Uhr, ca. 40 Min.'), []);
+});
+
+test('htmlToText liefert lesbaren Seitentext ohne Skripte, mit Titel und Entities', () => {
+  const html = '<html><head><title>Castroper Weihnachtsdorf</title><meta name="description" content="Am Reiterbrunnen &amp; Marktplatz"><style>.x{}</style>' +
+    '<script>var geheim=1</script></head><body><nav>Menü</nav><h1>Öffnungszeiten</h1><p>27.11.&nbsp;bis 23.12.2026<br>täglich 12&#8211;21 Uhr</p></body></html>';
+  const t = lib.htmlToText(html);
+  assert.match(t, /Castroper Weihnachtsdorf/);
+  assert.match(t, /Am Reiterbrunnen & Marktplatz/);
+  assert.match(t, /27\.11\. bis 23\.12\.2026/);
+  assert.match(t, /täglich 12–21 Uhr/);
+  assert.doesNotMatch(t, /geheim|\.x\{\}|</);
+  assert.ok(lib.htmlToText('<p>' + 'Wort '.repeat(5000) + '</p>', 500).length <= 501);
+});
+
+test('sourcePagesBlock nennt Seite als Hauptquelle mit URL und meldet nicht ladbare Seiten', () => {
+  const b = lib.sourcePagesBlock([
+    { url: 'https://www.weihnachtsdorf-castrop.de/', ok: true, text: 'täglich 12–21 Uhr' },
+    { url: 'https://kaputt.de/', ok: false, fehler: 'HTTP 404', text: '' }
+  ], '2026-11-14');
+  assert.match(b, /VOM INHABER GENANNTE SEITE/);
+  assert.match(b, /https:\/\/www\.weihnachtsdorf-castrop\.de\//);
+  assert.match(b, /täglich 12–21 Uhr/);
+  assert.match(b, /kaputt\.de.*nicht geladen/);
+  assert.equal(lib.sourcePagesBlock([], '2026-11-14'), '');
+});
+
+test('buildResearchPrompt stellt die geladene Seite als Hauptquelle vor die Websuche', () => {
+  const p = { today_de: 'Samstag', iso: '2026-11-14', topic_text: 'Weihnachtsdorf www.weihnachtsdorf-castrop.de' };
+  const pages = [{ url: 'https://www.weihnachtsdorf-castrop.de/', ok: true, text: 'täglich 12–21 Uhr' }];
+  const pr = lib.buildResearchPrompt(p, pages);
+  assert.match(pr, /täglich 12–21 Uhr/);
+  assert.match(pr, /Hauptquelle/);
+  assert.ok(pr.indexOf('täglich 12–21 Uhr') < pr.indexOf('Antworte NUR'));
+  assert.doesNotMatch(lib.buildResearchPrompt(p, []), /VOM INHABER GENANNTE SEITE/);
+});
+
+test('fullResearchBlock gibt den Seitentext auch dann an den Artikel, wenn die Websuche nichts fand', () => {
+  const pages = [{ url: 'https://www.weihnachtsdorf-castrop.de/', ok: true, text: 'täglich 12–21 Uhr' }];
+  const b = lib.fullResearchBlock(parseResearch('nichts'), pages, '2026-11-14');
+  assert.match(b, /RECHERCHE IM INTERNET/);
+  assert.match(b, /täglich 12–21 Uhr/);
+  const r = lib.withOwnerSources(parseResearch(MODEL_TEXT), pages);
+  assert.equal(r.quellen[0].url, 'https://www.weihnachtsdorf-castrop.de/');
+});
+
+test('Pipeline lädt genannte Seiten selbst und gibt sie an Recherche und Artikel', async () => {
+  const { readFileSync } = await import('node:fs');
+  const sdk = readFileSync(new URL('./artikel-pipeline.sdk.js', import.meta.url), 'utf8');
+  const node = (name) => { const i = sdk.indexOf("name: '" + name + "'"); return sdk.slice(i, sdk.indexOf('output:', i)); };
+  const prep = node('Recherche vorbereiten');
+  assert.match(prep, /extractUrls\(/);
+  assert.match(prep, /httpRequest/);
+  assert.match(prep, /buildResearchPrompt\(/);
+  assert.match(node('Recherche auswerten'), /fullResearchBlock\(/);
+});
