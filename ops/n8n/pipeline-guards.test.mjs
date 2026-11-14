@@ -45,3 +45,9 @@ test('Live-Check: kurze Einzelprüfungen statt einer langen Schleife', () => {
   assert.equal(liveStep(false, LIVE_MAX_TRIES - 1), 'aufgeben');
   assert.equal(liveStep(true, LIVE_MAX_TRIES - 1), 'live');
 });
+
+// Regression 09.11. + 14.11.2026: GitHub-Prüfung (~11 Min) + Netlify-Build (~10 Min) dauern zusammen > 16 Min.
+// Der Live-Check gab nach 4 + 12 Min auf, der Artikel kam erst danach online → Social-Posts fehlten.
+test('Live-Check wartet insgesamt mindestens 40 Minuten (4 Min + Versuche à 1 Min)', () => {
+  assert.ok(4 + LIVE_MAX_TRIES >= 40, 'Fenster nur ' + (4 + LIVE_MAX_TRIES) + ' Min');
+});
