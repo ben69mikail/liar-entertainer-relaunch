@@ -557,6 +557,24 @@
     "webp": "/blog-images/zaubershow-auf-dem-castroper-weihnachtsdorf/zaubershow-weihnachtsdorf-kinder.webp",
     "avif": "/blog-images/zaubershow-auf-dem-castroper-weihnachtsdorf/zaubershow-weihnachtsdorf-kinder.avif"
   },
+  "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/cover.jpg": {
+    "width": 1280,
+    "height": 1280,
+    "webp": "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/cover.webp",
+    "avif": "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/cover.avif"
+  },
+  "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/inline-1.jpg": {
+    "width": 1280,
+    "height": 995,
+    "webp": "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/inline-1.webp",
+    "avif": "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/inline-1.avif"
+  },
+  "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/inline-2.jpg": {
+    "width": 495,
+    "height": 271,
+    "webp": "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/inline-2.webp",
+    "avif": "/blog-images/zaubershow-castroper-weihnachtsdorf-15-november/inline-2.avif"
+  },
   "/blog-images/zaubershow-im-kindergarten-so-wird-der-besuch-zum-highlight/kinderzauberer-kindergarten-staunende-kinder.jpg": {
     "width": 600,
     "height": 600,
@@ -790,5 +808,11 @@
     "height": 1920,
     "webp": "/story-generated/was-kostet-zauberer-kindergeburtstag.webp",
     "avif": "/story-generated/was-kostet-zauberer-kindergeburtstag.avif"
+  },
+  "/story-generated/zaubershow-castroper-weihnachtsdorf-15-november.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/zaubershow-castroper-weihnachtsdorf-15-november.webp",
+    "avif": "/story-generated/zaubershow-castroper-weihnachtsdorf-15-november.avif"
   }
 }

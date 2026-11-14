@@ -9,8 +9,7 @@ heroFocus: { x: 52, top: 46, bottom: 100 }
 categories: ["Termine","Lokales"]
 tags: ["castroper-weihnachtsdorf","zaubershow","weihnachtsmarkt","familien","clown-zauberer"]
 author: "Michaël Prescler"
-draft: true
-freigabe: ja
+draft: false
 ---
 
 Morgen ist es so weit: Am **Sonntag, 15. November 2026, um 12:30 Uhr** trete ich als Clown Zauberer LIAR auf dem **Castroper Weihnachtsdorf** auf. Alle sind herzlich eingeladen: Familien mit Kindern, Großeltern, Freunde und Nachbarn. Mein wichtigster Tipp vorab: Kommen Sie ein paar Minuten früher. Dann haben die Kinder einen guten Platz und verpassen den Anfang nicht.
