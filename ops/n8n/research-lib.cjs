@@ -36,6 +36,30 @@ function parseResearch(text) {
   return { ok, orte, termin, fakten, widersprueche, quellen, bilder: [] };
 }
 
+// Die n8n-Code-Sandbox hat KEIN globales `URL` (15.11.2026) – deshalb eigene, kleine Parser.
+function parseUrl(raw) {
+  const m = String(raw || '').trim().match(/^(https?):\/\/([^\/?#\s]+)([^\s]*)$/i);
+  if (!m) return null;
+  const hostname = m[2].toLowerCase();
+  if (!/^[a-z0-9.-]+(:\d+)?$/.test(hostname) || !hostname.includes('.')) return null;
+  const rest = m[3] || '';
+  const href = m[1].toLowerCase() + '://' + hostname + (rest.startsWith('/') ? rest : '/' + rest);
+  return { hostname: hostname.replace(/:\d+$/, ''), href };
+}
+
+function resolveUrl(ref, base) {
+  const r = String(ref || '').trim();
+  if (/^https?:\/\//i.test(r)) return (parseUrl(r) || {}).href || '';
+  const b = parseUrl(base);
+  if (!b || !r || /^[a-z]+:/i.test(r)) return '';
+  const proto = b.href.slice(0, b.href.indexOf('://'));
+  if (r.startsWith('//')) return (parseUrl(proto + ':' + r) || {}).href || '';
+  const origin = b.href.match(/^https?:\/\/[^\/]+/i)[0];
+  if (r.startsWith('/')) return origin + r;
+  const path = b.href.slice(origin.length).split(/[?#]/)[0];
+  return origin + path.slice(0, path.lastIndexOf('/') + 1) + r;
+}
+
 function extractImages(html, pageUrl) {
   const out = [];
   const seen = new Set();
@@ -45,7 +69,8 @@ function extractImages(html, pageUrl) {
     const m = tag.match(/content=["']([^"']+)["']/i);
     if (!m) continue;
     let url;
-    try { url = new URL(m[1].replace(/&amp;/g, '&'), pageUrl).href; } catch (e) { continue; }
+    url = resolveUrl(m[1].replace(/&amp;/g, '&'), pageUrl);
+    if (!url) continue;
     if (!/^https?:/i.test(url)) continue;
     const path = url.split('?')[0].toLowerCase();
     if (!/\.(jpe?g|png|webp)$/.test(path)) continue;
@@ -89,8 +114,8 @@ function extractUrls(text, max = 3) {
   for (const m of s.matchAll(URL_RE)) {
     let raw = m[2].replace(/[.,;:!?]+$/, '');
     if (!/^https?:\/\//i.test(raw)) raw = 'https://' + raw;
-    let u;
-    try { u = new URL(raw); } catch (e) { continue; }
+    const u = parseUrl(raw);
+    if (!u) continue;
     if (OWN_HOSTS.test(u.hostname)) continue;
     const href = u.href;
     if (!out.includes(href)) out.push(href);
@@ -173,11 +198,23 @@ function withOwnerSources(r, pages) {
   return { ...r, quellen: own.concat(rest) };
 }
 
+// Antwort der Websuche lesen: Text + Fehlergrund (nicht erreichbar / abgeschnitten).
+function researchStatus(resp) {
+  const r = resp || {};
+  const api = r.body || r;
+  const ch = (api && api.choices && api.choices[0]) || {};
+  const txt = (ch.message && ch.message.content) || '';
+  let fehler = '';
+  if (!txt) fehler = 'Recherche nicht erreichbar (HTTP ' + (r.statusCode || '?') + ')';
+  else if (ch.finish_reason === 'length') fehler = 'Recherche abgeschnitten (Token-Limit) – Ergebnis unvollständig';
+  return { txt, fehler };
+}
+
 function fullResearchBlock(r, pages, isoDate) {
   return [sourcePagesBlock(pages, isoDate), researchBlock(r, isoDate)].filter(Boolean).join('\n\n');
 }
 
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { safeUrl, parseResearch, extractImages, researchBlock, researchSummary,
+  module.exports = { safeUrl, parseResearch, extractImages, researchBlock, researchSummary, parseUrl, resolveUrl, researchStatus,
     extractUrls, htmlToText, sourcePagesBlock, buildResearchPrompt, withOwnerSources, fullResearchBlock };
 }
