@@ -160,3 +160,52 @@ test('Artikel-Prompt lässt Inhalte der genannten Seite in den Artikeltext einfl
   const prompt = sdk.slice(i, sdk.indexOf('output:', i));
   assert.match(prompt, /VOM INHABER GENANNTE SEITE[^']*(Termine|Öffnungszeiten)[^']*im Artikel/);
 });
+
+// --- Regression 15.11.2026 (Lauf 2638, Castroper Weihnachtsdorf) ---
+// 1) Die n8n-Code-Sandbox kennt kein globales `URL` → `new URL()` warf, wurde verschluckt → keine Seite geladen.
+// 2) Websuche brach mit finish_reason "length" ab (3843 von 4000 Tokens fürs Nachdenken) → JSON abgeschnitten.
+const NOTE_2638 = 'ergänze den Artikel mit Informationen die du aus dem offizielle Internetseite von dem Castroper Weihnachtsmarkt holst und zwar https://castroper-weihnachtsdorf.de/ benutze das Bild wo ich zu sehen bin';
+
+async function libInSandbox() {
+  const vm = await import('node:vm');
+  const { readFileSync } = await import('node:fs');
+  const src = readFileSync(new URL('./research-lib.cjs', import.meta.url), 'utf8');
+  const ctx = vm.createContext({ module: { exports: {} } }); // wie n8n: kein URL, kein require
+  vm.runInContext(src, ctx);
+  assert.equal(vm.runInContext('typeof URL', ctx), 'undefined');
+  return ctx.module.exports;
+}
+
+test('extractUrls funktioniert ohne globales URL (n8n-Sandbox)', async () => {
+  const sb = await libInSandbox();
+  assert.deepEqual([...sb.extractUrls(NOTE_2638)], ['https://castroper-weihnachtsdorf.de/']);
+  assert.deepEqual([...sb.extractUrls('Infos: www.Weihnachtsdorf-Castrop.de/programm, liar-entertainer.com')], ['https://www.weihnachtsdorf-castrop.de/programm']);
+  assert.deepEqual([...sb.extractUrls('schau auf weihnachtsdorf-castrop punkt de')], ['https://weihnachtsdorf-castrop.de/']);
+});
+
+test('extractImages macht relative Bild-URLs ohne globales URL absolut', async () => {
+  const sb = await libInSandbox();
+  const html = '<meta property="og:image" content="/media/stadthalle.jpg"><meta property="og:image" content="bild.png"><meta property="og:image" content="//cdn.x.de/a.webp">';
+  assert.deepEqual([...sb.extractImages(html, 'https://www.gladbeck.de/kultur/stadthalle')].map(i => i.url), [
+    'https://www.gladbeck.de/media/stadthalle.jpg', 'https://www.gladbeck.de/kultur/bild.png', 'https://cdn.x.de/a.webp'
+  ]);
+});
+
+test('researchStatus erkennt abgeschnittene Websuche', () => {
+  const s = lib.researchStatus({ statusCode: 200, body: { choices: [{ finish_reason: 'length', message: { content: '{"orte":[' } }] } });
+  assert.match(s.fehler, /abgeschnitten/);
+  assert.equal(lib.researchStatus({ statusCode: 200, body: { choices: [{ finish_reason: 'stop', message: { content: '{}' } }] } }).fehler, '');
+  assert.match(lib.researchStatus({ statusCode: 502, body: {} }).fehler, /nicht erreichbar.*502/);
+});
+
+test('Websuche hat genug Tokens und wenig Denkaufwand', async () => {
+  const { readFileSync } = await import('node:fs');
+  const sdk = readFileSync(new URL('./artikel-pipeline.sdk.js', import.meta.url), 'utf8');
+  const i = sdk.indexOf("name: 'Web-Recherche (Internet)'");
+  const call = sdk.slice(i, sdk.indexOf('output:', i));
+  const max = Number((call.match(/max_tokens: (\d+)/) || [])[1]);
+  assert.ok(max >= 12000, 'max_tokens ' + max);
+  assert.match(call, /reasoning: \{ effort: 'low' \}/);
+  const j = sdk.indexOf("name: 'Recherche auswerten'");
+  assert.match(sdk.slice(j, sdk.indexOf('output:', j)), /researchStatus\(/);
+});
