@@ -9,8 +9,7 @@ heroFocus: { x: 67, top: 4, bottom: 80 }
 categories: ["Ratgeber","Saisonal"]
 tags: ["adventskalender-kinder","weihnachtszeit-ideen","basteln-mit-kindern","zaubertricks-fuer-kinder","familienzeit"]
 author: "Michaël Prescler"
-draft: true
-freigabe: ja
+draft: false
 ---
 
 Ein Adventskalender für Kinder muss nicht aus 24 Stück Schokolade bestehen. In diesem Artikel finden Sie 24 Ideen zum Selbermachen: kleine Zaubertricks, Bastelaktionen und gemeinsame Momente, die wenig kosten, schnell vorbereitet sind und die Weihnachtszeit für die ganze Familie besonders machen. Alles, was Sie dafür brauchen, sind 24 kleine Zettel, ein paar Umschläge oder Streichholzschachteln und ein bisschen Lust aufs Staunen.

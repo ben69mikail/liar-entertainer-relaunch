@@ -53,6 +53,24 @@
     "webp": "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/inline-2.webp",
     "avif": "/blog-images/ab-welchem-alter-zauberer-kindergeburtstag/inline-2.avif"
   },
+  "/blog-images/adventskalender-kinder-24-ideen-selbermachen/cover.jpg": {
+    "width": 1360,
+    "height": 1360,
+    "webp": "/blog-images/adventskalender-kinder-24-ideen-selbermachen/cover.webp",
+    "avif": "/blog-images/adventskalender-kinder-24-ideen-selbermachen/cover.avif"
+  },
+  "/blog-images/adventskalender-kinder-24-ideen-selbermachen/inline-1.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/adventskalender-kinder-24-ideen-selbermachen/inline-1.webp",
+    "avif": "/blog-images/adventskalender-kinder-24-ideen-selbermachen/inline-1.avif"
+  },
+  "/blog-images/adventskalender-kinder-24-ideen-selbermachen/inline-2.jpg": {
+    "width": 1200,
+    "height": 1600,
+    "webp": "/blog-images/adventskalender-kinder-24-ideen-selbermachen/inline-2.webp",
+    "avif": "/blog-images/adventskalender-kinder-24-ideen-selbermachen/inline-2.avif"
+  },
   "/blog-images/adventsmarkt-in-rheinberg-mit-clown-zauberer/clown-zauberer-weihnachtsmarkt-publikum.jpg": {
     "width": 600,
     "height": 800,
@@ -724,6 +742,12 @@
     "height": 575,
     "webp": "/content-fotos/logo-clown-zauberer-nrw.webp",
     "avif": "/content-fotos/logo-clown-zauberer-nrw.avif"
+  },
+  "/story-generated/adventskalender-kinder-24-ideen-selbermachen.jpg": {
+    "width": 1080,
+    "height": 1920,
+    "webp": "/story-generated/adventskalender-kinder-24-ideen-selbermachen.webp",
+    "avif": "/story-generated/adventskalender-kinder-24-ideen-selbermachen.avif"
   },
   "/story-generated/clown-oder-zauberer-kindergeburtstag.jpg": {
     "width": 1080,
