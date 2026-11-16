@@ -42,3 +42,12 @@ test('Bericht nennt Video mit Musik oder Bild-Fallback', () => {
   assert.match(fb, /Bild \(kein Video gefunden\)/);
   assert.match(fb, /Zeitüberschreitung/);
 });
+
+test('Story-Workflow-Quelle enthält die getestete Lib (keine Abweichung)', async () => {
+  const { readFileSync } = await import('node:fs');
+  const sdk = readFileSync(new URL('./story-repost.sdk.js', import.meta.url), 'utf8');
+  for (const fn of ['videoUrlFor', 'igContainerBody', 'igStatusStep', 'fbVideoStart', 'fbUploadHeaders', 'fbVideoFinish', 'storyReport']) {
+    assert.match(sdk, new RegExp('function ' + fn + '\\('), fn);
+  }
+  assert.match(sdk, /const IG_MAX_CHECKS = 10;/);
+});
